@@ -1,6 +1,6 @@
-# intro v2
-#### Intro V2 is the next generation of my personal website, merging my personal website and portfolio page.
-#### Build on the newest version Next UI with a completely custom layout/design and using Contentlayer. I'll include some more fun design options with Rough notation
+# intro
+#### Intro is the next generation (v2) of my personal website, merging my personal website and portfolio page (ignitus).
+#### Build on the newest versions of Next.js and Next UI with a completely custom layout and using Contentlayer. I'll include some more fun design options with Rough notation later on.
 
 ## 🏗️ Tech Stack:
 
@@ -12,7 +12,7 @@
 
 ## 🗳️ Status:
 
-[![build next.js](https://github.com/LennardZuendorf/introductioV2/actions/workflows/next.js.yml/badge.svg)](https://github.com/LennardZuendorf/introductioV2/actions/workflows/next.js.yml)
+[![build next.js](https://github.com/LennardZuendorf/intro/actions/workflows/build.yml/badge.svg)](https://github.com/LennardZuendorf/intro/actions/workflows/build.yml)
 
 ## 👨‍💻 Author and Credits:
 
