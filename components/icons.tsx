@@ -8,18 +8,45 @@ export const Logo: React.FC<IconSvgProps> = ({
 	...props
 }) => (
 	<svg
-		fill="none"
-		height={size || height}
-		viewBox="0 0 32 32"
+		xmlns="http://www.w3.org/2000/svg"
 		width={size || width}
-		{...props}
+		height={size || height}
+		fill="none"
+		viewBox="0 0 200 200"
 	>
-		<path
-			clipRule="evenodd"
-			d="M17.6482 10.1305L15.8785 7.02583L7.02979 22.5499H10.5278L17.6482 10.1305ZM19.8798 14.0457L18.11 17.1983L19.394 19.4511H16.8453L15.1056 22.5499H24.7272L19.8798 14.0457Z"
-			fill="currentColor"
-			fillRule="evenodd"
-		/>
+		<circle
+			cx="82.699"
+			cy="100.483"
+			r="66.873"
+			fill="#272727"
+			transform="rotate(-90 82.7 100.483)"
+		></circle>
+		<circle
+			cx="99"
+			cy="100"
+			r="66.873"
+			fill="url(#paint0_linear_213_20)"
+		></circle>
+		<circle
+			cx="116.666"
+			cy="100.483"
+			r="66.873"
+			fill="#F4F4F4"
+			transform="rotate(-90 116.666 100.483)"
+		></circle>
+		<defs>
+			<linearGradient
+				id="paint0_linear_213_20"
+				x1="99"
+				x2="99"
+				y1="33.127"
+				y2="166.873"
+				gradientUnits="userSpaceOnUse"
+			>
+				<stop stopColor="#E5E5E5"></stop>
+				<stop offset="0.997" stopColor="#515151"></stop>
+			</linearGradient>
+		</defs>
 	</svg>
 );
 
