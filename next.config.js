@@ -3,11 +3,6 @@ const nextConfig = {
   async redirects() {
     return [
       {
-        source: '/',
-        destination: 'https://www.bento.me/zuendorf',
-        permanent: false,
-      },
-      {
         source: '/linkd',
         destination: 'https://www.linkedin.com/in/lennard-zuendorf/',
         permanent: true,
