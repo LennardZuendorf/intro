@@ -12,7 +12,7 @@
 
 ## 🗳️ Status:
 
-[![build next.js](https://github.com/LennardZuendorf/introductioV2/actions/workflows/next.js.yml/badge.svg)](https://github.com/LennardZuendorf/introductioV2/actions/workflows/next.js.yml)
+[![build next.js](https://github.com/LennardZuendorf/intro/actions/workflows/build.yml/badge.svg)](https://github.com/LennardZuendorf/intro/actions/workflows/build.yml)
 
 ## 👨‍💻 Author and Credits:
 
