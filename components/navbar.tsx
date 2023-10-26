@@ -18,6 +18,7 @@ import clsx from "clsx";
 import { ThemeSwitch } from "@/components/theme-switch";
 
 import { Logo } from "@/components/icons";
+import {ColorSwitch} from "@/components/color-switch";
 
 export const Navbar = () => {
 	return (
@@ -31,15 +32,15 @@ export const Navbar = () => {
 				</NavbarBrand>
 			</NavbarContent>
 
-			<NavbarContent className="hidden sm:flex basis-1/5 sm:basis-full" justify="end">
-				<NavbarItem className="hidden sm:flex gap-2">
-					<ul className="hidden sm:flex gap-4 justify-end ml-2">
+			<NavbarContent className="hidden sm:flex gap-8 basis-1/5 sm:basis-full" justify="end">
+				<NavbarItem className="hidden sm:flex">
+					<ul className="hidden sm:flex gap-6 justify-end ml-2">
 						{siteConfig.navItems.map((item) => (
 							<NavbarItem key={item.href}>
 								<NextLink
 									className={clsx(
 										linkStyles({ color: "foreground" }),
-										"data-[active=true]:text-primary data-[active=true]:font-medium"
+										"data-[active=true]:text-primary data-[active=true]:font-large"
 									)}
 									color="foreground"
 									href={item.href}
@@ -49,11 +50,16 @@ export const Navbar = () => {
 							</NavbarItem>
 						))}
 					</ul>
+				</NavbarItem>
+
+				<NavbarItem className="hidden sm:flex gap-2 justify-end ml-2">
+					<ColorSwitch />
 					<ThemeSwitch />
 				</NavbarItem>
 			</NavbarContent>
 
 			<NavbarContent className="sm:hidden basis-1 pl-4" justify="end">
+				<ColorSwitch />
 				<ThemeSwitch />
 				<NavbarMenuToggle />
 			</NavbarContent>
