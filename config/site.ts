@@ -5,22 +5,18 @@ export const siteConfig = {
 	description: "Personal Website and Portfolio",
 	navItems: [
 		{
-			label: "Home",
-			href: "/",
+		  label: "Projects",
+		  href: "/projects",
 		},
-    {
-      label: "Projects",
-      href: "/projects",
-    },
-    {
-      label: "About",
-      href: "/about",
-    }
+		{
+		  label: "About",
+		  href: "/about",
+		}
 	],
 	navMenuItems: [
 		{
 			label: "Home",
-			href: "/home",
+			href: "/",
 		},
 		{
 			label: "Projects",
