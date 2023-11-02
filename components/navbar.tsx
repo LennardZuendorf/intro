@@ -1,3 +1,5 @@
+"use client";
+
 import {
 	Navbar as NextUINavbar,
 	NavbarContent,
@@ -8,21 +10,20 @@ import {
 	NavbarMenuItem,
 } from "@nextui-org/navbar";
 import { Link } from "@nextui-org/link";
-
-import { link as linkStyles } from "@nextui-org/theme";
-
+import { usePathname } from 'next/navigation'
 import { siteConfig } from "@/config/site";
 import NextLink from "next/link";
-import clsx from "clsx";
 
 import { ThemeSwitch } from "@/components/theme-switch";
 
 import { Logo } from "@/components/icons";
-import {ColorSwitch} from "@/components/color-switch";
 
 export const Navbar = () => {
+	const pathname = usePathname();
+
 	return (
 		<NextUINavbar maxWidth="xl" position="sticky">
+
 			<NavbarContent className="basis-1/5 sm:basis-full" justify="start">
 				<NavbarBrand as="li" className="gap-3 max-w-fit">
 					<NextLink className="flex justify-start items-center gap-1" href="/">
@@ -33,33 +34,25 @@ export const Navbar = () => {
 			</NavbarContent>
 
 			<NavbarContent className="hidden sm:flex gap-8 basis-1/5 sm:basis-full" justify="end">
-				<NavbarItem className="hidden sm:flex">
-					<ul className="hidden sm:flex gap-6 justify-end ml-2">
-						{siteConfig.navItems.map((item) => (
-							<NavbarItem key={item.href}>
-								<NextLink
-									className={clsx(
-										linkStyles({ color: "foreground" }),
-										"data-[active=true]:text-primary data-[active=true]:font-large"
-									)}
-									color="foreground"
-									href={item.href}
-								>
-									{item.label}
-								</NextLink>
-							</NavbarItem>
-						))}
-					</ul>
+				<NavbarItem className="hidden sm:flex gap-2 justify-start ml-2" isActive={pathname==='/projects'}>
+					<Link color="foreground" href="/projects">
+						Projects
+					</Link>
+				</NavbarItem>
+
+				<NavbarItem className= "hidden sm:flex gap-2 justify-start ml-2" isActive={pathname==='/about'}>
+					<Link color="foreground" href="/about">
+						About
+					</Link>
 				</NavbarItem>
 
 				<NavbarItem className="hidden sm:flex gap-2 justify-end ml-2">
-					<ColorSwitch />
 					<ThemeSwitch />
 				</NavbarItem>
+
 			</NavbarContent>
 
 			<NavbarContent className="sm:hidden basis-1 pl-4" justify="end">
-				<ColorSwitch />
 				<ThemeSwitch />
 				<NavbarMenuToggle />
 			</NavbarContent>
@@ -69,15 +62,10 @@ export const Navbar = () => {
 					{siteConfig.navMenuItems.map((item, index) => (
 						<NavbarMenuItem key={`${item}-${index}`}>
 							<Link
-								color={
-									index === 2
-										? "primary"
-										: index === siteConfig.navMenuItems.length - 1
-										? "danger"
-										: "foreground"
-								}
-								href="#"
+								color="foreground"
+								href={item.href}
 								size="lg"
+								className={pathname === item.href ? 'font-bold' : 'font-light'}
 							>
 								{item.label}
 							</Link>
