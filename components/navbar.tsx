@@ -13,10 +13,8 @@ import { Link } from "@nextui-org/link";
 import { usePathname } from 'next/navigation'
 import { siteConfig } from "@/config/site";
 import NextLink from "next/link";
-
 import { ThemeSwitch } from "@/components/theme-switch";
-
-import { Logo } from "@/components/icons";
+import { Logo } from "@/components/microComponents/icons";
 
 export const Navbar = () => {
 	const pathname = usePathname();
