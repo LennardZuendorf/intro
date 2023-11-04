@@ -15,9 +15,12 @@ import { siteConfig } from "@/config/site";
 import NextLink from "next/link";
 import { ThemeSwitch } from "@/components/theme-switch";
 import { Logo } from "@/components/microComponents/icons";
+import { useTheme } from "next-themes";
+import {commonColors, semanticColors} from "@nextui-org/theme";
 
 export const Navbar = () => {
 	const pathname = usePathname();
+	const { theme, setTheme } = useTheme();
 
 	return (
 		<NextUINavbar maxWidth="xl" position="sticky">
@@ -25,8 +28,14 @@ export const Navbar = () => {
 			<NavbarContent className="basis-1/5 sm:basis-full" justify="start">
 				<NavbarBrand as="li" className="gap-3 max-w-fit">
 					<NextLink className="flex justify-start items-center gap-1" href="/">
-						<Logo />
-						<p className="font-bold text-inherit">Lennard Zündorf</p>
+						<Logo
+							size={50}
+							top={theme === "light" ? commonColors.zinc["50"] : commonColors.zinc["900"]}
+							bottom={theme === "light" ? commonColors.zinc["900"] : commonColors.zinc["50"]}
+							gradientStart={theme === "light" ? commonColors.zinc["200"] : commonColors.zinc["700"]}
+							gradientStop={theme === "light" ? commonColors.zinc["700"] : commonColors.zinc["200"]}
+						/>
+						<p className="font-bold text-inherit">{siteConfig.title}</p>
 					</NextLink>
 				</NavbarBrand>
 			</NavbarContent>

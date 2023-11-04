@@ -4,9 +4,9 @@ import { siteConfig } from "@/config/site";
 import { fontSans } from "@/config/fonts";
 import { Providers } from "./providers";
 import { Navbar } from "@/components/navbar";
-import { Link } from "@nextui-org/link";
 import clsx from "clsx";
 import {Footer} from "@/components/footer";
+import { Analytics } from '@vercel/analytics/react';
 
 export const metadata: Metadata = {
 	title: {
@@ -35,7 +35,7 @@ export default function RootLayout({
 			<head />
 			<body
 				className={clsx(
-					"min-h-screen bg-background font-sans antialiased",
+					"min-h-screen bg-background font-sans",
 					fontSans.variable
 				)}
 			>
@@ -48,6 +48,7 @@ export default function RootLayout({
 						<Footer />
 					</div>
 				</Providers>
+				<Analytics />
 			</body>
 		</html>
 	);

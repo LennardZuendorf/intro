@@ -1,8 +1,8 @@
 export type SiteConfig = typeof siteConfig;
 
 export const siteConfig = {
-	name: "Lennard Zündorf",
-	title: "zuendorf.me",
+	name: "zuendorf.me",
+	title: "Lennard Zündorf",
 	description: "Personal Website and Portfolio",
 	navItems: [
 		{
