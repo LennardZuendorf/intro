@@ -15,20 +15,20 @@ export const Footer = () => {
                 <div className="mt-16 flex flex-col items-center">
                     <div className="mb-3 flex space-x-4">
                         <div className="flex gap-4">
-                            <Link href={siteConfig.links.github}>
+                            <Link href={siteConfig.links.mail}>
                                 <Chip
                                     startContent={<HiAtSymbol size={20}/>}
-                                    variant="shadow"
+                                    variant="faded"
                                     color="default"
                                 >
                                     Mail
                                 </Chip>
                             </Link>
 
-                            <Link href={siteConfig.links.github}>
+                            <Link href={siteConfig.links.linkedin}>
                                 <Chip
-                                    startContent={<AiFillLinkedin size={20} />}
-                                    variant="shadow"
+                                    startContent={<AiFillLinkedin size={18} />}
+                                    variant="faded"
                                     color="default"
                                 >
                                     LinkedIn
@@ -38,7 +38,7 @@ export const Footer = () => {
                             <Link href={siteConfig.links.github}>
                                 <Chip
                                     startContent={<AiOutlineGithub size={20}/>}
-                                    variant="shadow"
+                                    variant="faded"
                                     color="default"
                                 >
                                     Github
@@ -46,13 +46,11 @@ export const Footer = () => {
                             </Link>
                         </div>
                     </div>
-                    <div className="mb-2 flex space-x-2 text-sm ">
+                    <div className="mb-2 flex space-x-2 text-sm">
                         <div>{siteConfig.name}</div>
-                        <div>{` • `}</div>
                         <div>{`© ${new Date().getFullYear()}`}</div>
-                    </div>
-                    <div className="mb-8 text-sm">
-                        <Link href="/legal" color="foreground" underline="hover">Legal - Datenschutzbestimmungen</Link>
+                        <div>{` | `}</div>
+                        <Link href="/legal" color="foreground" underline="hover" size={"sm"}>legal</Link>
                     </div>
                 </div>
             </footer>
