@@ -10,7 +10,7 @@
 
 **Hosting:** Vercel
 
-## 🗳️ Status:
+## 🗳️ Status (Main):
 
 [![build next.js](https://github.com/LennardZuendorf/intro/actions/workflows/build.yml/badge.svg)](https://github.com/LennardZuendorf/intro/actions/workflows/build.yml)
 
