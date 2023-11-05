@@ -6,7 +6,7 @@ import { Providers } from "./providers";
 import { Navbar } from "@/components/navbar";
 import clsx from "clsx";
 import {Footer} from "@/components/footer";
-import { Analytics } from '@vercel/analytics/react';
+import { AptabaseProvider } from '@aptabase/react';
 
 export const metadata: Metadata = {
 	title: {
@@ -39,16 +39,16 @@ export default function RootLayout({
 					fontSans.variable
 				)}
 			>
-				<Providers themeProps={{ attribute: "class", defaultTheme: "dark" }}>
-					<div className="relative flex flex-col h-screen">
-						<Navbar />
-						<main className="container mx-auto max-w-7xl pt-16 px-6 flex-grow">
-							{children}
-						</main>
-						<Footer />
-					</div>
-				</Providers>
-				<Analytics />
+				<AptabaseProvider appKey="A-EU-5932666181">{children}</AptabaseProvider>
+					<Providers themeProps={{ attribute: "class", defaultTheme: "dark" }}>
+						<div className="relative flex flex-col h-screen">
+							<Navbar />
+							<main className="container mx-auto max-w-7xl pt-16 px-6 flex-grow">
+								{children}
+							</main>
+							<Footer />
+						</div>
+					</Providers>
 			</body>
 		</html>
 	);

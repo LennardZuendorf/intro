@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@aptabase/react": "^0.2.2",
     "@nextui-org/button": "2.0.18",
     "@nextui-org/code": "2.0.16",
     "@nextui-org/input": "2.1.6",
@@ -25,7 +26,6 @@
     "@types/node": "20.5.7",
     "@types/react": "18.2.21",
     "@types/react-dom": "18.2.7",
-    "@vercel/analytics": "^1.1.1",
     "autoprefixer": "10.4.15",
     "clsx": "^2.0.0",
     "cookies-next": "^4.0.0",
