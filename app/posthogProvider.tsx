@@ -2,14 +2,16 @@
 'use client'
 import posthog from 'posthog-js'
 import { PostHogProvider } from 'posthog-js/react'
-import { usePathname, useSearchParams } from "next/navigation";
-import { useEffect } from "react";
 
 if (typeof window !== 'undefined') {
-  posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
-    api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST,
-    capture_pageview: true
-  })
+  const { NEXT_PUBLIC_POSTHOG_KEY, NEXT_PUBLIC_POSTHOG_HOST } = process.env
+
+  if (NEXT_PUBLIC_POSTHOG_KEY && NEXT_PUBLIC_POSTHOG_HOST) {
+    posthog.init(NEXT_PUBLIC_POSTHOG_KEY, {
+      api_host: NEXT_PUBLIC_POSTHOG_HOST,
+      capture_pageview: true
+    })
+  }
 }
 
 export function PHProvider({
