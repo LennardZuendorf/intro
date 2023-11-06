@@ -2,11 +2,11 @@ import "@/styles/globals.css";
 import { Metadata } from "next";
 import { siteConfig } from "@/config/site";
 import { fontSans } from "@/config/fonts";
-import { Providers } from "./providers";
+import { UIProvider } from "./uiProvider";
 import { Navbar } from "@/components/navbar";
 import clsx from "clsx";
 import {Footer} from "@/components/footer";
-import { AptabaseProvider } from '@aptabase/react';
+import { PHProvider } from "./posthogProvider";
 
 export const metadata: Metadata = {
 	title: {
@@ -33,23 +33,24 @@ export default function RootLayout({
 	return (
 		<html lang="en" suppressHydrationWarning>
 			<head />
-			<body
-				className={clsx(
-					"min-h-screen bg-background font-sans",
-					fontSans.variable
-				)}
-			>
-				<AptabaseProvider appKey="A-EU-5932666181">{children}</AptabaseProvider>
-					<Providers themeProps={{ attribute: "class", defaultTheme: "dark" }}>
-						<div className="relative flex flex-col h-screen">
-							<Navbar />
-							<main className="container mx-auto max-w-7xl pt-16 px-6 flex-grow">
-								{children}
-							</main>
-							<Footer />
-						</div>
-					</Providers>
-			</body>
+			<PHProvider>
+				<body
+					className={clsx(
+						"min-h-screen bg-background font-sans",
+						fontSans.variable
+					)}
+				>
+						<UIProvider themeProps={{ attribute: "class", defaultTheme: "dark" }}>
+							<div className="relative flex flex-col h-screen">
+								<Navbar />
+								<main className="container mx-auto max-w-7xl pt-16 px-6 flex-grow">
+									{children}
+								</main>
+								<Footer />
+							</div>
+						</UIProvider>
+				</body>
+			</PHProvider>
 		</html>
 	);
 }

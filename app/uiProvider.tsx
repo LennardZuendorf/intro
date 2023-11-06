@@ -10,7 +10,7 @@ export interface ProvidersProps {
 	themeProps?: ThemeProviderProps;
 }
 
-export function Providers({ children, themeProps }: ProvidersProps) {
+export function UIProvider({ children, themeProps }: ProvidersProps) {
 	return (
 		<NextUIProvider>
 			<NextThemesProvider {...themeProps}>{children}</NextThemesProvider>
