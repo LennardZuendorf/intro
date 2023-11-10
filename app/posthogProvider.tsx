@@ -9,7 +9,10 @@ if (typeof window !== 'undefined') {
   if (NEXT_PUBLIC_POSTHOG_KEY && NEXT_PUBLIC_POSTHOG_HOST) {
     posthog.init(NEXT_PUBLIC_POSTHOG_KEY, {
       api_host: NEXT_PUBLIC_POSTHOG_HOST,
-      capture_pageview: true
+      capture_pageview: true,
+      autocapture: true,
+      persistence: "memory",
+      disable_persistence: true
     })
   }
 }
