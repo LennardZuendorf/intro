@@ -16,14 +16,14 @@ module.exports = {
         themes: {
           light: {
             colors: {
-              foreground: "#1E1E1E",
-              background: "#F4F4F4",
+              foreground: "#141414",
+              background: "#FAFAFA",
             },
           },
           dark: {
             colors: {
               foreground:"#F4F4F4",
-              background:"#1E1E1E",
+              background:"#141414",
             },
           },
         },
