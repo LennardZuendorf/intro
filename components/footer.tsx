@@ -18,7 +18,7 @@ export const Footer = () => {
                             <Link href={siteConfig.links.mail}>
                                 <Chip
                                     startContent={<HiAtSymbol size={20}/>}
-                                    variant="faded"
+                                    variant="light"
                                     color="default"
                                 >
                                     Mail
@@ -28,7 +28,7 @@ export const Footer = () => {
                             <Link href={siteConfig.links.linkedin}>
                                 <Chip
                                     startContent={<AiFillLinkedin size={18} />}
-                                    variant="faded"
+                                    variant="light"
                                     color="default"
                                 >
                                     LinkedIn
@@ -38,7 +38,7 @@ export const Footer = () => {
                             <Link href={siteConfig.links.github}>
                                 <Chip
                                     startContent={<AiOutlineGithub size={20}/>}
-                                    variant="faded"
+                                    variant="light"
                                     color="default"
                                 >
                                     Github
