@@ -32,7 +32,7 @@ export default function RootLayout({
 }) {
 	return (
 		<html lang="en" suppressHydrationWarning>
-			<head />
+			<head ><title></title></head>
 			<PHProvider>
 				<body
 					className={clsx(
@@ -40,15 +40,15 @@ export default function RootLayout({
 						fontSans.variable
 					)}
 				>
-						<UIProvider themeProps={{ attribute: "class", defaultTheme: "dark" }}>
-							<div className="relative flex flex-col h-screen">
-								<Navbar />
-								<main className="container mx-auto flex-grow">
-									{children}
-								</main>
-								<Footer />
-							</div>
-						</UIProvider>
+					<UIProvider themeProps={{ attribute: "class", defaultTheme: "dark" }}>
+						<div className="relative flex flex-col h-screen">
+							<Navbar />
+							<main className="container grow">
+								{children}
+							</main>
+							<Footer />
+						</div>
+					</UIProvider>
 				</body>
 			</PHProvider>
 		</html>
