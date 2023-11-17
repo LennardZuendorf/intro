@@ -1,7 +1,18 @@
 'use client'
 
 import {header, title} from "@/components/primitives";
-import {Card, CardBody, Divider, Tab, Table, TableCell, TableHeader, TableRow, Tabs} from "@nextui-org/react";
+import {
+	Card,
+	CardBody,
+	Divider, Spacer,
+	Tab,
+	Table, TableBody,
+	TableCell,
+	TableColumn,
+	TableHeader,
+	TableRow,
+	Tabs
+} from "@nextui-org/react";
 
 export default function DocsPage() {
 	return (
@@ -14,47 +25,24 @@ export default function DocsPage() {
 					<Tabs aria-label="Options" defaultSelectedKey="data-protection">
 						<Tab key="data-protection" title="Data Protection">
 							<div className="text-start">
-								These are the data protection guidelines. They are not yet finished.
+								<h2 className={header()}>Data Protection</h2>
+								<p>These are the data protection guidelines. They are not yet finished.</p>
 							</div>
 						</Tab>
 						<Tab key="cookies" title="Cookie">
 							<div className="text-start">
-								This page doesn't use cookies. It uses posthog for analytics, but doesn't store any data about you.
-								It's that easy.
+								<h2 className={header()}>Cookie Usage</h2>
+								<p>This page doesn&lsquot use cookies. It uses posthog for analytics, but doesn&lsquot store any data about you.</p>
+								<Spacer />
+								<p>That&lsquos it.</p>
 							</div>
 						</Tab>
-						<Tab key="contact" title="Contact">
+						<Tab key="impressum" title="Impressum">
 							<div className="text-start">
-								You can contact me under the following information:
-								<Table hideHeader aria-label="Example static collection table">
-									<TableHeader>
-										<TableColumn>NAME</TableColumn>
-										<TableColumn>ROLE</TableColumn>
-										<TableColumn>STATUS</TableColumn>
-									</TableHeader>
-									<TableBody>
-										<TableRow key="1">
-											<TableCell>Tony Reichert</TableCell>
-											<TableCell>CEO</TableCell>
-											<TableCell>Active</TableCell>
-										</TableRow>
-										<TableRow key="2">
-											<TableCell>Zoey Lang</TableCell>
-											<TableCell>Technical Lead</TableCell>
-											<TableCell>Paused</TableCell>
-										</TableRow>
-										<TableRow key="3">
-											<TableCell>Jane Fisher</TableCell>
-											<TableCell>Senior Developer</TableCell>
-											<TableCell>Active</TableCell>
-										</TableRow>
-										<TableRow key="4">
-											<TableCell>William Howard</TableCell>
-											<TableCell>Community Manager</TableCell>
-											<TableCell>Vacation</TableCell>
-										</TableRow>
-									</TableBody>
-								</Table>
+								<h2 className={header()}>Contact Information</h2>
+								<p>You can contact me (the site owner) under the following information.</p>
+								<p>(This is the legally required information about this website owner)</p>
+								<Spacer y={4}/>
 							</div>
 						</Tab>
 					</Tabs>
