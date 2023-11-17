@@ -7,13 +7,18 @@ import {color} from "framer-motion";
 import {TitleGrid} from "@/components/title-grid";
 
 export default function Home() {
-
 	return (
-		<section className="flex flex-col items-center justify-center gap-6 py-8 md:py-10" >
-			<div className="inline-block text-center justify-center p-8 sm:p-16 md:p-32">
-				<div className="gap-2">
+		<section className="flex flex-col items-center justify-center gap-8 sm:gap-16" >
+			<div className="block text-center justify-center pt-16 pb-16 sm:pt-24 sm:pb-24 md:pt-48 md:pb-48">
+				<div  id="title-hero">
 					<Link href="https://www.targetfund.de">
-						<Chip variant="shadow" color="primary" size="md">
+						<Chip
+							variant="shadow"
+							size="md"
+							classNames={{
+								base: "bg-gradient-to-br from-default-200 to-default-700 shadow-default-500/30",
+								content: "drop-shadow shadow-black text-white",
+							}}>
 							Check out targetfund.de!
 						</Chip>
 					</Link>
@@ -24,7 +29,12 @@ export default function Home() {
 					Here you can find all the information about me and my projects.
 				</h4>
 			</div>
-			<div className="inline-block text-center justify-center flex flex-wrap w-full">
+			<div id="title-grid" className="block text-center justify-center">
+				<div id="grid-header" className="pb-8">
+					<h2 className={header()}>
+						My Projects & Activities
+					</h2>
+				</div>
 				<TitleGrid />
 			</div>
 		</section>

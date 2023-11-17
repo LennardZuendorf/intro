@@ -8,26 +8,15 @@ module.exports = {
     './app/**/*.{js,ts,jsx,tsx,mdx}',
     './node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}'
   ],
-  theme: {
-    extend: {
-      container: {
-        center: true,
-        padding: '1rem',
-        screens: {
-          sm: '100%',
-          md: '100%',
-          lg: '90%',
-          xl: '80%',
-        },
-      },},
-  },
+  theme: {},
   darkMode: "class",
   plugins: [nextui({
+    addCommonColors: true,
         themes: {
           light: {
             colors: {
               foreground: "#141414",
-              background: "#FAFAFA",
+              background: "#FEFEFE",
               primary: {
                 DEFAULT: "#BEF264",
                 foreground: "#000000",
@@ -37,7 +26,7 @@ module.exports = {
           },
           dark: {
             colors: {
-              foreground:"#F4F4F4",
+              foreground:"#FEFEFE",
               background:"#141414",
               primary: {
                 DEFAULT: "#BEF264",
