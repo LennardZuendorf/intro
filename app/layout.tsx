@@ -43,7 +43,7 @@ export default function RootLayout({
 					<UIProvider themeProps={{ attribute: "class", defaultTheme: "dark" }}>
 						<div className="relative flex flex-col h-screen">
 							<Navbar />
-							<main className="container grow">
+							<main className="container mx-auto grow w-full sm:w-11/12 md:w-10/12 lg:w-9/12 xl:8/12 px-4">
 								{children}
 							</main>
 							<Footer />
