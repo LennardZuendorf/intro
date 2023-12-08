@@ -34,7 +34,7 @@ export default function RootLayout({
         )}
         >
         <Provider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-            <Navigation className="" />
+            <Navigation />
             <main>{children}</main>
             <Footer className="flex flex-col items-center pt-4 pb-4 gap-1" />
         </Provider>
