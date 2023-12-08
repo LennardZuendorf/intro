@@ -1,14 +1,23 @@
 'use client'
 
-import { title } from "@/components/primitives";
-import {Card, CardHeader, CardBody, CardFooter, Image, Button} from "@nextui-org/react";
+import {callout, header, subtitle, title} from "@/components/primitives";
+import {Card, CardHeader, CardBody, CardFooter, Image, Button, Divider, Chip, Spacer} from "@nextui-org/react";
+import {Link} from "@nextui-org/link";
+import {commonColors} from "@nextui-org/theme";
+import {useTheme} from "next-themes";
+import {useRouter} from "next/navigation";
 
-export default function DocsPage() {
+export default function ProjectsPage() {
+	const router = useRouter();
+
 	return (
-		<div className="flex flex-col items-center justify-center gap-8 sm:gap-16" >
-			<div className="inline-block text-center justify-center">
-				<h1 className={title()}>Projects</h1>
+		<section className="flex flex-col items-center justify-center gap-2 sm:gap-4">
+			<div id="title" className="block text-center justify-center pb-2 md:pb-4">
+				<h1 className={title()}>My Projects</h1>
+				<h4 className={subtitle()}>
+					These are the projects I actively work on in my free time and some archived ones.
+				</h4>
 			</div>
-		</div>
+		</section>
 	);
 }

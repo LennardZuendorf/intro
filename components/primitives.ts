@@ -1,7 +1,7 @@
 import { tv } from "tailwind-variants";
 
 export const callout = tv({
-	base: "tracking-tight inline font-black font-callout",
+	base: "tracking-tight inline font-bold font-callout",
 	variants: {
 		size: {
 			sm: "text-3xl lg:text-4xl",
@@ -18,7 +18,7 @@ export const callout = tv({
 });
 
 export const title = tv({
-	base: "tracking-tight inline font-black font-callout",
+	base: "tracking-tight inline font-bold font-callout",
 	variants: {
 		size: {
 			sm: "text-2xl lg:text-3xl",
@@ -30,12 +30,12 @@ export const title = tv({
 		},
 	},
 	defaultVariants: {
-		size: "md",
+		size: "sm",
 	},
 });
 
 export const header = tv({
-	base: "tracking-tight inline font-black font-callout",
+	base: "tracking-tight inline font-semi-bold font-callout",
 	variants: {
 		size: {
 			sm: "text-2xl lg:text-3xl",
