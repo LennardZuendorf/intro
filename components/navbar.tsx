@@ -23,8 +23,7 @@ export const Navbar = () => {
 	const { theme, setTheme } = useTheme();
 
 	return (
-		<NextUINavbar maxWidth="xl" position="sticky">
-
+		<NextUINavbar maxWidth="xl" position="sticky" className="pt-4">
 			<NavbarContent className="basis-1/5 sm:basis-full" justify="start">
 				<NavbarBrand as="li" className="gap-3 max-w-fit">
 					<NextLink className="flex justify-start items-center gap-1" href="/">
@@ -39,20 +38,17 @@ export const Navbar = () => {
 					</NextLink>
 				</NavbarBrand>
 			</NavbarContent>
-
 			<NavbarContent className="hidden sm:flex gap-8 basis-1/5 sm:basis-full" justify="end">
 				<NavbarItem className="hidden sm:flex gap-2 justify-start ml-2" isActive={pathname==='/projects'}>
 					<Link color="foreground" href="/projects">
 						Projects
 					</Link>
 				</NavbarItem>
-
 				<NavbarItem className= "hidden sm:flex gap-2 justify-start ml-2" isActive={pathname==='/about'}>
 					<Link color="foreground" href="/about">
 						About
 					</Link>
 				</NavbarItem>
-
 				<NavbarItem className="hidden sm:flex gap-2 justify-end ml-2">
 					<ThemeSwitch />
 				</NavbarItem>

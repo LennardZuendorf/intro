@@ -1,11 +1,11 @@
-export default function DocsLayout({
+export default function ProjectsLayout({
 	children,
 }: {
 	children: React.ReactNode;
 }) {
 	return (
-		<section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
-			<div className="text-center justify-center">
+		<section>
+			<div className="container mx-auto grow w-full">
 				{children}
 			</div>
 		</section>

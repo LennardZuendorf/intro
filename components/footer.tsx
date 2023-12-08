@@ -11,7 +11,7 @@ import {AiFillLinkedin, AiOutlineGithub} from 'react-icons/ai';
 export const Footer = () => {
     {
         return (
-            <footer>
+            <footer className="pb-4">
                 <div className="mt-16 flex flex-col items-center">
                     <div className="mb-3 flex space-x-4">
                         <div className="flex gap-4">

@@ -14,12 +14,13 @@ import {
 	Tabs
 } from "@nextui-org/react";
 
-export default function DocsPage() {
+export default function LegalPage() {
 	return (
 		<section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10" >
 			<div className="inline-block text-start justify-center">
 				<h1 className={title()}>Legal & Data Protection</h1>
 			</div>
+			<Divider/>
 			<div className="inline-block text-center justify-center">
 				<div className="w-full">
 					<Tabs aria-label="Options" defaultSelectedKey="data-protection">
