@@ -4,9 +4,9 @@ import { cn } from "@/lib/utils"
 import { siteConfig } from "@/config/site";
 import { Separator } from "@/components/ui/separator"
 import Link from 'next/link'
-import { ColorToggle } from "@/components/color-toggle"
+import { ToggleColor } from "@/components/toggle-color"
 import {Button} from "@/components/ui/button";
-import {ThemeToggle} from "@/components/theme-toggle";
+import {ToggleTheme} from "@/components/toggle-theme";
 
 export const Footer = () => {
     {
@@ -31,8 +31,8 @@ export const Footer = () => {
                         </Link>
                     </div>
                     <div className="flex items-end gap-x-4">
-                        <ThemeToggle />
-                        <ColorToggle />
+                        <ToggleTheme />
+                        <ToggleColor />
                     </div>
 
                 </div>
