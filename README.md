@@ -1,12 +1,12 @@
 # intro v2
 #### Intro V2 is the next generation of my personal website, merging my personal website and portfolio page.
-#### Build on the newest version Next UI with a completely custom layout/design and using Contentlayer. I'll include some more fun design options with Rough notation
+#### Build using Next.js 14 and top of shadcn/ui, powered by tailwindcss and radix. Uses a completely custom layout using Contentlayer for mdx based content.
 
 ## 🏗️ Tech Stack:
 
-**Languages:** Typescript, MDX
+**Languages:** Typescript
 
-**Frameworks:** Next.js, TailwindCSS, Contentlayer, NextUI, ...
+**Frameworks:** Next.js, TailwindCSS, Contentlayer
 
 **Hosting:** Vercel
 
@@ -17,3 +17,5 @@
 ## 👨‍💻 Author and Credits:
 
 **Author:** [@LennardZuendorf](https://github.com/LennardZuendorf)
+
+Based on [shadcn/ui](https://ui.shadcn.com) from [@shadcn](https://twitter.com/shadcn)
