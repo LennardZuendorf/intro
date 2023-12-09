@@ -2,9 +2,11 @@ import React from "react";
 import type { Metadata } from 'next'
 import './globals.css'
 
-import { Provider } from "@/components/theme-provider"
+import { Provider } from "@/components/provider-theme"
 import { Footer } from "@/components/footer"
 import {Navigation} from "@/components/navigation";
+import { SpeedInsights } from '@vercel/speed-insights/next';
+import { Analytics } from '@vercel/analytics/react';
 
 import { Inter as FontSans } from "next/font/google"
 import { cn } from "@/lib/utils"
@@ -29,15 +31,17 @@ export default function RootLayout({
         <html lang="en" suppressHydrationWarning>
         <head />
         <body className={cn(
-            "h-screen bg-background font-sans antialiased",
+            "h-full bg-background font-sans antialiased",
             fontSans.variable
         )}
         >
         <Provider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
             <Navigation />
-            <main>{children}</main>
-            <Footer className="flex flex-col items-center pt-4 pb-4 gap-1" />
+            <main className={cn("container mx-auto grow place-items-center w-full md:w-10/12 xl:w-8/12")}>{children}</main>
+            <Footer />
         </Provider>
+        <SpeedInsights />
+        <Analytics />
         </body>
         </html>
       </>
