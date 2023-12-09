@@ -2,49 +2,51 @@ import * as React from "react";
 import { cn } from "@/lib/utils"
 
 import { siteConfig } from "@/config/site";
-import { RxLinkedinLogo, RxGithubLogo, RxEnvelopeClosed  } from "react-icons/rx";
+import { Separator } from "@/components/ui/separator"
 import Link from 'next/link'
-import { ModeToggle } from "@/components/color-toggle"
+import { ColorToggle } from "@/components/color-toggle"
 import {Button} from "@/components/ui/button";
+import {ThemeToggle} from "@/components/theme-toggle";
 
-export const Footer = ({ className }: React.HTMLAttributes<HTMLElement>) => {
+export const Footer = () => {
     {
         return (
-            <footer className={cn(className)}>
-                <div className="container flex flex-col items-center justify-between gap-4 md:h-24 md:flex-row">
-                    <div className="flex flex-col items-center gap-2 px-8 md:flex-row md:gap-2 md:px-0">
-                        <div className="flex space-x-4">
-                            <Link href={siteConfig.links.mail}>
-                                <Button variant="outline" size="icon" className="justify-center items-center">
-                                    <RxEnvelopeClosed size={15} className="h-[1.2rem] w-[1.2rem] rotate-0" />
-                                </Button>
-                            </Link>
-
-                            <Link href={siteConfig.links.linkedin}>
-                                <Button variant="outline" size="icon" className="justify-center items-center">
-                                    <RxLinkedinLogo size={15} className="h-[1.2rem] w-[1.2rem] rotate-0" />
-                                </Button>
-                            </Link>
-
-                            <Link href={siteConfig.links.github}>
-                                <Button variant="outline" size="icon" className="justify-center items-center">
-                                    <RxGithubLogo size={15} className="h-[1.2rem] w-[1.2rem] rotate-0" />
-                                </Button>
-                            </Link>
-                        </div>
+            <footer className={cn("flex flex-col items-center pt-4 w-full")}>
+                <div className="container flex flex-col sm:flex-row items-center justify-between">
+                    <div className="flex items-start gap-x-4">
+                        <Link href={siteConfig.links.mail}>
+                            <Button variant="link" size="icon" className="justify-center items-center">
+                                <h4>Mail</h4>
+                            </Button>
+                        </Link>
+                        <Link href={siteConfig.links.linkedin}>
+                            <Button variant="link" size="icon" className="justify-center items-center">
+                                <h4>LinkedIn</h4>
+                            </Button>
+                        </Link>
+                        <Link href={siteConfig.links.github}>
+                            <Button variant="link" size="icon" className="justify-center items-center">
+                                <h4>Github</h4>
+                            </Button>
+                        </Link>
                     </div>
-                    <ModeToggle />
+                    <div className="flex items-end gap-x-4">
+                        <ThemeToggle />
+                        <ColorToggle />
+                    </div>
+
                 </div>
+                <Separator className="my-4" />
                 <div>
-                    <div className="flex items-center space-x-2 text-sm">
-                        <div>{siteConfig.name}</div>
+                    <div className="flex items-center gap-x-2 text-sm">
+                        <div>Build by Lennard Zündorf</div>
                         <div>{`© ${new Date().getFullYear()}`}</div>
                         <div>{` | `}</div>
 
                         <Link href="/legal">
-                            <Button variant="link">
+                            <h4 className="text-sm font-medium leading-none hover:underline">
                                 legal
-                            </Button>
+                            </h4>
                         </Link>
                     </div>
                 </div>
