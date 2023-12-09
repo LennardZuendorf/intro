@@ -26,7 +26,7 @@ export const Navigation = () => {
                     {siteConfig.navItems.map((item) => (
                         <NavigationMenuItem key={item.href}>
                             <Link href={item.href} legacyBehavior passHref>
-                                <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), pathname === item.href ? 'font-bold' : 'font-light')} active={pathname === item.href}>
+                                <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), pathname === item.href ? 'font-black' : 'font-medium')} active={pathname === item.href}>
                                     {item.label}
                                 </NavigationMenuLink>
                             </Link>
