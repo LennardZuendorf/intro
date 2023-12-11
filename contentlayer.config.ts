@@ -7,19 +7,41 @@ const Project = defineDocumentType(() => ({
     fields: {
         title: {
             type: 'string',
-            description: 'The title of the post',
             required: true,
         },
-        date: {
-            type: 'date',
-            description: 'The date of the post',
+        focus:{
+            type: 'boolean',
             required: true,
+        },
+        category:{
+            type: 'string',
+            required: true,
+        },
+        description: {
+            type: 'string',
+            required: true,
+        },
+        tags: {
+            type: 'list',
+            of: {
+                type: 'string',
+            },
+        },
+        lastmod: {
+            type: 'date',
+            required: true
+        },
+        github: {
+            type: 'string',
+        },
+        link: {
+            type: 'string',
         },
     },
     computedFields: {
         url: {
             type: 'string',
-            resolve: (doc) => `/${doc._raw.flattenedPath}`,
+            resolve: (doc) => `/projects/${doc._raw.flattenedPath}`,
         },
     },
 }))
