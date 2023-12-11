@@ -4,7 +4,7 @@ import './globals.css'
 
 import { Provider } from "@/components/provider-theme"
 import { Footer } from "@/components/footer"
-import {Navigation} from "@/components/navigation";
+import {Nav} from "@/components/nav";
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { Analytics } from '@vercel/analytics/react';
 
@@ -36,7 +36,7 @@ export default function RootLayout({
         )}
         >
         <Provider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-            <Navigation />
+            <Nav />
             <main className={cn("container mx-auto grow place-items-center w-full md:w-10/12 xl:w-8/12")}>{children}</main>
             <Footer />
         </Provider>
