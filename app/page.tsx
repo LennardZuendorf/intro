@@ -1,4 +1,4 @@
-import {GridTitle} from '@/components/grid-title'
+import {GridTitle} from '@/components/pages/grid-title'
 
 export default function Home() {
   return (

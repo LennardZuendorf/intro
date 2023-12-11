@@ -12,7 +12,8 @@
 
 ## 🗳️ Status:
 
-[![build next.js page](https://github.com/LennardZuendorf/intro/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/LennardZuendorf/intro/actions/workflows/build.yml)
+(Main): [![Check NextJs build](https://github.com/LennardZuendorf/intro/actions/workflows/node.js.yml/badge.svg)](https://github.com/LennardZuendorf/intro/actions/workflows/node.js.yml)
+
 
 ## 👨‍💻 Author and Credits:
 
