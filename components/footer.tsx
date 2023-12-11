@@ -1,7 +1,7 @@
 import * as React from "react";
 import { cn } from "@/lib/utils"
 
-import { siteConfig } from "@/config/site";
+import { siteConfig } from "@/data/site";
 import { Separator } from "@/components/ui/separator"
 import Link from 'next/link'
 import { ToggleColor } from "@/components/toggle-color"

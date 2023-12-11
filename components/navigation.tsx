@@ -2,7 +2,7 @@
 
 import * as React from "react"
 import Link from "next/link"
-import { siteConfig } from "@/config/site";
+import { siteConfig } from "@/data/site";
 import { usePathname } from 'next/navigation'
 
 import { cn } from "@/lib/utils"
