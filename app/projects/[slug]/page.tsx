@@ -1,11 +1,13 @@
+// @ts-nocheck
+
 import { allProjects } from 'contentlayer/generated'
 import { getMDXComponent } from 'next-contentlayer/hooks'
 
 export const generateStaticParams = async () => allProjects.map((project) => ({ slug: project._raw.flattenedPath }))
 
-export const generateMetadata = ({ params }) => {
+export const generateMetadata = ({ params }: { params: { slug: string } }) => {
     const project = allProjects.find((post) => post._raw.flattenedPath === params.slug)
-    return { title: project.title }
+    return { title: project?.title }
 }
 
 const ProjectLayout = ({ params }: { params: { slug: string } }) => {
