@@ -1,8 +1,10 @@
 "use client"
 
 import * as React from "react"
+import { createContext, useContext, useState } from 'react';
 import { IoColorFilterSharp,IoColorFilterOutline  } from 'react-icons/io5';
 import { useTheme } from "next-themes"
+
 
 import { Button } from "@/components/ui/button"
 import {
@@ -12,8 +14,10 @@ import {
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 
+//TODO: Implement using state like zustand
 export function ToggleTheme() {
-    const { setTheme } = useTheme()
+    const { theme, setTheme } = useTheme();
+    const [color, setColor] = useState("monochrome");
 
     return (
         <DropdownMenu>
@@ -25,13 +29,27 @@ export function ToggleTheme() {
                 </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
-                <DropdownMenuItem onClick={() => setTheme("light")}>
+
+                <DropdownMenuItem onClick={() => {setColor("colorful")}}>
                     Colorful
                 </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => setTheme("dark")}>
+
+                <DropdownMenuItem onClick={() => {setColor("monochrome")}}>
                     Monochrome
                 </DropdownMenuItem>
             </DropdownMenuContent>
         </DropdownMenu>
     )
 }
+
+/*
+                <DropdownMenuItem onClick={() => {
+                    if (theme === "dark") {
+                        setTheme("chroma-dark");
+                    } else if (theme === "dark"){
+                        setTheme("chroma-light");
+                    } else return
+                }}>
+                    Colorful
+                </DropdownMenuItem>
+ */
