@@ -20,7 +20,7 @@ export default function Projects() {
     <div className="flex flex-col items-center justify-center gap-2 sm:gap-4 md:gap-8 lg:gap-16 py-2 md:py-4 lg:py-8">
         <hr className="my-8" />
         {focusProjects?.length ? (
-            <div className="grid gap-10 sm:grid-cols-2">
+            <div className="grid gap-10 sm:grid-cols-3">
                 {focusProjects.map((project, index) => (
                     <article
                         key={project._id}
@@ -36,7 +36,7 @@ export default function Projects() {
                                 priority={index <= 1}
                             />
                         )}
-                        <h2 className="text-2xl font-extrabold">{project.title}</h2>
+                        <h2 className="text-1xl font-extrabold">{project.title}</h2>
                         {project.description && (
                             <p className="text-muted-foreground">{project.description}</p>
                         )}
@@ -72,12 +72,12 @@ export default function Projects() {
                                 priority={index <= 1}
                             />
                         )}
-                        <h2 className="text-2xl font-extrabold">{project.title}</h2>
+                        <h2 className="text-xl font-black">{project.title}</h2>
                         {project.description && (
                             <p className="text-muted-foreground">{project.description}</p>
                         )}
                         {project.date && (
-                            <p className="text-sm text-muted-foreground">
+                            <p className="text-s text-muted-foreground">
                                 {format(parseISO(String(project.date)), 'LLLL d, yyyy')}
                             </p>
                         )}
