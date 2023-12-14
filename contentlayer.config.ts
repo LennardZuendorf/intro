@@ -9,6 +9,18 @@ const Project = defineDocumentType(() => ({
             type: 'string',
             required: true,
         },
+        description: {
+            type: 'string',
+            required: true,
+        },
+        date: {
+            type: "date",
+            required: true,
+        },
+        image: {
+            type: "string",
+            required: true,
+        },
         focus:{
             type: 'boolean',
             required: true,
@@ -17,19 +29,11 @@ const Project = defineDocumentType(() => ({
             type: 'string',
             required: true,
         },
-        description: {
-            type: 'string',
-            required: true,
-        },
         tags: {
             type: 'list',
             of: {
                 type: 'string',
             },
-        },
-        lastmod: {
-            type: 'date',
-            required: true
         },
         github: {
             type: 'string',
