@@ -1,10 +1,12 @@
 import { ReactNode } from 'react'
-import { CoreContent } from 'pliny/utils/contentlayer'
+
+//@ts-ignore
+import { coreContent, allCoreContent } from 'pliny/utils/contentlayer'
 import type { Project } from 'contentlayer/generated'
 import Link from "next/link";
 
 interface LayoutProps {
-    content: CoreContent<Project>
+    content: coreContent<Project>
     next?: { path: string; title: string }
     prev?: { path: string; title: string }
     children: ReactNode
