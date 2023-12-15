@@ -1,5 +1,4 @@
 // @ts-nocheck
-//TODO: Fix Paths
 
 import {notFound} from "next/navigation";
 
