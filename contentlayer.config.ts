@@ -1,8 +1,24 @@
-import { defineDocumentType, makeSource } from 'contentlayer/source-files'
+import { defineDocumentType, ComputedFields, makeSource } from 'contentlayer/source-files'
+
+const computedFields: ComputedFields = {
+    slug: {
+        type: 'string',
+        resolve: (doc) => doc._raw.flattenedPath.replace(/^.+?(\/)/, ''),
+    },
+    path: {
+        type: 'string',
+        resolve: (doc) => doc._raw.flattenedPath,
+    },
+    filePath: {
+        type: 'string',
+        resolve: (doc) => doc._raw.sourceFilePath,
+    },
+}
+
 
 const Project = defineDocumentType(() => ({
     name: 'Project',
-    filePathPattern: `**/*.mdx`,
+    filePathPattern: `/projects/**/*.mdx`,
     contentType: 'mdx',
     fields: {
         title: {
@@ -42,15 +58,10 @@ const Project = defineDocumentType(() => ({
             type: 'string',
         },
     },
-    computedFields: {
-        url: {
-            type: 'string',
-            resolve: (doc) => `/projects/${doc._raw.flattenedPath}`,
-        },
-    },
+    computedFields,
 }))
 
 export default makeSource({
-    contentDirPath: 'projects',
+    contentDirPath: './data',
     documentTypes: [Project],
 })

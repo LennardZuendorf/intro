@@ -58,9 +58,9 @@ export const Nav = () => {
                                 </li>
                                 {focusProjects.map((project) => (
                                     <ListItem
-                                        key={project.url}
+                                        key={project.title}
                                         title={project.title}
-                                        href={project.url}
+                                        href={project.path}
                                     >
                                         {project.description}
                                     </ListItem>

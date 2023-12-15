@@ -23,7 +23,7 @@ export default function Projects() {
             <div className="grid gap-10 sm:grid-cols-3">
                 {focusProjects.map((project, index) => (
                     <article
-                        key={project._id}
+                        key={project.title}
                         className="group relative flex flex-col space-y-2"
                     >
                         {project.image && (
@@ -45,7 +45,7 @@ export default function Projects() {
                                 {format(parseISO(String(project.date)), 'LLLL d, yyyy')}
                             </p>
                         )}
-                        <Link href={project.url} className="absolute inset-0">
+                        <Link href={project.path} className="absolute inset-0">
                             <span className="sr-only">View Article</span>
                         </Link>
                     </article>
@@ -59,7 +59,7 @@ export default function Projects() {
             <div className="grid gap-5 sm:grid-cols-6">
                 {otherProjects.map((project, index) => (
                     <article
-                        key={project._id}
+                        key={project.title}
                         className="group relative flex flex-col space-y-2"
                     >
                         {project.image && (
@@ -81,14 +81,14 @@ export default function Projects() {
                                 {format(parseISO(String(project.date)), 'LLLL d, yyyy')}
                             </p>
                         )}
-                        <Link href={project.url} className="absolute inset-0">
+                        <Link href={project.path} className="absolute inset-0">
                             <span className="sr-only">View Article</span>
                         </Link>
                     </article>
                 ))}
             </div>
         ) : (
-            <p>No Focus Projects.</p>
+            <p>No Other Projects.</p>
         )}
     </div>
   )
