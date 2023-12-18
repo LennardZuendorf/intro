@@ -1,16 +1,15 @@
-import Image from "next/image"
+import * as React from "react";
 import Link from "next/link"
-import { allProjects } from "contentlayer/generated"
-// @ts-ignore
-import { Project } from "contentlayer/types"
 import { compareDesc, parseISO, format } from "date-fns"
+
 import {Card, CardDescription, CardFooter, CardHeader, CardTitle} from "@/components/ui/card"
 import {Separator} from "@/components/ui/separator"
 import {ProjectCard} from "@/components/projects/card"
-import {siteConfig} from "@/data/site"
 import {Button} from "@/components/ui/button";
+
 import {cn} from "@/lib/utils";
-import * as React from "react";
+import { allProjects } from "contentlayer/generated"
+import type {Project} from 'contentlayer/generated'
 
 export default async function ProjectsPage() {
     const focusProjects = allProjects

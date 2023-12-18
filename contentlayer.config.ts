@@ -1,8 +1,12 @@
 import { defineDocumentType, ComputedFields, makeSource } from 'contentlayer/source-files'
-import rehypeAutolinkHeadings from "rehype-autolink-headings"
-import rehypePrettyCode from "rehype-pretty-code"
-import rehypeSlug from "rehype-slug"
 import remarkGfm from "remark-gfm"
+import rehypeAutolinkHeadings, {
+    type Options as AutolinkOptions,
+} from 'rehype-autolink-headings';
+import rehypePrettyCode, {
+    type Options as PrettyCodeOptions,
+} from 'rehype-pretty-code';
+import rehypeSlug from 'rehype-slug';
 
 const computedFields: ComputedFields = {
     slug: {
@@ -106,6 +110,7 @@ const About = defineDocumentType(() => ({
     computedFields,
 }))
 
+// @ts-ignore
 export default makeSource({
     contentDirPath: './data',
     documentTypes: [Project, LegalDoc, About],
@@ -114,31 +119,23 @@ export default makeSource({
         rehypePlugins: [
             rehypeSlug,
             [
-                rehypePrettyCode,
-                {
-                    theme: "github-dark",
-                    onVisitLine(node) {
-                        if (node.children.length === 0) {
-                            node.children = [{ type: "text", value: " " }]
-                        }
-                    },
-                    onVisitHighlightedLine(node) {
-                        node.properties.className.push("line--highlighted")
-                    },
-                    onVisitHighlightedWord(node) {
-                        node.properties.className = ["word--highlighted"]
-                    },
-                },
-            ],
-            [
                 rehypeAutolinkHeadings,
                 {
-                    properties: {
-                        className: ["subheading-anchor"],
-                        ariaLabel: "Link to section",
+                    behavior: 'append',
+                    test: ['h2', 'h3'],
+                    properties: { class: 'heading-link' },
+                } satisfies Partial<AutolinkOptions>,
+            ],
+            [
+                // @ts-ignore
+                rehypePrettyCode,
+                {
+                    theme: {
+                        light: 'github-light',
+                        dark: 'github-dark',
                     },
-                },
+                } satisfies Partial<PrettyCodeOptions>,
             ],
         ],
     },
-})
+});
