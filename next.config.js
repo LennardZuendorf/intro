@@ -25,6 +25,11 @@ const nextConfig = {
                 destination: 'mailto:lennard@zuendorf.me',
                 permanent: true,
             },
+            {
+                source: '/projects/thesis/preview',
+                destination: 'https://huggingface.co/spaces/LennardZuendorf/thesis-webapp-docker',
+                permanent: true,
+            }
         ];
     },
 };
