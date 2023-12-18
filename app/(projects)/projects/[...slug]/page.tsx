@@ -3,7 +3,6 @@
 import type {Project} from 'contentlayer/generated'
 import {allProjects} from 'contentlayer/generated'
 
-import Layout from '@/components/projects/layout'
 import { Mdx } from "@/components/projects/mdx-components"
 import Link from "next/link";
 
