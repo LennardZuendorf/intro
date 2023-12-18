@@ -26,6 +26,7 @@ export const Nav = () => {
             return compareDesc(parseISO(String(a.date)), parseISO(String(b.date)))
         }).slice(0, 3)
 
+    // @ts-ignore
     return (
         <div className={cn("flex flex-col items-center pt-4 pb-4 gap-1")}>
             <NavigationMenu className="rounded-md border">
@@ -60,7 +61,7 @@ export const Nav = () => {
                                     <ListItem
                                         key={project.title}
                                         title={project.title}
-                                        href={project.path}
+                                        href={pathname.includes("projects/") ? project.slug : project.path}
                                     >
                                         {project.description}
                                     </ListItem>
