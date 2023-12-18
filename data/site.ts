@@ -18,6 +18,11 @@ export const siteConfig = {
             href: "/about",
         },
     ],
+    focusProjects:{
+        top1: "tempus",
+        top2: "thesis",
+        top3: "quaestio"
+    },
     links: {
         github: "/github",
         linkedin: "/linkd",
