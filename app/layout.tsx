@@ -29,21 +29,25 @@ export default function RootLayout({
   return (
       <>
         <html lang="en" suppressHydrationWarning>
-        <head />
-        <body className={cn(
-            "h-full bg-background font-sans antialiased",
-            fontSans.variable
-        )}
-        >
-        <Provider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-            <Nav />
-            <main className={cn("container mx-auto grow place-items-center w-full md:w-10/12 xl:w-8/12")}>{children}</main>
-            <Footer />
-        </Provider>
-        <SpeedInsights />
-        <Analytics />
-        </body>
+            <head>
+                <title>Zuendorf.Me</title>
+                <meta property="og:title" content="Zuendorf.Me" key="title"/>
+            </head>
+            <body className={cn(
+                "h-full bg-background font-sans antialiased",
+                fontSans.variable
+            )}
+            >
+            <Provider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+                <Nav/>
+                <main
+                    className={cn("container mx-auto grow place-items-center w-full md:w-10/12 xl:w-8/12")}>{children}</main>
+                <Footer/>
+            </Provider>
+            <SpeedInsights/>
+            <Analytics/>
+            </body>
         </html>
       </>
-  )
+    )
 }
