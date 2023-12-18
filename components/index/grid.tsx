@@ -1,4 +1,4 @@
-export const GridTitle = () => {
+export const Grid = () => {
     return (
         <div>
             <h1>Title Grid</h1>

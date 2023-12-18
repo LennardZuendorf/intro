@@ -1,4 +1,4 @@
-import {GridTitle} from '@/components/index/grid-title'
+import {Grid} from '@/components/index/grid'
 
 export default function Home() {
   return (
@@ -12,7 +12,7 @@ export default function Home() {
         </p>
       </div>
       <div>
-        <GridTitle />
+        <Grid />
       </div>
     </section>
   )
