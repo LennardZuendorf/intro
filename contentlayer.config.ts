@@ -1,4 +1,8 @@
 import { defineDocumentType, ComputedFields, makeSource } from 'contentlayer/source-files'
+import rehypeAutolinkHeadings from "rehype-autolink-headings"
+import rehypePrettyCode from "rehype-pretty-code"
+import rehypeSlug from "rehype-slug"
+import remarkGfm from "remark-gfm"
 
 const computedFields: ComputedFields = {
     slug: {
@@ -14,7 +18,6 @@ const computedFields: ComputedFields = {
         resolve: (doc) => doc._raw.sourceFilePath,
     },
 }
-
 
 const Project = defineDocumentType(() => ({
     name: 'Project',
@@ -45,6 +48,10 @@ const Project = defineDocumentType(() => ({
             type: 'string',
             required: true,
         },
+        icon: {
+            type: "string",
+            required: false,
+        },
         tags: {
             type: 'list',
             of: {
@@ -61,7 +68,77 @@ const Project = defineDocumentType(() => ({
     computedFields,
 }))
 
+const LegalDoc = defineDocumentType(() => ({
+name: 'LegalDoc',
+    filePathPattern: `/legal/**/*.mdx`,
+    contentType: 'mdx',
+    fields: {
+        title: {
+            type: 'string',
+            required: true,
+        },
+        date: {
+            type: 'date',
+            required: true,
+        },
+        language: {
+            type: 'string',
+            required: true,
+        },
+    },
+    computedFields,
+}))
+
+const About = defineDocumentType(() => ({
+    name: 'About',
+    filePathPattern: `/about/**/*.mdx`,
+    contentType: 'mdx',
+    fields: {
+        title: {
+            type: 'string',
+            required: true,
+        },
+        date: {
+            type: 'date',
+            required: true,
+        },
+    },
+    computedFields,
+}))
+
 export default makeSource({
     contentDirPath: './data',
-    documentTypes: [Project],
+    documentTypes: [Project, LegalDoc, About],
+    mdx: {
+        remarkPlugins: [remarkGfm],
+        rehypePlugins: [
+            rehypeSlug,
+            [
+                rehypePrettyCode,
+                {
+                    theme: "github-dark",
+                    onVisitLine(node) {
+                        if (node.children.length === 0) {
+                            node.children = [{ type: "text", value: " " }]
+                        }
+                    },
+                    onVisitHighlightedLine(node) {
+                        node.properties.className.push("line--highlighted")
+                    },
+                    onVisitHighlightedWord(node) {
+                        node.properties.className = ["word--highlighted"]
+                    },
+                },
+            ],
+            [
+                rehypeAutolinkHeadings,
+                {
+                    properties: {
+                        className: ["subheading-anchor"],
+                        ariaLabel: "Link to section",
+                    },
+                },
+            ],
+        ],
+    },
 })
