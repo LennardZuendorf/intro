@@ -57,7 +57,7 @@ export default async function ProjectsPage() {
                                 <div className="flex gap-1 justify-start">
                                     {focusProjects[0].tags &&
                                         (focusProjects[0].tags || []).map((tag) => (
-                                            <Badge variant="outline">
+                                            <Badge variant="outline" key={tag}>
                                                 {tag}
                                             </Badge>
                                         ))

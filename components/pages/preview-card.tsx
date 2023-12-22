@@ -33,7 +33,7 @@ export const ProjectCard: React.FC<Props> = ({ project, className}) => {
                         <div className="flex gap-1 justify-start">
                             {project.tags &&
                                 (project.tags.slice(0, 2) || []).map((tag) => (
-                                    <Badge variant="outline">
+                                    <Badge variant="outline" key={tag}>
                                         {tag}
                                     </Badge>
                                 ))
