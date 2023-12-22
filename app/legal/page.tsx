@@ -2,7 +2,7 @@ import {Card, CardContent, CardDescription, CardHeader, CardTitle,} from "@/comp
 import {Tabs, TabsContent, TabsList, TabsTrigger,} from "@/components/ui/tabs"
 import {allLegalDocs} from "contentlayer/generated";
 import type {LegalDoc} from 'contentlayer/generated'
-import { Mdx } from "@/components/projects/mdx-components"
+import { Mdx } from "@/components/pages/mdx-components"
 
 export const generateStaticParams = async () => {
     return allLegalDocs.map((p) => ({slug: p.slug.split('/')}))
