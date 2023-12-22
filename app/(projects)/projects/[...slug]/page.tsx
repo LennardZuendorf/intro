@@ -38,7 +38,7 @@ export default async function Page({ params }: { params: { slug: string[] } }) {
                 <div className="flex flex-row gap-2">
                     {project.tags &&
                         (project.tags || []).map((tag) => (
-                            <Badge variant="outline">
+                            <Badge variant="outline" key={tag}>
                                 {tag}
                             </Badge>
                         ))
