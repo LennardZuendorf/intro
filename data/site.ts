@@ -1,9 +1,6 @@
 export type SiteConfig = typeof siteConfig;
 
 export const siteConfig = {
-    name: "zuendorf.me",
-    title: "Lennard Zündorf",
-    description: "Personal Website and Portfolio",
     navItems: [
         {
             label: "Home",
@@ -24,28 +21,24 @@ export const siteConfig = {
         top3: "quaestio"
     },
     links: {
-        github: "/github",
-        linkedin: "/linkd",
-        mail: "/mail"
+        github: "https://zuendorf.me/github",
+        linkedin: "https://zuendorf.me/link",
+        mail: "lennard@zuendorf.me"
     },
 };
 
 export type SiteMetadata = typeof siteMetadata;
 
 export const siteMetadata = {
-    title: 'ignitr',
-    author: 'Lennard',
-    description: 'Lennard Zuendorfs project and showcase portfolio website',
-    headerTitle: 'ignitr',
+    name: "zuendorf.me",
+    title: "zuendorf.me",
+    description: "Personal Website and Portfolio",
+    headerTitle: 'zuendorf.me',
     language: 'en-us',
     theme: 'system',
-    siteUrl: 'https://ignitr.tech',
-    siteRepo: 'https://github.com/lennardzuendorf/ignitus',
-    siteLogo: '/static/images/logo.png',
-    image: '/static/images/avatar.png',
-    socialBanner: '/static/images/social-preview.png',
-    email: 'lennard@zuendorf.me',
-    github: 'https://zuendorf.me/github',
-    linkedin: 'https://zuendorf.me/linkd',
+    siteUrl: 'https://zuendorf.me',
+    siteLogo: '/logo.png',
+    image: '/avatar.png',
+    socialBanner: '/social-preview.png',
     locale: 'en-de',
 }
