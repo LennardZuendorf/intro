@@ -10,7 +10,7 @@ import {Button} from "@/components/ui/button";
 export const Footer = () => {
     {
         return (
-            <footer className={cn("flex flex-col items-center pt-4 w-full")}>
+            <footer className={cn("flex flex-col items-center pt-4 w-full pb-4")}>
                 <div className="container flex flex-col sm:flex-row items-center justify-between">
                     <div className="flex items-start gap-x-4">
                         <Link href={siteConfig.links.mail}>
