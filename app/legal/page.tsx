@@ -26,7 +26,7 @@ export default async function Legal({ params }: { params: { slug: string[] } }) 
                       </CardHeader>
                       <CardContent className="space-y-2 text-start prose">
                           <Mdx code={german.body.code}/>
-                        </CardContent>
+                      </CardContent>
                   </Card>
               </TabsContent>
               <TabsContent value="english">

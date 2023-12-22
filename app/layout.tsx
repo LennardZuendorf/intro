@@ -20,7 +20,7 @@ export default function RootLayout({
         <html lang="en" suppressHydrationWarning>
         <head>
             <title>{siteMetadata.title}</title>
-            <link rel="icon" href="/icon?<generated>" type="image/png" sizes="32x32"/>
+            <link rel="icon" href="/favicon.ico" sizes="any"/>
             <meta name="robots" content="follow, index"/>
             <meta name="description" content={siteMetadata.title}/>
             <meta property="og:url" content={siteMetadata.siteUrl}/>
@@ -31,7 +31,7 @@ export default function RootLayout({
             <meta property="og:image" content={siteMetadata.image} key={siteMetadata.image}/>
         </head>
         <body className={cn(
-            "h-full bg-background font-sans antialiased",
+            "relative h-full bg-background font-sans antialiased",
                 inter.className
             )}
             >
@@ -42,7 +42,7 @@ export default function RootLayout({
                 >
                     {children}
                 </main>
-                <Footer/>
+                <Footer />
             </Provider>
             <SpeedInsights/>
             <Analytics/>

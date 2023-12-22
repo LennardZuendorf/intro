@@ -7,10 +7,14 @@ import Link from 'next/link'
 import { ToggleColor } from "@/components/toggle-color"
 import {Button} from "@/components/ui/button";
 
-export const Footer = () => {
+interface FooterProps {
+    className?: string
+}
+
+export const Footer: React.FC<FooterProps> = ({ className = ""  }) => {
     {
         return (
-            <footer className={cn("flex flex-col items-center pt-4 w-full pb-4")}>
+            <footer className={cn("flex flex-col items-center pt-4 w-full pb-4", className)}>
                 <div className="container flex flex-col sm:flex-row items-center justify-between">
                     <div className="flex items-start gap-x-4">
                         <Link href={siteConfig.links.mail}>
