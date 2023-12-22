@@ -19,7 +19,7 @@ export const SkillIcon: React.FC<Props> = ({ category, className}) => {
         <TooltipProvider>
             <Tooltip>
                 <TooltipTrigger asChild>
-                    <Button variant="ghost">
+                    <Button variant="link" >
                         {category === "Academic" ? < HiOutlineAcademicCap className={cn(className)}/> :
                             category === "Fullstack Product" ? <LuBoxes className={cn(className,)}/> :
                                 category === "Software Engineering" ? <LuLaptop2 className={cn(className)}/> :

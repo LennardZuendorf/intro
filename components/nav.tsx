@@ -17,7 +17,11 @@ import {
 } from "@/components/ui/navigation-menu"
 import {compareDesc, parseISO} from "date-fns";
 
-export const Nav = () => {
+interface FooterProps {
+    className?: string
+}
+
+export const Nav: React.FC<FooterProps> = ({ className = ""  }) => {
     const pathname = usePathname();
 
     const focusProjects = allProjects
@@ -28,7 +32,7 @@ export const Nav = () => {
 
     // @ts-ignore
     return (
-        <div className={cn("flex flex-col items-center pt-4 pb-4 gap-1")}>
+        <div className={cn("flex flex-col items-center pt-4 pb-4 gap-1", className)}>
             <NavigationMenu className="rounded-md border">
                 <NavigationMenuList>
                     <NavigationMenuItem key="/">

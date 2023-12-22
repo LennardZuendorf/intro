@@ -1,19 +1,17 @@
+import * as React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {notFound} from "next/navigation";
-
+import {RxArrowUp} from "react-icons/rx";
 // @ts-nocheck
 import type {Project} from 'contentlayer/generated'
 // @ts-nocheck
 import {allProjects} from 'contentlayer/generated'
-
 import { Mdx } from "@/components/pages/mdx-components"
-import {cn} from "@/lib/utils";
-import {buttonVariants} from "@/components/ui/button";
-import { RxArrowLeft } from "react-icons/rx";
-import {format, parseISO} from "date-fns"
-import { Separator } from "@/components/ui/separator"
-import {Badge} from "@/components/ui/badge";
+import {Button} from "@/components/ui/button";
+import {Separator} from "@/components/ui/separator"
+import {Header, SubHeader} from "@/components/ui/typography";
+
 
 export const generateStaticParams = async () => {
     return allProjects.map((p) => ({slug: p.slug.split('/')}))
@@ -29,22 +27,12 @@ export default async function Page({ params }: { params: { slug: string[] } }) {
     }
 
     return (
-        <article className="container relative max-w-3xl py-6 lg:py-10">
-            <div className="text-start">
-                <h1 className="scroll-m-20 pb-2 text-3xl font-semibold tracking-tight first:mt-0">
-                    {project.title}
-                </h1>
-                <Separator className="my-4"/>
-                <div className="flex flex-row gap-2">
-                    {project.tags &&
-                        (project.tags || []).map((tag) => (
-                            <Badge variant="outline" key={tag}>
-                                {tag}
-                            </Badge>
-                        ))
-                    }
-                </div>
+        <article className="container relative max-w-3xl py-6 lg:py-10 space-y-4">
+            <div className="text-start space-y-1">
+                <Header>{project.title} </Header>
+                <SubHeader>{project.description}</SubHeader>
             </div>
+            <Separator/>
             {project.image && (
                 <Image
                     src={project.image}
@@ -57,6 +45,15 @@ export default async function Page({ params }: { params: { slug: string[] } }) {
             )}
             <div className="text-start f">
                 <Mdx code={project.body.code}/>
+            </div>
+            <Separator />
+            <div className="flex justify-between">
+                <Link href="/projects">
+                    <Button variant="outline">
+                        <RxArrowUp className="mr-2 h-4 w-4"/>
+                        Back to All Projects
+                    </Button>
+                </Link>
             </div>
         </article>
     )
