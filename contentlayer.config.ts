@@ -17,9 +17,9 @@ const computedFields: ComputedFields = {
         type: 'string',
         resolve: (doc) => doc._raw.flattenedPath,
     },
-    filePath: {
-        type: 'string',
-        resolve: (doc) => doc._raw.sourceFilePath,
+    slugAsParams: {
+        type: "string",
+        resolve: (doc) => doc._raw.flattenedPath.split("/").slice(1).join("/"),
     },
 }
 
@@ -52,7 +52,7 @@ const Project = defineDocumentType(() => ({
             type: 'string',
             required: true,
         },
-        icon: {
+        skill: {
             type: "string",
             required: false,
         },
