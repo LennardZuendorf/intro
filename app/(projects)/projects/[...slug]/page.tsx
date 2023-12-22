@@ -1,10 +1,19 @@
-// @ts-nocheck
+import Image from "next/image";
+import Link from "next/link";
+import {notFound} from "next/navigation";
 
+// @ts-nocheck
 import type {Project} from 'contentlayer/generated'
+// @ts-nocheck
 import {allProjects} from 'contentlayer/generated'
 
-import { Mdx } from "@/components/projects/mdx-components"
-import Link from "next/link";
+import { Mdx } from "@/components/pages/mdx-components"
+import {cn} from "@/lib/utils";
+import {buttonVariants} from "@/components/ui/button";
+import { RxArrowLeft } from "react-icons/rx";
+import {format, parseISO} from "date-fns"
+import { Separator } from "@/components/ui/separator"
+import {Badge} from "@/components/ui/badge";
 
 export const generateStaticParams = async () => {
     return allProjects.map((p) => ({slug: p.slug.split('/')}))
@@ -13,42 +22,42 @@ export const generateStaticParams = async () => {
 export default async function Page({ params }: { params: { slug: string[] } }) {
     const slug = decodeURI(params.slug.join('/'))
     const project = allProjects.find((p) => p.slug === slug) as Project
-    const basePath = project.path.split('/').slice(0, -1)
+    const basePath = "/projects"
+
+    if (!project) {
+        notFound()
+    }
 
     return (
-        <section className="mx-auto max-w-3xl px-4 sm:px-6 xl:max-w-5xl xl:px-0">
-            <article>
-                <div className="xl:divide-y xl:divide-gray-200 xl:dark:divide-gray-700">
-                    <header className="pt-6 xl:pb-6">
-                        <div className="space-y-1 text-center">
-                            <div>
-                                <h1>{project.title}</h1>
-                            </div>
-                        </div>
-                    </header>
-                    <div
-                        className="grid-rows-[auto_1fr] divide-y divide-gray-200 pb-8 dark:divide-gray-700 xl:grid xl:grid-cols-4 xl:gap-x-6 xl:divide-y-0">
-                        <div
-                            className="divide-y divide-gray-200 dark:divide-gray-700 xl:col-span-3 xl:row-span-2 xl:pb-0">
-                            <div className="prose max-w-none pb-8 pt-10 dark:prose-invert">
-                                <Mdx code={project.body.code}/>
-                            </div>
-                        </div>
-                        <footer>
-                            <div className="pt-4 xl:pt-8">
-                                <Link
-                                    href={`/${basePath}`}
-                                    className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
-                                    aria-label="Back to all Projects"
-                                >
-                                    &larr; Back to All Projects
-                                </Link>
-                            </div>
-                        </footer>
-                    </div>
+        <article className="container relative max-w-3xl py-6 lg:py-10">
+            <div className="text-start">
+                <h1 className="scroll-m-20 pb-2 text-3xl font-semibold tracking-tight first:mt-0">
+                    {project.title}
+                </h1>
+                <Separator className="my-4"/>
+                <div className="flex flex-row gap-2">
+                    {project.tags &&
+                        (project.tags || []).map((tag) => (
+                            <Badge variant="outline">
+                                {tag}
+                            </Badge>
+                        ))
+                    }
                 </div>
-            </article>
-        </section>
-
+            </div>
+            {project.image && (
+                <Image
+                    src={project.image}
+                    alt={project.title}
+                    width={720}
+                    height={405}
+                    className="my-8 rounded-md border bg-muted transition-colors"
+                    priority
+                />
+            )}
+            <div className="text-start f">
+                <Mdx code={project.body.code}/>
+            </div>
+        </article>
     )
 }
