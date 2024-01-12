@@ -25,7 +25,12 @@ export const Nav: React.FC<FooterProps> = ({ className = "" }) => {
   const pathname = usePathname();
 
   const focusProjects = allProjects
-    .filter((project) => project.focus)
+    .filter((project) => project.active)
+    .sort((a, b) => {
+      if (a.active && !b.active) return -1;
+      if (!a.active && b.active) return 1;
+      else return 0;
+    })
     .sort((a, b) => {
       return compareDesc(parseISO(String(a.date)), parseISO(String(b.date)));
     })
@@ -43,7 +48,7 @@ export const Nav: React.FC<FooterProps> = ({ className = "" }) => {
               <NavigationMenuLink
                 className={cn(
                   navigationMenuTriggerStyle(),
-                  pathname === "/" ? "font-black" : "font-medium",
+                  pathname === "/" ? "font-bold" : "font-medium",
                 )}
                 active={pathname === "/"}
               >
@@ -58,7 +63,10 @@ export const Nav: React.FC<FooterProps> = ({ className = "" }) => {
                 <li className="row-span-3">
                   <NavigationMenuLink asChild>
                     <a
-                      className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
+                      className={cn(
+                        pathname === "/about" ? "font-bold" : "font-medium",
+                        "flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md",
+                      )}
                       href="/projects"
                     >
                       <L>All Projects</L>
@@ -79,7 +87,7 @@ export const Nav: React.FC<FooterProps> = ({ className = "" }) => {
                         : project.path
                     }
                   >
-                    {project.description}
+                    {project.description.substring(0, 50).concat("...")}
                   </ListItem>
                 ))}
               </ul>
@@ -90,7 +98,7 @@ export const Nav: React.FC<FooterProps> = ({ className = "" }) => {
               <NavigationMenuLink
                 className={cn(
                   navigationMenuTriggerStyle(),
-                  pathname === "/about" ? "font-black" : "font-medium",
+                  pathname === "/about" ? "font-bold" : "font-medium",
                 )}
                 active={pathname === "/about"}
               >

@@ -6,7 +6,7 @@ import { Nav } from "@/components/nav";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/react";
 
-import { inter } from "./fonts";
+import { lato, spartan, roboto_mono } from "./fonts";
 import { cn } from "@/lib/utils";
 import { siteMetadata } from "@/data/site";
 
@@ -37,7 +37,9 @@ export default function RootLayout({
         <body
           className={cn(
             "relative h-full bg-background font-sans antialiased",
-            inter.className,
+            lato.variable,
+            spartan.variable,
+            roboto_mono.variable,
           )}
         >
           <Provider

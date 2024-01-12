@@ -13,7 +13,13 @@ import {
 } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
-import { H4, M, Code, H3 } from "@/components/ui/typography";
+import { H4, M, Code, S } from "@/components/ui/typography";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 type Props = {
   project: Project;
@@ -27,7 +33,7 @@ export const ProjectCard: React.FC<Props> = ({
   className,
   focus = false,
 }) => {
-  return (
+  const card = (
     <Card
       className={cn("text-start", {
         "hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground":
@@ -36,58 +42,68 @@ export const ProjectCard: React.FC<Props> = ({
           focus,
       })}
     >
-      <Link href={project.path}>
-        <CardHeader className="grid grid-flow-col justify-between gap-4">
-          <div className="space-y-1">
-            <CardTitle>
-              <H4>{project.title}</H4>
-            </CardTitle>
-            <CardDescription
-              className={focus ? "text-background" : "text-foreground"}
-            >
-              <M>{project.description}</M>
-            </CardDescription>
+      <CardHeader className="grid grid-flow-col justify-between gap-4">
+        <div className="space-y-1">
+          <CardTitle>
+            <H4>{project.title}</H4>
+          </CardTitle>
+          <CardDescription
+            className={focus ? "text-background" : "text-foreground"}
+          >
+            <M>{project.description}</M>
+          </CardDescription>
+        </div>
+        <div>
+          <SkillIcon
+            category={project.category}
+            className={cn("h-5 w-5", {
+              "text-background": focus,
+              "text-foreground": !focus,
+            })}
+          />
+        </div>
+      </CardHeader>
+      <CardContent>
+        <div
+          className={cn("flex gap-2 items-center justify-between", {
+            "text-muted-background": focus,
+            "text-muted-foreground": !focus,
+          })}
+        >
+          <div className="flex gap-1 justify-start">
+            {project.tags &&
+              (project.tags.slice(0, 2) || []).map((tag) => (
+                <Badge
+                  key={tag}
+                  className={focus ? "text-foreground" : "text-background"}
+                >
+                  {tag}
+                </Badge>
+              ))}
           </div>
-          <div>
-            <SkillIcon
-              category={project.category}
-              className={cn("h-5 w-5", {
-                "text-background": focus,
-                "text-foreground": !focus,
-              })}
-            />
-          </div>
-        </CardHeader>
-        <CardContent>
-          <div
-            className={cn("flex gap-2 items-center justify-between", {
-              "text-muted-background": focus,
-              "text-muted-foreground": !focus,
+          <Code
+            className={cn({
+              "text-background": focus,
+              "text-foreground": !focus,
             })}
           >
-            <div className="flex gap-1 justify-start">
-              {project.tags &&
-                (project.tags.slice(0, 2) || []).map((tag) => (
-                  <Badge
-                    variant="outline"
-                    key={tag}
-                    className={focus ? "text-background" : "text-foreground"}
-                  >
-                    {tag}
-                  </Badge>
-                ))}
-            </div>
-            <Code
-              className={cn({
-                "text-background": focus,
-                "text-foreground": !focus,
-              })}
-            >
-              {format(parseISO(project.date), "LLL/yy")}
-            </Code>
-          </div>
-        </CardContent>
-      </Link>
+            {project.active ? format(parseISO(project.date), "LLL/yy") : "SOON"}
+          </Code>
+        </div>
+      </CardContent>
     </Card>
+  );
+
+  return project.active ? (
+    <Link href={project.path}>{card}</Link>
+  ) : (
+    <TooltipProvider>
+      <Tooltip>
+        <TooltipTrigger asChild>{card}</TooltipTrigger>
+        <TooltipContent>
+          <S>This project has not been released yet.</S>
+        </TooltipContent>
+      </Tooltip>
+    </TooltipProvider>
   );
 };

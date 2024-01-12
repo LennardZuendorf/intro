@@ -24,6 +24,7 @@ export const siteConfig = {
     github: "https://zuendorf.me/github",
     linkedin: "https://zuendorf.me/linkd",
     mail: "mailto:lennard@zuendorf.me",
+    cv: "https://zuendorf.me/cv",
   },
 };
 

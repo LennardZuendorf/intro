@@ -22,7 +22,7 @@ const H1: React.FC<TypographyProps> = ({ className = "", children }) => {
   return (
     <h1
       className={cn(
-        "scroll-m-20 text-5xl font-extrabold tracking-tight lg:text-6xl",
+        "scroll-m-20 text-5xl font-black font-title tracking-tight lg:text-6xl",
         className,
       )}
     >
@@ -36,7 +36,7 @@ const H2: React.FC<TypographyProps> = ({ className = "", children }) => {
   return (
     <h2
       className={cn(
-        "scroll-m-20 text-3xl font-bold tracking-tight lg:text-4xl text-mute",
+        "scroll-m-20 text-3xl font-bold tracking-tight font-spartan lg:text-4xl text-mute",
         className,
       )}
     >
@@ -119,7 +119,12 @@ const L: React.FC<TypographyProps> = ({ className = "", children }) => {
 
 const M: React.FC<TypographyProps> = ({ className = "", children }) => {
   return (
-    <p className={cn("leading-7 [&:not(:first-child)]:mt-6", className)}>
+    <p
+      className={cn(
+        " text-m font-medium leading-7 [&:not(:first-child)]:mt-6",
+        className,
+      )}
+    >
       {children}
     </p>
   );

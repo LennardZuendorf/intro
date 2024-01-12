@@ -26,6 +26,15 @@ export const experienceData = [
       "Did Technical Product Management and quality assurance as part of the PM team. With a focus on payment.",
       "Managed final development and launch of several new product features within payment and risk protection.",
     ],
+    skills: [
+      "Technical Product Management",
+      "Agile Development",
+      "Scrum",
+      "Backend Development",
+      "CI/CD",
+      "Jira",
+      "Confluence",
+    ],
   },
   {
     title: "Product Strategy Intern",
@@ -38,6 +47,14 @@ export const experienceData = [
       "Led product analysis for the next software generation.",
       "Supported product strategy in the segment through analysis, research, conception, and execution with the CPO.",
     ],
+    skills: [
+      "Product Management",
+      "Product Strategy",
+      "Agile Development",
+      "Tableau",
+      "Scrum",
+      "Jira",
+    ],
   },
   {
     title: "Innovation Manager (Working Student)",
@@ -49,6 +66,15 @@ export const experienceData = [
       "Set up and led internal governance, tooling, and operations, and ran administrative activities of the hub.",
       "Supported innovation processes through customer research as well as research & intelligence.",
       "Was involved in numerous new venture development cases and ran the internal business case development tool.",
+    ],
+    skills: [
+      "Innovation Management",
+      "Business Development",
+      "Business Case Development",
+      "Business Intelligence",
+      "Customer Research",
+      "Business Model Development",
+      "Innovation Processes",
     ],
   },
 ];

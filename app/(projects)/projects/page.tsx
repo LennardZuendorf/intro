@@ -1,34 +1,12 @@
 import * as React from "react";
-import { compareDesc, parseISO } from "date-fns";
-
 import { Separator } from "@/components/ui/separator";
 import { ProjectCard } from "@/components/pages/preview-card";
-import { allProjects } from "contentlayer/generated";
-import type { Project } from "contentlayer/generated";
 import { H2, Lead } from "@/components/ui/typography";
+import { getProjects } from "@/lib/utils";
 
 export default async function ProjectsPage() {
-  const focusProjects = allProjects
-    .filter((project) => project.focus)
-    .sort((a, b) => {
-      return compareDesc(parseISO(String(a.date)), parseISO(String(b.date)));
-    });
-
-  let otherFocusProjects: Project[] = [];
-
-  if (focusProjects.length < 3) {
-    otherFocusProjects = focusProjects.slice(3);
-    focusProjects.slice(0, 3);
-  }
-
-  const otherProjects = [
-    ...allProjects
-      .filter((project) => !project.focus)
-      .sort((a, b) => {
-        return compareDesc(parseISO(String(a.date)), parseISO(String(b.date)));
-      }),
-    ...otherFocusProjects,
-  ];
+  const focusProjects = getProjects().focusProjects;
+  const otherProjects = getProjects().otherProjects;
 
   return (
     <div className="flex flex-col gap-2 sm:gap-4 md:gap-8 lg:gap-16 py-2 md:py-4 lg:py-8">

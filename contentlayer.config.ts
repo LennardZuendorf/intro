@@ -55,6 +55,10 @@ const Project = defineDocumentType(() => ({
       type: "boolean",
       required: true,
     },
+    active: {
+      type: "boolean",
+      required: true,
+    },
     category: {
       type: "string",
       required: true,
