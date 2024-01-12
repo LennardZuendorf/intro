@@ -12,9 +12,10 @@
 
 **Hosting:** Vercel
 
-## 🗳️ Status:
+## 🗳️ Status (Main):
 
-(Main): [![Check NextJs build](https://github.com/LennardZuendorf/intro/actions/workflows/node.js.yml/badge.svg)](https://github.com/LennardZuendorf/intro/actions/workflows/node.js.yml)
+[![Check NextJs build](https://github.com/LennardZuendorf/intro/actions/workflows/node.js.yml/badge.svg)](https://github.com/LennardZuendorf/intro/actions/workflows/node.js.yml)
+
 
 ## 👨‍💻 Author and Credits:
 
