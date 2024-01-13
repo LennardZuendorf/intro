@@ -3,6 +3,7 @@ import Image from "next/image";
 import { useMDXComponent } from "next-contentlayer/hooks";
 import { cn } from "@/lib/utils";
 import { Callout } from "@/components/custom/callout";
+import { ProjectTech } from "@/components/custom/project-tech";
 
 const components = {
   h1: ({ className, ...props }: { className?: string; [key: string]: any }) => (
@@ -165,6 +166,7 @@ const components = {
   ),
   Image,
   Callout,
+  ProjectTech,
 };
 
 interface MdxProps {

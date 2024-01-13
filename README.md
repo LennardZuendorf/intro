@@ -6,7 +6,7 @@
 
 ## 🏗️ Tech Stack:
 
-**Languages:** Typescript
+**Languages:** Typescript, Javascript, CSS, MDX
 
 **Frameworks:** Next.js, TailwindCSS, Contentlayer
 
@@ -15,7 +15,6 @@
 ## 🗳️ Status (Main):
 
 [![Check NextJs build](https://github.com/LennardZuendorf/intro/actions/workflows/node.js.yml/badge.svg)](https://github.com/LennardZuendorf/intro/actions/workflows/node.js.yml)
-
 
 ## 👨‍💻 Author and Credits:
 

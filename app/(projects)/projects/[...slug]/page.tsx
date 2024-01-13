@@ -11,9 +11,10 @@ import { allProjects } from "contentlayer/generated";
 import { Mdx } from "@/components/custom/mdx-components";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import { H3, Lead } from "@/components/ui/typography";
+import { H3, H4, Lead } from "@/components/ui/typography";
 import { Badge } from "@/components/ui/badge";
 import { ProjectIndex } from "@/components/pages/project-index";
+import { ImgCarousel } from "@/components/custom/img-carousel";
 
 export const generateStaticParams = async () => {
   return allProjects.map((p) => ({ slug: p.slug.split("/") }));
@@ -28,14 +29,12 @@ export default async function Page({ params }: { params: { slug: string[] } }) {
   }
 
   return (
-    <article className="container relative max-w-3xl py-6 lg:py-10 space-y-4">
+    <article className="mx-auto justify-items-center justify-center relative w-full max-w-3xl py-6 lg:py-10 space-y-4">
       <div className="flex flex-col text-start space-y-1">
         <H3>{project.title} </H3>
         <div className="flex gap-1 justify-start">
           {project.tags &&
-            (project.tags.slice(0, 2) || []).map((tag) => (
-              <Badge key={tag}>{tag}</Badge>
-            ))}
+            project.tags.map((tag) => <Badge key={tag}>{tag}</Badge>)}
         </div>
       </div>
       <Separator />
@@ -67,15 +66,21 @@ export default async function Page({ params }: { params: { slug: string[] } }) {
         <Image
           src={project.images[0]}
           alt={project.title}
-          width={720}
+          width={780}
           height={405}
           className="my-8 rounded-md border bg-muted transition-colors"
           priority
         />
       )}
-      <div className="text-start f">
+      <div className="text-start">
         <Mdx code={project.body.code} />
       </div>
+      {project.images.length > 1 && (
+        <div className="text-start">
+          <H3>Images</H3>
+          <ImgCarousel images={project.images.slice(1)} alt={project.title} />
+        </div>
+      )}
       <Separator />
       <ProjectIndex currentProject={project} />
     </article>

@@ -1,10 +1,9 @@
 "use client";
 
 import * as React from "react";
-import Autoplay from "embla-carousel-autoplay";
 
-import { cn } from "@/lib/utils";
 import { Card, CardContent } from "@/components/ui/card";
+import Image from "next/image";
 import {
   Carousel,
   CarouselContent,
@@ -12,52 +11,42 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import Image from "next/image";
+import { cn } from "@/lib/utils";
 
-interface CarouselProps {
-  className?: string;
-  imgList: string[];
+type ImgCarouselProps = {
+  images: string[];
   alt: string;
-}
+  className?: string;
+};
 
-export const ImgCarousel: React.FC<CarouselProps> = ({
-  className = "",
-  imgList,
+export const ImgCarousel: React.FC<ImgCarouselProps> = ({
+  images,
+  className,
   alt,
 }) => {
-  const plugin = React.useRef(
-    Autoplay({ delay: 2000, stopOnInteraction: true }),
-  );
-
   return (
-    <Carousel
-      plugins={[plugin.current]}
-      className={cn("w-full max-w-xs", className)}
-      onMouseEnter={plugin.current.stop}
-      onMouseLeave={plugin.current.reset}
-    >
-      <CarouselContent>
-        {imgList.map((src, index) => (
-          <CarouselItem key={index}>
-            <div className="p-1">
-              <Card>
-                <CardContent className="flex aspect-square items-center justify-center p-6">
-                  <Image
-                    src={src}
-                    alt={alt}
-                    width={720}
-                    height={405}
-                    className="bg-muted transition-colors"
-                    priority
-                  />
-                </CardContent>
-              </Card>
-            </div>
-          </CarouselItem>
-        ))}
-      </CarouselContent>
-      <CarouselPrevious />
-      <CarouselNext />
-    </Carousel>
+    <div className="w-full px-8  justify-center items-center">
+      <Carousel
+        orientation="horizontal"
+        className="flex justify-center justify-self-center"
+      >
+        <CarouselContent>
+          {images.map((image, index) => (
+            <CarouselItem key={index}>
+              <Image
+                src={image}
+                alt={alt.concat("-", index.toString())}
+                width={780}
+                height={500}
+                className="my-8 rounded-md border bg-muted transition-colors"
+                priority
+              />
+            </CarouselItem>
+          ))}
+        </CarouselContent>
+        <CarouselPrevious />
+        <CarouselNext />
+      </Carousel>
+    </div>
   );
 };

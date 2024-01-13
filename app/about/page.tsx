@@ -79,7 +79,7 @@ export default async function AboutPage() {
             <H3>Experiences</H3>
           </CardTitle>
         </CardHeader>
-        <CardContent>
+        <CardContent className="p-8">
           <ExperienceCarousel experienceData={experienceData} />
         </CardContent>
       </Card>
