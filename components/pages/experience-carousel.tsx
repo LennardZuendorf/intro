@@ -32,10 +32,7 @@ export const ExperienceCarousel: React.FC<Props> = ({
   className,
 }) => {
   return (
-    <Carousel
-      orientation="horizontal"
-      className="flex w-11/12 lg:w-full justify-center"
-    >
+    <Carousel orientation="horizontal" className="flex justify-center">
       <CarouselContent className="space-y-4 space-x-4">
         {experienceData.map((experience, index) => (
           <CarouselItem key={index}>

@@ -7,7 +7,9 @@ export default function ProjectLayout({
 }) {
   return (
     <section className={cn("flex flex-col")}>
-      <div className="inline-block text-center justify-center">{children}</div>
+      <div className="inline-block text-center justify-center items-center">
+        {children}
+      </div>
     </section>
   );
 }
