@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { allProjects } from "contentlayer/generated";
 
-import { cn } from "@/lib/utils";
+import { cn, getProjects } from "@/lib/utils";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -15,7 +15,6 @@ import {
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
 import { L, Muted, S } from "@/components/ui/typography";
-import { compareDesc, parseISO } from "date-fns";
 
 interface FooterProps {
   className?: string;
@@ -24,16 +23,11 @@ interface FooterProps {
 export const Nav: React.FC<FooterProps> = ({ className = "" }) => {
   const pathname = usePathname();
 
-  const focusProjects = allProjects
+  const selectedProjects = [
+    ...getProjects().focusProjects,
+    ...getProjects().otherProjects,
+  ]
     .filter((project) => project.active)
-    .sort((a, b) => {
-      if (a.active && !b.active) return -1;
-      if (!a.active && b.active) return 1;
-      else return 0;
-    })
-    .sort((a, b) => {
-      return compareDesc(parseISO(String(a.date)), parseISO(String(b.date)));
-    })
     .slice(0, 3);
 
   // @ts-ignore
@@ -77,7 +71,7 @@ export const Nav: React.FC<FooterProps> = ({ className = "" }) => {
                     </a>
                   </NavigationMenuLink>
                 </li>
-                {focusProjects.map((project) => (
+                {selectedProjects.map((project) => (
                   <ListItem
                     key={project.title}
                     title={project.title}

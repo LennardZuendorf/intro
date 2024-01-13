@@ -55,7 +55,7 @@ export default async function Page({ params }: { params: { slug: string[] } }) {
           </Link>
         )}
         {project.link && (
-          <Link href={project.link}>
+          <Link href={project.link} rel="noopener noreferrer" target="_blank">
             <Button variant="outline">
               <HiLink className="mr-2 h-4 w-4" />
               Link
