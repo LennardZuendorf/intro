@@ -31,25 +31,9 @@ export const ProjectIndex: React.FC<Props> = ({ currentProject }) => {
             <PaginationPrevious href={nextProject.path.substring(9)} />
           </PaginationItem>
         )}
-        {nextProject != null && (
-          <PaginationItem>
-            <PaginationEllipsis />
-          </PaginationItem>
-        )}
         <PaginationItem>
-          <PaginationLink
-            href={currentProject.path.substring(9)}
-            isActive
-            size="lg"
-          >
-            Current
-          </PaginationLink>
+          <PaginationEllipsis />
         </PaginationItem>
-        {prevProject != null && (
-          <PaginationItem>
-            <PaginationEllipsis />
-          </PaginationItem>
-        )}
         {prevProject != null && (
           <PaginationItem>
             <PaginationNext href={prevProject.path.substring(9)} />

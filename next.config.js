@@ -6,6 +6,11 @@ const nextConfig = {
   async redirects() {
     return [
       {
+        source: "/linkedin",
+        destination: "/linkd",
+        permanent: true,
+      },
+      {
         source: "/linkd",
         destination: "https://www.linkedin.com/in/lennard-zuendorf/",
         permanent: true,
@@ -16,15 +21,9 @@ const nextConfig = {
         permanent: true,
       },
       {
-        source: "/linkedin",
-        destination: "/linkd",
-        permanent: true,
-      },
-      {
-        source: "/projects/thesis/preview",
-        destination:
-          "https://huggingface.co/spaces/LennardZuendorf/thesis-webapp-docker",
-        permanent: true,
+        source: "/cv",
+        destination: "https://www.zuendorf.me/docs/cv.pdf",
+        permanent: false,
       },
     ];
   },
