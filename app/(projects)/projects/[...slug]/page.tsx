@@ -13,7 +13,7 @@ import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { H3, H4, Lead } from "@/components/ui/typography";
 import { Badge } from "@/components/ui/badge";
-import { ProjectIndex } from "@/components/pages/project-index";
+import { ProjectsPagination } from "@/components/pages/projects-pagination";
 import { ImgCarousel } from "@/components/custom/img-carousel";
 
 export const generateStaticParams = async () => {
@@ -82,7 +82,7 @@ export default async function Page({ params }: { params: { slug: string[] } }) {
         </div>
       )}
       <Separator />
-      <ProjectIndex currentProject={project} />
+      <ProjectsPagination currentProject={project} />
     </article>
   );
 }

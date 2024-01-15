@@ -36,7 +36,7 @@ export default function RootLayout({
         </head>
         <body
           className={cn(
-            "relative h-full bg-background font-sans antialiased",
+            "relative h-screen bg-background font-sans antialiased",
             lato.variable,
             spartan.variable,
             roboto_mono.variable,

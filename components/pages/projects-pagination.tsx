@@ -15,7 +15,7 @@ type Props = {
   currentProject: Project;
 };
 
-export const ProjectIndex: React.FC<Props> = ({ currentProject }) => {
+export const ProjectsPagination: React.FC<Props> = ({ currentProject }) => {
   const allProjects = [
     ...getProjects().focusProjects,
     ...getProjects().otherProjects,
