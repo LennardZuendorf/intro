@@ -43,19 +43,11 @@ export const ProjectCard: React.FC<Props> = ({
       })}
     >
       <CardHeader className="grid grid-flow-col justify-between gap-4">
-        <div className="space-y-1">
-          <CardTitle>
-            <H4>{project.title}</H4>
-          </CardTitle>
-          <CardDescription
-            className={focus ? "text-background" : "text-foreground"}
-          >
-            <M>{project.description}</M>
-          </CardDescription>
-        </div>
+        <H4>{project.title}</H4>
         <div>
           <SkillIcon
             category={project.category}
+            variant="tooltip"
             className={cn("h-5 w-5", {
               "text-background": focus,
               "text-foreground": !focus,
@@ -63,7 +55,17 @@ export const ProjectCard: React.FC<Props> = ({
           />
         </div>
       </CardHeader>
-      <CardContent>
+      <CardContent className="space-y-2">
+        <div className="pr-8">
+          <S
+            className={cn(
+              "leading-3",
+              focus ? "text-background" : "text-foreground",
+            )}
+          >
+            {project.description}
+          </S>
+        </div>
         <div
           className={cn("flex gap-2 items-center justify-between", {
             "text-muted-background": focus,

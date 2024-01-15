@@ -5,3 +5,5 @@ public
 .fleet
 .idea
 .husky
+
+**/*.mdx

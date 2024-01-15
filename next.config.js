@@ -23,7 +23,7 @@ const nextConfig = {
       {
         source: "/cv",
         destination: "https://www.zuendorf.me/docs/cv.pdf",
-        permanent: false,
+        permanent: true,
       },
     ];
   },
