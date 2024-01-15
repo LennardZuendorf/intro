@@ -1,16 +1,39 @@
 export type CalloutData = typeof calloutData;
 export const calloutData = {
-  introCallout: "Hi! I'm Lennard",
+  introCallout: "Hi! I'm Lennard!",
   secondCallout:
-    "I’m a Student of Business Computing at HTW Berlin University, Focusing on (Technical) Product Management and Software Engineering. I'm a Backend PM at CHECK24 in Berlin.",
-  topics: [
+    "I'm a student of Business Computing focusing on Product Management and Software Engineering.",
+  skills: [
     "Product Management",
     "Software Engineering",
     "Digital Innovation",
-    "Machine Learning & Data Engineering",
+    "Machine Learning",
+    "Data Science",
     "Scrum & Agile",
     "Software Architecture",
+    "Product Development",
   ],
+  tech: [
+    "Python",
+    "Java",
+    "Typescript",
+    "React",
+    "Next.js",
+    "Node.js",
+    "PostgreSQL",
+    "AWS",
+  ],
+  focusProject: { desc: "My Thesis", link: "", category: "Academic" },
+  calloutProject: "quaestio",
+  focusJob: {
+    desc: "Backend PM",
+    link: "",
+    place: "CHECK24 Flug",
+    category: "Fullstack Product",
+  },
+  news: "",
+  spotify:
+    "https://open.spotify.com/playlist/4yJfh8Pp3A5qdYuzKmQZlV?si=1723654c72014989",
 };
 
 export type ExperienceData = typeof experienceData;
