@@ -1,34 +1,32 @@
+const { withContentlayer } = require("next-contentlayer");
+
 /** @type {import('next').NextConfig} */
-const nextConfig = {   
+
+const nextConfig = {
   async redirects() {
     return [
       {
-        source: '/',
-        destination: 'https://www.bento.me/zuendorf',
-        permanent: false,
-      },
-      {
-        source: '/linkd',
-        destination: 'https://www.linkedin.com/in/lennard-zuendorf/',
+        source: "/linkedin",
+        destination: "/linkd",
         permanent: true,
       },
       {
-        source: '/github',
-        destination: 'https://www.github.com/lennardzuendorf',
+        source: "/linkd",
+        destination: "https://www.linkedin.com/in/lennard-zuendorf/",
         permanent: true,
       },
       {
-        source: '/linkedin',
-        destination: '/linkd',
+        source: "/github",
+        destination: "https://www.github.com/lennardzuendorf",
         permanent: true,
       },
       {
-        source: '/mail',
-        destination: 'mailto:lennard@zuendorf.me',
+        source: "/cv",
+        destination: "https://www.zuendorf.me/docs/cv.pdf",
         permanent: true,
       },
     ];
   },
 };
 
-module.exports = nextConfig
+module.exports = withContentlayer(nextConfig);

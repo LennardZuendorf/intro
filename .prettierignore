@@ -1,0 +1,9 @@
+.next
+.contentlayer
+node_modules
+public
+.fleet
+.idea
+.husky
+
+**/*.mdx
