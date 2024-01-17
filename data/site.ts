@@ -38,8 +38,8 @@ export const siteMetadata = {
   language: "en-us",
   theme: "system",
   siteUrl: "https://zuendorf.me",
-  siteLogo: "/logo.png",
-  image: "/avatar.png",
-  socialBanner: "/opengraph-image.png",
+  siteLogo: "/img/logo.png",
+  image: "/img/avatar.png",
+  socialBanner: "/img/opengraph-image.png",
   locale: "en-de",
 };
