@@ -1,63 +1,67 @@
-import "@/styles/globals.css";
-import { Metadata } from "next";
-import { siteConfig } from "@/config/site";
-import { fontSans } from "@/config/fonts";
-import { Providers } from "./providers";
-import { Navbar } from "@/components/navbar";
-import { Link } from "@nextui-org/link";
-import clsx from "clsx";
+import React from "react";
+import "./globals.css";
+import { Provider } from "@/components/provider-theme";
+import { Footer } from "@/components/footer";
+import { Nav } from "@/components/nav";
+import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Analytics } from "@vercel/analytics/react";
 
-export const metadata: Metadata = {
-	title: {
-		default: siteConfig.name,
-		template: `%s - ${siteConfig.name}`,
-	},
-	description: siteConfig.description,
-	themeColor: [
-		{ media: "(prefers-color-scheme: light)", color: "white" },
-		{ media: "(prefers-color-scheme: dark)", color: "black" },
-	],
-	icons: {
-		icon: "/favicon.ico",
-		shortcut: "/favicon-16x16.png",
-		apple: "/apple-touch-icon.png",
-	},
-};
+import { lato, spartan, roboto_mono } from "./fonts";
+import { cn } from "@/lib/utils";
+import { siteMetadata } from "@/data/site";
 
 export default function RootLayout({
-	children,
+  children,
 }: {
-	children: React.ReactNode;
+  children: React.ReactNode;
 }) {
-	return (
-		<html lang="en" suppressHydrationWarning>
-			<head />
-			<body
-				className={clsx(
-					"min-h-screen bg-background font-sans antialiased",
-					fontSans.variable
-				)}
-			>
-				<Providers themeProps={{ attribute: "class", defaultTheme: "dark" }}>
-					<div className="relative flex flex-col h-screen">
-						<Navbar />
-						<main className="container mx-auto max-w-7xl pt-16 px-6 flex-grow">
-							{children}
-						</main>
-						<footer className="w-full flex items-center justify-center py-3">
-							<Link
-								isExternal
-								className="flex items-center gap-1 text-current"
-								href="https://nextui-docs-v2.vercel.app?utm_source=next-app-template"
-								title="nextui.org homepage"
-							>
-								<span className="text-default-600">Powered by</span>
-								<p className="text-primary">NextUI</p>
-							</Link>
-						</footer>
-					</div>
-				</Providers>
-			</body>
-		</html>
-	);
+  return (
+    <>
+      <html lang="en" suppressHydrationWarning>
+        <head>
+          <title>{siteMetadata.title}</title>
+          <link rel="icon" href="/favicon.ico" sizes="any" />
+          <meta name="robots" content="follow, index" />
+          <meta name="description" content={siteMetadata.title} />
+          <meta property="og:url" content={siteMetadata.siteUrl} />
+          <meta property="og:type" content={"website"} />
+          <meta property="og:site_name" content={siteMetadata.title} />
+          <meta property="og:description" content={siteMetadata.description} />
+          <meta property="og:title" content={siteMetadata.title} />
+          <meta
+            property="og:image"
+            content={siteMetadata.socialBanner}
+            key={siteMetadata.title}
+          />
+        </head>
+        <body
+          className={cn(
+            "relative h-screen bg-background font-sans antialiased",
+            lato.variable,
+            spartan.variable,
+            roboto_mono.variable,
+          )}
+        >
+          <Provider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <Nav />
+            <main
+              className={cn(
+                "container mx-auto grow place-items-center w-full md:w-10/12 xl:w-8/12",
+              )}
+            >
+              {children}
+            </main>
+            <Footer />
+          </Provider>
+          <SpeedInsights />
+          <Analytics />
+        </body>
+      </html>
+    </>
+  );
 }
