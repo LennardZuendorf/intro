@@ -32,7 +32,7 @@ export default async function Page({ params }: { params: { slug: string[] } }) {
     <article className="mx-auto justify-items-center justify-center relative w-full max-w-3xl py-6 lg:py-10 space-y-4">
       <div className="flex flex-col text-start space-y-1">
         <H3>{project.title} </H3>
-        <div className="flex gap-1 justify-start">
+        <div className="flex flex-wrap gap-1 justify-start">
           {project.tags &&
             project.tags.map((tag) => <Badge key={tag}>{tag}</Badge>)}
         </div>

@@ -30,8 +30,8 @@ export default function RootLayout({
           <meta property="og:title" content={siteMetadata.title} />
           <meta
             property="og:image"
-            content={siteMetadata.image}
-            key={siteMetadata.image}
+            content={siteMetadata.socialBanner}
+            key={siteMetadata.title}
           />
         </head>
         <body
