@@ -1,24 +1,14 @@
 import * as React from "react";
-import { H2, H3, H1, Lead } from "@/components/ui/typography";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Code, H2, H3, H4, L, Lead, M, S } from "@/components/ui/typography";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import type { AboutBlock } from "contentlayer/generated";
 import { allAboutBlocks } from "contentlayer/generated";
-import Image from "next/image";
-import { Button } from "@/components/ui/button";
-import { siteConfig } from "@/data/site";
-import Link from "next/link";
-import { cn } from "@/lib/utils";
-import { RxLinkedinLogo, RxEnvelopeOpen, RxGithubLogo } from "react-icons/rx";
-import { HiOutlineDocument } from "react-icons/hi";
-import { calloutData, experienceData } from "@/data/about";
+import { calloutData, experienceData, techStackData } from "@/data/about";
 import { Mdx } from "@/components/custom/mdx-components";
 import { ExperienceCarousel } from "@/components/pages/experience-carousel";
+import { cn } from "@/lib/utils";
+import { BrandIcon } from "@/components/custom/brand-icons";
+import { ExperienceAccordion } from "@/components/pages/experience-accordion";
 
 export default async function AboutPage() {
   const activities = allAboutBlocks.find((p) =>
@@ -26,72 +16,59 @@ export default async function AboutPage() {
   ) as AboutBlock;
 
   return (
-    <div className="flex flex-col justify-center items-center gap-2 sm:gap-4 md:gap-8 lg:gap-16 py-2 md:py-4 lg:py-8">
-      <div className="space-y-4">
-        <H2>About</H2>
-        <Lead>Learn more about me, my skills and experiences.</Lead>
-      </div>
-
-      <Card key="intro" className="w-full">
-        <CardContent className="grid gap-4 grid-cols-3 justify-center md:justify-start items-center">
-          <div className="flex col-span-3 md:col-span-1 justify-start">
-            <Image
-              src="/avatar.png"
-              alt="Lennard Zündorf profile picture"
-              width={300}
-              height={300}
-              className="my-8 rounded-md border bg-muted transition-colors"
-              priority
-            />
-          </div>
-          <div className="flex flex-col col-span-3 md:col-span-2 gap-8 justify-between text-start">
-            <H2>{calloutData.introCallout}</H2>
-            <Lead type="foreground">{calloutData.secondCallout}</Lead>
-            <div className="flex flex-wrap justify-center md:justify-start gap-4">
-              <Link href={siteConfig.links.mail}>
-                <Button className={cn("justify-center items-center")}>
-                  <RxEnvelopeOpen className="mr-2 h-4 w-4" /> Mail
-                </Button>
-              </Link>
-              <Link href={siteConfig.links.linkedin}>
-                <Button className="justify-center items-center">
-                  <RxLinkedinLogo className="mr-2 h-4 w-4" /> LinkedIn
-                </Button>
-              </Link>
-              <Link href={siteConfig.links.github}>
-                <Button className="justify-center items-center">
-                  <RxGithubLogo className="mr-2 h-4 w-4" /> Github
-                </Button>
-              </Link>
-              <Link href={siteConfig.links.cv}>
-                <Button className="justify-center items-center">
-                  <HiOutlineDocument className="mr-2 h-4 w-4" /> CV
-                </Button>
-              </Link>
-            </div>
+    <div className="flex flex-col justify-center items-center gap-4 lg:gap-8 py-2">
+      <Card key="intro" className="w-full text-start">
+        <CardHeader className="flex flex-col space-y-2 p-4">
+          <H4 className="font-black font-title">Lennard Zündorf</H4>
+        </CardHeader>
+        <CardContent className="flex flex-col justify-start gap-4 p-4">
+          <S className="leading-loose lg:leading-relaxed">
+            <L className="inline inline-flex mr-1 font-bold">I&aposm</L>a 24
+            year old student of <strong>Business Computing</strong> at the
+            University of Applied Sciences for Technology and Busines Berlin
+            (HTW Berlin). I&aposm <strong>graduating in March 2024</strong>. I
+            also work as a <strong>Backend Product Manager </strong> at{" "}
+            <strong>Check24 Flug </strong>. I currently live in{" "}
+            <strong>Berlin, Germany</strong>.
+          </S>
+          <S className="leading-loose lg:leading-relaxed">
+            While I&aposm a student, I have{" "}
+            <strong>always worked much and gained many experiences</strong>.
+            Studying has felt more like my side project for years. In my
+            (limited) free time I&aposve had a passion for coding, which parts
+            of this website are meant to showcase.
+          </S>
+          <S className="leading-loose lg:leading-relaxed">
+            I combine a <strong> strong technological background </strong> and a
+            high affinity for programming with a passion for product and the
+            bigger picture of software. Which has lead me to my current position
+            in <strong>Technical Product Management</strong>.
+          </S>
+          <div className="space-y-2 pt-4">
+            <Card className={cn("border-0")}>
+              <CardHeader className="p-2">
+                <H4 className="">Technologies I Commonly Use</H4>
+              </CardHeader>
+              <CardContent className="flex flex-wrap lg:grid lg:grid-cols-12 gap-2 p-2 pb-2">
+                {techStackData.map((tech, index) => (
+                  <BrandIcon
+                    brand={tech.icon}
+                    title={tech.name}
+                    className="h-6 w-6"
+                    key={tech.name}
+                  />
+                ))}
+              </CardContent>
+            </Card>
           </div>
         </CardContent>
       </Card>
-
       <Card key="experiences" className="w-full">
-        <CardHeader className="pt-4">
-          <CardTitle>
-            <H3>Experiences</H3>
-          </CardTitle>
+        <CardHeader className="">
+          <H4 className="font-title">Work Experiences</H4>
         </CardHeader>
-        <CardContent className="p-8">
-          <ExperienceCarousel experienceData={experienceData} />
-        </CardContent>
-      </Card>
-
-      <Card key="activities" className="w-full">
-        <CardHeader className="pt-4">
-          <CardTitle>
-            <H3>A Bit More About Me</H3>
-          </CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-4 space-x-4">
-          <Mdx code={activities.body.code} className="text-start pt-2" />
+        <CardContent className="">
+          <ExperienceAccordion experienceData={experienceData} />
         </CardContent>
       </Card>
     </div>

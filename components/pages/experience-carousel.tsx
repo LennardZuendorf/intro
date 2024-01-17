@@ -21,6 +21,7 @@ import { H4, Code, H2, H3, M } from "@/components/ui/typography";
 import type { ExperienceData } from "@/data/about";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { cn } from "@/lib/utils";
 
 type Props = {
   experienceData: ExperienceData;
@@ -32,11 +33,14 @@ export const ExperienceCarousel: React.FC<Props> = ({
   className,
 }) => {
   return (
-    <Carousel orientation="horizontal" className="flex justify-center">
+    <Carousel
+      orientation="horizontal"
+      className={cn("flex justify-center", className)}
+    >
       <CarouselContent className="space-y-4 space-x-4">
         {experienceData.map((experience, index) => (
           <CarouselItem key={index}>
-            <Card className="text-start border-0">
+            <Card className="text-start">
               <CardHeader className="flex">
                 <div className="grid grid-flow-row  md:grid-flow-col justify-start md:justify-between gap-2">
                   <Link href={experience.url}>

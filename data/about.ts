@@ -101,3 +101,60 @@ export const experienceData = [
     ],
   },
 ];
+
+export type techStackData = typeof techStackData;
+
+export const techStackData = [
+  {
+    name: "Java",
+    icon: "java",
+  },
+  {
+    name: "Python",
+    icon: "python",
+  },
+  {
+    name: "Typescript",
+    icon: "typescript",
+  },
+  {
+    name: "Spring Boot",
+    icon: "springboot",
+  },
+  {
+    name: "React.js",
+    icon: "reactjs",
+  },
+  {
+    name: "Huggingface Ecosystem",
+    icon: "huggingface",
+  },
+  {
+    name: "PostgreSQL",
+    icon: "postgresql",
+  },
+  {
+    name: "AWS",
+    icon: "aws",
+  },
+  {
+    name: "Docker",
+    icon: "docker",
+  },
+  {
+    name: "IntelliJ",
+    icon: "intellij",
+  },
+  {
+    name: "Jira",
+    icon: "jira",
+  },
+  {
+    name: "Figma",
+    icon: "figma",
+  },
+];
+
+export type softSkillsData = typeof softSkillsData;
+
+export const softSkillsData = {};
