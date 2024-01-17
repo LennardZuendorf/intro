@@ -40,6 +40,6 @@ export const siteMetadata = {
   siteUrl: "https://zuendorf.me",
   siteLogo: "/logo.png",
   image: "/avatar.png",
-  socialBanner: "/social-preview.png",
+  socialBanner: "/opengraph-image.png",
   locale: "en-de",
 };
