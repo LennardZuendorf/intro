@@ -14,9 +14,8 @@ import type { Project } from "@/.contentlayer/generated";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { RxLink1 } from "react-icons/rx";
+import { HiMiniArrowTopRightOnSquare } from "react-icons/hi2";
 import { SkillIcon } from "@/components/custom/skill-icon";
-import { ProjectCard } from "@/components/pages/project-preview";
 
 export default function Home() {
   const calloutProject = allProjects.find(
@@ -132,7 +131,7 @@ export default function Home() {
             <div className="col-span-1 flex justify-end items-center">
               <Link href="/about" scroll={false}>
                 <Button variant="outline" size="icon">
-                  <RxLink1 className="h-4 w-4" />
+                  <HiMiniArrowTopRightOnSquare className="h-4 w-4" />
                 </Button>
               </Link>
             </div>
@@ -152,7 +151,7 @@ export default function Home() {
             <div className="col-span-1 flex justify-end items-center">
               <Link href="/projects" scroll={false}>
                 <Button variant="outline" size="icon">
-                  <RxLink1 className="h-4 w-4" />
+                  <HiMiniArrowTopRightOnSquare className="h-4 w-4" />
                 </Button>
               </Link>
             </div>

@@ -9,7 +9,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { allLegalDocs } from "contentlayer/generated";
 import type { LegalDoc } from "contentlayer/generated";
 import { Mdx } from "@/components/custom/mdx-components";
-import { H2 } from "@/components/ui/typography";
+import { H2, H4 } from "@/components/ui/typography";
 
 export const generateStaticParams = async () => {
   return allLegalDocs.map((p) => ({ slug: p.slug.split("/") }));
@@ -29,7 +29,7 @@ export default async function Legal({
 
   return (
     <div className="flex flex-col gap-2 sm:gap-4 md:gap-8 lg:gap-16 py-2 md:py-4 lg:py-8">
-      <H2>Legal</H2>
+      <H4>Legal</H4>
       <Tabs defaultValue="english" className="w-[400px] w-full">
         <TabsList className="grid w-full grid-cols-2">
           <TabsTrigger value="german">German</TabsTrigger>

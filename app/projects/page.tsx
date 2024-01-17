@@ -10,13 +10,6 @@ export default async function ProjectsPage() {
 
   return (
     <div className="flex flex-col gap-4 lg:gap-8 py-2">
-      <div className="space-y-2">
-        <H2>My Projects </H2>
-        <Lead>
-          Some Projects are free time, hobby projects. Others are part of my
-          studies.
-        </Lead>
-      </div>
       <div className="grid gap-2 mx-auto lg:mx-0">
         <ProjectCard project={focusProjects[0]} />
         <div className="grid gap-2 grid-cols-1 md:grid-cols-2">
