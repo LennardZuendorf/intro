@@ -62,16 +62,6 @@ export default async function Page({ params }: { params: { slug: string[] } }) {
           </Link>
         )}
       </div>
-      {project.images && (
-        <Image
-          src={project.images[0]}
-          alt={project.title}
-          width={780}
-          height={405}
-          className="my-8 rounded-md border bg-muted transition-colors"
-          priority
-        />
-      )}
       <div className="text-start">
         <Mdx code={project.body.code} />
       </div>
