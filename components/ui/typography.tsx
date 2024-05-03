@@ -111,7 +111,7 @@ const LQuote: React.FC<TypographyProps> = ({ className = "", children }) => {
 const Quote: React.FC<TypographyProps> = ({ className = "", children }) => {
   return (
     <blockquote
-      className={cn("mt-6 border-l-2 pl-6 text-base lg:text-lg", className)}
+      className={cn("mt-6 border-l-2 pl-6 text-sm lg:text-base", className)}
     >
       {children}
     </blockquote>

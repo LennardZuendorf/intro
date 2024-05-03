@@ -2,9 +2,14 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 import { S } from "@/components/ui/typography";
 
-import { HiOutlineAcademicCap, HiLightBulb } from "react-icons/hi2";
+import {
+  HiAcademicCap,
+  HiLightBulb,
+  HiMiniRocketLaunch,
+} from "react-icons/hi2";
+import { FaCode } from "react-icons/fa";
 import { LuBrainCircuit, LuLaptop2 } from "react-icons/lu";
-import { RxGear } from "react-icons/rx";
+import { AiFillProduct } from "react-icons/ai";
 import {
   Tooltip,
   TooltipContent,
@@ -45,15 +50,15 @@ export const Icon: React.FC<Props> = ({ category, className, variant }) => {
   return (
     <div className="flex flex-row flex-wrap items-center">
       {category === "Academic" ? (
-        <HiOutlineAcademicCap className={cn(className)} />
+        <HiAcademicCap className={cn(className)} />
       ) : category === "Fullstack Product" ? (
-        <HiLightBulb className={cn(className)} />
+        <HiMiniRocketLaunch className={cn(className)} />
       ) : category === "Software Engineering" ? (
-        <LuLaptop2 className={cn(className)} />
+        <FaCode className={cn(className)} />
       ) : category === "Machine Learning" ? (
         <LuBrainCircuit className={cn(className)} />
       ) : (
-        <RxGear className={cn(className)} />
+        <AiFillProduct className={cn(className)} />
       )}
     </div>
   );
