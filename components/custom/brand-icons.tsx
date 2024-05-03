@@ -1,5 +1,6 @@
 import * as React from "react";
 import { FaPython, FaJava, FaAws } from "react-icons/fa";
+import Link from "next/link";
 import {
   SiTypescript,
   SiReact,
@@ -41,46 +42,50 @@ type Props = {
   className?: string;
   title: string;
   brand: string;
+  link?: any;
 };
 
 export const BrandIcon: React.FC<Props> = ({
   className = "",
   title,
+  link = "/",
   brand,
 }) => {
   return (
     <TooltipProvider>
       <Tooltip>
         <TooltipTrigger asChild>
-          <Button size="icon" variant="outline" key={title}>
-            <div className={cn("flex flex-row flex-wrap items-center")}>
-              {brand === "java" ? (
-                <FaJava className={cn(className)} />
-              ) : brand === "typescript" ? (
-                <SiTypescript className={cn(className)} />
-              ) : brand === "python" ? (
-                <FaPython className={cn(className)} />
-              ) : brand === "springboot" ? (
-                <SiSpring className={cn(className)} />
-              ) : brand === "reactjs" ? (
-                <SiReact className={cn(className)} />
-              ) : brand === "postgresql" ? (
-                <BiLogoPostgresql className={cn(className)} />
-              ) : brand === "docker" ? (
-                <SiDocker className={cn(className)} />
-              ) : brand === "figma" ? (
-                <SiFigma className={cn(className)} />
-              ) : brand === "intellij" ? (
-                <SiIntellijidea className={cn(className)} />
-              ) : brand === "jira" ? (
-                <SiJira className={cn(className)} />
-              ) : brand === "aws" ? (
-                <FaAws className={cn(className)} />
-              ) : (
-                <HGFIcon className={cn(className)} />
-              )}
-            </div>
-          </Button>
+          <Link href={link.toString()}>
+            <Button size="icon" variant="outline" key={title}>
+              <div className={cn("flex flex-row flex-wrap items-center")}>
+                {brand === "java" ? (
+                  <FaJava className={cn(className)} />
+                ) : brand === "typescript" ? (
+                  <SiTypescript className={cn(className)} />
+                ) : brand === "python" ? (
+                  <FaPython className={cn(className)} />
+                ) : brand === "springboot" ? (
+                  <SiSpring className={cn(className)} />
+                ) : brand === "reactjs" ? (
+                  <SiReact className={cn(className)} />
+                ) : brand === "postgresql" ? (
+                  <BiLogoPostgresql className={cn(className)} />
+                ) : brand === "docker" ? (
+                  <SiDocker className={cn(className)} />
+                ) : brand === "figma" ? (
+                  <SiFigma className={cn(className)} />
+                ) : brand === "intellij" ? (
+                  <SiIntellijidea className={cn(className)} />
+                ) : brand === "jira" ? (
+                  <SiJira className={cn(className)} />
+                ) : brand === "aws" ? (
+                  <FaAws className={cn(className)} />
+                ) : (
+                  <HGFIcon className={cn(className)} />
+                )}
+              </div>
+            </Button>
+          </Link>
         </TooltipTrigger>
         <TooltipContent>
           <S>{title}</S>

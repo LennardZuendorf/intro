@@ -34,14 +34,7 @@ export const ProjectCard: React.FC<Props> = ({
   focus = false,
 }) => {
   const card = (
-    <Card
-      className={cn("text-start", {
-        "hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground":
-          !focus,
-        "bg-foreground text-background hover:bg-accent-foreground hover:text-accent-background focus:bg-accent-foreground focus:text-accent-background":
-          focus,
-      })}
-    >
+    <Card className="text-start" variant="interactive">
       <CardHeader className="grid grid-flow-col justify-between gap-4">
         <H4>{project.title}</H4>
         <div>

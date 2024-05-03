@@ -36,7 +36,7 @@ export const calloutData = {
     desc: "Technical PM",
     link: "/about",
     text: "a technical product manager CHECK24 Flug in Berlin.",
-    category: "Fullstack Product",
+    category: "Product Management",
   },
   news: "",
   spotify:
@@ -55,6 +55,7 @@ interface Experience {
   location: string;
   url: string;
   roles: Role[];
+  desc: string;
 }
 
 export type ExperienceData = typeof experienceData;
@@ -63,41 +64,41 @@ export const experienceData: Experience[] = [
     company: "CHECK24 - Flug",
     location: "Berlin, Germany",
     url: "https://flug.check24.de",
+    desc: "CHECK24 Vergleichsportal Flug is the digital flight comparison and online travel agency for flights of the CHECK24 Group. Check24 Flug is one of the leading online travel agencies for flights in the DACH region.",
     roles: [
       {
-        title: "Product Manager",
+        title: "Professional Product Manager",
         range: "March 2024 - ...",
         text: [
-          "Handled Sprint planning, backlog refinement and release management for the main backend team.",
-          "Did Technical Product Management and quality assurance as part of the PM team. With a focus on payment.",
-          "Managed final development and launch of several new product features within payment and risk protection.",
+          "Independently conceiving, guiding implementation, testing, and managing the launch of product features for payments.",
+          "Taking charge of regular product operational processes, quality assurance, functionality testing, and cooperating in managing weekly product updates.",
+          "gile sprint management and support in regular Scrum ceremonies in close collaboration with the product management and IT teams.",
         ],
         skills: [
           "Technical Product Management",
           "Agile Development",
           "Scrum",
           "Backend Development",
-          "CI/CD",
+          "Payment Systems",
+          "PHP",
+          "MySQL",
           "Jira",
-          "Confluence",
         ],
       },
       {
         title: "Student Product Manager",
         range: "September 2023 - March 2024",
         text: [
-          "Handled Sprint planning, backlog refinement and release management for the main backend team.",
-          "Did Technical Product Management and quality assurance as part of the PM team. With a focus on payment.",
-          "Managed final development and launch of several new product features within payment and risk protection.",
+          "Testing, guiding the final implementation, and organizing the launch of payment features (including risk management and changes to the payment architecture).",
+          "Agile sprint management of the Backend Team in collaboration with the Lead Product Manager and the IT Lead.",
+          "Release management, testing, and quality assurance of weekly product updates.",
         ],
         skills: [
           "Technical Product Management",
           "Agile Development",
           "Scrum",
           "Backend Development",
-          "CI/CD",
           "Jira",
-          "Confluence",
         ],
       },
     ],
@@ -106,6 +107,7 @@ export const experienceData: Experience[] = [
     company: "Hypoport - Insurance Segment",
     location: "Berlin, Germany",
     url: "https://hypoport.de",
+    desc: "Hypoport is the largest publicly traded Fintech/Insurtech/Proptech group of companies. At the holding level, the Insurance Segment CPO leads and supports product teams across InsurTech companies by optimizing product development, devising effective product strategies, and driving successful implementation.",
     roles: [
       {
         title: "Product Strategy Intern",
@@ -118,10 +120,9 @@ export const experienceData: Experience[] = [
         skills: [
           "Product Management",
           "Product Strategy",
-          "Agile Development",
+          "Data Analysis",
           "Tableau",
           "Scrum",
-          "Jira",
         ],
       },
     ],
@@ -130,6 +131,7 @@ export const experienceData: Experience[] = [
     company: "Hypoport - Step Innovation Hub",
     location: "Berlin, Germany",
     url: "https://hypoport.de",
+    desc: "Step was the Innovation Hub of the Hypoport Group and was part of Hypoport SE until 2022, where opportunities for new products, business models, and technologies were explored collaboratively with subsidiary companies, and their implementation was supported.",
     roles: [
       {
         title: "Innovation Manager (Working Student)",
@@ -141,11 +143,8 @@ export const experienceData: Experience[] = [
         ],
         skills: [
           "Innovation Management",
-          "Business Development",
-          "Business Case Development",
-          "Business Intelligence",
-          "Customer Research",
-          "Business Model Development",
+          "Business Case and Model Development",
+          "Intelligence & Customer Research",
           "Innovation Processes",
         ],
       },
@@ -158,50 +157,62 @@ export const techStackData = [
   {
     name: "Java",
     icon: "java",
+    link: "https://www.java.com/en/",
   },
   {
     name: "Python",
     icon: "python",
+    link: "https://www.python.org/",
   },
   {
     name: "Typescript",
     icon: "typescript",
+    link: "https://www.typescriptlang.org/",
   },
   {
     name: "Spring Boot",
     icon: "springboot",
+    link: "https://spring.io/projects/spring-boot",
   },
   {
     name: "React.js",
     icon: "reactjs",
+    link: "https://reactjs.org/",
   },
   {
     name: "Huggingface Ecosystem",
     icon: "huggingface",
+    link: "https://huggingface.co/",
   },
   {
     name: "PostgreSQL",
     icon: "postgresql",
+    link: "https://www.postgresql.org/",
   },
   {
     name: "AWS",
     icon: "aws",
+    link: "https://aws.amazon.com/",
   },
   {
     name: "Docker",
     icon: "docker",
+    link: "https://www.docker.com/",
   },
   {
     name: "IntelliJ",
     icon: "intellij",
+    link: "https://www.jetbrains.com/idea/",
   },
   {
     name: "Jira",
     icon: "jira",
+    link: "https://www.atlassian.com/software/jira",
   },
   {
     name: "Figma",
     icon: "figma",
+    link: "https://www.figma.com/",
   },
 ];
 

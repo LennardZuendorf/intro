@@ -1,11 +1,12 @@
 import * as React from "react";
-import { Code, H2, H3, H4, L, Lead, M, S } from "@/components/ui/typography";
+import { Muted, H2, H3, H4, L, Lead, M, S } from "@/components/ui/typography";
+import Link from "next/link";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import type { AboutBlock } from "contentlayer/generated";
 import { allAboutBlocks } from "contentlayer/generated";
 import { calloutData, experienceData, techStackData } from "@/data/about";
 import { Mdx } from "@/components/custom/mdx-components";
-import { ExperienceCarousel } from "@/components/pages/experience-carousel";
+import { siteConfig } from "@/data/site";
 import { cn } from "@/lib/utils";
 import { BrandIcon } from "@/components/custom/brand-icons";
 import { ExperienceAccordion } from "@/components/pages/experience-accordion";
@@ -31,6 +32,15 @@ export default async function AboutPage() {
             <Card className={cn("border-0")}>
               <CardHeader className="p-2">
                 <H4 className="">Technologies I Commonly Use</H4>
+                <Muted>
+                  Check out my
+                  <Link
+                    className="pl-1 text-primary underline-offset-4 hover:underline font-semibold"
+                    href={siteConfig.links.github}
+                  >
+                    GitHub
+                  </Link>
+                </Muted>
               </CardHeader>
               <CardContent className="flex flex-wrap lg:grid lg:grid-cols-12 gap-2 p-2 pb-2">
                 {techStackData.map((tech, index) => (
@@ -39,6 +49,7 @@ export default async function AboutPage() {
                     title={tech.name}
                     className="h-6 w-6"
                     key={tech.name}
+                    link={tech.link}
                   />
                 ))}
               </CardContent>
@@ -47,8 +58,17 @@ export default async function AboutPage() {
         </CardContent>
       </Card>
       <Card key="experiences" className="w-full">
-        <CardHeader className="">
+        <CardHeader className="text-start">
           <H4 className="font-title">Work Experiences</H4>
+          <Muted>
+            Check out my
+            <Link
+              className="pl-1 text-primary underline-offset-4 hover:underline font-semibold"
+              href={siteConfig.links.linkedin}
+            >
+              LinkedIn Profile
+            </Link>
+          </Muted>
         </CardHeader>
         <CardContent className="">
           <ExperienceAccordion experienceData={experienceData} />
