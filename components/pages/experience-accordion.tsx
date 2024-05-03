@@ -34,12 +34,15 @@ export const ExperienceAccordion: React.FC<Props> = ({
   return (
     <Accordion type="single" collapsible className={cn("w-full", className)}>
       {experienceData.map((experience, index) => (
-        <AccordionItem value={experience.company} key={`experience-${index}`}>
+        <AccordionItem
+          value={experience.company}
+          key={`experience-${experience.company}`}
+        >
           <AccordionTrigger>
             <M className="">{experience.company}</M>
           </AccordionTrigger>
           <AccordionContent className="justify-start">
-            <Quote className="text-start text-xs lg:text-xs">
+            <Quote className="text-start text-xs lg:text-xs hidden lg:block">
               {experience.desc} -
               <Link
                 className="pl-1 text-primary font-semibold underline-offset-4 hover:underline"
@@ -71,7 +74,9 @@ export const ExperienceAccordion: React.FC<Props> = ({
                 </CardContent>
                 <CardFooter className="flex flex-wrap gap-1 md:space-x-2 p-2">
                   {role.skills.map((tag, skillsIndex) => (
-                    <Badge key={skillsIndex}>{tag}</Badge>
+                    <Badge className="text-xs" key={skillsIndex}>
+                      {tag}
+                    </Badge>
                   ))}
                 </CardFooter>
               </Card>

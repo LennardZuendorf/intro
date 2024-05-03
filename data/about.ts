@@ -34,7 +34,7 @@ export const calloutData = {
   },
   focusJob: {
     desc: "Technical PM",
-    link: "/about",
+    link: "/about#work-experience",
     text: "a technical product manager CHECK24 Flug in Berlin.",
     category: "Product Management",
   },
