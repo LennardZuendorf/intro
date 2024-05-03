@@ -1,4 +1,5 @@
 import { GreetingCard } from "@/components/pages/greeting-card";
+import { CurrentCard } from "@/components/pages/current-card";
 import {
   Card,
   CardContent,
@@ -6,33 +7,28 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { H4, L, M, Muted, Code, S } from "@/components/ui/typography";
+import { H4, L, M, Muted, SMuted, S } from "@/components/ui/typography";
 import * as React from "react";
 import { calloutData } from "@/data/about";
-import { allProjects } from "@/.contentlayer/generated/";
-import type { Project } from "@/.contentlayer/generated";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { HiMiniArrowTopRightOnSquare } from "react-icons/hi2";
-import { SkillIcon } from "@/components/custom/skill-icon";
 
 export default function Home() {
-  const calloutProject = allProjects.find(
-    (project) =>
-      project.title.toLowerCase() === calloutData.calloutProject.toLowerCase(),
-  );
-
   return (
-    <section className="flex flex-col items-center gap-2 sm:gap-4 lg:gap-8 py-4">
+    <section className="flex flex-col gap-2 sm:gap-4 ">
       <div className="grid grid-cols-12 gap-2 w-full">
         <GreetingCard className="col-span-12 lg:col-span-8 lg:row-span-2" />
-        <Card className="col-span-12 lg:col-span-4 lg:row-span-3">
+        <Card
+          className="col-span-12 lg:col-span-4 lg:row-span-3"
+          variant="interactive"
+        >
           <CardHeader className="p-1 pr-4 justify-end">
-            <Muted className="font-mono text-end">about me</Muted>
+            <SMuted className="font-mono text-end">about me</SMuted>
           </CardHeader>
           <CardContent>
-            <ul className="my-6 ml-6 list-disc [&>li]:mt-2 text-sm">
+            <ul className="my-6 ml-6 list-disc [&>li]:mt-2 text-sm xl:text-base 2xl:text-lg">
               <li>
                 I&rsquo;m a tech enthusiast bridging <strong>product</strong>,{" "}
                 <strong>dev</strong> and other related fields from a technical
@@ -50,76 +46,28 @@ export default function Home() {
             </ul>
           </CardContent>
         </Card>
-        <Card className="col-span-12 lg:col-span-4 lg:row-span-2 space-y-2">
+        <CurrentCard
+          className="hidden lg:block"
+          currentDesc={calloutData.focusProject.desc}
+          currentCategory={calloutData.focusProject.category}
+          currentLink={calloutData.focusProject.link}
+          currentText={calloutData.focusProject.text}
+          cardHeader="focus project"
+        ></CurrentCard>
+        <CurrentCard
+          className="hidden lg:block"
+          currentDesc={calloutData.focusJob.desc}
+          currentCategory={calloutData.focusJob.category}
+          currentLink={calloutData.focusJob.link}
+          currentText={calloutData.focusJob.text}
+          cardHeader="focus job"
+        ></CurrentCard>
+        <Card
+          className="col-span-12 lg:col-span-4 lg:row-span-1"
+          variant="interactive"
+        >
           <CardHeader className="p-1 pr-4 justify-end">
-            <Muted className="font-mono font-tiny text-end">
-              current project
-            </Muted>
-          </CardHeader>
-          <CardContent className="space-y-1 grid grid-flow-row">
-            <div className="flex flex-row flex-wrap items-center">
-              <SkillIcon
-                variant="default"
-                className="w-8 h-8 mr-2"
-                category={calloutData.focusProject.category}
-              />
-              <H4>{calloutData.focusProject.desc}</H4>
-            </div>
-            <div className="flex flex-row flex-wrap">
-              <S className="leading-relaxed">
-                I currently focus on
-                <Link
-                  href={
-                    calloutData.focusProject.link === ""
-                      ? "/projects"
-                      : calloutData.focusProject.link
-                  }
-                >
-                  <Code className="inline inline-flex">
-                    {calloutData.focusProject.desc.toLowerCase()}
-                  </Code>
-                </Link>
-                . Which is the final step of my Bachelors.
-              </S>
-            </div>
-            <div></div>
-          </CardContent>
-        </Card>
-        <Card className="col-span-12 lg:col-span-4 lg:row-span-2 space-y-2">
-          <CardHeader className="p-1 pr-4 justify-end">
-            <Muted className="font-mono font-tiny text-end">current role</Muted>
-          </CardHeader>
-          <CardContent className="space-y-1 grid grid-flow-row">
-            <div className="flex flex-row flex-wrap items-center">
-              <SkillIcon
-                variant="default"
-                className="w-8 h-8 mr-2"
-                category={calloutData.focusJob.category}
-              />
-              <H4 className="flex-wrap">{calloutData.focusJob.desc}</H4>
-            </div>
-            <div className="flex flex-row flex-wrap">
-              <S className="leading-relaxed">
-                I&rsquo;m a technical product manager for the backend team at
-                <Link
-                  href={
-                    calloutData.focusJob.link === ""
-                      ? "/projects"
-                      : calloutData.focusJob.link
-                  }
-                >
-                  <Code className="inline text-semibold">
-                    {calloutData.focusJob.place.toLowerCase()}
-                  </Code>
-                </Link>
-              </S>
-            </div>
-            <div></div>
-          </CardContent>
-        </Card>
-        <Card className="col-span-12 lg:col-span-4 lg:row-span-1">
-          <CardHeader className="p-1 pr-4 justify-end">
-            <Muted className="font-mono text-end">about</Muted>
+            <SMuted className="font-mono text-end">about</SMuted>
           </CardHeader>
           <CardContent className="grid grid-cols-3 justify-between">
             <div className="col-span-2 flex flex-wrap justify-start text-start">
@@ -137,9 +85,12 @@ export default function Home() {
             </div>
           </CardContent>
         </Card>
-        <Card className="col-span-12 lg:col-span-4 lg:row-span-1">
+        <Card
+          className="col-span-12 lg:col-span-4 lg:row-span-1"
+          variant="interactive"
+        >
           <CardHeader className="p-1 pr-4 justify-end">
-            <Muted className="font-mono text-end">projects</Muted>
+            <SMuted className="font-mono text-end">projects</SMuted>
           </CardHeader>
           <CardContent className="grid grid-cols-3 justify-between">
             <div className="col-span-2 flex flex-wrap justify-start text-start">
@@ -157,9 +108,12 @@ export default function Home() {
             </div>
           </CardContent>
         </Card>
-        <Card className="col-span-12 lg:col-span-8 lg:row-span-1 hidden lg:block">
+        <Card
+          className="col-span-12 lg:col-span-8 lg:row-span-1 hidden lg:block"
+          variant="interactive"
+        >
           <CardHeader className="p-1 pr-4 justify-end">
-            <Muted className="font-mono text-end">topics</Muted>
+            <SMuted className="font-mono text-end">topics</SMuted>
           </CardHeader>
           <CardContent className="gap-1 flex flex-wrap">
             {calloutData.skills.map((skill, index) => (

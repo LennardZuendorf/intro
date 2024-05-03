@@ -2,7 +2,7 @@ import type { Project } from "contentlayer/generated";
 import * as React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
-import { M, H4, Lead, Muted, S, H3, H2 } from "@/components/ui/typography";
+import { M, SMuted, Lead, Muted, S, H3, H2 } from "@/components/ui/typography";
 import Image from "next/image";
 import { calloutData } from "@/data/about";
 import Link from "next/link";
@@ -17,9 +17,9 @@ type Props = {
 
 export const GreetingCard: React.FC<Props> = ({ className }) => {
   return (
-    <Card key="intro" className={cn("w-full", className)}>
+    <Card key="intro" className={cn("w-full", className)} variant="interactive">
       <CardHeader className="p-1 pr-4 justify-end">
-        <Muted className="font-mono text-end">hello</Muted>
+        <SMuted className="font-mono text-end">hello</SMuted>
       </CardHeader>
       <CardContent className="grid gap-2 grid-cols-3 justify-center lg:justify-start items-center p-4 pt-0">
         <div className="flex col-span-3 md:col-span-1 justify-center lg:justify-start p-2">
