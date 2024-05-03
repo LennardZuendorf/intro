@@ -22,7 +22,7 @@ export default async function AboutPage() {
 
   return (
     <div className="flex flex-col justify-center items-center gap-4 lg:gap-8 py-2">
-      <Card key="intro" className="w-full text-start">
+      <Card key="intro" className="w-full text-start" id="about-me">
         <CardHeader className="flex flex-col space-y-2 p-4">
           <H4 className="font-black font-title">About Me</H4>
         </CardHeader>
@@ -57,7 +57,7 @@ export default async function AboutPage() {
           </div>
         </CardContent>
       </Card>
-      <Card key="experiences" className="w-full">
+      <Card key="experiences" className="w-full" id="work-experience">
         <CardHeader className="text-start">
           <H4 className="font-title">Work Experiences</H4>
           <Muted>

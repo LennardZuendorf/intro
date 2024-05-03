@@ -47,7 +47,7 @@ export default function Home() {
           </CardContent>
         </Card>
         <CurrentCard
-          className="hidden lg:block"
+          className=""
           currentDesc={calloutData.focusProject.desc}
           currentCategory={calloutData.focusProject.category}
           currentLink={calloutData.focusProject.link}
@@ -55,7 +55,7 @@ export default function Home() {
           cardHeader="focus project"
         ></CurrentCard>
         <CurrentCard
-          className="hidden lg:block"
+          className=""
           currentDesc={calloutData.focusJob.desc}
           currentCategory={calloutData.focusJob.category}
           currentLink={calloutData.focusJob.link}
@@ -63,7 +63,7 @@ export default function Home() {
           cardHeader="focus job"
         ></CurrentCard>
         <Card
-          className="col-span-12 lg:col-span-4 lg:row-span-1"
+          className="col-span-12 lg:col-span-4 lg:row-span-1 hidden lg:block"
           variant="interactive"
         >
           <CardHeader className="p-1 pr-4 justify-end">
@@ -77,7 +77,7 @@ export default function Home() {
               </Muted>
             </div>
             <div className="col-span-1 flex justify-end items-center">
-              <Link href="/about" scroll={false}>
+              <Link href="/about#about-me" scroll={false}>
                 <Button variant="outline" size="icon">
                   <HiMiniArrowTopRightOnSquare className="h-4 w-4" />
                 </Button>
@@ -86,7 +86,7 @@ export default function Home() {
           </CardContent>
         </Card>
         <Card
-          className="col-span-12 lg:col-span-4 lg:row-span-1"
+          className="col-span-12 lg:col-span-4 lg:row-span-1 hidden lg:block"
           variant="interactive"
         >
           <CardHeader className="p-1 pr-4 justify-end">
