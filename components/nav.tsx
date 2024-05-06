@@ -14,7 +14,7 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
-import { L, Muted, S } from "@/components/ui/typography";
+import { L, Muted, S, M } from "@/components/ui/typography";
 
 interface FooterProps {
   className?: string;
@@ -63,7 +63,7 @@ export const Nav: React.FC<FooterProps> = ({ className = "" }) => {
                       )}
                       href="/projects"
                     >
-                      <L>All Projects</L>
+                      <M>All Projects</M>
                       <S>
                         Look through my various projects from free time and
                         academia.
@@ -81,7 +81,7 @@ export const Nav: React.FC<FooterProps> = ({ className = "" }) => {
                         : project.path
                     }
                   >
-                    {project.description.substring(0, 50).concat("...")}
+                    <S>{project.description.substring(0, 50).concat("...")}</S>
                   </ListItem>
                 ))}
               </ul>
@@ -120,7 +120,7 @@ const ListItem = React.forwardRef<
           )}
           {...props}
         >
-          <L className="text-sm font-medium leading-none">{title}</L>
+          <M className="text-sm font-semibold leading-none">{title}</M>
           <Muted>{children}</Muted>
         </a>
       </NavigationMenuLink>

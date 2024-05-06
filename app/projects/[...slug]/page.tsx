@@ -34,7 +34,9 @@ export default async function Page({ params }: { params: { slug: string[] } }) {
         <H3>{project.title} </H3>
         <div className="flex flex-wrap gap-1 justify-start">
           {project.tags &&
-            project.tags.map((tag) => <Badge key={tag}>{tag}</Badge>)}
+            project.tags.map((tag) => (
+              <Badge key={tag}>{tag.toLowerCase()}</Badge>
+            ))}
         </div>
       </div>
       <Separator />
@@ -62,16 +64,6 @@ export default async function Page({ params }: { params: { slug: string[] } }) {
           </Link>
         )}
       </div>
-      {project.images && (
-        <Image
-          src={project.images[0]}
-          alt={project.title}
-          width={780}
-          height={405}
-          className="my-8 rounded-md border bg-muted transition-colors"
-          priority
-        />
-      )}
       <div className="text-start">
         <Mdx code={project.body.code} />
       </div>

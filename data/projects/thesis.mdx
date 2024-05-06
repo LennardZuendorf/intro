@@ -1,11 +1,74 @@
 ---
 type: Project
 title: My Bachelor Thesis
-date: 2024-02-09
+date: 2024-02-14
 description: Research and prototyping of an interpretable LLM Chat Application. My bachelor thesis project.
 images: ["/img/projects/thesis-thumbnail.png"]
 focus: True
-active: False
-tags: ["python", "transformers", "shap", "gradio"]
+active: True
+tags: ["python", "XAI", "transformers", "shap", "gradio", "captum", "academic"]
 category: Machine Learning
+github: https://github.com/LennardZuendorf/thesis-webapp
+link: /docs/thesis.pdf
 ---
+
+<Callout>
+    - my **bachelor thesis** about XAI, LLMs and ChatBots
+    - build in python with Huggingface, Gradio and SHAP/CAPTUM
+    - anlysing how LLM output and ChatBots can be more understandable
+</Callout>
+
+## About the Project
+
+When the time came to write me thesis, as the last bit of my bachelors degree the topic of Explainable AI was suggest to me by one of the professors at my Uni. I decided to specifically look into ChatBots, as they are pretty much category defining in the field of LLM applications. The offical topic of my thesis was 
+> Building an Interpretable Natural Language AI Tool based on Transformer Models and approaches of Explainable AI.
+
+
+The result of this is a **70 page thesis** that explored how techniques of XAI can be applied to LLMs and ChatBots. For this I explored several different approaches and open source implementations after outlining all important fundamentals.
+
+I also produced a working prototype, that tired to interpret and explain decision of a Mistral 7B Instruct Model inside the chat interface. This was meant to improve explainability towards common users.
+
+## Technology
+
+## Technology
+<ProjectTech>
+<Link href="https://www.python.org/">
+  <img
+    src="https://img.shields.io/badge/python-3776AB?style=for-the-badge&logo=python&logoColor=white"
+    alt="Python"
+    className="rounded-sm"
+  />
+</Link>
+<Link href="https://jupyter.org/">
+    <img
+        src="https://img.shields.io/badge/jupyter-cc5c0c.svg?style=for-the-badge&logo=jupyter&logoColor=white"
+        alt="Jupyter Notebooks"
+        className="rounded-sm"
+    />
+  </Link>
+  <Link href="https://huggingface.co/docs/transformers/en/index">
+    <img
+        src="https://custom-icon-badges.demolab.com/badge/transformers-6B7280?style=for-the-badge&logoColor=black&logo=transformers"
+        alt="Huggingface"
+        className="rounded-sm"
+    /> 
+    </Link>
+    <Link href="https://www.gradio.app/">
+     <img
+        src="https://custom-icon-badges.demolab.com/badge/gradio-F5F4ED?style=for-the-badge&logoColor=black&logo=gradio"
+        alt="Gradio"
+        className="rounded-sm"
+    />
+    </Link>
+</ProjectTech>
+
+The implementation of my thesis relied on several open source technologies, because of their availability. Most importantly this was the Huggingface Ecosystem, specifically transformers. Which I have already used in the past.
+
+For XAI Implementation I relied on [captum](https://captum.ai) but also tried out SHAP. In the end I settled with captum and implemented KernelSHAP with Mistral. 
+
+The rest of the application and UI is built in Python with Gradio and FastAPI.
+
+
+
+
+
