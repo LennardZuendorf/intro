@@ -120,7 +120,7 @@ const ListItem = React.forwardRef<
           )}
           {...props}
         >
-          <M className="text-sm font-medium leading-none">{title}</M>
+          <M className="text-sm font-semibold leading-none">{title}</M>
           <Muted>{children}</Muted>
         </a>
       </NavigationMenuLink>

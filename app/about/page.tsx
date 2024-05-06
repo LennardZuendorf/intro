@@ -1,16 +1,15 @@
 import * as React from "react";
-import { H2, H4, L, Muted } from "@/components/ui/typography";
+import { H2, H4, L, Muted, S } from "@/components/ui/typography";
 import Link from "next/link";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import type { AboutBlock } from "contentlayer/generated";
 import { allAboutBlocks } from "contentlayer/generated";
-import { calloutData, experienceData, techStackData } from "@/data/about";
+import { experienceData, techStackData } from "@/data/about";
 import { Mdx } from "@/components/custom/mdx-components";
 import { siteConfig } from "@/data/site";
 import { cn } from "@/lib/utils";
 import { BrandIcon } from "@/components/custom/brand-icons";
 import { ExperienceAccordion } from "@/components/pages/experience-accordion";
-import { Separator } from "@radix-ui/react-separator";
 
 export const generateStaticParams = async () => {
   return allAboutBlocks.map((p) => ({ slug: p.slug.split("/") }));
@@ -33,7 +32,8 @@ export default async function AboutPage() {
         </CardHeader>
         <CardContent className="flex flex-col justify-start gap-4 p-4">
           <Mdx code={aboutIntro.body.code} />
-          <H4>What I work on (in my free time)</H4>
+          <H4>I Work On</H4>
+          <S> (In my free time.)</S>
           <Muted>
             Check out my
             <Link
@@ -64,7 +64,7 @@ export default async function AboutPage() {
           </div>
         </CardContent>
       </Card>
-      <Card key="experiences" className="w-full" id="work-experience">
+      <Card key="experiences" className="w-full" id="work-experiences">
         <CardHeader className="text-start">
           <H4 className="font-title">Work Experiences</H4>
           <Muted>

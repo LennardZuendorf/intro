@@ -51,7 +51,7 @@ export const CurrentCard: React.FC<Props> = ({
             href={
               cardHeader === "focus project"
                 ? "projects".concat(currentLink.toString())
-                : "about"
+                : "".concat(currentLink.toString())
             }
           >
             <H4 className="text-wrap underline-offset-4 hover:underline">
