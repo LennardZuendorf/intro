@@ -54,7 +54,7 @@ export const ExperienceAccordion: React.FC<Props> = ({
             {experience.roles.map((role, roleIndex) => (
               <Card
                 className={cn(
-                  "text-start border-0 border-b-2 pb-4 rounded-none",
+                  "text-start border-0 border-b-2 last:border-b-0 pb-4 rounded-none",
                 )}
                 key={`card-${roleIndex}`}
               >
@@ -72,7 +72,7 @@ export const ExperienceAccordion: React.FC<Props> = ({
                     ))}
                   </ul>
                 </CardContent>
-                <CardFooter className="flex flex-wrap gap-1 md:space-x-2 p-2">
+                <CardFooter className="flex flex-wrap gap-1 md:space-x-2 p-2 hidden lg:block">
                   {role.skills.map((tag, skillsIndex) => (
                     <Badge className="text-xs" key={skillsIndex}>
                       {tag}
