@@ -63,7 +63,7 @@ export const CurrentCard: React.FC<Props> = ({
           <S className="leading-relaxed inline text-wrap">
             {cardHeader === "focus project"
               ? "I'm currently working on "
-              : "I'm currently working as "}
+              : "I'm a "}
             {currentText}
           </S>
         </div>

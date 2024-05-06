@@ -72,7 +72,7 @@ export const ProjectCard: React.FC<Props> = ({
                   key={tag}
                   className={focus ? "text-foreground" : "text-background"}
                 >
-                  {tag}
+                  {tag.toLowerCase()}
                 </Badge>
               ))}
           </div>

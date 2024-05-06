@@ -42,7 +42,7 @@ export const ExperienceAccordion: React.FC<Props> = ({
             <M className="">{experience.company}</M>
           </AccordionTrigger>
           <AccordionContent className="justify-start">
-            <Quote className="text-start text-xs lg:text-xs hidden lg:block">
+            <Quote className="text-start text-xs lg:text-xs hidden lg:block pb-2">
               {experience.desc} -
               <Link
                 className="pl-1 text-primary font-semibold underline-offset-4 hover:underline"

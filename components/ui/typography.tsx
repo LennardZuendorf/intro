@@ -36,7 +36,7 @@ const H2: React.FC<TypographyProps> = ({ className = "", children }) => {
   return (
     <h2
       className={cn(
-        "scroll-m-20 text-3xl font-bold tracking-tight font-spartan lg:text-4xl 2xl:text-8xl text-mute",
+        "scroll-m-20 text-3xl font-bold tracking-tight font-spartan lg:text-4xl 2xl:text-6xl text-mute",
         className,
       )}
     >
@@ -120,7 +120,9 @@ const Quote: React.FC<TypographyProps> = ({ className = "", children }) => {
 
 const L: React.FC<TypographyProps> = ({ className = "", children }) => {
   return (
-    <p className={cn("text-base font-semibold lg:text-lg ", className)}>
+    <p
+      className={cn("text-base font-semibold xl:text-lg xl:text-xl", className)}
+    >
       {children}
     </p>
   );
