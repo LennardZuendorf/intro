@@ -60,7 +60,7 @@ export default function Home() {
           currentCategory={calloutData.focusJob.category}
           currentLink={calloutData.focusJob.link}
           currentText={calloutData.focusJob.text}
-          cardHeader="focus job"
+          cardHeader="current job"
         ></CurrentCard>
         <Card
           className="col-span-12 lg:col-span-4 lg:row-span-1 hidden lg:block"
@@ -71,10 +71,8 @@ export default function Home() {
           </CardHeader>
           <CardContent className="grid grid-cols-3 justify-between">
             <div className="col-span-2 flex flex-wrap justify-start text-start">
-              <M>Learn More About Me</M>
-              <Muted className="text-sm">
-                My skills, experiences and techstack.
-              </Muted>
+              <L>Learn More About Me</L>
+              <Muted>My skills, experiences and techstack.</Muted>
             </div>
             <div className="col-span-1 flex justify-end items-center">
               <Link href="/about#about-me" scroll={false}>
@@ -94,10 +92,8 @@ export default function Home() {
           </CardHeader>
           <CardContent className="grid grid-cols-3 justify-between">
             <div className="col-span-2 flex flex-wrap justify-start text-start">
-              <M>See All My Projects</M>
-              <Muted className="text-sm">
-                All my academic and free time projects.
-              </Muted>
+              <L>See All My Projects</L>
+              <Muted>All my academic and free time projects.</Muted>
             </div>
             <div className="col-span-1 flex justify-end items-center">
               <Link href="/projects" scroll={false}>

@@ -34,7 +34,9 @@ export default async function Page({ params }: { params: { slug: string[] } }) {
         <H3>{project.title} </H3>
         <div className="flex flex-wrap gap-1 justify-start">
           {project.tags &&
-            project.tags.map((tag) => <Badge key={tag}>{tag}</Badge>)}
+            project.tags.map((tag) => (
+              <Badge key={tag}>{tag.toLowerCase()}</Badge>
+            ))}
         </div>
       </div>
       <Separator />
