@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/accordion";
 import { cn } from "@/lib/utils";
 import { Separator } from "@radix-ui/react-menu";
-import { H4, Code, M, L, S } from "@/components/ui/typography";
+import { Quote, Code, M, L, S } from "@/components/ui/typography";
 import {
   Card,
   CardContent,
@@ -34,32 +34,53 @@ export const ExperienceAccordion: React.FC<Props> = ({
   return (
     <Accordion type="single" collapsible className={cn("w-full", className)}>
       {experienceData.map((experience, index) => (
-        <AccordionItem value={experience.company} key={index}>
+        <AccordionItem
+          value={experience.company}
+          key={`experience-${experience.company}`}
+        >
           <AccordionTrigger>
             <M className="">{experience.company}</M>
           </AccordionTrigger>
           <AccordionContent className="justify-start">
-            <Card className="text-start border-0">
-              <CardHeader className="justify-start text-start p-2">
-                <div className="flex flex-col lg:flex-row justify-start lg:justify-between space-y-2">
-                  <L>{experience.title}</L>
-                  <Code className="">{experience.range}</Code>
-                </div>
-                <Separator />
-              </CardHeader>
-              <CardContent className="pl-4 p-2">
-                <ul className="ml-6 list-disc [&>li]:mt-2 text-sm">
-                  {experience.text.map((description, index) => (
-                    <li key={index}>{description}</li>
+            <Quote className="text-start text-xs lg:text-xs hidden lg:block pb-2">
+              {experience.desc} -
+              <Link
+                className="pl-1 text-primary font-semibold underline-offset-4 hover:underline"
+                href={experience.url}
+              >
+                Learn More
+              </Link>
+            </Quote>
+            {experience.roles.map((role, roleIndex) => (
+              <Card
+                className={cn(
+                  "text-start border-0 border-b-2 last:border-b-0 pb-4 rounded-none",
+                )}
+                key={`card-${roleIndex}`}
+              >
+                <CardHeader className="justify-start text-start p-2">
+                  <div className="flex flex-col lg:flex-row justify-start lg:justify-between space-y-2">
+                    <L>{role.title}</L>
+                    <Code className="">{role.range}</Code>
+                  </div>
+                  <Separator />
+                </CardHeader>
+                <CardContent className="pl-4 p-2">
+                  <ul className="ml-6 list-disc [&>li]:mt-2 text-sm">
+                    {role.text.map((description, textIndex) => (
+                      <li key={textIndex}>{description.toString()}</li>
+                    ))}
+                  </ul>
+                </CardContent>
+                <CardFooter className="flex flex-wrap gap-1 md:space-x-2 p-2 hidden lg:block">
+                  {role.skills.map((tag, skillsIndex) => (
+                    <Badge className="text-xs" key={skillsIndex}>
+                      {tag}
+                    </Badge>
                   ))}
-                </ul>
-              </CardContent>
-              <CardFooter className="flex flex-wrap gap-1 md:space-x-2 p-2">
-                {experience.skills.map((tag, index) => (
-                  <Badge key={index}>{tag}</Badge>
-                ))}
-              </CardFooter>
-            </Card>
+                </CardFooter>
+              </Card>
+            ))}
           </AccordionContent>
         </AccordionItem>
       ))}

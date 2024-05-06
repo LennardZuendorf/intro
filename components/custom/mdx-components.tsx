@@ -4,12 +4,13 @@ import { useMDXComponent } from "next-contentlayer/hooks";
 import { cn } from "@/lib/utils";
 import { Callout } from "@/components/custom/callout";
 import { ProjectTech } from "@/components/custom/project-tech";
+import Link from "next/link";
 
 const components = {
   h1: ({ className, ...props }: { className?: string; [key: string]: any }) => (
     <h1
       className={cn(
-        "mt-2 scroll-m-20 text-2xl font-bold tracking-tight",
+        "scroll-m-10 text-2xl font-bold tracking-tight mb:-2 mt-8 first:mt-0",
         className,
       )}
       {...props}
@@ -18,7 +19,7 @@ const components = {
   h2: ({ className, ...props }: { className?: string; [key: string]: any }) => (
     <h2
       className={cn(
-        "mt-8 scroll-m-10 pb-1 text-xl font-bold tracking-tight first:mt-0",
+        "mscroll-m-10 pb-1 text-xl font-bold tracking-tight mb-2 mt-6 first:mt-0",
         className,
       )}
       {...props}
@@ -27,7 +28,7 @@ const components = {
   h3: ({ className, ...props }: { className?: string; [key: string]: any }) => (
     <h3
       className={cn(
-        "mt-4 scroll-m-10 text-xl font-semibold tracking-tight",
+        "scroll-m-5 text-xl font-semibold tracking-tight mt-6 first:mt-0",
         className,
       )}
       {...props}
@@ -36,7 +37,7 @@ const components = {
   h4: ({ className, ...props }: { className?: string; [key: string]: any }) => (
     <h4
       className={cn(
-        "mt-2 scroll-m-5 text-lg font-bold tracking-tight",
+        "scroll-m-5 text-lg font-bold tracking-tight mt-3 first:mt-0",
         className,
       )}
       {...props}
@@ -45,7 +46,7 @@ const components = {
   h5: ({ className, ...props }: { className?: string; [key: string]: any }) => (
     <h5
       className={cn(
-        "mt-2 scroll-m-5 text-lg font-semibold tracking-tight",
+        "scroll-m-2 text-lg font-semibold tracking-tight mt-3 first:mt-0",
         className,
       )}
       {...props}
@@ -54,7 +55,7 @@ const components = {
   h6: ({ className, ...props }: { className?: string; [key: string]: any }) => (
     <h6
       className={cn(
-        "mt-2 scroll-m-5 text-base font-semibold tracking-tight",
+        "scroll-m-2 text-base font-semibold tracking-tight mt-2 first:mt-0",
         className,
       )}
       {...props}
@@ -167,6 +168,7 @@ const components = {
   Image,
   Callout,
   ProjectTech,
+  Link,
 };
 
 interface MdxProps {

@@ -46,7 +46,7 @@ export default function RootLayout({
         </head>
         <body
           className={cn(
-            "relative h-screen bg-background font-sans antialiased",
+            "relative min-h-screen bg-background font-sans antialiased",
             lato.variable,
             spartan.variable,
             roboto_mono.variable,
@@ -61,7 +61,7 @@ export default function RootLayout({
             <Nav />
             <main
               className={cn(
-                "container mx-auto grow place-items-center w-full md:w-10/12 xl:w-8/12",
+                "container mx-auto grow place-content-center w-full md:w-9/12 2xl:min-h-[95vh] xl:min-h-[75vh]",
               )}
             >
               {children}

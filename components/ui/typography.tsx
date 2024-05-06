@@ -22,7 +22,7 @@ const H1: React.FC<TypographyProps> = ({ className = "", children }) => {
   return (
     <h1
       className={cn(
-        "scroll-m-20 text-3xl font-black font-title tracking-tight lg:text-4xl",
+        "scroll-m-20 text-3xl font-black font-title tracking-tight lg:text-4xl 2xl:text-8xl",
         className,
       )}
     >
@@ -36,7 +36,7 @@ const H2: React.FC<TypographyProps> = ({ className = "", children }) => {
   return (
     <h2
       className={cn(
-        "scroll-m-20 text-3xl font-bold tracking-tight font-spartan lg:text-4xl text-mute",
+        "scroll-m-20 text-3xl font-bold tracking-tight font-spartan lg:text-4xl 2xl:text-6xl text-mute",
         className,
       )}
     >
@@ -50,7 +50,7 @@ const H3: React.FC<TypographyProps> = ({ className = "", children }) => {
   return (
     <h3
       className={cn(
-        "scroll-m-20 pb-2 text-2xl font-semibold tracking-tight lg:text-3xl first:mt-0",
+        "scroll-m-20 pb-2 text-2xl font-semibold tracking-tight lg:text-3xl 2xl:text-6xl first:mt-0",
         className,
       )}
     >
@@ -64,7 +64,7 @@ const H4: React.FC<TypographyProps> = ({ className = "", children }) => {
   return (
     <h4
       className={cn(
-        "scroll-m-20 text-xl font-semibold tracking-tight",
+        "scroll-m-20 text-xl font-semibold tracking-tight lg:text-2xl 2xl:text-4xl",
         className,
       )}
     >
@@ -82,7 +82,7 @@ const Lead: React.FC<VariantTypographyProps> = ({
   return (
     <p
       className={cn(
-        "scroll-m-20 text-base font-semibold tracking-tight ",
+        "scroll-m-20 text-lg font-semibold tracking-tight lg:text-xl",
         className,
         {
           "text-muted-foreground": type === "default",
@@ -98,7 +98,10 @@ const LQuote: React.FC<TypographyProps> = ({ className = "", children }) => {
   const content = formatContent(children);
   return (
     <blockquote
-      className={cn("mt-6 border-l-2 pl-6 text-lg font-semibold", className)}
+      className={cn(
+        "mt-6 border-l-2 pl-6 text-lg font-semibold lg:text-xl",
+        className,
+      )}
     >
       {content}
     </blockquote>
@@ -107,21 +110,29 @@ const LQuote: React.FC<TypographyProps> = ({ className = "", children }) => {
 
 const Quote: React.FC<TypographyProps> = ({ className = "", children }) => {
   return (
-    <blockquote className={cn("mt-6 border-l-2 pl-6", className)}>
+    <blockquote
+      className={cn("mt-6 border-l-2 pl-6 text-sm lg:text-base", className)}
+    >
       {children}
     </blockquote>
   );
 };
 
 const L: React.FC<TypographyProps> = ({ className = "", children }) => {
-  return <p className={cn("text-lg font-semibold", className)}>{children}</p>;
+  return (
+    <p
+      className={cn("text-base font-semibold xl:text-lg xl:text-xl", className)}
+    >
+      {children}
+    </p>
+  );
 };
 
 const M: React.FC<TypographyProps> = ({ className = "", children }) => {
   return (
     <p
       className={cn(
-        " text-m font-medium leading-7 [&:not(:first-child)]:mt-1",
+        "text-sm font-medium leading-7 [&:not(:first-child)]:mt-1 lg:text-base",
         className,
       )}
     >
@@ -132,24 +143,54 @@ const M: React.FC<TypographyProps> = ({ className = "", children }) => {
 
 const S: React.FC<TypographyProps> = ({ className = "", children }) => {
   return (
-    <small className={cn("text-sm font-medium leading-none", className)}>
+    <small
+      className={cn("text-xs font-medium leading-none lg:text-sm", className)}
+    >
       {children}
     </small>
   );
 };
 
+const XS: React.FC<TypographyProps> = ({ className = "", children }) => {
+  return (
+    <small
+      className={cn(
+        "text-[0.7rem] font-light leading-none lg:text-xs",
+        className,
+      )}
+    >
+      {children}
+    </small>
+  );
+};
+
+const SMuted: React.FC<TypographyProps> = ({ className = "", children }) => {
+  return (
+    <p
+      className={cn(
+        "text-[0.7rem] text-muted-foreground lg:text-xs",
+        className,
+      )}
+    >
+      {children}
+    </p>
+  );
+};
+
 const Muted: React.FC<TypographyProps> = ({ className = "", children }) => {
   return (
-    <p className={cn("text-sm text-muted-foreground", className)}>{children}</p>
+    <p className={cn("text-xs text-muted-foreground lg:text-sm", className)}>
+      {children}
+    </p>
   );
 };
 
 const Code: React.FC<TypographyProps> = ({ className = "", children }) => {
   return (
-    <p className={cn("mx-1", className)}>
+    <p className={cn(className)}>
       <code
         className={cn(
-          "relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold",
+          "relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold lg:text-md",
         )}
       >
         {children}
@@ -158,4 +199,19 @@ const Code: React.FC<TypographyProps> = ({ className = "", children }) => {
   );
 };
 
-export { H1, H2, H3, H4, Lead, LQuote, Quote, L, M, S, Muted, Code };
+export {
+  H1,
+  H2,
+  H3,
+  H4,
+  Lead,
+  LQuote,
+  Quote,
+  L,
+  M,
+  S,
+  XS,
+  Muted,
+  SMuted,
+  Code,
+};
