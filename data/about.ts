@@ -4,8 +4,7 @@ export type CalloutData = typeof calloutData;
 
 export const calloutData = {
   introCallout: "Hi! I'm Lennard!",
-  secondCallout:
-    "I'm a Technical Product Manager focusing the combination of Product Management and Software Engineering.",
+  secondCallout: "I",
   skills: [
     "Product Management",
     "Software Engineering",
@@ -72,7 +71,7 @@ export const experienceData: Experience[] = [
         text: [
           "Independently conceiving, guiding implementation, testing, and managing the launch of product features for payments.",
           "Taking charge of regular product operational processes, quality assurance, functionality testing, and cooperating in managing weekly product updates.",
-          "gile sprint management and support in regular Scrum ceremonies in close collaboration with the product management and IT teams.",
+          "Agile sprint management and support in regular Scrum ceremonies in close collaboration with the product management and IT teams.",
         ],
         skills: [
           "Technical Product Management",
