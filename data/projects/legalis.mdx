@@ -13,18 +13,18 @@ github: https://github.com/LennardZuendorf/legalis
 ---
 
 <Callout>
-    - uni project around court case prediction
-    - using heavily processed German court case data
-    - prediction with Random Forest and BERT
+    - uni project around court case prediction with AI
+    - prediction with Random Forest and BERT using German court case data
+    - built with sci-kit learn (random forest) and a BERT model
 </Callout>
 
 ## About the Project
 
-Legalis is a University project for a machine learning and data science course. I wrote a paper at the University of Oslo about court case outcome prediction and this in the continuation of the project.
+Legalis was a University project for a machine learning and data science course. I wrote a paper at the University of Oslo about court case outcome prediction and this in the continuation of the project. The focus of this was rundimentary prediction of court case outcomes in German civil law cases.
 
-I'm using bulk data from [openlegaldata](https:\openlegaldata.io), which included about 250.000 cases, out of which ca. 38k are usable for me. Based on this I trained a random forest classifier to predict the outcome of court cases.
+I used bulk data from [openlegaldata](https:\openlegaldata.io), which included about 250.000 cases, out of which ca. 38k were usable for me. Based on this I trained a random forest classifier to predict the outcome of court cases. In the end I reached about a 60% accuracy, which is not great, but also not bad. Additionally I did some very basic training of a BERT model for a classification tasks, which also got about a 60% accuracy.
 
-In the end I reached about a 60% accuracy, which is not great, but also not bad.
+While this is a nice explorative project it has many flaws and definately doesn't prove any reliable prediction capabilities.
 
 ## Technology & Tools
 
@@ -61,7 +61,7 @@ In the end I reached about a 60% accuracy, which is not great, but also not bad.
 
 I very much enjoy all the features [🤗 huggingface](https://huggingface.co/) provides and heavily rely on it in my machine learning projects. Especially the hosting of Dataset, Model and Apps/Spaces.
 
-For prediction, I have trained and optimized a random forest classifier aswell as a naive bayes and a BERT model for text classificaiton.
+For prediction, I have trained and optimized a random forest classifier aswell as a naive bayes, both using sci-kit and a BERT model for text classificaiton. For this I used transformers.
 
 I used ChatGPT to extract the outcome as a binary label for 2800 cases and trained the models on that. It works great for the extraction of certain information from longer text (if you're willing to pay or have short texts).
 
