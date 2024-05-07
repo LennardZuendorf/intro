@@ -30,8 +30,7 @@ export default function Home() {
           <CardContent>
             <ul className="my-6 ml-6 list-disc [&>li]:mt-2 text-sm xl:text-base 2xl:text-lg">
               <li>
-                <strong>I work on software</strong> that drives growth. I&apos;m
-                all about creating products that have actual impact.
+                <strong>I work on software</strong> that has actual impact.
               </li>
               <li>
                 My focus is <strong>technical product management</strong>, which
@@ -41,8 +40,7 @@ export default function Home() {
               </li>
               <li>
                 I&apos;m a <strong>coding enthusiast </strong>always trying to
-                learn and leveling up my skills through side projects and online
-                courses.
+                learn and leveling up my skills.
               </li>
             </ul>
           </CardContent>
@@ -72,7 +70,7 @@ export default function Home() {
           </CardHeader>
           <CardContent className="grid grid-cols-3 justify-between">
             <div className="col-span-2 flex flex-wrap justify-start text-start">
-              <L>Learn More About Me</L>
+              <L>Learn About Me</L>
               <Muted>My skills, experiences and techstack.</Muted>
             </div>
             <div className="col-span-1 flex justify-end items-center">
