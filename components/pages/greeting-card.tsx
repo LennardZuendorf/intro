@@ -35,9 +35,8 @@ export const GreetingCard: React.FC<Props> = ({ className }) => {
         <div className="flex flex-col col-span-3 md:col-span-2 gap-4 justify-between text-center lg:text-start">
           <H3 className="font-black font-title">Hi! I&apos;m Lennard!</H3>
           <M className="leading-normal">
-            I&apos;m a <strong>Technical Product Manager</strong> with a neck
-            for coding, focused on turning product vision into technical
-            features.
+            I&apos;m a <strong>Product Manager</strong> with a neck for coding,
+            focused on turning product vision into reality.
           </M>
           <div className="flex flex-wrap justify-center md:justify-start gap-4">
             <Link href={siteConfig.links.mail}>
