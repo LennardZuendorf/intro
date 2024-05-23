@@ -30,12 +30,12 @@ export default function Home() {
           <CardContent>
             <ul className="my-6 ml-6 list-disc [&>li]:mt-2 text-sm xl:text-base 2xl:text-lg">
               <li>
-                <strong>I work on software</strong> that drives growth. I&apos;m
-                all about creating products that have actual impact.
+                <strong>I enjoying working on software</strong> with real world
+                impact.
               </li>
               <li>
-                My focus is <strong>technical product management</strong>, which
-                combines my expertise in{" "}
+                My focus is technology based<strong>product management</strong>,
+                which combines my expertise in{" "}
                 <strong>product, engineering, innovation</strong> and{" "}
                 <strong>business</strong>.
               </li>
