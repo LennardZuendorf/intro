@@ -34,8 +34,8 @@ export default function Home() {
                 impact.
               </li>
               <li>
-                My focus is technology based<strong>product management</strong>,
-                which combines my expertise in{" "}
+                My focus is technology based <strong>product management</strong>
+                , which combines my expertise in{" "}
                 <strong>product, engineering, innovation</strong> and{" "}
                 <strong>business</strong>.
               </li>

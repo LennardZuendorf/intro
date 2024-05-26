@@ -2,7 +2,7 @@
 type: Project
 title: Tempus Productivity
 date: 2024-05-01
-description: A time based productivity app built redwood.js and supabase.
+description: A time-based productivity app built with Redwood.js and Supabase.
 images: ["/img/projects/tempus-thumbnail.png"]
 focus: True
 active: True
@@ -17,25 +17,35 @@ category: Fullstack Product
 ---
 
 <Callout>
-    - redwood.js based app for time based productivity
-    - inspired by Pomodoro, GTD and minimal ToDo lists
-    - currently under active development
+- Redwood.js-based app for time-based productivity
+- Inspired by Pomodoro, GTD, and minimal ToDo lists
+- Currently under active development
 </Callout>
 
-## About the Project
+### About the Project
 
-I sometimes struggle with **focused, goal driven productivity**. A well organized ToDo list doesn't necesarilly lead to focus an actually getting stuff done. 
+I sometimes struggle with **focused, goal-driven productivity**. A well-organized ToDo list doesn't necessarily lead to focus and actually getting stuff done.
 
-Over time I tried out many ways and ended up typically using something in between [GTD](https://gettingthingsdone.com/), overengineered ToDo list, excessive note taking and pomodoro. Nevertheless I always have been missing a tool that actually support all of this properly and that's why I have decided to build on Tempus.
+Over time, I tried out many methods and ended up typically using a mix between [GTD](https://gettingthingsdone.com/), overengineered ToDo lists, excessive note-taking, and Pomodoro. Nevertheless, I always felt the need for a tool that supports all these approaches properly, which led to the creation of Tempus.
 
-Tempus will be my idea of an **optimal App to manage and productively do tasks from different sources**.
+Tempus will embody my vision of an **optimal app to manage and productively handle tasks from different sources**.
 
-## Technology
+### Features
+
+Tempus Productivity will offer several key features to enhance productivity:
+
+- **Time Management**: Combines elements of Pomodoro, GTD, and minimal ToDo lists.
+- **Task Integration**: Supports tasks from various sources for comprehensive management.
+- **User-friendly Interface**: Designed to be intuitive and easy to use.
+- **Customizable Workflows**: Allows users to tailor their productivity methods.
+
+### Technology
+
 <ProjectTech>
   <Link href="https://www.typescriptlang.org/">
     <img
       src="https://img.shields.io/badge/TypeScript-3178C6.svg?style=for-the-badge&logo=TypeScript&logoColor=white"
-      alt="Typescript"
+      alt="TypeScript"
       className="rounded-sm"
     />
   </Link>
@@ -49,7 +59,7 @@ Tempus will be my idea of an **optimal App to manage and productively do tasks f
   <Link href="https://redwoodjs.com/">
     <img
       src="https://img.shields.io/badge/Redwood-FDF8F6?style=for-the-badge&logo=redwoodjs&logoColor=BF4722"
-      alt="RedwoodJs"
+      alt="RedwoodJS"
       className="rounded-sm"
     />
   </Link>
@@ -62,6 +72,15 @@ Tempus will be my idea of an **optimal App to manage and productively do tasks f
   </Link>
 </ProjectTech>
 
-Tempus will be build using the **Redwood.Js framework** and **Supabase**. Redwood is a framework is a full stack framework to built react apps, that comes with many extremely helpfull capabilites. Supabase is an open source alternative to Firebase, build around PostgreSQL. It provides Database, Auth, Logging, Storage, Edge Functions, etc.
+Tempus is built using the **Redwood.js framework** and **Supabase**. Redwood is a full-stack framework for building React apps, offering many helpful capabilities. Supabase is an open-source alternative to Firebase, built around PostgreSQL. It provides Database, Auth, Logging, Storage, Edge Functions, and more.
 
-UI will be build with TailwindCSS and based on shadcn/ui blocks
+The UI is built with TailwindCSS and based on Shadcn/ui blocks.
+
+#### Architecture
+
+- **Frontend**: Built with TypeScript and Redwood.js, utilizing React Server Components for dynamic rendering.
+- **Backend**: Powered by Supabase for database management, authentication, logging, and storage.
+- **Analytics**: Integrated with Posthog to track user interactions and gather analytics data.
+- **CMS**: Uses PayloadCMS for content management, providing a flexible and user-friendly interface for managing content.
+- **Deployment**: Hosted on Vercel, ensuring seamless deployment and scaling capabilities.
+- **Styling**: TailwindCSS and Shadcn/UI are used for creating a modern, responsive, and visually appealing user interface.

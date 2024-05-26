@@ -11,9 +11,9 @@ export const calloutData = {
     "Digital Innovation",
     "Machine Learning",
     "Data Science",
-    "Scrum & Agile",
+    "Scrum & Kanban",
     "Software Architecture",
-    "Product Development",
+    "Product Strategy",
   ],
   tech: [
     "Python",
