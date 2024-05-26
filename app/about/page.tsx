@@ -33,7 +33,6 @@ export default async function AboutPage() {
         <CardContent className="flex flex-col justify-start gap-4 p-4">
           <Mdx code={aboutIntro.body.code} />
           <H4>I Work On</H4>
-          <S> (In my free time.)</S>
           <Muted>
             Check out my
             <Link
