@@ -41,8 +41,7 @@ export default function Home() {
               </li>
               <li>
                 I&apos;m a <strong>coding enthusiast </strong>always trying to
-                learn and leveling up my skills through side projects and online
-                courses.
+                learn and leveling up my skills.
               </li>
             </ul>
           </CardContent>
@@ -72,7 +71,7 @@ export default function Home() {
           </CardHeader>
           <CardContent className="grid grid-cols-3 justify-between">
             <div className="col-span-2 flex flex-wrap justify-start text-start">
-              <L>Learn More About Me</L>
+              <L>Learn About Me</L>
               <Muted>My skills, experiences and techstack.</Muted>
             </div>
             <div className="col-span-1 flex justify-end items-center">
