@@ -21,13 +21,13 @@ export const GreetingCard: React.FC<Props> = ({ className }) => {
       <CardHeader className="p-1 pr-4 justify-end">
         <SMuted className="font-mono text-end">hello</SMuted>
       </CardHeader>
-      <CardContent className="grid gap-2 grid-cols-3 justify-center lg:justify-start items-center p-4 pt-0">
+      <CardContent className="place-self-center grid gap-2 grid-cols-3 justify-center lg:justify-start items-center  p-4 pt-0">
         <div className="flex col-span-3 md:col-span-1 justify-center lg:justify-start p-2">
           <Image
             src="/img/avatar.png"
             alt="Lennard Zündorf profile picture"
-            width={200}
-            height={200}
+            width={250}
+            height={250}
             className="rounded-md border bg-muted transition-colors"
             priority
           />
