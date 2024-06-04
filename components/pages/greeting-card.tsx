@@ -21,20 +21,23 @@ export const GreetingCard: React.FC<Props> = ({ className }) => {
       <CardHeader className="p-1 pr-4 justify-end">
         <SMuted className="font-mono text-end">hello</SMuted>
       </CardHeader>
-      <CardContent className="grid gap-2 grid-cols-3 justify-center lg:justify-start items-center p-4 pt-0">
+      <CardContent className="place-self-center grid gap-2 grid-cols-3 justify-center lg:justify-start items-center  p-4 pt-0">
         <div className="flex col-span-3 md:col-span-1 justify-center lg:justify-start p-2">
           <Image
             src="/img/avatar.png"
             alt="Lennard Zündorf profile picture"
-            width={200}
-            height={200}
+            width={250}
+            height={250}
             className="rounded-md border bg-muted transition-colors"
             priority
           />
         </div>
         <div className="flex flex-col col-span-3 md:col-span-2 gap-4 justify-between text-center lg:text-start">
-          <H3 className="font-black font-title">{calloutData.introCallout}</H3>
-          <M className="leading-normal">{calloutData.secondCallout}</M>
+          <H3 className="font-black font-title">Hi! I&apos;m Lennard!</H3>
+          <M className="leading-normal">
+            I&apos;m a <strong>Product Manager</strong> with a neck for coding,
+            focused on turning product vision into reality.
+          </M>
           <div className="flex flex-wrap justify-center md:justify-start gap-4">
             <Link href={siteConfig.links.mail}>
               <Button className={cn("justify-center items-center")} size="icon">

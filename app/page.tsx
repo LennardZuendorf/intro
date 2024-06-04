@@ -30,18 +30,18 @@ export default function Home() {
           <CardContent>
             <ul className="my-6 ml-6 list-disc [&>li]:mt-2 text-sm xl:text-base 2xl:text-lg">
               <li>
-                I&rsquo;m a tech enthusiast bridging <strong>product</strong>,{" "}
-                <strong>dev</strong> and other related fields from a technical
-                background.
+                <strong>I enjoying working on software</strong> with real world
+                impact.
               </li>
               <li>
-                I work on software with a{" "}
-                <strong>strong focus on product</strong> and{" "}
-                <strong>executing product strategy</strong>.
+                My focus is technology based <strong>product management</strong>
+                , which combines my expertise in{" "}
+                <strong>product, engineering, innovation</strong> and{" "}
+                <strong>business</strong>.
               </li>
               <li>
-                Outside work, I explore <strong>programming projects</strong>,
-                enhancing my skills and learning new ones.
+                I&apos;m a <strong>coding enthusiast </strong>always trying to
+                learn and leveling up my skills.
               </li>
             </ul>
           </CardContent>
@@ -71,7 +71,7 @@ export default function Home() {
           </CardHeader>
           <CardContent className="grid grid-cols-3 justify-between">
             <div className="col-span-2 flex flex-wrap justify-start text-start">
-              <L>Learn More About Me</L>
+              <L>Learn About Me</L>
               <Muted>My skills, experiences and techstack.</Muted>
             </div>
             <div className="col-span-1 flex justify-end items-center">
