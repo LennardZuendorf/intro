@@ -1,4 +1,4 @@
 {
-    "buildCommand": "pnpm ci",
+    "buildCommand": "pnpm run ci",
     "installCommand": "pnpm i"
   }
