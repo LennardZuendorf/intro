@@ -2,9 +2,8 @@
 import * as React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { allProjects } from "contentlayer/generated";
 
-import { cn, getProjects } from "@/lib/utils";
+import { cn } from "@/lib/utils";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -22,13 +21,6 @@ interface FooterProps {
 
 export const Nav: React.FC<FooterProps> = ({ className = "" }) => {
   const pathname = usePathname();
-
-  const selectedProjects = [
-    ...getProjects().focusProjects,
-    ...getProjects().otherProjects,
-  ]
-    .filter((project) => project.active)
-    .slice(0, 3);
 
   // @ts-ignore
   return (
@@ -71,19 +63,6 @@ export const Nav: React.FC<FooterProps> = ({ className = "" }) => {
                     </a>
                   </NavigationMenuLink>
                 </li>
-                {selectedProjects.map((project) => (
-                  <ListItem
-                    key={project.title}
-                    title={project.title}
-                    href={
-                      pathname.includes("projects/")
-                        ? project.slug
-                        : project.path
-                    }
-                  >
-                    <S>{project.description.substring(0, 50).concat("...")}</S>
-                  </ListItem>
-                ))}
               </ul>
             </NavigationMenuContent>
           </NavigationMenuItem>
