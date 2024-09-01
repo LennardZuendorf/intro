@@ -1,14 +1,16 @@
 import React from "react";
 import "./globals.css";
-import { Provider } from "@/components/provider-theme";
+import { ThemeProvider } from "@/components/provider-theme";
 import { Footer } from "@/components/footer";
 import { Nav } from "@/components/nav";
+import { Dock } from "@/components/dock";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/react";
 
 import { lato, spartan, roboto_mono } from "./fonts";
 import { cn } from "@/lib/utils";
 import { siteMetadata } from "@/data/site";
+import { TooltipProvider } from "@/components/ui/tooltip";
 
 export default function RootLayout({
   children,
@@ -52,22 +54,24 @@ export default function RootLayout({
             roboto_mono.variable,
           )}
         >
-          <Provider
+          <ThemeProvider
             attribute="class"
             defaultTheme="system"
             enableSystem
             disableTransitionOnChange
           >
-            <Nav />
-            <main
-              className={cn(
-                "container mx-auto grow place-content-center w-full md:w-9/12 2xl:min-h-[95vh] xl:min-h-[75vh]",
-              )}
-            >
-              {children}
-            </main>
+            <TooltipProvider delayDuration={0}>
+              <main
+                className={cn(
+                  "container mx-auto grow place-content-center w-full md:w-9/12 2xl:min-h-[95vh] xl:min-h-[75vh] h-full",
+                )}
+              >
+                {children}
+              </main>
+              <Dock />
+            </TooltipProvider>
             <Footer />
-          </Provider>
+          </ThemeProvider>
           <SpeedInsights />
           <Analytics />
         </body>
