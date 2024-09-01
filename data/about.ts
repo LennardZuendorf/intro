@@ -32,9 +32,9 @@ export const calloutData = {
     text: "a time based ToDo App inspired by GTD and Pomodoro.",
   },
   focusJob: {
-    desc: "Technical PM",
+    desc: "Product Manager",
     link: "/about#work-experiences",
-    text: "a technical product manager at CHECK24 Flug in Berlin.",
+    text: "a product manager at CHECK24 Flug in Berlin, where I focus on payment topics.",
     category: "Product Management",
   },
   news: "",
@@ -66,7 +66,7 @@ export const experienceData: Experience[] = [
     desc: "CHECK24 Vergleichsportal Flug is the digital flight comparison and online travel agency for flights of the CHECK24 Group. Check24 Flug is one of the leading online travel agencies for flights in the DACH region.",
     roles: [
       {
-        title: "Professional Product Manager",
+        title: "Professional Product Manager Payment | Backend",
         range: "March 2024 - ...",
         text: [
           "Independently conceiving, guiding implementation, testing, and managing the launch of product features for payments.",
@@ -74,7 +74,8 @@ export const experienceData: Experience[] = [
           "Agile sprint management and support in regular Scrum ceremonies in close collaboration with the product management and IT teams.",
         ],
         skills: [
-          "Technical Product Management",
+          "Product Management",
+          "Product Ownership",
           "Agile Development",
           "Scrum",
           "Backend Development",
@@ -82,6 +83,7 @@ export const experienceData: Experience[] = [
           "PHP",
           "MySQL",
           "Jira",
+          "Grafana",
         ],
       },
       {
@@ -93,10 +95,13 @@ export const experienceData: Experience[] = [
           "Release management, testing, and quality assurance of weekly product updates.",
         ],
         skills: [
-          "Technical Product Management",
+          "Product Management",
+          "Product Ownership",
           "Agile Development",
           "Scrum",
           "Backend Development",
+          "Payment Systems",
+          "MySQL",
           "Jira",
         ],
       },
