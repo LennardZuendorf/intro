@@ -41,7 +41,13 @@ export default function Home() {
               </li>
               <li>
                 I&apos;m a <strong>coding enthusiast </strong>always trying to
-                learn and leveling up my skills.
+                learn and leveling up my skills in product, coding and software
+                at large.
+              </li>
+              <li>
+                My free time I spent with{" "}
+                <strong>music and various podcasts</strong>, working out or
+                working on my own projects.
               </li>
             </ul>
           </CardContent>
