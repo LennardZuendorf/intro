@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node_version: [ 18.x, 20.x, 22.x ]
+        node_version: [18.x, 20.x, 22.x]
 
     name: Node ${{ matrix.node_version }} Build
     steps:

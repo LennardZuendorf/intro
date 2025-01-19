@@ -1,6 +1,6 @@
-import * as React from 'react';
-import { titleCase } from 'title-case';
 import { cn } from '@/lib/utils';
+import type * as React from 'react';
+import { titleCase } from 'title-case';
 
 function formatContent(children: React.ReactNode): React.ReactNode {
   return typeof children === 'string' ? titleCase(children) : children;
