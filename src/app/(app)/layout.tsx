@@ -5,6 +5,8 @@ import { Providers } from '@/components/providers';
 import { siteMetadata } from '@/data/site';
 import { cn } from '@/lib/utils';
 import Script from 'next/script';
+import { Nav } from '@/components/navbar';
+import { Toaster } from '@/components/ui/toaster';
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -20,12 +22,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </head>
         <body className={cn('relative min-h-screen bg-background font-sans antialiased')}>
           <Providers attribute='class' defaultTheme='system' enableSystem disableTransitionOnChange>
+            <Nav />
             <div
               className={cn(
-                'relative container mx-auto grow place-content-center w-full md:w-9/12 2xl:min-h-[95vh] xl:min-h-[75vh] h-full'
+                'container mx-auto grow place-content-center w-full md:w-9/12 2xl:min-h-[95vh] xl:min-h-[75vh]'
               )}
             >
               {children}
+              <Toaster />
             </div>
             <Footer className='absolute inset-x-0 bottom-0' />
           </Providers>

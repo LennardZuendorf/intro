@@ -1,5 +1,3 @@
-import { RollerCoaster } from 'lucide-react';
-
 export type CalloutData = typeof calloutData;
 
 export const calloutData = {
