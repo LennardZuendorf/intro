@@ -1,5 +1,5 @@
 import type { Config } from 'tailwindcss';
-import { fontFamily } from 'tailwindcss/defaultTheme';
+import typographyPlugin from '@tailwindcss/typography';
 
 const config: Config = {
   content: ['./src/components/**/*.{js,ts,jsx,tsx,mdx}', './src/app/**/*.{js,ts,jsx,tsx,mdx}'],
@@ -30,6 +30,6 @@ const config: Config = {
       }
     }
   },
-  plugins: [require('@tailwindcss/typography')]
+  plugins: [typographyPlugin]
 };
 export default config;
