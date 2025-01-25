@@ -15,7 +15,8 @@
     "start": "cross-env NODE_OPTIONS=--no-deprecation next start",
     "format": "prettier --write .",
     "lint-staged": "lint-staged",
-    "prepare": "husky"
+    "prepare": "husky",
+    "ci": "payload migrate && pnpm build"
   },
   "dependencies": {
     "@next/eslint-plugin-next": "^15.1.6",
