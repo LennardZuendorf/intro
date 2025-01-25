@@ -11,6 +11,12 @@ const compat = new FlatCompat({
 });
 
 /** @type {import('eslint').Linter.Config[]} */
-const configs = [...compat.extends('next/core-web-vitals'), ...compat.extends('next/typescript')];
+const configs = [
+  ...compat.extends('next/core-web-vitals'),
+  ...compat.extends('next/typescript'),
+  {
+    ignores: ['src/migrations/**'], // Add this line to ignore the folder
+  },
+];
 
 export default configs;
