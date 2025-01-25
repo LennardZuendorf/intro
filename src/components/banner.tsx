@@ -13,7 +13,7 @@ export function Banner() {
 
   // Check localStorage on initial render
   useEffect(() => {
-    const acknowledgment = localStorage.getItem('zuendorf.me-trackingCheck');
+    const acknowledgment = localStorage.getItem('trackingCheck');
     if (acknowledgment != 'true') {
       setIsAcknowledged(false);
     }
@@ -21,7 +21,7 @@ export function Banner() {
 
   // Handle button click
   const handleButtonClick = () => {
-    localStorage.setItem('zuendorf.me-trackingCheck', JSON.stringify(true));
+    localStorage.setItem('trackingCheck', JSON.stringify(true));
     setIsAcknowledged(true); // Hide the banner
   };
 
