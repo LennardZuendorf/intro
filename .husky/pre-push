@@ -1,3 +1,6 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
 # Step 1: Run the build process
 echo "Running build process..."
 pnpm run build
@@ -8,11 +11,20 @@ fi
 
 # Step 2: Create the database migration
 echo "Creating a new database migration..."
-pnpm run payload:migrate:create
+pnpm run payload:migrate:create > migration_output.log
 if [ $? -ne 0 ]; then
   echo "Migration creation failed. Aborting push."
   exit 1
 fi
+
+# Check if a migration file was created by inspecting the output
+if grep -q "No schema changes detected" migration_output.log; then
+  echo "No new migration detected. Skipping commit and push."
+  rm migration_output.log
+  exit 0
+fi
+
+rm migration_output.log
 
 # Step 3: Add the migration files to VCS
 echo "Adding migration files to version control..."
