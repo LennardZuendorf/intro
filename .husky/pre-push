@@ -1,1 +1,31 @@
+# Step 1: Run the build process
+echo "Running build process..."
 pnpm run build
+if [ $? -ne 0 ]; then
+  echo "Build failed. Aborting push."
+  exit 1
+fi
+
+# Step 2: Create the database migration
+echo "Creating a new database migration..."
+pnpm run payload:migrate:create
+if [ $? -ne 0 ]; then
+  echo "Migration creation failed. Aborting push."
+  exit 1
+fi
+
+# Step 3: Add the migration files to VCS
+echo "Adding migration files to version control..."
+git add src/migrations/
+if [ $? -ne 0 ]; then
+  echo "Failed to stage migration files. Aborting push."
+  exit 1
+fi
+
+# Step 4: Commit the migration
+echo "Committing migration files..."
+git commit -m "chore: add migration for latest build"
+if [ $? -ne 0 ]; then
+  echo "Failed to commit migration files. Aborting push."
+  exit 1
+fi
