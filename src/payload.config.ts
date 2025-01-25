@@ -9,6 +9,7 @@ import sharp from 'sharp';
 import { Users } from './collections/Users';
 import { Media } from './collections/Media';
 import { s3Storage } from '@payloadcms/storage-s3';
+import { env } from '@/env';
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
@@ -22,13 +23,13 @@ export default buildConfig({
   },
   collections: [Users, Media],
   editor: lexicalEditor(),
-  secret: process.env.PAYLOAD_SECRET || '',
+  secret: env.PAYLOAD_SECRET || '',
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts')
   },
   db: postgresAdapter({
     pool: {
-      connectionString: process.env.POSTGRES_URL || ''
+      connectionString: env.POSTGRES_URL || ''
     }
   }),
   sharp,
@@ -40,18 +41,15 @@ export default buildConfig({
           prefix: 'media'
         }
       },
-      // @ts-expect-error this is never null
-      bucket: process.env.S3_STORAGE_BUCKET,
+      bucket: env.S3_STORAGE_BUCKET,
       config: {
         forcePathStyle: true,
         credentials: {
-          // @ts-expect-error this is never null
-          accessKeyId: process.env.S3_ACCESS_KEY,
-          // @ts-expect-error this is never null
-          secretAccessKey: process.env.S3_SECRET_KEY
+          accessKeyId: env.S3_ACCESS_KEY,
+          secretAccessKey: env.S3_SECRET_KEY
         },
-        region: process.env.S3_REGION,
-        endpoint: process.env.S3_STORAGE_URL
+        region: env.S3_REGION,
+        endpoint: env.S3_STORAGE_URL
       }
     })
   ]

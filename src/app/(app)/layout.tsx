@@ -8,6 +8,7 @@ import Script from 'next/script';
 import { Nav } from '@/components/navbar';
 import { Toaster } from '@/components/ui/toaster';
 import { Inter } from 'next/font/google';
+import { env } from '@/env';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -21,8 +22,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <head>
           <title>{siteMetadata.title}</title>
           <Script
-            src={process.env.NEXT_PUBLIC_UMAMI_SCRIPT_SRC}
-            data-website-id={process.env.NEXT_PUBLIC_UMAMI_WEBSITE_ID}
+            src={env.NEXT_PUBLIC_UMAMI_SCRIPT_SRC}
+            data-website-id={env.NEXT_PUBLIC_UMAMI_WEBSITE_ID}
             strategy='lazyOnload'
           />
         </head>
