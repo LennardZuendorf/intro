@@ -29,3 +29,11 @@ if [ $? -ne 0 ]; then
   echo "Failed to commit migration files. Aborting push."
   exit 1
 fi
+
+# Step 5: Push the changes
+echo "Pushing changes..."
+git push
+if [ $? -ne 0 ]; then
+  echo "Push failed. Aborting."
+  exit 1
+fi
