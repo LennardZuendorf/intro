@@ -18,10 +18,10 @@ import { S } from '@/components/ui/typography'; // Import clsx for combining cla
 
 interface ThemeSwitcherProps {
   className?: string; // Optional className for additional styling
-  buttonVariant?: 'default' | 'outline' | 'ghost' | 'link'; // Button variant
+  buttonVariant?: 'default' | 'reverse' | 'noShadow' | 'accent'; // Button variant
 }
 
-const ThemeSwitcher: React.FC<ThemeSwitcherProps> = ({ className, buttonVariant = 'outline' }) => {
+const ThemeSwitcher: React.FC<ThemeSwitcherProps> = ({ className, buttonVariant = 'accent' }) => {
   const [mounted, setMounted] = useState(false);
   const { theme, setTheme } = useTheme();
 
@@ -55,7 +55,11 @@ const ThemeSwitcher: React.FC<ThemeSwitcherProps> = ({ className, buttonVariant 
       <DropdownMenuContent className='w-content' align='center'>
         <DropdownMenuLabel className='text-center'>Theme</DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuRadioGroup value={theme} onValueChange={(e) => setTheme(e)}>
+        <DropdownMenuRadioGroup
+          value={theme}
+          onValueChange={(e) => setTheme(e)}
+          className='space-y-0.5'
+        >
           <DropdownMenuRadioItem className='flex gap-2' value='light'>
             <Sun size={ICON_SIZE} className='text-muted-foreground' /> <S>Light</S>
           </DropdownMenuRadioItem>

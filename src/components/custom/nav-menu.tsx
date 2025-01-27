@@ -31,7 +31,7 @@ export const MainNav: React.FC<Props> = ({ navItems, className }) => {
 
   return (
     <div className={cn('flex flex-col items-center pt-4 pb-4 gap-1', className)}>
-      <NavigationMenu className='rounded-md border'>
+      <NavigationMenu>
         <NavigationMenuList>
           {navItems.map((item) => (
             <NavigationMenuItem key={item.name}>
@@ -49,7 +49,7 @@ export const MainNav: React.FC<Props> = ({ navItems, className }) => {
             </NavigationMenuItem>
           ))}
           <NavigationMenuItem key='theme-switcher'>
-            <ThemeSwitcher buttonVariant='ghost' />
+            <ThemeSwitcher buttonVariant='noShadow' />
           </NavigationMenuItem>
         </NavigationMenuList>
       </NavigationMenu>
