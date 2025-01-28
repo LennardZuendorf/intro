@@ -21,7 +21,7 @@ interface ThemeSwitcherProps {
   buttonVariant?: 'default' | 'reverse' | 'noShadow' | 'accent'; // Button variant
 }
 
-const ThemeSwitcher: React.FC<ThemeSwitcherProps> = ({ className, buttonVariant = 'accent' }) => {
+const ThemeSwitcher: React.FC<ThemeSwitcherProps> = ({ className, buttonVariant = 'default' }) => {
   const [mounted, setMounted] = useState(false);
   const { theme, setTheme } = useTheme();
 

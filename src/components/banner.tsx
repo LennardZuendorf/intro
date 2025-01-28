@@ -32,7 +32,7 @@ export function Banner() {
 
   return (
     <Alert
-      className='bg-background  z-[5000] fixed inset-x-0 bottom-5 2xl:w-6/12 lg:8/12 10/12 mx-auto mt-4'
+      className='bg-background z-[5000] fixed inset-x-0 bottom-5 2xl:w-6/12 lg:8/12 10/12 mx-auto mt-4'
       variant='destructive'
     >
       <Info className='h-4 w-4' />
@@ -64,7 +64,7 @@ export function Banner() {
           </Button>
           <Link
             className={buttonVariants({
-              variant: 'outline',
+              variant: 'accent',
               size: 'sm',
               className: 'sm:text-wrap'
             })}
