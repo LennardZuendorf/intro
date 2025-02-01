@@ -26,8 +26,9 @@ const config: Config = {
         secondaryBlack: '#212121'
       },
       borderRadius: {
-        base: '17px',
-        md: '17px'
+        base: '12px',
+        md: '16px',
+        lg: '24px'
       },
       boxShadow: {
         shadow: 'var(--shadow)'
