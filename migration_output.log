@@ -1,0 +1,24 @@
+
+> intro-zuendorf.me@1.3.0 payload:migrate:create /Users/lzuendorf/Development/intro
+> cross-env NODE_OPTIONS=--no-deprecation payload migrate:create
+
+[01:59:00] [31mERROR[39m: [36mError: cannot connect to Postgres. Details: connect ECONNREFUSED 127.0.0.1:54322[39m
+    err: {
+      "type": "Error",
+      "message": "connect ECONNREFUSED 127.0.0.1:54322",
+      "stack":
+          Error: connect ECONNREFUSED 127.0.0.1:54322
+              at /Users/lzuendorf/Development/intro/node_modules/.pnpm/pg-pool@3.7.0_pg@8.11.3/node_modules/pg-pool/index.js:45:11
+              at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+              at async connectWithReconnect (/Users/lzuendorf/Development/intro/node_modules/.pnpm/@payloadcms+db-postgres@3.19.0_@neondatabase+serverless@0.9.5_@types+react@19.0.1_@vercel+pos_ndpb324lyfcac7vqc6ab5fz7ie/node_modules/@payloadcms/db-postgres/src/connect.ts:22:14)
+              at async Object.connect (/Users/lzuendorf/Development/intro/node_modules/.pnpm/@payloadcms+db-postgres@3.19.0_@neondatabase+serverless@0.9.5_@types+react@19.0.1_@vercel+pos_ndpb324lyfcac7vqc6ab5fz7ie/node_modules/@payloadcms/db-postgres/src/connect.ts:65:7)
+              at async BasePayload.init (/Users/lzuendorf/Development/intro/node_modules/.pnpm/payload@3.19.0_bufferutil@4.0.8_graphql@16.9.0_monaco-editor@0.52.0_react-dom@19.0.0_react@19_ymxd7owsffznvkwnejww5wellu/node_modules/payload/src/index.ts:630:7)
+              at async migrate (/Users/lzuendorf/Development/intro/node_modules/.pnpm/payload@3.19.0_bufferutil@4.0.8_graphql@16.9.0_monaco-editor@0.52.0_react-dom@19.0.0_react@19_ymxd7owsffznvkwnejww5wellu/node_modules/payload/src/bin/migrate.ts:65:3)
+              at async start (file:///Users/lzuendorf/Development/intro/node_modules/.pnpm/payload@3.19.0_bufferutil@4.0.8_graphql@16.9.0_monaco-editor@0.52.0_react-dom@19.0.0_react@19_ymxd7owsffznvkwnejww5wellu/node_modules/payload/bin.js:30:7)
+      "errno": -61,
+      "code": "ECONNREFUSED",
+      "syscall": "connect",
+      "address": "127.0.0.1",
+      "port": 54322
+    }
+ ELIFECYCLE  Command failed with exit code 1.

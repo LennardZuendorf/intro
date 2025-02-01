@@ -4,29 +4,39 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { HomeIcon, MessageCircleIcon, UserIcon } from 'lucide-react';
-import { MainNav } from '@/components/custom/nav-menu';
+import {
+  NavigationMenu,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  navigationMenuTriggerStyle
+} from '@/components/ui/navigation-menu';
+import { M, Muted } from '@/components/ui/typography';
+import Link from 'next/link';
+import { ThemeSelect } from '@/components/shared/theme-select';
+import { usePathname } from 'next/navigation';
+
+const navItems = [
+  {
+    name: 'Home',
+    link: '/',
+    icon: <HomeIcon className='h-4 w-4 text-neutral-500 dark:text-white' />
+  },
+  {
+    name: 'About',
+    link: '/about',
+    icon: <UserIcon className='h-4 w-4 text-neutral-500 dark:text-white' />
+  },
+  {
+    name: 'Contact',
+    link: '/contact',
+    icon: <MessageCircleIcon className='h-4 w-4 text-neutral-500 dark:text-white' />
+  }
+];
 
 export const Nav = ({ className }: { className?: string }) => {
-  const navItems = [
-    {
-      name: 'Home',
-      link: '/',
-      icon: <HomeIcon className='h-4 w-4 text-neutral-500 dark:text-white' />
-    },
-    {
-      name: 'About',
-      link: '/about',
-      icon: <UserIcon className='h-4 w-4 text-neutral-500 dark:text-white' />
-    },
-    {
-      name: 'Contact',
-      link: '/contact',
-      icon: <MessageCircleIcon className='h-4 w-4 text-neutral-500 dark:text-white' />
-    }
-  ];
-
+  const pathname = usePathname();
   const { scrollYProgress } = useScroll();
-
   const [visible, setVisible] = useState(false);
 
   useMotionValueEvent(scrollYProgress, 'change', (current) => {
@@ -57,8 +67,54 @@ export const Nav = ({ className }: { className?: string }) => {
           className
         )}
       >
-        <MainNav navItems={navItems} />
+        <div className={cn('flex flex-col items-center pt-4 pb-4 gap-1', className)}>
+          <NavigationMenu>
+            <NavigationMenuList>
+              {navItems.map((item) => (
+                <NavigationMenuItem key={item.name}>
+                  <Link href={item.link} legacyBehavior passHref>
+                    <NavigationMenuLink
+                      className={cn(
+                        navigationMenuTriggerStyle(),
+                        pathname === '/about' ? 'font-bold' : 'font-medium'
+                      )}
+                      active={pathname === '/about'}
+                    >
+                      {item.name}
+                    </NavigationMenuLink>
+                  </Link>
+                </NavigationMenuItem>
+              ))}
+              <NavigationMenuItem key='theme-switcher'>
+                <ThemeSelect buttonVariant='noShadow' />
+              </NavigationMenuItem>
+            </NavigationMenuList>
+          </NavigationMenu>
+        </div>
       </motion.div>
     </AnimatePresence>
   );
 };
+
+const ListItem = React.forwardRef<React.ElementRef<'a'>, React.ComponentPropsWithoutRef<'a'>>(
+  ({ className, title, children, ...props }, ref) => {
+    return (
+      <li>
+        <NavigationMenuLink asChild>
+          <a
+            ref={ref}
+            className={cn(
+              'block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground',
+              className
+            )}
+            {...props}
+          >
+            <M className='text-sm font-semibold leading-none'>{title}</M>
+            <Muted>{children}</Muted>
+          </a>
+        </NavigationMenuLink>
+      </li>
+    );
+  }
+);
+ListItem.displayName = 'ListItem';
