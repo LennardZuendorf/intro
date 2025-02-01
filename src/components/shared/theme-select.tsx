@@ -49,7 +49,7 @@ export const ThemeSelect: React.FC<ThemeSwitcherProps> = ({
   useEffect(() => {
     setMounted(true);
     setValue(theme === undefined ? 'system' : theme);
-  }, []);
+  }, [theme]);
 
   if (!mounted) {
     return null;

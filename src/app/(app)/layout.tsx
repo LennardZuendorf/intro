@@ -27,7 +27,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             strategy='lazyOnload'
           />
         </head>
-        <body className={cn('relative min-h-screen bg-background font-sans antialiased')}>
+        <body className={cn('relative min-h-screen bg-bg font-sans antialiased')}>
           <Providers attribute='class' defaultTheme='system' enableSystem disableTransitionOnChange>
             <Nav />
             <div

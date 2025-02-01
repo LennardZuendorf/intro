@@ -13,7 +13,7 @@ import {
 import { Muted, M } from '@/components/ui/typography';
 import { JSX } from 'react';
 import { cn } from '@/lib/utils';
-import { ThemeSwitcher } from '@/components/shared/theme-switcher';
+import { ThemeSelect } from '@/components/shared/theme-select';
 
 export type NavItem = {
   name: string;
@@ -49,7 +49,7 @@ export const MainNav: React.FC<Props> = ({ navItems, className }) => {
             </NavigationMenuItem>
           ))}
           <NavigationMenuItem key='theme-switcher'>
-            <ThemeSwitcher buttonVariant='noShadow' />
+            <ThemeSelect buttonVariant='noShadow' />
           </NavigationMenuItem>
         </NavigationMenuList>
       </NavigationMenu>
