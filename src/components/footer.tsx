@@ -3,11 +3,13 @@
 import { cn } from '@/lib/utils';
 import type * as React from 'react';
 
-import { ThemeSwitcher } from '@/components/shared/theme-switcher';
+import { ThemeSelect } from '@/components/shared/theme-select';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { siteConfig } from '@/data/site';
 import Link from 'next/link';
+import { FaGithub, FaLinkedin } from 'react-icons/fa6';
+import { MailboxIcon } from 'lucide-react';
 
 interface FooterProps {
   className?: string;
@@ -19,23 +21,35 @@ export const Footer: React.FC<FooterProps> = ({ className = '' }) => {
       <div className='container flex flex-col sm:flex-row items-center justify-between align-middle'>
         <div className='flex items-start space-x-2'>
           <Link href={siteConfig.links.mail}>
-            <Button variant='link' className={cn('justify-center items-center')}>
-              <h4>Mail</h4>
+            <Button
+              variant='link'
+              className='justify-center items-center opacity-60 hover:opacity-100'
+              size='icon'
+            >
+              <MailboxIcon size='3vh' />
             </Button>
           </Link>
           <Link href={siteConfig.links.linkedin}>
-            <Button variant='link' className='justify-center items-center'>
-              <h4>LinkedIn</h4>
+            <Button
+              variant='link'
+              className='justify-center items-center opacity-60 hover:opacity-100'
+              size='icon'
+            >
+              <FaLinkedin size='2vh' />
             </Button>
           </Link>
           <Link href={siteConfig.links.github}>
-            <Button variant='link' className='justify-center items-center'>
-              <h4>Github</h4>
+            <Button
+              variant='link'
+              className='justify-center items-center opacity-60 hover:opacity-100'
+              size='icon'
+            >
+              <FaGithub size='2vh' />
             </Button>
           </Link>
         </div>
         <div className='flex items-end gap-x-4'>
-          <ThemeSwitcher />
+          <ThemeSelect />
         </div>
       </div>
       <Separator className='my-4' />
