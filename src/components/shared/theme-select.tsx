@@ -80,11 +80,11 @@ export const ThemeSelect: React.FC<ThemeSwitcherProps> = ({
                   key={themeOption.value}
                   value={themeOption.value}
                   onSelect={(currentValue) => {
-                    setValue(currentValue === value ? '' : currentValue);
+                    setValue(currentValue === value ? 'system' : currentValue);
                     setOpen(false);
                     setTheme(currentValue);
                   }}
-                  className={value == themeOption.value ? 'underline' : ''}
+                  className={value == themeOption.value ? 'opacity-60' : ''}
                 >
                   <div className='flex flex-row gap-2 items-center justify-start w-full'>
                     {themeOption.icon}

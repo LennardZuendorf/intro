@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-motion';
 import { cn } from '@/lib/utils';
-import { HomeIcon, MessageCircleIcon, UserIcon } from 'lucide-react';
+import { FolderArchiveIcon, HomeIcon, UserIcon } from 'lucide-react';
 import {
   NavigationMenu,
   NavigationMenuItem,
@@ -19,18 +19,18 @@ import { usePathname } from 'next/navigation';
 const navItems = [
   {
     name: 'Home',
-    link: '/',
+    link: '/#',
     icon: <HomeIcon className='h-4 w-4 text-neutral-500 dark:text-white' />
   },
   {
-    name: 'About',
-    link: '/about',
-    icon: <UserIcon className='h-4 w-4 text-neutral-500 dark:text-white' />
+    name: 'Projects',
+    link: '/#projects',
+    icon: <FolderArchiveIcon className='h-4 w-4 text-neutral-500 dark:text-white' />
   },
   {
-    name: 'Contact',
-    link: '/contact',
-    icon: <MessageCircleIcon className='h-4 w-4 text-neutral-500 dark:text-white' />
+    name: 'About',
+    link: '/#about',
+    icon: <UserIcon className='h-4 w-4 text-neutral-500 dark:text-white' />
   }
 ];
 

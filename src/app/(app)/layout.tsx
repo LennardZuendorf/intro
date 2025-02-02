@@ -30,15 +30,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <body className={cn('relative min-h-screen bg-bg font-sans antialiased')}>
           <Providers attribute='class' defaultTheme='system' enableSystem disableTransitionOnChange>
             <Nav />
-            <div
-              className={cn(
-                'container mx-auto grow place-content-center w-full md:w-9/12 2xl:min-h-[95vh] xl:min-h-[75vh]'
-              )}
-            >
+            <div className={cn('container mx-auto grow place-content-center md:w-9/12 w-11/12')}>
               {children}
               <Toaster />
             </div>
-            <Footer className='absolute inset-x-0 bottom-0' />
+            <Footer />
           </Providers>
         </body>
       </html>

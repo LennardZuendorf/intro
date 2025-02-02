@@ -5,13 +5,13 @@ import { FaArrowRight, FaGithub, FaCodepen, FaLinkedin, FaDribbble } from 'react
 import { Button } from '@/components/ui/button';
 import Avatar from '@/components/custom/avatar';
 
-const Hero = () => {
+export const ProjectGrid = () => {
   return (
-    <section className='mx-auto flex flex-col gap-10 md:w-[800px]' id='main-hero'>
+    <section className='mx-auto flex flex-col h-screen' id='projects'>
       <div className='flex flex-col justify-center gap-10 md:flex-row md:justify-between'>
         <div className='order-last md:order-1 md:w-[500px]'>
           <div className='mb-6 flex flex-col gap-y-2 text-center md:text-start'>
-            <h1 className='text-4xl font-bold'>Ralph Ortiz</h1>
+            <h1 className='text-4xl font-bold'>Project Secto Ortiz</h1>
             <h2 className='text-lg font-medium'>Full Stack Engineer</h2>
             <p>
               I am passionate about integrating functionality and design in applications to create
@@ -84,5 +84,3 @@ const Hero = () => {
     </section>
   );
 };
-
-export default Hero;
