@@ -10,6 +10,7 @@ export const env = createEnv({
     S3_STORAGE_URL: z.string().url(),
     S3_STORAGE_BUCKET: z.string().min(1, 'S3_STORAGE_BUCKET is required'),
     PAYLOAD_SECRET: z.string().min(1, 'PAYLOAD_SECRET is required'),
+    RESEND_API_KEY: z.string().min(1, 'RESEND API KEY is required'),
     NODE_ENV: z.enum(['development', 'test', 'production']).default('development')
   },
   client: {
@@ -26,7 +27,8 @@ export const env = createEnv({
     PAYLOAD_SECRET: process.env.PAYLOAD_SECRET,
     NODE_ENV: process.env.NODE_ENV,
     NEXT_PUBLIC_UMAMI_SCRIPT_SRC: process.env.NEXT_PUBLIC_UMAMI_SCRIPT_SRC,
-    NEXT_PUBLIC_UMAMI_WEBSITE_ID: process.env.NEXT_PUBLIC_UMAMI_WEBSITE_ID
+    NEXT_PUBLIC_UMAMI_WEBSITE_ID: process.env.NEXT_PUBLIC_UMAMI_WEBSITE_ID,
+    RESEND_API_KEY: process.env.RESEND_API_KEY
   },
   skipValidation: !!process.env.SKIP_ENV_VALIDATION,
   emptyStringAsUndefined: true
