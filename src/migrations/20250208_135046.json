@@ -1,5 +1,5 @@
 {
-  "id": "8c870961-dfe8-47da-a946-6890f3975707",
+  "id": "0bf50e8d-0fec-4b18-b9be-06f56a91ccd9",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -272,6 +272,120 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
+    "public.tag": {
+      "name": "tag",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "name": {
+          "name": "name",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "type": {
+          "name": "type",
+          "type": "enum_tag_type",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "link": {
+          "name": "link",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "icon_id": {
+          "name": "icon_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "tag_icon_idx": {
+          "name": "tag_icon_idx",
+          "columns": [
+            {
+              "expression": "icon_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "tag_updated_at_idx": {
+          "name": "tag_updated_at_idx",
+          "columns": [
+            {
+              "expression": "updated_at",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "tag_created_at_idx": {
+          "name": "tag_created_at_idx",
+          "columns": [
+            {
+              "expression": "created_at",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "tag_icon_id_media_id_fk": {
+          "name": "tag_icon_id_media_id_fk",
+          "tableFrom": "tag",
+          "tableTo": "media",
+          "columnsFrom": ["icon_id"],
+          "columnsTo": ["id"],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
     "public.experiences": {
       "name": "experiences",
       "schema": "",
@@ -481,8 +595,8 @@
           "primaryKey": false,
           "notNull": true
         },
-        "skills_id": {
-          "name": "skills_id",
+        "tag_id": {
+          "name": "tag_id",
           "type": "integer",
           "primaryKey": false,
           "notNull": false
@@ -534,11 +648,11 @@
           "method": "btree",
           "with": {}
         },
-        "experiences_rels_skills_id_idx": {
-          "name": "experiences_rels_skills_id_idx",
+        "experiences_rels_tag_id_idx": {
+          "name": "experiences_rels_tag_id_idx",
           "columns": [
             {
-              "expression": "skills_id",
+              "expression": "tag_id",
               "isExpression": false,
               "asc": true,
               "nulls": "last"
@@ -560,89 +674,11 @@
           "onDelete": "cascade",
           "onUpdate": "no action"
         },
-        "experiences_rels_skills_fk": {
-          "name": "experiences_rels_skills_fk",
+        "experiences_rels_tag_fk": {
+          "name": "experiences_rels_tag_fk",
           "tableFrom": "experiences_rels",
-          "tableTo": "skills",
-          "columnsFrom": ["skills_id"],
-          "columnsTo": ["id"],
-          "onDelete": "cascade",
-          "onUpdate": "no action"
-        }
-      },
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {},
-      "policies": {},
-      "checkConstraints": {},
-      "isRLSEnabled": false
-    },
-    "public.projects_tags": {
-      "name": "projects_tags",
-      "schema": "",
-      "columns": {
-        "_order": {
-          "name": "_order",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "_parent_id": {
-          "name": "_parent_id",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "id": {
-          "name": "id",
-          "type": "varchar",
-          "primaryKey": true,
-          "notNull": true
-        },
-        "tag": {
-          "name": "tag",
-          "type": "varchar",
-          "primaryKey": false,
-          "notNull": false
-        }
-      },
-      "indexes": {
-        "projects_tags_order_idx": {
-          "name": "projects_tags_order_idx",
-          "columns": [
-            {
-              "expression": "_order",
-              "isExpression": false,
-              "asc": true,
-              "nulls": "last"
-            }
-          ],
-          "isUnique": false,
-          "concurrently": false,
-          "method": "btree",
-          "with": {}
-        },
-        "projects_tags_parent_id_idx": {
-          "name": "projects_tags_parent_id_idx",
-          "columns": [
-            {
-              "expression": "_parent_id",
-              "isExpression": false,
-              "asc": true,
-              "nulls": "last"
-            }
-          ],
-          "isUnique": false,
-          "concurrently": false,
-          "method": "btree",
-          "with": {}
-        }
-      },
-      "foreignKeys": {
-        "projects_tags_parent_id_fk": {
-          "name": "projects_tags_parent_id_fk",
-          "tableFrom": "projects_tags",
-          "tableTo": "projects",
-          "columnsFrom": ["_parent_id"],
+          "tableTo": "tag",
+          "columnsFrom": ["tag_id"],
           "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
@@ -670,9 +706,21 @@
           "primaryKey": false,
           "notNull": true
         },
-        "description": {
-          "name": "description",
-          "type": "varchar",
+        "date": {
+          "name": "date",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "cover_image_id": {
+          "name": "cover_image_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "project_text": {
+          "name": "project_text",
+          "type": "jsonb",
           "primaryKey": false,
           "notNull": true
         },
@@ -685,18 +733,6 @@
         "repo_url": {
           "name": "repo_url",
           "type": "varchar",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "cover_image_id": {
-          "name": "cover_image_id",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "date": {
-          "name": "date",
-          "type": "timestamp(3) with time zone",
           "primaryKey": false,
           "notNull": false
         },
@@ -876,8 +912,8 @@
           "primaryKey": false,
           "notNull": true
         },
-        "techstacks_id": {
-          "name": "techstacks_id",
+        "tag_id": {
+          "name": "tag_id",
           "type": "integer",
           "primaryKey": false,
           "notNull": false
@@ -929,11 +965,11 @@
           "method": "btree",
           "with": {}
         },
-        "projects_rels_techstacks_id_idx": {
-          "name": "projects_rels_techstacks_id_idx",
+        "projects_rels_tag_id_idx": {
+          "name": "projects_rels_tag_id_idx",
           "columns": [
             {
-              "expression": "techstacks_id",
+              "expression": "tag_id",
               "isExpression": false,
               "asc": true,
               "nulls": "last"
@@ -955,336 +991,13 @@
           "onDelete": "cascade",
           "onUpdate": "no action"
         },
-        "projects_rels_techstacks_fk": {
-          "name": "projects_rels_techstacks_fk",
+        "projects_rels_tag_fk": {
+          "name": "projects_rels_tag_fk",
           "tableFrom": "projects_rels",
-          "tableTo": "techstacks",
-          "columnsFrom": ["techstacks_id"],
+          "tableTo": "tag",
+          "columnsFrom": ["tag_id"],
           "columnsTo": ["id"],
           "onDelete": "cascade",
-          "onUpdate": "no action"
-        }
-      },
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {},
-      "policies": {},
-      "checkConstraints": {},
-      "isRLSEnabled": false
-    },
-    "public.skills": {
-      "name": "skills",
-      "schema": "",
-      "columns": {
-        "id": {
-          "name": "id",
-          "type": "serial",
-          "primaryKey": true,
-          "notNull": true
-        },
-        "name": {
-          "name": "name",
-          "type": "varchar",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "proficiency": {
-          "name": "proficiency",
-          "type": "enum_skills_proficiency",
-          "typeSchema": "public",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "updated_at": {
-          "name": "updated_at",
-          "type": "timestamp(3) with time zone",
-          "primaryKey": false,
-          "notNull": true,
-          "default": "now()"
-        },
-        "created_at": {
-          "name": "created_at",
-          "type": "timestamp(3) with time zone",
-          "primaryKey": false,
-          "notNull": true,
-          "default": "now()"
-        },
-        "url": {
-          "name": "url",
-          "type": "varchar",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "thumbnail_u_r_l": {
-          "name": "thumbnail_u_r_l",
-          "type": "varchar",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "filename": {
-          "name": "filename",
-          "type": "varchar",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "mime_type": {
-          "name": "mime_type",
-          "type": "varchar",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "filesize": {
-          "name": "filesize",
-          "type": "numeric",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "width": {
-          "name": "width",
-          "type": "numeric",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "height": {
-          "name": "height",
-          "type": "numeric",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "focal_x": {
-          "name": "focal_x",
-          "type": "numeric",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "focal_y": {
-          "name": "focal_y",
-          "type": "numeric",
-          "primaryKey": false,
-          "notNull": false
-        }
-      },
-      "indexes": {
-        "skills_updated_at_idx": {
-          "name": "skills_updated_at_idx",
-          "columns": [
-            {
-              "expression": "updated_at",
-              "isExpression": false,
-              "asc": true,
-              "nulls": "last"
-            }
-          ],
-          "isUnique": false,
-          "concurrently": false,
-          "method": "btree",
-          "with": {}
-        },
-        "skills_created_at_idx": {
-          "name": "skills_created_at_idx",
-          "columns": [
-            {
-              "expression": "created_at",
-              "isExpression": false,
-              "asc": true,
-              "nulls": "last"
-            }
-          ],
-          "isUnique": false,
-          "concurrently": false,
-          "method": "btree",
-          "with": {}
-        },
-        "skills_filename_idx": {
-          "name": "skills_filename_idx",
-          "columns": [
-            {
-              "expression": "filename",
-              "isExpression": false,
-              "asc": true,
-              "nulls": "last"
-            }
-          ],
-          "isUnique": true,
-          "concurrently": false,
-          "method": "btree",
-          "with": {}
-        }
-      },
-      "foreignKeys": {},
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {},
-      "policies": {},
-      "checkConstraints": {},
-      "isRLSEnabled": false
-    },
-    "public.techstacks": {
-      "name": "techstacks",
-      "schema": "",
-      "columns": {
-        "id": {
-          "name": "id",
-          "type": "serial",
-          "primaryKey": true,
-          "notNull": true
-        },
-        "name": {
-          "name": "name",
-          "type": "varchar",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "icon_id": {
-          "name": "icon_id",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "category": {
-          "name": "category",
-          "type": "enum_techstacks_category",
-          "typeSchema": "public",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "updated_at": {
-          "name": "updated_at",
-          "type": "timestamp(3) with time zone",
-          "primaryKey": false,
-          "notNull": true,
-          "default": "now()"
-        },
-        "created_at": {
-          "name": "created_at",
-          "type": "timestamp(3) with time zone",
-          "primaryKey": false,
-          "notNull": true,
-          "default": "now()"
-        },
-        "url": {
-          "name": "url",
-          "type": "varchar",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "thumbnail_u_r_l": {
-          "name": "thumbnail_u_r_l",
-          "type": "varchar",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "filename": {
-          "name": "filename",
-          "type": "varchar",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "mime_type": {
-          "name": "mime_type",
-          "type": "varchar",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "filesize": {
-          "name": "filesize",
-          "type": "numeric",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "width": {
-          "name": "width",
-          "type": "numeric",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "height": {
-          "name": "height",
-          "type": "numeric",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "focal_x": {
-          "name": "focal_x",
-          "type": "numeric",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "focal_y": {
-          "name": "focal_y",
-          "type": "numeric",
-          "primaryKey": false,
-          "notNull": false
-        }
-      },
-      "indexes": {
-        "techstacks_icon_idx": {
-          "name": "techstacks_icon_idx",
-          "columns": [
-            {
-              "expression": "icon_id",
-              "isExpression": false,
-              "asc": true,
-              "nulls": "last"
-            }
-          ],
-          "isUnique": false,
-          "concurrently": false,
-          "method": "btree",
-          "with": {}
-        },
-        "techstacks_updated_at_idx": {
-          "name": "techstacks_updated_at_idx",
-          "columns": [
-            {
-              "expression": "updated_at",
-              "isExpression": false,
-              "asc": true,
-              "nulls": "last"
-            }
-          ],
-          "isUnique": false,
-          "concurrently": false,
-          "method": "btree",
-          "with": {}
-        },
-        "techstacks_created_at_idx": {
-          "name": "techstacks_created_at_idx",
-          "columns": [
-            {
-              "expression": "created_at",
-              "isExpression": false,
-              "asc": true,
-              "nulls": "last"
-            }
-          ],
-          "isUnique": false,
-          "concurrently": false,
-          "method": "btree",
-          "with": {}
-        },
-        "techstacks_filename_idx": {
-          "name": "techstacks_filename_idx",
-          "columns": [
-            {
-              "expression": "filename",
-              "isExpression": false,
-              "asc": true,
-              "nulls": "last"
-            }
-          ],
-          "isUnique": true,
-          "concurrently": false,
-          "method": "btree",
-          "with": {}
-        }
-      },
-      "foreignKeys": {
-        "techstacks_icon_id_media_id_fk": {
-          "name": "techstacks_icon_id_media_id_fk",
-          "tableFrom": "techstacks",
-          "tableTo": "media",
-          "columnsFrom": ["icon_id"],
-          "columnsTo": ["id"],
-          "onDelete": "set null",
           "onUpdate": "no action"
         }
       },
@@ -1419,6 +1132,12 @@
           "primaryKey": false,
           "notNull": false
         },
+        "tag_id": {
+          "name": "tag_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
         "experiences_id": {
           "name": "experiences_id",
           "type": "integer",
@@ -1427,18 +1146,6 @@
         },
         "projects_id": {
           "name": "projects_id",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "skills_id": {
-          "name": "skills_id",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "techstacks_id": {
-          "name": "techstacks_id",
           "type": "integer",
           "primaryKey": false,
           "notNull": false
@@ -1520,6 +1227,21 @@
           "method": "btree",
           "with": {}
         },
+        "payload_locked_documents_rels_tag_id_idx": {
+          "name": "payload_locked_documents_rels_tag_id_idx",
+          "columns": [
+            {
+              "expression": "tag_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
         "payload_locked_documents_rels_experiences_id_idx": {
           "name": "payload_locked_documents_rels_experiences_id_idx",
           "columns": [
@@ -1540,36 +1262,6 @@
           "columns": [
             {
               "expression": "projects_id",
-              "isExpression": false,
-              "asc": true,
-              "nulls": "last"
-            }
-          ],
-          "isUnique": false,
-          "concurrently": false,
-          "method": "btree",
-          "with": {}
-        },
-        "payload_locked_documents_rels_skills_id_idx": {
-          "name": "payload_locked_documents_rels_skills_id_idx",
-          "columns": [
-            {
-              "expression": "skills_id",
-              "isExpression": false,
-              "asc": true,
-              "nulls": "last"
-            }
-          ],
-          "isUnique": false,
-          "concurrently": false,
-          "method": "btree",
-          "with": {}
-        },
-        "payload_locked_documents_rels_techstacks_id_idx": {
-          "name": "payload_locked_documents_rels_techstacks_id_idx",
-          "columns": [
-            {
-              "expression": "techstacks_id",
               "isExpression": false,
               "asc": true,
               "nulls": "last"
@@ -1609,6 +1301,15 @@
           "onDelete": "cascade",
           "onUpdate": "no action"
         },
+        "payload_locked_documents_rels_tag_fk": {
+          "name": "payload_locked_documents_rels_tag_fk",
+          "tableFrom": "payload_locked_documents_rels",
+          "tableTo": "tag",
+          "columnsFrom": ["tag_id"],
+          "columnsTo": ["id"],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
         "payload_locked_documents_rels_experiences_fk": {
           "name": "payload_locked_documents_rels_experiences_fk",
           "tableFrom": "payload_locked_documents_rels",
@@ -1623,24 +1324,6 @@
           "tableFrom": "payload_locked_documents_rels",
           "tableTo": "projects",
           "columnsFrom": ["projects_id"],
-          "columnsTo": ["id"],
-          "onDelete": "cascade",
-          "onUpdate": "no action"
-        },
-        "payload_locked_documents_rels_skills_fk": {
-          "name": "payload_locked_documents_rels_skills_fk",
-          "tableFrom": "payload_locked_documents_rels",
-          "tableTo": "skills",
-          "columnsFrom": ["skills_id"],
-          "columnsTo": ["id"],
-          "onDelete": "cascade",
-          "onUpdate": "no action"
-        },
-        "payload_locked_documents_rels_techstacks_fk": {
-          "name": "payload_locked_documents_rels_techstacks_fk",
-          "tableFrom": "payload_locked_documents_rels",
-          "tableTo": "techstacks",
-          "columnsFrom": ["techstacks_id"],
           "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
@@ -1970,6 +1653,18 @@
           "primaryKey": false,
           "notNull": false
         },
+        "selected_projects_id": {
+          "name": "selected_projects_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "selected_experiences_id": {
+          "name": "selected_experiences_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
         "about_main_section": {
           "name": "about_main_section",
           "type": "jsonb",
@@ -2010,6 +1705,36 @@
           "concurrently": false,
           "method": "btree",
           "with": {}
+        },
+        "page_content_selected_projects_idx": {
+          "name": "page_content_selected_projects_idx",
+          "columns": [
+            {
+              "expression": "selected_projects_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "page_content_selected_experiences_idx": {
+          "name": "page_content_selected_experiences_idx",
+          "columns": [
+            {
+              "expression": "selected_experiences_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         }
       },
       "foreignKeys": {
@@ -2018,6 +1743,24 @@
           "tableFrom": "page_content",
           "tableTo": "media",
           "columnsFrom": ["avatar_id"],
+          "columnsTo": ["id"],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        },
+        "page_content_selected_projects_id_projects_id_fk": {
+          "name": "page_content_selected_projects_id_projects_id_fk",
+          "tableFrom": "page_content",
+          "tableTo": "projects",
+          "columnsFrom": ["selected_projects_id"],
+          "columnsTo": ["id"],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        },
+        "page_content_selected_experiences_id_experiences_id_fk": {
+          "name": "page_content_selected_experiences_id_experiences_id_fk",
+          "tableFrom": "page_content",
+          "tableTo": "experiences",
+          "columnsFrom": ["selected_experiences_id"],
           "columnsTo": ["id"],
           "onDelete": "set null",
           "onUpdate": "no action"
@@ -2057,26 +1800,8 @@
           "primaryKey": false,
           "notNull": true
         },
-        "skills_id": {
-          "name": "skills_id",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "techstacks_id": {
-          "name": "techstacks_id",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "projects_id": {
-          "name": "projects_id",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "experiences_id": {
-          "name": "experiences_id",
+        "tag_id": {
+          "name": "tag_id",
           "type": "integer",
           "primaryKey": false,
           "notNull": false
@@ -2128,56 +1853,11 @@
           "method": "btree",
           "with": {}
         },
-        "page_content_rels_skills_id_idx": {
-          "name": "page_content_rels_skills_id_idx",
+        "page_content_rels_tag_id_idx": {
+          "name": "page_content_rels_tag_id_idx",
           "columns": [
             {
-              "expression": "skills_id",
-              "isExpression": false,
-              "asc": true,
-              "nulls": "last"
-            }
-          ],
-          "isUnique": false,
-          "concurrently": false,
-          "method": "btree",
-          "with": {}
-        },
-        "page_content_rels_techstacks_id_idx": {
-          "name": "page_content_rels_techstacks_id_idx",
-          "columns": [
-            {
-              "expression": "techstacks_id",
-              "isExpression": false,
-              "asc": true,
-              "nulls": "last"
-            }
-          ],
-          "isUnique": false,
-          "concurrently": false,
-          "method": "btree",
-          "with": {}
-        },
-        "page_content_rels_projects_id_idx": {
-          "name": "page_content_rels_projects_id_idx",
-          "columns": [
-            {
-              "expression": "projects_id",
-              "isExpression": false,
-              "asc": true,
-              "nulls": "last"
-            }
-          ],
-          "isUnique": false,
-          "concurrently": false,
-          "method": "btree",
-          "with": {}
-        },
-        "page_content_rels_experiences_id_idx": {
-          "name": "page_content_rels_experiences_id_idx",
-          "columns": [
-            {
-              "expression": "experiences_id",
+              "expression": "tag_id",
               "isExpression": false,
               "asc": true,
               "nulls": "last"
@@ -2199,38 +1879,11 @@
           "onDelete": "cascade",
           "onUpdate": "no action"
         },
-        "page_content_rels_skills_fk": {
-          "name": "page_content_rels_skills_fk",
+        "page_content_rels_tag_fk": {
+          "name": "page_content_rels_tag_fk",
           "tableFrom": "page_content_rels",
-          "tableTo": "skills",
-          "columnsFrom": ["skills_id"],
-          "columnsTo": ["id"],
-          "onDelete": "cascade",
-          "onUpdate": "no action"
-        },
-        "page_content_rels_techstacks_fk": {
-          "name": "page_content_rels_techstacks_fk",
-          "tableFrom": "page_content_rels",
-          "tableTo": "techstacks",
-          "columnsFrom": ["techstacks_id"],
-          "columnsTo": ["id"],
-          "onDelete": "cascade",
-          "onUpdate": "no action"
-        },
-        "page_content_rels_projects_fk": {
-          "name": "page_content_rels_projects_fk",
-          "tableFrom": "page_content_rels",
-          "tableTo": "projects",
-          "columnsFrom": ["projects_id"],
-          "columnsTo": ["id"],
-          "onDelete": "cascade",
-          "onUpdate": "no action"
-        },
-        "page_content_rels_experiences_fk": {
-          "name": "page_content_rels_experiences_fk",
-          "tableFrom": "page_content_rels",
-          "tableTo": "experiences",
-          "columnsFrom": ["experiences_id"],
+          "tableTo": "tag",
+          "columnsFrom": ["tag_id"],
           "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
@@ -2242,128 +1895,26 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
-    "public.socials_socials": {
-      "name": "socials_socials",
-      "schema": "",
-      "columns": {
-        "_order": {
-          "name": "_order",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "_parent_id": {
-          "name": "_parent_id",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "id": {
-          "name": "id",
-          "type": "varchar",
-          "primaryKey": true,
-          "notNull": true
-        },
-        "label": {
-          "name": "label",
-          "type": "varchar",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "url": {
-          "name": "url",
-          "type": "varchar",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "icon_id": {
-          "name": "icon_id",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": false
-        }
-      },
-      "indexes": {
-        "socials_socials_order_idx": {
-          "name": "socials_socials_order_idx",
-          "columns": [
-            {
-              "expression": "_order",
-              "isExpression": false,
-              "asc": true,
-              "nulls": "last"
-            }
-          ],
-          "isUnique": false,
-          "concurrently": false,
-          "method": "btree",
-          "with": {}
-        },
-        "socials_socials_parent_id_idx": {
-          "name": "socials_socials_parent_id_idx",
-          "columns": [
-            {
-              "expression": "_parent_id",
-              "isExpression": false,
-              "asc": true,
-              "nulls": "last"
-            }
-          ],
-          "isUnique": false,
-          "concurrently": false,
-          "method": "btree",
-          "with": {}
-        },
-        "socials_socials_icon_idx": {
-          "name": "socials_socials_icon_idx",
-          "columns": [
-            {
-              "expression": "icon_id",
-              "isExpression": false,
-              "asc": true,
-              "nulls": "last"
-            }
-          ],
-          "isUnique": false,
-          "concurrently": false,
-          "method": "btree",
-          "with": {}
-        }
-      },
-      "foreignKeys": {
-        "socials_socials_icon_id_media_id_fk": {
-          "name": "socials_socials_icon_id_media_id_fk",
-          "tableFrom": "socials_socials",
-          "tableTo": "media",
-          "columnsFrom": ["icon_id"],
-          "columnsTo": ["id"],
-          "onDelete": "set null",
-          "onUpdate": "no action"
-        },
-        "socials_socials_parent_id_fk": {
-          "name": "socials_socials_parent_id_fk",
-          "tableFrom": "socials_socials",
-          "tableTo": "socials",
-          "columnsFrom": ["_parent_id"],
-          "columnsTo": ["id"],
-          "onDelete": "cascade",
-          "onUpdate": "no action"
-        }
-      },
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {},
-      "policies": {},
-      "checkConstraints": {},
-      "isRLSEnabled": false
-    },
-    "public.socials": {
-      "name": "socials",
+    "public.legal_texts": {
+      "name": "legal_texts",
       "schema": "",
       "columns": {
         "id": {
           "name": "id",
           "type": "serial",
           "primaryKey": true,
+          "notNull": true
+        },
+        "english_text": {
+          "name": "english_text",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "german_text": {
+          "name": "german_text",
+          "type": "jsonb",
+          "primaryKey": false,
           "notNull": true
         },
         "updated_at": {
@@ -2386,18 +1937,365 @@
       "policies": {},
       "checkConstraints": {},
       "isRLSEnabled": false
+    },
+    "public.footer": {
+      "name": "footer",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "main_text": {
+          "name": "main_text",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "main_link_id": {
+          "name": "main_link_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {
+        "footer_main_link_idx": {
+          "name": "footer_main_link_idx",
+          "columns": [
+            {
+              "expression": "main_link_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "footer_main_link_id_tag_id_fk": {
+          "name": "footer_main_link_id_tag_id_fk",
+          "tableFrom": "footer",
+          "tableTo": "tag",
+          "columnsFrom": ["main_link_id"],
+          "columnsTo": ["id"],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.footer_rels": {
+      "name": "footer_rels",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "order": {
+          "name": "order",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "parent_id": {
+          "name": "parent_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "path": {
+          "name": "path",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "tag_id": {
+          "name": "tag_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {
+        "footer_rels_order_idx": {
+          "name": "footer_rels_order_idx",
+          "columns": [
+            {
+              "expression": "order",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "footer_rels_parent_idx": {
+          "name": "footer_rels_parent_idx",
+          "columns": [
+            {
+              "expression": "parent_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "footer_rels_path_idx": {
+          "name": "footer_rels_path_idx",
+          "columns": [
+            {
+              "expression": "path",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "footer_rels_tag_id_idx": {
+          "name": "footer_rels_tag_id_idx",
+          "columns": [
+            {
+              "expression": "tag_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "footer_rels_parent_fk": {
+          "name": "footer_rels_parent_fk",
+          "tableFrom": "footer_rels",
+          "tableTo": "footer",
+          "columnsFrom": ["parent_id"],
+          "columnsTo": ["id"],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "footer_rels_tag_fk": {
+          "name": "footer_rels_tag_fk",
+          "tableFrom": "footer_rels",
+          "tableTo": "tag",
+          "columnsFrom": ["tag_id"],
+          "columnsTo": ["id"],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.header": {
+      "name": "header",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "color_switch": {
+          "name": "color_switch",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.header_rels": {
+      "name": "header_rels",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "order": {
+          "name": "order",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "parent_id": {
+          "name": "parent_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "path": {
+          "name": "path",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "tag_id": {
+          "name": "tag_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {
+        "header_rels_order_idx": {
+          "name": "header_rels_order_idx",
+          "columns": [
+            {
+              "expression": "order",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "header_rels_parent_idx": {
+          "name": "header_rels_parent_idx",
+          "columns": [
+            {
+              "expression": "parent_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "header_rels_path_idx": {
+          "name": "header_rels_path_idx",
+          "columns": [
+            {
+              "expression": "path",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "header_rels_tag_id_idx": {
+          "name": "header_rels_tag_id_idx",
+          "columns": [
+            {
+              "expression": "tag_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "header_rels_parent_fk": {
+          "name": "header_rels_parent_fk",
+          "tableFrom": "header_rels",
+          "tableTo": "header",
+          "columnsFrom": ["parent_id"],
+          "columnsTo": ["id"],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "header_rels_tag_fk": {
+          "name": "header_rels_tag_fk",
+          "tableFrom": "header_rels",
+          "tableTo": "tag",
+          "columnsFrom": ["tag_id"],
+          "columnsTo": ["id"],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
     }
   },
   "enums": {
-    "public.enum_skills_proficiency": {
-      "name": "enum_skills_proficiency",
+    "public.enum_tag_type": {
+      "name": "enum_tag_type",
       "schema": "public",
-      "values": ["beginner", "intermediate", "advanced", "expert"]
-    },
-    "public.enum_techstacks_category": {
-      "name": "enum_techstacks_category",
-      "schema": "public",
-      "values": ["frontend", "backend", "database", "devops", "other"]
+      "values": ["techstack", "skill", "socials", "other"]
     }
   },
   "schemas": {},

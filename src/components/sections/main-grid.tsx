@@ -4,10 +4,14 @@ import { FaArrowRight, FaGithub, FaCodepen, FaLinkedin, FaDribbble } from 'react
 
 import { Button } from '@/components/ui/button';
 import Avatar from '@/components/custom/avatar';
+import { cn } from '@/lib/utils';
+import { SectionProps } from '@/app/(app)/page';
 
-export const HeroGrid = () => {
+export const MainSection = ({
+  className = 'mx-auto flex flex-col h-screen md:justify-center'
+}: SectionProps) => {
   return (
-    <section className='mx-auto flex flex-col h-screen' id='hero'>
+    <section id='hero' className={cn('', className)}>
       <div className='flex flex-col justify-center gap-10 md:flex-row md:justify-between'>
         <div className='order-last md:order-1 md:w-[500px]'>
           <div className='mb-6 flex flex-col gap-y-2 text-center md:text-start'>
@@ -84,5 +88,3 @@ export const HeroGrid = () => {
     </section>
   );
 };
-
-export default HeroGrid;

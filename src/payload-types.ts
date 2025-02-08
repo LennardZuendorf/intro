@@ -13,10 +13,9 @@ export interface Config {
   collections: {
     media: Media;
     users: User;
+    tag: Tag;
     experiences: Experience;
     projects: Project;
-    skills: Skill;
-    techstacks: Techstack;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -25,10 +24,9 @@ export interface Config {
   collectionsSelect: {
     media: MediaSelect<false> | MediaSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
+    tag: TagSelect<false> | TagSelect<true>;
     experiences: ExperiencesSelect<false> | ExperiencesSelect<true>;
     projects: ProjectsSelect<false> | ProjectsSelect<true>;
-    skills: SkillsSelect<false> | SkillsSelect<true>;
-    techstacks: TechstacksSelect<false> | TechstacksSelect<true>;
     'payload-locked-documents':
       | PayloadLockedDocumentsSelect<false>
       | PayloadLockedDocumentsSelect<true>;
@@ -40,11 +38,15 @@ export interface Config {
   };
   globals: {
     'page-content': PageContent;
-    socials: Social;
+    legalTexts: LegalText;
+    footer: Footer;
+    header: Header;
   };
   globalsSelect: {
     'page-content': PageContentSelect<false> | PageContentSelect<true>;
-    socials: SocialsSelect<false> | SocialsSelect<true>;
+    legalTexts: LegalTextsSelect<false> | LegalTextsSelect<true>;
+    footer: FooterSelect<false> | FooterSelect<true>;
+    header: HeaderSelect<false> | HeaderSelect<true>;
   };
   locale: null;
   user: User & {
@@ -111,6 +113,33 @@ export interface User {
   password?: string | null;
 }
 /**
+ * tags are a multi usable combination of a name, category, and optional url/link and icon
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "tag".
+ */
+export interface Tag {
+  id: number;
+  /**
+   * name of the tag, will be used as label in all lowercase
+   */
+  name: string;
+  /**
+   * category of the tag - can be tech, skill, social or internal
+   */
+  type: 'techstack' | 'skill' | 'socials' | 'other';
+  /**
+   * optional - must be viable link, i.e. /about or https://google.com otherwise
+   */
+  link?: string | null;
+  /**
+   * optional - a link or logo (should be svg)
+   */
+  icon?: (number | null) | Media;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "experiences".
  */
@@ -119,35 +148,15 @@ export interface Experience {
   company: string;
   position: string;
   startDate: string;
-  skills?: (number | Skill)[] | null;
   /**
    * Leave blank if still working here
    */
   endDate?: string | null;
+  skills?: (number | Tag)[] | null;
   description?: string | null;
   responsibilityOne: string;
   responsibilityTwo?: string | null;
   responsibilityThree?: string | null;
-  updatedAt: string;
-  createdAt: string;
-  url?: string | null;
-  thumbnailURL?: string | null;
-  filename?: string | null;
-  mimeType?: string | null;
-  filesize?: number | null;
-  width?: number | null;
-  height?: number | null;
-  focalX?: number | null;
-  focalY?: number | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "skills".
- */
-export interface Skill {
-  id: number;
-  name: string;
-  proficiency: 'beginner' | 'intermediate' | 'advanced' | 'expert';
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -167,42 +176,35 @@ export interface Skill {
 export interface Project {
   id: number;
   title: string;
-  description: string;
-  liveUrl?: string | null;
-  repoUrl?: string | null;
+  date: string;
   coverImage?: (number | null) | Media;
-  technologies?: (number | Techstack)[] | null;
-  date?: string | null;
-  tags?:
-    | {
-        tag?: string | null;
-        id?: string | null;
-      }[]
-    | null;
+  projectText: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  technologies?: (number | Tag)[] | null;
+  /**
+   * optional - must be viable link, i.e. /about or https://google.com otherwise
+   */
+  liveUrl?: string | null;
+  /**
+   * optional - must be viable link, i.e. /about or https://google.com otherwise
+   */
+  repoUrl?: string | null;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
-  thumbnailURL?: string | null;
-  filename?: string | null;
-  mimeType?: string | null;
-  filesize?: number | null;
-  width?: number | null;
-  height?: number | null;
-  focalX?: number | null;
-  focalY?: number | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "techstacks".
- */
-export interface Techstack {
-  id: number;
-  name: string;
-  icon?: (number | null) | Media;
-  category?: ('frontend' | 'backend' | 'database' | 'devops' | 'other') | null;
-  updatedAt: string;
-  createdAt: string;
-  url: string;
   thumbnailURL?: string | null;
   filename?: string | null;
   mimeType?: string | null;
@@ -228,20 +230,16 @@ export interface PayloadLockedDocument {
         value: number | User;
       } | null)
     | ({
+        relationTo: 'tag';
+        value: number | Tag;
+      } | null)
+    | ({
         relationTo: 'experiences';
         value: number | Experience;
       } | null)
     | ({
         relationTo: 'projects';
         value: number | Project;
-      } | null)
-    | ({
-        relationTo: 'skills';
-        value: number | Skill;
-      } | null)
-    | ({
-        relationTo: 'techstacks';
-        value: number | Techstack;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -321,14 +319,26 @@ export interface UsersSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "tag_select".
+ */
+export interface TagSelect<T extends boolean = true> {
+  name?: T;
+  type?: T;
+  link?: T;
+  icon?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "experiences_select".
  */
 export interface ExperiencesSelect<T extends boolean = true> {
   company?: T;
   position?: T;
   startDate?: T;
-  skills?: T;
   endDate?: T;
+  skills?: T;
   description?: T;
   responsibilityOne?: T;
   responsibilityTwo?: T;
@@ -351,57 +361,12 @@ export interface ExperiencesSelect<T extends boolean = true> {
  */
 export interface ProjectsSelect<T extends boolean = true> {
   title?: T;
-  description?: T;
+  date?: T;
+  coverImage?: T;
+  projectText?: T;
+  technologies?: T;
   liveUrl?: T;
   repoUrl?: T;
-  coverImage?: T;
-  technologies?: T;
-  date?: T;
-  tags?:
-    | T
-    | {
-        tag?: T;
-        id?: T;
-      };
-  updatedAt?: T;
-  createdAt?: T;
-  url?: T;
-  thumbnailURL?: T;
-  filename?: T;
-  mimeType?: T;
-  filesize?: T;
-  width?: T;
-  height?: T;
-  focalX?: T;
-  focalY?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "skills_select".
- */
-export interface SkillsSelect<T extends boolean = true> {
-  name?: T;
-  proficiency?: T;
-  updatedAt?: T;
-  createdAt?: T;
-  url?: T;
-  thumbnailURL?: T;
-  filename?: T;
-  mimeType?: T;
-  filesize?: T;
-  width?: T;
-  height?: T;
-  focalX?: T;
-  focalY?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "techstacks_select".
- */
-export interface TechstacksSelect<T extends boolean = true> {
-  name?: T;
-  icon?: T;
-  category?: T;
   updatedAt?: T;
   createdAt?: T;
   url?: T;
@@ -452,6 +417,9 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
  */
 export interface PageContent {
   id: number;
+  /**
+   * text displayed in the intro card
+   */
   MainIntroSection: {
     root: {
       type: string;
@@ -467,6 +435,9 @@ export interface PageContent {
     };
     [k: string]: unknown;
   };
+  /**
+   * text displayed in the about me card
+   */
   MainAboutMeSection: {
     root: {
       type: string;
@@ -482,11 +453,29 @@ export interface PageContent {
     };
     [k: string]: unknown;
   };
+  /**
+   * main avatar/picture of me
+   */
   avatar?: (number | null) | Media;
-  selectedSkills?: (number | Skill)[] | null;
-  selectedTechStacks?: (number | Techstack)[] | null;
-  selectedProjects?: (number | Project)[] | null;
-  selectedExperiences?: (number | Experience)[] | null;
+  /**
+   * selection of skills to showcase in the skills card
+   */
+  selectedSkills?: (number | Tag)[] | null;
+  /**
+   * selection of tech to showcase in the skills card
+   */
+  selectedTechStacks?: (number | Tag)[] | null;
+  /**
+   * single project shown on the project preview card
+   */
+  selectedProjects?: (number | null) | Project;
+  /**
+   * single (current) experience shown on the experience preview card
+   */
+  selectedExperiences?: (number | null) | Experience;
+  /**
+   * formatted text displayed in the main about me card
+   */
   AboutMainSection: {
     root: {
       type: string;
@@ -502,6 +491,9 @@ export interface PageContent {
     };
     [k: string]: unknown;
   };
+  /**
+   * formatted text in the about me subsection card
+   */
   AboutSubsection: {
     root: {
       type: string;
@@ -522,18 +514,84 @@ export interface PageContent {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "socials".
+ * via the `definition` "legalTexts".
  */
-export interface Social {
+export interface LegalText {
   id: number;
-  socials?:
-    | {
-        label?: string | null;
-        url?: string | null;
-        icon?: (number | null) | Media;
-        id?: string | null;
-      }[]
-    | null;
+  /**
+   * formatted text displayed as English speaking legal disclaimers
+   */
+  englishText: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  /**
+   * formatted text displayed as German speaking legal disclaimers
+   */
+  germanText: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "footer".
+ */
+export interface Footer {
+  id: number;
+  /**
+   * main text in the footer
+   */
+  mainText?: string | null;
+  /**
+   * main link in the footer
+   */
+  mainLink?: (number | null) | Tag;
+  /**
+   * linked socials in the footer
+   */
+  socialLinks?: (number | Tag)[] | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "header".
+ */
+export interface Header {
+  id: number;
+  /**
+   * all the links showcases in the header nav
+   */
+  links?: (number | Tag)[] | null;
+  /**
+   * if the color switch button is enabled
+   */
+  'color-switch'?: boolean | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -557,17 +615,34 @@ export interface PageContentSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "socials_select".
+ * via the `definition` "legalTexts_select".
  */
-export interface SocialsSelect<T extends boolean = true> {
-  socials?:
-    | T
-    | {
-        label?: T;
-        url?: T;
-        icon?: T;
-        id?: T;
-      };
+export interface LegalTextsSelect<T extends boolean = true> {
+  englishText?: T;
+  germanText?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "footer_select".
+ */
+export interface FooterSelect<T extends boolean = true> {
+  mainText?: T;
+  mainLink?: T;
+  socialLinks?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "header_select".
+ */
+export interface HeaderSelect<T extends boolean = true> {
+  links?: T;
+  'color-switch'?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

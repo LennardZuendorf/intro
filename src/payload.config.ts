@@ -1,5 +1,4 @@
 import { postgresAdapter } from '@payloadcms/db-postgres';
-import { payloadCloudPlugin } from '@payloadcms/payload-cloud';
 import path from 'path';
 import { buildConfig } from 'payload';
 import { fileURLToPath } from 'url';
@@ -11,10 +10,10 @@ import { s3Storage } from '@payloadcms/storage-s3';
 import { env } from '@/env';
 import { lexicalEditor } from '@payloadcms/richtext-lexical';
 import { Experiences } from '@/collections/Experience';
-import { Skills } from '@/collections/Skill';
-import { TechStacks } from '@/collections/Tech';
+import { Tag } from '@/collections/Tag';
 import { Projects } from '@/collections/Project';
-import { PageContent, Socials } from '@/payload-globals';
+import { Footer, Header, LegalTexts, PageContent } from '@/payload-globals';
+import { seoPlugin } from '@payloadcms/plugin-seo';
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
@@ -43,7 +42,12 @@ export default buildConfig({
   }),
   sharp,
   plugins: [
-    payloadCloudPlugin(),
+    seoPlugin({
+      collections: ['project'],
+      uploadsCollection: 'media',
+      generateTitle: ({ doc }) => `Website.com — ${doc.title}`,
+      generateDescription: ({ doc }) => doc.excerpt
+    }),
     s3Storage({
       collections: {
         media: {
@@ -62,6 +66,6 @@ export default buildConfig({
       }
     })
   ],
-  collections: [Media, Users, Experiences, Projects, Skills, TechStacks],
-  globals: [PageContent, Socials]
+  collections: [Media, Users, Tag, Experiences, Projects],
+  globals: [PageContent, LegalTexts, Footer, Header]
 });
