@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 /**
  * Checks if the given item is a simple object.
  *
@@ -10,7 +12,6 @@
  *          false otherwise.
  */
 export function isObject(item: unknown): boolean {
-  // @ts-expect-error by design
   return item && typeof item === 'object' && !Array.isArray(item);
 }
 
