@@ -3,7 +3,7 @@ import './globals.css';
 import { Footer } from '@/components/footer';
 import { Providers } from '@/components/providers';
 import { siteMetadata } from '@/data/site';
-import { cn } from '@/lib/utils';
+import { cn } from '@/lib/utils/ui';
 import Script from 'next/script';
 import { Nav } from '@/components/navbar';
 import { Toaster } from '@/components/ui/toaster';

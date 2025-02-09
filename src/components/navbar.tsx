@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-motion';
-import { cn } from '@/lib/utils';
+import { cn } from '@/lib/utils/ui';
 import { FolderArchiveIcon, HomeIcon, UserIcon } from 'lucide-react';
 import {
   NavigationMenu,

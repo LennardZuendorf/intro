@@ -1,13 +1,8 @@
 import type { NextPage } from 'next';
-
-import React from 'react';
+import { redirect } from 'next/navigation';
 
 const Page: NextPage = () => {
-  return (
-    <div className='container'>
-      <h1 className='text-4xl font-bold'>Hello, Next.js 15!</h1>
-    </div>
-  );
+  return redirect('/#projects');
 };
 
 export default Page;

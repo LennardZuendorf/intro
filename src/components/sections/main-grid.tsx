@@ -4,7 +4,7 @@ import { FaArrowRight, FaGithub, FaCodepen, FaLinkedin, FaDribbble } from 'react
 
 import { Button } from '@/components/ui/button';
 import Avatar from '@/components/custom/avatar';
-import { cn } from '@/lib/utils';
+import { cn } from '@/lib/utils/ui';
 import { SectionProps } from '@/app/(app)/page';
 
 export const MainSection = ({

@@ -1,4 +1,4 @@
-import { cn } from '@/lib/utils';
+import { cn } from '@/lib/utils/ui';
 import type * as React from 'react';
 import { titleCase } from 'title-case';
 

@@ -8,7 +8,7 @@ import {
   AccordionItem,
   AccordionTrigger
 } from '@/components/ui/accordion';
-import { cn } from '@/lib/utils';
+import { cn } from '@/lib/utils/ui';
 import { Separator } from '@/components/ui/separator';
 import { Quote, Code, M, L } from '@/components/ui/typography';
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';

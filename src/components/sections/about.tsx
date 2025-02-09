@@ -5,7 +5,7 @@ import { FaArrowRight, FaGithub, FaCodepen, FaLinkedin, FaDribbble } from 'react
 import { Button } from '@/components/ui/button';
 import Avatar from '@/components/custom/avatar';
 import { SectionProps } from '@/app/(app)/page';
-import { cn } from '@/lib/utils';
+import { cn } from '@/lib/utils/ui';
 
 export const AboutSection = ({
   className = 'mx-auto flex flex-col h-screen md:justify-center'

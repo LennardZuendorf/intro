@@ -11,9 +11,9 @@ import { env } from '@/env';
 import { lexicalEditor } from '@payloadcms/richtext-lexical';
 import { Experiences } from '@/collections/Experience';
 import { Tag } from '@/collections/Tag';
-import { Projects } from '@/collections/Project';
 import { Footer, Header, LegalTexts, PageContent } from '@/payload-globals';
 import { seoPlugin } from '@payloadcms/plugin-seo';
+import { ProjectPost } from '@/collections/ProjectPost';
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
@@ -23,15 +23,26 @@ export default buildConfig({
     user: Users.slug,
     importMap: {
       baseDir: path.resolve(dirname)
+    },
+    livePreview: {
+      breakpoints: [
+        {
+          name: 'mobile',
+          height: 667,
+          label: 'Mobile',
+          width: 375
+        }
+      ]
     }
   },
   email: resendAdapter({
     defaultFromAddress: 'dev@admin.zuendorf.me',
     defaultFromName: 'Payload CMS',
-    apiKey: process.env.RESEND_API_KEY || ''
+    apiKey: env.RESEND_API_KEY || ''
   }),
   editor: lexicalEditor({}),
   secret: env.PAYLOAD_SECRET || '',
+  serverURL: env.NEXT_PUBLIC_URL,
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts')
   },
@@ -66,6 +77,6 @@ export default buildConfig({
       }
     })
   ],
-  collections: [Media, Users, Tag, Experiences, Projects],
+  collections: [Media, Users, Tag, Experiences, ProjectPost],
   globals: [PageContent, LegalTexts, Footer, Header]
 });

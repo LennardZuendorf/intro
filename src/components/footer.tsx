@@ -1,6 +1,6 @@
 'use client';
 
-import { cn } from '@/lib/utils';
+import { cn } from '@/lib/utils/ui';
 import type * as React from 'react';
 
 import { ThemeSelect } from '@/components/shared/theme-select';
