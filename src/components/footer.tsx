@@ -18,7 +18,7 @@ interface FooterProps {
 export const Footer: React.FC<FooterProps> = ({ className = '' }) => {
   return (
     <footer className={cn('flex flex-col items-center pt-4 w-full pb-4', className)}>
-      <div className='container flex flex-col sm:flex-row items-center justify-between align-middle'>
+      <div className='container flex flex-col sm:flex-row items-center justify-between align-middle space-y-2'>
         <div className='flex items-start space-x-2'>
           <Link href={siteConfig.links.mail}>
             <Button

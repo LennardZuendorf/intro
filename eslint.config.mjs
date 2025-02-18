@@ -16,7 +16,7 @@ const configs = [
   ...compat.extends('next/typescript'),
   {
     ignores: ['src/migrations/**', 'src/lib/utils/deepMerge.ts'] // Add this line to ignore the folder
-  },
+  }
 ];
 
 export default configs;

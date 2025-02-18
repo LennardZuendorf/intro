@@ -1,89 +1,100 @@
 'use client';
 
-import { FaArrowRight, FaGithub, FaCodepen, FaLinkedin, FaDribbble } from 'react-icons/fa6';
-
 import { Button } from '@/components/ui/button';
-import Avatar from '@/components/custom/avatar';
 import { cn } from '@/lib/utils/ui';
 import { SectionProps } from '@/app/(app)/page';
+import { Card, CardContent, CardHeader } from '@/components/ui/card';
+import { H3, L, M, Muted, SMuted } from '@/components/ui/typography';
+import Link from 'next/link';
+import { HiMiniArrowTopRightOnSquare } from 'react-icons/hi2';
 
 export const MainSection = ({
   className = 'mx-auto flex flex-col h-screen md:justify-center'
 }: SectionProps) => {
   return (
-    <section id='hero' className={cn('', className)}>
-      <div className='flex flex-col justify-center gap-10 md:flex-row md:justify-between'>
-        <div className='order-last md:order-1 md:w-[500px]'>
-          <div className='mb-6 flex flex-col gap-y-2 text-center md:text-start'>
-            <h1 className='text-4xl font-bold'>Main Hero</h1>
-            <h2 className='text-lg font-medium'>Full Stack Engineer</h2>
-            <p>
-              I am passionate about integrating functionality and design in applications to create
-              intuitive, user-friendly experiences.
-            </p>
-          </div>
-          <div className='flex flex-col space-y-4 md:flex-row md:space-x-4 md:space-y-0'>
-            <a href='https://calendly.com/ralphortiz/30min' target='_blank'>
-              <Button size='lg' className='w-full'>
-                Schedule a meeting <FaArrowRight className='ml-2' size='14px' />
-              </Button>
-            </a>
-          </div>
-          <div className='mt-10 flex justify-center space-x-5 md:justify-start'>
-            <a href='https://github.com/rcortiz' target='_blank'>
-              <FaGithub size='24px' className='opacity-60 hover:opacity-100' />
-            </a>
-            <a href='https://codepen.io/rcortiz' target='_blank'>
-              <FaCodepen size='24px' className='opacity-60 hover:opacity-100' />
-            </a>
-            <a href='https://www.linkedin.com/in/ralphortiz/' target='_blank'>
-              <FaLinkedin size='24px' className='opacity-60 hover:opacity-100' />
-            </a>
-            <a href='https://dribbble.com/_rcortiz' target='_blank'>
-              <FaDribbble size='24px' className='opacity-60 hover:opacity-100' />
-            </a>
-          </div>
-        </div>
-        <div className='relative order-1 mx-auto md:order-last'>
-          <Avatar />
-        </div>
-      </div>
-      <div className='space-y-6'>
-        <div>
-          <h5 className='mb-4 font-cera text-lg font-medium'>About Me</h5>
-          <p className='mb-4'>
-            I&rsquo;m a software engineer passionate about creating seamless, high-performance user
-            interfaces that blend thoughtful design with strong engineering principles. I enjoy
-            working at the intersection of design and development, ensuring that the experiences I
-            build are not only visually compelling but also highly usable and efficient.
-          </p>
-          <p className='mb-4'>
-            Currently, I&rsquo;m a Software Developer at{' '}
-            <a
-              href='https://www.gmanmi.com/'
-              target='_blank'
-              className='font-medium text-[#EE4865] hover:underline dark:text-[#FFAB00]'
-            >
-              GMA New Media Inc.
-            </a>
-            , where I contribute to the design, development, and maintenance of web applications,
-            ensuring they meet performance, usability, and scalability standards. I collaborate with
-            cross-functional teams to implement new features, troubleshoot issues, and enhance
-            existing systems.
-          </p>
-          <p className='mb-4'>
-            In the past, I&rsquo;ve had the opportunity to work in diverse environments, from large
-            corporations to start-ups, and have gained valuable experience in managing group
-            systems, APIs, and integrating modern technologies like ReactJS and Node.js.
-            Additionally, I enjoy creating personal projects that explore different aspects of web
-            development.
-          </p>
-          <p className='mb-4'>
-            Outside of work, I&rsquo;m usually at the gym, playing video games, reading, or watching
-            TV series and documentaries. Traveling is another one of my passions, and I&rsquo;m
-            always looking for new adventures.
-          </p>
-        </div>
+    <section className={cn(className, 'flex flex-col gap-2 sm:gap-4')} id='hero'>
+      <div className='grid grid-cols-12 gap-2 w-full'>
+        <Card key='intro' className={cn('w-full', 'col-span-12 lg:col-span-8 lg:row-span-2')}>
+          <CardHeader className='p-1 pr-4 justify-end'>
+            <SMuted className='font-mono text-end'>hello</SMuted>
+          </CardHeader>
+          <CardContent className='place-self-center grid gap-2 grid-cols-3 justify-center lg:justify-start items-center  p-4 pt-0'>
+            <div className='flex flex-col col-span-3 md:col-span-2 gap-4 justify-between text-center lg:text-start'>
+              <H3 className='font-black font-title'>Hi! I&apos;m Lennard!</H3>
+              <M className='leading-normal'>
+                I&apos;m a <strong>Product Manager</strong> with a neck for coding, focused on
+                turning product vision into reality.
+              </M>
+            </div>
+          </CardContent>
+        </Card>
+        <Card className='col-span-12 lg:col-span-4 lg:row-span-3'>
+          <CardHeader className='p-1 pr-4 justify-end'>
+            <SMuted className='font-mono text-end'>about me</SMuted>
+          </CardHeader>
+          <CardContent>
+            <ul className='my-6 ml-6 list-disc [&>li]:mt-2 text-sm xl:text-base 2xl:text-lg'>
+              <li>
+                <strong>I enjoying working on software</strong> with real world impact.
+              </li>
+              <li>
+                My focus is technology based <strong>product management</strong>, which combines my
+                expertise in <strong>product, engineering, innovation</strong> and{' '}
+                <strong>business</strong>.
+              </li>
+              <li>
+                I&apos;m a <strong>coding enthusiast </strong>always trying to learn and leveling up
+                my skills in product, coding and software at large.
+              </li>
+              <li>
+                My free time I spent with <strong>music and various podcasts</strong>, working out
+                or working on my own projects.
+              </li>
+            </ul>
+          </CardContent>
+        </Card>
+        <Card className='col-span-12 lg:col-span-4 lg:row-span-1 hidden lg:block'>
+          <CardHeader className='p-1 pr-4 justify-end'>
+            <SMuted className='font-mono text-end'>about</SMuted>
+          </CardHeader>
+          <CardContent className='grid grid-cols-3 justify-between'>
+            <div className='col-span-2 flex flex-wrap justify-start text-start'>
+              <L>Learn About Me</L>
+              <Muted>My skills, experiences and techstack.</Muted>
+            </div>
+            <div className='col-span-1 flex justify-end items-center'>
+              <Link href='/about#about-me' scroll={false}>
+                <Button variant='default' size='icon'>
+                  <HiMiniArrowTopRightOnSquare className='h-4 w-4' />
+                </Button>
+              </Link>
+            </div>
+          </CardContent>
+        </Card>
+        <Card className='col-span-12 lg:col-span-4 lg:row-span-1 hidden lg:block'>
+          <CardHeader className='p-1 pr-4 justify-end'>
+            <SMuted className='font-mono text-end'>projects</SMuted>
+          </CardHeader>
+          <CardContent className='grid grid-cols-3 justify-between'>
+            <div className='col-span-2 flex flex-wrap justify-start text-start'>
+              <L>See All My Projects</L>
+              <Muted>All my academic and free time projects.</Muted>
+            </div>
+            <div className='col-span-1 flex justify-end items-center'>
+              <Link href='/projects' scroll={false}>
+                <Button variant='default' size='icon'>
+                  <HiMiniArrowTopRightOnSquare className='h-4 w-4' />
+                </Button>
+              </Link>
+            </div>
+          </CardContent>
+        </Card>
+        <Card className='col-span-12 lg:col-span-8 lg:row-span-1 hidden lg:block'>
+          <CardHeader className='p-1 pr-4 justify-end'>
+            <SMuted className='font-mono text-end'>topics</SMuted>
+          </CardHeader>
+          <CardContent className='gap-1 flex flex-wrap'></CardContent>
+        </Card>
       </div>
     </section>
   );

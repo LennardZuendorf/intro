@@ -1,6 +1,5 @@
 import configPromise from '@payload-config';
 import { getPayload } from 'payload';
-import { draftMode } from 'next/headers';
 import React from 'react';
 import { LivePreviewListener } from '@/lib/utils/payloadcms/LivePreviewListener';
 import { NextPage } from 'next';
@@ -9,7 +8,6 @@ import { Card, CardContent } from '@/components/ui/card';
 import RichText from '@/components/blocks/RichText';
 
 const LegalPage: NextPage = async () => {
-  const { isEnabled: draft } = await draftMode();
   const legalContent = await queryLegalContent();
 
   if (!legalContent) {
@@ -17,10 +15,10 @@ const LegalPage: NextPage = async () => {
   }
 
   return (
-    <article className='pt-16 pb-16'>
-      {draft && <LivePreviewListener />}
+    <article className='lg:pt-5 lg:pb-5 pt-2.5 pb-2.5 space-y-2.5 lg:space-y-5'>
+      <LivePreviewListener />
 
-      <div className='container mx-auto'>
+      <section className='container mx-auto' id='data-protection'>
         {!legalContent || (!legalContent.germanText && !legalContent.englishText) ? (
           <div>No legal content available.</div>
         ) : (
@@ -37,7 +35,7 @@ const LegalPage: NextPage = async () => {
               <TabsContent value='de'>
                 <Card>
                   <CardContent>
-                    <RichText data={legalContent.germanText} />
+                    <RichText data={legalContent.germanText} enableGutter={false} />
                   </CardContent>
                 </Card>
               </TabsContent>
@@ -46,14 +44,23 @@ const LegalPage: NextPage = async () => {
               <TabsContent value='en'>
                 <Card>
                   <CardContent>
-                    <RichText data={legalContent.englishText} />
+                    <RichText data={legalContent.englishText} enableGutter={false} />
                   </CardContent>
                 </Card>
               </TabsContent>
             )}
           </Tabs>
         )}
-      </div>
+      </section>
+      <section className='container mx-auto' id='privacy'>
+        {legalContent.privacy && (
+          <Card>
+            <CardContent>
+              <RichText data={legalContent.privacy} enableGutter={false} />
+            </CardContent>
+          </Card>
+        )}
+      </section>
     </article>
   );
 };

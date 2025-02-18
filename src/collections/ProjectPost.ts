@@ -92,8 +92,57 @@ export const ProjectPost: CollectionConfig<'projects'> = {
           label: 'Content'
         },
         {
-          fields: [],
-          label: 'Meta'
+          label: 'Classes',
+          fields: [
+            {
+              type: 'row',
+              fields: [
+                {
+                  name: 'technologies',
+                  type: 'relationship',
+                  relationTo: 'tag',
+                  hasMany: true,
+                  label: 'Used Technologies'
+                },
+                {
+                  type: 'text',
+                  name: 'liveUrl',
+                  admin: {
+                    description:
+                      'optional - must be viable link, i.e. /about or https://google.com otherwise'
+                  },
+                  // @ts-expect-error this is a text field but I cannot set string as a type
+                  validate: (value) => {
+                    if (!value || value.trim() === '') {
+                      return true;
+                    } else {
+                      return /^(\/|https?:\/\/)/.test(value)
+                        ? true
+                        : 'Must be a valid URL (e.g. /about or https://google.com)';
+                    }
+                  }
+                },
+                {
+                  type: 'text',
+                  name: 'repoUrl',
+                  admin: {
+                    description:
+                      'optional - must be viable link, i.e. /about or https://google.com otherwise'
+                  },
+                  // @ts-expect-error this is a text field but I cannot set string as a type
+                  validate: (value) => {
+                    if (!value || value.trim() === '') {
+                      return true;
+                    } else {
+                      return /^(\/|https?:\/\/)/.test(value)
+                        ? true
+                        : 'Must be a valid URL (e.g. /about or https://google.com)';
+                    }
+                  }
+                }
+              ]
+            }
+          ]
         },
         {
           name: 'meta',

@@ -11,7 +11,7 @@ import { env } from '@/env';
 import { lexicalEditor } from '@payloadcms/richtext-lexical';
 import { Experiences } from '@/collections/Experience';
 import { Tag } from '@/collections/Tag';
-import { Footer, Header, LegalTexts, PageContent } from '@/payload-globals';
+import { LegalTexts, PageContent } from '@/payload-globals';
 import { seoPlugin } from '@payloadcms/plugin-seo';
 import { ProjectPost } from '@/collections/ProjectPost';
 
@@ -78,5 +78,5 @@ export default buildConfig({
     })
   ],
   collections: [Media, Users, Tag, Experiences, ProjectPost],
-  globals: [PageContent, LegalTexts, Footer, Header]
+  globals: [PageContent, LegalTexts]
 });

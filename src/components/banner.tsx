@@ -37,7 +37,7 @@ export function Banner() {
             sessions.
           </XS>
           <S>
-            I use tools like{' '}
+            Used tools include{' '}
             <a className='underline' href='https://umami.ts'>
               Umami
             </a>{' '}
@@ -58,7 +58,7 @@ export function Banner() {
               size: 'sm',
               className: 'sm:text-wrap'
             })}
-            href='/legal/privacy'
+            href='/legal#privacy'
           >
             <S className='hidden sm:block'>Learn More</S>{' '}
             {/* Text visible on sm screens and larger */}

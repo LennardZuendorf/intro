@@ -41,10 +41,10 @@ export default async function Post({ params: paramsPromise }: Args) {
   if (!project) return notFound();
 
   return (
-    <article className='pt-16 pb-16'>
+    <article className='md:pt-10 md:pb-10 pt-5 pb-5'>
       {draft && <LivePreviewListener />}
 
-      <div className='flex flex-col items-center gap-4 pt-8'>
+      <div className='flex flex-col items-center px-5'>
         <div className='container'>
           <RichText className='max-w-[48rem] mx-auto' data={project.content} enableGutter={false} />
         </div>

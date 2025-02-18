@@ -120,64 +120,6 @@ export const PageContent: GlobalConfig = {
   ]
 };
 
-export const Footer: GlobalConfig = {
-  slug: 'footer',
-  fields: [
-    {
-      name: 'mainText',
-      type: 'text',
-      admin: {
-        description: 'main text in the footer'
-      }
-    },
-    {
-      type: 'row',
-      fields: [
-        {
-          name: 'mainLink',
-          type: 'relationship',
-          relationTo: 'tag',
-          admin: {
-            description: 'main link in the footer'
-          },
-          hasMany: false
-        },
-        {
-          name: 'socialLinks',
-          type: 'relationship',
-          relationTo: 'tag',
-          hasMany: true,
-          admin: {
-            description: 'linked socials in the footer'
-          }
-        }
-      ]
-    }
-  ]
-};
-
-export const Header: GlobalConfig = {
-  slug: 'header',
-  fields: [
-    {
-      name: 'links',
-      type: 'relationship',
-      relationTo: 'tag',
-      admin: {
-        description: 'all the links showcases in the header nav'
-      },
-      hasMany: true
-    },
-    {
-      name: 'color-switch',
-      type: 'checkbox',
-      admin: {
-        description: 'if the color switch button is enabled'
-      }
-    }
-  ]
-};
-
 export const LegalTexts: GlobalConfig = {
   slug: 'legalTexts',
   fields: [
@@ -185,7 +127,7 @@ export const LegalTexts: GlobalConfig = {
       type: 'tabs',
       tabs: [
         {
-          label: 'English',
+          label: 'EnglishLegalDisclaimers',
           description: 'English Language Legal Disclaimers',
           fields: [
             {
@@ -199,7 +141,7 @@ export const LegalTexts: GlobalConfig = {
           ]
         },
         {
-          label: 'German',
+          label: 'GermanLegalDisclaimers',
           description: 'German Language Legal Disclaimers',
           fields: [
             {
@@ -208,6 +150,19 @@ export const LegalTexts: GlobalConfig = {
               required: true,
               admin: {
                 description: 'formatted text displayed as German speaking legal disclaimers'
+              }
+            }
+          ]
+        },
+        {
+          label: 'PrivacyDisclaimers',
+          description: 'Additional Privacy Disclaimers',
+          fields: [
+            {
+              name: 'privacy',
+              type: 'richText',
+              admin: {
+                description: 'additional information about privacy'
               }
             }
           ]

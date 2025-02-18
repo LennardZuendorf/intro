@@ -39,14 +39,10 @@ export interface Config {
   globals: {
     'page-content': PageContent;
     legalTexts: LegalText;
-    footer: Footer;
-    header: Header;
   };
   globalsSelect: {
     'page-content': PageContentSelect<false> | PageContentSelect<true>;
     legalTexts: LegalTextsSelect<false> | LegalTextsSelect<true>;
-    footer: FooterSelect<false> | FooterSelect<true>;
-    header: HeaderSelect<false> | HeaderSelect<true>;
   };
   locale: null;
   user: User & {
@@ -266,6 +262,15 @@ export interface Project {
     };
     [k: string]: unknown;
   };
+  technologies?: (number | Tag)[] | null;
+  /**
+   * optional - must be viable link, i.e. /about or https://google.com otherwise
+   */
+  liveUrl?: string | null;
+  /**
+   * optional - must be viable link, i.e. /about or https://google.com otherwise
+   */
+  repoUrl?: string | null;
   meta?: {
     title?: string | null;
     /**
@@ -504,6 +509,9 @@ export interface ProjectsSelect<T extends boolean = true> {
   slug?: T;
   heroImage?: T;
   content?: T;
+  technologies?: T;
+  liveUrl?: T;
+  repoUrl?: T;
   meta?:
     | T
     | {
@@ -691,44 +699,24 @@ export interface LegalText {
     };
     [k: string]: unknown;
   };
-  updatedAt?: string | null;
-  createdAt?: string | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "footer".
- */
-export interface Footer {
-  id: number;
   /**
-   * main text in the footer
+   * additional information about privacy
    */
-  mainText?: string | null;
-  /**
-   * main link in the footer
-   */
-  mainLink?: (number | null) | Tag;
-  /**
-   * linked socials in the footer
-   */
-  socialLinks?: (number | Tag)[] | null;
-  updatedAt?: string | null;
-  createdAt?: string | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "header".
- */
-export interface Header {
-  id: number;
-  /**
-   * all the links showcases in the header nav
-   */
-  links?: (number | Tag)[] | null;
-  /**
-   * if the color switch button is enabled
-   */
-  'color-switch'?: boolean | null;
+  privacy?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -757,29 +745,7 @@ export interface PageContentSelect<T extends boolean = true> {
 export interface LegalTextsSelect<T extends boolean = true> {
   englishText?: T;
   germanText?: T;
-  updatedAt?: T;
-  createdAt?: T;
-  globalType?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "footer_select".
- */
-export interface FooterSelect<T extends boolean = true> {
-  mainText?: T;
-  mainLink?: T;
-  socialLinks?: T;
-  updatedAt?: T;
-  createdAt?: T;
-  globalType?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "header_select".
- */
-export interface HeaderSelect<T extends boolean = true> {
-  links?: T;
-  'color-switch'?: T;
+  privacy?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
