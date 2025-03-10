@@ -11,13 +11,17 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default:
+          'text-mtext bg-main border-2 border-border shadow-shadow hover:translate-x-boxShadowX hover:translate-y-boxShadowY hover:shadow-none hover:bg-accent hover:text-atext',
+        neutral:
           'text-mtext bg-main border-2 border-border shadow-shadow hover:translate-x-boxShadowX hover:translate-y-boxShadowY hover:shadow-none',
+        reversed:
+          'text-mtext bg-bg border-2 border-border shadow-shadow hover:translate-x-boxShadowX hover:translate-y-boxShadowY hover:shadow-none hover:bg-accent hover:text-atext',
+        reversedNeutral:
+          'text-mtext bg-bg border-2 border-border shadow-shadow hover:translate-x-boxShadowX hover:translate-y-boxShadowY hover:shadow-none',
         noShadow:
           'text-mtext bg-main border-2 border-transparent hover:border-border focus:border-border',
         accent:
           'bg-accent text-atext border-2 border-border shadow-shadow hover:translate-x-boxShadowX hover:translate-y-boxShadowY hover:shadow-none',
-        reverse:
-          'text-mtext bg-main border-2 border-border hover:translate-x-reverseBoxShadowX hover:translate-y-reverseBoxShadowY hover:shadow-shadow',
         link: 'text-mtext hover:underline'
       },
       size: {

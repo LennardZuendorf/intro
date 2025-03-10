@@ -2,7 +2,7 @@ import type { NextPage } from 'next';
 import { Banner } from '@/components/banner';
 import { MainSection } from '@/components/sections/main-grid';
 import { AboutSection } from '@/components/sections/about';
-import { ProjectSection } from '@/components/sections/project-grid';
+import { Projects } from '@/components/sections/projects';
 
 export interface SectionProps {
   className?: string;
@@ -10,13 +10,12 @@ export interface SectionProps {
 
 const Page: NextPage = () => {
   return (
-    <div className='flex flex-col items-center justify-center min-h-screen'>
-      <div className='container lg:w-9/12 md:w-10/12 sm:w-11/12 gap-10'>
-        <MainSection />
-        <AboutSection />
-        <ProjectSection />
-        <Banner />
-      </div>
+    <div className='min-h-screen'>
+      <MainSection className='' />
+      <AboutSection className='' />
+      <Projects className='lg:h-svh bg-main border-t-4 border-border pt-5 pb-5 md:pt-10 md:pb-10' />
+
+      <Banner className='' />
     </div>
   );
 };

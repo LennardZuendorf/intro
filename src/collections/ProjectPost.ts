@@ -49,6 +49,11 @@ export const ProjectPost: CollectionConfig<'projects'> = {
       required: true
     },
     {
+      name: 'shortDescription',
+      type: 'textarea',
+      required: true
+    },
+    {
       name: 'slug',
       type: 'text',
       admin: {

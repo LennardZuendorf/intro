@@ -245,6 +245,7 @@ export interface Experience {
 export interface Project {
   id: number;
   title: string;
+  shortDescription: string;
   slug?: string | null;
   heroImage?: (number | null) | Media;
   content: {
@@ -506,6 +507,7 @@ export interface ExperiencesSelect<T extends boolean = true> {
  */
 export interface ProjectsSelect<T extends boolean = true> {
   title?: T;
+  shortDescription?: T;
   slug?: T;
   heroImage?: T;
   content?: T;

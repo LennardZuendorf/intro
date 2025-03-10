@@ -9,8 +9,9 @@ const badgeVariants = cva(
   {
     variants: {
       variant: {
-        default: 'bg-main text-mtext',
-        neutral: 'bg-bw text-text'
+        default: 'bg-main text-mtext hover:bg-accent hover:text-atext',
+        revered: 'bg-bg text-mtext hover:bg-accent hover:text-atext',
+        accent: 'bg-accent text-text hover:bg-main'
       }
     },
     defaultVariants: {

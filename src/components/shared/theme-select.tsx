@@ -33,7 +33,7 @@ const themes = [
 
 interface ThemeSwitcherProps {
   className?: string; // Optional className for additional styling
-  buttonVariant?: 'default' | 'reverse' | 'noShadow' | 'accent'; // Button variant
+  buttonVariant?: 'default' | 'reversed' | 'noShadow' | 'accent'; // Button variant
 }
 
 export const ThemeSelect: React.FC<ThemeSwitcherProps> = ({

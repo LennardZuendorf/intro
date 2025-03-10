@@ -5,8 +5,10 @@ import { CheckCircle, CircleHelp } from 'lucide-react';
 import { S, XS } from '@/components/ui/typography';
 import { Button, buttonVariants } from '@/components/ui/button';
 import Link from 'next/link';
+import { SectionProps } from '@/app/(app)/page';
+import { cn } from '@/lib/utils/ui';
 
-export function Banner() {
+export function Banner({ className }: SectionProps) {
   const [isAcknowledged, setIsAcknowledged] = useState(true);
 
   useEffect(() => {
@@ -27,7 +29,12 @@ export function Banner() {
   }
 
   return (
-    <div className='z-[5000] bg-card fixed inset-x-0 bottom-5 2xl:w-6/12 lg:8/12 10/12 mx-auto mt-4 rounded-base shadow-shadow font-heading border-2 border-border p-4 bg-bg'>
+    <div
+      className={cn(
+        'z-[5000] bg-card fixed inset-x-0 bottom-5 2xl:w-6/12 lg:8/12 10/12 mx-auto mt-4 rounded-base shadow-shadow font-heading border-2 border-border p-4 bg-bg',
+        className
+      )}
+    >
       <div className='flex flex-row justify-between gap-3 md:flex-row md:items-center'>
         <div className='flex flex-col space-y-2 col-span-5 pt-2'>
           <XS>
