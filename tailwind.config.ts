@@ -15,10 +15,12 @@ const config: Config = {
         main: 'var(--main)',
         overlay: 'var(--overlay)',
         bg: 'var(--bg)',
-        bw: 'var(--bw)',
+        bw: 'var(--accent)',
+        accent: 'var(--accent)',
         blank: 'var(--blank)',
         text: 'var(--text)',
         mtext: 'var(--mtext)',
+        atext: 'var(--atext)',
         border: 'var(--border)',
         ring: 'var(--ring)',
         ringOffset: 'var(--ring-offset)',
@@ -26,12 +28,13 @@ const config: Config = {
         secondaryBlack: '#212121'
       },
       borderRadius: {
-        base: '12px',
-        md: '16px',
-        lg: '24px'
+        base: '4px',
+        md: '8px',
+        lg: '12px'
       },
       boxShadow: {
-        shadow: 'var(--shadow)'
+        shadow: 'var(--shadow)',
+        lshadow: 'var(--shadow-l)'
       },
       translate: {
         boxShadowX: '6px',

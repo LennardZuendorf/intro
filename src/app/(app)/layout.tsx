@@ -9,6 +9,7 @@ import { Nav } from '@/components/navbar';
 import { Toaster } from '@/components/ui/toaster';
 import { Inter } from 'next/font/google';
 import { env } from '@/env';
+import SetColorPreference from '@/lib/utils/setColorPreference';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -27,11 +28,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             strategy='lazyOnload'
           />
         </head>
-        <body className={cn('relative min-h-screen bg-bg font-sans antialiased')}>
+        <body className={cn('min-h-screen bg-bg font-sans antialiased')}>
           <Providers attribute='class' defaultTheme='system' enableSystem disableTransitionOnChange>
             <Nav />
-            <div className={cn('container mx-auto grow place-content-center md:w-9/12 w-11/12')}>
+            <div className='w-full'>
               {children}
+              <SetColorPreference />
               <Toaster />
             </div>
             <Footer />

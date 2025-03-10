@@ -14,6 +14,7 @@ import { M, Muted } from '@/components/ui/typography';
 import Link from 'next/link';
 import { ThemeSelect } from '@/components/shared/theme-select';
 import { usePathname } from 'next/navigation';
+import { ColorSelect } from '@/components/shared/color-select';
 
 type navItemsType = Array<{
   name: string;
@@ -24,7 +25,7 @@ export const Nav = ({ className }: { className?: string }) => {
   const { scrollYProgress } = useScroll();
   const [visible, setVisible] = useState(false);
   const pathname = usePathname();
-  const isAnimated = !pathname.includes('projects/') && !pathname.includes('/legal');
+  const isAnimated = !pathname.includes('/legal');
 
   useMotionValueEvent(scrollYProgress, 'change', (current) => {
     const direction = current! - scrollYProgress.getPrevious()!;
@@ -100,9 +101,11 @@ const Navbar = ({
               </Link>
             </NavigationMenuItem>
           ))}
-          <NavigationMenuItem key='theme-switcher'>
+          <NavigationMenuItem key='color-settings'>
             <ThemeSelect buttonVariant='noShadow' />
+            <ColorSelect buttonVariant='noShadow' />
           </NavigationMenuItem>
+          <NavigationMenuItem key='socials'></NavigationMenuItem>
         </NavigationMenuList>
       </NavigationMenu>
     </div>

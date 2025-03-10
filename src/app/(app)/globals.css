@@ -6,10 +6,9 @@
   --main: #f6f6f6;
 
   --overlay: rgba(0, 0, 0, 0.8); /* background color overlay for alert dialogs, modals, etc. */
-  --accent: #88aaee;
 
   --bg: #fff;
-  --bw: #fd9745;
+  --accent: oklch(0.3 0.02 300);
   --blank: #000; /* blank black and white */
   --border: #000;
   --text: #000;
@@ -21,8 +20,16 @@
   --border-radius: 17px;
   --box-shadow-x: 6px;
   --box-shadow-y: 4px;
+  --box-shadow-x2: 3px;
+  --box-shadow-y2: 2px;
+
+  --box-lshadow-x: 9px;
+  --box-lshadow-y: 6px;
+
   --reverse-box-shadow-x: -6px;
   --reverse-box-shadow-y: -4px;
+
+
   --base-font-weight: 500;
   --heading-font-weight: 900;
 
@@ -30,16 +37,18 @@
 }
 
 .dark {
-  --main: #2e2e2e;
+  --main: #202020;
 
-  --bg: #191818;
+  --bg: #191919;
+  --accent: oklch(0.98 0.005 300);
   --blank: #fff;
   --border: #000;
   --text: #e6e6e6;
   --mtext: #e6e6e6;
-  --atext: #e6e6e6;
+  --atext: #000;
   --ring: #fff;
   --ring-offset: #000;
 
   --shadow: var(--box-shadow-x) var(--box-shadow-y) 0px 0px var(--border);
+  --shadow-l: var(--box-lshadow-x) var(--box-lshadow-y) 0px 0px var(--border);
 }
