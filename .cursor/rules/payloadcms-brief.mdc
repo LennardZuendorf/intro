@@ -1,0 +1,58 @@
+---
+description: Questions/Tasks around PayloadCMS
+globs: 
+alwaysApply: false
+---
+
+# PayloadCMS Brief
+
+## Overview
+PayloadCMS is a full-stack, headless Content Management System (CMS) specifically designed for Next.js applications. It's an open-source, code-first framework that provides powerful content management capabilities while giving developers complete control over their data and infrastructure.
+
+## Key Features
+- **Full Admin Panel**: Built with React server/client components that match your data model
+- **Database Control**: Direct database access with automatic schema generation, migrations, and proper indexing
+- **API Options**: Instant REST, GraphQL, and direct Node.js APIs
+- **Authentication**: Built-in authentication system that can be used in your own applications
+- **Access Control**: Customizable access control patterns for content security
+- **Media Management**: File storage and image management with cropping and focal point selection
+- **Live Preview**: Real-time content preview as you make changes
+- **TypeScript Integration**: Fully typed with automatic type generation based on your content model
+- **Serverless Deployment**: Deploy seamlessly on Vercel and other platforms
+
+## Integration with Next.js
+PayloadCMS directly integrates with Next.js applications:
+- Install in any existing Next.js app with minimal configuration
+- Admin panel is rendered within your Next.js application
+- Server components can access data directly without additional API calls
+- Content changes trigger appropriate revalidation of routes
+
+## Data Model
+PayloadCMS organizes content through:
+- **Collections**: Database collections for repeating content types (like Projects, Users)
+- **Globals**: Single instances of content (like Site Settings, Legal Pages)
+- **Fields**: Strongly-typed content fields with validation and customization options
+- **Blocks**: Modular content components for rich, structured content editing
+
+## Architecture in this Project
+In this personal website project, PayloadCMS is used for:
+- Managing project portfolio entries with rich content
+- Storing experience/resume information
+- Handling legal content with multilingual support
+- Managing media assets
+- Providing a consistent editing experience for all site content
+
+## Development Workflow
+- Collection and Global schemas are defined in code
+- Admin UI is auto-generated based on these schemas
+- Content is managed through the admin interface
+- Next.js components fetch and display content using server components
+- Live Preview allows immediate visualization of content changes
+
+## Advantages Over Traditional CMS Solutions
+- No external service dependencies – data stays within your infrastructure
+- Fully customizable admin UI to match specific project needs
+- Strong developer experience with code-first approach
+- Version-controlled schema definitions
+- Seamless integration with modern JavaScript/TypeScript ecosystems
+- Serverless-friendly for modern cloud deployments

@@ -1,0 +1,54 @@
+{
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "files.exclude": {
+    "**/.git": true,
+    "**/.DS_Store": true,
+    "**/node_modules": true,
+    "**/.next": false
+  },
+  "VsCodeTaskButtons.tasks": [
+    {
+      "label": "✅ Full Quality Check",
+      "color": "#007acc",
+      "singleInstance": true,
+      "task": "Full Code Quality Check",
+      "tooltip": "Run Full Code Quality Check"
+    },
+    {
+      "label": "🔄 Lint Staged",
+      "color": "#007acc",
+      "singleInstance": true,
+      "task": "Lint Staged",
+      "tooltip": "Lint Staged Files"
+    },
+    {
+      "label": "🗃️ Start Supabase",
+      "singleInstance": true,
+      "task": "Start Supabase",
+      "tooltip": "Start local Supabase Env"
+    },
+    {
+      "label": "🛑 Stop Supabase",
+      "singleInstance": true,
+      "task": "Stop Supabase",
+      "tooltip": "Stop local Supabase Env"
+    }
+  ],
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+  "tailwindCSS.includeLanguages": {
+    "typescript": "javascript",
+    "typescriptreact": "javascript"
+  },
+  "tailwindCSS.experimental.classRegex": [
+    ["cn\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"],
+    ["cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"]
+  ],
+  "editor.quickSuggestions": {
+    "strings": true
+  }
+}

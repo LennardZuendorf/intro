@@ -9,9 +9,9 @@ const nextConfig = {
         hostname: 'localhost',
         port: '3000',
         pathname: '/api/media/**',
-        search: '',
-      },
-    ],
+        search: ''
+      }
+    ]
   },
   async redirects() {
     return [

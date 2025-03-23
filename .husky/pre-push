@@ -1,8 +1,0 @@
-# Step 1: Run the build process
-echo "Running build process..."
-pnpm run build
-if [ $? -ne 0 ]; then
-  echo "Build failed. Aborting push."
-  exit 1
-fi
-
