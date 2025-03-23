@@ -94,8 +94,7 @@
     {
       "label": "Stop Supabase",
       "type": "shell",
-      "command": "npx",
-      "args": ["supabase", "stop --all"],
+      "command": "npx supabase stop --all",
       "group": "none",
       "presentation": {
         "reveal": "always",
