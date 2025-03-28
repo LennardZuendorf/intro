@@ -10,6 +10,7 @@ import { Toaster } from '@/components/ui/toaster';
 import { Inter } from 'next/font/google';
 import { env } from '@/env';
 import SetColorPreference from '@/lib/utils/setColorPreference';
+import { ScrollArrow } from '@/components/ScrollArrow';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -39,6 +40,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </div>
             <Footer />
           </Providers>
+          <ScrollArrow />
         </body>
       </html>
     </>
