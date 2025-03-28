@@ -1,30 +1,60 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { cn } from '@/lib/utils/ui';
-import { AnimatePresence, motion, useMotionValueEvent, useScroll } from 'framer-motion';
+import { AnimatePresence, motion, useScroll } from 'framer-motion';
 
 export const ScrollArrow: React.FC = () => {
-  const { scrollYProgress } = useScroll();
-  const [visible, setVisible] = useState(true);
+  const { scrollY } = useScroll();
   const [atBottom, setAtBottom] = useState(false);
+  const [isScrolling, setIsScrolling] = useState(false);
+  const [atProjects, setAtProjects] = useState(false);
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-  // This is the reverse logic from the navbar
-  useMotionValueEvent(scrollYProgress, 'change', (current) => {
-    // Get scroll direction
-    const direction = current! - scrollYProgress.getPrevious()!;
+  // Track scrolling activity and check position
+  useEffect(() => {
+    const unsubscribe = scrollY.on('change', () => {
+      // When any scroll activity happens
+      setIsScrolling(true);
 
-    // Show when scrolling up, hide when scrolling down
-    if (scrollYProgress.get() < 0.05) {
-      setVisible(true); // Always visible at the top
-    } else {
-      setVisible(direction < 0); // Show when scrolling up (hide when scrolling down)
+      // Clear previous timeout
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+
+      // Set a new timeout to mark when scrolling stops
+      timeoutRef.current = setTimeout(() => {
+        setIsScrolling(false);
+      }, 500); // Adjust timeout as needed (500ms = half second)
+
+      // Check if at bottom of page
+      const isAtBottom = window.innerHeight + window.scrollY >= document.body.offsetHeight - 100;
+      setAtBottom(isAtBottom);
+
+      // Check if we're at the projects section
+      const projectsSection = document.querySelector('section#projects');
+      if (projectsSection) {
+        const rect = projectsSection.getBoundingClientRect();
+        // If projects section is in view or we've scrolled past it
+        setAtProjects(rect.top <= window.innerHeight);
+      }
+    });
+
+    // Run once on mount to initialize state
+    const projectsSection = document.querySelector('section#projects');
+    if (projectsSection) {
+      const rect = projectsSection.getBoundingClientRect();
+      setAtProjects(rect.top <= window.innerHeight);
     }
 
-    // Check if at bottom of page
-    const isAtBottom = window.innerHeight + window.scrollY >= document.body.offsetHeight - 100;
-    setAtBottom(isAtBottom);
-  });
+    return () => {
+      unsubscribe();
+      // Clear timeout on cleanup
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+    };
+  }, [scrollY]);
 
   const handleScroll = () => {
     // Find all sections (hero, about, projects)
@@ -57,9 +87,12 @@ export const ScrollArrow: React.FC = () => {
     }
   };
 
+  // Show when not scrolling, not at bottom, and not at projects section
+  const shouldShow = !isScrolling && !atBottom && !atProjects;
+
   return (
     <AnimatePresence>
-      {visible && !atBottom && (
+      {shouldShow && (
         <motion.button
           onClick={handleScroll}
           className={cn(
