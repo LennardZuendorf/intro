@@ -8,7 +8,7 @@
   --overlay: rgba(0, 0, 0, 0.8); /* background color overlay for alert dialogs, modals, etc. */
 
   --bg: #fff;
-  --grid: oklch(0.95 0 0);  /* Slightly darker than white background */
+  --grid: oklch(0.85 0 0);  /* More visible grid lines for light mode */
   --accent-light: oklch(0.3 0 0);  /* Light black */
   --accent: oklch(0.2 0 0);        /* Medium black */
   --accent-dark: oklch(0.1 0 0);   /* Dark black */
@@ -42,7 +42,7 @@
   --main: #202020;
 
   --bg: #191919;
-  --grid: oklch(0.25 0 0);  /* Slightly lighter than dark background */
+  --grid: oklch(0.35 0 0);  /* More visible grid lines for dark mode */
   --accent-light: oklch(0.98 0 0);  /* Light white */
   --accent: oklch(0.95 0 0);        /* Medium white */
   --accent-dark: oklch(0.92 0 0);   /* Dark white */

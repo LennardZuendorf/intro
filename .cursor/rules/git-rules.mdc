@@ -1,10 +1,29 @@
 ---
-description:
-globs:
-alwaysApply: true
+description: Git commit and and any Git related actions.
+globs: 
+alwaysApply: false
 ---
+# Git Commit and Branch Guidelines
 
-# Your rule content
+## Commit Message Guidelines
 
-- You can @ files here
-- You can use markdown but dont have to
+- Use conventional commit prefixes such as `chore:`, `fix:`, `feat:`, `refactor:`, `docs:`, and `test:` to clearly indicate the nature of each commit.
+- Write the commit subject in the imperative mood (e.g., "Fix", "Add", "Update") and keep it concise (ideally under 50 characters).
+- Separate the subject from the body with a blank line if additional details are necessary.
+- Include issue or ticket references in the body when applicable.
+- Avoid including multiple unrelated changes in a single commit.
+
+## Branch Naming Conventions
+
+- **Feature branches**: Use the prefix `feat/` (e.g., `feat/new-login-flow`).
+- **Bugfix branches**: Use the prefix `fix/` (e.g., `fix/login-error`).
+- **Chore branches**: Use the prefix `chore/` for non-functional changes (e.g., `chore/update-dependencies`).
+- **Hotfix branches**: Use the prefix `hotfix/` for immediate fixes (e.g., `hotfix/crash-on-load`).
+- Use lowercase letters and hyphens to separate words in branch names.
+
+## Merge and Rebase Strategies
+
+- Prefer rebase and fast-forward merges for a cleaner commit history.
+- Squash commits when merging feature branches to keep the history concise.
+
+By following these guidelines, we ensure consistent and clear commit messages that improve team collaboration and project maintainability.
