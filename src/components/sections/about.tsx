@@ -56,19 +56,6 @@ export default function AboutSection({ className }: SectionProps) {
         }}
       />
 
-      {/* Dark mode grid overlay */}
-      <div
-        className='absolute inset-0 w-full h-full dark:opacity-100 opacity-0'
-        style={{
-          backgroundImage: `
-            linear-gradient(to right, var(--grid) 1px, transparent 1px),
-            linear-gradient(to bottom, var(--grid) 1px, transparent 1px)
-          `,
-          backgroundSize: '80px 80px',
-          maskImage: 'radial-gradient(circle at center, black 40%, transparent 100%)'
-        }}
-      />
-
       <div className='relative w-full max-w-6xl mx-auto px-6 py-16'>
         <div className='grid grid-cols-1 lg:grid-cols-2 gap-12'>
           {/* Left Column - About Text */}
