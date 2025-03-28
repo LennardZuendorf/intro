@@ -5,8 +5,12 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export type ColorPalette = {
+export interface ColorPalette {
   name: string;
-  colorCode: string;
+  colorCode: {
+    light: string;
+    base: string;
+    dark: string;
+  };
   className: string;
-};
+}

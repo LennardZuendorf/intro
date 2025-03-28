@@ -1,90 +1,149 @@
 'use client';
 
-import { FaArrowRight, FaGithub, FaCodepen, FaLinkedin, FaDribbble } from 'react-icons/fa6';
-
-import { Button } from '@/components/ui/button';
-import Avatar from '@/components/custom/avatar';
 import { SectionProps } from '@/app/(app)/page';
 import { cn } from '@/lib/utils/ui';
 
-export const AboutSection = ({
-  className = 'mx-auto flex flex-col h-screen md:justify-center'
-}: SectionProps) => {
+const skills = [
+  'TypeScript',
+  'React',
+  'Node.js',
+  'Product Strategy',
+  'UX Design',
+  'Team Leadership',
+  'System Architecture',
+  'Cloud Infrastructure',
+  'Agile Methods'
+];
+
+const experiences = [
+  {
+    title: 'Senior Product Manager',
+    company: 'Company Name',
+    period: '2022 - Present',
+    description:
+      'Leading product strategy and development for enterprise SaaS solutions. Driving innovation and team success.'
+  },
+  {
+    title: 'Product Manager',
+    company: 'Previous Company',
+    period: '2020 - 2022',
+    description:
+      'Managed product lifecycle and development of key features. Led cross-functional teams and improved user satisfaction.'
+  }
+];
+
+export default function AboutSection({ className }: SectionProps) {
   return (
-    <section id='about' className={cn('', className)}>
-      <div className='flex flex-col justify-center gap-10 md:flex-row md:justify-between'>
-        <div className='order-last md:order-1 md:w-[500px]'>
-          <div className='mb-6 flex flex-col gap-y-2 text-center md:text-start'>
-            <h1 className='text-4xl font-bold'>About Section</h1>
-            <h2 className='text-lg font-medium'>Full Stack Engineer</h2>
-            <p>
-              I am passionate about integrating functionality and design in applications to create
-              intuitive, user-friendly experiences.
-            </p>
+    <section
+      className={cn(
+        'min-h-[100svh] w-full relative overflow-hidden',
+        'flex items-center justify-center',
+        'bg-[#F8F5F1] dark:bg-[#1A1A1A]',
+        className
+      )}
+      id='about'
+    >
+      {/* Grid background with mask */}
+      <div
+        className='absolute inset-0 w-full h-full'
+        style={{
+          backgroundImage: `
+            linear-gradient(to right, var(--grid) 1px, transparent 1px),
+            linear-gradient(to bottom, var(--grid) 1px, transparent 1px)
+          `,
+          backgroundSize: '80px 80px',
+          maskImage: 'radial-gradient(circle at center, black 40%, transparent 100%)'
+        }}
+      />
+
+      {/* Dark mode grid overlay */}
+      <div
+        className='absolute inset-0 w-full h-full dark:opacity-100 opacity-0'
+        style={{
+          backgroundImage: `
+            linear-gradient(to right, var(--grid) 1px, transparent 1px),
+            linear-gradient(to bottom, var(--grid) 1px, transparent 1px)
+          `,
+          backgroundSize: '80px 80px',
+          maskImage: 'radial-gradient(circle at center, black 40%, transparent 100%)'
+        }}
+      />
+
+      <div className='relative w-full max-w-6xl mx-auto px-6 py-16'>
+        <div className='grid grid-cols-1 lg:grid-cols-2 gap-12'>
+          {/* Left Column - About Text */}
+          <div className='space-y-8'>
+            <div className='relative'>
+              <div className='absolute -top-3 -left-3 px-4 py-1 bg-accent-light text-atext font-mono text-sm border-2 border-black rotate-2 rounded-md'>
+                About Me
+              </div>
+              <div className='bg-white dark:bg-[#2A2A2A] p-8 rounded-md border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]'>
+                <div className='prose prose-lg dark:prose-invert'>
+                  <p className='font-mono leading-relaxed'>
+                    I&apos;m a Product Manager and Tech Explorer passionate about building digital
+                    products that combine strategic vision with technical excellence. With
+                    experience in both product strategy and hands-on development, I bridge the gap
+                    between business goals and technical implementation.
+                  </p>
+                  <p className='font-mono leading-relaxed mt-4'>
+                    Currently focused on enterprise SaaS solutions, I lead cross-functional teams in
+                    developing innovative products that solve real user problems while maintaining
+                    technical excellence.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Skills Section */}
+            <div className='space-y-4'>
+              <h3 className='text-2xl font-bold relative'>
+                <span className='bg-accent text-atext px-3 py-1.5 font-medium rotate-1 inline-block rounded-md border-2 border-black'>
+                  Skills & Expertise
+                </span>
+              </h3>
+              <div className='flex flex-wrap gap-2'>
+                {skills.map((skill) => (
+                  <span
+                    key={skill}
+                    className='px-3 py-1.5 bg-accent-light text-atext font-medium border-2 border-black rounded-md rotate-1 hover:-rotate-1 transition-all shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:bg-accent'
+                  >
+                    {skill}
+                  </span>
+                ))}
+              </div>
+            </div>
           </div>
-          <div className='flex flex-col space-y-4 md:flex-row md:space-x-4 md:space-y-0'>
-            <a href='https://calendly.com/ralphortiz/30min' target='_blank'>
-              <Button size='lg' className='w-full'>
-                Schedule a meeting <FaArrowRight className='ml-2' size='14px' />
-              </Button>
-            </a>
+
+          {/* Right Column - Experience */}
+          <div className='space-y-8'>
+            <h3 className='text-2xl font-bold relative'>
+              <span className='bg-accent-dark text-atext px-3 py-1.5 font-medium -rotate-1 inline-block rounded-md border-2 border-black'>
+                Experience
+              </span>
+            </h3>
+            <div className='space-y-6'>
+              {experiences.map((exp, index) => (
+                <div
+                  key={exp.title}
+                  className={cn(
+                    'bg-white dark:bg-[#2A2A2A] p-6 rounded-md border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all',
+                    index % 2 === 0 ? 'hover:-rotate-1' : 'rotate-1 hover:rotate-0'
+                  )}
+                >
+                  <div className='flex justify-between items-start mb-2'>
+                    <h4 className='font-bold text-lg'>{exp.title}</h4>
+                    <span className='font-mono text-sm'>{exp.period}</span>
+                  </div>
+                  <h5 className='font-mono text-sm mb-2'>{exp.company}</h5>
+                  <p className='font-mono text-sm text-gray-600 dark:text-gray-400'>
+                    {exp.description}
+                  </p>
+                </div>
+              ))}
+            </div>
           </div>
-          <div className='mt-10 flex justify-center space-x-5 md:justify-start'>
-            <a href='https://github.com/rcortiz' target='_blank'>
-              <FaGithub size='24px' className='opacity-60 hover:opacity-100' />
-            </a>
-            <a href='https://codepen.io/rcortiz' target='_blank'>
-              <FaCodepen size='24px' className='opacity-60 hover:opacity-100' />
-            </a>
-            <a href='https://www.linkedin.com/in/ralphortiz/' target='_blank'>
-              <FaLinkedin size='24px' className='opacity-60 hover:opacity-100' />
-            </a>
-            <a href='https://dribbble.com/_rcortiz' target='_blank'>
-              <FaDribbble size='24px' className='opacity-60 hover:opacity-100' />
-            </a>
-          </div>
-        </div>
-        <div className='relative order-1 mx-auto md:order-last'>
-          <Avatar />
-        </div>
-      </div>
-      <div className='space-y-6'>
-        <div>
-          <h5 className='mb-4 font-cera text-lg font-medium'>About Me</h5>
-          <p className='mb-4'>
-            I&rsquo;m a software engineer passionate about creating seamless, high-performance user
-            interfaces that blend thoughtful design with strong engineering principles. I enjoy
-            working at the intersection of design and development, ensuring that the experiences I
-            build are not only visually compelling but also highly usable and efficient.
-          </p>
-          <p className='mb-4'>
-            Currently, I&rsquo;m a Software Developer at{' '}
-            <a
-              href='https://www.gmanmi.com/'
-              target='_blank'
-              className='font-medium text-[#EE4865] hover:underline dark:text-[#FFAB00]'
-            >
-              GMA New Media Inc.
-            </a>
-            , where I contribute to the design, development, and maintenance of web applications,
-            ensuring they meet performance, usability, and scalability standards. I collaborate with
-            cross-functional teams to implement new features, troubleshoot issues, and enhance
-            existing systems.
-          </p>
-          <p className='mb-4'>
-            In the past, I&rsquo;ve had the opportunity to work in diverse environments, from large
-            corporations to start-ups, and have gained valuable experience in managing group
-            systems, APIs, and integrating modern technologies like ReactJS and Node.js.
-            Additionally, I enjoy creating personal projects that explore different aspects of web
-            development.
-          </p>
-          <p className='mb-4'>
-            Outside of work, I&rsquo;m usually at the gym, playing video games, reading, or watching
-            TV series and documentaries. Traveling is another one of my passions, and I&rsquo;m
-            always looking for new adventures.
-          </p>
         </div>
       </div>
     </section>
   );
-};
+}

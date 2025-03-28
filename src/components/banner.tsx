@@ -31,7 +31,7 @@ export function Banner({ className }: SectionProps) {
   return (
     <div
       className={cn(
-        'z-[5000] bg-card fixed inset-x-0 bottom-5 2xl:w-6/12 lg:8/12 10/12 mx-auto mt-4 rounded-base shadow-shadow font-heading border-2 border-border p-4 bg-bg',
+        'z-[5000] bg-card fixed inset-x-0 bottom-5 2xl:w-6/12 lg:8/12 10/12 mx-auto mt-4 rounded-base shadow-shadow font-heading border-2 border-border p-4 bg-bg hover:bg-accent-light transition-colors',
         className
       )}
     >

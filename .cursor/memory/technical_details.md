@@ -108,3 +108,131 @@ The application uses a mix of:
 - Husky for git hooks
 - TypeScript for type safety
 - PNPM as package manager
+
+## Component Architecture Updates
+
+### Hero Section
+The hero section will be implemented as a standalone component with the following features:
+- Neobrutalism design elements (bold typography, strong borders, high contrast)
+- Responsive layout with proper spacing and alignment
+- Interactive elements and animations
+- Content management through Payload CMS
+- Optimized performance with proper image loading
+
+#### Technical Stack for Hero
+- Next.js Server Component for initial render
+- TailwindCSS with custom Neobrutalism utility classes
+- Framer Motion for animations
+- Payload CMS integration for content management
+- Image optimization through Next.js Image component
+
+### About Section
+The about section will be implemented in two parts:
+
+1. Homepage About Section:
+   - Condensed information with key highlights
+   - Visual elements following Neobrutalism design
+   - Interactive elements for engagement
+   - Direct integration with CMS content
+
+2. Dedicated About Page:
+   - Full-width layout with detailed information
+   - Rich content management through Payload CMS
+   - Interactive elements and animations
+   - Responsive design for all viewports
+
+#### Technical Stack for About Components
+- Next.js App Router for page routing
+- Server Components for optimal performance
+- TailwindCSS with Neobrutalism design system
+- Framer Motion for animations and transitions
+- Payload CMS integration for content management
+
+## Content Management Structure
+
+### Hero Content Model
+```typescript
+// Hero section content model
+{
+  title: {
+    type: 'text',
+    required: true,
+  },
+  subtitle: {
+    type: 'text',
+    required: true,
+  },
+  description: {
+    type: 'richText',
+    required: true,
+  },
+  ctaButton: {
+    type: 'group',
+    fields: {
+      text: { type: 'text' },
+      link: { type: 'text' },
+    },
+  },
+  backgroundImage: {
+    type: 'upload',
+    relationTo: 'media',
+  },
+}
+```
+
+### About Content Model
+```typescript
+// About page content model
+{
+  shortBio: {
+    type: 'richText',
+    required: true,
+  },
+  fullBio: {
+    type: 'richText',
+    required: true,
+  },
+  skills: {
+    type: 'array',
+    fields: {
+      category: { type: 'text' },
+      items: { type: 'array', fields: { name: { type: 'text' } } },
+    },
+  },
+  experience: {
+    type: 'array',
+    fields: {
+      title: { type: 'text' },
+      company: { type: 'text' },
+      period: { type: 'text' },
+      description: { type: 'richText' },
+    },
+  },
+  education: {
+    type: 'array',
+    fields: {
+      degree: { type: 'text' },
+      institution: { type: 'text' },
+      period: { type: 'text' },
+      description: { type: 'richText' },
+    },
+  },
+}
+```
+
+## Design System Integration
+
+### Neobrutalism Design Elements
+- Bold typography with system fonts
+- High contrast color combinations
+- Strong borders (3-4px) with slight offsets
+- Playful interactive states
+- Bold background colors
+- Distinctive hover and focus states
+
+### Animation Guidelines
+- Subtle hover transitions (150-200ms)
+- Page transition animations
+- Scroll-triggered animations for sections
+- Interactive element feedback
+- Loading state animations

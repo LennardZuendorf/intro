@@ -9,7 +9,9 @@ export default function SetColorPreference() {
     const r = window.document.querySelector(':root') as HTMLElement;
 
     if (colorObj) {
-      r.style.setProperty('--accent', colorObj.colorCode);
+      r.style.setProperty('--accent-light', colorObj.colorCode.light);
+      r.style.setProperty('--accent', colorObj.colorCode.base);
+      r.style.setProperty('--accent-dark', colorObj.colorCode.dark);
     }
   }, []);
 

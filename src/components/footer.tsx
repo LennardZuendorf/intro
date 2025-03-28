@@ -28,7 +28,7 @@ export const Footer: React.FC<FooterProps> = ({ className = '' }) => {
           <Link href={siteConfig.links.mail}>
             <Button
               variant='link'
-              className='justify-center items-center text-mtext hover:text-atext hover:bg-accent'
+              className='justify-center items-center text-mtext hover:text-atext hover:bg-accent-light'
               size='icon'
             >
               <MailboxIcon size='3vh' />
@@ -37,7 +37,7 @@ export const Footer: React.FC<FooterProps> = ({ className = '' }) => {
           <Link href={siteConfig.links.linkedin}>
             <Button
               variant='link'
-              className='justify-center items-center hover:text-atext hover:bg-accent'
+              className='justify-center items-center hover:text-atext hover:bg-accent-light'
               size='icon'
             >
               <FaLinkedin size='2vh' />
@@ -46,7 +46,7 @@ export const Footer: React.FC<FooterProps> = ({ className = '' }) => {
           <Link href={siteConfig.links.github}>
             <Button
               variant='link'
-              className='justify-center items-center hover:text-atext hover:bg-accent'
+              className='justify-center items-center hover:text-atext hover:bg-accent-light'
               size='icon'
             >
               <FaGithub size='2vh' />

@@ -16,15 +16,45 @@ const config: Config = {
         overlay: 'var(--overlay)',
         bg: 'var(--bg)',
         bw: 'var(--accent)',
-        accent: 'var(--accent)',
+        accent: {
+          light: 'var(--accent-light)',
+          DEFAULT: 'var(--accent)',
+          dark: 'var(--accent-dark)'
+        },
         blank: 'var(--blank)',
         text: 'var(--text)',
         mtext: 'var(--mtext)',
         atext: 'var(--atext)',
-        border: 'var(--border)',
-        ring: 'var(--ring)',
+        border: 'rgb(var(--border))',
+        ring: 'rgb(var(--ring))',
         ringOffset: 'var(--ring-offset)',
-
+        input: 'rgb(var(--input))',
+        background: 'rgb(var(--background))',
+        foreground: 'rgb(var(--foreground))',
+        primary: {
+          DEFAULT: 'rgb(var(--primary))',
+          foreground: 'rgb(var(--primary-foreground))'
+        },
+        secondary: {
+          DEFAULT: 'rgb(var(--secondary))',
+          foreground: 'rgb(var(--secondary-foreground))'
+        },
+        destructive: {
+          DEFAULT: 'rgb(var(--destructive))',
+          foreground: 'rgb(var(--destructive-foreground))'
+        },
+        muted: {
+          DEFAULT: 'rgb(var(--muted))',
+          foreground: 'rgb(var(--muted-foreground))'
+        },
+        popover: {
+          DEFAULT: 'rgb(var(--popover))',
+          foreground: 'rgb(var(--popover-foreground))'
+        },
+        card: {
+          DEFAULT: 'rgb(var(--card))',
+          foreground: 'rgb(var(--card-foreground))'
+        },
         secondaryBlack: '#212121'
       },
       borderRadius: {

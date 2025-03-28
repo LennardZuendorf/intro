@@ -8,7 +8,10 @@
   --overlay: rgba(0, 0, 0, 0.8); /* background color overlay for alert dialogs, modals, etc. */
 
   --bg: #fff;
-  --accent: oklch(0.3 0.02 300);
+  --grid: oklch(0.95 0 0);  /* Slightly darker than white background */
+  --accent-light: oklch(0.3 0 0);  /* Light black */
+  --accent: oklch(0.2 0 0);        /* Medium black */
+  --accent-dark: oklch(0.1 0 0);   /* Dark black */
   --blank: #000; /* blank black and white */
   --border: #000;
   --text: #000;
@@ -39,7 +42,10 @@
   --main: #202020;
 
   --bg: #191919;
-  --accent: oklch(0.98 0.005 300);
+  --grid: oklch(0.25 0 0);  /* Slightly lighter than dark background */
+  --accent-light: oklch(0.98 0 0);  /* Light white */
+  --accent: oklch(0.95 0 0);        /* Medium white */
+  --accent-dark: oklch(0.92 0 0);   /* Dark white */
   --blank: #fff;
   --border: #000;
   --text: #e6e6e6;

@@ -21,8 +21,8 @@ const buttonVariants = cva(
         noShadow:
           'text-mtext bg-main border-2 border-transparent hover:border-border focus:border-border',
         accent:
-          'bg-accent text-atext border-2 border-border shadow-shadow hover:translate-x-boxShadowX hover:translate-y-boxShadowY hover:shadow-none',
-        link: 'text-mtext hover:underline'
+          'bg-accent text-atext border-2 border-border shadow-shadow hover:translate-x-boxShadowX hover:translate-y-boxShadowY hover:shadow-none hover:bg-accent-dark',
+        link: 'text-mtext hover:text-accent'
       },
       size: {
         default: 'h-10 px-4 py-2',

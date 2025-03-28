@@ -2,6 +2,7 @@
 
 import { CommandList } from 'cmdk';
 import * as React from 'react';
+import { useEffect, useState } from 'react';
 
 import { Button } from '@/components/ui/button';
 import { Command, CommandGroup, CommandItem } from '@/components/ui/command';
@@ -14,22 +15,38 @@ import type { ColorPalette } from '@/lib/utils/ui';
 const accentColors: ColorPalette[] = [
   {
     name: 'Amber',
-    colorCode: 'oklch(0.666 0.179 58.318)',
+    colorCode: {
+      light: 'oklch(0.766 0.179 58.318)', // Lighter amber
+      base: 'oklch(0.666 0.179 58.318)', // Original amber
+      dark: 'oklch(0.566 0.179 58.318)' // Darker amber
+    },
     className: 'bg-amber-600'
   },
   {
     name: 'Emerald',
-    colorCode: 'oklch(0.6 0.118 184.704)',
+    colorCode: {
+      light: 'oklch(0.7 0.118 184.704)', // Lighter emerald
+      base: 'oklch(0.6 0.118 184.704)', // Original emerald
+      dark: 'oklch(0.5 0.118 184.704)' // Darker emerald
+    },
     className: 'bg-emerald-600'
   },
   {
     name: 'Rose',
-    colorCode: 'oklch(0.712 0.194 13.428)',
+    colorCode: {
+      light: 'oklch(0.812 0.194 13.428)', // Lighter rose
+      base: 'oklch(0.712 0.194 13.428)', // Original rose
+      dark: 'oklch(0.612 0.194 13.428)' // Darker rose
+    },
     className: 'bg-rose-400'
   },
   {
     name: 'Indigo',
-    colorCode: 'oklch(0.511 0.262 276.966)',
+    colorCode: {
+      light: 'oklch(0.611 0.262 276.966)', // Lighter indigo
+      base: 'oklch(0.511 0.262 276.966)', // Original indigo
+      dark: 'oklch(0.411 0.262 276.966)' // Darker indigo
+    },
     className: 'bg-indigo-600'
   }
 ];
@@ -39,25 +56,57 @@ interface ColorSelectProps {
   buttonVariant?: 'default' | 'reversed' | 'noShadow' | 'accent';
 }
 
+//TODO: Fix build error with ColorPalette Type.
+
 export const ColorSelect: React.FC<ColorSelectProps> = ({
   className,
   buttonVariant = 'default'
 }) => {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
+  const [currentColor, setCurrentColor] = useState<ColorPalette | null>(null);
 
-  const currentColor: ColorPalette | null = JSON.parse(localStorage.getItem('color') as string);
-  console.log(JSON.parse(localStorage.getItem('color') as string));
+  // Load color from localStorage only on client-side
+  useEffect(() => {
+    try {
+      const savedColor = localStorage.getItem('color');
+      if (savedColor) {
+        setCurrentColor(JSON.parse(savedColor));
+
+        // Apply the saved color when component mounts
+        const color = JSON.parse(savedColor);
+        const r = window.document.querySelector(':root') as HTMLElement;
+        r.style.setProperty('--accent-light', color.colorCode.light);
+        r.style.setProperty('--accent', color.colorCode.base);
+        r.style.setProperty('--accent-dark', color.colorCode.dark);
+      }
+    } catch (error) {
+      console.error('Error loading color from localStorage:', error);
+    }
+  }, []);
 
   const updateColorPalette = (color: ColorPalette) => {
     const r = window.document.querySelector(':root') as HTMLElement;
-    r.style.setProperty('--accent', color.colorCode);
+    // Set accent colors
+    r.style.setProperty('--accent-light', color.colorCode.light);
+    r.style.setProperty('--accent', color.colorCode.base);
+    r.style.setProperty('--accent-dark', color.colorCode.dark);
+    // Ensure grid stays neutral
+    const isDark = document.documentElement.classList.contains('dark');
+    r.style.setProperty('--grid', isDark ? 'oklch(0.25 0 0)' : 'oklch(0.95 0 0)');
     localStorage.setItem('color', JSON.stringify(color));
+    setCurrentColor(color);
   };
 
   const resetColorPalette = () => {
     const r = window.document.querySelector(':root') as HTMLElement;
+    r.style.removeProperty('--accent-light');
     r.style.removeProperty('--accent');
+    r.style.removeProperty('--accent-dark');
+    // Reset grid to neutral
+    const isDark = document.documentElement.classList.contains('dark');
+    r.style.setProperty('--grid', isDark ? 'oklch(0.25 0 0)' : 'oklch(0.95 0 0)');
     localStorage.removeItem('color');
+    setCurrentColor(null);
   };
 
   return (

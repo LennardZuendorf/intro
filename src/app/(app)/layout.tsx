@@ -28,7 +28,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             strategy='lazyOnload'
           />
         </head>
-        <body className={cn('min-h-screen bg-bg font-sans antialiased')}>
+        <body className={cn('min-h-screen bg-bg font-sans antialiased relative')}>
+          <div className='absolute inset-0 -z-10 h-full w-full bg-[linear-gradient(to_right,var(--grid)_1px,transparent_1px),linear-gradient(to_bottom,var(--grid)_1px,transparent_1px)] bg-[size:20px_20px]' />
           <Providers attribute='class' defaultTheme='system' enableSystem disableTransitionOnChange>
             <Nav />
             <div className='w-full'>
