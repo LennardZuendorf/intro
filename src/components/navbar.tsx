@@ -83,32 +83,42 @@ const Navbar = ({
   className?: string;
 }) => {
   return (
-    <div className={cn('flex flex-col items-center pt-4 pb-4 gap-1', className)}>
-      <NavigationMenu>
-        <NavigationMenuList>
-          {navItems.map((item) => (
-            <NavigationMenuItem key={item.name}>
-              <Link href={item.link} legacyBehavior passHref>
-                <NavigationMenuLink
-                  className={cn(
-                    navigationMenuTriggerStyle(),
-                    pathname.includes(item.link) ? 'font-bold' : 'font-medium'
-                  )}
-                  active={!pathname.includes(item.link)}
-                >
-                  {item.name}
-                </NavigationMenuLink>
-              </Link>
-            </NavigationMenuItem>
-          ))}
-          <NavigationMenuItem key='color-settings'>
-            <ThemeSelect buttonVariant='noShadow' />
-            <ColorSelect buttonVariant='noShadow' />
-          </NavigationMenuItem>
-          <NavigationMenuItem key='socials'></NavigationMenuItem>
-        </NavigationMenuList>
-      </NavigationMenu>
-    </div>
+    <motion.header className={cn('flex flex-col items-center pt-4 pb-4 gap-1', className)}>
+      <nav className={cn('flex flex-col items-center pt-4 pb-4 gap-1', className)}>
+        <div className={cn('flex flex-col items-center pt-4 pb-4 gap-1', className)}>
+          <NavigationMenu>
+            <NavigationMenuList>
+              {navItems.map((item) => (
+                <NavigationMenuItem key={item.name}>
+                  <Link href={item.link} legacyBehavior passHref>
+                    <NavigationMenuLink
+                      className={cn(
+                        navigationMenuTriggerStyle(),
+                        pathname.includes(item.link) ? 'font-bold' : 'font-medium'
+                      )}
+                      active={!pathname.includes(item.link)}
+                    >
+                      {item.name}
+                    </NavigationMenuLink>
+                  </Link>
+                </NavigationMenuItem>
+              ))}
+              <NavigationMenuItem key='color-settings'>
+                <ThemeSelect
+                  buttonVariant='noShadow'
+                  className='hover:border-2 hover:border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[-2px] hover:translate-y-[-2px]'
+                />
+                <ColorSelect
+                  buttonVariant='noShadow'
+                  className='hover:border-2 hover:border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[-2px] hover:translate-y-[-2px]'
+                />
+              </NavigationMenuItem>
+              <NavigationMenuItem key='socials'></NavigationMenuItem>
+            </NavigationMenuList>
+          </NavigationMenu>
+        </div>
+      </nav>
+    </motion.header>
   );
 };
 
@@ -142,12 +152,12 @@ function queryHeaderContent(): navItemsType {
       link: '/#hero'
     },
     {
-      name: 'Projects',
-      link: '/#projects'
-    },
-    {
       name: 'About',
       link: '/#about'
+    },
+    {
+      name: 'Projects',
+      link: '/#projects'
     }
   ];
 }

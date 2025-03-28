@@ -41,7 +41,7 @@ export const Footer: React.FC<FooterProps> = ({ className = '' }) => {
           <Link href={siteConfig.links.mail}>
             <Button
               variant='link'
-              className='justify-center items-center text-mtext hover:text-atext hover:bg-accent-light rounded-md'
+              className='justify-center items-center text-mtext hover:text-atext hover:bg-accent-light rounded-md hover:border-2 hover:border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]'
               size='icon'
             >
               <MailboxIcon size='3vh' />
@@ -50,7 +50,7 @@ export const Footer: React.FC<FooterProps> = ({ className = '' }) => {
           <Link href={siteConfig.links.linkedin}>
             <Button
               variant='link'
-              className='justify-center items-center hover:text-atext hover:bg-accent-light rounded-md'
+              className='justify-center items-center hover:text-atext hover:bg-accent-light rounded-md hover:border-2 hover:border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]'
               size='icon'
             >
               <FaLinkedin size='2vh' />
@@ -59,7 +59,7 @@ export const Footer: React.FC<FooterProps> = ({ className = '' }) => {
           <Link href={siteConfig.links.github}>
             <Button
               variant='link'
-              className='justify-center items-center hover:text-atext hover:bg-accent-light rounded-md'
+              className='justify-center items-center hover:text-atext hover:bg-accent-light rounded-md hover:border-2 hover:border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]'
               size='icon'
             >
               <FaGithub size='2vh' />
@@ -69,11 +69,11 @@ export const Footer: React.FC<FooterProps> = ({ className = '' }) => {
         <div className='flex items-end gap-x-4'>
           <ColorSelect
             buttonVariant='default'
-            className='shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-0.5 transition-all'
+            className='shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-0.5 transition-all hover:border-2 hover:border-black'
           />
           <ThemeSelect
             buttonVariant='default'
-            className='shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-0.5 transition-all'
+            className='shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-0.5 transition-all hover:border-2 hover:border-black'
           />
         </div>
       </div>
@@ -85,7 +85,7 @@ export const Footer: React.FC<FooterProps> = ({ className = '' }) => {
           <Link href='/legal'>
             <Button
               variant='link'
-              className='justify-center items-center hover:text-accent text-sm font-medium leading-none hover:underline p-0'
+              className='justify-center items-center hover:text-accent text-sm font-medium leading-none hover:underline p-0 hover:bg-accent-light hover:shadow-[1px_1px_0px_0px_rgba(0,0,0,1)]'
               size='icon'
             >
               legal
