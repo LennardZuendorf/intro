@@ -1,5 +1,20 @@
 'use client';
 
+/**
+ * Toaster Component
+ * ----------------
+ * Renders toast notifications with neobrutalist styling and special features.
+ *
+ * Special Features:
+ * - Alternating rotation: Toasts alternate between clockwise and counterclockwise tilts
+ * - Color name highlighting: Automatically highlights color names (Amber, Emerald, etc.) in their respective colors
+ * - Hover effects: Toasts lift slightly on hover with increased shadow
+ * - Proper z-index handling and positioning
+ *
+ * This component is automatically included in the layout and doesn't need to be manually added.
+ * Use the useToast hook to trigger toast notifications from any component.
+ */
+
 import { useToast } from '@/hooks/use-toast';
 
 import {
@@ -16,9 +31,9 @@ export function Toaster() {
 
   return (
     <ToastProvider>
-      {toasts.map(function ({ id, title, description, action, ...props }) {
+      {toasts.map(({ id, title, description, action, ...props }) => {
         // Alternate between rotate-1 and -rotate-1 based on whether ID is even or odd
-        const isEven = parseInt(id) % 2 === 0;
+        const isEven = Number.parseInt(id) % 2 === 0;
         const rotationClass = isEven ? 'rotate-1' : '-rotate-1';
 
         // Pick border color based on variant

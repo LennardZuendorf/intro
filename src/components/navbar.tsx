@@ -1,8 +1,7 @@
 'use client';
 
-import React, { useState } from 'react';
-import { AnimatePresence, motion, useMotionValueEvent, useScroll } from 'framer-motion';
-import { cn } from '@/lib/utils/ui';
+import { ColorSelect } from '@/components/shared/color-select';
+import { ThemeSelect } from '@/components/shared/theme-select';
 import {
   NavigationMenu,
   NavigationMenuItem,
@@ -11,10 +10,11 @@ import {
   navigationMenuTriggerStyle
 } from '@/components/ui/navigation-menu';
 import { M, Muted } from '@/components/ui/typography';
+import { cn } from '@/lib/utils/ui';
+import { AnimatePresence, motion, useMotionValueEvent, useScroll } from 'framer-motion';
 import Link from 'next/link';
-import { ThemeSelect } from '@/components/shared/theme-select';
 import { usePathname } from 'next/navigation';
-import { ColorSelect } from '@/components/shared/color-select';
+import React, { useState } from 'react';
 
 type navItemsType = Array<{
   name: string;
@@ -66,11 +66,8 @@ export const Nav = ({ className }: { className?: string }) => {
         </motion.div>
       </AnimatePresence>
     );
-  } else {
-    return (
-      <Navbar className={className ? className : ''} pathname={pathname} navItems={navItems} />
-    );
   }
+  return <Navbar className={className ? className : ''} pathname={pathname} navItems={navItems} />;
 };
 
 const Navbar = ({
@@ -113,7 +110,7 @@ const Navbar = ({
                   className='hover:border-2 hover:border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[-2px] hover:translate-y-[-2px]'
                 />
               </NavigationMenuItem>
-              <NavigationMenuItem key='socials'></NavigationMenuItem>
+              <NavigationMenuItem key='socials' />
             </NavigationMenuList>
           </NavigationMenu>
         </div>

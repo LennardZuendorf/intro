@@ -1,9 +1,9 @@
 'use client';
 
-import { CommandList } from 'cmdk';
-import * as React from 'react';
-import { useEffect, useState } from 'react';
 import { useToast } from '@/hooks/use-toast';
+import { CommandList } from 'cmdk';
+import type * as React from 'react';
+import { useEffect, useState } from 'react';
 
 import { Button } from '@/components/ui/button';
 import { Command, CommandGroup, CommandItem } from '@/components/ui/command';
@@ -86,6 +86,18 @@ export const ColorSelect: React.FC<ColorSelectProps> = ({
     }
   }, []);
 
+  /**
+   * Updates the color palette across the application and shows a toast notification
+   * with a fun, custom message for the selected color.
+   *
+   * Each color has its own unique toast message with personalized copy:
+   * - Amber: "Liquid Gold Activated!" with amber-colored name
+   * - Emerald: "Green Machine Engaged!" with emerald-colored name
+   * - Rose: "Pretty in Pink Deployed!" with rose-colored name
+   * - Indigo: "Deep Blue Dive Commenced!" with indigo-colored name
+   *
+   * @param color The ColorPalette object containing the selected color information
+   */
   const updateColorPalette = (color: ColorPalette) => {
     const r = window.document.querySelector(':root') as HTMLElement;
     // Set accent colors
@@ -100,20 +112,20 @@ export const ColorSelect: React.FC<ColorSelectProps> = ({
     // Unique funny messages for each color
     const colorMessages: Record<string, { title: string; description: string }> = {
       Amber: {
-        title: `Liquid Gold Activated!`,
+        title: 'Liquid Gold Activated!',
         description: `Golden like a sunset, warm like whiskey. You're basically a hipster now.`
       },
       Emerald: {
-        title: `Green Machine Engaged!`,
-        description: `Green with envy, your coworkers will be. Yoda approves this theme, yes.`
+        title: 'Green Machine Engaged!',
+        description: 'Green with envy, your coworkers will be. Yoda approves this theme, yes.'
       },
       Rose: {
-        title: `Pretty in Pink Deployed!`,
+        title: 'Pretty in Pink Deployed!',
         description: `Life's looking pretty in pink! Your screen's blushing with excitement.`
       },
       Indigo: {
-        title: `Deep Blue Dive Commenced!`,
-        description: `Deep like the ocean, mysterious like your browser history. Excellent choice.`
+        title: 'Deep Blue Dive Commenced!',
+        description: 'Deep like the ocean, mysterious like your browser history. Excellent choice.'
       }
     };
 
@@ -127,6 +139,16 @@ export const ColorSelect: React.FC<ColorSelectProps> = ({
     });
   };
 
+  /**
+   * Resets the color palette to system defaults and shows a randomly selected
+   * toast notification with a fun message.
+   *
+   * Random messages include:
+   * - "Back to basics! Keeping it minimalist like your excuses for not doing laundry."
+   * - "Default restored! Sometimes vanilla is the most exotic flavor of all."
+   * - "Reset complete! Like clearing your history after 'research' - we won't judge."
+   * - "Color purged! Marie Kondo would be proud. This color did not spark joy."
+   */
   const resetColorPalette = () => {
     const r = window.document.querySelector(':root') as HTMLElement;
     r.style.removeProperty('--accent-light');

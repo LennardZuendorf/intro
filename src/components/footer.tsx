@@ -3,13 +3,13 @@
 import { cn } from '@/lib/utils/ui';
 import type * as React from 'react';
 
-import { ThemeSelect } from '@/components/shared/theme-select';
 import { ColorSelect } from '@/components/shared/color-select';
+import { ThemeSelect } from '@/components/shared/theme-select';
 import { Button } from '@/components/ui/button';
 import { siteConfig } from '@/data/site';
+import { MailboxIcon } from 'lucide-react';
 import Link from 'next/link';
 import { FaGithub, FaLinkedin } from 'react-icons/fa6';
-import { MailboxIcon } from 'lucide-react';
 
 interface FooterProps {
   className?: string;

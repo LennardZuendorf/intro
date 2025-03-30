@@ -1,12 +1,8 @@
 'use client';
 
-import Image from 'next/image';
-import Link from 'next/link';
-import { ArrowUpRight } from 'lucide-react';
-import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { cn } from '@/lib/utils/ui';
+import { Card } from '@/components/ui/card';
 import {
   Carousel,
   CarouselContent,
@@ -15,7 +11,11 @@ import {
   CarouselPrevious
 } from '@/components/ui/carousel';
 import { useIsBreakpoint } from '@/hooks/useWindowDimensions';
+import { cn } from '@/lib/utils/ui';
 import type { Project } from '@/payload-types';
+import { ArrowUpRight } from 'lucide-react';
+import Image from 'next/image';
+import Link from 'next/link';
 import React from 'react';
 
 interface ProjectCarouselProps {
@@ -60,8 +60,12 @@ export function ProjectCarousel({ projects }: ProjectCarouselProps) {
                   <p className='mb-4'>{project.shortDescription}</p>
 
                   <div className='flex flex-wrap gap-2 mb-6'>
-                    {project.technologies?.map((tech, index) => (
-                      <Badge key={index}>
+                    {project.technologies?.map((tech) => (
+                      <Badge
+                        key={
+                          typeof tech === 'object' && tech !== null ? tech.id || tech.name : tech
+                        }
+                      >
                         {typeof tech === 'object' && tech !== null ? tech.name : tech}
                       </Badge>
                     ))}

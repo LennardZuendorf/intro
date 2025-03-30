@@ -6,6 +6,7 @@
 - Create a proper about section on the homepage
 - Implement a dedicated about page
 - Complete remaining documentation updates
+- ✅ Migrate from ESLint and Prettier to Biome for code quality
 
 ## Current Status
 
@@ -16,6 +17,8 @@
 - Core page structure implemented with Next.js App Router
 - Site structure and navigation flow documented
 - Basic implementation of homepage sections needs improvement
+- Toast notification system implemented with neobrutalist design
+- ✅ Migrated from ESLint and Prettier to Biome for linting and formatting
 
 ## Implementation Progress
 
@@ -36,6 +39,7 @@
 - 🟨 Projects section implemented with ProjectCarousel component
 - 🟨 Navigation and footer components need design finalization
 - 🟨 Neobrutalism design elements partially implemented
+- ✅ Toast notification system with neobrutalist styling implemented
 
 ### Content Management
 
@@ -169,6 +173,32 @@
 - **UI Component Updates**: Revised multiple components (e.g., banner, main-grid, about) to utilize the updated accent color system. This includes updating hover states and badge backgrounds.
 - **Neutral Default Theme**: Set up a neutral default accent palette (black in light mode, white in dark mode) and ensured that selecting a color does not affect grid background colors.
 - **Grid Background Implementation**: Implemented grid backgrounds in the main grid and about sections using a new `--grid` CSS variable. The grid remains independent from the accent color selection.
+- **Toast Notification System**: Implemented a comprehensive neobrutalist toast notification system that provides user feedback for color theme and appearance mode changes.
+- **Code Quality Tooling Migration**: Successfully migrated from ESLint and Prettier to Biome for code linting and formatting, improving build performance and configuration simplicity.
+
+### Toast Notification System Implementation
+
+- **Neobrutalist Toast Component**: Replaced standard Sonner toast with a custom neobrutalist toast from neobrutalism.dev featuring thick borders, shadow effects, and themed styling.
+- **Custom Toast Messages**: Created witty, personalized messages for each color theme and appearance mode selection.
+- **Color Integration**: Each color name in toasts is highlighted in its corresponding color (e.g., "Emerald" appears in emerald color).
+- **Dynamic Theming**: Toast styles adapt to the current light/dark mode with proper color contrast.
+- **Visual Effects**: Added subtle rotations and hover animations to enhance the neobrutalist aesthetic.
+- **Welcome Back Toasts**: Implemented delayed welcome toasts when returning to the site with a saved color preference.
+- **Comprehensive Documentation**: Added detailed JSDoc comments to all toast-related components and functions.
+
+### Biome Migration Implementation
+
+- **Installation**: Installed Biome as a development dependency.
+- **Configuration**: Created a comprehensive `biome.json` configuration file with settings that match the previous ESLint and Prettier setup.
+- **Script Updates**: Updated npm scripts in `package.json` to use Biome commands for linting, formatting, and code checking.
+- **Git Hook Integration**: Updated lint-staged configuration to use Biome for pre-commit code quality checks.
+- **Code Fixes**: Addressed and fixed various code issues detected by Biome:
+  - Fixed SVG accessibility issues by adding title elements
+  - Replaced array index keys with more stable unique identifiers
+  - Converted `forEach` loops to more efficient `for...of` loops
+  - Fixed React useEffect dependency arrays
+  - Addressed self-closing element issues in JSX
+  - Configured appropriate rule exceptions for project-specific needs
 
 ### Open Issues & Next Steps
 

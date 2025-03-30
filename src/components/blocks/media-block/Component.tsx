@@ -1,7 +1,7 @@
-import React from 'react';
-import Image from 'next/image';
 import { cn } from '@/lib/utils/ui';
 import type { Media } from '@/payload-types';
+import Image from 'next/image';
+import type React from 'react';
 
 type Props = {
   media?: Media;
@@ -56,7 +56,7 @@ export const MediaBlock: React.FC<Props> = (props) => {
             },
             captionClassName
           )}
-        ></div>
+        />
       )}
     </div>
   );

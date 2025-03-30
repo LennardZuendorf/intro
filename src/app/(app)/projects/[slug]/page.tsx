@@ -1,18 +1,18 @@
-import configPromise from '@payload-config';
-import { getPayload } from 'payload';
-import { draftMode } from 'next/headers';
-import React, { cache } from 'react';
 import RichText from '@/components/blocks/RichText';
+import configPromise from '@payload-config';
+import { draftMode } from 'next/headers';
+import { getPayload } from 'payload';
+import React, { cache } from 'react';
 
-import { LivePreviewListener } from '@/lib/utils/payloadcms/LivePreviewListener';
-import { notFound } from 'next/navigation';
-import Link from 'next/link';
-import { ArrowLeft, Calendar, Tag } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
-import Image from 'next/image';
-import { format } from 'date-fns';
 import { Button } from '@/components/ui/button';
-import { Project } from '@/payload-types';
+import { LivePreviewListener } from '@/lib/utils/payloadcms/LivePreviewListener';
+import type { Project } from '@/payload-types';
+import { format } from 'date-fns';
+import { ArrowLeft, Calendar, Tag } from 'lucide-react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { notFound } from 'next/navigation';
 
 export async function generateStaticParams() {
   const payload = await getPayload({ config: configPromise });
@@ -52,7 +52,7 @@ export default async function Post({ params: paramsPromise }: Args) {
       {draft && <LivePreviewListener />}
       <div className='bg-bg'>
         <div className='relative border-b-4 border-black dark:border-white'>
-          <div className='absolute inset-0 bg-black/50 z-10'></div>
+          <div className='absolute inset-0 bg-black/50 z-10' />
           <Image
             src={
               typeof project.heroImage === 'object'
@@ -116,8 +116,14 @@ export default async function Post({ params: paramsPromise }: Args) {
                     <div>
                       <h4 className='font-bold'>Technologies</h4>
                       <div className='flex flex-wrap gap-2 mb-6'>
-                        {project.technologies?.map((tech, index) => (
-                          <Badge key={index}>
+                        {project.technologies?.map((tech) => (
+                          <Badge
+                            key={
+                              typeof tech === 'object' && tech !== null
+                                ? tech.id || tech.name
+                                : tech
+                            }
+                          >
                             {typeof tech === 'object' && tech !== null ? tech.name : tech}
                           </Badge>
                         ))}
@@ -133,23 +139,23 @@ export default async function Post({ params: paramsPromise }: Args) {
                   </h3>
                   <ul className='space-y-3'>
                     <li className='flex items-center'>
-                      <span className='h-2 w-2 bg-black dark:bg-white rounded-full mr-2'></span>
+                      <span className='h-2 w-2 bg-black dark:bg-white rounded-full mr-2' />
                       <span>Responsive design with mobile-first approach</span>
                     </li>
                     <li className='flex items-center'>
-                      <span className='h-2 w-2 bg-black dark:bg-white rounded-full mr-2'></span>
+                      <span className='h-2 w-2 bg-black dark:bg-white rounded-full mr-2' />
                       <span>Optimized performance with 95+ Lighthouse score</span>
                     </li>
                     <li className='flex items-center'>
-                      <span className='h-2 w-2 bg-black dark:bg-white rounded-full mr-2'></span>
+                      <span className='h-2 w-2 bg-black dark:bg-white rounded-full mr-2' />
                       <span>Integrated CMS for content management</span>
                     </li>
                     <li className='flex items-center'>
-                      <span className='h-2 w-2 bg-black dark:bg-white rounded-full mr-2'></span>
+                      <span className='h-2 w-2 bg-black dark:bg-white rounded-full mr-2' />
                       <span>Automated CI/CD pipeline for seamless deployment</span>
                     </li>
                     <li className='flex items-center'>
-                      <span className='h-2 w-2 bg-black dark:bg-white rounded-full mr-2'></span>
+                      <span className='h-2 w-2 bg-black dark:bg-white rounded-full mr-2' />
                       <span>Accessibility compliance with WCAG standards</span>
                     </li>
                   </ul>

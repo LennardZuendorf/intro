@@ -1,10 +1,10 @@
-import { SectionProps } from '@/app/(app)/page';
+import type { SectionProps } from '@/app/(app)/page';
+import { ProjectCarousel } from '@/components/custom/project-carousel';
 import { cn } from '@/lib/utils/ui';
-import { getPayload } from 'payload';
 import configPromise from '@payload-config';
 import { draftMode } from 'next/headers';
+import { getPayload } from 'payload';
 import React from 'react';
-import { ProjectCarousel } from '@/components/custom/project-carousel';
 
 export async function Projects({ className }: SectionProps) {
   const payloadProjects = await queryProjects();
@@ -12,8 +12,8 @@ export async function Projects({ className }: SectionProps) {
   return (
     <section id='projects' className={cn('py-14 md:py-24 relative overflow-hidden', className)}>
       {/* Decorative elements */}
-      <div className='absolute -top-20 -left-20 w-40 h-40 rounded-full bg-accent-light opacity-10 blur-3xl'></div>
-      <div className='absolute -bottom-20 -right-20 w-40 h-40 rounded-full bg-accent-dark opacity-10 blur-3xl'></div>
+      <div className='absolute -top-20 -left-20 w-40 h-40 rounded-full bg-accent-light opacity-10 blur-3xl' />
+      <div className='absolute -bottom-20 -right-20 w-40 h-40 rounded-full bg-accent-dark opacity-10 blur-3xl' />
 
       <div className='flex flex-col w-full sm:w-11/12 md:w-10/12 px-5 sm:px-2 md:px-0 mx-auto items-center space-y-10 md:space-y-16 h-full'>
         <div className='space-y-6 relative max-w-3xl mx-auto'>
@@ -28,7 +28,7 @@ export async function Projects({ className }: SectionProps) {
             MY{' '}
             <span className='text-accent relative inline-block'>
               PROJECTS
-              <span className='absolute -bottom-2 left-0 w-full h-1 bg-accent-light'></span>
+              <span className='absolute -bottom-2 left-0 w-full h-1 bg-accent-light' />
             </span>
           </h2>
           <p className='text-lg md:text-xl text-center mx-auto max-w-2xl text-mtext/80 font-medium'>
@@ -39,8 +39,8 @@ export async function Projects({ className }: SectionProps) {
         {/* Project carousel container with enhanced styling */}
         <div className='w-full relative border-2 border-black p-4 md:p-6 rounded-lg bg-main shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] transition-all hover:shadow-[12px_12px_0px_0px_rgba(0,0,0,0.8)] hover:-translate-y-1 hover:-translate-x-1'>
           {/* Small decorative elements */}
-          <div className='absolute -top-3 -right-3 w-6 h-6 bg-accent-light border-2 border-black rounded-full'></div>
-          <div className='absolute -bottom-3 -left-3 w-6 h-6 bg-accent border-2 border-black rounded-full'></div>
+          <div className='absolute -top-3 -right-3 w-6 h-6 bg-accent-light border-2 border-black rounded-full' />
+          <div className='absolute -bottom-3 -left-3 w-6 h-6 bg-accent border-2 border-black rounded-full' />
 
           {/* ProjectCarousel component remains untouched */}
           <ProjectCarousel projects={payloadProjects} />

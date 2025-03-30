@@ -1,22 +1,22 @@
 import { MediaBlock } from '@/components/blocks/media-block/Component';
-import {
+import type {
   DefaultNodeTypes,
   SerializedBlockNode,
   SerializedLinkNode
 } from '@payloadcms/richtext-lexical';
-import { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical';
+import type { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical';
 import {
-  JSXConvertersFunction,
+  type JSXConvertersFunction,
   LinkJSXConverter,
   RichText as RichTextWithoutBlocks
 } from '@payloadcms/richtext-lexical/react';
 
+import { BannerBlock } from '@/components/blocks/banner/Component';
+import { cn } from '@/lib/utils/ui';
 import type {
   BannerBlock as BannerBlockProps,
   MediaBlock as MediaBlockProps
 } from '@/payload-types';
-import { BannerBlock } from '@/components/blocks/banner/Component';
-import { cn } from '@/lib/utils/ui';
 
 type NodeTypes = DefaultNodeTypes | SerializedBlockNode<MediaBlockProps | BannerBlockProps>;
 

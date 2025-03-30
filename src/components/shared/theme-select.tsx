@@ -10,9 +10,9 @@ import { Command, CommandGroup, CommandItem } from '@/components/ui/command';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { useToast } from '@/hooks/use-toast';
 
-import { useEffect, useState } from 'react';
-import { useTheme } from 'next-themes';
 import { cn } from '@/lib/utils/ui';
+import { useTheme } from 'next-themes';
+import { useEffect, useState } from 'react';
 
 const themes = [
   {
@@ -57,6 +57,16 @@ export const ThemeSelect: React.FC<ThemeSwitcherProps> = ({
     return null;
   }
 
+  /**
+   * Handles theme changes and displays a themed toast notification.
+   *
+   * Custom messages for each theme:
+   * - Light Mode: "Sunglasses Off! Brightness cranked to 11. Hope you had your coffee today."
+   * - Dark Mode: "Embrace the Dark Side. We have cookies, better battery life, and fewer judging looks from strangers."
+   * - System Mode: "Device Harmony Achieved. Going with the flow like a digital zen master. Your OS is in charge now."
+   *
+   * @param selectedTheme The theme to apply ('light', 'dark', or 'system')
+   */
   const handleThemeChange = (selectedTheme: string) => {
     setTheme(selectedTheme);
 
@@ -112,7 +122,7 @@ export const ThemeSelect: React.FC<ThemeSwitcherProps> = ({
                     setOpen(false);
                     handleThemeChange(currentValue);
                   }}
-                  className={value == themeOption.value ? 'opacity-60' : ''}
+                  className={value === themeOption.value ? 'opacity-60' : ''}
                 >
                   <div className='flex flex-row gap-2 items-center justify-start w-full'>
                     {themeOption.icon}

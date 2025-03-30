@@ -1,16 +1,16 @@
 import type React from 'react';
 import './globals.css';
+import { ScrollArrow } from '@/components/ScrollArrow';
 import { Footer } from '@/components/footer';
-import { Providers } from '@/components/providers';
-import { siteMetadata } from '@/data/site';
-import { cn } from '@/lib/utils/ui';
-import Script from 'next/script';
 import { Nav } from '@/components/navbar';
+import { Providers } from '@/components/providers';
 import { Toaster } from '@/components/ui/toaster';
-import { Inter } from 'next/font/google';
+import { siteMetadata } from '@/data/site';
 import { env } from '@/env';
 import SetColorPreference from '@/lib/utils/setColorPreference';
-import { ScrollArrow } from '@/components/ScrollArrow';
+import { cn } from '@/lib/utils/ui';
+import { Inter } from 'next/font/google';
+import Script from 'next/script';
 
 const inter = Inter({
   subsets: ['latin'],

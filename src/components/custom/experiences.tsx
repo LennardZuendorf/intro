@@ -1,19 +1,19 @@
 'use client';
 
-import * as React from 'react';
-import type { ExperienceData } from '@/data/about';
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger
 } from '@/components/ui/accordion';
-import { cn } from '@/lib/utils/ui';
-import { Separator } from '@/components/ui/separator';
-import { Quote, Code, M, L } from '@/components/ui/typography';
-import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
-import Link from 'next/link';
 import { Badge } from '@/components/ui/badge';
+import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
+import { Separator } from '@/components/ui/separator';
+import { Code, L, M, Quote } from '@/components/ui/typography';
+import type { ExperienceData } from '@/data/about';
+import { cn } from '@/lib/utils/ui';
+import Link from 'next/link';
+import type * as React from 'react';
 
 type Props = {
   experienceData: ExperienceData;
@@ -38,10 +38,10 @@ export const ExperienceAccordion: React.FC<Props> = ({ experienceData, className
                 Learn More
               </Link>
             </Quote>
-            {experience.roles.map((role, roleIndex) => (
+            {experience.roles.map((role) => (
               <Card
                 className={cn('text-start border-0 border-b-2 last:border-b-0 pb-4 rounded-none')}
-                key={`card-${roleIndex}`}
+                key={`${experience.company}-${role.title}-${role.range}`}
               >
                 <CardHeader className='justify-start text-start p-2'>
                   <div className='flex flex-col lg:flex-row justify-start lg:justify-between space-y-2'>
@@ -53,13 +53,15 @@ export const ExperienceAccordion: React.FC<Props> = ({ experienceData, className
                 <CardContent className='pl-4 p-2'>
                   <ul className='ml-6 list-disc [&>li]:mt-2 text-sm'>
                     {role.text.map((description, textIndex) => (
-                      <li key={textIndex}>{description.toString()}</li>
+                      <li key={`${description.toString().substring(0, 20)}-${textIndex}`}>
+                        {description.toString()}
+                      </li>
                     ))}
                   </ul>
                 </CardContent>
                 <CardFooter className='flex flex-wrap gap-1 md:space-x-2 p-2 hidden lg:block'>
-                  {role.skills.map((tag, skillsIndex) => (
-                    <Badge className='text-xs' key={skillsIndex}>
+                  {role.skills.map((tag) => (
+                    <Badge className='text-xs' key={tag}>
                       {tag}
                     </Badge>
                   ))}

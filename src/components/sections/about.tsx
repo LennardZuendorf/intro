@@ -1,6 +1,6 @@
 'use client';
 
-import { SectionProps } from '@/app/(app)/page';
+import type { SectionProps } from '@/app/(app)/page';
 import { cn } from '@/lib/utils/ui';
 
 const skills = [

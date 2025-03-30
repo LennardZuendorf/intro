@@ -104,10 +104,59 @@ The application uses a mix of:
 
 ### Development Tools
 
-- ESLint & Prettier for code quality and formatting
+- Biome for code linting and formatting
 - Husky for git hooks
 - TypeScript for type safety
 - PNPM as package manager
+
+### Code Quality Tools
+
+#### Biome Configuration
+
+The project uses Biome as a unified tool for code linting and formatting. The configuration is defined in `biome.json` with the following key features:
+
+- **Linting**: Enables recommended rules with customizations for project needs
+  - `correctness.noUnusedVariables`: Set to error level to prevent unused variable declarations
+  - `suspicious.noExplicitAny`: Set to warning level to discourage but not block use of `any` type
+  - `style.noNonNullAssertion`: Disabled to allow non-null assertions where needed
+  - Accessibility and security rules configured based on project requirements
+  
+- **Formatting**: Consistent code style throughout the project
+  - Single quotes for both regular and JSX strings
+  - No trailing commas
+  - Always use semicolons
+  - 100 character line width
+  - 2 space indentation
+  
+- **File Exclusions**: Configuration excludes specific files and directories
+  - Build artifacts and caches (`.next`, `node_modules`, etc.)
+  - Generated files like `payload-types.ts`
+  - Migration files and specific utility files
+
+#### Package.json Scripts
+
+```json
+{
+  "scripts": {
+    "lint": "biome lint .",
+    "format": "biome format --write .",
+    "check": "biome check --write ."
+  }
+}
+```
+
+#### Pre-commit Hooks
+
+The project uses Husky with lint-staged to ensure code quality before commits:
+
+```json
+{
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": ["biome check --write"],
+    "*.{json,html}": ["biome format --write"]
+  }
+}
+```
 
 ## Component Architecture Updates
 

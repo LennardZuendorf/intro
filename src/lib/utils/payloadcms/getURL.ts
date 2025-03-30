@@ -11,7 +11,7 @@ export const getServerSideURL = () => {
 };
 
 export const getClientSideURL = () => {
-  if (!!(typeof window !== 'undefined' && window.document && window.document.createElement)) {
+  if (typeof window !== 'undefined' && window.document && window.document.createElement) {
     const protocol = window.location.protocol;
     const domain = window.location.hostname;
     const port = window.location.port;

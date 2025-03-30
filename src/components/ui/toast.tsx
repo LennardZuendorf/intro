@@ -1,7 +1,33 @@
 'use client';
 
+/**
+ * Neobrutalist Toast Component
+ * ---------------------------
+ * A custom toast notification component with neobrutalist styling.
+ *
+ * Features:
+ * - Thick black borders (2px)
+ * - Subtle shadow effects
+ * - Hover animations
+ * - High-contrast colors
+ * - Supports light/dark mode
+ *
+ * Variants:
+ * - default: Standard toast with main background
+ * - destructive: Black background with white text for errors/warnings
+ *
+ * Usage:
+ * Import the useToast hook from @/hooks/use-toast and call:
+ *
+ * toast({
+ *   title: "Title here",
+ *   description: "Description here",
+ *   variant: "default"
+ * });
+ */
+
 import * as ToastPrimitives from '@radix-ui/react-toast';
-import { cva, type VariantProps } from 'class-variance-authority';
+import { type VariantProps, cva } from 'class-variance-authority';
 import { X } from 'lucide-react';
 
 import * as React from 'react';

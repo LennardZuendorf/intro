@@ -1,8 +1,9 @@
 'use client';
 
-import React, { useState, useEffect, useRef } from 'react';
 import { cn } from '@/lib/utils/ui';
 import { AnimatePresence, motion, useScroll } from 'framer-motion';
+import type React from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 export const ScrollArrow: React.FC = () => {
   const { scrollY } = useScroll();
@@ -135,8 +136,10 @@ export const ScrollArrow: React.FC = () => {
             strokeWidth='2'
             strokeLinecap='round'
             strokeLinejoin='round'
+            aria-hidden='true'
           >
-            <polyline points='6 9 12 15 18 9'></polyline>
+            <title>Scroll Down Arrow</title>
+            <polyline points='6 9 12 15 18 9' />
           </svg>
         </motion.button>
       )}

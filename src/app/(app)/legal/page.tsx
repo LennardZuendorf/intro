@@ -1,11 +1,11 @@
+import RichText from '@/components/blocks/RichText';
+import { Card, CardContent } from '@/components/ui/card';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { LivePreviewListener } from '@/lib/utils/payloadcms/LivePreviewListener';
 import configPromise from '@payload-config';
+import type { NextPage } from 'next';
 import { getPayload } from 'payload';
 import React from 'react';
-import { LivePreviewListener } from '@/lib/utils/payloadcms/LivePreviewListener';
-import { NextPage } from 'next';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Card, CardContent } from '@/components/ui/card';
-import RichText from '@/components/blocks/RichText';
 
 const LegalPage: NextPage = async () => {
   const legalContent = await queryLegalContent();
@@ -76,9 +76,8 @@ async function queryLegalContent() {
 
   if (!result) {
     return null;
-  } else {
-    return result;
   }
+  return result;
 }
 
 export default LegalPage;

@@ -1,12 +1,12 @@
 'use client';
 
+import type { SectionProps } from '@/app/(app)/page';
 import { Button } from '@/components/ui/button';
-import { cn } from '@/lib/utils/ui';
-import { SectionProps } from '@/app/(app)/page';
 import { H3 } from '@/components/ui/typography';
+import { cn } from '@/lib/utils/ui';
 import Link from 'next/link';
-import { HiMiniArrowTopRightOnSquare } from 'react-icons/hi2';
 import { useState } from 'react';
+import { HiMiniArrowTopRightOnSquare } from 'react-icons/hi2';
 
 const interests = [
   'Product Strategy',

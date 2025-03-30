@@ -1,4 +1,4 @@
-import { CollectionConfig } from 'payload';
+import type { CollectionConfig } from 'payload';
 
 export const Tag: CollectionConfig = {
   slug: 'tag',
@@ -46,11 +46,10 @@ export const Tag: CollectionConfig = {
       validate: (value) => {
         if (!value || value.trim() === '') {
           return true;
-        } else {
-          return /^(\/|https?:\/\/)/.test(value)
-            ? true
-            : 'Must be a valid URL (e.g. /about or https://google.com)';
         }
+        return /^(\/|https?:\/\/)/.test(value)
+          ? true
+          : 'Must be a valid URL (e.g. /about or https://google.com)';
       }
     },
     {

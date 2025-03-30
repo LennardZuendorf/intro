@@ -3,70 +3,70 @@
 @tailwind utilities;
 
 :root {
-  /* Background colors */
-  --main: oklch(0.97 0.01 89); /* Light gray background (#f6f6f6) */
-  --bg: oklch(1 0 0); /* Pure white (#ffffff) */
+	/* Background colors */
+	--main: oklch(0.97 0.01 89); /* Light gray background (#f6f6f6) */
+	--bg: oklch(1 0 0); /* Pure white (#ffffff) */
 
-  /* Special purpose colors */
-  --overlay: oklch(0 0 0 / 0.8); /* Black with 80% opacity for overlays */
+	/* Special purpose colors */
+	--overlay: oklch(0 0 0 / 0.8); /* Black with 80% opacity for overlays */
 
-  /* Grid and accent system */
-  --grid: oklch(0.9 0 0); /* Slightly brighter light gray for grid lines */
-  --accent-light: oklch(0.3 0 0); /* Light black */
-  --accent: oklch(0.2 0 0); /* Medium black */
-  --accent-dark: oklch(0.1 0 0); /* Dark black */
+	/* Grid and accent system */
+	--grid: oklch(0.9 0 0); /* Slightly brighter light gray for grid lines */
+	--accent-light: oklch(0.3 0 0); /* Light black */
+	--accent: oklch(0.2 0 0); /* Medium black */
+	--accent-dark: oklch(0.1 0 0); /* Dark black */
 
-  /* Core UI colors */
-  --blank: oklch(0 0 0); /* Pure black (#000000) */
-  --border: oklch(0 0 0); /* Black for borders */
-  --text: oklch(0 0 0); /* Primary text color - black */
-  --mtext: oklch(0 0 0); /* Main text color - black */
-  --atext: oklch(0.9 0 0); /* Light gray text for accents (#e6e6e6) */
-  --ring: oklch(0 0 0); /* Focus ring color - black */
-  --ring-offset: oklch(1 0 0); /* Ring offset color - white */
+	/* Core UI colors */
+	--blank: oklch(0 0 0); /* Pure black (#000000) */
+	--border: oklch(0 0 0); /* Black for borders */
+	--text: oklch(0 0 0); /* Primary text color - black */
+	--mtext: oklch(0 0 0); /* Main text color - black */
+	--atext: oklch(0.9 0 0); /* Light gray text for accents (#e6e6e6) */
+	--ring: oklch(0 0 0); /* Focus ring color - black */
+	--ring-offset: oklch(1 0 0); /* Ring offset color - white */
 
-  /* UI Dimension Variables */
-  --border-radius: 17px;
-  --box-shadow-x: 6px;
-  --box-shadow-y: 4px;
-  --box-shadow-x2: 3px;
-  --box-shadow-y2: 2px;
+	/* UI Dimension Variables */
+	--border-radius: 17px;
+	--box-shadow-x: 6px;
+	--box-shadow-y: 4px;
+	--box-shadow-x2: 3px;
+	--box-shadow-y2: 2px;
 
-  --box-lshadow-x: 9px;
-  --box-lshadow-y: 6px;
+	--box-lshadow-x: 9px;
+	--box-lshadow-y: 6px;
 
-  --reverse-box-shadow-x: -6px;
-  --reverse-box-shadow-y: -4px;
+	--reverse-box-shadow-x: -6px;
+	--reverse-box-shadow-y: -4px;
 
-  /* Typography */
-  --base-font-weight: 500;
-  --heading-font-weight: 900;
+	/* Typography */
+	--base-font-weight: 500;
+	--heading-font-weight: 900;
 
-  /* Shadows */
-  --shadow: var(--box-shadow-x) var(--box-shadow-y) 0px 0px var(--border);
+	/* Shadows */
+	--shadow: var(--box-shadow-x) var(--box-shadow-y) 0px 0px var(--border);
 }
 
 .dark {
-  /* Background colors - dark mode */
-  --main: oklch(0.2 0 0); /* Dark gray background (#202020) */
-  --bg: oklch(0.15 0 0); /* Very dark gray (#191919) */
+	/* Background colors - dark mode */
+	--main: oklch(0.2 0 0); /* Dark gray background (#202020) */
+	--bg: oklch(0.15 0 0); /* Very dark gray (#191919) */
 
-  /* Grid and accent system - dark mode */
-  --grid: oklch(0.25 0 0); /* Darker grid lines for dark mode */
-  --accent-light: oklch(0.98 0 0); /* Light white */
-  --accent: oklch(0.95 0 0); /* Medium white */
-  --accent-dark: oklch(0.92 0 0); /* Dark white */
+	/* Grid and accent system - dark mode */
+	--grid: oklch(0.25 0 0); /* Darker grid lines for dark mode */
+	--accent-light: oklch(0.98 0 0); /* Light white */
+	--accent: oklch(0.95 0 0); /* Medium white */
+	--accent-dark: oklch(0.92 0 0); /* Dark white */
 
-  /* Core UI colors - dark mode */
-  --blank: oklch(1 0 0); /* Pure white (#ffffff) */
-  --border: oklch(0 0 0); /* Black borders (consistent with light mode) */
-  --text: oklch(0.9 0 0); /* Light gray text (#e6e6e6) */
-  --mtext: oklch(0.9 0 0); /* Main text color - light gray */
-  --atext: oklch(0 0 0); /* Black text for accents */
-  --ring: oklch(1 0 0); /* Focus ring color - white */
-  --ring-offset: oklch(0 0 0); /* Ring offset color - black */
+	/* Core UI colors - dark mode */
+	--blank: oklch(1 0 0); /* Pure white (#ffffff) */
+	--border: oklch(0 0 0); /* Black borders (consistent with light mode) */
+	--text: oklch(0.9 0 0); /* Light gray text (#e6e6e6) */
+	--mtext: oklch(0.9 0 0); /* Main text color - light gray */
+	--atext: oklch(0 0 0); /* Black text for accents */
+	--ring: oklch(1 0 0); /* Focus ring color - white */
+	--ring-offset: oklch(0 0 0); /* Ring offset color - black */
 
-  /* Shadows - dark mode */
-  --shadow: var(--box-shadow-x) var(--box-shadow-y) 0px 0px var(--border);
-  --shadow-l: var(--box-lshadow-x) var(--box-lshadow-y) 0px 0px var(--border);
+	/* Shadows - dark mode */
+	--shadow: var(--box-shadow-x) var(--box-shadow-y) 0px 0px var(--border);
+	--shadow-l: var(--box-lshadow-x) var(--box-lshadow-y) 0px 0px var(--border);
 }

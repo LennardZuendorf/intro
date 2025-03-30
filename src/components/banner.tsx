@@ -1,19 +1,19 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { CheckCircle, CircleHelp } from 'lucide-react';
-import { S, XS } from '@/components/ui/typography';
+import type { SectionProps } from '@/app/(app)/page';
 import { Button, buttonVariants } from '@/components/ui/button';
-import Link from 'next/link';
-import { SectionProps } from '@/app/(app)/page';
+import { S, XS } from '@/components/ui/typography';
 import { cn } from '@/lib/utils/ui';
+import { CheckCircle, CircleHelp } from 'lucide-react';
+import Link from 'next/link';
+import { useEffect, useState } from 'react';
 
 export function Banner({ className }: SectionProps) {
   const [isAcknowledged, setIsAcknowledged] = useState(true);
 
   useEffect(() => {
     const acknowledgment = localStorage.getItem('trackingCheck');
-    if (acknowledgment != 'true') {
+    if (acknowledgment !== 'true') {
       setIsAcknowledged(false);
     }
   }, []);

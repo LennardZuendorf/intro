@@ -1,8 +1,8 @@
-import type { NextPage } from 'next';
 import { Banner } from '@/components/banner';
-import { MainSection } from '@/components/sections/main-grid';
 import AboutSection from '@/components/sections/about';
+import { MainSection } from '@/components/sections/main-grid';
 import { Projects } from '@/components/sections/projects';
+import type { NextPage } from 'next';
 
 export interface SectionProps {
   className?: string;

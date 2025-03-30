@@ -1,4 +1,4 @@
-import React from 'react';
+import type React from 'react';
 
 import type { Project } from '@/payload-types';
 
@@ -14,7 +14,7 @@ export const ProjectHero: React.FC<{
           <div className=''>
             <h1 className='mb-6 text-3xl md:text-5xl lg:text-6xl'>{title}</h1>
           </div>
-          <div className='flex flex-col md:flex-row gap-4 md:gap-16'></div>
+          <div className='flex flex-col md:flex-row gap-4 md:gap-16' />
         </div>
       </div>
     </div>

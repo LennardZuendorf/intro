@@ -12,6 +12,10 @@ import {
 import { Banner } from '@/components/blocks/banner/config';
 import { MediaBlock } from '@/components/blocks/media-block/config';
 
+import { formatSlug } from '@/collections/hooks/formatSlug';
+import { env } from '@/env';
+import { authenticated } from '@/lib/admin/access/authenticated';
+import { authenticatedOrPublished } from '@/lib/admin/access/authenticatedOrPublished';
 import {
   MetaDescriptionField,
   MetaImageField,
@@ -19,10 +23,6 @@ import {
   OverviewField,
   PreviewField
 } from '@payloadcms/plugin-seo/fields';
-import { authenticated } from '@/lib/admin/access/authenticated';
-import { authenticatedOrPublished } from '@/lib/admin/access/authenticatedOrPublished';
-import { formatSlug } from '@/collections/hooks/formatSlug';
-import { env } from '@/env';
 
 export const ProjectPost: CollectionConfig<'projects'> = {
   slug: 'projects',
@@ -120,11 +120,10 @@ export const ProjectPost: CollectionConfig<'projects'> = {
                   validate: (value) => {
                     if (!value || value.trim() === '') {
                       return true;
-                    } else {
-                      return /^(\/|https?:\/\/)/.test(value)
-                        ? true
-                        : 'Must be a valid URL (e.g. /about or https://google.com)';
                     }
+                    return /^(\/|https?:\/\/)/.test(value)
+                      ? true
+                      : 'Must be a valid URL (e.g. /about or https://google.com)';
                   }
                 },
                 {
@@ -138,11 +137,10 @@ export const ProjectPost: CollectionConfig<'projects'> = {
                   validate: (value) => {
                     if (!value || value.trim() === '') {
                       return true;
-                    } else {
-                      return /^(\/|https?:\/\/)/.test(value)
-                        ? true
-                        : 'Must be a valid URL (e.g. /about or https://google.com)';
                     }
+                    return /^(\/|https?:\/\/)/.test(value)
+                      ? true
+                      : 'Must be a valid URL (e.g. /about or https://google.com)';
                   }
                 }
               ]
