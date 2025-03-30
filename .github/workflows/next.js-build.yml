@@ -3,9 +3,6 @@ name: Check NextJS Build using pnpm
 on:
   push:
 
-  pull_request:
-    types: [opened, reopened, synchronize]
-
   workflow_dispatch:
 
 env:
@@ -52,6 +49,9 @@ jobs:
 
       - name: Dependency Install
         run: pnpm install
+
+      - name: Run Payload Migrations (Fresh)
+        run: yes | pnpm payload migrate:fresh
 
       - name: Run Biome Check
         run: pnpm run check
