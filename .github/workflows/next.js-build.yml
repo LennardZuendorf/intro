@@ -4,7 +4,7 @@ on:
   push:
 
   pull_request:
-    types: [opened, reopened, updated]
+    types: [opened, reopened, synchronize]
 
   workflow_dispatch:
 
@@ -28,17 +28,14 @@ jobs:
       - name: Install Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: ${{ matrix.node_version }}
           cache: 'pnpm'
 
       - name: Dependency Install
         run: pnpm install
 
-      - name: Run Linter
-        run: pnpm run lint
-
-      - name: Run Prettier
-        run: pnpm run format
+      - name: Run Biome Check
+        run: pnpm run check
 
       - name: Build with Next.js
         run: pnpm run build
