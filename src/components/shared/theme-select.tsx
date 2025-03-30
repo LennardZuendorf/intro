@@ -8,6 +8,7 @@ import * as React from 'react';
 import { Button } from '@/components/ui/button';
 import { Command, CommandGroup, CommandItem } from '@/components/ui/command';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { useToast } from '@/hooks/use-toast';
 
 import { useEffect, useState } from 'react';
 import { useTheme } from 'next-themes';
@@ -42,6 +43,7 @@ export const ThemeSelect: React.FC<ThemeSwitcherProps> = ({
 }) => {
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState('');
+  const { toast } = useToast();
 
   const [mounted, setMounted] = useState(false);
   const { theme, setTheme } = useTheme();
@@ -54,6 +56,32 @@ export const ThemeSelect: React.FC<ThemeSwitcherProps> = ({
   if (!mounted) {
     return null;
   }
+
+  const handleThemeChange = (selectedTheme: string) => {
+    setTheme(selectedTheme);
+
+    // Show toast notification for theme change with fun messages
+    const themeMessages = {
+      light: {
+        title: 'Sunglasses Off!',
+        description: 'Brightness cranked to 11. Hope you had your coffee today.'
+      },
+      dark: {
+        title: 'Embrace the Dark Side',
+        description: 'We have cookies, better battery life, and fewer judging looks from strangers.'
+      },
+      system: {
+        title: 'Device Harmony Achieved',
+        description: 'Going with the flow like a digital zen master. Your OS is in charge now.'
+      }
+    };
+
+    toast({
+      title: themeMessages[selectedTheme as keyof typeof themeMessages].title,
+      description: themeMessages[selectedTheme as keyof typeof themeMessages].description,
+      variant: 'default'
+    });
+  };
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -82,7 +110,7 @@ export const ThemeSelect: React.FC<ThemeSwitcherProps> = ({
                   onSelect={(currentValue) => {
                     setValue(currentValue === value ? 'system' : currentValue);
                     setOpen(false);
-                    setTheme(currentValue);
+                    handleThemeChange(currentValue);
                   }}
                   className={value == themeOption.value ? 'opacity-60' : ''}
                 >

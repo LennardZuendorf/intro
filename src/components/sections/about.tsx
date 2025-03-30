@@ -38,14 +38,14 @@ export default function AboutSection({ className }: SectionProps) {
       className={cn(
         'min-h-[100svh] w-full relative overflow-hidden',
         'flex items-center justify-center',
-        'bg-[#F8F5F1] dark:bg-[#1A1A1A]',
+        'bg-[#F8F5F1] dark:bg-[#1A1A1A] z-0',
         className
       )}
       id='about'
     >
       {/* Grid background with mask */}
       <div
-        className='absolute inset-0 w-full h-full'
+        className='absolute inset-0 w-full h-full z-[1] pointer-events-none'
         style={{
           backgroundImage: `
             linear-gradient(to right, var(--grid) 1px, transparent 1px),
@@ -56,7 +56,7 @@ export default function AboutSection({ className }: SectionProps) {
         }}
       />
 
-      <div className='relative w-full max-w-6xl mx-auto px-6 py-16'>
+      <div className='relative w-full max-w-6xl mx-auto px-6 py-16 z-[2]'>
         <div className='grid grid-cols-1 lg:grid-cols-2 gap-12'>
           {/* Left Column - About Text */}
           <div className='space-y-8'>

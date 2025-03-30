@@ -49,18 +49,21 @@
 ## Open Tasks
 
 ### Hero Section Updates
+
 - Implement new hero section with Neobrutalism design
 - Add proper content management through CMS
 - Ensure responsive design across all viewports
 - Add engaging animations and interactions
 
 ### About Section Enhancement
+
 - Design and implement improved about section for homepage
 - Create proper content structure in CMS
 - Add visual elements following Neobrutalism style
 - Ensure content is engaging and informative
 
 ### New About Page
+
 - Create new route for dedicated about page
 - Design layout following Neobrutalism principles
 - Implement content management through CMS

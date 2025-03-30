@@ -112,7 +112,9 @@ The application uses a mix of:
 ## Component Architecture Updates
 
 ### Hero Section
+
 The hero section will be implemented as a standalone component with the following features:
+
 - Neobrutalism design elements (bold typography, strong borders, high contrast)
 - Responsive layout with proper spacing and alignment
 - Interactive elements and animations
@@ -120,6 +122,7 @@ The hero section will be implemented as a standalone component with the followin
 - Optimized performance with proper image loading
 
 #### Technical Stack for Hero
+
 - Next.js Server Component for initial render
 - TailwindCSS with custom Neobrutalism utility classes
 - Framer Motion for animations
@@ -127,9 +130,11 @@ The hero section will be implemented as a standalone component with the followin
 - Image optimization through Next.js Image component
 
 ### About Section
+
 The about section will be implemented in two parts:
 
 1. Homepage About Section:
+
    - Condensed information with key highlights
    - Visual elements following Neobrutalism design
    - Interactive elements for engagement
@@ -142,6 +147,7 @@ The about section will be implemented in two parts:
    - Responsive design for all viewports
 
 #### Technical Stack for About Components
+
 - Next.js App Router for page routing
 - Server Components for optimal performance
 - TailwindCSS with Neobrutalism design system
@@ -151,6 +157,7 @@ The about section will be implemented in two parts:
 ## Content Management Structure
 
 ### Hero Content Model
+
 ```typescript
 // Hero section content model
 {
@@ -181,6 +188,7 @@ The about section will be implemented in two parts:
 ```
 
 ### About Content Model
+
 ```typescript
 // About page content model
 {
@@ -223,6 +231,7 @@ The about section will be implemented in two parts:
 ## Design System Integration
 
 ### Neobrutalism Design Elements
+
 - Bold typography with system fonts
 - High contrast color combinations
 - Strong borders (3-4px) with slight offsets
@@ -231,6 +240,7 @@ The about section will be implemented in two parts:
 - Distinctive hover and focus states
 
 ### Animation Guidelines
+
 - Subtle hover transitions (150-200ms)
 - Page transition animations
 - Scroll-triggered animations for sections

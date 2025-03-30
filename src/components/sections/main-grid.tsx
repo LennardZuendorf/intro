@@ -28,14 +28,14 @@ export const MainSection = ({ className }: SectionProps) => {
       className={cn(
         'min-h-[100svh] w-full relative overflow-hidden',
         'flex items-center justify-center',
-        'bg-[#F8F5F1] dark:bg-[#1A1A1A]',
+        'bg-[#F8F5F1] dark:bg-[#1A1A1A] z-0',
         className
       )}
       id='hero'
     >
       {/* Grid background with mask */}
       <div
-        className='absolute inset-0 w-full h-full'
+        className='absolute inset-0 w-full h-full z-[1] pointer-events-none'
         style={{
           backgroundImage: `
             linear-gradient(to right, var(--grid) 1px, transparent 1px),
@@ -46,7 +46,7 @@ export const MainSection = ({ className }: SectionProps) => {
         }}
       />
 
-      <div className='relative w-full max-w-6xl mx-auto px-6 py-8 flex flex-col lg:flex-row items-center gap-16'>
+      <div className='relative w-full max-w-6xl mx-auto px-6 py-8 flex flex-col lg:flex-row items-center gap-16 z-[2]'>
         {/* Left Content */}
         <div className='w-full lg:w-[55%] flex flex-col items-start gap-8'>
           {/* Name Card */}

@@ -3,6 +3,7 @@
 import { CommandList } from 'cmdk';
 import * as React from 'react';
 import { useEffect, useState } from 'react';
+import { useToast } from '@/hooks/use-toast';
 
 import { Button } from '@/components/ui/button';
 import { Command, CommandGroup, CommandItem } from '@/components/ui/command';
@@ -64,6 +65,7 @@ export const ColorSelect: React.FC<ColorSelectProps> = ({
 }) => {
   const [open, setOpen] = useState(false);
   const [currentColor, setCurrentColor] = useState<ColorPalette | null>(null);
+  const { toast } = useToast();
 
   // Load color from localStorage only on client-side
   useEffect(() => {
@@ -90,11 +92,39 @@ export const ColorSelect: React.FC<ColorSelectProps> = ({
     r.style.setProperty('--accent-light', color.colorCode.light);
     r.style.setProperty('--accent', color.colorCode.base);
     r.style.setProperty('--accent-dark', color.colorCode.dark);
-    // Ensure grid stays neutral
-    const isDark = document.documentElement.classList.contains('dark');
-    r.style.setProperty('--grid', isDark ? 'oklch(0.25 0 0)' : 'oklch(0.95 0 0)');
+    // Set grid to use the lightest accent color
+    r.style.setProperty('--grid', color.colorCode.light);
     localStorage.setItem('color', JSON.stringify(color));
     setCurrentColor(color);
+
+    // Unique funny messages for each color
+    const colorMessages: Record<string, { title: string; description: string }> = {
+      Amber: {
+        title: `Liquid Gold Activated!`,
+        description: `Golden like a sunset, warm like whiskey. You're basically a hipster now.`
+      },
+      Emerald: {
+        title: `Green Machine Engaged!`,
+        description: `Green with envy, your coworkers will be. Yoda approves this theme, yes.`
+      },
+      Rose: {
+        title: `Pretty in Pink Deployed!`,
+        description: `Life's looking pretty in pink! Your screen's blushing with excitement.`
+      },
+      Indigo: {
+        title: `Deep Blue Dive Commenced!`,
+        description: `Deep like the ocean, mysterious like your browser history. Excellent choice.`
+      }
+    };
+
+    // Show toast notification with neobrutalist styling and color-specific message
+    toast({
+      title: colorMessages[color.name]?.title || `${color.name} theme activated!`,
+      description:
+        colorMessages[color.name]?.description ||
+        `Your vibe is now ${color.name.toLowerCase()}. Looking good!`,
+      variant: 'default'
+    });
   };
 
   const resetColorPalette = () => {
@@ -104,9 +134,39 @@ export const ColorSelect: React.FC<ColorSelectProps> = ({
     r.style.removeProperty('--accent-dark');
     // Reset grid to neutral
     const isDark = document.documentElement.classList.contains('dark');
-    r.style.setProperty('--grid', isDark ? 'oklch(0.25 0 0)' : 'oklch(0.95 0 0)');
+    r.style.setProperty('--grid', isDark ? 'oklch(0.25 0 0)' : 'oklch(0.9 0 0)');
     localStorage.removeItem('color');
     setCurrentColor(null);
+
+    // Funny reset messages
+    const resetMessages = [
+      {
+        title: 'Back to basics!',
+        description: 'Keeping it minimalist like your excuses for not doing laundry.'
+      },
+      {
+        title: 'Default restored!',
+        description: 'Sometimes vanilla is the most exotic flavor of all.'
+      },
+      {
+        title: 'Reset complete!',
+        description: 'Like clearing your history after "research" - we won\'t judge.'
+      },
+      {
+        title: 'Color purged!',
+        description: 'Marie Kondo would be proud. This color did not spark joy.'
+      }
+    ];
+
+    // Pick a random funny message
+    const randomMessage = resetMessages[Math.floor(Math.random() * resetMessages.length)];
+
+    // Show toast notification with neobrutalist styling
+    toast({
+      title: randomMessage.title,
+      description: randomMessage.description,
+      variant: 'default'
+    });
   };
 
   return (

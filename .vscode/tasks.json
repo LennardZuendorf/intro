@@ -36,7 +36,7 @@
       "label": "Lint Staged",
       "type": "shell",
       "command": "pnpm",
-      "args": ["run", "lint-staged"],
+      "args": ["run", "lint"],
       "group": "none",
       "presentation": {
         "reveal": "always",

@@ -20,12 +20,12 @@ export const Footer: React.FC<FooterProps> = ({ className = '' }) => {
     <footer
       className={cn(
         'flex flex-col items-center pt-6 pb-6 w-full border-t-4 border-black space-y-5 md:space-y-2 relative',
-        'bg-[#F8F5F1] dark:bg-[#1A1A1A]',
+        'bg-[#F8F5F1] dark:bg-[#1A1A1A] z-0',
         className
       )}
     >
       <div
-        className='absolute inset-0 w-full h-full pointer-events-none'
+        className='absolute inset-0 w-full h-full pointer-events-none z-[1]'
         style={{
           backgroundImage: `
             linear-gradient(to right, var(--grid) 1px, transparent 1px),
@@ -36,7 +36,7 @@ export const Footer: React.FC<FooterProps> = ({ className = '' }) => {
         }}
       />
 
-      <div className='container flex flex-col sm:flex-row items-center justify-between align-middle space-y-5 md:space-y-2'>
+      <div className='container flex flex-col sm:flex-row items-center justify-between align-middle space-y-5 md:space-y-2 z-[10] relative'>
         <div className='flex items-start space-x-2'>
           <Link href={siteConfig.links.mail}>
             <Button
@@ -77,7 +77,7 @@ export const Footer: React.FC<FooterProps> = ({ className = '' }) => {
           />
         </div>
       </div>
-      <div>
+      <div className='relative z-[2]'>
         <div className='flex items-center gap-x-2 text-sm font-mono'>
           <div>Built by Lennard Zündorf</div>
           <div> {`© ${new Date().getFullYear()}`}</div>

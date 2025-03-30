@@ -8,10 +8,10 @@ export const ScrollArrow: React.FC = () => {
   const { scrollY } = useScroll();
   const [atBottom, setAtBottom] = useState(false);
   const [isScrolling, setIsScrolling] = useState(false);
-  const [atProjects, setAtProjects] = useState(false);
+  const [aboveProjectsOrAtFooter, setAboveProjectsOrAtFooter] = useState(false);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-  // Track scrolling activity and check position
+  // Track scrolling activity and check positions
   useEffect(() => {
     const unsubscribe = scrollY.on('change', () => {
       // When any scroll activity happens
@@ -25,27 +25,46 @@ export const ScrollArrow: React.FC = () => {
       // Set a new timeout to mark when scrolling stops
       timeoutRef.current = setTimeout(() => {
         setIsScrolling(false);
-      }, 500); // Adjust timeout as needed (500ms = half second)
+      }, 300); // 300ms timeout - shorter for better responsiveness
 
       // Check if at bottom of page
       const isAtBottom = window.innerHeight + window.scrollY >= document.body.offsetHeight - 100;
       setAtBottom(isAtBottom);
 
-      // Check if we're at the projects section
+      // Check for projects section position
       const projectsSection = document.querySelector('section#projects');
-      if (projectsSection) {
-        const rect = projectsSection.getBoundingClientRect();
-        // If projects section is in view or we've scrolled past it
-        setAtProjects(rect.top <= window.innerHeight);
+      const footerSection = document.querySelector('footer');
+
+      if (projectsSection && footerSection) {
+        const projectsRect = projectsSection.getBoundingClientRect();
+        const footerRect = footerSection.getBoundingClientRect();
+
+        // Hide if:
+        // 1. We haven't scrolled down to projects section yet OR
+        // 2. We're at the footer
+        const isAboveProjects = projectsRect.top > window.innerHeight;
+        const isAtFooter = footerRect.top <= window.innerHeight;
+
+        setAboveProjectsOrAtFooter(isAboveProjects || isAtFooter);
       }
     });
 
-    // Run once on mount to initialize state
+    // Run once on mount to initialize states
     const projectsSection = document.querySelector('section#projects');
-    if (projectsSection) {
-      const rect = projectsSection.getBoundingClientRect();
-      setAtProjects(rect.top <= window.innerHeight);
+    const footerSection = document.querySelector('footer');
+
+    if (projectsSection && footerSection) {
+      const projectsRect = projectsSection.getBoundingClientRect();
+      const footerRect = footerSection.getBoundingClientRect();
+
+      const isAboveProjects = projectsRect.top > window.innerHeight;
+      const isAtFooter = footerRect.top <= window.innerHeight;
+
+      setAboveProjectsOrAtFooter(isAboveProjects || isAtFooter);
     }
+
+    const isAtBottom = window.innerHeight + window.scrollY >= document.body.offsetHeight - 100;
+    setAtBottom(isAtBottom);
 
     return () => {
       unsubscribe();
@@ -87,8 +106,8 @@ export const ScrollArrow: React.FC = () => {
     }
   };
 
-  // Show when not scrolling, not at bottom, and not at projects section
-  const shouldShow = !isScrolling && !atBottom && !atProjects;
+  // Show only when not scrolling, not at bottom, and not above projects or at footer
+  const shouldShow = !isScrolling && !atBottom && !aboveProjectsOrAtFooter;
 
   return (
     <AnimatePresence>
@@ -98,7 +117,8 @@ export const ScrollArrow: React.FC = () => {
           className={cn(
             'fixed bottom-8 left-1/2 transform -translate-x-1/2 z-50',
             'p-3 border-4 border-black bg-white dark:bg-[#2A2A2A] shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]',
-            'hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all'
+            'hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-y-1 hover:translate-x-1 transition-all',
+            'dark:text-white'
           )}
           aria-label='Scroll to Next Section'
           initial={{ opacity: 0, y: 20 }}
