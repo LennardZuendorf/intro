@@ -22,7 +22,7 @@ const H1: React.FC<TypographyProps> = ({ className = '', children }) => {
   return (
     <h1
       className={cn(
-        'scroll-m-20 text-3xl font-black font-title tracking-tight lg:text-4xl 2xl:text-8xl',
+        'scroll-m-20 text-2xl font-black tracking-tight lg:text-3xl 2xl:text-6xl first:mt-0',
         className
       )}
     >
@@ -36,7 +36,7 @@ const H2: React.FC<TypographyProps> = ({ className = '', children }) => {
   return (
     <h2
       className={cn(
-        'scroll-m-20 text-3xl font-bold tracking-tight font-spartan lg:text-4xl 2xl:text-6xl text-mute',
+        'scroll-m-20 text-xl font-semibold tracking-tight lg:text-2xl 2xl:text-4xl',
         className
       )}
     >
@@ -50,7 +50,7 @@ const H3: React.FC<TypographyProps> = ({ className = '', children }) => {
   return (
     <h3
       className={cn(
-        'scroll-m-20 pb-2 text-2xl font-semibold tracking-tight lg:text-3xl 2xl:text-6xl first:mt-0',
+        'scroll-m-20 text-lg font-semibold tracking-tight lg:text-xl 2xl:text-3xl',
         className
       )}
     >
@@ -64,7 +64,7 @@ const H4: React.FC<TypographyProps> = ({ className = '', children }) => {
   return (
     <h4
       className={cn(
-        'scroll-m-20 text-xl font-semibold tracking-tight lg:text-2xl 2xl:text-4xl',
+        'scroll-m-20 text-base font-semibold tracking-tight lg:text-lg 2xl:text-2xl',
         className
       )}
     >
@@ -145,7 +145,11 @@ const SMuted: React.FC<TypographyProps> = ({ className = '', children }) => {
 };
 
 const Muted: React.FC<TypographyProps> = ({ className = '', children }) => {
-  return <p className={cn('text-xs text-muted-foreground lg:text-sm', className)}>{children}</p>;
+  return (
+    <p className={cn('text-md text-mono text-muted-foreground lg:text-lg', className)}>
+      {children}
+    </p>
+  );
 };
 
 const Code: React.FC<TypographyProps> = ({ className = '', children }) => {

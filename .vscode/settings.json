@@ -10,6 +10,7 @@
 		"**/node_modules": true,
 		"**/.next": false
 	},
+	"afterDelay": 1000,
 	"VsCodeTaskButtons.tasks": [
 		{
 			"label": "✅ Full Quality Check",

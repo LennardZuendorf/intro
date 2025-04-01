@@ -63,8 +63,11 @@ const config: Config = {
         lg: '12px'
       },
       boxShadow: {
-        shadow: 'var(--shadow)',
-        lshadow: 'var(--shadow-l)'
+        shadow: 'var(--shadow-md)',
+        lshadow: 'var(--shadow-lg)',
+        sm: 'var(--shadow-sm)',
+        md: 'var(--shadow-md)',
+        lg: 'var(--shadow-lg)'
       },
       translate: {
         boxShadowX: '6px',

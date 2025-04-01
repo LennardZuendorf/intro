@@ -40,7 +40,7 @@ export function ProjectCarousel({ projects }: ProjectCarouselProps) {
             <CarouselItem key={project.id} className={cn('md:basis-1/2 lg:basis-1/3')}>
               <Card className='group h-full' variant='reversed'>
                 <div className='relative overflow-hidden border-b-4 border-black aspect-video'>
-                  <Image
+                  {/*<Image
                     src={
                       typeof project.heroImage === 'object'
                         ? typeof project.heroImage?.url === 'string'
@@ -53,6 +53,7 @@ export function ProjectCarousel({ projects }: ProjectCarouselProps) {
                     height={400}
                     className='object-cover w-full h-full transform group-hover:scale-105 transition-transform duration-500 contrast-75'
                   />
+                  */}
                 </div>
 
                 <div className='p-6'>
