@@ -35,11 +35,15 @@ const themes = [
 interface ThemeSwitcherProps {
   className?: string; // Optional className for additional styling
   buttonVariant?: 'default' | 'reversed' | 'noShadow' | 'accent'; // Button variant
+  noButtonShadow?: boolean; // Whether to remove the button shadow
+  popoverClassName?: string; // Separate class for the popover
 }
 
 export const ThemeSelect: React.FC<ThemeSwitcherProps> = ({
   className,
-  buttonVariant = 'default'
+  buttonVariant = 'default',
+  noButtonShadow = false,
+  popoverClassName
 }) => {
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState('');
@@ -89,14 +93,21 @@ export const ThemeSelect: React.FC<ThemeSwitcherProps> = ({
     toast({
       title: themeMessages[selectedTheme as keyof typeof themeMessages].title,
       description: themeMessages[selectedTheme as keyof typeof themeMessages].description,
-      variant: 'default'
+      variant: 'default',
+      duration: 5000
     });
   };
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
-        <Button variant={buttonVariant} role='combobox' aria-expanded={open} size='icon'>
+        <Button
+          variant={buttonVariant}
+          role='combobox'
+          aria-expanded={open}
+          size='icon'
+          className={cn(noButtonShadow && 'shadow-none', className)}
+        >
           {value ? (
             themes.find((theme) => theme.value === value)?.icon
           ) : (
@@ -105,9 +116,12 @@ export const ThemeSelect: React.FC<ThemeSwitcherProps> = ({
         </Button>
       </PopoverTrigger>
       <PopoverContent
+        align='center'
+        sideOffset={8}
         className={cn(
-          'flex shrink !border-0 p-0 font-base justify-items-center align-middle text-center',
-          className
+          'flex shrink !border-0 p-0 font-base justify-items-center align-middle text-center z-[9999] shadow-lg bg-bg',
+          'bottom-full md:bottom-auto', // Position above navbar on mobile, default on desktop
+          popoverClassName
         )}
       >
         <Command>

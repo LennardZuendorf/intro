@@ -55,13 +55,15 @@ const accentColors: ColorPalette[] = [
 interface ColorSelectProps {
   className?: string;
   buttonVariant?: 'default' | 'reversed' | 'noShadow' | 'accent';
+  noButtonShadow?: boolean;
+  popoverClassName?: string;
 }
-
-//TODO: Fix build error with ColorPalette Type.
 
 export const ColorSelect: React.FC<ColorSelectProps> = ({
   className,
-  buttonVariant = 'default'
+  buttonVariant = 'default',
+  noButtonShadow = false,
+  popoverClassName
 }) => {
   const [open, setOpen] = useState(false);
   const [currentColor, setCurrentColor] = useState<ColorPalette | null>(null);
@@ -104,7 +106,7 @@ export const ColorSelect: React.FC<ColorSelectProps> = ({
     r.style.setProperty('--accent-light', color.colorCode.light);
     r.style.setProperty('--accent', color.colorCode.base);
     r.style.setProperty('--accent-dark', color.colorCode.dark);
-    // Set grid to use the lightest accent color
+    // Set grid to use the lightest accent color, consistent with setColorPreference.tsx
     r.style.setProperty('--grid', color.colorCode.light);
     localStorage.setItem('color', JSON.stringify(color));
     setCurrentColor(color);
@@ -135,7 +137,8 @@ export const ColorSelect: React.FC<ColorSelectProps> = ({
       description:
         colorMessages[color.name]?.description ||
         `Your vibe is now ${color.name.toLowerCase()}. Looking good!`,
-      variant: 'default'
+      variant: 'default',
+      duration: 5000
     });
   };
 
@@ -154,9 +157,8 @@ export const ColorSelect: React.FC<ColorSelectProps> = ({
     r.style.removeProperty('--accent-light');
     r.style.removeProperty('--accent');
     r.style.removeProperty('--accent-dark');
-    // Reset grid to neutral
-    const isDark = document.documentElement.classList.contains('dark');
-    r.style.setProperty('--grid', isDark ? 'oklch(0.25 0 0)' : 'oklch(0.9 0 0)');
+    // Reset grid to default from CSS instead of setting explicitly
+    r.style.removeProperty('--grid');
     localStorage.removeItem('color');
     setCurrentColor(null);
 
@@ -187,21 +189,31 @@ export const ColorSelect: React.FC<ColorSelectProps> = ({
     toast({
       title: randomMessage.title,
       description: randomMessage.description,
-      variant: 'default'
+      variant: 'default',
+      duration: 5000
     });
   };
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
-        <Button variant={buttonVariant} role='combobox' aria-expanded={open} size='icon'>
+        <Button
+          variant={buttonVariant}
+          role='combobox'
+          aria-expanded={open}
+          size='icon'
+          className={cn(noButtonShadow && 'shadow-none', className)}
+        >
           <Palette className='h-4 w-4' />
         </Button>
       </PopoverTrigger>
       <PopoverContent
+        align='center'
+        sideOffset={8}
         className={cn(
-          'flex shrink !border-0 p-0 font-base justify-items-center align-middle text-center',
-          className
+          'flex shrink !border-0 p-0 font-base justify-items-center align-middle text-center z-[9999] shadow-lg bg-bg',
+          'bottom-full md:bottom-auto', // Position above navbar on mobile, default on desktop
+          popoverClassName
         )}
       >
         <Command>

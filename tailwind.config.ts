@@ -11,6 +11,9 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        mono: ['var(--mono-font-family)']
+      },
       colors: {
         main: 'var(--main)',
         overlay: 'var(--overlay)',
@@ -25,8 +28,8 @@ const config: Config = {
         text: 'var(--text)',
         mtext: 'var(--mtext)',
         atext: 'var(--atext)',
-        border: 'rgb(var(--border))',
-        ring: 'rgb(var(--ring))',
+        border: 'var(--border)',
+        ring: 'var(--ring)',
         ringOffset: 'var(--ring-offset)',
         input: 'rgb(var(--input))',
         background: 'rgb(var(--background))',
@@ -67,7 +70,38 @@ const config: Config = {
         lshadow: 'var(--shadow-lg)',
         sm: 'var(--shadow-sm)',
         md: 'var(--shadow-md)',
-        lg: 'var(--shadow-lg)'
+        lg: 'var(--shadow-lg)',
+        glow: '0 0 15px rgba(0, 0, 0, 0.3)',
+        'accent-glow': '0 0 15px var(--accent)'
+      },
+      keyframes: {
+        float: {
+          '0%, 100%': { transform: 'translateY(0) rotate(var(--tw-rotate, 0))' },
+          '50%': { transform: 'translateY(-10px) rotate(var(--tw-rotate, 0))' }
+        },
+        wiggle: {
+          '0%, 100%': { transform: 'rotate(-2deg)' },
+          '50%': { transform: 'rotate(2deg)' }
+        },
+        shimmer: {
+          '0%': { backgroundPosition: '-200% 0' },
+          '100%': { backgroundPosition: '200% 0' }
+        },
+        pulse: {
+          '0%, 100%': { opacity: '1' },
+          '50%': { opacity: '0.5' }
+        },
+        bounce: {
+          '0%, 100%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(-20px)' }
+        }
+      },
+      animation: {
+        float: 'float 3s ease-in-out infinite',
+        wiggle: 'wiggle 0.5s ease-in-out infinite',
+        shimmer: 'shimmer 2s linear infinite',
+        pulse: 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+        bounce: 'bounce 1s infinite'
       },
       translate: {
         boxShadowX: '6px',
@@ -78,6 +112,10 @@ const config: Config = {
       fontWeight: {
         base: '500',
         heading: '900'
+      },
+      transitionDuration: {
+        '2000': '2000ms',
+        '3000': '3000ms'
       }
     }
   },

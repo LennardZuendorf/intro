@@ -61,7 +61,8 @@ export default function SetColorPreference() {
             description:
               welcomeMessages[colorObj.name]?.description ||
               `Welcome back to your ${colorObj.name.toLowerCase()} aesthetic.`,
-            variant: 'default'
+            variant: 'default',
+            duration: 5000
           });
         }, 1000);
       } catch (error) {
