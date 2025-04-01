@@ -38,7 +38,7 @@ export default function AboutSection({ className }: SectionProps) {
       className={cn(
         'min-h-[100svh] w-full relative overflow-hidden',
         'flex items-center justify-center',
-        'bg-[#F8F5F1] dark:bg-[#1A1A1A] z-0',
+        'bg-main z-0',
         className
       )}
       id='about'
