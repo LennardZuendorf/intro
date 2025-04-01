@@ -4,7 +4,7 @@ import { type VariantProps, cva } from 'class-variance-authority';
 import type * as React from 'react';
 
 const neoBadgeVariants = cva(
-  'inline-block px-3 py-1.5 font-medium rounded-md border-2 border-black transition-all',
+  'inline-block px-3 py-1.5 font-mono rounded-md border-2 border-black transition-all duration-300',
   {
     variants: {
       variant: {
@@ -16,17 +16,17 @@ const neoBadgeVariants = cva(
       },
       rotation: {
         none: '',
-        slight: 'rotate-1',
-        negative: '-rotate-1',
-        medium: 'rotate-2',
-        negativeMedium: '-rotate-2'
+        slight: 'rotate-slight',
+        negative: 'rotate-negative',
+        medium: 'rotate-medium',
+        negativeMedium: 'rotate-negative-medium'
       },
       interactive: {
         none: '',
-        grow: 'hover:scale-105',
-        lift: 'hover:-translate-y-0.5',
-        bounce: 'hover:-translate-y-1 hover:shadow-lg',
-        wiggle: 'hover:rotate-3 hover:scale-105'
+        grow: 'hover-grow',
+        lift: 'hover-lift',
+        bounce: 'hover-bounce',
+        wiggle: 'hover-wiggle'
       },
       shadow: {
         none: '',
@@ -44,7 +44,7 @@ const neoBadgeVariants = cva(
       variant: 'default',
       rotation: 'none',
       interactive: 'none',
-      shadow: 'none',
+      shadow: 'sm',
       size: 'md'
     }
   }

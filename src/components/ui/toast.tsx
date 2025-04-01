@@ -6,15 +6,13 @@
  * A custom toast notification component with neobrutalist styling.
  *
  * Features:
- * - Thick black borders (2px)
- * - Subtle shadow effects
- * - Hover animations
- * - High-contrast colors
+ * - Uses Card component styling
+ * - Consistent with other UI components
  * - Supports light/dark mode
  *
  * Variants:
  * - default: Standard toast with main background
- * - destructive: Black background with white text for errors/warnings
+ * - destructive: Dark background with light text for errors/warnings
  *
  * Usage:
  * Import the useToast hook from @/hooks/use-toast and call:
@@ -52,12 +50,12 @@ const ToastViewport = React.forwardRef<
 ToastViewport.displayName = ToastPrimitives.Viewport.displayName;
 
 const toastVariants = cva(
-  'group pointer-events-auto relative flex w-full items-center justify-between space-x-4 overflow-hidden rounded-base border-2 border-border shadow-shadow p-6 pr-8 transition-all data-[swipe=cancel]:translate-x-0 data-[swipe=end]:translate-x-[var(--radix-toast-swipe-end-x)] data-[swipe=move]:translate-x-[var(--radix-toast-swipe-move-x)] data-[swipe=move]:transition-none data-[state=open]:animate-in data-[state=closed]:animate-out data-[swipe=end]:animate-out data-[state=closed]:fade-out-80 data-[state=closed]:slide-out-to-right-full data-[state=open]:slide-in-from-top-full data-[state=open]:sm:slide-in-from-bottom-full hover:-translate-y-1 hover:shadow-[6px_6px_0px_0px_var(--border)]',
+  'group pointer-events-auto relative flex w-full items-center justify-between space-x-4 overflow-hidden rounded-md border-4 border-border shadow-lg p-6 pr-8 transition-all data-[swipe=cancel]:translate-x-0 data-[swipe=end]:translate-x-[var(--radix-toast-swipe-end-x)] data-[swipe=move]:translate-x-[var(--radix-toast-swipe-move-x)] data-[swipe=move]:transition-none data-[state=open]:animate-in data-[state=closed]:animate-out data-[swipe=end]:animate-out data-[state=closed]:fade-out-80 data-[state=closed]:slide-out-to-right-full data-[state=open]:slide-in-from-top-full data-[state=open]:sm:slide-in-from-bottom-full hover-lift',
   {
     variants: {
       variant: {
         default: 'bg-main text-mtext',
-        destructive: 'bg-black text-white'
+        destructive: 'bg-accent-dark text-atext'
       }
     },
     defaultVariants: {
@@ -87,7 +85,7 @@ const ToastAction = React.forwardRef<
   <ToastPrimitives.Action
     ref={ref}
     className={cn(
-      'inline-flex h-8 shrink-0 items-center justify-center rounded-base border-2 border-black bg-accent px-3 text-sm font-bold text-atext shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all hover:-translate-y-0.5 hover:shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]',
+      'inline-flex h-8 shrink-0 items-center justify-center rounded-md border-2 border-border bg-accent px-3 text-sm font-bold text-atext shadow-md hover-lift',
       className
     )}
     {...props}

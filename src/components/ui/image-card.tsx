@@ -1,3 +1,6 @@
+import { Card } from '@/components/ui/card';
+import { cn } from '@/lib/utils/ui';
+
 type Props = {
   imageUrl: string;
   caption?: string;
@@ -24,21 +27,35 @@ export default function ImageCard({
   hideCaption = false
 }: Props) {
   return (
-    <figure
-      className={`${className} overflow-hidden shadow-md rounded-md border-4 border-black bg-bg font-base  ${heightClass || ''} ${fullHeight ? 'flex flex-col' : ''}`}
+    <Card
+      variant='reversed'
+      rotation='none'
+      interactive='none'
+      className={cn(
+        className,
+        'overflow-hidden',
+        heightClass || '',
+        fullHeight ? 'flex flex-col' : ''
+      )}
     >
       <div
-        className={`${!fullHeight ? aspectRatio : 'flex-grow'} overflow-hidden ${hideCaption ? 'h-full' : ''}`}
+        className={cn(
+          !fullHeight ? aspectRatio : 'flex-grow',
+          'overflow-hidden',
+          hideCaption ? 'h-full' : ''
+        )}
       >
         <img
-          className={`w-${width} h-full object-cover ${imageClassName}`}
+          className={cn(`w-${width} h-full object-cover`, imageClassName)}
           src={imageUrl}
           alt={alt}
         />
       </div>
       {!hideCaption && caption && (
-        <figcaption className='border-border p-4 text-center font-medium'>{caption}</figcaption>
+        <figcaption className='border-t-2 border-border p-4 text-center font-medium'>
+          {caption}
+        </figcaption>
       )}
-    </figure>
+    </Card>
   );
 }

@@ -12,43 +12,51 @@ const cardVariants = cva('rounded-md border-4 border-border text-mtext shadow-md
     variant: {
       default: 'bg-main',
       reversed: 'bg-bg',
-      outline: 'bg-transparent'
+      outline: 'bg-transparent',
+      accent: 'bg-accent text-atext'
     },
     rotation: {
       none: '',
-      slight: 'rotate-1',
-      negative: '-rotate-1',
-      medium: 'rotate-2',
-      negativeMedium: '-rotate-2'
+      slight: 'rotate-slight',
+      slightNegative: 'rotate-negative',
+      medium: 'rotate-medium',
+      mediumNegative: 'rotate-negative-medium'
     },
     interactive: {
       none: '',
-      grow: 'hover:scale-105',
-      lift: 'hover:-translate-y-0.5',
-      bounce: 'hover:-translate-y-1 hover:shadow-lg',
-      wiggle: 'hover:rotate-3 hover:scale-105',
-      flip: 'hover:-rotate-1'
+      slight: 'hover-lift transition-all duration-300',
+      medium: 'hover-grow hover:shadow-xl transition-all duration-300'
     },
     shadow: {
       none: '',
       sm: 'shadow-sm',
       md: 'shadow-md',
-      lg: 'shadow-lg'
+      lg: 'shadow-lg',
+      xl: 'shadow-xl'
+    },
+    borderStyle: {
+      default: 'border-4 border-border',
+      accent: 'border-4 border-accent',
+      none: 'border-0'
     }
   },
   defaultVariants: {
     variant: 'default',
     rotation: 'none',
     interactive: 'none',
-    shadow: 'md'
+    shadow: 'lg',
+    borderStyle: 'default'
   }
 });
 
 const Card = React.forwardRef<HTMLDivElement, CardProps>(
-  ({ className, variant, rotation, interactive, shadow, ...props }, ref) => (
+  ({ className, variant, rotation, interactive, shadow, borderStyle, ...props }, ref) => (
     <div
       ref={ref}
-      className={cn(cardVariants({ variant, rotation, interactive, shadow, className }))}
+      className={cn(
+        cardVariants({ variant, rotation, interactive, shadow, borderStyle }),
+        className
+      )}
       {...props}
     />
   )
