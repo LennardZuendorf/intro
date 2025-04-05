@@ -1,0 +1,106 @@
+---
+description: writing react code
+globs: 
+alwaysApply: false
+---
+# React & TypeScript Best Practices
+
+## Component Structure
+
+- Use functional components with hooks instead of class components
+- Keep components small and focused on a single responsibility
+- Extract complex logic into custom hooks
+- Use PascalCase for component names and camelCase for variables/functions
+- Place components in appropriate directories based on their scope/usage
+
+## TypeScript Patterns
+
+- Define explicit prop interfaces/types for all components
+- Use `type` for creating object shapes and `interface` for objects that will be extended
+- Avoid using `any` type - prefer `unknown` when type is uncertain
+- Use type guards (`instanceof`, `typeof`, custom predicates) to narrow types
+- Leverage TypeScript's utility types (Pick, Omit, Partial, etc.)
+- Define enums or union types for finite sets of options
+- Use discriminated unions for complex state management
+
+```tsx
+// Component props interface example
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  variant?: 'default' | 'accent' | 'link';
+  size?: 'sm' | 'md' | 'lg';
+  isLoading?: boolean;
+}
+
+// Custom hook with proper typing
+function useToggle(initialState: boolean): [boolean, () => void] {
+  const [state, setState] = useState(initialState);
+  const toggle = useCallback(() => setState(prev => !prev), []);
+  return [state, toggle];
+}
+```
+
+## Performance Optimization
+
+- Memoize expensive calculations with `useMemo`
+- Memoize event handlers with `useCallback` when passed as props
+- Use `React.memo()` for components that render often with the same props
+- Avoid unnecessary renders with proper dependency arrays
+- Use virtualization for long lists (react-window, react-virtualized)
+- Implement code splitting with dynamic imports and React.lazy
+
+## State Management
+
+- Keep state as local as possible (component state → context → global)
+- Use reducer pattern (`useReducer`) for complex state logic
+- Implement context with careful consideration of re-renders
+- Extract state into custom hooks for reusability
+- Normalize complex data structures
+- Avoid prop drilling by using composition or context
+
+## Component Composition
+
+- Favor composition over inheritance
+- Use render props and higher-order components sparingly
+- Implement compound components for complex UI with multiple parts
+- Leverage children and slots for flexible compositions
+- Create adapter components to integrate third-party libraries
+
+## Styling Approaches
+
+- Use CSS-in-JS or utility-first approaches (Tailwind) for component styling
+- Maintain consistent patterns (className patterns, variables, theming)
+- Implement proper responsive design
+- Ensure accessibility in all styling (contrast, focus states, etc.)
+- Use CSS variables for theming and configuration
+
+## Code Organization
+
+- Group related files together (component + hooks + utils + tests)
+- Create barrel exports (index.ts) for cleaner imports
+- Use absolute imports with path aliases
+- Split complex components into smaller sub-components
+- Maintain consistent code style with proper formatting
+
+## Testing
+
+- Write unit tests for components, hooks, and utilities
+- Use React Testing Library for component testing
+- Focus on testing behavior, not implementation details
+- Implement integration tests for critical user flows
+- Use mock service worker for API testing
+
+## Accessibility
+
+- Use semantic HTML elements appropriately
+- Include proper ARIA attributes where needed
+- Ensure keyboard navigation works for all interactive elements
+- Implement proper focus management for modals and other complex UIs
+- Test with screen readers and keyboard-only navigation
+
+## Common Patterns
+
+- Controlled vs. uncontrolled components
+- Error boundaries for graceful error handling
+- Portals for rendering outside the DOM hierarchy
+- Refs for imperative actions and DOM manipulation
+- Context providers for theming, authentication, etc.

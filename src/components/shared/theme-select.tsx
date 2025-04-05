@@ -94,7 +94,7 @@ export const ThemeSelect: React.FC<ThemeSwitcherProps> = ({
       title: themeMessages[selectedTheme as keyof typeof themeMessages].title,
       description: themeMessages[selectedTheme as keyof typeof themeMessages].description,
       variant: 'default',
-      duration: 5000
+      duration: 1000
     });
   };
 

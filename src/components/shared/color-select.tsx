@@ -138,7 +138,7 @@ export const ColorSelect: React.FC<ColorSelectProps> = ({
         colorMessages[color.name]?.description ||
         `Your vibe is now ${color.name.toLowerCase()}. Looking good!`,
       variant: 'default',
-      duration: 5000
+      duration: 1000
     });
   };
 
@@ -190,7 +190,7 @@ export const ColorSelect: React.FC<ColorSelectProps> = ({
       title: randomMessage.title,
       description: randomMessage.description,
       variant: 'default',
-      duration: 5000
+      duration: 1000
     });
   };
 

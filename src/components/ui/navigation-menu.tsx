@@ -1,10 +1,10 @@
 import * as NavigationMenuPrimitive from '@radix-ui/react-navigation-menu';
-import { cva } from 'class-variance-authority';
 import { ChevronDown } from 'lucide-react';
 
 import * as React from 'react';
 
 import { cn } from '@/lib/utils/ui';
+import { buttonVariants } from './button';
 
 const NavigationMenu = React.forwardRef<
   React.ElementRef<typeof NavigationMenuPrimitive.Root>,
@@ -41,9 +41,9 @@ NavigationMenuList.displayName = NavigationMenuPrimitive.List.displayName;
 
 const NavigationMenuItem = NavigationMenuPrimitive.Item;
 
-const navigationMenuTriggerStyle = cva(
-  'bg-main group inline-flex h-10 w-max items-center justify-center text-mtext rounded-md bg-bg px-4 py-2 text-sm font-heading transition-all border-2 border-transparent hover:border-border hover:bg-accent hover:text-atext disabled:pointer-events-none disabled:opacity-50'
-);
+const navigationMenuTriggerStyle = () => {
+  return cn(buttonVariants({ variant: 'noShadow' }), 'group w-max font-heading');
+};
 
 const NavigationMenuTrigger = React.forwardRef<
   React.ElementRef<typeof NavigationMenuPrimitive.Trigger>,
@@ -51,7 +51,7 @@ const NavigationMenuTrigger = React.forwardRef<
 >(({ className, children, ...props }, ref) => (
   <NavigationMenuPrimitive.Trigger
     ref={ref}
-    className={cn(navigationMenuTriggerStyle(), 'group', className)}
+    className={cn(navigationMenuTriggerStyle(), className)}
     {...props}
   >
     {children}

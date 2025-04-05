@@ -1,6 +1,7 @@
 'use client';
 
-import type { SectionProps } from '@/app/(app)/page';
+import type { SectionProps as PageSectionProps } from '@/app/(app)/page';
+import { Section } from '@/components/ui/section';
 import { cn } from '@/lib/utils/ui';
 
 const skills = [
@@ -32,32 +33,17 @@ const experiences = [
   }
 ];
 
-export default function AboutSection({ className }: SectionProps) {
+export default function AboutSection({ className }: PageSectionProps) {
   return (
-    <section
-      className={cn(
-        'min-h-[100svh] w-full relative overflow-hidden',
-        'flex items-center justify-center',
-        'bg-main z-0',
-        className
-      )}
-      id='about'
-    >
-      {/* Grid background with mask */}
-      <div
-        className='absolute inset-0 w-full h-full z-[1] pointer-events-none'
-        style={{
-          backgroundImage: `
-            linear-gradient(to right, var(--grid) 1px, transparent 1px),
-            linear-gradient(to bottom, var(--grid) 1px, transparent 1px)
-          `,
-          backgroundSize: '80px 80px',
-          maskImage: 'radial-gradient(circle at center, black 40%, transparent 100%)'
-        }}
-      />
-
-      <div className='relative w-full max-w-6xl mx-auto px-6 py-16 z-[2]'>
-        <div className='grid grid-cols-1 lg:grid-cols-2 gap-12'>
+    <section id='about'>
+      <Section
+        className={className}
+        background='grid'
+        maxWidth='min(92%, 1280px)'
+        centerContent={true}
+        containerClassName='justify-center items-center mx-auto relative z-[2]'
+      >
+        <div className='w-full max-w-[1280px] grid grid-cols-1 lg:grid-cols-2 gap-12'>
           {/* Left Column - About Text */}
           <div className='space-y-8'>
             <div className='relative'>
@@ -130,7 +116,7 @@ export default function AboutSection({ className }: SectionProps) {
             </div>
           </div>
         </div>
-      </div>
+      </Section>
     </section>
   );
 }

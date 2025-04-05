@@ -19,10 +19,12 @@ const buttonVariants = cva(
         reversedNeutral:
           'text-mtext bg-bg border-2 border-border shadow-shadow hover:translate-x-boxShadowX hover:translate-y-boxShadowY hover:shadow-none',
         noShadow:
-          'text-mtext bg-main border-2 border-transparent hover:border-border focus:border-border',
+          'text-mtext bg-main border-2 border-transparent hover:border-border hover:border-2 hover:bg-accent hover:text-atext focus:border-border focus:border-2',
         accent:
           'bg-accent text-atext border-2 border-border shadow-shadow hover:translate-x-boxShadowX hover:translate-y-boxShadowY hover:shadow-none hover:bg-accent-dark',
-        link: 'text-mtext hover:text-accent'
+        link: 'text-mtext hover:text-accent',
+        action:
+          'w-full text-base border-2 border-border shadow-md bg-main text-mtext group hover:shadow-lg hover:-translate-y-0.5 hover:bg-accent hover:text-atext'
       },
       size: {
         default: 'h-10 px-4 py-2',

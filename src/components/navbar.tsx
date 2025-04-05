@@ -42,6 +42,12 @@ export const Nav = ({ className }: { className?: string }) => {
   const togglePin = () => {
     const newPinState = !isPinned;
     setIsPinned(newPinState);
+
+    // If we're unpinning, immediately hide the navbar
+    if (!newPinState) {
+      setVisible(false);
+    }
+
     localStorage.setItem('navbarPinned', String(newPinState));
   };
 
@@ -149,7 +155,6 @@ const Navbar = ({
                       'bg-main py-1.5 px-2 md:px-3',
                       pathname.includes(item.link) ? 'font-bold' : 'font-medium'
                     )}
-                    active={!pathname.includes(item.link)}
                   >
                     {item.name}
                   </NavigationMenuLink>
@@ -174,7 +179,7 @@ const Navbar = ({
                   variant='default'
                   size='icon'
                   onClick={togglePin}
-                  className={cn('shadow-none', isPinned && 'bg-accent text-mtext')}
+                  className={cn('shadow-none', isPinned && 'text-mtext')}
                 >
                   {isPinned ? <PinOff className='h-4 w-4' /> : <Pin className='h-4 w-4' />}
                 </Button>

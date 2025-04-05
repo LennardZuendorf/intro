@@ -1,0 +1,128 @@
+# React & TypeScript Best Practices
+
+## CRITICAL PRINCIPLES
+
+- **ALWAYS create reusable components** when a pattern is used more than once
+- **NEVER duplicate component logic or styling** - extract to a shared component
+- **BUILD a comprehensive base UI component library** for consistent interfaces
+- **USE Tailwind CSS variables and CSS variables** for all theming and styling
+
+## Component Structure
+
+- **Always use** functional components with hooks instead of class components
+- **Keep components small** and focused on a single responsibility (max 150-200 lines)
+- **Extract complex logic** into custom hooks - no business logic in components
+- **Use PascalCase** for component names and camelCase for variables/functions
+- **Organize components** in appropriate directories based on their scope/usage
+
+## Reusability First
+
+- **Create reusable components immediately** when something appears twice
+- **Design with variants from the start** - use props to control visual variations
+- **Implement a complete props API** for flexibility (size, color, orientation, etc.)
+- **Document component props** with comprehensive TypeScript interfaces
+- **Create base UI components** for all fundamental interface elements:
+  - Buttons, inputs, form elements, cards, modals, layout containers
+  - Typography elements (headings, paragraphs, lists)
+  - Navigation components (menus, tabs, breadcrumbs)
+  - Feedback components (alerts, toasts, loaders)
+
+## TypeScript Patterns
+
+- **Always define** explicit prop interfaces/types for all components
+- **Use `type` for** creating object shapes and `interface` for objects that will be extended
+- **Never use `any` type** - use `unknown` when type is uncertain
+- **Implement type guards** (`instanceof`, `typeof`, custom predicates) to narrow types
+- **Leverage TypeScript's utility types** (Pick, Omit, Partial, etc.)
+- **Define enums or union types** for finite sets of options
+- **Use discriminated unions** for complex state management
+
+```tsx
+// Component props interface example
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  variant: 'default' | 'accent' | 'link';  // Required prop
+  size: 'sm' | 'md' | 'lg';                // Required prop
+  isLoading?: boolean;                     // Optional prop
+}
+
+// Custom hook with proper typing
+function useToggle(initialState: boolean): [boolean, () => void] {
+  const [state, setState] = useState(initialState);
+  const toggle = useCallback(() => setState(prev => !prev), []);
+  return [state, toggle];
+}
+```
+
+## Styling Best Practices
+
+- **Always use Tailwind CSS** or other utility-first approaches for component styling
+- **Define global CSS variables** in your root stylesheet for:
+  - Colors, spacing, typography, borders, shadows, animations
+  - Breakpoints, z-indices, and other consistent values
+- **Reference Tailwind variables** through CSS variables for theme consistency
+- **Create a comprehensive design token system** using CSS variables
+- **Never use hardcoded color values or spacing** - use variables
+
+```css
+/* Required CSS variable approach */
+:root {
+  /* Design tokens */
+  --color-primary: theme('colors.blue.600');
+  --spacing-base: theme('spacing.4');
+  --border-radius: theme('borderRadius.md');
+  
+  /* Component-specific variables */
+  --button-padding-x: var(--spacing-base);
+  --card-shadow: theme('boxShadow.md');
+}
+```
+
+## Performance Optimization
+
+- **Always memoize** expensive calculations with `useMemo`
+- **Memoize all event handlers** with `useCallback` when passed as props
+- **Use React.memo()** for components that render often with the same props
+- **Minimize renders** with proper dependency arrays in hooks
+- **Implement virtualization** for all long lists (react-window, react-virtualized)
+- **Use code splitting** with dynamic imports and React.lazy for large components
+
+## State Management
+
+- **Keep state as local as possible** (component → context → global)
+- **Use reducer pattern** (`useReducer`) for all complex state logic
+- **Implement context carefully** to prevent unnecessary re-renders
+- **Extract state into custom hooks** for reusability
+- **Normalize complex data structures** for efficient updates
+- **Never prop drill** - use composition or context instead
+
+## Component Composition
+
+- **Always favor composition over inheritance**
+- **Use render props and HOCs sparingly**
+- **Implement compound components** for complex UI with multiple parts
+- **Leverage children and slots** for flexible compositions
+- **Create adapter components** to integrate third-party libraries
+
+## Code Organization
+
+- **Group related files together** (component + hooks + utils + tests)
+- **Create barrel exports** (index.ts) for cleaner imports
+- **Use absolute imports** with path aliases - never relative paths beyond one level
+- **Split complex components** into smaller sub-components
+- **Maintain consistent code style** with automated formatting
+
+## Accessibility
+
+- **Always use semantic HTML elements** appropriately
+- **Include proper ARIA attributes** where needed
+- **Ensure keyboard navigation** works for all interactive elements
+- **Implement proper focus management** for modals and other complex UIs
+- **Test with screen readers** and keyboard-only navigation
+
+## Common Patterns
+
+- Controlled vs. uncontrolled components
+- Error boundaries for graceful error handling
+- Portals for rendering outside the DOM hierarchy
+- Refs for imperative actions and DOM manipulation
+- Context providers for theming, authentication, etc. 

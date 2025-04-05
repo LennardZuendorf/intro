@@ -27,3 +27,7 @@ alwaysApply: false
 - Squash commits when merging feature branches to keep the history concise.
 
 By following these guidelines, we ensure consistent and clear commit messages that improve team collaboration and project maintainability.
+
+## Linting
+
+- always run pnpm run check before committing or pushing changes
