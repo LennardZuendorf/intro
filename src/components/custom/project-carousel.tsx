@@ -23,8 +23,6 @@ interface ProjectCarouselProps {
 }
 
 export function ProjectCarousel({ projects }: ProjectCarouselProps) {
-  const isMediumScreen = useIsBreakpoint('md');
-
   return (
     <div className='w-full relative py-10'>
       <Carousel
@@ -83,14 +81,8 @@ export function ProjectCarousel({ projects }: ProjectCarouselProps) {
             </CarouselItem>
           ))}
         </CarouselContent>
-        <CarouselPrevious
-          positioning={!isMediumScreen ? 'vertical' : 'horizontal'}
-          className='bg-bg border-border'
-        />
-        <CarouselNext
-          positioning={!isMediumScreen ? 'vertical' : 'horizontal'}
-          className='bg-bg border-border'
-        />
+        <CarouselPrevious className='bg-bg border-border' />
+        <CarouselNext className='bg-bg border-border' />
       </Carousel>
     </div>
   );

@@ -9,16 +9,16 @@ import { ProfileImage } from '@/components/ui/profile-image';
 import { Section } from '@/components/ui/section';
 import { Code, H1, H3, H4, L, Muted } from '@/components/ui/typography';
 import { cn } from '@/lib/utils/ui';
-import type { PageContent } from '@/payload-types';
+import type { SectionContent } from '@/payload-types';
 import Link from 'next/link';
 import { HiMiniArrowTopRightOnSquare } from 'react-icons/hi2';
 
 // Interface for the component props
 interface HeroSectionProps extends PageSectionProps {
-  pageContent: PageContent;
+  sectionContent: SectionContent;
 }
 
-export const HeroSection = ({ className, pageContent }: HeroSectionProps) => {
+export const HeroSection = ({ className, sectionContent }: HeroSectionProps) => {
   return (
     <section id='hero'>
       <Section
@@ -145,7 +145,7 @@ export const HeroSection = ({ className, pageContent }: HeroSectionProps) => {
             {/* Profile Image */}
             <div className='hidden md:block w-full scale-100 md:scale-105 2xl:scale-110'>
               <ProfileImage
-                image={pageContent?.avatar}
+                image={sectionContent?.avatar}
                 alt='Lennard Zündorf'
                 className='w-full'
                 aspectRatio='aspect-square'

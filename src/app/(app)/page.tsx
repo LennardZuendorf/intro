@@ -2,7 +2,7 @@ import { Banner } from '@/components/banner';
 import AboutSection from '@/components/sections/about';
 import { HeroSection } from '@/components/sections/hero';
 import { Projects } from '@/components/sections/projects';
-import type { PageContent } from '@/payload-types';
+import type { SectionContent } from '@/payload-types';
 import configPromise from '@payload-config';
 import type { NextPage } from 'next';
 import { getPayload } from 'payload';
@@ -12,21 +12,21 @@ export interface SectionProps {
   className?: string;
 }
 
-const queryPageContent = cache(async (): Promise<PageContent> => {
+const querySectionContent = cache(async (): Promise<SectionContent> => {
   const payload = await getPayload({ config: configPromise });
-  const pageContent = await payload.findGlobal({
+  const sectionContent = await payload.findGlobal({
     slug: 'sectionContent'
   });
 
-  return pageContent as PageContent;
+  return sectionContent as SectionContent;
 });
 
 const Page: NextPage = async () => {
-  const pageContent = await queryPageContent();
+  const sectionContent = await querySectionContent();
 
   return (
     <div className='min-h-screen'>
-      <HeroSection className='' pageContent={pageContent} />
+      <HeroSection className='' sectionContent={sectionContent} />
       <AboutSection className='' />
       <Projects className='lg:h-svh bg-main border-t-4 border-border pt-5 pb-5 md:pt-10 md:pb-10' />
       <Banner className='' />
