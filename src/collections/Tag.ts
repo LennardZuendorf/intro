@@ -6,7 +6,7 @@ export const Tag: CollectionConfig = {
     useAsTitle: 'name',
     description:
       'tags are a multi usable combination of a name, category, and optional url/link and icon',
-    group: 'Classes'
+    group: 'Content Collection'
   },
   fields: [
     {

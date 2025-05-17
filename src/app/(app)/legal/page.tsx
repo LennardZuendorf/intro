@@ -69,7 +69,7 @@ async function queryLegalContent() {
   const payload = await getPayload({ config: configPromise });
 
   const result = await payload.findGlobal({
-    slug: 'legalTexts', // required
+    slug: 'legalContent', // required
     depth: 2,
     showHiddenFields: true
   });

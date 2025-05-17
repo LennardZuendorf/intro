@@ -15,7 +15,7 @@ export interface SectionProps {
 const queryPageContent = cache(async (): Promise<PageContent> => {
   const payload = await getPayload({ config: configPromise });
   const pageContent = await payload.findGlobal({
-    slug: 'page-content'
+    slug: 'sectionContent'
   });
 
   return pageContent as PageContent;

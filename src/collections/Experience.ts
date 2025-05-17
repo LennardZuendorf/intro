@@ -5,7 +5,7 @@ export const Experiences: CollectionConfig = {
   slug: 'experiences',
   admin: {
     useAsTitle: 'position',
-    group: 'Content'
+    group: 'Content Collection'
   },
   fields: [
     {
@@ -45,7 +45,12 @@ export const Experiences: CollectionConfig = {
       name: 'skills',
       type: 'relationship',
       relationTo: 'tag',
-      hasMany: true
+      hasMany: true,
+      filterOptions: () => ({
+        type: {
+          equals: 'skill'
+        }
+      })
     },
     {
       name: 'description',

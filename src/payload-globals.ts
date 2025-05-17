@@ -1,7 +1,7 @@
 import type { GlobalConfig } from 'payload';
 
-export const PageContent: GlobalConfig = {
-  slug: 'page-content',
+export const SectionContent: GlobalConfig = {
+  slug: 'sectionContent',
   fields: [
     {
       type: 'tabs', // required
@@ -48,6 +48,11 @@ export const PageContent: GlobalConfig = {
                   type: 'relationship',
                   relationTo: 'tag', // ensure this matches your Skills collection slug
                   hasMany: true,
+                  filterOptions: () => ({
+                    type: {
+                      equals: 'skill'
+                    }
+                  }),
                   admin: {
                     description: 'selection of skills to showcase in the skills card'
                   }
@@ -57,6 +62,11 @@ export const PageContent: GlobalConfig = {
                   type: 'relationship',
                   relationTo: 'tag', // ensure this matches your Techstacks collection slug
                   hasMany: true,
+                  filterOptions: () => ({
+                    type: {
+                      equals: 'techstack'
+                    }
+                  }),
                   admin: {
                     description: 'selection of tech to showcase in the skills card'
                   }
@@ -120,8 +130,8 @@ export const PageContent: GlobalConfig = {
   ]
 };
 
-export const LegalTexts: GlobalConfig = {
-  slug: 'legalTexts',
+export const LegalContent: GlobalConfig = {
+  slug: 'legalContent',
   fields: [
     {
       type: 'tabs',

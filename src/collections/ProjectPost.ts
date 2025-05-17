@@ -40,7 +40,7 @@ export const ProjectPost: CollectionConfig<'projects'> = {
       }
     },
     useAsTitle: 'title',
-    group: 'Content'
+    group: 'Content Collection'
   },
   fields: [
     {
@@ -107,6 +107,11 @@ export const ProjectPost: CollectionConfig<'projects'> = {
                   type: 'relationship',
                   relationTo: 'tag',
                   hasMany: true,
+                  filterOptions: () => ({
+                    type: {
+                      equals: 'techstack'
+                    }
+                  }),
                   label: 'Used Technologies'
                 },
                 {

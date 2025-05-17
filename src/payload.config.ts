@@ -4,7 +4,7 @@ import { Experiences } from '@/collections/Experience';
 import { ProjectPost } from '@/collections/ProjectPost';
 import { Tag } from '@/collections/Tag';
 import { env } from '@/env';
-import { LegalTexts, PageContent } from '@/payload-globals';
+import { LegalContent, SectionContent } from '@/payload-globals';
 import { postgresAdapter } from '@payloadcms/db-postgres';
 import { resendAdapter } from '@payloadcms/email-resend';
 import { seoPlugin } from '@payloadcms/plugin-seo';
@@ -36,8 +36,8 @@ export default buildConfig({
     }
   },
   email: resendAdapter({
-    defaultFromAddress: 'dev@admin.zuendorf.me',
-    defaultFromName: 'Payload CMS',
+    defaultFromAddress: 'intro@ignitr.dev',
+    defaultFromName: 'Intro Payload CMS',
     apiKey: env.RESEND_API_KEY || ''
   }),
   editor: lexicalEditor({}),
@@ -78,5 +78,5 @@ export default buildConfig({
     })
   ],
   collections: [Media, Users, Tag, Experiences, ProjectPost],
-  globals: [PageContent, LegalTexts]
+  globals: [SectionContent, LegalContent]
 });

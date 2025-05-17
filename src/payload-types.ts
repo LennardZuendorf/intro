@@ -37,12 +37,12 @@ export interface Config {
     defaultIDType: number;
   };
   globals: {
-    'page-content': PageContent;
-    legalTexts: LegalText;
+    sectionContent: SectionContent;
+    legalContent: LegalContent;
   };
   globalsSelect: {
-    'page-content': PageContentSelect<false> | PageContentSelect<true>;
-    legalTexts: LegalTextsSelect<false> | LegalTextsSelect<true>;
+    sectionContent: SectionContentSelect<false> | SectionContentSelect<true>;
+    legalContent: LegalContentSelect<false> | LegalContentSelect<true>;
   };
   locale: null;
   user: User & {
@@ -560,9 +560,9 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "page-content".
+ * via the `definition` "sectionContent".
  */
-export interface PageContent {
+export interface SectionContent {
   id: number;
   /**
    * text displayed in the intro card
@@ -661,9 +661,9 @@ export interface PageContent {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "legalTexts".
+ * via the `definition` "legalContent".
  */
-export interface LegalText {
+export interface LegalContent {
   id: number;
   /**
    * formatted text displayed as English speaking legal disclaimers
@@ -724,9 +724,9 @@ export interface LegalText {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "page-content_select".
+ * via the `definition` "sectionContent_select".
  */
-export interface PageContentSelect<T extends boolean = true> {
+export interface SectionContentSelect<T extends boolean = true> {
   MainIntroSection?: T;
   MainAboutMeSection?: T;
   avatar?: T;
@@ -742,9 +742,9 @@ export interface PageContentSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "legalTexts_select".
+ * via the `definition` "legalContent_select".
  */
-export interface LegalTextsSelect<T extends boolean = true> {
+export interface LegalContentSelect<T extends boolean = true> {
   englishText?: T;
   germanText?: T;
   privacy?: T;
