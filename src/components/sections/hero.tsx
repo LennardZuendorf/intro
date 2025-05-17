@@ -28,7 +28,7 @@ export const HeroSection = ({ className, pageContent }: HeroSectionProps) => {
         centerContent={true}
         containerClassName='justify-center items-center mx-auto'
       >
-        <div className='w-full max-w-[1280px] flex items-center justify-between gap-8 md:gap-12 lg:gap-16 2xl:gap-24'>
+        <div className='w-full max-w-[1280px] flex flex-col md:flex-row items-center justify-between gap-8 md:gap-12 lg:gap-16 2xl:gap-24'>
           <div className='w-full lg:w-[55%] flex flex-col items-start gap-6 md:gap-8 2xl:gap-12'>
             <Card
               className='relative w-full scale-100 md:scale-105 2xl:scale-110'
@@ -143,7 +143,7 @@ export const HeroSection = ({ className, pageContent }: HeroSectionProps) => {
           {/* Right Content Column */}
           <div className='w-full lg:w-[45%] flex flex-col gap-8 md:gap-10 2xl:gap-12'>
             {/* Profile Image */}
-            <div className='w-full scale-100 md:scale-105 2xl:scale-110'>
+            <div className='hidden md:block w-full scale-100 md:scale-105 2xl:scale-110'>
               <ProfileImage
                 image={pageContent?.avatar}
                 alt='Lennard Zündorf'
