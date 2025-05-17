@@ -104,7 +104,7 @@ export const ScrollArrow: React.FC = () => {
   const shouldShow = !isScrolling && !isAtBottom;
 
   // Create a motion version of Button
-  const MotionButton = motion(Button);
+  const MotionButton = motion.create(Button);
 
   return (
     <AnimatePresence>
@@ -113,7 +113,7 @@ export const ScrollArrow: React.FC = () => {
           onClick={handleArrowClick}
           variant='default'
           size='icon'
-          className={cn('fixed bottom-8 left-1/2 -translate-x-1/2 z-50')}
+          className={cn('fixed bottom-5 left-1/2 -translate-x-1/2 z-50')}
           aria-label='Scroll to Next Section'
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}

@@ -91,7 +91,7 @@ export const Nav = ({ className }: { className?: string }) => {
           }}
           className={cn(
             'fixed mx-auto z-[100]',
-            'bottom-0 md:bottom-auto md:top-10', // Bottom on mobile, Top on md and up
+            'bottom-0 md:bottom-auto md:top-5', // Bottom on mobile, Top on md and up
             'inset-x-0',
             className
           )}
