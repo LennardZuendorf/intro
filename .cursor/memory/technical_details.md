@@ -188,6 +188,28 @@ The project now includes a highly reusable Section component that standardizes l
   - About section: Uses grid background with custom content layout
   - Footer: Uses mask background with custom styling
 
+#### Section Component Grid Layout Update (2024-06-09)
+
+- **Change:** When `columns=2`, Section now uses CSS Grid for layout.
+- **Grid Structure:**
+  - `grid-template-columns: 1fr 1fr` (two equal columns on large screens, one column on small screens)
+  - `grid-template-rows: auto auto` (top row for columns, bottom row for full-width content)
+- **Placement:**
+  - `<Section.Left>`: grid column 1
+  - `<Section.Right>`: grid column 2
+  - `<Section.Bottom>`: spans both columns in the second row (`col-span-2` on large screens)
+- **Responsive:**
+  - On small screens, columns stack vertically; on large screens, they are side by side.
+- **Usage:**
+  - Enables layouts with two columns above and a full-width row below, matching common design patterns for about, hero, or feature sections.
+
+#### Section.Bottom Feature (2024-06-09)
+
+- **Purpose**: Allows a full-width row below the two columns in the Section component when `columns=2`.
+- **Usage**: Use `<Section.Bottom>` as a child of Section. When present, it renders below the left and right columns, spanning the full width of the section container.
+- **Implementation**: Section extracts Section.Left, Section.Right, and Section.Bottom from its children. If Section.Bottom is present, it is rendered in a new row below the columns, with appropriate spacing and styling. This enables layouts where content needs to span both columns, such as footers, callouts, or additional information.
+- **Backward Compatibility**: Existing usages of Section with 1 or 2 columns remain unaffected if Section.Bottom is not used.
+
 #### Technical Implementation
 
 ```typescript
@@ -204,17 +226,16 @@ interface SectionProps extends HTMLAttributes<HTMLElement> {
   containerClassName?: string;
   gridSize?: string;
   maskIntensity?: number;
-  containerDirection?: 'row' | 'col';
+  columns?: 1 | 2;
   as?: ElementType;
   centerContent?: boolean;
 }
 ```
 
-This standardized approach to section layout ensures:
-- Consistent visual treatment across the site
-- Reduced code duplication
-- Simplified maintenance
-- Flexible customization where needed
+- Section now supports a `columns` prop (default: 1). When `columns={2}`, it renders a responsive two-column layout with unified gaps and no extra padding/margin.
+- Use `Section.Left` and `Section.Right` subcomponents to define column content.
+- All layout logic (background, centering, maxWidth, etc.) is now centralized in Section.
+- SectionGrid has been removed and all usages migrated.
 
 ### Hero Section
 

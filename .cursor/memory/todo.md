@@ -1,0 +1,3 @@
+- [x] Centralize Card scaling logic (responsive by default, opt-out via prop)
+- [x] Remove all scale classes from hero.tsx and about.tsx
+- [x] Unify About/Hero section layout: flex, column widths, gaps, and padding 

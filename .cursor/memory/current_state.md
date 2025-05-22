@@ -2,10 +2,16 @@
 
 ## Active Goals
 
-- Update and fix the hero section with Neobrutalism design
 - Create a proper about section on the homepage
 - Implement a dedicated about page
+- Update the projects section
+- Finalize and cleanup the dedicated project page
+- Finalize and cleanup the legal page
+- Complete CMS integration across all components
+- Define and refine CMS fields and data models
 - Complete remaining documentation updates
+- Unify design across the site
+- ✅ Update and fix the hero section with Neobrutalism design
 - ✅ Migrate from ESLint and Prettier to Biome for code quality
 - ✅ Fix UI component issues (ScrollArrow visibility and Navbar pin functionality)
 
@@ -23,6 +29,8 @@
 - ✅ Fixed ScrollArrow component to show correctly based on scroll position
 - ✅ Improved Navbar component to hide immediately when unpinned
 - ✅ Adjusted card spacing in hero section for better visual balance
+- ✅ Completed hero section updates with Neobrutalism design
+- ✅ Completed design implementation of UI components with Neobrutalism style
 
 ## Implementation Progress
 
@@ -42,9 +50,10 @@
 - ✅ About section implemented with consistent styling and improved layout
 - 🟨 Projects section implemented with ProjectCarousel component
 - 🟨 Navigation and footer components need design finalization
-- 🟨 Neobrutalism design elements partially implemented
+- ✅ Neobrutalism design elements implemented
 - ✅ Toast notification system with neobrutalist styling implemented
 - ✅ Reusable Section component created for consistent layouts
+- ✅ Section.Bottom feature added to Section component for full-width row below columns
 
 ### Content Management
 
@@ -57,12 +66,13 @@
 
 ## Open Tasks
 
-### Hero Section Updates
+### CMS Integration and Structure
 
-- Implement new hero section with Neobrutalism design
-- Add proper content management through CMS
-- Ensure responsive design across all viewports
-- Add engaging animations and interactions
+- Review and refine existing CMS fields and data models
+- Define missing content models (about page, hero section)
+- Ensure CMS data structure aligns with component needs
+- Create complete schema for all site content
+- Implement proper data fetching across all components
 
 ### About Section Enhancement
 
@@ -78,22 +88,55 @@
 - Implement content management through CMS
 - Add interactive elements and proper navigation
 
+### Projects Section Update
+
+- Enhance the project carousel with complete Neobrutalism styling
+- Improve the visual presentation of project cards
+- Optimize for mobile and responsive viewing
+- Add smooth transitions between project slides
+
+### Project Page Finalization
+
+- Clean up the dedicated project page layout
+- Ensure consistent styling with the main site
+- Optimize media display for project details
+- Improve navigation between project pages
+
+### Legal Page Cleanup
+
+- Finalize the legal page with consistent styling
+- Ensure proper content layout and readability
+- Verify accessibility compliance
+- Review and update localization support
+
+### Design Unification
+
+- Ensure consistent design patterns across all pages and components
+- Standardize spacing, typography, and color usage
+- Apply Neobrutalism styling consistently throughout the site
+- Verify responsive design consistency across all viewports
+
 ## Blockers
 
 - Need to define content structure for about page in CMS
-- Hero section design needs to be finalized
+- CMS fields may need modification before component implementation
 - Content strategy for about section needs to be determined
 
 ## Next Steps
 
-1. Update the about section content and design
-2. Update the projects section design
-3. Update the project page design
-4. Fully utilize CMS throughout the codebase
-5. Wrap up, polish, tests, etc.
+1. Review and refine CMS data models and fields
+2. Update the about section content and design with CMS integration
+3. Update the projects section design with complete CMS data
+4. Finalize and clean up the dedicated project page
+5. Finalize and clean up the legal page
+6. Fully integrate CMS throughout the codebase
+7. Unify design across the entire site
+8. Wrap up, polish, tests, etc.
 
 ## Completed Tasks
 
+- **Hero Section Updates**: Implemented hero section with Neobrutalism design, responsive design, and engaging visual elements
+- **Design Implementation**: Completed UI components design with Neobrutalism style (still needs unification across the site)
 - **UI Component Fixes**: Fixed ScrollArrow visibility logic, improved Navbar pin/unpin behavior, adjusted card spacing in hero section
 - **UI Component Enhancements**: Added and improved social buttons, background grid, icon links, profile image, and other UI components
 - **Section Improvements**: Updated the hero section, about section, footer, and navbar with improved styling and functionality
@@ -101,6 +144,7 @@
 - **Project Cleanup**: Removed unused assets, updated CI workflows, and added git hooks
 - **Reusable Components**: Created a highly reusable Section component that standardizes layout structures across the site
 - **Layout Alignment**: Fixed alignment issues in Hero and About sections to ensure proper content centering
+- **Section.Bottom Feature**: Added Section.Bottom support to Section component, allowing a full-width row below the two columns for additional layout flexibility
 
 ## Recent Improvements
 
@@ -277,3 +321,17 @@ Improved button styling and consistency:
 - Write the commit subject in the imperative mood (e.g., "Fix", "Add", "Update") and keep it concise (ideally under 50 characters).
 - Separate the subject from the body with a blank line if additional details are necessary.
 - Include issue or ticket references in the body when applicable.
+
+- Card component now applies responsive scaling by default (`scale-100 md:scale-105 2xl:scale-110`).
+- Scaling logic is centralized in Card; opt-out via `disableScale` prop.
+- All scale classes removed from hero.tsx and about.tsx.
+- About and Hero sections now use unified flex layout: left column `w-full lg:w-[55%]`, right column `w-full lg:w-[45%]`, and matching gap classes.
+- Cards fill their columns and have consistent width across sections.
+
+- Section and SectionGrid are now unified: Section supports a `columns` prop (1 or 2) and provides `Section.Left`/`Section.Right` for two-column layouts.
+- All usages in hero.tsx and about.tsx updated to use the new Section API.
+- SectionGrid component deleted.
+
+- Task: Update `experience-carousel.tsx` to use vertical orientation, ensure full width, max 2 visible, responsive.
+- Status: Implementation complete, pending user review.
+- Details: Carousel orientation is now vertical, with height-based classes to show up to 2 items at once. Layout is responsive and full width. Unique keys and ExperienceCard usage retained.
