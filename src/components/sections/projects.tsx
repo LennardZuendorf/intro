@@ -1,5 +1,4 @@
 import type { SectionProps } from '@/app/(app)/page';
-import { ProjectCarousel } from '@/components/custom/project-carousel';
 import { cn } from '@/lib/utils/ui';
 import configPromise from '@payload-config';
 import { draftMode } from 'next/headers';
