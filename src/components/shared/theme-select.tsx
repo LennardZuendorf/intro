@@ -34,7 +34,7 @@ const themes = [
 
 interface ThemeSwitcherProps {
   className?: string; // Optional className for additional styling
-  buttonVariant?: 'default' | 'reversed' | 'noShadow' | 'accent'; // Button variant
+  buttonVariant?: 'default' | 'link' | 'accent' | 'action' | 'neutral' | 'noShadow'; // Button variant
   noButtonShadow?: boolean; // Whether to remove the button shadow
   popoverClassName?: string; // Separate class for the popover
 }

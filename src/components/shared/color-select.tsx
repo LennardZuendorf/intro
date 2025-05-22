@@ -54,7 +54,7 @@ const accentColors: ColorPalette[] = [
 
 interface ColorSelectProps {
   className?: string;
-  buttonVariant?: 'default' | 'reversed' | 'noShadow' | 'accent';
+  buttonVariant?: 'default' | 'link' | 'accent' | 'action' | 'neutral' | 'noShadow';
   noButtonShadow?: boolean;
   popoverClassName?: string;
 }

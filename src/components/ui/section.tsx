@@ -78,14 +78,23 @@ function Section({
   if (columns === 2) {
     // Filter out Section.Left, Section.Right, and Section.Bottom children
     const left = React.Children.toArray(children).find(
-      (child: React.ReactElement) => child?.type?.displayName === 'SectionLeft'
-    );
+      (child: React.ReactNode) =>
+        React.isValidElement(child) &&
+        typeof child.type !== 'string' &&
+        (child.type as { displayName?: string })?.displayName === 'SectionLeft'
+    ) as React.ReactElement<{ children?: React.ReactNode }> | undefined;
     const right = React.Children.toArray(children).find(
-      (child: React.ReactElement) => child?.type?.displayName === 'SectionRight'
-    );
+      (child: React.ReactNode) =>
+        React.isValidElement(child) &&
+        typeof child.type !== 'string' &&
+        (child.type as { displayName?: string })?.displayName === 'SectionRight'
+    ) as React.ReactElement<{ children?: React.ReactNode }> | undefined;
     const bottom = React.Children.toArray(children).find(
-      (child: React.ReactElement) => child?.type?.displayName === 'SectionBottom'
-    );
+      (child: React.ReactNode) =>
+        React.isValidElement(child) &&
+        typeof child.type !== 'string' &&
+        (child.type as { displayName?: string })?.displayName === 'SectionBottom'
+    ) as React.ReactElement<{ children?: React.ReactNode }> | undefined;
     content = (
       <div
         className={cn(
@@ -97,14 +106,12 @@ function Section({
         )}
       >
         <div className='w-full col-span-1 flex flex-col gap-4 md:gap-6 lg:gap-8'>
-          {left && (left as React.ReactElement).props.children}
+          {left?.props.children}
         </div>
-        <div className='w-full col-span-1'>
-          {right && (right as React.ReactElement).props.children}
-        </div>
+        <div className='w-full col-span-1'>{right?.props.children}</div>
         {bottom && (
           <div className='w-full col-span-1 lg:col-span-2 mt-2 lg:mt-4 2xl:mt-6'>
-            {(bottom as React.ReactElement).props.children}
+            {bottom?.props.children}
           </div>
         )}
       </div>
