@@ -141,6 +141,31 @@ export const experienceData: Experience[] = [
 export type techStackData = typeof techStackData;
 export const techStackData = [
   {
+    name: 'Jira',
+    icon: 'jira',
+    link: 'https://www.atlassian.com/software/jira'
+  },
+  {
+    name: 'Grafana',
+    icon: 'grafana',
+    link: 'https://grafana.com/'
+  },
+  {
+    name: 'Typescript',
+    icon: 'typescript',
+    link: 'https://www.typescriptlang.org/'
+  },
+  {
+    name: 'React.js',
+    icon: 'reactjs',
+    link: 'https://reactjs.org/'
+  },
+  {
+    name: 'AWS',
+    icon: 'aws',
+    link: 'https://aws.amazon.com/'
+  },
+  {
     name: 'Java',
     icon: 'java',
     link: 'https://www.java.com/en/'
@@ -151,54 +176,20 @@ export const techStackData = [
     link: 'https://www.python.org/'
   },
   {
-    name: 'Typescript',
-    icon: 'typescript',
-    link: 'https://www.typescriptlang.org/'
+    name: 'Docker',
+    icon: 'docker',
+    link: 'https://www.docker.com/'
   },
+
   {
-    name: 'Spring Boot',
-    icon: 'springboot',
-    link: 'https://spring.io/projects/spring-boot'
-  },
-  {
-    name: 'React.js',
-    icon: 'reactjs',
-    link: 'https://reactjs.org/'
+    name: 'Figma',
+    icon: 'figma',
+    link: 'https://www.figma.com/'
   },
   {
     name: 'Huggingface Ecosystem',
     icon: 'huggingface',
     link: 'https://huggingface.co/'
-  },
-  {
-    name: 'PostgreSQL',
-    icon: 'postgresql',
-    link: 'https://www.postgresql.org/'
-  },
-  {
-    name: 'AWS',
-    icon: 'aws',
-    link: 'https://aws.amazon.com/'
-  },
-  {
-    name: 'Docker',
-    icon: 'docker',
-    link: 'https://www.docker.com/'
-  },
-  {
-    name: 'IntelliJ',
-    icon: 'intellij',
-    link: 'https://www.jetbrains.com/idea/'
-  },
-  {
-    name: 'Jira',
-    icon: 'jira',
-    link: 'https://www.atlassian.com/software/jira'
-  },
-  {
-    name: 'Figma',
-    icon: 'figma',
-    link: 'https://www.figma.com/'
   }
 ];
 

@@ -11,8 +11,7 @@ const neoBadgeVariants = cva(
         default: 'bg-accent text-atext hover:bg-accent-dark',
         dark: 'bg-accent-dark text-atext hover:bg-accent',
         light: 'bg-accent-light text-atext hover:bg-accent',
-        outline:
-          'bg-transparent text-mtext border-2 border-black hover:bg-accent-light hover:text-atext'
+        outline: 'bg-bg text-mtext border-2 border-accent hover:bg-accent hover:text-atext'
       },
       rotation: {
         none: '',
@@ -35,9 +34,9 @@ const neoBadgeVariants = cva(
         lg: 'shadow-lg'
       },
       size: {
-        sm: 'px-2 py-1 text-xs',
-        md: 'px-3 py-1.5 text-sm',
-        lg: 'px-4 py-2 text-base'
+        sm: 'px-2 py-1 text-xs md:text-sm',
+        md: 'px-3 py-1.5 text-sm md:text-base',
+        lg: 'px-4 py-2 text-base md:text-lg'
       }
     },
     defaultVariants: {

@@ -5,9 +5,10 @@ import configPromise from '@payload-config';
 import { draftMode } from 'next/headers';
 import { getPayload } from 'payload';
 import React from 'react';
+import CarouselVertical from '../custom/experience-carousel';
 
 export async function Projects({ className }: SectionProps) {
-  const payloadProjects = await queryProjects();
+  const _payloadProjects = await queryProjects();
 
   return (
     <section id='projects' className={cn('py-14 md:py-24 relative overflow-hidden', className)}>
@@ -43,7 +44,7 @@ export async function Projects({ className }: SectionProps) {
           <div className='absolute -bottom-3 -left-3 w-6 h-6 bg-accent border-2 border-black rounded-full' />
 
           {/* ProjectCarousel component remains untouched */}
-          <ProjectCarousel projects={payloadProjects} />
+          <CarouselVertical />
         </div>
       </div>
     </section>

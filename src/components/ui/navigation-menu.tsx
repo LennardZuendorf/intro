@@ -42,7 +42,7 @@ NavigationMenuList.displayName = NavigationMenuPrimitive.List.displayName;
 const NavigationMenuItem = NavigationMenuPrimitive.Item;
 
 const navigationMenuTriggerStyle = () => {
-  return cn(buttonVariants({ variant: 'noShadow' }), 'group w-max font-heading');
+  return cn(buttonVariants({ variant: 'neutral' }), 'group w-max font-heading');
 };
 
 const NavigationMenuTrigger = React.forwardRef<

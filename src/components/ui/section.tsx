@@ -3,6 +3,7 @@
 import { BackgroundGrid } from '@/components/ui/background-grid';
 import { cn } from '@/lib/utils/ui';
 import type { ElementType, HTMLAttributes, ReactNode } from 'react';
+import React from 'react';
 
 export interface SectionProps extends HTMLAttributes<HTMLElement> {
   /** Content for the section */
@@ -25,15 +26,18 @@ export interface SectionProps extends HTMLAttributes<HTMLElement> {
   gridSize?: string;
   /** Mask intensity (0-100) */
   maskIntensity?: number;
-  /** Container flex direction */
-  containerDirection?: 'row' | 'col';
+  /** Number of columns */
+  columns?: 1 | 2;
   /** Render as a different HTML element */
   as?: ElementType;
   /** Center content (adds justify-center) */
   centerContent?: boolean;
 }
 
-export function Section({
+const defaultGap = 'gap-4 md:gap-8 lg:gap-12 2xl:gap-16';
+const defaultColumnGap = 'gap-4 md:gap-8 lg:gap-12 2xl:gap-16';
+
+function Section({
   children,
   className,
   fullHeight = true,
@@ -45,7 +49,7 @@ export function Section({
   containerClassName,
   gridSize = '80px',
   maskIntensity = 40,
-  containerDirection = 'col',
+  columns = 1,
   centerContent = true,
   as: Element = 'section',
   ...props
@@ -62,11 +66,50 @@ export function Section({
   // Container for content
   const containerClasses = cn(
     'w-full flex',
-    containerDirection === 'col' ? 'flex-col' : 'flex-col lg:flex-row',
+    columns === 2 ? 'flex-col lg:flex-row' : 'flex-col',
     centerContent && 'items-center justify-center',
     padding,
+    defaultGap,
     containerClassName
   );
+
+  // If columns=2, expect Section.Left, Section.Right, and Section.Bottom as children
+  let content: ReactNode = children;
+  if (columns === 2) {
+    // Filter out Section.Left, Section.Right, and Section.Bottom children
+    const left = React.Children.toArray(children).find(
+      (child: React.ReactElement) => child?.type?.displayName === 'SectionLeft'
+    );
+    const right = React.Children.toArray(children).find(
+      (child: React.ReactElement) => child?.type?.displayName === 'SectionRight'
+    );
+    const bottom = React.Children.toArray(children).find(
+      (child: React.ReactElement) => child?.type?.displayName === 'SectionBottom'
+    );
+    content = (
+      <div
+        className={cn(
+          'grid w-full',
+          'grid-cols-1 lg:grid-cols-2',
+          'auto-rows-auto',
+          defaultColumnGap,
+          'gap-y-6 2xl:gap-y-8'
+        )}
+      >
+        <div className='w-full col-span-1 flex flex-col gap-4 md:gap-6 lg:gap-8'>
+          {left && (left as React.ReactElement).props.children}
+        </div>
+        <div className='w-full col-span-1'>
+          {right && (right as React.ReactElement).props.children}
+        </div>
+        {bottom && (
+          <div className='w-full col-span-1 lg:col-span-2 mt-2 lg:mt-4 2xl:mt-6'>
+            {(bottom as React.ReactElement).props.children}
+          </div>
+        )}
+      </div>
+    );
+  }
 
   // Common content container
   const contentContainer = (
@@ -77,7 +120,7 @@ export function Section({
         width: containerWidth
       }}
     >
-      {children}
+      {content}
     </div>
   );
 
@@ -119,3 +162,24 @@ export function Section({
     </Element>
   );
 }
+
+function Left({ children }: { children: ReactNode }) {
+  return <>{children}</>;
+}
+Left.displayName = 'SectionLeft';
+
+function Right({ children }: { children: ReactNode }) {
+  return <>{children}</>;
+}
+Right.displayName = 'SectionRight';
+
+function Bottom({ children }: { children: ReactNode }) {
+  return <>{children}</>;
+}
+Bottom.displayName = 'SectionBottom';
+
+Section.Left = Left;
+Section.Right = Right;
+Section.Bottom = Bottom;
+
+export { Section };

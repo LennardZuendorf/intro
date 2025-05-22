@@ -9,6 +9,7 @@ import { siteMetadata } from '@/data/site';
 import { env } from '@/env';
 import SetColorPreference from '@/lib/utils/setColorPreference';
 import { cn } from '@/lib/utils/ui';
+import { StagewiseToolbar } from '@stagewise/toolbar-next';
 import { Inter } from 'next/font/google';
 import Script from 'next/script';
 
@@ -18,6 +19,10 @@ const inter = Inter({
 });
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  const stagewiseConfig = {
+    plugins: []
+  };
+
   return (
     <>
       <html lang='en' suppressHydrationWarning className={inter.className}>
@@ -41,6 +46,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <Footer />
           </Providers>
           <ScrollArrow />
+          {process.env.NODE_ENV === 'development' && <StagewiseToolbar config={stagewiseConfig} />}
         </body>
       </html>
     </>

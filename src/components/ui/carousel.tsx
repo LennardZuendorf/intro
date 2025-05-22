@@ -4,6 +4,7 @@ import useEmblaCarousel, { type UseEmblaCarouselType } from 'embla-carousel-reac
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import * as React from 'react';
 
+import type { ButtonProps } from '@/components/ui/button';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils/ui';
 
@@ -128,6 +129,10 @@ const Carousel = React.forwardRef<
         {...props}
       >
         {children}
+        {/* Bottom fade overlay for vertical carousels */}
+        {orientation === 'vertical' && (
+          <div className='pointer-events-none absolute bottom-0 left-0 w-full h-12 bg-gradient-to-t from-bg-main/90 to-transparent z-20' />
+        )}
       </div>
     </CarouselContext.Provider>
   );
@@ -177,15 +182,16 @@ const CarouselItem = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLD
 CarouselItem.displayName = 'CarouselItem';
 
 const CarouselPrevious = React.forwardRef<HTMLButtonElement, React.ComponentProps<typeof Button>>(
-  ({ className, variant = 'outline', size = 'icon', ...props }, ref) => {
+  ({ className, variant = 'noShadow', size = 'icon', ...props }, ref) => {
     const { orientation, scrollPrev, canScrollPrev } = useCarousel();
 
     return (
       <Button
         ref={ref}
+        variant={variant as ButtonProps['variant'] | 'default'}
         size={size}
         className={cn(
-          'absolute  h-8 w-8 rounded-full',
+          'absolute z-10',
           orientation === 'horizontal'
             ? '-left-12 top-1/2 -translate-y-1/2'
             : '-top-12 left-1/2 -translate-x-1/2 rotate-90',
@@ -204,15 +210,16 @@ const CarouselPrevious = React.forwardRef<HTMLButtonElement, React.ComponentProp
 CarouselPrevious.displayName = 'CarouselPrevious';
 
 const CarouselNext = React.forwardRef<HTMLButtonElement, React.ComponentProps<typeof Button>>(
-  ({ className, variant = 'outline', size = 'icon', ...props }, ref) => {
+  ({ className, variant = 'noShadow', size = 'icon', ...props }, ref) => {
     const { orientation, scrollNext, canScrollNext } = useCarousel();
 
     return (
       <Button
         ref={ref}
+        variant={variant as ButtonProps['variant'] | 'default'}
         size={size}
         className={cn(
-          'absolute h-8 w-8 rounded-full',
+          'absolute z-10',
           orientation === 'horizontal'
             ? '-right-12 top-1/2 -translate-y-1/2'
             : '-bottom-12 left-1/2 -translate-x-1/2 rotate-90',

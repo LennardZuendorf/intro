@@ -5,7 +5,9 @@ import { type VariantProps, cva } from 'class-variance-authority';
 
 interface CardProps
   extends React.HTMLAttributes<HTMLDivElement>,
-    VariantProps<typeof cardVariants> {}
+    VariantProps<typeof cardVariants> {
+  disableScale?: boolean;
+}
 
 const cardVariants = cva('rounded-md border-4 border-border text-mtext shadow-md transition-all', {
   variants: {
@@ -13,7 +15,8 @@ const cardVariants = cva('rounded-md border-4 border-border text-mtext shadow-md
       default: 'bg-main',
       reversed: 'bg-bg',
       outline: 'bg-transparent',
-      accent: 'bg-accent text-atext'
+      accent: 'bg-accent text-atext',
+      clickable: 'bg-main hover:bg-accent-dark hover:text-atext'
     },
     rotation: {
       none: '',
@@ -50,10 +53,23 @@ const cardVariants = cva('rounded-md border-4 border-border text-mtext shadow-md
 });
 
 const Card = React.forwardRef<HTMLDivElement, CardProps>(
-  ({ className, variant, rotation, interactive, shadow, borderStyle, ...props }, ref) => (
+  (
+    {
+      className,
+      variant,
+      rotation,
+      interactive,
+      shadow,
+      borderStyle,
+      disableScale = false,
+      ...props
+    },
+    ref
+  ) => (
     <div
       ref={ref}
       className={cn(
+        !disableScale && 'scale-100',
         cardVariants({ variant, rotation, interactive, shadow, borderStyle }),
         className
       )}
