@@ -8,6 +8,7 @@ import {
   CarouselPrevious
 } from '@/components/ui/carousel';
 import { experienceData } from '@/data/about';
+import { cn } from '@/lib/utils/ui';
 import * as React from 'react';
 
 interface ExperienceCarouselProps {
@@ -16,40 +17,44 @@ interface ExperienceCarouselProps {
 
 export default function ExperienceCarousel({ visibleCount = 2 }: ExperienceCarouselProps) {
   const cardRef = React.useRef<HTMLDivElement>(null);
-  const [cardHeight, setCardHeight] = React.useState<number | null>(null);
 
-  React.useEffect(() => {
-    function updateHeight() {
-      if (cardRef.current) {
-        setCardHeight(cardRef.current.getBoundingClientRect().height);
-      }
-    }
-    updateHeight();
-    window.addEventListener('resize', updateHeight);
-    return () => window.removeEventListener('resize', updateHeight);
-  }, []);
+  const cardHeight = 345;
 
-  const gap = 8; // px, for gap-4
-  const carouselHeight = cardHeight
-    ? cardHeight * visibleCount + gap * (visibleCount - 1)
-    : undefined;
+  // Calculate basis for responsive design
+  const getBasisClass = () => {
+    if (visibleCount === 1) return 'basis-full';
+    if (visibleCount === 2) return 'basis-full md:basis-1/2';
+    return `basis-full md:basis-1/${Math.min(visibleCount, 3)}`;
+  };
 
   return (
-    <Carousel opts={{ align: 'start' }} orientation='vertical' className='w-full my-14'>
+    <Carousel
+      opts={{ align: 'start', dragFree: false }}
+      orientation='vertical'
+      className='w-full p-2'
+    >
       <CarouselContent
-        className='w-full flex-col gap-2 -mt-2'
-        style={carouselHeight ? { height: `${carouselHeight}px` } : {}}
+        className={cn('w-full flex-col mt-2 mb-2')}
+        style={{
+          height: cardHeight ? `${cardHeight}px` : 'auto'
+        }}
       >
         {experienceData.map((exp, idx) => (
-          <CarouselItem key={exp.company} className='w-full h-full basis-full md:basis-1/2'>
-            <div ref={idx === 0 ? cardRef : undefined}>
-              <ExperienceCard experience={exp} className='w-full' />
+          <CarouselItem
+            key={exp.company}
+            className={`w-full ${getBasisClass()}`}
+            style={{
+              marginBottom: 0
+            }}
+          >
+            <div ref={idx === 0 ? cardRef : undefined} className='h-full'>
+              <ExperienceCard experience={exp} className='w-full max-h-[345px]' />
             </div>
           </CarouselItem>
         ))}
       </CarouselContent>
-      <CarouselPrevious />
-      <CarouselNext />
+      <CarouselPrevious className='-top-3 left-1/2 -translate-x-1/2' />
+      <CarouselNext className='-bottom-3 left-1/2 -translate-x-1/2' />
     </Carousel>
   );
 }

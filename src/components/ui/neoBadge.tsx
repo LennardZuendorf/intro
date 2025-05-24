@@ -34,9 +34,9 @@ const neoBadgeVariants = cva(
         lg: 'shadow-lg'
       },
       size: {
-        sm: 'px-2 py-1 text-xs md:text-sm',
-        md: 'px-3 py-1.5 text-sm md:text-base',
-        lg: 'px-4 py-2 text-base md:text-lg'
+        sm: 'px-2 py-1',
+        md: 'px-3 py-1.5',
+        lg: 'px-4 py-2'
       }
     },
     defaultVariants: {

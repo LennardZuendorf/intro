@@ -1,4 +1,5 @@
 import type { SectionProps } from '@/app/(app)/page';
+import { H2, L, S } from '@/components/ui/typography';
 import { cn } from '@/lib/utils/ui';
 import configPromise from '@payload-config';
 import { draftMode } from 'next/headers';
@@ -19,21 +20,21 @@ export async function Projects({ className }: SectionProps) {
         <div className='space-y-6 relative max-w-3xl mx-auto'>
           {/* Badge with enhanced neobrutalist styling */}
           <div className='flex justify-center mb-4'>
-            <span className='inline-block bg-accent-dark text-atext px-4 py-2 font-bold border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] rotate-1 rounded-md text-sm md:text-base uppercase tracking-wider'>
-              Projects
+            <span className='inline-block bg-accent-dark text-atext px-4 py-2 font-bold border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] rotate-1 rounded-md uppercase tracking-wider'>
+              <S>Projects</S>
             </span>
           </div>
 
-          <h2 className='text-4xl md:text-6xl font-extrabold text-center text-mtext leading-tight'>
+          <H2 className='font-extrabold text-center text-mtext leading-tight'>
             MY{' '}
             <span className='text-accent relative inline-block'>
               PROJECTS
               <span className='absolute -bottom-2 left-0 w-full h-1 bg-accent-light' />
             </span>
-          </h2>
-          <p className='text-lg md:text-xl text-center mx-auto max-w-2xl text-mtext/80 font-medium'>
+          </H2>
+          <L className='text-center mx-auto max-w-2xl text-mtext/80 font-medium'>
             A selection of products I&lsquove managed from conception to delivery
-          </p>
+          </L>
         </div>
 
         {/* Project carousel container with enhanced styling */}

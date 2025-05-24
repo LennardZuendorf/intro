@@ -7,7 +7,7 @@ import { CornerIconLink, IconLink } from '@/components/ui/icon-link';
 import { NeoBadge } from '@/components/ui/neoBadge';
 import { ProfileImage } from '@/components/ui/profile-image';
 import { Section } from '@/components/ui/section';
-import { Code, H1, H3, H4, L, Muted } from '@/components/ui/typography';
+import { Code, H1, H3, H4, L, M } from '@/components/ui/typography';
 import { cn } from '@/lib/utils/ui';
 import type { SectionContent } from '@/payload-types';
 import Link from 'next/link';
@@ -36,40 +36,30 @@ export const HeroSection = ({ className, sectionContent }: HeroSectionProps) => 
                 <NeoBadge
                   variant='light'
                   rotation='medium'
-                  className='font-mono text-sm md:text-base 2xl:text-lg'
+                  className='font-mono'
                   interactive='lift'
                 >
                   <Code>Hey there! 👋</Code>
                 </NeoBadge>
               </div>
-              <H1 className='-rotate-1 text-3xl md:text-4xl 2xl:text-5xl'>I'm Lennard</H1>
+              <H1 className='-rotate-1'>I'm Lennard</H1>
             </CardHeader>
             <CardContent className='p-5 pt-0 md:p-6 md:pt-0 2xl:p-8 2xl:pt-0'>
               <div className='prose dark:prose-invert max-w-none mb-3'>
-                <p className='font-mono text-sm md:text-base leading-relaxed'>
+                <M className='font-mono leading-relaxed'>
                   a 25-year-old Product Manager & Product Owner based in Berlin, Germany.
-                </p>
-                <p className='font-mono text-sm md:text-base leading-relaxed mt-1'>
+                </M>
+                <M className='font-mono leading-relaxed mt-1'>
                   I leverage my technical expertise to execute product strategy, drive
                   implementation and manage the product with a focus on payments.
-                </p>
+                </M>
               </div>
 
               <div className='space-y-2 md:space-y-3'>
-                <NeoBadge
-                  variant='default'
-                  rotation='slight'
-                  interactive='bounce'
-                  className='md:text-lg 2xl:text-xl'
-                >
+                <NeoBadge variant='default' rotation='slight' interactive='bounce'>
                   <L>Product</L>
                 </NeoBadge>
-                <NeoBadge
-                  className='ml-2 md:text-lg 2xl:text-xl'
-                  variant='dark'
-                  rotation='negative'
-                  interactive='wiggle'
-                >
+                <NeoBadge className='ml-2' variant='dark' rotation='negative' interactive='wiggle'>
                   <L>Technology</L>
                 </NeoBadge>
               </div>
@@ -82,7 +72,7 @@ export const HeroSection = ({ className, sectionContent }: HeroSectionProps) => 
           </Card>
 
           {/* Description */}
-          <div className='relative font-mono text-base md:text-lg 2xl:text-xl leading-relaxed'>
+          <div className='relative font-mono leading-relaxed'>
             <NeoBadge
               variant='light'
               rotation='slight'
@@ -116,9 +106,7 @@ export const HeroSection = ({ className, sectionContent }: HeroSectionProps) => 
 
           {/* Current Focus Card */}
           <div className='w-full mt-1 md:mt-3'>
-            <H4 className='font-mono text-sm md:text-base 2xl:text-lg uppercase tracking-wider ml-2 mb-2'>
-              Currently
-            </H4>
+            <H4 className='font-mono uppercase tracking-wider ml-2 mb-2'>Currently</H4>
 
             <div className='grid grid-cols-1 gap-3'>
               {/* Professional Role */}
@@ -129,10 +117,10 @@ export const HeroSection = ({ className, sectionContent }: HeroSectionProps) => 
                 variant='clickable'
               >
                 <div className='p-3 md:p-4 2xl:p-6'>
-                  <H3 className='text-base md:text-lg 2xl:text-xl mb-1'>Product @ Check24 Flug</H3>
-                  <Muted className='text-sm md:text-base 2xl:text-lg'>
+                  <H3 className='mb-1'>Product @ Check24 Flug</H3>
+                  <M className='text-muted-foreground'>
                     Leading product strategy and development for enterprise SaaS solutions.
-                  </Muted>
+                  </M>
                   <CornerIconLink
                     href='/#about'
                     icon={<HiMiniArrowTopRightOnSquare className='h-4 w-4 md:h-5 md:w-5' />}
@@ -162,7 +150,7 @@ export const HeroSection = ({ className, sectionContent }: HeroSectionProps) => 
               href='/#about'
               icon={<HiMiniArrowTopRightOnSquare className='h-4 w-4 md:h-5 md:w-5' />}
               variant='action'
-              className='text-base md:text-lg 2xl:text-xl md:py-2 2xl:py-3'
+              className='md:py-2 2xl:py-3'
               size='lg'
               iconPosition='right'
             >
@@ -172,7 +160,7 @@ export const HeroSection = ({ className, sectionContent }: HeroSectionProps) => 
               href='/#projects'
               icon={<HiMiniArrowTopRightOnSquare className='h-4 w-4 md:h-5 md:w-5' />}
               variant='action'
-              className='text-base md:text-lg 2xl:text-xl md:py-2 2xl:py-3'
+              className='md:py-2 2xl:py-3'
               size='lg'
               iconPosition='right'
             >

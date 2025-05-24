@@ -14,9 +14,10 @@ const cardVariants = cva('rounded-md border-4 border-border text-mtext shadow-md
     variant: {
       default: 'bg-main',
       reversed: 'bg-bg',
-      outline: 'bg-transparent',
+      outline: 'bg-transparent ',
       accent: 'bg-accent text-atext',
-      clickable: 'bg-main hover:bg-accent-dark hover:text-atext'
+      clickable: 'bg-main hover:bg-accent-dark hover:text-atext',
+      invisible: 'bg-transparent border-none shadow-none'
     },
     rotation: {
       none: '',
@@ -31,7 +32,7 @@ const cardVariants = cva('rounded-md border-4 border-border text-mtext shadow-md
       medium: 'hover-grow hover:shadow-xl transition-all duration-300'
     },
     shadow: {
-      none: '',
+      none: 'shadow-none',
       sm: 'shadow-sm',
       md: 'shadow-md',
       lg: 'shadow-lg',

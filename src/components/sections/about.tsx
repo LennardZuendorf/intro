@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { NeoBadge } from '@/components/ui/neoBadge';
 import { Section } from '@/components/ui/section';
 import { Separator } from '@/components/ui/separator';
-import { Code, H3, H4, L, Muted } from '@/components/ui/typography';
+import { Code, H3, H4, L, M, Muted } from '@/components/ui/typography';
 import { experienceData, techStackData } from '@/data/about';
 import { cn } from '@/lib/utils/ui';
 import Link from 'next/link';
@@ -73,13 +73,13 @@ export default function AboutSection({ className }: PageSectionProps) {
         <Section.Left>
           {/* About Me Card */}
           <div className='relative'>
-            <Card className='relative w-full' interactive='slight' rotation='slight'>
+            <Card className='relative w-full' interactive='medium' rotation='none'>
               <CardHeader className='p-5 pb-2 md:p-6 md:pb-2 2xl:p-8 2xl:pb-2'>
                 <div className='absolute -top-2 -left-2 md:-top-3 md:-left-3'>
                   <NeoBadge
                     variant='light'
                     rotation='medium'
-                    className='font-mono text-sm md:text-base 2xl:text-lg'
+                    className='font-mono'
                     interactive='lift'
                   >
                     <Code>About Me</Code>
@@ -88,23 +88,23 @@ export default function AboutSection({ className }: PageSectionProps) {
               </CardHeader>
               <CardContent className='p-5 pt-0 md:p-6 md:pt-0 2xl:p-8 2xl:pt-0'>
                 <div className='prose dark:prose-invert max-w-none'>
-                  <p className='font-mono text-sm md:text-base leading-relaxed'>
+                  <M className='font-mono leading-relaxed'>
                     With a strong foundation in{' '}
                     <span className='font-bold inline-block'>Business Computing</span> and a passion
                     for technology, I bridge the gap between code and commerce. My experience in
                     <span className='font-bold inline-block'> Innovation Management</span> and{' '}
                     <span className='font-bold inline-block'>Product Strategy</span> has given me a
                     unique perspective that I apply to my product management approach.
-                  </p>
-                  <p className='font-mono text-sm md:text-base leading-relaxed mt-3'>
+                  </M>
+                  <M className='font-mono leading-relaxed mt-3'>
                     When I'm not working as a PM, you can find me expanding my skills through
                     <span className='font-bold inline-block'> language learning</span> and{' '}
                     <span className='font-bold inline-block'>side projects</span> that push my
                     coding abilities.
-                  </p>
+                  </M>
                 </div>
                 <Separator />
-                <Muted className='font-mono text-sm md:text-base leading-relaxed'>
+                <Muted className='font-mono leading-relaxed'>
                   I'm passionate about building with technology, from web apps to data
                   visualizations, always aiming to solve real problems while exploring new tech.
                 </Muted>
@@ -112,7 +112,7 @@ export default function AboutSection({ className }: PageSectionProps) {
             </Card>
           </div>
           {/* Additional Text Content */}
-          <div className='relative font-mono text-base md:text-lg 2xl:text-xl leading-relaxed'>
+          <div className='relative font-mono leading-relaxed'>
             <NeoBadge
               variant='light'
               rotation='slight'
@@ -146,19 +146,31 @@ export default function AboutSection({ className }: PageSectionProps) {
         </Section.Left>
         <Section.Right>
           {/* Experience Section - Carousel */}
-          <div className='absolute top-15 z-50'>
-            <NeoBadge rotation='negativeMedium' interactive='grow'>
-              <Code>Experiences</Code>
-            </NeoBadge>
+          <div className='relative'>
+            <Card
+              className='relative w-full'
+              interactive='none'
+              rotation='slight'
+              shadow='none'
+              variant='invisible'
+            >
+              <CardHeader className='p-5 pb-2 md:p-6 md:pb-2 2xl:p-8 2xl:pb-2'>
+                <div className='absolute -top-12 -left-2 md:top-6 md:-left-3 z-[100]'>
+                  <NeoBadge variant='dark' rotation='none' className='font-mono' interactive='grow'>
+                    <Code>Experiences</Code>
+                  </NeoBadge>
+                </div>
+              </CardHeader>
+              <CardContent className='py-5 px-0'>
+                <CarouselVertical visibleCount={1} />
+              </CardContent>
+            </Card>
           </div>
-          <CarouselVertical visibleCount={1} />
         </Section.Right>
         <Section.Bottom>
           {/* Professional Skills */}
           <div className='w-full'>
-            <H4 className='font-mono text-sm md:text-base 2xl:text-lg uppercase tracking-wider ml-2 mb-2'>
-              Key Skills
-            </H4>
+            <H4 className='font-mono uppercase tracking-wider ml-2 mb-2'>Key Skills</H4>
             <div className='flex flex-wrap gap-2 md:gap-3 relative w-full transition-all duration-500 ease-in-out'>
               {(showAllSkills ? allSkills : visibleSkills).map((skill, index) => (
                 <NeoBadge
@@ -204,9 +216,7 @@ export default function AboutSection({ className }: PageSectionProps) {
 
           {/* Tech Stack Section */}
           <div className='mt-1 md:mt-2'>
-            <H4 className='font-mono text-sm md:text-base 2xl:text-lg uppercase tracking-wider ml-2 mb-2'>
-              Tech Stack
-            </H4>
+            <H4 className='font-mono uppercase tracking-wider ml-2 mb-2'>Tech Stack</H4>
             <div className='flex flex-wrap gap-2 md:gap-3 relative transition-all duration-500 ease-in-out'>
               {(showAllTech ? techStackData : visibleTech).map((tech, index) => (
                 <NeoBadge
