@@ -1,0 +1,264 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# UI Components Guide
+
+## Overview
+
+This project uses a comprehensive UI component library built on shadcn/ui and customized for the Neobrutalism design aesthetic. All components follow responsive design principles and work seamlessly with the unified typography system.
+
+## Typography Components (`typography.tsx`)
+
+**Priority: ALWAYS USE FIRST**
+
+These components provide the foundation for all text in the application with comprehensive responsive scaling.
+
+### Headings
+- `H1` - Main page headings (text-xl → 2xl:text-6xl)
+- `H2` - Section headings (text-lg → 2xl:text-4xl)  
+- `H3` - Subsection headings (text-base → 2xl:text-3xl)
+- `H4` - Small headings/labels (text-sm → 2xl:text-2xl)
+
+### Body Text
+- `Lead` - Important descriptive text with type variants (`foreground` | `default`)
+- `L` - Large body text (text-sm → 2xl:text-2xl)
+- `M` - Medium body text (text-xs → 2xl:text-lg)
+- `S` - Small text (text-[0.625rem] → 2xl:text-base)
+- `XS` - Extra small text (text-[0.5rem] → 2xl:text-sm)
+
+### Specialized Text
+- `Muted` - Muted/secondary text with mono font
+- `SMuted` - Small muted text
+- `Code` - Inline code snippets with background
+- `Quote` - Regular quotes
+- `LQuote` - Large quotes
+
+**Usage Rules:**
+- NEVER use raw HTML tags (`<p>`, `<h1>`, etc.) - always use typography components
+- NEVER override responsive sizing with custom classes
+- Use `className` prop for styling but preserve responsive behavior
+- Automatic title-case formatting applied to headings
+
+## Layout Components
+
+### Section (`section.tsx`)
+Comprehensive layout wrapper with background and column support.
+
+**Props:**
+- `background`: `'grid'` | `'mask'` | `'none'`
+- `columns`: `1` | `2` (enables Section.Left/Section.Right/Section.Bottom)
+- `fullHeight`: boolean (min-h-[100svh])
+- `centerContent`: boolean
+- `maxWidth`, `padding`, `containerClassName`
+- `as`: ElementType (render as different element)
+
+**Two-Column Usage:**
+```tsx
+<Section columns={2}>
+  <Section.Left>Left content</Section.Left>
+  <Section.Right>Right content</Section.Right>
+  <Section.Bottom>Full-width bottom content</Section.Bottom>
+</Section>
+```
+
+### Background Grid (`background-grid.tsx`)
+Grid background for hero-style sections - used internally by Section component.
+
+## Interactive Components
+
+### Button (`button.tsx`)
+Core interactive element with Neobrutalism styling.
+
+**Variants:**
+- `default` - Main buttons with shadow effects
+- `neutral` - Neutral styling without shadows
+- `noShadow` - Flat button style
+- `accent` - Accent-colored button
+- `link` - Text link styling
+- `action` - Full-width action button with enhanced hover
+
+**Sizes:** `default`, `sm`, `lg`, `icon`
+
+### NeoBadge (`neoBadge.tsx`)
+Stylized badges for categories, labels, and interactive elements.
+
+**Variants:** `default`, `dark`, `light`, `outline`
+**Rotation:** `none`, `slight`, `negative`, `medium`, `negativeMedium`
+**Interactive:** `none`, `grow`, `lift`, `bounce`, `wiggle`
+**Size:** `sm`, `md`, `lg` (no text sizing - use with typography components)
+
+### IconLink (`icon-link.tsx`)
+Link components with icon support and Neobrutalism styling.
+
+**Components:**
+- `IconLink` - Full button-style link with icon
+- `CornerIconLink` - Minimal icon-only link for corners
+
+**Props:**
+- `iconPosition`: `'left'` | `'right'`
+- `external`: boolean (adds target="_blank")
+- Inherits all Button variants and sizes
+
+## Content Components
+
+### Card (`card.tsx`)
+Primary content containers with comprehensive variant system.
+
+**Variants:**
+- `default` - Standard card styling
+- `reversed` - Light background
+- `outline` - Transparent background  
+- `accent` - Accent-colored card
+- `clickable` - Interactive hover states
+
+**Features:**
+- `rotation`: `slight`, `slightNegative`, `medium`, `mediumNegative`
+- `interactive`: `slight`, `medium` (hover effects)
+- `shadow`: `sm`, `md`, `lg`, `xl`
+- `borderStyle`: `default`, `accent`, `none`
+- `disableScale`: boolean (disable responsive scaling)
+
+**Structure:** `Card`, `CardHeader`, `CardContent`, `CardFooter`, `CardTitle`, `CardDescription`
+
+### Profile Image (`profile-image.tsx`)
+Specialized image component for profile pictures with Neobrutalism styling.
+
+### Image Card (`image-card.tsx`)
+Card wrapper for images with consistent styling.
+
+## Navigation Components
+
+### Navigation Menu (`navigation-menu.tsx`)
+Complex navigation with dropdown support.
+
+### Dropdown Menu (`dropdown-menu.tsx`)
+Dropdown menus with full customization options.
+
+### Tabs (`tabs.tsx`)
+Tab interface for content switching.
+
+### Pagination (`pagination.tsx`)
+Page navigation component.
+
+## Feedback Components
+
+### Toast (`toast.tsx`)
+Neobrutalist toast notifications with themed styling and animations.
+
+### Toaster (`toaster.tsx`)
+Toast container and management.
+
+### Sonner (`sonner.tsx`)
+Enhanced toast system integration.
+
+### Alert (`alert.tsx`)
+Alert messages with variant support.
+
+### Tooltip (`tooltip.tsx`)
+Hover tooltips for additional context.
+
+### Hover Card (`hover-card.tsx`)
+Rich hover content containers.
+
+## Form Components
+
+### Command (`command.tsx`)
+Command palette/search interface.
+
+### Dialog (`dialog.tsx`)
+Modal dialogs with accessibility features.
+
+### Popover (`popover.tsx`)
+Floating content containers.
+
+## Data Components
+
+### Carousel (`carousel.tsx`)
+Content carousel with vertical/horizontal support and touch/keyboard navigation.
+
+### Accordion (`accordion.tsx`)
+Collapsible content sections.
+
+### Separator (`separator.tsx`)
+Visual content dividers.
+
+## Utility Components
+
+### Badge (`badge.tsx`)
+Simple badges (use NeoBadge for Neobrutalism styling).
+
+## Component Usage Hierarchy
+
+### 1. Typography First
+Always start with typography components for any text content.
+
+### 2. Layout Structure  
+Use Section for page layout, Card for content containers.
+
+### 3. Interactive Elements
+Button for actions, IconLink for navigation, NeoBadge for labels.
+
+### 4. Specialized Components
+Use specific components (ProfileImage, Carousel, etc.) for specialized needs.
+
+## Best Practices
+
+### Do's
+- ✅ Use typography components exclusively for text
+- ✅ Leverage component variants instead of custom styling
+- ✅ Follow the Neobrutalism aesthetic with borders, shadows, rotations
+- ✅ Use Section for consistent layouts
+- ✅ Compose Card with CardHeader/CardContent/CardFooter
+- ✅ Apply interactive props (rotation, hover effects) for playfulness
+
+### Don'ts  
+- ❌ Never use raw HTML text elements (`<p>`, `<h1>`, etc.)
+- ❌ Don't override responsive typography sizing
+- ❌ Avoid custom shadows/borders - use component variants
+- ❌ Don't mix Badge and NeoBadge - prefer NeoBadge for this design
+- ❌ Don't create custom layout grids - use Section columns
+
+### Custom Styling
+When custom styling is needed:
+- Use `className` prop to extend, not override
+- Preserve component responsive behavior
+- Follow Neobrutalism principles (thick borders, bold colors, rotations)
+- Use CSS variables for theming consistency
+
+### Responsive Behavior
+- All components support responsive scaling
+- Typography scales automatically across 5 breakpoints
+- Cards have optional responsive scaling (`disableScale` to opt-out)
+- Sections adapt layout for mobile/desktop
+- Interactive elements maintain touch-friendly sizing
+
+### Accessibility
+- All components include proper ARIA attributes
+- Focus states are clearly visible
+- Color contrast meets accessibility standards
+- Keyboard navigation is fully supported
+- Screen reader compatibility maintained
+
+## Component Import Patterns
+
+```tsx
+// Typography (always priority)
+import { H1, H2, H3, H4, Lead, L, M, S, Code, Muted } from '@/components/ui/typography';
+
+// Layout
+import { Section } from '@/components/ui/section';
+import { Card, CardHeader, CardContent, CardFooter } from '@/components/ui/card';
+
+// Interactive
+import { Button } from '@/components/ui/button';
+import { IconLink, CornerIconLink } from '@/components/ui/icon-link';
+import { NeoBadge } from '@/components/ui/neoBadge';
+
+// Specialized
+import { ProfileImage } from '@/components/ui/profile-image';
+import { Carousel } from '@/components/ui/carousel';
+```
+
+This guide ensures consistent, maintainable, and accessible UI development following the project's Neobrutalism design system.
