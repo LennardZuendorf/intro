@@ -10,10 +10,8 @@ export interface SectionProps extends HTMLAttributes<HTMLElement> {
   children: ReactNode;
   /** Enable full viewport height */
   fullHeight?: boolean;
-  /** Background type */
-  background?: 'grid' | 'mask' | 'none';
-  /** Background color class */
-  bgColor?: string;
+  /** Background variant */
+  background?: 'default' | 'grid' | 'secondary' | 'accent';
   /** Max width for the content container */
   maxWidth?: string;
   /** Container width style */
@@ -24,84 +22,133 @@ export interface SectionProps extends HTMLAttributes<HTMLElement> {
   containerClassName?: string;
   /** Grid size for background (pixel value) */
   gridSize?: string;
-  /** Mask intensity (0-100) */
+  /** Mask intensity (0-100) - for potential future use */
   maskIntensity?: number;
-  /** Number of columns */
+  /** @deprecated Use compositional approach with Section.Top/Section.Content instead */
   columns?: 1 | 2;
   /** Render as a different HTML element */
   as?: ElementType;
   /** Center content (adds justify-center) */
   centerContent?: boolean;
+  /** Gap size between elements */
+  gap?: 'sm' | 'md' | 'lg';
+  /** Container width preset */
+  width?: 'sm' | 'md' | 'lg' | 'xl' | 'full';
 }
 
-const defaultGap = 'gap-4 md:gap-8 lg:gap-12 2xl:gap-16';
-const defaultColumnGap = 'gap-4 md:gap-8 lg:gap-12 2xl:gap-16';
+// Gap scales
+const gapScale = {
+  sm: 'gap-2 md:gap-4 lg:gap-6 2xl:gap-8',
+  md: 'gap-4 md:gap-8 lg:gap-12 2xl:gap-16',
+  lg: 'gap-6 md:gap-12 lg:gap-16 2xl:gap-20'
+};
+
+// Width presets
+const widthPresets = {
+  sm: 'min(92%, 768px)',
+  md: 'min(92%, 1024px)',
+  lg: 'min(92%, 1280px)',
+  xl: 'min(92%, 1536px)',
+  full: '100%'
+};
+
+// Background color variants
+const backgroundVariants = {
+  default: 'bg-main',
+  grid: 'bg-main',
+  secondary: 'bg-secondary',
+  accent: 'bg-accent-light'
+};
 
 function Section({
   children,
   className,
   fullHeight = true,
-  background = 'none',
-  bgColor = 'bg-main',
-  maxWidth = 'min(92%, 1280px)',
+  background = 'default',
+  maxWidth,
   containerWidth = 'clamp(100%, 80vw, 1600px)',
   padding = 'px-6 py-8 md:py-12 2xl:py-16',
   containerClassName,
   gridSize = '80px',
   maskIntensity = 40,
-  columns = 1,
+  columns, // Deprecated but kept for backward compatibility
   centerContent = true,
   as: Element = 'section',
+  gap = 'md',
+  width,
   ...props
 }: SectionProps) {
+  // Determine maxWidth from width preset or use provided maxWidth
+  const finalMaxWidth = width ? widthPresets[width] : maxWidth || widthPresets.lg;
+
   // Base section classes
   const sectionClasses = cn(
     'w-full relative',
     fullHeight && 'min-h-[100svh]',
     'flex items-center justify-center',
-    bgColor,
+    backgroundVariants[background],
     className
   );
+
+  // Detect if using compositional layout
+  const childrenArray = React.Children.toArray(children);
+  const hasTop = childrenArray.some(
+    (child) =>
+      React.isValidElement(child) &&
+      typeof child.type !== 'string' &&
+      (child.type as { displayName?: string })?.displayName === 'SectionTop'
+  );
+  const hasBottom = childrenArray.some(
+    (child) =>
+      React.isValidElement(child) &&
+      typeof child.type !== 'string' &&
+      (child.type as { displayName?: string })?.displayName === 'SectionBottom'
+  );
+
+  // Use compositional layout if Section.Top or Section.Bottom is detected
+  const useCompositional = hasTop || hasBottom;
 
   // Container for content
   const containerClasses = cn(
     'w-full flex',
-    columns === 2 ? 'flex-col lg:flex-row' : 'flex-col',
+    useCompositional ? 'flex-col' : columns === 2 ? 'flex-col lg:flex-row' : 'flex-col',
     centerContent && 'items-center justify-center',
     padding,
-    defaultGap,
+    gapScale[gap],
     containerClassName
   );
 
-  // If columns=2, expect Section.Left, Section.Right, and Section.Bottom as children
+  // Legacy columns support for backward compatibility
   let content: ReactNode = children;
-  if (columns === 2) {
-    // Filter out Section.Left, Section.Right, and Section.Bottom children
-    const left = React.Children.toArray(children).find(
+  if (columns === 2 && !useCompositional) {
+    const left = childrenArray.find(
       (child: React.ReactNode) =>
         React.isValidElement(child) &&
         typeof child.type !== 'string' &&
         (child.type as { displayName?: string })?.displayName === 'SectionLeft'
     ) as React.ReactElement<{ children?: React.ReactNode }> | undefined;
-    const right = React.Children.toArray(children).find(
+
+    const right = childrenArray.find(
       (child: React.ReactNode) =>
         React.isValidElement(child) &&
         typeof child.type !== 'string' &&
         (child.type as { displayName?: string })?.displayName === 'SectionRight'
     ) as React.ReactElement<{ children?: React.ReactNode }> | undefined;
-    const bottom = React.Children.toArray(children).find(
+
+    const bottom = childrenArray.find(
       (child: React.ReactNode) =>
         React.isValidElement(child) &&
         typeof child.type !== 'string' &&
         (child.type as { displayName?: string })?.displayName === 'SectionBottom'
     ) as React.ReactElement<{ children?: React.ReactNode }> | undefined;
+
     content = (
       <div
         className={cn(
           'grid w-full',
           'grid-cols-1 lg:grid-cols-2',
           'auto-rows-auto',
-          defaultColumnGap,
+          gapScale[gap],
           'gap-y-6 2xl:gap-y-8'
         )}
       >
@@ -123,7 +170,7 @@ function Section({
     <div
       className={containerClasses}
       style={{
-        maxWidth,
+        maxWidth: finalMaxWidth,
         width: containerWidth
       }}
     >
@@ -131,29 +178,7 @@ function Section({
     </div>
   );
 
-  // Masked grid background (for footer-style)
-  if (background === 'mask') {
-    return (
-      <Element className={cn(sectionClasses, 'z-0')} {...props}>
-        <div
-          className='absolute inset-0 w-full h-full pointer-events-none z-[1]'
-          style={{
-            backgroundImage: `
-              linear-gradient(to right, var(--grid) 1px, transparent 1px),
-              linear-gradient(to bottom, var(--grid) 1px, transparent 1px)
-            `,
-            backgroundSize: `${gridSize} ${gridSize}`,
-            maskImage: `radial-gradient(circle at center, black ${maskIntensity}%, transparent 100%)`
-          }}
-        />
-        <div className='relative z-[2] w-full flex items-center justify-center'>
-          {contentContainer}
-        </div>
-      </Element>
-    );
-  }
-
-  // Background grid (for hero-style)
+  // Background grid rendering
   if (background === 'grid') {
     return (
       <BackgroundGrid className={sectionClasses} {...props}>
@@ -170,23 +195,117 @@ function Section({
   );
 }
 
-function Left({ children }: { children: ReactNode }) {
+// Compositional components
+function SectionTop({ children, gap = 'md' }: { children: ReactNode; gap?: 'sm' | 'md' | 'lg' }) {
+  // Detect if Top contains Left/Right for column layout
+  const childrenArray = React.Children.toArray(children);
+  const hasLeft = childrenArray.some(
+    (child) =>
+      React.isValidElement(child) &&
+      typeof child.type !== 'string' &&
+      (child.type as { displayName?: string })?.displayName === 'SectionLeft'
+  );
+  const hasRight = childrenArray.some(
+    (child) =>
+      React.isValidElement(child) &&
+      typeof child.type !== 'string' &&
+      (child.type as { displayName?: string })?.displayName === 'SectionRight'
+  );
+
+  if (hasLeft || hasRight) {
+    // Column layout within Top
+    const left = childrenArray.find(
+      (child) =>
+        React.isValidElement(child) &&
+        typeof child.type !== 'string' &&
+        (child.type as { displayName?: string })?.displayName === 'SectionLeft'
+    ) as React.ReactElement<{ children?: React.ReactNode }> | undefined;
+
+    const right = childrenArray.find(
+      (child) =>
+        React.isValidElement(child) &&
+        typeof child.type !== 'string' &&
+        (child.type as { displayName?: string })?.displayName === 'SectionRight'
+    ) as React.ReactElement<{ children?: React.ReactNode }> | undefined;
+
+    return (
+      <div
+        className={cn('grid w-full', 'grid-cols-1 lg:grid-cols-2', 'auto-rows-auto', gapScale[gap])}
+      >
+        <div className='w-full col-span-1 flex flex-col gap-4 md:gap-6 lg:gap-8'>
+          {left?.props.children}
+        </div>
+        <div className='w-full col-span-1'>{right?.props.children}</div>
+      </div>
+    );
+  }
+
+  // Single content in Top
+  return <div className='w-full'>{children}</div>;
+}
+SectionTop.displayName = 'SectionTop';
+
+function SectionBottom({
+  children,
+  gap = 'md'
+}: { children: ReactNode; gap?: 'sm' | 'md' | 'lg' }) {
+  // Detect if Bottom contains Left/Right for column layout
+  const childrenArray = React.Children.toArray(children);
+  const hasLeft = childrenArray.some(
+    (child) =>
+      React.isValidElement(child) &&
+      typeof child.type !== 'string' &&
+      (child.type as { displayName?: string })?.displayName === 'SectionLeft'
+  );
+  const hasRight = childrenArray.some(
+    (child) =>
+      React.isValidElement(child) &&
+      typeof child.type !== 'string' &&
+      (child.type as { displayName?: string })?.displayName === 'SectionRight'
+  );
+
+  if (hasLeft || hasRight) {
+    // Column layout within Bottom
+    const left = childrenArray.find(
+      (child) =>
+        React.isValidElement(child) &&
+        typeof child.type !== 'string' &&
+        (child.type as { displayName?: string })?.displayName === 'SectionLeft'
+    ) as React.ReactElement<{ children?: React.ReactNode }> | undefined;
+
+    const right = childrenArray.find(
+      (child) =>
+        React.isValidElement(child) &&
+        typeof child.type !== 'string' &&
+        (child.type as { displayName?: string })?.displayName === 'SectionRight'
+    ) as React.ReactElement<{ children?: React.ReactNode }> | undefined;
+
+    return (
+      <div
+        className={cn('grid w-full', 'grid-cols-1 lg:grid-cols-2', 'auto-rows-auto', gapScale[gap])}
+      >
+        <div className='w-full col-span-1 flex flex-col gap-4 md:gap-6 lg:gap-8'>
+          {left?.props.children}
+        </div>
+        <div className='w-full col-span-1'>{right?.props.children}</div>
+      </div>
+    );
+  }
+
+  // Single content in Bottom
+  return <div className='w-full'>{children}</div>;
+}
+SectionBottom.displayName = 'SectionBottom';
+
+function SectionLeft({ children }: { children: ReactNode }) {
   return <>{children}</>;
 }
-Left.displayName = 'SectionLeft';
+SectionLeft.displayName = 'SectionLeft';
 
-function Right({ children }: { children: ReactNode }) {
+function SectionRight({ children }: { children: ReactNode }) {
   return <>{children}</>;
 }
-Right.displayName = 'SectionRight';
+SectionRight.displayName = 'SectionRight';
 
-function Bottom({ children }: { children: ReactNode }) {
-  return <>{children}</>;
-}
-Bottom.displayName = 'SectionBottom';
-
-Section.Left = Left;
-Section.Right = Right;
-Section.Bottom = Bottom;
-
-export { Section };
+// Export all components individually (like Card, CardHeader, etc.)
+export { Section, SectionTop, SectionLeft, SectionRight, SectionBottom };

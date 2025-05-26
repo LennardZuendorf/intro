@@ -3,9 +3,15 @@
 import type { SectionProps as PageSectionProps } from '@/app/(app)/page';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { NeoBadge } from '@/components/ui/neoBadge';
-import { Section } from '@/components/ui/section';
+import {
+  Section,
+  SectionBottom,
+  SectionLeft,
+  SectionRight,
+  SectionTop
+} from '@/components/ui/section';
 import { Separator } from '@/components/ui/separator';
-import { Code, H3, H4, L, M, Muted } from '@/components/ui/typography';
+import { Code, H4, M, Muted, S } from '@/components/ui/typography';
 import { experienceData, techStackData } from '@/data/about';
 import { cn } from '@/lib/utils/ui';
 import Link from 'next/link';
@@ -14,8 +20,6 @@ import CarouselVertical from '../custom/experience-carousel';
 
 export default function AboutSection({ className }: PageSectionProps) {
   const [showAllSkills, setShowAllSkills] = useState(false);
-  const [showAllTech, setShowAllTech] = useState(false);
-  const [animatingTech, setAnimatingTech] = useState(false);
   const [animatingSkills, setAnimatingSkills] = useState(false);
 
   const allSkills = [
@@ -30,24 +34,9 @@ export default function AboutSection({ className }: PageSectionProps) {
     'UX Design'
   ];
 
-  // Display only 5 skills initially
+  // Display only 5 skills initially for full-width layout
   const visibleSkills = allSkills.slice(0, 5);
   const hasMoreSkills = allSkills.length > 5;
-
-  // Display only 5 tech stack items initially
-  const visibleTech = techStackData.slice(0, 5);
-  const hasMoreTech = techStackData.length > 5;
-
-  // Handle tech stack toggle with animation
-  const handleTechToggle = (show: boolean) => {
-    setAnimatingTech(true);
-    setShowAllTech(show);
-
-    // Reset animation flag after animation completes
-    setTimeout(() => {
-      setAnimatingTech(false);
-    }, 500);
-  };
 
   // Handle skills toggle with animation
   const handleSkillsToggle = (show: boolean) => {
@@ -65,112 +54,121 @@ export default function AboutSection({ className }: PageSectionProps) {
       <Section
         className={className}
         background='grid'
-        maxWidth='min(92%, 1280px)'
+        width='lg'
         centerContent={true}
         containerClassName='justify-center items-center mx-auto relative z-[2]'
-        columns={2}
       >
-        <Section.Left>
-          {/* About Me Card */}
-          <div className='relative'>
-            <Card className='relative w-full' interactive='medium' rotation='none'>
-              <CardHeader className='p-5 pb-2 md:p-6 md:pb-2 2xl:p-8 2xl:pb-2'>
-                <div className='absolute -top-2 -left-2 md:-top-3 md:-left-3'>
-                  <NeoBadge
-                    variant='light'
-                    rotation='medium'
-                    className='font-mono'
-                    interactive='lift'
-                  >
-                    <Code>About Me</Code>
-                  </NeoBadge>
-                </div>
-              </CardHeader>
-              <CardContent className='p-5 pt-0 md:p-6 md:pt-0 2xl:p-8 2xl:pt-0'>
-                <div className='prose dark:prose-invert max-w-none'>
-                  <M className='font-mono leading-relaxed'>
-                    With a strong foundation in{' '}
-                    <span className='font-bold inline-block'>Business Computing</span> and a passion
-                    for technology, I bridge the gap between code and commerce. My experience in
-                    <span className='font-bold inline-block'> Innovation Management</span> and{' '}
-                    <span className='font-bold inline-block'>Product Strategy</span> has given me a
-                    unique perspective that I apply to my product management approach.
-                  </M>
-                  <M className='font-mono leading-relaxed mt-3'>
-                    When I'm not working as a PM, you can find me expanding my skills through
-                    <span className='font-bold inline-block'> language learning</span> and{' '}
-                    <span className='font-bold inline-block'>side projects</span> that push my
-                    coding abilities.
-                  </M>
-                </div>
-                <Separator />
-                <Muted className='font-mono leading-relaxed'>
-                  I'm passionate about building with technology, from web apps to data
-                  visualizations, always aiming to solve real problems while exploring new tech.
-                </Muted>
-              </CardContent>
-            </Card>
-          </div>
-          {/* Additional Text Content */}
-          <div className='relative font-mono leading-relaxed'>
-            <NeoBadge
-              variant='light'
-              rotation='slight'
-              className='font-mono'
-              size='lg'
-              interactive='grow'
-            >
-              Building digital products
-            </NeoBadge>{' '}
-            that combine{' '}
-            <NeoBadge
-              variant='default'
-              rotation='negative'
-              className='font-mono'
-              size='lg'
-              interactive='wiggle'
-            >
-              strategic vision
-            </NeoBadge>{' '}
-            with{' '}
-            <NeoBadge
-              variant='dark'
-              rotation='slight'
-              className='font-mono'
-              size='lg'
-              interactive='bounce'
-            >
-              technical excellence.
-            </NeoBadge>
-          </div>
-        </Section.Left>
-        <Section.Right>
-          {/* Experience Section - Carousel */}
-          <div className='relative'>
-            <Card
-              className='relative w-full'
-              interactive='none'
-              rotation='slight'
-              shadow='none'
-              variant='invisible'
-            >
-              <CardHeader className='p-5 pb-2 md:p-6 md:pb-2 2xl:p-8 2xl:pb-2'>
-                <div className='absolute -top-12 -left-2 md:top-6 md:-left-3 z-[100]'>
-                  <NeoBadge variant='dark' rotation='none' className='font-mono' interactive='grow'>
-                    <Code>Experiences</Code>
-                  </NeoBadge>
-                </div>
-              </CardHeader>
-              <CardContent className='py-5 px-0'>
-                <CarouselVertical visibleCount={1} />
-              </CardContent>
-            </Card>
-          </div>
-        </Section.Right>
-        <Section.Bottom>
-          {/* Professional Skills */}
+        <SectionTop>
+          <SectionLeft>
+            {/* About Me Card */}
+            <div className='relative mb-6'>
+              <Card className='relative w-full' interactive='medium' rotation='none'>
+                <CardHeader className='p-5 pb-2 md:p-6 md:pb-2 2xl:p-8 2xl:pb-2'>
+                  <div className='absolute -top-4 -left-2 md:-top-5 md:-left-3'>
+                    <NeoBadge
+                      variant='light'
+                      rotation='medium'
+                      className='font-mono'
+                      interactive='lift'
+                    >
+                      <Code>About Me</Code>
+                    </NeoBadge>
+                  </div>
+                </CardHeader>
+                <CardContent className='p-5 pt-0 md:p-6 md:pt-0 2xl:p-8 2xl:pt-0'>
+                  <div className='prose dark:prose-invert max-w-none'>
+                    <M className='font-mono leading-relaxed'>
+                      With a strong foundation in{' '}
+                      <span className='font-bold inline-block'>Business Computing</span> and a
+                      passion for technology, I bridge the gap between code and commerce. My
+                      experience in
+                      <span className='font-bold inline-block'> Innovation Management</span> and{' '}
+                      <span className='font-bold inline-block'>Product Strategy</span> has given me
+                      a unique perspective that I apply to my product management approach.
+                    </M>
+                    <M className='font-mono leading-relaxed mt-3'>
+                      When I'm not working as a PM, you can find me expanding my skills through
+                      <span className='font-bold inline-block'> language learning</span> and{' '}
+                      <span className='font-bold inline-block'>side projects</span> that push my
+                      coding abilities.
+                    </M>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+
+            {/* Quick Stats Card */}
+            <div className='relative'>
+              <Card className='relative w-full' interactive='slight' rotation='slightNegative'>
+                <CardHeader className='p-5 pb-2 md:p-6 md:pb-2 2xl:p-8 2xl:pb-2'>
+                  <div className='absolute -top-4 -left-2 md:-top-5 md:-left-3'>
+                    <NeoBadge
+                      variant='dark'
+                      rotation='slight'
+                      className='font-mono'
+                      interactive='lift'
+                    >
+                      <Code>Quick Stats</Code>
+                    </NeoBadge>
+                  </div>
+                </CardHeader>
+                <CardContent className='p-4 pt-0 md:p-5 md:pt-0 2xl:p-6 2xl:pt-0'>
+                  <div className='grid grid-cols-4 gap-2'>
+                    <div className='text-center'>
+                      <M className='font-mono font-bold'>5+</M>
+                      <S className='font-mono text-muted-foreground text-xs'>Years</S>
+                    </div>
+                    <div className='text-center'>
+                      <M className='font-mono font-bold'>15+</M>
+                      <S className='font-mono text-muted-foreground text-xs'>Projects Built</S>
+                    </div>
+                    <div className='text-center'>
+                      <M className='font-mono font-bold'>3</M>
+                      <S className='font-mono text-muted-foreground text-xs'>Languages</S>
+                    </div>
+                    <div className='text-center'>
+                      <M className='font-mono font-bold'>Berlin</M>
+                      <S className='font-mono text-muted-foreground text-xs'>Based In</S>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+          </SectionLeft>
+
+          <SectionRight>
+            {/* Experience Section - Carousel */}
+            <div className='relative'>
+              <Card
+                className='relative w-full'
+                interactive='none'
+                rotation='slight'
+                shadow='none'
+                variant='invisible'
+              >
+                <CardHeader className='p-5 pb-2 md:p-6 md:pb-2 2xl:p-8 2xl:pb-2'>
+                  <div className='absolute -top-12 -left-2 md:top-6 md:-left-3 z-[100]'>
+                    <NeoBadge
+                      variant='dark'
+                      rotation='none'
+                      className='font-mono'
+                      interactive='grow'
+                    >
+                      <Code>Experiences</Code>
+                    </NeoBadge>
+                  </div>
+                </CardHeader>
+                <CardContent className='py-5 px-0'>
+                  <CarouselVertical visibleCount={1} />
+                </CardContent>
+              </Card>
+            </div>
+          </SectionRight>
+        </SectionTop>
+        <SectionBottom>
+          {/* What I Do - Full Width Skills */}
           <div className='w-full'>
-            <H4 className='font-mono uppercase tracking-wider ml-2 mb-2'>Key Skills</H4>
+            <H4 className='font-mono uppercase tracking-wider ml-2 mb-4'>What I Do</H4>
             <div className='flex flex-wrap gap-2 md:gap-3 relative w-full transition-all duration-500 ease-in-out'>
               {(showAllSkills ? allSkills : visibleSkills).map((skill, index) => (
                 <NeoBadge
@@ -213,60 +211,7 @@ export default function AboutSection({ className }: PageSectionProps) {
               )}
             </div>
           </div>
-
-          {/* Tech Stack Section */}
-          <div className='mt-1 md:mt-2'>
-            <H4 className='font-mono uppercase tracking-wider ml-2 mb-2'>Tech Stack</H4>
-            <div className='flex flex-wrap gap-2 md:gap-3 relative transition-all duration-500 ease-in-out'>
-              {(showAllTech ? techStackData : visibleTech).map((tech, index) => (
-                <NeoBadge
-                  key={tech.name}
-                  variant='dark'
-                  size='sm'
-                  className={`tech-badge transition-all duration-300 ease-in-out ${
-                    animatingTech ? 'scale-95 opacity-80' : 'scale-100 opacity-100'
-                  } z-10`}
-                  style={{
-                    transitionDelay: `${index * 25}ms`
-                  }}
-                  rotation={index % 3 === 0 ? 'slight' : index % 3 === 1 ? 'negative' : 'none'}
-                  interactive='lift'
-                >
-                  <Link
-                    href={tech.link}
-                    target='_blank'
-                    rel='noopener noreferrer'
-                    className='inline-block'
-                  >
-                    {tech.name}
-                  </Link>
-                </NeoBadge>
-              ))}
-              {hasMoreTech && !showAllTech && (
-                <NeoBadge
-                  variant='outline'
-                  size='sm'
-                  className='hover:cursor-pointer transition-all duration-300 ease-in-out'
-                  interactive='lift'
-                  onClick={() => handleTechToggle(true)}
-                >
-                  + More
-                </NeoBadge>
-              )}
-              {showAllTech && (
-                <NeoBadge
-                  variant='outline'
-                  size='sm'
-                  className='hover:cursor-pointer transition-all duration-300 ease-in-out'
-                  interactive='lift'
-                  onClick={() => handleTechToggle(false)}
-                >
-                  - Hide
-                </NeoBadge>
-              )}
-            </div>
-          </div>
-        </Section.Bottom>
+        </SectionBottom>
       </Section>
     </section>
   );

@@ -1,52 +1,73 @@
 import type { SectionProps } from '@/app/(app)/page';
-import { H2, L, S } from '@/components/ui/typography';
+import { Card, CardContent, CardHeader } from '@/components/ui/card';
+import { NeoBadge } from '@/components/ui/neoBadge';
+import { Section, SectionTop } from '@/components/ui/section';
+import { Code, H4, S } from '@/components/ui/typography';
 import { cn } from '@/lib/utils/ui';
 import configPromise from '@payload-config';
 import { draftMode } from 'next/headers';
 import { getPayload } from 'payload';
-import React from 'react';
-import CarouselVertical from '../custom/experience-carousel';
+import ProjectCarousel from '../custom/project-carousel';
+import { TechStackCompact } from '../shared/tech-stack';
 
 export async function Projects({ className }: SectionProps) {
-  const _payloadProjects = await queryProjects();
+  const payloadProjects = await queryProjects();
 
   return (
-    <section id='projects' className={cn('py-14 md:py-24 relative overflow-hidden', className)}>
-      {/* Decorative elements */}
-      <div className='absolute -top-20 -left-20 w-40 h-40 rounded-full bg-accent-light opacity-10 blur-3xl' />
-      <div className='absolute -bottom-20 -right-20 w-40 h-40 rounded-full bg-accent-dark opacity-10 blur-3xl' />
-
-      <div className='flex flex-col w-full sm:w-11/12 md:w-10/12 px-5 sm:px-2 md:px-0 mx-auto items-center space-y-10 md:space-y-16 h-full'>
-        <div className='space-y-6 relative max-w-3xl mx-auto'>
-          {/* Badge with enhanced neobrutalist styling */}
-          <div className='flex justify-center mb-4'>
-            <span className='inline-block bg-accent-dark text-atext px-4 py-2 font-bold border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] rotate-1 rounded-md uppercase tracking-wider'>
-              <S>Projects</S>
-            </span>
+    <section id='projects'>
+      <Section
+        className={cn('relative overflow-hidden', className)}
+        background='default'
+        width='lg'
+        centerContent={true}
+        fullHeight={false}
+        padding='py-14 md:py-24 px-6 py-8 md:py-12 2xl:py-16'
+        gap='md'
+      >
+        <SectionTop>
+          {/* Project carousel with transparent wrapper */}
+          <div className='w-full relative flex justify-center'>
+            <Card
+              className='relative w-full'
+              interactive='none'
+              rotation='none'
+              shadow='none'
+              variant='invisible'
+            >
+              <CardHeader className='p-5 pb-2 md:p-6 md:pb-2 2xl:p-8 2xl:pb-2'>
+                <div className='absolute -top-4 -left-2 md:-top-5 md:-left-3 z-[100]'>
+                  <NeoBadge
+                    variant='dark'
+                    rotation='slight'
+                    className='font-mono'
+                    interactive='lift'
+                  >
+                    <Code>Projects</Code>
+                  </NeoBadge>
+                </div>
+              </CardHeader>
+              <CardContent className='py-5 px-0'>
+                {/* Project carousel with horizontal layout */}
+                {payloadProjects && payloadProjects.length > 0 ? (
+                  <ProjectCarousel projects={payloadProjects} visibleCount={4} />
+                ) : (
+                  <div className='flex items-center justify-center h-32'>
+                    <S className='text-muted-foreground'>No projects available</S>
+                  </div>
+                )}
+              </CardContent>
+            </Card>
           </div>
 
-          <H2 className='font-extrabold text-center text-mtext leading-tight'>
-            MY{' '}
-            <span className='text-accent relative inline-block'>
-              PROJECTS
-              <span className='absolute -bottom-2 left-0 w-full h-1 bg-accent-light' />
-            </span>
-          </H2>
-          <L className='text-center mx-auto max-w-2xl text-mtext/80 font-medium'>
-            A selection of products I&lsquove managed from conception to delivery
-          </L>
-        </div>
-
-        {/* Project carousel container with enhanced styling */}
-        <div className='w-full relative border-2 border-black p-4 md:p-6 rounded-lg bg-main shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] transition-all hover:shadow-[12px_12px_0px_0px_rgba(0,0,0,0.8)] hover:-translate-y-1 hover:-translate-x-1'>
-          {/* Small decorative elements */}
-          <div className='absolute -top-3 -right-3 w-6 h-6 bg-accent-light border-2 border-black rounded-full' />
-          <div className='absolute -bottom-3 -left-3 w-6 h-6 bg-accent border-2 border-black rounded-full' />
-
-          {/* ProjectCarousel component remains untouched */}
-          <CarouselVertical />
-        </div>
-      </div>
+          {/* Tech Stack Section */}
+          <div className='w-full flex flex-col items-center'>
+            <H4 className='font-mono uppercase tracking-wider mb-4 text-center'>Tech Stack</H4>
+            <div className='flex justify-center w-full'>
+              <TechStackCompact />
+            </div>
+          </div>
+        </SectionTop>
+      </Section>
     </section>
   );
 }
@@ -56,12 +77,109 @@ const queryProjects = async () => {
 
   const payload = await getPayload({ config: configPromise });
 
-  const result = await payload.find({
-    collection: 'projects',
-    draft,
-    overrideAccess: draft,
-    pagination: false
-  });
+  try {
+    // 1. Fetch all projects (expecting only technology IDs)
+    const projectsResult = await payload.find({
+      collection: 'projects',
+      overrideAccess: draft,
+      pagination: false,
+      depth: 2, //Needs to 2 to get the Picture Data
+      select: {
+        id: true,
+        title: true,
+        slug: true,
+        shortDescription: true,
+        heroImage: true,
+        technologies: true,
+        liveUrl: true,
+        repoUrl: true
+      },
+      where: {
+        _status: {
+          equals: 'published'
+        }
+      }
+    });
 
-  return result.docs || null;
+    console.log(
+      'Projects with technology IDs:',
+      projectsResult.docs.map((p) => ({
+        title: p.title,
+        technologies: p.technologies
+      }))
+    );
+
+    // 2. Collect all unique technology IDs from all projects
+    const allTechIds = new Set<number>();
+    for (const project of projectsResult.docs) {
+      if (project.technologies && Array.isArray(project.technologies)) {
+        for (const techId of project.technologies) {
+          if (typeof techId === 'number') {
+            allTechIds.add(techId);
+          }
+        }
+      }
+    }
+
+    console.log('Unique technology IDs to fetch:', Array.from(allTechIds));
+
+    // 3. Fetch ALL techstack tags in a single query
+    const techstackResult = await payload.find({
+      collection: 'tag',
+      where: {
+        id: {
+          in: Array.from(allTechIds)
+        },
+        type: {
+          equals: 'techstack'
+        }
+      },
+      depth: 0,
+      pagination: false
+    });
+
+    console.log(
+      'Fetched techstack tags:',
+      techstackResult.docs.map((t) => ({ id: t.id, name: t.name }))
+    );
+
+    // 4. Create a lookup map for O(1) technology assignment
+    const techLookup = new Map();
+    for (const tech of techstackResult.docs) {
+      techLookup.set(tech.id, tech);
+    }
+
+    // 5. Map technologies to projects
+    const projectsWithTechnologies = projectsResult.docs.map((project) => {
+      if (project.technologies && Array.isArray(project.technologies)) {
+        const populatedTechnologies = project.technologies
+          .map((techId) => {
+            if (typeof techId === 'number') {
+              return techLookup.get(techId) || null;
+            }
+            return null;
+          })
+          .filter((tech) => tech !== null);
+
+        return {
+          ...project,
+          technologies: populatedTechnologies
+        };
+      }
+      return project;
+    });
+
+    console.log(
+      'Final projects with populated technologies:',
+      projectsWithTechnologies.map((p) => ({
+        title: p.title,
+        technologies: p.technologies?.map((t) => t.name)
+      }))
+    );
+
+    return projectsWithTechnologies;
+  } catch (error) {
+    console.error('Error fetching projects:', error);
+    return null;
+  }
 };
