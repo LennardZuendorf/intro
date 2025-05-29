@@ -27,7 +27,7 @@ export default function ExperienceCard({ experience: exp, className }: Experienc
               href={exp.url}
               target='_blank'
               rel='noopener noreferrer'
-              className='text-sm text-gray-500 hover:text-atext transition-colors'
+              className='text-sm text-gray-500 hover:text-accent-foreground transition-colors'
             >
               <svg
                 xmlns='http://www.w3.org/2000/svg'

@@ -15,50 +15,39 @@ const config: Config = {
         mono: ['var(--mono-font-family)']
       },
       colors: {
-        main: 'var(--main)',
-        overlay: 'var(--overlay)',
-        bg: 'var(--bg)',
-        bw: 'var(--accent)',
-        accent: {
-          light: 'var(--accent-light)',
-          DEFAULT: 'var(--accent)',
-          dark: 'var(--accent-dark)'
-        },
-        blank: 'var(--blank)',
-        text: 'var(--text)',
-        mtext: 'var(--mtext)',
-        atext: 'var(--atext)',
-        border: 'var(--border)',
-        ring: 'var(--ring)',
-        ringOffset: 'var(--ring-offset)',
-        input: 'rgb(var(--input))',
-        background: 'rgb(var(--background))',
-        foreground: 'rgb(var(--foreground))',
+        overlay: 'var(--main)/50',
+        border: 'var(--blank)',
+
         primary: {
-          DEFAULT: 'rgb(var(--primary))',
-          foreground: 'rgb(var(--primary-foreground))'
+          DEFAULT: 'var(--primary)',
+          foreground: 'var(--primary-foreground)'
         },
         secondary: {
           DEFAULT: 'rgb(var(--secondary))',
-          foreground: 'rgb(var(--secondary-foreground))'
+          foreground: 'rgb(var(--primary-foreground))'
+        },
+        accent: {
+          light: 'var(--accent-light)',
+          DEFAULT: 'var(--accent)',
+          dark: 'var(--accent-dark)',
+          foreground: 'var(--accent-foreground)'
         },
         destructive: {
-          DEFAULT: 'rgb(var(--destructive))',
-          foreground: 'rgb(var(--destructive-foreground))'
+          DEFAULT: 'var(--secondary)',
+          foreground: 'var(--secondary-foreground)'
         },
         muted: {
-          DEFAULT: 'rgb(var(--muted))',
-          foreground: 'rgb(var(--muted-foreground))'
+          DEFAULT: 'var(--secondary)',
+          foreground: 'var(--secondary-foreground)'
         },
         popover: {
-          DEFAULT: 'rgb(var(--popover))',
-          foreground: 'rgb(var(--popover-foreground))'
+          DEFAULT: 'var(--secondary)',
+          foreground: 'var(--secondary-foreground)'
         },
         card: {
-          DEFAULT: 'rgb(var(--card))',
-          foreground: 'rgb(var(--card-foreground))'
-        },
-        secondaryBlack: '#212121'
+          DEFAULT: 'var(--secondary)',
+          foreground: 'var(--secondary-foreground)'
+        }
       },
       borderRadius: {
         base: '4px',
@@ -66,13 +55,9 @@ const config: Config = {
         lg: '12px'
       },
       boxShadow: {
-        shadow: 'var(--shadow-md)',
-        lshadow: 'var(--shadow-lg)',
         sm: 'var(--shadow-sm)',
         md: 'var(--shadow-md)',
-        lg: 'var(--shadow-lg)',
-        glow: '0 0 15px rgba(0, 0, 0, 0.3)',
-        'accent-glow': '0 0 15px var(--accent)'
+        lg: 'var(--shadow-lg)'
       },
       keyframes: {
         float: {

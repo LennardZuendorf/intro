@@ -8,10 +8,11 @@ const neoBadgeVariants = cva(
   {
     variants: {
       variant: {
-        default: 'bg-accent text-atext hover:bg-accent-dark',
-        dark: 'bg-accent-dark text-atext hover:bg-accent',
-        light: 'bg-accent-light text-atext hover:bg-accent',
-        outline: 'bg-bg text-mtext border-2 border-accent hover:bg-accent hover:text-atext'
+        default: 'bg-accent text-accent-foreground hover:bg-accent-dark',
+        dark: 'bg-accent-dark text-accent-foreground hover:bg-accent',
+        light: 'bg-accent-light text-accent-foreground hover:bg-accent',
+        outline:
+          'bg-primary text-primary-foreground border-2 border-accent hover:bg-accent hover:text-accent-foreground'
       },
       rotation: {
         none: '',

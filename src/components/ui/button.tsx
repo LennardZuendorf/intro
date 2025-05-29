@@ -11,16 +11,16 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          'text-mtext bg-main border-2 border-border shadow-shadow hover:translate-x-boxShadowX hover:translate-y-boxShadowY hover:shadow-none hover:bg-accent hover:text-atext',
+          'text-primary-foreground bg-primary border-2 border-border shadow-sm hover:translate-x-boxShadowX hover:translate-y-boxShadowY hover:shadow-none hover:bg-accent hover:text-accent-foreground shadow-shadow',
         neutral:
-          'text-mtext bg-main hover:bg-accent hover:text-atext hover:border-border hover:border-2',
+          'text-primary-foreground bg-primary hover:bg-accent hover:text-accent-foreground hover:border-border hover:border-2',
         noShadow:
-          'text-mtext bg-main border-2 border-border hover:border-border hover:border-2 hover:bg-accent hover:text-atext focus:border-border focus:border-2',
+          'text-primary-foreground bg-primary border-2 border-border hover:border-border hover:border-2 hover:bg-accent hover:text-accent-foreground focus:border-border focus:border-2',
         accent:
-          'bg-accent text-atext border-2 border-border shadow-shadow hover:translate-x-boxShadowX hover:translate-y-boxShadowY hover:shadow-none hover:bg-accent-dark',
-        link: 'text-mtext hover:text-accent hover:underline hover:underline-offset-2 hover:',
+          'bg-accent text-accent-foreground border-2 border-border shadow-sm hover:translate-x-boxShadowX hover:translate-y-boxShadowY hover:shadow-none hover:bg-accent-dark shadow-shadow',
+        link: 'text-primary-foreground hover:text-accent hover:underline hover:underline-offset-2 hover:',
         action:
-          'w-full text-base border-2 border-border shadow-md bg-main text-mtext group hover:shadow-lg hover:-translate-y-0.5 hover:bg-accent hover:text-atext'
+          'w-full text-base border-2 border-border shadow-sm bg-primary text-primary-foreground group hover:shadow-lg hover:-translate-y-0.5 hover:bg-accent hover:text-accent-foreground shadow-shadow'
       },
       size: {
         default: 'h-10 px-4 py-2',

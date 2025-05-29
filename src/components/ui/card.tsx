@@ -9,49 +9,52 @@ interface CardProps
   disableScale?: boolean;
 }
 
-const cardVariants = cva('rounded-md border-4 border-border text-mtext shadow-md transition-all', {
-  variants: {
-    variant: {
-      default: 'bg-main',
-      reversed: 'bg-bg',
-      outline: 'bg-transparent ',
-      accent: 'bg-accent text-atext',
-      clickable: 'bg-main hover:bg-accent-dark hover:text-atext',
-      invisible: 'bg-transparent border-none shadow-none'
+const cardVariants = cva(
+  'rounded-md border-4 border-border text-primary-foreground shadow-black shadow-md transition-all',
+  {
+    variants: {
+      variant: {
+        default: 'bg-primary',
+        reversed: 'bg-primary',
+        outline: 'bg-transparent ',
+        accent: 'bg-accent text-accent-foreground',
+        clickable: 'bg-primary hover:bg-accent-dark hover:text-accent-foreground',
+        invisible: 'bg-transparent border-none shadow-none'
+      },
+      rotation: {
+        none: '',
+        slight: 'rotate-slight',
+        slightNegative: 'rotate-negative',
+        medium: 'rotate-medium',
+        mediumNegative: 'rotate-negative-medium'
+      },
+      interactive: {
+        none: '',
+        slight: 'hover-lift transition-all duration-300',
+        medium: 'hover-grow hover:shadow-xl transition-all duration-300'
+      },
+      shadow: {
+        none: 'shadow-none',
+        sm: 'shadow-sm',
+        md: 'shadow-md',
+        lg: 'shadow-lg',
+        xl: 'shadow-xl'
+      },
+      borderStyle: {
+        default: 'border-4 border-border',
+        accent: 'border-4 border-accent',
+        none: 'border-0'
+      }
     },
-    rotation: {
-      none: '',
-      slight: 'rotate-slight',
-      slightNegative: 'rotate-negative',
-      medium: 'rotate-medium',
-      mediumNegative: 'rotate-negative-medium'
-    },
-    interactive: {
-      none: '',
-      slight: 'hover-lift transition-all duration-300',
-      medium: 'hover-grow hover:shadow-xl transition-all duration-300'
-    },
-    shadow: {
-      none: 'shadow-none',
-      sm: 'shadow-sm',
-      md: 'shadow-md',
-      lg: 'shadow-lg',
-      xl: 'shadow-xl'
-    },
-    borderStyle: {
-      default: 'border-4 border-border',
-      accent: 'border-4 border-accent',
-      none: 'border-0'
+    defaultVariants: {
+      variant: 'default',
+      rotation: 'none',
+      interactive: 'none',
+      shadow: 'lg',
+      borderStyle: 'default'
     }
-  },
-  defaultVariants: {
-    variant: 'default',
-    rotation: 'none',
-    interactive: 'none',
-    shadow: 'lg',
-    borderStyle: 'default'
   }
-});
+);
 
 const Card = React.forwardRef<HTMLDivElement, CardProps>(
   (
@@ -102,7 +105,11 @@ const CardDescription = React.forwardRef<
   HTMLParagraphElement,
   React.HTMLAttributes<HTMLParagraphElement>
 >(({ className, ...props }, ref) => (
-  <div ref={ref} className={cn('text-sm text-mtext font-base !mt-3', className)} {...props} />
+  <div
+    ref={ref}
+    className={cn('text-sm text-primary-foreground font-base !mt-3', className)}
+    {...props}
+  />
 ));
 CardDescription.displayName = 'CardDescription';
 

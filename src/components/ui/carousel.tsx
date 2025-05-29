@@ -131,7 +131,7 @@ const Carousel = React.forwardRef<
         {children}
         {/* Bottom fade overlay for vertical carousels */}
         {orientation === 'vertical' && (
-          <div className='pointer-events-none absolute bottom-0 left-0 w-full h-12 bg-gradient-to-t from-bg-main/90 to-transparent z-20' />
+          <div className='pointer-events-none absolute bottom-0 left-0 w-full h-12 bg-gradient-to-t from-primary-primary/90 to-transparent z-20' />
         )}
       </div>
     </CarouselContext.Provider>

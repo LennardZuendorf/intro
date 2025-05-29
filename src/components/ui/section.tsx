@@ -52,8 +52,8 @@ const widthPresets = {
 
 // Background color variants
 const backgroundVariants = {
-  default: 'bg-main',
-  grid: 'bg-main',
+  default: 'bg-primary',
+  grid: 'bg-primary',
   secondary: 'bg-secondary',
   accent: 'bg-accent-light'
 };

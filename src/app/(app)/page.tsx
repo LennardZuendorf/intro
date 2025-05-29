@@ -28,7 +28,7 @@ const Page: NextPage = async () => {
     <div className='min-h-screen'>
       <HeroSection className='' sectionContent={sectionContent} />
       <AboutSection className='' />
-      <Projects className='lg:h-svh bg-main border-t-4 border-border pt-5 pb-5 md:pt-10 md:pb-10' />
+      <Projects className='lg:h-svh bg-primary border-t-4 border-border pt-5 pb-5 md:pt-10 md:pb-10' />
       <Banner className='' />
     </div>
   );

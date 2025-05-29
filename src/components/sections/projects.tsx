@@ -17,7 +17,7 @@ export async function Projects({ className }: SectionProps) {
     <section id='projects'>
       <Section
         className={cn('relative overflow-hidden', className)}
-        background='default'
+        background='secondary'
         width='lg'
         centerContent={true}
         fullHeight={false}

@@ -45,7 +45,7 @@ export default function AboutPage() {
 
         {/* Bio Section with Image */}
         <div className='relative bg-white dark:bg-[#2A2A2A] p-8 rounded-md border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]'>
-          <div className='absolute -top-3 -left-3 px-4 py-1 bg-accent-light text-atext font-mono text-sm border-2 border-black rotate-2 rounded-md'>
+          <div className='absolute -top-3 -left-3 px-4 py-1 bg-accent-light text-accent-foreground font-mono text-sm border-2 border-black rotate-2 rounded-md'>
             My Journey
           </div>
 
@@ -86,7 +86,7 @@ export default function AboutPage() {
         {/* Skills Section */}
         <div className='space-y-6'>
           <h2 className='text-3xl font-bold relative'>
-            <span className='bg-accent text-atext px-3 py-1.5 font-medium rotate-1 inline-block rounded-md border-2 border-black'>
+            <span className='bg-accent text-accent-foreground px-3 py-1.5 font-medium rotate-1 inline-block rounded-md border-2 border-black'>
               Skills & Technologies
             </span>
           </h2>
@@ -109,7 +109,7 @@ export default function AboutPage() {
                 ].map((skill) => (
                   <span
                     key={skill}
-                    className='px-3 py-1.5 bg-accent-light text-atext font-medium border-2 border-black rounded-md rotate-1 hover:-rotate-1 transition-all shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:bg-accent'
+                    className='px-3 py-1.5 bg-accent-light text-accent-foreground font-medium border-2 border-black rounded-md rotate-1 hover:-rotate-1 transition-all shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:bg-accent'
                   >
                     {skill}
                   </span>
@@ -140,7 +140,7 @@ export default function AboutPage() {
         {/* Experience Section */}
         <div className='space-y-6'>
           <h2 className='text-3xl font-bold relative' id='work-experiences'>
-            <span className='bg-accent-dark text-atext px-3 py-1.5 font-medium -rotate-1 inline-block rounded-md border-2 border-black'>
+            <span className='bg-accent-dark text-accent-foreground px-3 py-1.5 font-medium -rotate-1 inline-block rounded-md border-2 border-black'>
               Work Experience
             </span>
           </h2>
@@ -233,7 +233,7 @@ export default function AboutPage() {
             </p>
             <Link
               href='/projects'
-              className='px-4 py-2 bg-accent text-atext font-medium border-2 border-black rounded-md inline-block hover:-rotate-1 transition-all shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]'
+              className='px-4 py-2 bg-accent text-accent-foreground font-medium border-2 border-black rounded-md inline-block hover:-rotate-1 transition-all shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]'
             >
               View All Projects
             </Link>
@@ -250,7 +250,7 @@ export default function AboutPage() {
                 href='https://github.com/lennardz'
                 target='_blank'
                 rel='noopener noreferrer'
-                className='p-2 bg-accent-light text-atext border-2 border-black rounded-md hover:bg-accent transition-all shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]'
+                className='p-2 bg-accent-light text-accent-foreground border-2 border-black rounded-md hover:bg-accent transition-all shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]'
               >
                 GitHub
               </Link>
@@ -258,13 +258,13 @@ export default function AboutPage() {
                 href='https://linkedin.com/in/lennardz'
                 target='_blank'
                 rel='noopener noreferrer'
-                className='p-2 bg-accent-light text-atext border-2 border-black rounded-md hover:bg-accent transition-all shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]'
+                className='p-2 bg-accent-light text-accent-foreground border-2 border-black rounded-md hover:bg-accent transition-all shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]'
               >
                 LinkedIn
               </Link>
               <Link
                 href='mailto:mail@zuendorf.me'
-                className='p-2 bg-accent-light text-atext border-2 border-black rounded-md hover:bg-accent transition-all shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]'
+                className='p-2 bg-accent-light text-accent-foreground border-2 border-black rounded-md hover:bg-accent transition-all shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]'
               >
                 Email
               </Link>

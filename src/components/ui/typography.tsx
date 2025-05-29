@@ -201,7 +201,7 @@ const Code: React.FC<TypographyProps> = ({ className = '', children }) => {
     <p className={cn(className)}>
       <code
         className={cn(
-          'relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-xs font-semibold sm:text-sm md:text-sm lg:text-base xl:text-base 2xl:text-lg'
+          'relative rounded px-[0.3rem] py-[0.2rem] font-mono text-xs font-semibold sm:text-sm md:text-sm lg:text-base xl:text-base 2xl:text-lg'
         )}
       >
         {children}

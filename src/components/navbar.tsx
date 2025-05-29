@@ -143,7 +143,7 @@ const Navbar = ({
         className
       )}
     >
-      <NavigationMenu className='bg-main w-full md:w-auto'>
+      <NavigationMenu className='bg-primary w-full md:w-auto'>
         <NavigationMenuList className='flex justify-between w-full'>
           <div className='flex items-center space-x-1 md:space-x-2'>
             {navItems.map((item) => (
@@ -152,7 +152,7 @@ const Navbar = ({
                   <NavigationMenuLink
                     className={cn(
                       navigationMenuTriggerStyle(),
-                      'bg-main py-1.5 px-2 md:px-3',
+                      'bg-primary py-1.5 px-2 md:px-3',
                       pathname.includes(item.link) ? 'font-bold' : 'font-medium'
                     )}
                   >
@@ -163,7 +163,7 @@ const Navbar = ({
             ))}
           </div>
           <div className='isolate relative z-[9999]'>
-            <NavigationMenuItem key='settings' className='relative bg-main'>
+            <NavigationMenuItem key='settings' className='relative bg-primary'>
               <div className='flex space-x-1'>
                 <ThemeSelect
                   buttonVariant='default'
@@ -179,7 +179,7 @@ const Navbar = ({
                   variant='default'
                   size='icon'
                   onClick={togglePin}
-                  className={cn('shadow-none', isPinned && 'text-mtext')}
+                  className={cn('shadow-none', isPinned && 'text-primary-foreground')}
                 >
                   {isPinned ? <PinOff className='h-4 w-4' /> : <Pin className='h-4 w-4' />}
                 </Button>

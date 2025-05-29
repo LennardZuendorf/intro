@@ -34,8 +34,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             strategy='lazyOnload'
           />
         </head>
-        <body className={cn('min-h-screen bg-bg font-sans antialiased relative')}>
-          <div className='absolute inset-0 -z-10 h-full w-full bg-main' />
+        <body className={cn('min-h-screen bg-primary font-sans antialiased relative')}>
+          <div className='absolute inset-0 -z-10 h-full w-full bg-primary' />
           <Providers attribute='class' defaultTheme='system' enableSystem disableTransitionOnChange>
             <Nav />
             <div className='w-full'>

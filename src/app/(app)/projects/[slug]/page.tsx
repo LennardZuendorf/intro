@@ -65,7 +65,7 @@ export default async function Post({ params: paramsPromise }: Args) {
   return (
     <article className=''>
       {draft && <LivePreviewListener />}
-      <div className='bg-bg'>
+      <div className='bg-primary'>
         <div className='relative border-b-4 border-black dark:border-white'>
           <div className='absolute inset-0 bg-black/50 z-10' />
           <Image
@@ -92,11 +92,11 @@ export default async function Post({ params: paramsPromise }: Args) {
                 {project.title}
               </h1>
               <div className='flex flex-wrap gap-4 mb-6'>
-                <div className='flex items-center bg-accent text-atext px-3 py-1 border-2 border-black rounded-base shadow-shadow'>
+                <div className='flex items-center bg-accent text-accent-foreground px-3 py-1 border-2 border-black rounded-base shadow-shadow shadow-md'>
                   <Calendar className='h-4 w-4 mr-2' />
                   <span className='font-medium'>{format(project.createdAt, 'PPPP')}</span>
                 </div>
-                <div className='flex items-center bg-main px-3 py-1 border-2 border-border rounded-base shadow-shadow'>
+                <div className='flex items-center bg-primary px-3 py-1 border-2 border-border rounded-base shadow-shadow shadow-md'>
                   <Tag className='h-4 w-4 mr-2' />
                   <span className='font-medium'>Project Category</span>
                 </div>
@@ -110,7 +110,7 @@ export default async function Post({ params: paramsPromise }: Args) {
           <div className='grid grid-cols-1 lg:grid-cols-12 gap-12'>
             {/* Main Content */}
             <div className='lg:col-span-8'>
-              <div className='bg-white dark:bg-[#242424] border-4 border-black dark:border-white shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] dark:shadow-[8px_8px_0px_0px_rgba(255,255,255,0.2)] p-6 md:p-8'>
+              <div className='bg-primary border-4 border-black dark:border-white shadow-shadow shadow-md p-6 md:p-8'>
                 <RichText
                   className='max-w-[48rem] mx-auto'
                   data={project.content}
@@ -123,7 +123,7 @@ export default async function Post({ params: paramsPromise }: Args) {
             <div className='lg:col-span-4'>
               <div className='sticky top-24'>
                 {/* Project Info */}
-                <div className='bg-accent border-2 border-border shadow-shadow text-atext p-6 mb-8'>
+                <div className='bg-accent border-2 border-border shadow-shadow text-accent-foreground p-6 mb-8'>
                   <h3 className='text-xl font-bold mb-4 border-b-4 border-black pb-2'>
                     Project Overview
                   </h3>
