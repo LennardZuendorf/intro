@@ -15,23 +15,38 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
 export async function generateStaticParams() {
-  const payload = await getPayload({ config: configPromise });
-  const projects = await payload.find({
-    collection: 'projects',
-    draft: false,
-    limit: 1000,
-    overrideAccess: false,
-    pagination: false,
-    select: {
-      slug: true
-    }
-  });
+  try {
+    const payload = await getPayload({ config: configPromise });
+    const projects = await payload.find({
+      collection: 'projects',
+      draft: false,
+      limit: 1000,
+      overrideAccess: false,
+      pagination: false,
+      select: {
+        slug: true
+      },
+      where: {
+        _status: {
+          equals: 'published'
+        },
+        slug: {
+          exists: true
+        }
+      }
+    });
 
-  const params = projects.docs.map(({ slug }) => {
-    return { slug };
-  });
+    const params = projects.docs
+      .filter(({ slug }) => slug && typeof slug === 'string')
+      .map(({ slug }) => ({
+        slug: slug as string
+      }));
 
-  return params;
+    return params;
+  } catch (error) {
+    console.error('Error in generateStaticParams:', error);
+    return [];
+  }
 }
 
 type Args = {
