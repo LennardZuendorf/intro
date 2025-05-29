@@ -24,8 +24,6 @@ export interface SectionProps extends HTMLAttributes<HTMLElement> {
   gridSize?: string;
   /** Mask intensity (0-100) - for potential future use */
   maskIntensity?: number;
-  /** @deprecated Use compositional approach with Section.Top/Section.Content instead */
-  columns?: 1 | 2;
   /** Render as a different HTML element */
   as?: ElementType;
   /** Center content (adds justify-center) */
@@ -71,7 +69,6 @@ function Section({
   containerClassName,
   gridSize = '80px',
   maskIntensity = 40,
-  columns, // Deprecated but kept for backward compatibility
   centerContent = true,
   as: Element = 'section',
   gap = 'md',
@@ -90,80 +87,18 @@ function Section({
     className
   );
 
-  // Detect if using compositional layout
-  const childrenArray = React.Children.toArray(children);
-  const hasTop = childrenArray.some(
-    (child) =>
-      React.isValidElement(child) &&
-      typeof child.type !== 'string' &&
-      (child.type as { displayName?: string })?.displayName === 'SectionTop'
-  );
-  const hasBottom = childrenArray.some(
-    (child) =>
-      React.isValidElement(child) &&
-      typeof child.type !== 'string' &&
-      (child.type as { displayName?: string })?.displayName === 'SectionBottom'
-  );
-
-  // Use compositional layout if Section.Top or Section.Bottom is detected
-  const useCompositional = hasTop || hasBottom;
-
   // Container for content
   const containerClasses = cn(
     'w-full flex',
-    useCompositional ? 'flex-col' : columns === 2 ? 'flex-col lg:flex-row' : 'flex-col',
+    'flex-col',
     centerContent && 'items-center justify-center',
     padding,
     gapScale[gap],
     containerClassName
   );
 
-  // Legacy columns support for backward compatibility
-  let content: ReactNode = children;
-  if (columns === 2 && !useCompositional) {
-    const left = childrenArray.find(
-      (child: React.ReactNode) =>
-        React.isValidElement(child) &&
-        typeof child.type !== 'string' &&
-        (child.type as { displayName?: string })?.displayName === 'SectionLeft'
-    ) as React.ReactElement<{ children?: React.ReactNode }> | undefined;
-
-    const right = childrenArray.find(
-      (child: React.ReactNode) =>
-        React.isValidElement(child) &&
-        typeof child.type !== 'string' &&
-        (child.type as { displayName?: string })?.displayName === 'SectionRight'
-    ) as React.ReactElement<{ children?: React.ReactNode }> | undefined;
-
-    const bottom = childrenArray.find(
-      (child: React.ReactNode) =>
-        React.isValidElement(child) &&
-        typeof child.type !== 'string' &&
-        (child.type as { displayName?: string })?.displayName === 'SectionBottom'
-    ) as React.ReactElement<{ children?: React.ReactNode }> | undefined;
-
-    content = (
-      <div
-        className={cn(
-          'grid w-full',
-          'grid-cols-1 lg:grid-cols-2',
-          'auto-rows-auto',
-          gapScale[gap],
-          'gap-y-6 2xl:gap-y-8'
-        )}
-      >
-        <div className='w-full col-span-1 flex flex-col gap-4 md:gap-6 lg:gap-8'>
-          {left?.props.children}
-        </div>
-        <div className='w-full col-span-1'>{right?.props.children}</div>
-        {bottom && (
-          <div className='w-full col-span-1 lg:col-span-2 mt-2 lg:mt-4 2xl:mt-6'>
-            {bottom?.props.children}
-          </div>
-        )}
-      </div>
-    );
-  }
+  // Content is just children, no legacy columns support
+  const content: ReactNode = children;
 
   // Common content container
   const contentContainer = (

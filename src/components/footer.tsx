@@ -18,16 +18,11 @@ export const Footer: React.FC<FooterProps> = ({ className = '' }) => {
   return (
     <Section
       as='footer'
-      background='mask'
       fullHeight={false}
-      bgColor='bg-[#F8F5F1] dark:bg-[#1A1A1A]'
-      className={cn('border-t-4 border-black space-y-5 md:space-y-2', className)}
+      className={cn('border-t-4 border-black', className)}
       padding='pt-6 pb-6'
-      maxWidth='100%'
-      containerWidth='100%'
       centerContent={true}
-      containerClassName='items-center space-y-5 md:space-y-2'
-      maskIntensity={40}
+      gap='sm'
     >
       <div className='container flex flex-col sm:flex-row items-center justify-between align-middle space-y-5 md:space-y-2 z-[10] relative'>
         <SocialButtons iconSize='2vh' buttonVariant='default' />
