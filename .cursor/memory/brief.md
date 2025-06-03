@@ -43,23 +43,6 @@ The homepage (`/`) is organized into distinct sections:
 - **Project Pages**: Provide detailed information about specific projects including technologies, outcomes, and visual elements
 - **Legal Pages**: Contains necessary legal information with language switching capability
 
-## Technology Stack
-
-- **Frontend**: Next.js 15, TypeScript, TailwindCSS, PostCSS
-- **UI Components**: shadcn/ui with Neobrutalism styling from neobrutalism.dev
-- **CMS**: Payload CMS (custom integration)
-- **Database**: PostgreSQL via Supabase
-- **Storage**: Supabase Blob Storage
-- **Hosting**: Vercel
-- **Email**: Resend for email functionality
-
-## Deployment & Infrastructure
-
-- Hosted on Vercel
-- CI/CD via GitHub Actions
-- PostgreSQL database and blob storage via Supabase
-- Code quality tools: ESLint, Prettier
-
 ## Design Philosophy
 
 The website follows the Neobrutalism design trend, characterized by:
@@ -80,4 +63,4 @@ The website follows the Neobrutalism design trend, characterized by:
 
 ## Author
 
-Developed by Lennard Zuendorf (GitHub: @LennardZuendorf)
+Developed by Lennard Zuendorf (GitHub: @LennardZuendorf) 
