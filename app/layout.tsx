@@ -5,6 +5,7 @@ import { Footer } from "@/components/footer";
 import { Nav } from "@/components/nav";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/react";
+import { DisclaimerBanner } from "@/components/disclaimer-banner";
 
 import { lato, spartan, roboto_mono } from "./fonts";
 import { cn } from "@/lib/utils";
@@ -59,6 +60,9 @@ export default function RootLayout({
             disableTransitionOnChange
           >
             <Nav />
+            <div className="container mx-auto md:w-9/12 py-2">
+              <DisclaimerBanner />
+            </div>
             <main
               className={cn(
                 "container mx-auto grow place-content-center w-full md:w-9/12 2xl:min-h-[95vh] xl:min-h-[75vh]",
