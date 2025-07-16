@@ -110,6 +110,9 @@ The project is built on a modern web development stack with the following archit
 - **PageContent**: General site content (Global)
 - **LegalTexts**: Privacy policy, terms, etc. (Global)
 
+**Block Components**:
+- **Badge Block**: Dynamic badge component with customizable styling and optional linking
+
 #### Data Flow Architecture
 1. **Content Creation**: Payload CMS admin interface
 2. **Data Storage**: PostgreSQL database via Supabase
@@ -195,6 +198,12 @@ The project is built on a modern web development stack with the following archit
 - **Problem**: Inconsistent styling, duplicated layout code
 - **Solution**: Unified Card component with variants and proper semantic structure
 - **Impact**: Consistent theming, reduced code duplication, better maintainability
+
+#### Badge Block System (2025-01-XX)
+**Decision**: Create reusable Badge block component for Payload CMS
+- **Problem**: Need for dynamic badge content manageable through CMS
+- **Solution**: Block component with full NeoBadge integration and optional linking
+- **Impact**: Content editors can add badges with various styling options without developer intervention
 
 #### Code Quality Migration (2024-12-19)
 **Decision**: Replace ESLint + Prettier with Biome
