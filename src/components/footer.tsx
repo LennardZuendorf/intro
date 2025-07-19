@@ -1,11 +1,8 @@
-'use client';
-
 import { ColorSelect } from '@/components/shared/color-select';
 import { SocialButtons } from '@/components/shared/social-buttons';
 import { ThemeSelect } from '@/components/shared/theme-select';
 import { Button } from '@/components/ui/button';
 import { Section } from '@/components/ui/section';
-import { siteConfig } from '@/data/site';
 import { cn } from '@/lib/utils/ui';
 import Link from 'next/link';
 import type * as React from 'react';
@@ -21,8 +18,9 @@ export const Footer: React.FC<FooterProps> = ({ className = '' }) => {
       fullHeight={false}
       className={cn('border-t-4 border-black', className)}
       padding='pt-6 pb-6'
-      centerContent={true}
-      gap='sm'
+      background='grid'
+      centerContent={false}
+      gap='gap-4'
     >
       <div className='container flex flex-col sm:flex-row items-center justify-between align-middle space-y-5 md:space-y-2 z-[10] relative'>
         <SocialButtons iconSize='2vh' buttonVariant='default' />

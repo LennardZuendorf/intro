@@ -1,11 +1,22 @@
-export type SiteConfig = typeof siteConfig;
+// Content settings interface and configuration
+export interface ContentSettings {
+  sections: {
+    showProjects: boolean;
+    showAbout: boolean;
+    showContact: boolean;
+  };
+}
 
+export const contentSettings: ContentSettings = {
+  sections: {
+    showProjects: true,
+    showAbout: true,
+    showContact: true
+  }
+};
+
+// Local site configuration (avoid name conflicts)
 export const siteConfig = {
-  focusProjects: {
-    top1: 'tempus',
-    top2: 'thesis',
-    top3: 'quaestio'
-  },
   links: {
     github: 'https://zuendorf.me/github',
     linkedin: 'https://zuendorf.me/linkd',
@@ -13,8 +24,6 @@ export const siteConfig = {
     cv: 'https://zuendorf.me/cv'
   }
 };
-
-export type SiteMetadata = typeof siteMetadata;
 
 export const siteMetadata = {
   name: 'zuendorf.me',

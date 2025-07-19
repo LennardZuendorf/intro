@@ -1,34 +1,22 @@
-export type CalloutData = typeof calloutData;
-
-export const calloutData = {
-  introCallout: "Hi! I'm Lennard!",
-  secondCallout: 'I',
+export const aboutFallbackData: AboutFallbackData = {
+  aboutMeText: `With a strong foundation in Business Computing and a passion for technology, I bridge the gap between code and commerce. My experience in Innovation Management and Product Strategy has given me a unique perspective that I apply to my product management approach. When I'm not working as a PM, you can find me expanding my skills through language learning and side projects that push my coding abilities.`,
   skills: [
     'Product Management',
     'Software Engineering',
     'Digital Innovation',
-    'Machine Learning',
-    'Data Science',
     'Scrum & Kanban',
     'Software Architecture',
-    'Product Strategy'
-  ],
-  tech: ['Python', 'Java', 'Typescript', 'React', 'Next.js', 'Node.js', 'PostgreSQL', 'AWS'],
-  focusProject: {
-    desc: 'tempus productivity',
-    link: '/tempus',
-    category: 'Fullstack Product',
-    text: 'a time based ToDo App inspired by GTD and Pomodoro.'
-  },
-  focusJob: {
-    desc: 'Product Manager',
-    link: '/about#work-experiences',
-    text: 'a product manager at CHECK24 Flug in Berlin, where I focus on payment topics.',
-    category: 'Product Management'
-  },
-  news: '',
-  spotify: 'https://open.spotify.com/playlist/4yJfh8Pp3A5qdYuzKmQZlV?si=1723654c72014989'
+    'Product Strategy',
+    'Data Science',
+    'Machine Learning',
+    'UX Design'
+  ]
 };
+
+export interface AboutFallbackData {
+  aboutMeText: string;
+  skills: string[];
+}
 
 interface Role {
   title: string;
@@ -180,7 +168,6 @@ export const techStackData = [
     icon: 'docker',
     link: 'https://www.docker.com/'
   },
-
   {
     name: 'Figma',
     icon: 'figma',
@@ -192,7 +179,3 @@ export const techStackData = [
     link: 'https://huggingface.co/'
   }
 ];
-
-export type softSkillsData = typeof softSkillsData;
-
-export const softSkillsData = {};

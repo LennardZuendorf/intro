@@ -4,7 +4,7 @@ import { type VariantProps, cva } from 'class-variance-authority';
 import type * as React from 'react';
 
 const neoBadgeVariants = cva(
-  'inline-block px-3 py-1.5 font-mono rounded-md border-2 border-black transition-all duration-300',
+  'inline-block font-mono rounded-md border-2 border-black transition-all duration-300',
   {
     variants: {
       variant: {
@@ -12,7 +12,7 @@ const neoBadgeVariants = cva(
         dark: 'bg-accent-dark text-accent-foreground hover:bg-accent',
         light: 'bg-accent-light text-accent-foreground hover:bg-accent',
         outline:
-          'bg-primary text-primary-foreground border-2 border-accent hover:bg-accent hover:text-accent-foreground'
+          'bg-primary text-primary-foreground border-2 border-border hover:bg-accent hover:text-accent-foreground'
       },
       rotation: {
         none: '',
@@ -35,9 +35,9 @@ const neoBadgeVariants = cva(
         lg: 'shadow-lg'
       },
       size: {
-        sm: 'px-2 py-1',
-        md: 'px-3 py-1.5',
-        lg: 'px-4 py-2'
+        sm: 'px-1 py-0.5 sm:px-1.5 sm:py-0.5 md:px-1.5 md:py-0.5 lg:px-2 lg:py-1 xl:px-2 xl:py-1 2xl:px-2.5 2xl:py-1',
+        md: 'px-1.5 py-0.5 sm:px-2 sm:py-1 md:px-2 md:py-1 lg:px-2.5 lg:py-1 xl:px-2.5 xl:py-1 2xl:px-3 2xl:py-1.5',
+        lg: 'px-2 py-1 sm:px-2.5 sm:py-1 md:px-2.5 md:py-1 lg:px-3 lg:py-1.5 xl:px-3 xl:py-1.5 2xl:px-4 2xl:py-2'
       }
     },
     defaultVariants: {

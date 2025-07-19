@@ -4,124 +4,110 @@ export const SectionContent: GlobalConfig = {
   slug: 'sectionContent',
   fields: [
     {
-      type: 'tabs', // required
-      tabs: [
+      type: 'row',
+      fields: [
         {
-          label: 'Main Hero Section',
-          description: 'data displayed on the main hero section',
-          fields: [
-            {
-              type: 'row',
-              fields: [
-                {
-                  name: 'MainIntroSection',
-                  type: 'richText',
-                  required: true,
-                  admin: {
-                    description: 'text displayed in the intro card'
-                  }
-                },
-                {
-                  name: 'MainAboutMeSection',
-                  type: 'richText',
-                  required: true,
-                  admin: {
-                    description: 'text displayed in the about me card'
-                  }
-                }
-              ]
-            },
-            {
-              name: 'avatar',
-              type: 'upload',
-              relationTo: 'media',
-              required: false,
-              admin: {
-                description: 'main avatar/picture of me'
-              }
-            },
-            {
-              type: 'row',
-              fields: [
-                {
-                  name: 'selectedSkills',
-                  type: 'relationship',
-                  relationTo: 'tag', // ensure this matches your Skills collection slug
-                  hasMany: true,
-                  filterOptions: () => ({
-                    type: {
-                      equals: 'skill'
-                    }
-                  }),
-                  admin: {
-                    description: 'selection of skills to showcase in the skills card'
-                  }
-                },
-                {
-                  name: 'selectedTechStacks',
-                  type: 'relationship',
-                  relationTo: 'tag', // ensure this matches your Techstacks collection slug
-                  hasMany: true,
-                  filterOptions: () => ({
-                    type: {
-                      equals: 'techstack'
-                    }
-                  }),
-                  admin: {
-                    description: 'selection of tech to showcase in the skills card'
-                  }
-                }
-              ]
-            },
-            {
-              type: 'row',
-              fields: [
-                {
-                  name: 'selectedProjects',
-                  type: 'relationship',
-                  relationTo: 'projects', // ensure this matches your Projects collection slug
-                  hasMany: false,
-                  admin: {
-                    description: 'single project shown on the project preview card'
-                  }
-                },
-                {
-                  name: 'selectedExperiences',
-                  type: 'relationship',
-                  relationTo: 'experiences', // ensure this matches your Experiences collection slug
-                  hasMany: false,
-                  admin: {
-                    description: 'single (current) experience shown on the experience preview card'
-                  }
-                }
-              ]
-            }
-          ]
+          name: 'MainIntroSection',
+          type: 'richText',
+          required: true,
+          admin: {
+            description: 'text displayed in the intro card'
+          }
         },
         {
-          label: 'About Section',
-          description: 'Data for the About Section',
+          name: 'MainAboutMeSection',
+          type: 'richText',
+          required: true,
+          admin: {
+            description: 'text displayed in the about me card'
+          }
+        }
+      ]
+    },
+    {
+      name: 'avatar',
+      type: 'upload',
+      relationTo: 'media',
+      required: false,
+      admin: {
+        description: 'main avatar/picture of me'
+      }
+    },
+    {
+      type: 'row',
+      fields: [
+        {
+          name: 'selectedSkills',
+          type: 'relationship',
+          relationTo: 'tag', // ensure this matches your Skills collection slug
+          hasMany: true,
+          filterOptions: () => ({
+            type: {
+              equals: 'skill'
+            }
+          }),
+          admin: {
+            description: 'selection of skills to showcase in the skills card'
+          }
+        },
+        {
+          name: 'selectedTechStacks',
+          type: 'relationship',
+          relationTo: 'tag', // ensure this matches your Techstacks collection slug
+          hasMany: true,
+          filterOptions: () => ({
+            type: {
+              equals: 'techstack'
+            }
+          }),
+          admin: {
+            description: 'selection of tech to showcase in the skills card'
+          }
+        }
+      ]
+    },
+    {
+      type: 'row',
+      fields: [
+        {
+          name: 'selectedProjects',
+          type: 'relationship',
+          relationTo: 'projects', // ensure this matches your Projects collection slug
+          hasMany: false,
+          admin: {
+            description: 'single project shown on the project preview card'
+          }
+        },
+        {
+          name: 'selectedExperiences',
+          type: 'relationship',
+          relationTo: 'experiences', // ensure this matches your Experiences collection slug
+          hasMany: false,
+          admin: {
+            description: 'single (current) experience shown on the experience preview card'
+          }
+        }
+      ]
+    },
+    {
+      type: 'row',
+      fields: [
+        {
+          name: 'quickSkills',
+          type: 'array',
+          maxRows: 4,
+          minRows: 2,
+          admin: {
+            description: 'exactly 4 skills to display in the quick skills section'
+          },
           fields: [
             {
-              type: 'row',
-              fields: [
-                {
-                  name: 'AboutMainSection',
-                  type: 'richText',
-                  required: true,
-                  admin: {
-                    description: 'formatted text displayed in the main about me card'
-                  }
-                },
-                {
-                  name: 'AboutSubsection',
-                  type: 'richText',
-                  required: true,
-                  admin: {
-                    description: 'formatted text in the about me subsection card'
-                  }
-                }
-              ]
+              name: 'skill',
+              type: 'text',
+              required: true,
+              admin: {
+                description: 'skill name for display'
+              }
             }
           ]
         }

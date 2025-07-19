@@ -1,6 +1,6 @@
 'use client';
 
-import ProjectCard from '@/components/custom/project-card';
+import ProjectCard from '@/components/sections/components/project-card';
 import {
   Carousel,
   CarouselContent,

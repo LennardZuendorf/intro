@@ -5,13 +5,15 @@ import { Footer } from '@/components/footer';
 import { Nav } from '@/components/navbar';
 import { Providers } from '@/components/providers';
 import { Toaster } from '@/components/ui/toaster';
-import { siteMetadata } from '@/data/site';
 import { env } from '@/env';
 import SetColorPreference from '@/lib/utils/setColorPreference';
 import { cn } from '@/lib/utils/ui';
+import { ReactPlugin } from '@21st-extension/react';
+import { TwentyFirstToolbar } from '@21st-extension/toolbar-next';
 import { StagewiseToolbar } from '@stagewise/toolbar-next';
 import { Inter } from 'next/font/google';
 import Script from 'next/script';
+import { siteMetadata } from '../../../content/ContentSettings';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -19,8 +21,8 @@ const inter = Inter({
 });
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  const stagewiseConfig = {
-    plugins: []
+  const twentyFirstConfig = {
+    plugins: [ReactPlugin]
   };
 
   return (
@@ -46,7 +48,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <Footer />
           </Providers>
           <ScrollArrow />
-          {process.env.NODE_ENV === 'development' && <StagewiseToolbar config={stagewiseConfig} />}
+          {process.env.NODE_ENV === 'development' && (
+            <TwentyFirstToolbar config={twentyFirstConfig} />
+          )}
         </body>
       </html>
     </>

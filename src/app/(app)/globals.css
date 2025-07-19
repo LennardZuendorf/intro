@@ -10,7 +10,7 @@
 	--secondary: oklch(1 0 0); /* Strong white */
 	--blank: oklch(0 0 0); /* Pure black (#000000) */
 
-	/* Grid and accent system. Editing based on Color Styles */ 
+	/* Grid and accent system. Editing based on Color Styles */
 	--grid: oklch(0.9 0 0); /* Slightly brighter light gray for grid lines */
 	--accent: oklch(0.3 0 0); /* Medium black */
 	--accent-foreground: oklch(1 0 0); /* Light gray text for accents (#e6e6e6) */
@@ -46,7 +46,7 @@
 	--secondary: oklch(0 0 0); /* Slightly lighter very dark gray */
 	--blank: oklch(0 0 0); /* Pure black (#000000) */
 
-	/* Grid and accent system. Editing based on Color Styles */ 
+	/* Grid and accent system. Editing based on Color Styles */
 	--grid: oklch(0.32 0 0); /* Slightly brighter light gray for grid lines */
 	--accent: oklch(1 0 0); /* Medium black */
 	--accent-foreground: oklch(0 0 0); /* Black text for accents */

@@ -1,62 +1,80 @@
-# Shipping Plan: Quick Production Deployment
+# Hero & Section Layout Refactor – Technical Architecture & Implementation Plan
 
-## Current Situation Assessment
+## 1. Overview
+We will **eliminate duplicated JSX** in `hero.tsx` by consolidating mobile/tablet/desktop markup into a single responsive tree that leverages Tailwind breakpoint utilities and the existing `Section` compositional API. Minor enhancements to the `Section` component will expose flexible row/column gaps so that future sections can reuse the same responsive grid logic.
 
-Based on analysis, the project has:
-- ✅ Working Payload CMS integration
-- ✅ Complete UI components and styling  
-- ✅ Most core functionality implemented
-- ❌ Incomplete blog implementation causing build failures
-- ❌ Missing Fumadocs dependencies despite memory showing completion
+> NOTE: No external package additions are required — Tailwind & existing utilities suffice.
 
-## Quick Shipping Strategy
+---
 
-Instead of completing the complex Fumadocs migration, we'll take the fastest path to production:
+## 2. Component-Level Changes
 
-### Option 1: Remove Blog Implementation (FASTEST - 15 minutes)
-1. Delete the broken blog files
-2. Remove blog navigation links
-3. Focus on core portfolio functionality
-4. Ship with just the main portfolio site
+### 2.1 `src/components/ui/section.tsx`
+| Change | Rationale |
+|--------|-----------|
+| **Add props** `rowGap?: string` and `colGap?: string` | Allow callers to override default `responsiveGap` & `responsiveColumnGap` without touching internals. |
+| **Expose breakpoint-aware CSS vars** (`--row-gap`, `--col-gap`) via inline style to give granular control if future design iterations need non-Tailwind spacing. | Future-proofing; optional for this refactor. |
+| **Refactor `SectionTop` grid classes** to drive gaps from the new props (`rowGap`, `colGap`) and default to `responsiveColumnGap`. | Centralizes spacing logic. |
+| **Remove leftover comments for legacy columns** | Clean-up. |
 
-### Option 2: Simple Static Blog (MEDIUM - 1-2 hours)  
-1. Create a simple static blog using existing components
-2. Use hardcoded blog posts in TypeScript files
-3. Skip complex MDX processing for now
-4. Can migrate to Fumadocs later
+Implementation sketch:
+```tsx
+function SectionTop({ children, rowGap, colGap }: { children: ReactNode; rowGap?: string; colGap?: string }) {
+  const gapY = rowGap ?? responsiveColumnGap;
+  const gapX = colGap ?? responsiveColumnGap;
+  return (
+    <div className={cn(`grid grid-cols-1 md:grid-cols-2 w-full`, gapX)}>
+      {/* ...children layout unchanged ... */}
+    </div>
+  );
+}
+```
 
-### Option 3: Keep Payload CMS for Blog (SLOWER - 2-3 hours)
-1. Create blog collections in Payload CMS
-2. Use existing Payload infrastructure
-3. Keep everything unified under one system
+### 2.2 `src/components/sections/hero.tsx`
+1. **Delete** the two wrapper divs `#hero-mobile-layout` and `#hero-desktop-layout`.
+2. Wrap everything in **single `Section` → `SectionTop` → `SectionLeft` / `SectionRight`** chain.
+3. Use `hidden`, `sm:block`, `lg:flex`, etc. to control visibility & orientation.
+4. **Avatar logic**
+   - `<ImageCard className="hidden sm:block ... lg:w-40 lg:h-40 sm:w-20 sm:h-20" />`.
+5. **Navigation Buttons orientation**
+   - Use `flex-col sm:flex-row` plus `gap-3 md:gap-4` to toggle between stack vs row.
+6. Keep card IDs for analytics but ensure uniqueness (no duplicates).
+7. Remove dead CSS classes & inline widths (`w-full` overrides are fine).
 
-## Recommendation: Option 1 (Remove Blog)
+### 2.3 Tests
+* Add Jest snapshot for `HeroSection` rendering at three viewport widths using `@testing-library/react` + `jest-styled-media-query` mock or simple className snapshot.
 
-For immediate shipping, I recommend **Option 1**:
+---
 
-**Rationale:**
-- Gets you live in 15 minutes
-- Core portfolio functionality is complete
-- Blog can be added later without disrupting main site
-- Reduces complexity and maintenance overhead
+## 3. CSS & Tailwind Guidelines
+* Rely on Tailwind’s responsive prefix strategy.
+* Keep **gaps** consistent: use the exported constants from `Section` *or* new props.
+* No bespoke media queries in CSS files.
 
-**Implementation:**
-1. Delete `src/app/(app)/blog/` directory
-2. Remove blog navigation from navbar
-3. Fix any remaining references
-4. Test build and deploy
+---
 
-## Post-Shipping Roadmap
+## 4. Reusable Utilities
+* None required beyond extending `cn` helper if conditional class logic grows.
 
-After successful deployment:
-1. **Week 1:** Monitor performance and fix any issues
-2. **Week 2:** Add simple blog implementation if needed  
-3. **Week 3+:** Consider Fumadocs migration if blog becomes important
+---
 
-## Success Metrics
+## 5. Data Flow / Props
+* No API shape changes. `HeroSection` still accepts optional `sectionContent` pulled from PayloadCMS.
+* Avatar URL extraction remains intact.
 
-- ✅ Clean build with no errors
-- ✅ Core portfolio pages working (/, /projects/[slug], /about)
-- ✅ Payload CMS admin accessible  
-- ✅ Production deployment successful
-- ✅ Good Core Web Vitals scores 
+---
+
+## 6. Risks & Mitigations
+| Risk | Impact | Mitigation |
+|------|---------|-----------|
+| Overlapping Tailwind classes cause unintended styles | Medium | Isolate responsive modifiers; audit final compiled CSS via DevTools. |
+| Snapshot tests brittle due to class order | Low | Use regex snapshots or assert presence of key class fragments only. |
+| Hidden avatar on mobile harms branding | Low | Re-evaluate after QA; can swap to `sm:hidden` quickly. |
+
+---
+
+## 7. Deliverables
+- Updated `section.tsx` with new props + refactored `SectionTop`.
+- Refactored `hero.tsx` with unified responsive markup.
+- New unit/snapshot tests under `src/components/sections/__tests__/`.
+- Git commit following conventional message format `feat(hero): consolidate layout & add section gap props`. 

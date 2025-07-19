@@ -1,13 +1,13 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
-import { siteConfig } from '@/data/site';
 import { cn } from '@/lib/utils/ui';
 import { MailboxIcon } from 'lucide-react';
 import Link from 'next/link';
 import type React from 'react';
 import type { IconType } from 'react-icons';
 import { FaGithub, FaLinkedin } from 'react-icons/fa6';
+import { siteConfig } from '../../../content/ContentSettings';
 
 // Icon mapping for common social platforms
 const iconMap = {

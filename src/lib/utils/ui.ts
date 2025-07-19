@@ -11,6 +11,7 @@ export interface ColorPalette {
     light: string;
     base: string;
     dark: string;
+    foreground?: string;
   };
   className: string;
 }

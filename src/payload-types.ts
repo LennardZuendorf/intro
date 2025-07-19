@@ -621,41 +621,17 @@ export interface SectionContent {
    */
   selectedExperiences?: (number | null) | Experience;
   /**
-   * formatted text displayed in the main about me card
+   * exactly 4 skills to display in the quick skills section
    */
-  AboutMainSection: {
-    root: {
-      type: string;
-      children: {
-        type: string;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  };
-  /**
-   * formatted text in the about me subsection card
-   */
-  AboutSubsection: {
-    root: {
-      type: string;
-      children: {
-        type: string;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  };
+  quickSkills?:
+    | {
+        /**
+         * skill name for display
+         */
+        skill: string;
+        id?: string | null;
+      }[]
+    | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -734,8 +710,12 @@ export interface SectionContentSelect<T extends boolean = true> {
   selectedTechStacks?: T;
   selectedProjects?: T;
   selectedExperiences?: T;
-  AboutMainSection?: T;
-  AboutSubsection?: T;
+  quickSkills?:
+    | T
+    | {
+        skill?: T;
+        id?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

@@ -7,8 +7,8 @@ import { cn } from '@/lib/utils/ui';
 import configPromise from '@payload-config';
 import { draftMode } from 'next/headers';
 import { getPayload } from 'payload';
-import ProjectCarousel from '../custom/project-carousel';
 import { TechStackCompact } from '../shared/tech-stack';
+import { ProjectsGrid } from './components/project-grid';
 
 export async function Projects({ className }: SectionProps) {
   const payloadProjects = await queryProjects();
@@ -18,15 +18,13 @@ export async function Projects({ className }: SectionProps) {
       <Section
         className={cn('relative overflow-hidden', className)}
         background='secondary'
-        width='lg'
         centerContent={true}
-        fullHeight={false}
+        fullHeight={true}
         padding='py-14 md:py-24 px-6 py-8 md:py-12 2xl:py-16'
-        gap='md'
       >
         <SectionTop>
-          {/* Project carousel with transparent wrapper */}
-          <div className='w-full relative flex justify-center'>
+          {/* Projects Grid */}
+          <div className='w-full relative flex flex-col items-center'>
             <Card
               className='relative w-full'
               interactive='none'
@@ -47,9 +45,8 @@ export async function Projects({ className }: SectionProps) {
                 </div>
               </CardHeader>
               <CardContent className='py-5 px-0'>
-                {/* Project carousel with horizontal layout */}
                 {payloadProjects && payloadProjects.length > 0 ? (
-                  <ProjectCarousel projects={payloadProjects} visibleCount={4} />
+                  <ProjectsGrid projects={payloadProjects} />
                 ) : (
                   <div className='flex items-center justify-center h-32'>
                     <S className='text-muted-foreground'>No projects available</S>

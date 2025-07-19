@@ -3,7 +3,7 @@
 import { useToast } from '@/hooks/use-toast';
 import { CommandList } from 'cmdk';
 import type * as React from 'react';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import { Button } from '@/components/ui/button';
 import { Command, CommandGroup, CommandItem } from '@/components/ui/command';
@@ -26,9 +26,10 @@ const accentColors: ColorPalette[] = [
   {
     name: 'Emerald',
     colorCode: {
-      light: 'oklch(0.7 0.118 184.704)', // Lighter emerald
-      base: 'oklch(0.6 0.118 184.704)', // Original emerald
-      dark: 'oklch(0.5 0.118 184.704)' // Darker emerald
+      light: 'oklch(0.6 0.118 184.704)', // Lighter emerald
+      base: 'oklch(0.5 0.118 184.704)', // Original emerald
+      dark: 'oklch(0.4 0.118 184.704)', // Darker emerald
+      foreground: 'oklch(1.0 0 0)' // Foreground emerald (white)
     },
     className: 'bg-emerald-600'
   },
@@ -46,7 +47,8 @@ const accentColors: ColorPalette[] = [
     colorCode: {
       light: 'oklch(0.611 0.262 276.966)', // Lighter indigo
       base: 'oklch(0.511 0.262 276.966)', // Original indigo
-      dark: 'oklch(0.411 0.262 276.966)' // Darker indigo
+      dark: 'oklch(0.411 0.262 276.966)', // Darker indigo
+      foreground: 'oklch(1.0 0 0)' // Foreground indigo (white)
     },
     className: 'bg-indigo-600'
   }
@@ -67,7 +69,27 @@ export const ColorSelect: React.FC<ColorSelectProps> = ({
 }) => {
   const [open, setOpen] = useState(false);
   const [currentColor, setCurrentColor] = useState<ColorPalette | null>(null);
+  const [isDarkMode, setIsDarkMode] = useState(false);
   const { toast } = useToast();
+
+  // Check dark mode preference
+  useEffect(() => {
+    const checkDarkMode = () => {
+      setIsDarkMode(document.documentElement.classList.contains('dark'));
+    };
+
+    // Initial check
+    checkDarkMode();
+
+    // Watch for dark mode changes
+    const observer = new MutationObserver(checkDarkMode);
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['class']
+    });
+
+    return () => observer.disconnect();
+  }, []);
 
   // Load color from localStorage only on client-side
   useEffect(() => {
@@ -78,15 +100,52 @@ export const ColorSelect: React.FC<ColorSelectProps> = ({
 
         // Apply the saved color when component mounts
         const color = JSON.parse(savedColor);
-        const r = window.document.querySelector(':root') as HTMLElement;
-        r.style.setProperty('--accent-light', color.colorCode.light);
-        r.style.setProperty('--accent', color.colorCode.base);
-        r.style.setProperty('--accent-dark', color.colorCode.dark);
+        applyColorPalette(color);
       }
     } catch (error) {
       console.error('Error loading color from localStorage:', error);
     }
   }, []);
+
+  /**
+   * Applies color palette based on current theme mode (light/dark).
+   * In dark mode, uses lighter accent colors for better contrast.
+   * In light mode, uses darker accent colors for better readability.
+   */
+  const applyColorPalette = useCallback(
+    (color: ColorPalette) => {
+      const r = window.document.querySelector(':root') as HTMLElement;
+
+      if (isDarkMode) {
+        // Dark mode: use lighter accents for better visibility
+        r.style.setProperty('--accent-light', color.colorCode.light);
+        r.style.setProperty('--accent', color.colorCode.light);
+        r.style.setProperty('--accent-dark', color.colorCode.base);
+      } else {
+        // Light mode: use darker accents for better contrast
+        r.style.setProperty('--accent-light', color.colorCode.light);
+        r.style.setProperty('--accent', color.colorCode.base);
+        r.style.setProperty('--accent-dark', color.colorCode.dark);
+      }
+
+      if (color.colorCode.foreground) {
+        r.style.setProperty('--accent-foreground', color.colorCode.foreground);
+      } else {
+        r.style.removeProperty('--accent-foreground');
+      }
+
+      // Set grid to use the lightest accent color, consistent with setColorPreference.tsx
+      r.style.setProperty('--grid', color.colorCode.light);
+    },
+    [isDarkMode]
+  );
+
+  // Re-apply color when dark mode changes
+  useEffect(() => {
+    if (currentColor) {
+      applyColorPalette(currentColor);
+    }
+  }, [currentColor, applyColorPalette]);
 
   /**
    * Updates the color palette across the application and shows a toast notification
@@ -101,13 +160,7 @@ export const ColorSelect: React.FC<ColorSelectProps> = ({
    * @param color The ColorPalette object containing the selected color information
    */
   const updateColorPalette = (color: ColorPalette) => {
-    const r = window.document.querySelector(':root') as HTMLElement;
-    // Set accent colors
-    r.style.setProperty('--accent-light', color.colorCode.light);
-    r.style.setProperty('--accent', color.colorCode.base);
-    r.style.setProperty('--accent-dark', color.colorCode.dark);
-    // Set grid to use the lightest accent color, consistent with setColorPreference.tsx
-    r.style.setProperty('--grid', color.colorCode.light);
+    applyColorPalette(color);
     localStorage.setItem('color', JSON.stringify(color));
     setCurrentColor(color);
 
@@ -157,6 +210,7 @@ export const ColorSelect: React.FC<ColorSelectProps> = ({
     r.style.removeProperty('--accent-light');
     r.style.removeProperty('--accent');
     r.style.removeProperty('--accent-dark');
+    r.style.removeProperty('--accent-foreground');
     // Reset grid to default from CSS instead of setting explicitly
     r.style.removeProperty('--grid');
     localStorage.removeItem('color');

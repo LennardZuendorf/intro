@@ -1,4 +1,5 @@
 import { Card } from '@/components/ui/card';
+import type { CardProps } from '@/components/ui/card';
 import { cn } from '@/lib/utils/ui';
 
 type Props = {
@@ -12,6 +13,9 @@ type Props = {
   imageClassName?: string;
   fullHeight?: boolean;
   hideCaption?: boolean;
+  rotation?: CardProps['rotation'];
+  interactive?: CardProps['interactive'];
+  variant?: CardProps['variant'];
 };
 
 export default function ImageCard({
@@ -24,16 +28,19 @@ export default function ImageCard({
   heightClass,
   imageClassName = '',
   fullHeight = false,
-  hideCaption = false
+  hideCaption = false,
+  rotation = 'slight',
+  interactive = 'slight',
+  variant = 'reversed'
 }: Props) {
   return (
     <Card
-      variant='reversed'
-      rotation='none'
-      interactive='none'
+      variant={variant}
+      rotation={rotation}
+      interactive={interactive}
       className={cn(
         className,
-        'overflow-hidden',
+        'overflow-hidden justify-center items-center',
         heightClass || '',
         fullHeight ? 'flex flex-col' : ''
       )}

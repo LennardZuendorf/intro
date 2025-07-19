@@ -1,8 +1,8 @@
 'use client';
 
-import { techStackData } from '@/data/about';
 import Link from 'next/link';
 import React, { useState } from 'react';
+import { techStackData } from '../../../content/AboutContent';
 import { NeoBadge } from '../ui/neoBadge';
 
 export function TechStackCompact() {

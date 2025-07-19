@@ -33,6 +33,9 @@ export default function SetColorPreference() {
         r.style.setProperty('--accent', colorObj.colorCode.base);
         r.style.setProperty('--accent-dark', colorObj.colorCode.dark);
         r.style.setProperty('--grid', colorObj.colorCode.light);
+        if (colorObj.colorCode.foreground) {
+          r.style.setProperty('--accent-foreground', colorObj.colorCode.foreground);
+        }
 
         // Fun welcome back messages for each color
         const welcomeMessages: Record<string, { title: string; description: string }> = {

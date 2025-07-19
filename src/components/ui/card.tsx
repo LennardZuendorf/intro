@@ -3,7 +3,7 @@ import * as React from 'react';
 import { cn } from '@/lib/utils/ui';
 import { type VariantProps, cva } from 'class-variance-authority';
 
-interface CardProps
+export interface CardProps
   extends React.HTMLAttributes<HTMLDivElement>,
     VariantProps<typeof cardVariants> {
   disableScale?: boolean;
@@ -17,7 +17,7 @@ const cardVariants = cva(
         default: 'bg-primary',
         reversed: 'bg-primary',
         outline: 'bg-transparent ',
-        accent: 'bg-accent text-accent-foreground',
+        accent: 'bg-accent text-accent-foreground ',
         clickable: 'bg-primary hover:bg-accent-dark hover:text-accent-foreground',
         invisible: 'bg-transparent border-none shadow-none'
       },
@@ -122,7 +122,7 @@ CardContent.displayName = 'CardContent';
 
 const CardFooter = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
   ({ className, ...props }, ref) => (
-    <div ref={ref} className={cn('flex items-center p-6 pt-0', className)} {...props} />
+    <div ref={ref} className={cn('flex items-center p-3 pt-0', className)} {...props} />
   )
 );
 CardFooter.displayName = 'CardFooter';
