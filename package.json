@@ -17,9 +17,12 @@
 		"lint-staged": "lint-staged",
 		"prepare": "husky",
 		"ci:hard": "payload migrate:fresh && pnpm build",
-		"ci": "payload migrate  && pnpm build"
+		"ci": "payload migrate  && pnpm build",
+		"test": "jest --watch"
 	},
 	"dependencies": {
+		"@21st-extension/react": "^0.5.14",
+		"@21st-extension/toolbar-next": "^0.5.14",
 		"@floating-ui/react": "^0.27.3",
 		"@payloadcms/db-postgres": "3.20.0",
 		"@payloadcms/email-resend": "3.20.0",
@@ -82,13 +85,20 @@
 	},
 	"devDependencies": {
 		"@biomejs/biome": "^1.9.4",
+		"@testing-library/jest-dom": "^6.6.3",
+		"@testing-library/react": "^16.3.0",
+		"@types/jest": "^30.0.0",
 		"@types/node": "^22.10.1",
 		"@types/react": "19.0.1",
 		"@types/react-dom": "19.0.1",
 		"autoprefixer": "^10.4.20",
 		"globals": "^15.14.0",
+		"jest": "^30.0.4",
+		"jest-environment-jsdom": "^30.0.4",
 		"postcss": "^8.4.49",
 		"tailwindcss": "^3.4.16",
+		"ts-jest": "^29.4.0",
+		"ts-node": "^10.9.2",
 		"typescript": "5.7.2"
 	},
 	"engines": {
