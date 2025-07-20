@@ -6,7 +6,16 @@
     "useIgnoreFile": true
   },
   "files": {
-    "ignoreUnknown": true
+    "ignoreUnknown": true,
+    "includes": [
+      "src/**/*.ts",
+      "src/**/*.tsx",
+      "src/**/*.js",
+      "src/**/*.jsx",
+      "!src/**/ui/*tsx",
+      "!src/**/migrations/*ts",
+      "!src/**/payload-generated-schema.ts"
+    ]
   },
   "formatter": {
     "enabled": true,
