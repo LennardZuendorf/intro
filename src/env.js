@@ -4,6 +4,11 @@ import { z } from 'zod';
 export const env = createEnv({
   server: {
     POSTGRES_URL: z.string().url(),
+    POSTGRES_USER: z.string().min(1, 'POSTGRES_USER is required'),
+    POSTGRES_PASSWORD: z.string().min(1, 'POSTGRES_PASSWORD is required'),
+    POSTGRES_DB: z.string().min(1, 'POSTGRES_DB is required'),
+    POSTGRES_HOST: z.string().min(1, 'POSTGRES_HOST is required'),
+    POSTGRES_PORT: z.number().min(1, 'POSTGRES_PORT is required'),
     S3_ACCESS_KEY: z.string().min(1, 'S3_ACCESS_KEY is required'),
     S3_SECRET_KEY: z.string().min(1, 'S3_SECRET_KEY is required'),
     S3_REGION: z.string().min(1, 'S3_REGION is required'),
@@ -21,6 +26,11 @@ export const env = createEnv({
   },
   runtimeEnv: {
     POSTGRES_URL: process.env.POSTGRES_URL,
+    POSTGRES_USER: process.env.POSTGRES_USER,
+    POSTGRES_PASSWORD: process.env.POSTGRES_PASSWORD,
+    POSTGRES_DB: process.env.POSTGRES_DB,
+    POSTGRES_HOST: process.env.POSTGRES_HOST,
+    POSTGRES_PORT: parseInt(process.env.POSTGRES_PORT),
     S3_ACCESS_KEY: process.env.S3_ACCESS_KEY,
     S3_SECRET_KEY: process.env.S3_SECRET_KEY,
     S3_REGION: process.env.S3_REGION,
