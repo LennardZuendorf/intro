@@ -15,9 +15,9 @@
  * The toast appears with a 1-second delay to avoid interrupting the initial page load experience.
  */
 
+import { useLayoutEffect } from 'react';
 import { useToast } from '@/hooks/use-toast';
 import type { ColorPalette } from '@/lib/utils/ui';
-import { useLayoutEffect } from 'react';
 
 export default function SetColorPreference() {
   const { toast } = useToast();
@@ -74,5 +74,5 @@ export default function SetColorPreference() {
     }
   }, [toast]);
 
-  return <></>;
+  return null;
 }

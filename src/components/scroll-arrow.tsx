@@ -1,10 +1,10 @@
 'use client';
 
-import { Button } from '@/components/ui/button';
-import { cn } from '@/lib/utils/ui';
 import { AnimatePresence, motion, useScroll } from 'framer-motion';
 import type React from 'react';
 import { useEffect, useRef, useState } from 'react';
+import { Button } from '@/components/ui/button';
+import { cn } from '@/lib/utils/ui';
 
 export const ScrollArrow: React.FC = () => {
   const { scrollY } = useScroll();

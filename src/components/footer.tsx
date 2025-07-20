@@ -1,17 +1,19 @@
+import Link from 'next/link';
 import { ColorSelect } from '@/components/shared/color-select';
 import { SocialButtons } from '@/components/shared/social-buttons';
 import { ThemeSelect } from '@/components/shared/theme-select';
 import { Button } from '@/components/ui/button';
 import { Section } from '@/components/ui/section';
+import { fetchSocialTags } from '@/lib/content/fetchTags';
 import { cn } from '@/lib/utils/ui';
-import Link from 'next/link';
-import type * as React from 'react';
 
 interface FooterProps {
   className?: string;
 }
 
-export const Footer: React.FC<FooterProps> = ({ className = '' }) => {
+export const Footer = async ({ className = '' }: FooterProps) => {
+  const socialTags = await fetchSocialTags();
+
   return (
     <Section
       as='footer'
@@ -20,10 +22,9 @@ export const Footer: React.FC<FooterProps> = ({ className = '' }) => {
       padding='pt-6 pb-6'
       background='grid'
       centerContent={false}
-      gap='gap-4'
     >
-      <div className='container flex flex-col sm:flex-row items-center justify-between align-middle space-y-5 md:space-y-2 z-[10] relative'>
-        <SocialButtons iconSize='2vh' buttonVariant='default' />
+      <div className='w-full flex flex-col sm:flex-row items-center justify-between z-[10]'>
+        <SocialButtons socials={socialTags} iconSize='2vh' buttonVariant='default' />
         <div className='flex items-end gap-x-4'>
           <ColorSelect buttonVariant='default' className='shadow-md' popoverClassName='shadow-lg' />
           <ThemeSelect buttonVariant='default' className='shadow-md' popoverClassName='shadow-lg' />

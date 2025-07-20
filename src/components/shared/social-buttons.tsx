@@ -1,13 +1,12 @@
 'use client';
 
-import { Button } from '@/components/ui/button';
-import { cn } from '@/lib/utils/ui';
 import { MailboxIcon } from 'lucide-react';
 import Link from 'next/link';
 import type React from 'react';
-import type { IconType } from 'react-icons';
 import { FaGithub, FaLinkedin } from 'react-icons/fa6';
-import { siteConfig } from '../../../content/ContentSettings';
+import { Button } from '@/components/ui/button';
+import { cn } from '@/lib/utils/ui';
+import type { Tag } from '@/payload-types';
 
 // Icon mapping for common social platforms
 const iconMap = {
@@ -16,25 +15,13 @@ const iconMap = {
   mail: MailboxIcon
 } as const;
 
-// Available social types
-type SocialType = keyof typeof iconMap;
+type IconMapKeys = keyof typeof iconMap;
 
-// Individual social link configuration
-export interface SocialLink {
-  type: SocialType;
-  href: string;
-  label?: string;
-  icon?: IconType | React.FC<{ size?: string | number; className?: string }>;
-}
-
-export interface SocialButtonsProps extends React.HTMLAttributes<HTMLDivElement> {
-  // Array of social links to display
-  socials?: SocialLink[];
-  // Use predefined links from siteConfig
+interface SocialButtonsProps {
+  socials?: Tag[];
   useDefaultLinks?: boolean;
-  // Button styling
-  buttonVariant?: React.ComponentProps<typeof Button>['variant'];
-  // Icon size (e.g. '1.25rem', '2vh')
+  className?: string;
+  buttonVariant?: 'default' | 'neutral' | 'noShadow' | 'accent' | 'link' | 'action';
   iconSize?: string;
 }
 
@@ -46,34 +33,49 @@ export const SocialButtons: React.FC<SocialButtonsProps> = ({
   iconSize = '1.25rem',
   ...props
 }) => {
-  // If no socials provided and useDefaultLinks is true, use siteConfig links
-  const socialLinks =
-    socials ||
-    (useDefaultLinks
-      ? [
-          { type: 'mail', href: siteConfig.links.mail },
-          { type: 'linkedin', href: siteConfig.links.linkedin },
-          { type: 'github', href: siteConfig.links.github }
-        ]
-      : []);
+  // Don't render if socials is undefined or empty
+  if (!socials || socials.length === 0) return null;
 
-  // No social links to display
-  if (socialLinks.length === 0) return null;
+  // Filter socials to only include those with valid icons and links
+  const validSocials = socials.filter((social): social is Tag => {
+    // Check if the social has a valid type that maps to an icon
+    const hasValidIcon = Boolean(
+      social.name && (social.name.toLowerCase() as IconMapKeys) in iconMap
+    );
+    // Check if the social has a link
+    const hasLink = Boolean(social.link && typeof social.link === 'string');
+
+    return hasValidIcon && hasLink;
+  });
+
+  // Don't render if no valid socials
+  if (validSocials.length === 0) {
+    console.log('No valid socials found');
+    console.log(socials);
+    return null;
+  }
 
   return (
     <div className={cn('flex gap-2', className)} {...props}>
-      {socialLinks.map((social, index) => {
-        // Determine which icon to use (custom or from our map)
-        const IconComponent = social.icon || iconMap[social.type];
-
+      {validSocials.map((social, index) => {
         return (
           <Link
-            href={social.href}
+            href={social.link!}
             key={`${social.type}-${index}`}
-            aria-label={social.label || social.type}
+            aria-label={social.name || social.type}
+            target='_blank'
+            rel='noopener noreferrer'
           >
             <Button variant={buttonVariant} size='icon'>
-              <IconComponent size={iconSize} className={iconSize ? undefined : 'size-5'} />
+              {social.name.toLowerCase() === 'github' && (
+                <FaGithub size={iconSize} className='w-5 h-5' />
+              )}
+              {social.name.toLowerCase() === 'linkedin' && (
+                <FaLinkedin size={iconSize} className='w-5 h-5' />
+              )}
+              {social.name.toLowerCase() === 'mail' && (
+                <MailboxIcon size={iconSize} className='w-5 h-5' />
+              )}
             </Button>
           </Link>
         );

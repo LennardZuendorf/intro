@@ -1,4 +1,3 @@
-import { MediaBlock } from '@/components/blocks/media-block/Component';
 import type {
   DefaultNodeTypes,
   SerializedBlockNode,
@@ -10,8 +9,8 @@ import {
   LinkJSXConverter,
   RichText as RichTextWithoutBlocks
 } from '@payloadcms/richtext-lexical/react';
-
 import { BannerBlock } from '@/components/blocks/banner/Component';
+import { MediaBlock } from '@/components/blocks/media-block/Component';
 import { cn } from '@/lib/utils/ui';
 import type {
   BannerBlock as BannerBlockProps,

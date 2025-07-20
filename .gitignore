@@ -46,3 +46,6 @@ next-env.d.ts
 
 .history/**
 .history
+# migrations - exclude from biome linting/formatting
+src/migrations/**
+

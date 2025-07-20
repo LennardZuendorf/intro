@@ -1,17 +1,16 @@
 'use client';
 
-import { useToast } from '@/hooks/use-toast';
 import { CommandList } from 'cmdk';
+import { Palette } from 'lucide-react';
 import type * as React from 'react';
 import { useCallback, useEffect, useState } from 'react';
 
 import { Button } from '@/components/ui/button';
 import { Command, CommandGroup, CommandItem } from '@/components/ui/command';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-import { cn } from '@/lib/utils/ui';
-import { Palette } from 'lucide-react';
-
+import { useToast } from '@/hooks/use-toast';
 import type { ColorPalette } from '@/lib/utils/ui';
+import { cn } from '@/lib/utils/ui';
 
 const accentColors: ColorPalette[] = [
   {
@@ -91,22 +90,6 @@ export const ColorSelect: React.FC<ColorSelectProps> = ({
     return () => observer.disconnect();
   }, []);
 
-  // Load color from localStorage only on client-side
-  useEffect(() => {
-    try {
-      const savedColor = localStorage.getItem('color');
-      if (savedColor) {
-        setCurrentColor(JSON.parse(savedColor));
-
-        // Apply the saved color when component mounts
-        const color = JSON.parse(savedColor);
-        applyColorPalette(color);
-      }
-    } catch (error) {
-      console.error('Error loading color from localStorage:', error);
-    }
-  }, []);
-
   /**
    * Applies color palette based on current theme mode (light/dark).
    * In dark mode, uses lighter accent colors for better contrast.
@@ -139,6 +122,22 @@ export const ColorSelect: React.FC<ColorSelectProps> = ({
     },
     [isDarkMode]
   );
+
+  // Load color from localStorage only on client-side
+  useEffect(() => {
+    try {
+      const savedColor = localStorage.getItem('color');
+      if (savedColor) {
+        setCurrentColor(JSON.parse(savedColor));
+
+        // Apply the saved color when component mounts
+        const color = JSON.parse(savedColor);
+        applyColorPalette(color);
+      }
+    } catch (error) {
+      console.error('Error loading color from localStorage:', error);
+    }
+  }, [applyColorPalette]);
 
   // Re-apply color when dark mode changes
   useEffect(() => {

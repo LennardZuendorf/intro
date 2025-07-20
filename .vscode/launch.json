@@ -1,47 +1,47 @@
 {
-	"version": "0.2.0",
-	"configurations": [
-		{
-			"name": "Build Project",
-			"type": "node",
-			"request": "launch",
-			"runtimeExecutable": "pnpm",
-			"runtimeArgs": ["run", "build"],
-			"skipFiles": ["<node_internals>/**"],
-			"console": "integratedTerminal",
-			"presentation": {
-				"hidden": false,
-				"group": "Build & Run",
-				"order": 1
-			}
-		},
-		{
-			"name": "Dev Server",
-			"type": "node",
-			"request": "launch",
-			"runtimeExecutable": "pnpm",
-			"runtimeArgs": ["run", "dev"],
-			"skipFiles": ["<node_internals>/**"],
-			"console": "integratedTerminal",
-			"presentation": {
-				"hidden": false,
-				"group": "Build & Run",
-				"order": 2
-			}
-		},
-		{
-			"name": "Production Server",
-			"type": "node",
-			"request": "launch",
-			"runtimeExecutable": "pnpm",
-			"runtimeArgs": ["run", "start"],
-			"skipFiles": ["<node_internals>/**"],
-			"console": "integratedTerminal",
-			"presentation": {
-				"hidden": false,
-				"group": "Build & Run",
-				"order": 3
-			}
-		}
-	]
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Build Project",
+      "type": "node",
+      "request": "launch",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": ["run", "build"],
+      "skipFiles": ["<node_internals>/**"],
+      "console": "integratedTerminal",
+      "presentation": {
+        "hidden": false,
+        "group": "Build & Run",
+        "order": 1
+      }
+    },
+    {
+      "name": "Dev Server",
+      "type": "node",
+      "request": "launch",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": ["run", "dev"],
+      "skipFiles": ["<node_internals>/**"],
+      "console": "integratedTerminal",
+      "presentation": {
+        "hidden": false,
+        "group": "Build & Run",
+        "order": 2
+      }
+    },
+    {
+      "name": "Production Server",
+      "type": "node",
+      "request": "launch",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": ["run", "start"],
+      "skipFiles": ["<node_internals>/**"],
+      "console": "integratedTerminal",
+      "presentation": {
+        "hidden": false,
+        "group": "Build & Run",
+        "order": 3
+      }
+    }
+  ]
 }

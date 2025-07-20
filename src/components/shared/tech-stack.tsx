@@ -1,11 +1,15 @@
 'use client';
 
 import Link from 'next/link';
-import React, { useState } from 'react';
-import { techStackData } from '../../../content/AboutContent';
+import { useState } from 'react';
+import type { Tag } from '@/payload-types';
 import { NeoBadge } from '../ui/neoBadge';
 
-export function TechStackCompact() {
+interface TechStackCompactProps {
+  techStackData: Tag[];
+}
+
+export function TechStackCompact({ techStackData }: TechStackCompactProps) {
   const [showAllTech, setShowAllTech] = useState(false);
   const [animatingTech, setAnimatingTech] = useState(false);
 
@@ -24,11 +28,16 @@ export function TechStackCompact() {
     }, 500);
   };
 
+  // If no tech stack data, don't render anything
+  if (!techStackData || techStackData.length === 0) {
+    return null;
+  }
+
   return (
     <div className='flex flex-wrap gap-2 md:gap-3 relative transition-all duration-500 ease-in-out'>
       {(showAllTech ? techStackData : visibleTech).map((tech, index) => (
         <NeoBadge
-          key={tech.name}
+          key={`tech-${tech.id}-${index}`}
           variant='dark'
           size='sm'
           className={`tech-badge transition-all duration-300 ease-in-out ${
@@ -40,7 +49,12 @@ export function TechStackCompact() {
           rotation={index % 3 === 0 ? 'slight' : index % 3 === 1 ? 'negative' : 'none'}
           interactive='lift'
         >
-          <Link href={tech.link} target='_blank' rel='noopener noreferrer' className='inline-block'>
+          <Link
+            href={tech.link || '#'}
+            target='_blank'
+            rel='noopener noreferrer'
+            className='inline-block'
+          >
             {tech.name}
           </Link>
         </NeoBadge>

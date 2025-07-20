@@ -1,20 +1,20 @@
 'use client';
 
+import { useState } from 'react';
 import { NeoBadge } from '@/components/ui/neoBadge';
 import { H4 } from '@/components/ui/typography';
-import { useState } from 'react';
-import { aboutFallbackData } from '../../../../content/AboutContent';
+import type { Tag } from '@/payload-types';
 
 interface SkillsShowcaseProps {
-  skills: string[];
+  skills: Tag[];
 }
 
 export default function SkillsShowcase({ skills }: SkillsShowcaseProps) {
   const [showAllSkills, setShowAllSkills] = useState(false);
   const [animatingSkills, setAnimatingSkills] = useState(false);
 
-  // Ensure we have at least 5 skills for proper display
-  const skillsToDisplay = skills.length >= 5 ? skills : aboutFallbackData.skills;
+  // Use the skills passed as props (already guaranteed to have content from fetch function)
+  const skillsToDisplay = skills;
 
   // Display only 5 skills initially for full-width layout
   const visibleSkills = skillsToDisplay.slice(0, 5);
@@ -37,7 +37,7 @@ export default function SkillsShowcase({ skills }: SkillsShowcaseProps) {
       <div className='flex flex-wrap gap-2 md:gap-3 relative w-full transition-all duration-500 ease-in-out'>
         {(showAllSkills ? skillsToDisplay : visibleSkills).map((skill, index) => (
           <NeoBadge
-            key={skill}
+            key={skill.id}
             variant={index % 3 === 0 ? 'default' : index % 3 === 1 ? 'light' : 'dark'}
             size='sm'
             className={`skill-badge transition-all duration-300 ease-in-out ${
@@ -49,7 +49,7 @@ export default function SkillsShowcase({ skills }: SkillsShowcaseProps) {
             rotation={index % 3 === 0 ? 'slight' : index % 3 === 1 ? 'negative' : 'none'}
             interactive={index % 3 === 0 ? 'lift' : index % 3 === 1 ? 'bounce' : 'wiggle'}
           >
-            {skill}
+            {skill.name}
           </NeoBadge>
         ))}
         {hasMoreSkills && !showAllSkills && (

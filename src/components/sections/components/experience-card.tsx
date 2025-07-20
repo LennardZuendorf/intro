@@ -1,10 +1,10 @@
 'use client';
 
+import Link from 'next/link';
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
 import { H4, M, Muted, S } from '@/components/ui/typography';
 import { cn } from '@/lib/utils/ui';
 import type { Experience, Tag } from '@/payload-types';
-import Link from 'next/link';
 
 interface ExperienceCardProps {
   experience: Experience;

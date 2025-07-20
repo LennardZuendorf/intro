@@ -1,10 +1,9 @@
-import type { CollectionConfig } from 'payload';
-
 import {
   FixedToolbarFeature,
   InlineToolbarFeature,
   lexicalEditor
 } from '@payloadcms/richtext-lexical';
+import type { CollectionConfig } from 'payload';
 
 import { anyone } from '@/lib/admin/access/anyone';
 import { authenticated } from '@/lib/admin/access/authenticated';

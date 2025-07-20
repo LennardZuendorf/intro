@@ -1,5 +1,6 @@
 'use client';
 
+import * as React from 'react';
 import ProjectCard from '@/components/sections/components/project-card';
 import {
   Carousel,
@@ -8,9 +9,8 @@ import {
   CarouselNext,
   CarouselPrevious
 } from '@/components/ui/carousel';
-import { cn } from '@/lib/utils/ui';
+import { getRandomCardProps } from '@/lib/utils/randomCardProps';
 import type { Project } from '@/payload-types';
-import * as React from 'react';
 
 interface ProjectCarouselProps {
   projects: Project[];
@@ -41,13 +41,22 @@ export default function ProjectCarousel({ projects, visibleCount = 3 }: ProjectC
         className='w-full'
       >
         <CarouselContent className='w-full flex-row p-4'>
-          {projects.map((project, idx) => (
-            <CarouselItem key={project.id} className={`${getBasisClass()} pl-4`}>
-              <div ref={idx === 0 ? cardRef : undefined} className='h-full flex justify-center'>
-                <ProjectCard project={project} className='w-full max-w-sm h-[450px]' />
-              </div>
-            </CarouselItem>
-          ))}
+          {projects.map((project, idx) => {
+            const { rotation, interactive } = getRandomCardProps(project.id);
+
+            return (
+              <CarouselItem key={project.id} className={`${getBasisClass()} pl-4`}>
+                <div ref={idx === 0 ? cardRef : undefined} className='h-full flex justify-center'>
+                  <ProjectCard
+                    project={project}
+                    className='w-full max-w-sm h-[450px]'
+                    rotation={rotation}
+                    interactive={interactive}
+                  />
+                </div>
+              </CarouselItem>
+            );
+          })}
         </CarouselContent>
         <CarouselPrevious className='-left-10 top-1/2 -translate-y-1/2' />
         <CarouselNext className='-right-10 top-1/2 -translate-y-1/2' />

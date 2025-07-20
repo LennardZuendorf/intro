@@ -116,6 +116,89 @@ export const SectionContent: GlobalConfig = {
   ]
 };
 
+export const SiteControls: GlobalConfig = {
+  slug: 'siteControls',
+  admin: {
+    group: 'Site Settings & SEO'
+  },
+  fields: [
+    {
+      name: 'sectionVisibility',
+      type: 'group',
+      label: 'Section Visibility',
+      admin: {
+        description: 'Control which sections are shown on the site'
+      },
+      fields: [
+        {
+          name: 'showProjects',
+          type: 'checkbox',
+          defaultValue: true,
+          admin: {
+            description: 'Show projects section on the landing page'
+          }
+        },
+        {
+          name: 'showAbout',
+          type: 'checkbox',
+          defaultValue: true,
+          admin: {
+            description: 'Show about section on the landing page'
+          }
+        }
+      ]
+    },
+    {
+      name: 'socials',
+      type: 'group',
+      fields: [
+        {
+          name: 'linkedin',
+          type: 'relationship',
+          relationTo: 'tag',
+          filterOptions: () => ({
+            type: {
+              equals: 'socials'
+            }
+          }),
+          hasMany: false,
+          admin: {
+            description: 'link to my linkedin profile'
+          }
+        },
+        {
+          name: 'github',
+          type: 'relationship',
+          relationTo: 'tag',
+          filterOptions: () => ({
+            type: {
+              equals: 'socials'
+            }
+          }),
+          hasMany: false,
+          admin: {
+            description: 'link to my github profile'
+          }
+        },
+        {
+          name: 'mail',
+          type: 'relationship',
+          relationTo: 'tag',
+          filterOptions: () => ({
+            type: {
+              equals: 'socials'
+            }
+          }),
+          hasMany: false,
+          admin: {
+            description: 'link to my github profile'
+          }
+        }
+      ]
+    }
+  ]
+};
+
 export const LegalContent: GlobalConfig = {
   slug: 'legalContent',
   fields: [

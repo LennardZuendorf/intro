@@ -1,109 +1,123 @@
 {
-	"version": "2.0.0",
-	"tasks": [
-		{
-			"label": "Lint",
-			"type": "shell",
-			"command": "pnpm",
-			"args": ["run", "lint"],
-			"group": {
-				"kind": "test",
-				"isDefault": true
-			},
-			"presentation": {
-				"reveal": "always",
-				"panel": "dedicated",
-				"clear": true,
-				"focus": false
-			},
-			"problemMatcher": ["$eslint-stylish"]
-		},
-		{
-			"label": "Format",
-			"type": "shell",
-			"command": "pnpm",
-			"args": ["run", "format"],
-			"group": "none",
-			"presentation": {
-				"reveal": "always",
-				"panel": "dedicated",
-				"clear": true,
-				"focus": false
-			},
-			"problemMatcher": []
-		},
-		{
-			"label": "Lint Staged",
-			"type": "shell",
-			"command": "pnpm",
-			"args": ["run", "lint"],
-			"group": "none",
-			"presentation": {
-				"reveal": "always",
-				"panel": "dedicated",
-				"clear": true,
-				"focus": false
-			},
-			"problemMatcher": []
-		},
-		{
-			"label": "Generate Types",
-			"type": "shell",
-			"command": "pnpm",
-			"args": ["run", "generate:types"],
-			"group": "build",
-			"presentation": {
-				"reveal": "always",
-				"panel": "dedicated",
-				"clear": true,
-				"focus": false
-			},
-			"problemMatcher": []
-		},
-		{
-			"label": "Full Code Quality Check",
-			"dependsOrder": "sequence",
-			"dependsOn": ["Generate Types", "Lint", "Format"],
-			"group": {
-				"kind": "build",
-				"isDefault": true
-			},
-			"presentation": {
-				"reveal": "always",
-				"panel": "dedicated",
-				"clear": true,
-				"focus": false
-			},
-			"problemMatcher": []
-		},
-		{
-			"label": "Start Supabase",
-			"type": "shell",
-			"command": "npx supabase stop --all && npx supabase start",
-			"group": "none",
-			"isBackground": true,
-			"presentation": {
-				"reveal": "always",
-				"panel": "dedicated",
-				"clear": true,
-				"focus": true
-			},
-			"problemMatcher": [],
-			"detail": "Stop any running Supabase instances and start the local Supabase development stack"
-		},
-		{
-			"label": "Stop Supabase",
-			"type": "shell",
-			"command": "npx supabase stop --all",
-			"group": "none",
-			"presentation": {
-				"reveal": "always",
-				"panel": "dedicated",
-				"clear": true,
-				"focus": false
-			},
-			"problemMatcher": [],
-			"detail": "Stop the local Supabase development stack"
-		}
-	]
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Lint",
+      "type": "shell",
+      "command": "pnpm",
+      "args": ["run", "lint"],
+      "group": {
+        "kind": "test",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "clear": true,
+        "focus": false
+      },
+      "problemMatcher": ["$eslint-stylish"]
+    },
+    {
+      "label": "Format",
+      "type": "shell",
+      "command": "pnpm",
+      "args": ["run", "format"],
+      "group": "none",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "clear": true,
+        "focus": false
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Lint Staged",
+      "type": "shell",
+      "command": "pnpm",
+      "args": ["run", "lint"],
+      "group": "none",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "clear": true,
+        "focus": false
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Generate Types",
+      "type": "shell",
+      "command": "pnpm",
+      "args": ["run", "generate:types"],
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "clear": true,
+        "focus": false
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Validate Types",
+      "type": "shell",
+      "command": "pnpm",
+      "args": ["tsc", "--noEmit"],
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "clear": true,
+        "focus": false
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Full Code Quality Check",
+      "dependsOrder": "sequence",
+      "dependsOn": ["Generate Types", "Lint", "Format", "Validate Types"],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "clear": true,
+        "focus": false
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Start Supabase",
+      "type": "shell",
+      "command": "npx supabase stop --all && npx supabase start",
+      "group": "none",
+      "isBackground": true,
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "clear": true,
+        "focus": true
+      },
+      "problemMatcher": [],
+      "detail": "Stop any running Supabase instances and start the local Supabase development stack"
+    },
+    {
+      "label": "Stop Supabase",
+      "type": "shell",
+      "command": "npx supabase stop --all",
+      "group": "none",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "clear": true,
+        "focus": false
+      },
+      "problemMatcher": [],
+      "detail": "Stop the local Supabase development stack"
+    }
+  ]
 }

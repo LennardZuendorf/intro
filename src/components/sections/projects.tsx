@@ -1,32 +1,37 @@
 import type { SectionProps } from '@/app/(app)/page';
+import { TechStackCompact } from '@/components/shared/tech-stack';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { NeoBadge } from '@/components/ui/neoBadge';
-import { Section, SectionTop } from '@/components/ui/section';
+import { Section, SectionBottom, SectionTop } from '@/components/ui/section';
 import { Code, H4, S } from '@/components/ui/typography';
+import { fetchAllProjects } from '@/lib/content/fetchProjects';
+import { fetchTechStackTags } from '@/lib/content/fetchTags';
 import { cn } from '@/lib/utils/ui';
-import configPromise from '@payload-config';
-import { draftMode } from 'next/headers';
-import { getPayload } from 'payload';
-import { TechStackCompact } from '../shared/tech-stack';
+import ProjectCarousel from './components/project-carousel';
 import { ProjectsGrid } from './components/project-grid';
 
 export async function Projects({ className }: SectionProps) {
-  const payloadProjects = await queryProjects();
+  const payloadProjects = await fetchAllProjects();
+  const techStackTags = await fetchTechStackTags();
+
+  if (!payloadProjects || payloadProjects.length === 0) {
+    console.log('No projects found');
+    console.log(payloadProjects);
+    return null;
+  }
 
   return (
-    <section id='projects'>
+    <section id='projects' className='min-h-screen'>
       <Section
-        className={cn('relative overflow-hidden', className)}
+        className={cn('relative overflow-hidden min-h-screen', className)}
         background='secondary'
-        centerContent={true}
         fullHeight={true}
-        padding='py-14 md:py-24 px-6 py-8 md:py-12 2xl:py-16'
       >
         <SectionTop>
-          {/* Projects Grid */}
-          <div className='w-full relative flex flex-col items-center'>
+          {/* Projects Grid/Carousel */}
+          <div className='w-full relative flex flex-col items-center flex-1'>
             <Card
-              className='relative w-full'
+              className='relative w-full flex-1 flex flex-col'
               interactive='none'
               rotation='none'
               shadow='none'
@@ -44,9 +49,19 @@ export async function Projects({ className }: SectionProps) {
                   </NeoBadge>
                 </div>
               </CardHeader>
-              <CardContent className='py-5 px-0'>
+              <CardContent className='py-5 px-0 flex-1 flex flex-col'>
                 {payloadProjects && payloadProjects.length > 0 ? (
-                  <ProjectsGrid projects={payloadProjects} />
+                  <>
+                    {/* Desktop/Tablet Grid - Hidden on mobile */}
+                    <div className='hidden sm:block flex-1'>
+                      <ProjectsGrid projects={payloadProjects} />
+                    </div>
+
+                    {/* Mobile Carousel - Hidden on desktop/tablet */}
+                    <div className='block sm:hidden flex-1 flex flex-col justify-center'>
+                      <ProjectCarousel projects={payloadProjects} visibleCount={1} />
+                    </div>
+                  </>
                 ) : (
                   <div className='flex items-center justify-center h-32'>
                     <S className='text-muted-foreground'>No projects available</S>
@@ -55,128 +70,17 @@ export async function Projects({ className }: SectionProps) {
               </CardContent>
             </Card>
           </div>
-
+        </SectionTop>
+        <SectionBottom>
           {/* Tech Stack Section */}
           <div className='w-full flex flex-col items-center'>
             <H4 className='font-mono uppercase tracking-wider mb-4 text-center'>Tech Stack</H4>
             <div className='flex justify-center w-full'>
-              <TechStackCompact />
+              <TechStackCompact techStackData={techStackTags} />
             </div>
           </div>
-        </SectionTop>
+        </SectionBottom>
       </Section>
     </section>
   );
 }
-
-const queryProjects = async () => {
-  const { isEnabled: draft } = await draftMode();
-
-  const payload = await getPayload({ config: configPromise });
-
-  try {
-    // 1. Fetch all projects (expecting only technology IDs)
-    const projectsResult = await payload.find({
-      collection: 'projects',
-      overrideAccess: draft,
-      pagination: false,
-      depth: 2, //Needs to 2 to get the Picture Data
-      select: {
-        id: true,
-        title: true,
-        slug: true,
-        shortDescription: true,
-        heroImage: true,
-        technologies: true,
-        liveUrl: true,
-        repoUrl: true
-      },
-      where: {
-        _status: {
-          equals: 'published'
-        }
-      }
-    });
-
-    console.log(
-      'Projects with technology IDs:',
-      projectsResult.docs.map((p) => ({
-        title: p.title,
-        technologies: p.technologies
-      }))
-    );
-
-    // 2. Collect all unique technology IDs from all projects
-    const allTechIds = new Set<number>();
-    for (const project of projectsResult.docs) {
-      if (project.technologies && Array.isArray(project.technologies)) {
-        for (const techId of project.technologies) {
-          if (typeof techId === 'number') {
-            allTechIds.add(techId);
-          }
-        }
-      }
-    }
-
-    console.log('Unique technology IDs to fetch:', Array.from(allTechIds));
-
-    // 3. Fetch ALL techstack tags in a single query
-    const techstackResult = await payload.find({
-      collection: 'tag',
-      where: {
-        id: {
-          in: Array.from(allTechIds)
-        },
-        type: {
-          equals: 'techstack'
-        }
-      },
-      depth: 0,
-      pagination: false
-    });
-
-    console.log(
-      'Fetched techstack tags:',
-      techstackResult.docs.map((t) => ({ id: t.id, name: t.name }))
-    );
-
-    // 4. Create a lookup map for O(1) technology assignment
-    const techLookup = new Map();
-    for (const tech of techstackResult.docs) {
-      techLookup.set(tech.id, tech);
-    }
-
-    // 5. Map technologies to projects
-    const projectsWithTechnologies = projectsResult.docs.map((project) => {
-      if (project.technologies && Array.isArray(project.technologies)) {
-        const populatedTechnologies = project.technologies
-          .map((techId) => {
-            if (typeof techId === 'number') {
-              return techLookup.get(techId) || null;
-            }
-            return null;
-          })
-          .filter((tech) => tech !== null);
-
-        return {
-          ...project,
-          technologies: populatedTechnologies
-        };
-      }
-      return project;
-    });
-
-    console.log(
-      'Final projects with populated technologies:',
-      projectsWithTechnologies.map((p) => ({
-        title: p.title,
-        technologies: p.technologies?.map((t) => t.name)
-      }))
-    );
-
-    return projectsWithTechnologies;
-  } catch (error) {
-    console.error('Error fetching projects:', error);
-    return null;
-  }
-};

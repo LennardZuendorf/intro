@@ -1,9 +1,9 @@
 'use client';
 
-import { BackgroundGrid } from '@/components/ui/background-grid';
-import { cn } from '@/lib/utils/ui';
 import type { ElementType, HTMLAttributes, ReactNode } from 'react';
 import React from 'react';
+import { BackgroundGrid } from '@/components/ui/background-grid';
+import { cn } from '@/lib/utils/ui';
 
 export interface SectionProps extends HTMLAttributes<HTMLElement> {
   /** Content for the section */

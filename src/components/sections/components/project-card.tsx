@@ -1,20 +1,30 @@
 'use client';
 
-import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
+import type { VariantProps } from 'class-variance-authority';
+import { ExternalLink } from 'lucide-react';
+import Image from 'next/image';
+import { Card, CardContent, CardFooter, CardHeader, type cardVariants } from '@/components/ui/card';
 import { IconLink } from '@/components/ui/icon-link';
 import { NeoBadge } from '@/components/ui/neoBadge';
 import { H4, M } from '@/components/ui/typography';
 import { cn } from '@/lib/utils/ui';
 import type { Project } from '@/payload-types';
-import { ExternalLink } from 'lucide-react';
-import Image from 'next/image';
+
+type CardVariants = VariantProps<typeof cardVariants>;
 
 interface ProjectCardProps {
   project: Project;
   className?: string;
+  rotation?: CardVariants['rotation'];
+  interactive?: CardVariants['interactive'];
 }
 
-export default function ProjectCard({ project, className }: ProjectCardProps) {
+export default function ProjectCard({
+  project,
+  className,
+  rotation = 'none',
+  interactive = 'slight'
+}: ProjectCardProps) {
   // Handle hero image - it can be a number (ID) or Media object
   const heroImageUrl =
     typeof project.heroImage === 'object' && project.heroImage?.url ? project.heroImage.url : null;
@@ -40,9 +50,9 @@ export default function ProjectCard({ project, className }: ProjectCardProps) {
     <Card
       className={cn('w-full h-[450px] overflow-hidden', className)}
       variant='default'
-      rotation='none'
+      rotation={rotation}
       shadow='lg'
-      interactive='slight'
+      interactive={interactive}
     >
       {/* Title Picture */}
       {heroImageUrl && (
@@ -53,6 +63,7 @@ export default function ProjectCard({ project, className }: ProjectCardProps) {
             width={400}
             height={192}
             className='w-full h-full object-cover hover:scale-105 transition-transform duration-300'
+            loading='lazy'
           />
         </div>
       )}
@@ -72,7 +83,7 @@ export default function ProjectCard({ project, className }: ProjectCardProps) {
         {technologies.length > 0 && (
           <div className='space-y-2'>
             <div className='flex flex-wrap gap-1.5'>
-              {technologies.map((tech) => (
+              {technologies.slice(0, 3).map((tech) => (
                 <NeoBadge
                   key={`${project.id}-tech-${tech}`}
                   variant='light'
@@ -84,6 +95,18 @@ export default function ProjectCard({ project, className }: ProjectCardProps) {
                   {tech}
                 </NeoBadge>
               ))}
+              {technologies.length > 3 && (
+                <NeoBadge
+                  key={`${project.id}-tech-more`}
+                  variant='outline'
+                  size='sm'
+                  rotation='none'
+                  interactive='none'
+                  className='text-xs'
+                >
+                  +{technologies.length - 3}
+                </NeoBadge>
+              )}
             </div>
           </div>
         )}
@@ -114,7 +137,7 @@ export default function ProjectCard({ project, className }: ProjectCardProps) {
               className='flex-1'
             >
               <ExternalLink className='w-3 h-3' />
-              Live Demo
+              Preview
             </IconLink>
           )}
         </div>

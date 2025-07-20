@@ -1,5 +1,10 @@
 'use client';
 
+import { AnimatePresence, motion, useMotionValueEvent, useScroll } from 'framer-motion';
+import { Pin, PinOff } from 'lucide-react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import React, { useEffect, useState } from 'react';
 import { ColorSelect } from '@/components/shared/color-select';
 import { ThemeSelect } from '@/components/shared/theme-select';
 import { Button } from '@/components/ui/button';
@@ -12,11 +17,6 @@ import {
 } from '@/components/ui/navigation-menu';
 import { M, Muted } from '@/components/ui/typography';
 import { cn } from '@/lib/utils/ui';
-import { AnimatePresence, motion, useMotionValueEvent, useScroll } from 'framer-motion';
-import { Pin, PinOff } from 'lucide-react';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import React, { useState, useEffect } from 'react';
 
 type navItemsType = Array<{
   name: string;

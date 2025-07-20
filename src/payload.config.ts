@@ -1,10 +1,5 @@
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { Experiences } from '@/collections/Experience';
-import { ProjectPost } from '@/collections/ProjectPost';
-import { Tag } from '@/collections/Tag';
-import { env } from '@/env';
-import { LegalContent, SectionContent } from '@/payload-globals';
 import { postgresAdapter } from '@payloadcms/db-postgres';
 import { resendAdapter } from '@payloadcms/email-resend';
 import { seoPlugin } from '@payloadcms/plugin-seo';
@@ -12,6 +7,11 @@ import { lexicalEditor } from '@payloadcms/richtext-lexical';
 import { s3Storage } from '@payloadcms/storage-s3';
 import { buildConfig } from 'payload';
 import sharp from 'sharp';
+import { Experiences } from '@/collections/Experience';
+import { ProjectPost } from '@/collections/ProjectPost';
+import { Tag } from '@/collections/Tag';
+import { env } from '@/env';
+import { LegalContent, SectionContent, SiteControls } from '@/payload-globals';
 import { Media } from './collections/Media';
 import { Users } from './collections/Users';
 
@@ -55,6 +55,7 @@ export default buildConfig({
   plugins: [
     seoPlugin({
       collections: ['project'],
+      globals: ['siteControls'],
       uploadsCollection: 'media',
       generateTitle: ({ doc }) => `Website.com — ${doc.title}`,
       generateDescription: ({ doc }) => doc.excerpt
@@ -78,5 +79,5 @@ export default buildConfig({
     })
   ],
   collections: [Media, Users, Tag, Experiences, ProjectPost],
-  globals: [SectionContent, LegalContent]
+  globals: [SectionContent, LegalContent, SiteControls]
 });

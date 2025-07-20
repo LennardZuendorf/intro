@@ -51,16 +51,6 @@ export const Tag: CollectionConfig = {
           ? true
           : 'Must be a valid URL (e.g. /about or https://google.com)';
       }
-    },
-    {
-      name: 'icon',
-      type: 'upload',
-      relationTo: 'media',
-      required: false,
-      label: 'Icon or Logo',
-      admin: {
-        description: 'optional - a link or logo (should be svg)'
-      }
     }
   ]
 };

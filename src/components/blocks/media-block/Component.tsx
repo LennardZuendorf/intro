@@ -1,7 +1,7 @@
-import { cn } from '@/lib/utils/ui';
-import type { Media } from '@/payload-types';
 import Image from 'next/image';
 import type React from 'react';
+import { cn } from '@/lib/utils/ui';
+import type { Media } from '@/payload-types';
 
 type Props = {
   media?: Media;

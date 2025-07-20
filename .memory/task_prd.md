@@ -1,136 +1,129 @@
-
-# Hero & Section Layout Refactor – PRD
+# Projects Section Finalization – PRD
 
 ## 1. Background / Problem Statement
-Recent iterations to improve the mobile experience introduced **two completely separate markup blocks** inside `src/components/sections/hero.tsx` (`#hero-mobile-layout` & `#hero-desktop-layout`). While functionally correct, this duplication:
+The current **Projects** section provides users with a carousel of project cards, but it lacks the flexible **grid view** requested in the design vision. On larger screens, a carousel limits discoverability and wastes horizontal space. Conversely, a dense grid on phones overwhelms users with small tap-targets. We need a **hybrid solution** that adapts gracefully across breakpoints while showcasing projects in an engaging, on-brand way.
 
-1. Inflates LOC, harming maintainability & readability.
-2. Creates a risk of visual drift between breakpoints (fixes must be applied twice).
-3. Complicates future feature work (e.g., adding a new badge requires changes in two places).
-
-The `Section` component already supports a **two-row / two-column grid** on large screens but isn’t being leveraged effectively in the hero implementation. We need a unified, responsive solution that:
-- Keeps a **single source of truth** for each logical UI element.
-- Uses **utility classes & conditional rendering** to adapt across breakpoints.
-- Hides/reshapes specific elements (e.g., avatar image) on small screens without code duplication.
-
----
+Key issues with the current implementation:
+1. **Single-layout limitation** – No grid view on desktop / tablet.
+2. **Static visuals** – Cards do not leverage the playful Neobrutalism rotations & hover states.
+3. **Lack of progressive disclosure** – All projects render at once, causing long scrolls and slower LCP.
+4. **Inconsistent UX** between mobile and desktop users.
 
 ## 2. Goals & Objectives
-1. **Eliminate duplicated JSX** inside `hero.tsx`.
-2. **Leverage `SectionTop`, `SectionLeft`, `SectionRight`, `SectionBottom`** to handle desktop grid automatically.
-3. Ensure **smooth responsive behavior** across three breakpoints:
-   - Mobile (< 640 px)
-   - Tablet (640 – 1024 px)
-   - Desktop (≥ 1024 px)
-4. Keep layout gaps, alignments, and rotations consistent with the design system.
-5. Hide or rearrange selected content on smaller breakpoints (e.g., profile picture).
-6. Produce clean, documented code that passes existing tests & linters.
-
----
+1. Provide an **adaptive Projects section**
+   • **Grid view** on `md` & `lg` with 2 → 3 columns.
+   • **Carousel view** on `sm` (mobile) using existing `ProjectCarousel`.
+2. **Randomize card visual variants** to keep the page fresh and highlight the design system:
+   • Random `rotation` (`none`, `slight`, `slightNegative`, `medium`, `mediumNegative`).
+   • Random `interactive` level (`none`, `slight`, `medium`).
+3. **Progressive loading** – Initial grid limited to **max 3 rows** (≤ 9 cards) with a **“Show more”** button to reveal the rest.
+4. Each **ProjectCard** MUST display:
+   • Cover image (16:9, lazy-loaded).
+   • Title (using `H3` typography).
+   • Short description (max 120 chars).
+   • ≥ 3 tech-stack badges (uses `NeoBadge`).
+   • “Read more” (internal link) & “Preview” (external, `target="_blank"`).
+5. Maintain full accessibility, responsive behavior, and alignment with the Neobrutalism design guides.
 
 ## 3. Out-of-Scope
-- Styling or functional changes to other page sections.
-- Significant visual redesign beyond layout/spacing tweaks.
-
----
+- Redesigning the underlying `Card` component beyond variant usage.
+- Any changes to project CMS schema.
+- Implementing infinite scroll or intersection-observer lazy fetch (simple show/hide suffices for now).
 
 ## 4. Target Layout Sketches
 
-### 4.1 Mobile (< 640 px)
-```
-┌───────────────────────────────┐
-│ Hero Card                     │
-├───────────────────────────────┤
-│ Mission Statement             │
-├───────────────────────────────┤
-│ Project Announcement Card     │
-├───────────────────────────────┤
-│ Current Role Card             │
-├───────────────────────────────┤
-│ Navigation Buttons (stack)    │
-└───────────────────────────────┘
-```
-Notes:
-- `ImageCard` (avatar) **hidden** to save vertical space.
-- `gap-y` ≈ `1rem` (16 px) between blocks.
-
-### 4.2 Tablet (640 – 1024 px)
-```
-Same vertical flow as mobile **but**
-- Avatar becomes visible (smaller 80×80).
-- Larger gaps (`gap-y` ≈ 1.5rem).
-```
-
-### 4.3 Desktop (≥ 1024 px)
+### 4.1 Desktop (`lg` ≥ 1024 px)
 ```
 ┌────────────────────────────────────────────────────────────┐
-│                SectionTop  (grid cols-2)                  │
-│ ┌────────────┐   ┌─────────────────────────────────────┐ │
-│ │ Hero Card  │   │ Project Announcement Card           │ │
-│ │ + Mission  │   │ Current Role Card                   │ │
-│ │ Statement  │   │ Navigation Buttons (row)            │ │
-│ └────────────┘   └─────────────────────────────────────┘ │
+│  Row 1   ┌───────┐ ┌───────┐ ┌───────┐                    │
+│          │ Card  │ │ Card  │ │ Card  │                    │
+│          └───────┘ └───────┘ └───────┘                    │
+│  Row 2   ┌───────┐ ┌───────┐ ┌───────┐                    │
+│          │ Card  │ │ Card  │ │ Card  │                    │
+│  Row 3   └───────┘ └───────┘ └───────┘                    │
+│                                                           │
+│             [ Show more ▼ ]                               │
 └────────────────────────────────────────────────────────────┘
 ```
-- Avatar visible (120 – 160 px) within Hero Card.
-- `SectionLeft` stacks **Hero Card** & **Mission Statement** vertically.
-- `SectionRight` stacks **Announcement** + **Role** + **Nav Buttons** vertically.
-- Global `gap-x` ≈ 2rem between columns; `gap-y` inside column matches design system.
+Columns: **3** (`gap-x` 2 rem, `gap-y` 2 rem).
 
-`SectionBottom` is **unused** in hero for now but remains available for future content.
+### 4.2 Tablet (`md` 640–1023 px)
+```
+┌───────────────────────────────────────────────┐
+│  Row 1   ┌───────┐ ┌───────┐                 │
+│          │ Card  │ │ Card  │                 │
+│  Row 2   └───────┘ └───────┘                 │
+│  Row 3   ┌───────┐ ┌───────┐                 │
+│          │ Card  │ │ Card  │                 │
+│  Row 3   └───────┘ └───────┘                 │
+│                                             │
+│           [ Show more ▼ ]                    │
+└───────────────────────────────────────────────┘
+```
+Columns: **2** (`gap-x` 1.5 rem, `gap-y` 1.5 rem).
 
----
+### 4.3 Mobile (`sm` < 640 px)
+```
+┌──────────────────────────┐
+│      ←  Card  →          │
+│      ←  Card  →          │
+│      ←  Card  →          │
+│   (carousel indicators)  │
+└──────────────────────────┘
+```
+Full-width **carousel** – swipe & arrow nav.
 
 ## 5. Functional Requirements
-1. Convert duplicated mobile/desktop markup into **single JSX tree** using Tailwind responsive classes (`md:hidden`, `md:block`, `lg:grid`, etc.).
-2. **Avatar Image**
-   - Hidden on `<sm` (mobile)
-   - Shown with `w-20 h-20` on `sm` & `md`
-   - `w-40 h-40` on `lg`+
-3. Implement responsive **gaps** using existing `responsiveGap` / `responsiveColumnGap` constants in `Section`.
-4. Utilize `SectionTop` with two children (`SectionLeft`, `SectionRight`) to create the desktop grid.
-5. Make sure internal cards keep their **interactive** & **rotation** props intact.
-6. Ensure no hard-coded pixel widths override the design system.
-
----
+1. **Responsive switch**
+   • Use CSS/Tailwind breakpoints: `hidden lg:grid`, `block lg:hidden`, etc.
+2. **Grid layout**
+   • `grid-cols-2 md:grid-cols-2 lg:grid-cols-3` within `SectionTop` or dedicated wrapper.
+   • Cap initial render to `MAX_INITIAL = 9` cards.
+   • “Show more” toggles `showAll` state; smooth scroll to new bottom.
+3. **Random card variants**
+   • Utility `getRandomCardProps()` returns `{ rotation, interactive }` seeded per render.
+   • Ensure random selection but stable between re-renders (memoize by project id).
+4. **ProjectCard composition**
+   • Use `Card` + `ImageCard` (or `img` w/ mask) inside.
+   • Typography components only (H3, S, etc.).
+   • Badges via `NeoBadge` with `variant="accent"`.
+5. **Buttons**
+   • “Read more” → `/projects/[slug]` internal link.
+   • “Preview” external; `rel="noopener noreferrer"`.
+6. **Accessibility & A11y**
+   • `alt` text from project `image.alt`.
+   • Buttons & links keyboard-focusable.
+7. **Performance**
+   • Lazy-load images (`loading="lazy"`).
+   • Only mount carousel on `sm` viewport (SSR safe via `useWindowDimensions`).
 
 ## 6. Non-Functional Requirements
-- **Accessibility**: Maintain ARIA labels & focus states provided by child components.
-- **Performance**: Avoid unnecessary renders; conditional rendering over `display:none` where feasible.
-- **Testing**: Existing Jest tests must pass; add a snapshot test for hero responsive layout.
-- **Code Quality**: Pass ESLint/biome checks; no unused vars.
-
----
+- **Code Quality**: Pass Biome lint, typed.
+- **Testing**: Add Jest/RTL snapshot for grid & carousel, plus unit test for `getRandomCardProps`.
+- **Accessibility**: Meets WCAG AA for contrast & keyboard.
+- **Maintainability**: Grid & carousel encapsulated in `ProjectsSection` component.
 
 ## 7. Acceptance Criteria
 | ID | Description | Verification |
 |----|-------------|--------------|
-| AC-1 | Only one JSX block for each logical element exists in `hero.tsx`. | Code review diff / grep shows no duplicate element IDs. |
-| AC-2 | Layout matches Sketches across breakpoints | Manual QA in Chrome DevTools emulation. |
-| AC-3 | Avatar hidden on mobile, shown on tablet & desktop | Visual QA. |
-| AC-4 | No linter or unit test regressions | `pnpm lint` & `pnpm test` pass. |
-| AC-5 | Section component reusable for future pages | Developer review. |
-
----
+| AC-1 | Grid shows 3 cols (`lg`), 2 cols (`md`), hidden on `sm` | Manual resize QA |
+| AC-2 | Carousel visible only on `sm` | Manual QA / Jest DOM queries |
+| AC-3 | Cards display image, title, description, ≥3 badges, 2 buttons | Unit test snapshot |
+| AC-4 | Max 9 cards initially, “Show more” reveals rest | E2E / unit test |
+| AC-5 | Random rotations & interactivity visibly vary | Visual QA (diff screenshots) |
+| AC-6 | Lint & tests pass | CI run |
 
 ## 8. Implementation Tasks (High-Level)
-1. **Section Enhancements**
-   - [ ] Review `Section` gap utilities; expose optional `rowGap` & `colGap` if needed.
-2. **Hero Refactor**
-   - [ ] Remove `#hero-mobile-layout` & `#hero-desktop-layout` containers.
-   - [ ] Wrap content in a single `SectionTop` with `SectionLeft` + `SectionRight`.
-   - [ ] Apply `hidden` / `block` classes to conditional elements (avatar, nav button orientation, etc.).
-3. **Spacing Polish**
-   - [ ] Align gaps/padding to design system tokens.
-4. **Testing**
-   - [ ] Update / add Jest snapshots for hero component.
-5. **QA & Review**
-   - [ ] Cross-browser & device emulation checks.
-   - [ ] Accessibility audit (keyboard nav, contrast).
-
----
+1. **Utility**: `utils/randomCardProps.ts` – return stable random variant per project id.
+2. **ProjectCard enhancements** – consume random props; ensure required children.
+3. **ProjectsGrid component** – responsive grid, show-more logic.
+4. **ProjectsSection wrapper** – switch between `ProjectsGrid` & `ProjectCarousel` based on viewport.
+5. **Tests** – snapshots for grid (collapsed/expanded) & carousel.
+6. **QA** – cross-browser, keyboard, Lighthouse run.
 
 ## 9. Timeline / Effort
-- **Est. Dev Time**: 4-5 hrs
-- **Testing & QA**: 1 hr
-- **Buffer / Review**: 1 hr 
+- **Dev**: 5–6 hrs  
+- **Testing & QA**: 1.5 hrs  
+- **Buffer / Review**: 1 hr  
+
+> **Total** ≈ 8.5 hrs 

@@ -1,4 +1,10 @@
-import type { CollectionConfig } from 'payload';
+import {
+  MetaDescriptionField,
+  MetaImageField,
+  MetaTitleField,
+  OverviewField,
+  PreviewField
+} from '@payloadcms/plugin-seo/fields';
 
 import {
   BlocksFeature,
@@ -8,21 +14,13 @@ import {
   InlineToolbarFeature,
   lexicalEditor
 } from '@payloadcms/richtext-lexical';
-
+import type { CollectionConfig } from 'payload';
+import { formatSlug } from '@/collections/hooks/formatSlug';
 import { Banner } from '@/components/blocks/banner/config';
 import { MediaBlock } from '@/components/blocks/media-block/config';
-
-import { formatSlug } from '@/collections/hooks/formatSlug';
 import { env } from '@/env';
 import { authenticated } from '@/lib/admin/access/authenticated';
 import { authenticatedOrPublished } from '@/lib/admin/access/authenticatedOrPublished';
-import {
-  MetaDescriptionField,
-  MetaImageField,
-  MetaTitleField,
-  OverviewField,
-  PreviewField
-} from '@payloadcms/plugin-seo/fields';
 
 export const ProjectPost: CollectionConfig<'projects'> = {
   slug: 'projects',

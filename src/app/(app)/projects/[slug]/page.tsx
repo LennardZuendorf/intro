@@ -1,18 +1,16 @@
-import RichText from '@/components/blocks/RichText';
 import configPromise from '@payload-config';
-import { draftMode } from 'next/headers';
-import { getPayload } from 'payload';
-import React, { cache } from 'react';
-
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { LivePreviewListener } from '@/lib/utils/payloadcms/LivePreviewListener';
-import type { Project } from '@/payload-types';
 import { format } from 'date-fns';
 import { ArrowLeft, Calendar, Tag } from 'lucide-react';
+import { draftMode } from 'next/headers';
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import { getPayload } from 'payload';
+import RichText from '@/components/blocks/RichText';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { fetchProjectBySlug } from '@/lib/content/fetchProjects';
+import { LivePreviewListener } from '@/lib/utils/payloadcms/LivePreviewListener';
 
 export async function generateStaticParams() {
   try {
@@ -57,8 +55,11 @@ type Args = {
 
 export default async function Post({ params: paramsPromise }: Args) {
   const { isEnabled: draft } = await draftMode();
-  const { slug = 'projects' } = await paramsPromise;
-  const project: Project = await queryPostBySlug({ slug });
+  const slug = await paramsPromise;
+
+  if (!slug) return notFound();
+
+  const project = await fetchProjectBySlug(slug.slug!);
 
   if (!project) return notFound();
 
@@ -183,24 +184,3 @@ export default async function Post({ params: paramsPromise }: Args) {
     </article>
   );
 }
-
-const queryPostBySlug = cache(async ({ slug }: { slug: string }) => {
-  const { isEnabled: draft } = await draftMode();
-
-  const payload = await getPayload({ config: configPromise });
-
-  const result = await payload.find({
-    collection: 'projects',
-    draft,
-    limit: 1,
-    overrideAccess: draft,
-    pagination: false,
-    where: {
-      slug: {
-        equals: slug
-      }
-    }
-  });
-
-  return result.docs?.[0] || null;
-});

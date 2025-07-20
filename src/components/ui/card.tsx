@@ -1,7 +1,6 @@
+import { cva, type VariantProps } from 'class-variance-authority';
 import * as React from 'react';
-
 import { cn } from '@/lib/utils/ui';
-import { type VariantProps, cva } from 'class-variance-authority';
 
 export interface CardProps
   extends React.HTMLAttributes<HTMLDivElement>,

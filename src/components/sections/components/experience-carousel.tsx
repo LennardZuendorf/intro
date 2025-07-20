@@ -1,4 +1,5 @@
 'use client';
+import React from 'react';
 import ExperienceCard from '@/components/sections/components/experience-card';
 import {
   Carousel,
@@ -8,24 +9,18 @@ import {
   CarouselPrevious
 } from '@/components/ui/carousel';
 import { cn } from '@/lib/utils/ui';
-import type { Experience, Tag } from '@/payload-types';
-import * as React from 'react';
-import {
-  type ExperienceData,
-  experienceData as fallbackExperienceData
-} from '../../../../content/AboutContent';
+import type { Experience } from '@/payload-types';
 
 interface ExperienceCarouselProps {
+  experiences: Experience[];
   visibleCount?: number;
-  experiences?: Experience[] | null;
 }
 
 export default function ExperienceCarousel({
-  visibleCount = 2,
-  experiences
+  experiences,
+  visibleCount = 2
 }: ExperienceCarouselProps) {
   const cardRef = React.useRef<HTMLDivElement>(null);
-
   const cardHeight = 345;
 
   // Calculate basis for responsive design
@@ -35,49 +30,16 @@ export default function ExperienceCarousel({
     return `basis-full md:basis-1/${Math.min(visibleCount, 3)}`;
   };
 
-  const dataToRender =
-    experiences && experiences.length > 0
-      ? experiences
-      : fallbackExperienceData.map((localExp, index): Experience => {
-          const firstRole = localExp.roles[0];
-          const [start, end] = firstRole.range.split(' - ');
-          const parseDate = (dateStr: string | undefined): string | null => {
-            if (!dateStr) return null;
-            // Simple case for "Month Year" format, handles German month
-            const date = new Date(dateStr.replace('Februar', 'February'));
-            if (!Number.isNaN(date.getTime())) {
-              return date.toISOString();
-            }
-            return null;
-          };
-
-          const startDate = parseDate(start);
-          const endDate = end === '...' || !end ? null : parseDate(end);
-
-          return {
-            id: index,
-            company: localExp.company,
-            position: firstRole.title,
-            startDate: startDate || new Date().toISOString(),
-            endDate: endDate,
-            description: localExp.desc,
-            responsibilityOne: firstRole.text[0] || '',
-            responsibilityTwo: firstRole.text[1] || null,
-            responsibilityThree: firstRole.text[2] || null,
-            url: localExp.url,
-            skills: firstRole.skills.map(
-              (skillName): Tag => ({
-                id: Math.random(),
-                name: skillName,
-                type: 'skill',
-                updatedAt: new Date().toISOString(),
-                createdAt: new Date().toISOString()
-              })
-            ),
-            updatedAt: new Date().toISOString(),
-            createdAt: new Date().toISOString()
-          };
-        });
+  if (!experiences || experiences.length === 0) {
+    return (
+      <div
+        className='w-full p-2 flex items-center justify-center'
+        style={{ height: `${cardHeight}px` }}
+      >
+        <div className='text-muted-foreground'>No experiences available</div>
+      </div>
+    );
+  }
 
   return (
     <Carousel
@@ -88,12 +50,12 @@ export default function ExperienceCarousel({
       <CarouselContent
         className={cn('w-full flex-col mt-2 mb-2')}
         style={{
-          height: cardHeight ? `${cardHeight}px` : 'auto'
+          height: `${cardHeight}px`
         }}
       >
-        {dataToRender.map((exp, idx) => (
+        {experiences.map((exp, idx) => (
           <CarouselItem
-            key={exp.id}
+            key={`experience-${exp.id}`}
             className={`w-full ${getBasisClass()}`}
             style={{
               marginBottom: 0

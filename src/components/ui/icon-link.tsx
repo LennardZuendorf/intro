@@ -1,9 +1,9 @@
 'use client';
 
-import { Button, type ButtonProps, buttonVariants } from '@/components/ui/button';
-import { cn } from '@/lib/utils/ui';
 import Link from 'next/link';
 import React from 'react';
+import { Button, type ButtonProps } from '@/components/ui/button';
+import { cn } from '@/lib/utils/ui';
 
 interface IconLinkProps extends Omit<ButtonProps, 'asChild'> {
   href: string;

@@ -1,12 +1,12 @@
 'use client';
 
+import { CheckCircle, CircleHelp } from 'lucide-react';
+import Link from 'next/link';
+import { useEffect, useState } from 'react';
 import type { SectionProps } from '@/app/(app)/page';
 import { Button, buttonVariants } from '@/components/ui/button';
 import { S, XS } from '@/components/ui/typography';
 import { cn } from '@/lib/utils/ui';
-import { CheckCircle, CircleHelp } from 'lucide-react';
-import Link from 'next/link';
-import { useEffect, useState } from 'react';
 
 export function Banner({ className }: SectionProps) {
   const [isAcknowledged, setIsAcknowledged] = useState(true);

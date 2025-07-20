@@ -1,10 +1,11 @@
 'use client';
 
+import { useRef, useState } from 'react';
 import ProjectCard from '@/components/sections/components/project-card';
 import { NeoBadge } from '@/components/ui/neoBadge';
 import { Code, S } from '@/components/ui/typography';
+import { getRandomCardProps } from '@/lib/utils/randomCardProps';
 import type { Project } from '@/payload-types';
-import { useState } from 'react';
 
 interface ProjectsGridProps {
   projects: Project[];
@@ -13,21 +14,25 @@ interface ProjectsGridProps {
 
 export function ProjectsGrid({ projects, className }: ProjectsGridProps) {
   const [showAll, setShowAll] = useState(false);
-  const [animating, setAnimating] = useState(false);
+  const buttonRef = useRef<HTMLDivElement>(null);
 
-  const maxVisible = 6;
+  const maxVisible = 9; // 3 rows of 3 cards
   const visibleProjects = showAll ? projects : projects.slice(0, maxVisible);
   const hasMore = projects.length > maxVisible;
 
-  // Handle toggle with animation
+  // Handle toggle with smooth scroll
   const handleToggle = (show: boolean) => {
-    setAnimating(true);
     setShowAll(show);
 
-    // Reset animation flag after animation completes
-    setTimeout(() => {
-      setAnimating(false);
-    }, 500);
+    // Scroll to button after expansion
+    if (show && buttonRef.current) {
+      setTimeout(() => {
+        buttonRef.current?.scrollIntoView({
+          behavior: 'smooth',
+          block: 'center'
+        });
+      }, 300);
+    }
   };
 
   if (!projects || projects.length === 0) {
@@ -40,26 +45,41 @@ export function ProjectsGrid({ projects, className }: ProjectsGridProps) {
 
   return (
     <div className={className}>
-      {/* Projects Grid */}
-      <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 transition-all duration-500 ease-in-out'>
-        {visibleProjects.map((project, index) => (
-          <div
-            key={project.id}
-            className={`transition-all duration-300 ease-in-out ${
-              animating ? 'scale-95 opacity-80' : 'scale-100 opacity-100'
-            }`}
-            style={{
-              transitionDelay: `${index * 50}ms`
-            }}
-          >
-            <ProjectCard project={project} className='h-full' />
-          </div>
-        ))}
+      {/* Projects Grid with extra large margin for shadows and rotations */}
+      <div className='px-16 py-12 mx-4'>
+        <div
+          className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 transition-all duration-300 ease-in-out'
+          style={{
+            maxHeight: showAll ? 'none' : '1800px', // Increased height for larger margins
+            overflow: 'visible' // Changed from hidden to visible to prevent clipping
+          }}
+        >
+          {visibleProjects.map((project, index) => {
+            const { rotation, interactive } = getRandomCardProps(project.id);
+
+            return (
+              <div
+                key={project.id}
+                className='transition-all duration-300 ease-in-out'
+                style={{
+                  transitionDelay: `${index * 50}ms`
+                }}
+              >
+                <ProjectCard
+                  project={project}
+                  className='h-full'
+                  rotation={rotation}
+                  interactive={interactive}
+                />
+              </div>
+            );
+          })}
+        </div>
       </div>
 
       {/* Show More/Less Button */}
       {hasMore && (
-        <div className='flex justify-center mt-6'>
+        <div ref={buttonRef} className='flex justify-center mt-8'>
           {!showAll ? (
             <NeoBadge
               variant='default'

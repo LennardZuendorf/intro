@@ -1,80 +1,110 @@
-# Hero & Section Layout Refactor – Technical Architecture & Implementation Plan
+# Projects Section Finalization – Technical Architecture & Implementation Plan
 
 ## 1. Overview
-We will **eliminate duplicated JSX** in `hero.tsx` by consolidating mobile/tablet/desktop markup into a single responsive tree that leverages Tailwind breakpoint utilities and the existing `Section` compositional API. Minor enhancements to the `Section` component will expose flexible row/column gaps so that future sections can reuse the same responsive grid logic.
+We will deliver a **hybrid Projects showcase** that renders a **responsive grid** on `md`+ screens and keeps the existing **carousel** for `sm` devices. Cards will receive **deterministic random visual variants** (rotation & interactive) to inject playfulness without re-render flicker. A maximum of **3 grid rows** (9 items) will render initially, followed by a “Show more” toggle that expands/collapses the list.
 
-> NOTE: No external package additions are required — Tailwind & existing utilities suffice.
+> NOTE: No third-party packages required – utilities are implemented in-house. All code is typed and passes Biome.
 
 ---
 
 ## 2. Component-Level Changes
 
-### 2.1 `src/components/ui/section.tsx`
-| Change | Rationale |
-|--------|-----------|
-| **Add props** `rowGap?: string` and `colGap?: string` | Allow callers to override default `responsiveGap` & `responsiveColumnGap` without touching internals. |
-| **Expose breakpoint-aware CSS vars** (`--row-gap`, `--col-gap`) via inline style to give granular control if future design iterations need non-Tailwind spacing. | Future-proofing; optional for this refactor. |
-| **Refactor `SectionTop` grid classes** to drive gaps from the new props (`rowGap`, `colGap`) and default to `responsiveColumnGap`. | Centralizes spacing logic. |
-| **Remove leftover comments for legacy columns** | Clean-up. |
+| # | File(s) | Change | Rationale |
+|---|---------|--------|-----------|
+| 2.1 | `src/lib/utils/randomCardProps.ts` **(new)** | Export `getRandomCardProps(projectId)` returning `{ rotation, interactive }` | Centralises variant logic; deterministic via hash of id. |
+| 2.2 | `src/components/sections/components/project-card.tsx` | Accept optional `rotation` & `interactive` props; default to values from parent; forward to `<Card>` | Allows parent to inject visual variety. |
+| 2.3 | `src/components/sections/components/project-grid.tsx` | • Update `maxVisible` → `9`.  
+• Use `getRandomCardProps` per project and pass to `ProjectCard`.  
+• Animate height change via CSS (`transition-[max-height]`) instead of manual anim flag. | Meets PRD limits; random variants; smoother animation. |
+| 2.4 | `src/components/sections/components/project-carousel.tsx` | Generate card props via `getRandomCardProps` & pass to `ProjectCard`. | Carousel should match playful visuals. |
+| 2.5 | `src/components/sections/projects.tsx` | Rename exports to `ProjectsSection` (optional), keep API.  
+Ensure conditional render: `lg:hidden` for carousel, `hidden lg:block` for grid *OR* viewport hook (SSR-safe).  
+Pass `className` down for spacing. | Provides hybrid switch; keeps SSR simple. |
+| 2.6 | `src/components/ui/neoBadge.tsx` (none) | n/a | Show-more button uses existing NeoBadge ‑ no change needed. |
+| 2.7 | **Tests** under `src/components/sections/__tests__/` | Snapshot grid collapsed/expanded; check column count via `getComputedStyle`; carousel presence on `sm`. | Ensure functional correctness. |
 
-Implementation sketch:
-```tsx
-function SectionTop({ children, rowGap, colGap }: { children: ReactNode; rowGap?: string; colGap?: string }) {
-  const gapY = rowGap ?? responsiveColumnGap;
-  const gapX = colGap ?? responsiveColumnGap;
-  return (
-    <div className={cn(`grid grid-cols-1 md:grid-cols-2 w-full`, gapX)}>
-      {/* ...children layout unchanged ... */}
-    </div>
-  );
+---
+
+## 3. Algorithms & Utilities
+
+### 3.1 Deterministic Random Variant
+```ts
+// randomCardProps.ts
+const ROTATIONS = ['none','slight','slightNegative','medium','mediumNegative'] as const;
+const INTERACTIVES = ['none','slight','medium'] as const;
+
+function hashString(str: string): number {
+  let hash = 0;
+  for (let i = 0; i < str.length; i++) {
+    hash = (hash << 5) - hash + str.charCodeAt(i);
+    hash |= 0; // convert to 32-bit
+  }
+  return Math.abs(hash);
+}
+
+export function getRandomCardProps(id: number | string) {
+  const h = typeof id === 'number' ? id : hashString(id.toString());
+  return {
+    rotation: ROTATIONS[h % ROTATIONS.length],
+    interactive: INTERACTIVES[(h >> 3) % INTERACTIVES.length]
+  } as const;
 }
 ```
-
-### 2.2 `src/components/sections/hero.tsx`
-1. **Delete** the two wrapper divs `#hero-mobile-layout` and `#hero-desktop-layout`.
-2. Wrap everything in **single `Section` → `SectionTop` → `SectionLeft` / `SectionRight`** chain.
-3. Use `hidden`, `sm:block`, `lg:flex`, etc. to control visibility & orientation.
-4. **Avatar logic**
-   - `<ImageCard className="hidden sm:block ... lg:w-40 lg:h-40 sm:w-20 sm:h-20" />`.
-5. **Navigation Buttons orientation**
-   - Use `flex-col sm:flex-row` plus `gap-3 md:gap-4` to toggle between stack vs row.
-6. Keep card IDs for analytics but ensure uniqueness (no duplicates).
-7. Remove dead CSS classes & inline widths (`w-full` overrides are fine).
-
-### 2.3 Tests
-* Add Jest snapshot for `HeroSection` rendering at three viewport widths using `@testing-library/react` + `jest-styled-media-query` mock or simple className snapshot.
+The function guarantees **stable output per project id** across renders, preventing hydration mismatches.
 
 ---
 
-## 3. CSS & Tailwind Guidelines
-* Rely on Tailwind’s responsive prefix strategy.
-* Keep **gaps** consistent: use the exported constants from `Section` *or* new props.
-* No bespoke media queries in CSS files.
+## 4. State Management
+* `ProjectsGrid` maintains a local `showAll` boolean via `useState`.
+* Height transition uses CSS to avoid JS timers; still scroll to bottom on expand via `ref.scrollIntoView`.
 
 ---
 
-## 4. Reusable Utilities
-* None required beyond extending `cn` helper if conditional class logic grows.
+## 5. Styling Guidelines
+* Grid wrapper: `grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6` (Tailwind).  
+* Show-more button: `NeoBadge` (`variant='default'` → expand, `variant='outline'` → collapse).
+* Use `rotate-*` & interactive classes driven by `Card` variants.
 
 ---
 
-## 5. Data Flow / Props
-* No API shape changes. `HeroSection` still accepts optional `sectionContent` pulled from PayloadCMS.
-* Avatar URL extraction remains intact.
+## 6. Data Flow / Props
+```
+ProjectsSection (server) -> projects data
+ ├── ProjectsCarousel (client) [sm]  ──┐
+ └── ProjectsGrid (client) [md+]      ├── ProjectCard (client)
+                                      └── ...Card children
+```
+All heavy lifting (random props, toggling) occurs in client components. Server component performs data fetch only.
 
 ---
 
-## 6. Risks & Mitigations
+## 7. Risks & Mitigations
 | Risk | Impact | Mitigation |
-|------|---------|-----------|
-| Overlapping Tailwind classes cause unintended styles | Medium | Isolate responsive modifiers; audit final compiled CSS via DevTools. |
-| Snapshot tests brittle due to class order | Low | Use regex snapshots or assert presence of key class fragments only. |
-| Hidden avatar on mobile harms branding | Low | Re-evaluate after QA; can swap to `sm:hidden` quickly. |
+|------|--------|-----------|
+| Hydration mismatch due to non-deterministic random | Flash / react warnings | Use deterministic hash function. |
+| Large project lists impact LCP | Medium | Limit initial cards to 9, lazy-load images, `next/image` optimisation. |
+| Carousel/Grid duplicate DOM in SSR | Low | Acceptable; hidden via CSS. Optimize later with dynamic import + viewport check if perf issue. |
 
 ---
 
-## 7. Deliverables
-- Updated `section.tsx` with new props + refactored `SectionTop`.
-- Refactored `hero.tsx` with unified responsive markup.
-- New unit/snapshot tests under `src/components/sections/__tests__/`.
-- Git commit following conventional message format `feat(hero): consolidate layout & add section gap props`. 
+## 8. Deliverables
+1. Utility `randomCardProps.ts`.
+2. Updated `ProjectCard` accepting variant props.
+3. Refactored `ProjectsGrid` with show-more and variants.
+4. Refactored `ProjectCarousel` passing variants.
+5. Updated `ProjectsSection` toggling grid/carousel via CSS.
+6. Jest/RTL tests.
+
+---
+
+## 9. Timeline
+| Task | Est. |
+|------|------|
+| 2.1 Utility | 0.5 h |
+| 2.2 Card update | 0.5 h |
+| 2.3 Grid refactor | 1.5 h |
+| 2.4 Carousel update | 0.5 h |
+| 2.5 Section updates | 1 h |
+| 2.7 Tests | 1.5 h |
+| QA / buffer | 1 h |
+| **Total** | **6.5 h** | 

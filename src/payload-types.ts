@@ -6,10 +6,66 @@
  * and re-run `payload generate:types` to regenerate this file.
  */
 
+/**
+ * Supported timezones in IANA format.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "supportedTimezones".
+ */
+export type SupportedTimezones =
+  | 'Pacific/Midway'
+  | 'Pacific/Niue'
+  | 'Pacific/Honolulu'
+  | 'Pacific/Rarotonga'
+  | 'America/Anchorage'
+  | 'Pacific/Gambier'
+  | 'America/Los_Angeles'
+  | 'America/Tijuana'
+  | 'America/Denver'
+  | 'America/Phoenix'
+  | 'America/Chicago'
+  | 'America/Guatemala'
+  | 'America/New_York'
+  | 'America/Bogota'
+  | 'America/Caracas'
+  | 'America/Santiago'
+  | 'America/Buenos_Aires'
+  | 'America/Sao_Paulo'
+  | 'Atlantic/South_Georgia'
+  | 'Atlantic/Azores'
+  | 'Atlantic/Cape_Verde'
+  | 'Europe/London'
+  | 'Europe/Berlin'
+  | 'Africa/Lagos'
+  | 'Europe/Athens'
+  | 'Africa/Cairo'
+  | 'Europe/Moscow'
+  | 'Asia/Riyadh'
+  | 'Asia/Dubai'
+  | 'Asia/Baku'
+  | 'Asia/Karachi'
+  | 'Asia/Tashkent'
+  | 'Asia/Calcutta'
+  | 'Asia/Dhaka'
+  | 'Asia/Almaty'
+  | 'Asia/Jakarta'
+  | 'Asia/Bangkok'
+  | 'Asia/Shanghai'
+  | 'Asia/Singapore'
+  | 'Asia/Tokyo'
+  | 'Asia/Seoul'
+  | 'Australia/Brisbane'
+  | 'Australia/Sydney'
+  | 'Pacific/Guam'
+  | 'Pacific/Noumea'
+  | 'Pacific/Auckland'
+  | 'Pacific/Fiji';
+
 export interface Config {
   auth: {
     users: UserAuthOperations;
   };
+  blocks: {};
   collections: {
     media: Media;
     users: User;
@@ -39,10 +95,12 @@ export interface Config {
   globals: {
     sectionContent: SectionContent;
     legalContent: LegalContent;
+    siteControls: SiteControl;
   };
   globalsSelect: {
     sectionContent: SectionContentSelect<false> | SectionContentSelect<true>;
     legalContent: LegalContentSelect<false> | LegalContentSelect<true>;
+    siteControls: SiteControlsSelect<false> | SiteControlsSelect<true>;
   };
   locale: null;
   user: User & {
@@ -179,6 +237,13 @@ export interface User {
   hash?: string | null;
   loginAttempts?: number | null;
   lockUntil?: string | null;
+  sessions?:
+    | {
+        id: string;
+        createdAt?: string | null;
+        expiresAt: string;
+      }[]
+    | null;
   password?: string | null;
 }
 /**
@@ -201,10 +266,6 @@ export interface Tag {
    * optional - must be viable link, i.e. /about or https://google.com otherwise
    */
   link?: string | null;
-  /**
-   * optional - a link or logo (should be svg)
-   */
-  icon?: (number | null) | Media;
   updatedAt: string;
   createdAt: string;
 }
@@ -462,6 +523,13 @@ export interface UsersSelect<T extends boolean = true> {
   hash?: T;
   loginAttempts?: T;
   lockUntil?: T;
+  sessions?:
+    | T
+    | {
+        id?: T;
+        createdAt?: T;
+        expiresAt?: T;
+      };
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -471,7 +539,6 @@ export interface TagSelect<T extends boolean = true> {
   name?: T;
   type?: T;
   link?: T;
-  icon?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -700,6 +767,50 @@ export interface LegalContent {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "siteControls".
+ */
+export interface SiteControl {
+  id: number;
+  /**
+   * Control which sections are shown on the site
+   */
+  sectionVisibility?: {
+    /**
+     * Show projects section on the landing page
+     */
+    showProjects?: boolean | null;
+    /**
+     * Show about section on the landing page
+     */
+    showAbout?: boolean | null;
+  };
+  socials?: {
+    /**
+     * link to my linkedin profile
+     */
+    linkedin?: (number | null) | Tag;
+    /**
+     * link to my github profile
+     */
+    github?: (number | null) | Tag;
+    /**
+     * link to my github profile
+     */
+    mail?: (number | null) | Tag;
+  };
+  meta?: {
+    title?: string | null;
+    description?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (number | null) | Media;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "sectionContent_select".
  */
 export interface SectionContentSelect<T extends boolean = true> {
@@ -728,6 +839,35 @@ export interface LegalContentSelect<T extends boolean = true> {
   englishText?: T;
   germanText?: T;
   privacy?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "siteControls_select".
+ */
+export interface SiteControlsSelect<T extends boolean = true> {
+  sectionVisibility?:
+    | T
+    | {
+        showProjects?: T;
+        showAbout?: T;
+      };
+  socials?:
+    | T
+    | {
+        linkedin?: T;
+        github?: T;
+        mail?: T;
+      };
+  meta?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        image?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

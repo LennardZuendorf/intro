@@ -1,5 +1,6 @@
-import { Card } from '@/components/ui/card';
+import Image from 'next/image';
 import type { CardProps } from '@/components/ui/card';
+import { Card } from '@/components/ui/card';
 import { cn } from '@/lib/utils/ui';
 
 type Props = {
@@ -48,14 +49,16 @@ export default function ImageCard({
       <div
         className={cn(
           !fullHeight ? aspectRatio : 'flex-grow',
-          'overflow-hidden',
+          'overflow-hidden relative',
           hideCaption ? 'h-full' : ''
         )}
       >
-        <img
+        <Image
           className={cn(`w-${width} h-full object-cover`, imageClassName)}
           src={imageUrl}
           alt={alt}
+          fill
+          sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
         />
       </div>
       {!hideCaption && caption && (

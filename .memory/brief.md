@@ -115,169 +115,24 @@ intro-zuendorf.me serves as a comprehensive digital presence for Lennard Zuendor
 - **Interactive Feedback**: Clear hover states and animations guide user actions
 - **Layout Predictability**: Section-based structure provides familiar navigation patterns 
 
-# Overall Tasks and Project Status
+# Project Roadmap & Tasks
 
-## Project Overview
+This roadmap outlines the remaining work to bring the project to a production-ready state. Tasks are ordered by priority.
 
-**intro-zuendorf.me** - Personal website and portfolio combining professional presence with project showcase. Built with Next.js 15, TypeScript, Payload CMS, and featuring a bold Neobrutalism design system.
+## Phase 1: Core Feature Finalization
+- [ ] **Finalize Project Section Layout**: Complete the design and responsiveness of the main project showcase section.
+- [ ] **Finalize Project Preview Page**: Finish the detailed view page for individual projects.
+- [ ] **Finalize/Cleanup Legal Page**: Ensure the legal page is complete and well-formatted.
+- [ ] **Update PayloadCMS Settings**: Implement necessary configuration changes in the CMS backend.
+- [ ] **Refine Theme Change Notification**: Adjust the toast notification for color mode switching (sizing and wording).
 
-**Version**: 1.3.0  
-**Status**: Active Development  
-**Branch**: neon-building (ahead of origin by 2 commits)
+## Phase 2: Code Quality & Stability
+- [ ] **Cleanup Codebase**: Perform a full pass on the codebase to refactor, remove unused code, and improve readability.
+- [ ] **Add Tests Across Codebase**: Increase unit and integration test coverage for all major components and features.
 
-## Completed Tasks (Major Milestones)
+## Phase 3: Performance & SEO
+- [ ] **Improve & Review Pagespeed**: Analyze and optimize the site's loading performance and Core Web Vitals.
+- [ ] **Review & Finalize SEO**: Implement and verify all SEO-related metadata and configurations.
 
-### Core Infrastructure ✅
-- [x] Next.js 15 setup with App Router architecture
-- [x] TypeScript configuration with strict mode
-- [x] Payload CMS integration with PostgreSQL (Supabase)
-- [x] Supabase database and storage setup
-- [x] Vercel hosting with CI/CD pipeline
-- [x] GitHub Actions for automated testing and deployment
-
-### Design System Implementation ✅
-- [x] TailwindCSS configuration with custom theme
-- [x] Neobrutalism design system implementation
-- [x] shadcn/ui component library integration
-- [x] 5-breakpoint responsive typography system (H1-H4, Lead, L, M, S, XS, Muted, Code)
-- [x] Unified Section component with grid layouts
-- [x] Comprehensive Card component with variants (default, reversed, outline, accent, clickable)
-- [x] Complete Button system with Neobrutalism styling
-
-### Content Management ✅
-- [x] Payload CMS collections (Users, Media, Experiences, Tags, ProjectPost)
-- [x] Global content types (SectionContent, LegalContent)
-- [x] S3-compatible storage adapter for media
-- [x] Email integration with Resend
-- [x] Admin interface for content management
-
-### Core Components ✅
-- [x] Navigation system (Navbar with responsive design)
-- [x] Footer with social links and legal navigation
-- [x] Hero section with personal branding
-- [x] About section with professional background
-- [x] Projects section with carousel and filtering
-- [x] Experience cards with professional timeline
-- [x] Project cards with detailed information
-- [x] ScrollArrow component for smooth navigation
-- [x] Interactive UI components (Accordion, Dialog, Dropdown, Tabs, etc.)
-
-### Code Quality and Tooling ✅
-- [x] Migration from ESLint + Prettier to Biome (unified linting/formatting)
-- [x] Husky git hooks with lint-staged pre-commit checks
-- [x] Proper TypeScript types and payload-types generation
-- [x] Environment configuration and security setup
-
-## In Progress Tasks
-
-### New Badge Block System 🔄
-- [x] Badge block Component.tsx created
-- [x] Badge block config.ts created
-- [ ] Badge block integration testing
-- [ ] Badge block documentation
-- [ ] Git tracking for new badge block files
-
-**Status**: Component files created but not yet committed to repository.
-
-### Package Updates 🔄
-- [x] package.json modifications in progress
-- [x] pnpm-lock.yaml updates
-- [ ] Dependency verification and testing
-- [ ] Update documentation for new dependencies
-
-**Status**: Package changes made but not committed.
-
-## Pending Tasks (Identified)
-
-### Development Workflow 📋
-- [ ] Complete git commit for current changes (badge block + package updates)
-- [ ] Verify all new components are properly integrated
-- [ ] Test badge block functionality across all breakpoints
-- [ ] Update component documentation
-
-### Content and Features 📋
-- [ ] Populate CMS with current project data
-- [ ] Add real professional experience data
-- [ ] Create project detail pages for portfolio items
-- [ ] Implement contact form functionality
-- [ ] Add blog/article functionality (if needed)
-
-### Performance and Optimization 📋
-- [ ] Image optimization for all media assets
-- [ ] Core Web Vitals optimization
-- [ ] SEO metadata completion
-- [ ] Analytics integration verification
-- [ ] Performance monitoring setup
-
-### Testing and Quality Assurance 📋
-- [ ] Cross-browser compatibility testing
-- [ ] Mobile device testing across various screen sizes
-- [ ] Accessibility audit and WCAG compliance verification
-- [ ] Load testing and performance benchmarking
-- [ ] Security audit for CMS and database access
-
-### Documentation and Maintenance 📋
-- [ ] Component library documentation
-- [ ] CMS content guidelines
-- [ ] Deployment and maintenance procedures
-- [ ] Backup and recovery procedures
-
-## Project Health Status
-
-### ✅ Strengths
-- Solid architectural foundation with modern tech stack
-- Comprehensive design system implementation
-- Type-safe development with TypeScript
-- Automated code quality with Biome
-- Flexible content management with Payload CMS
-- Responsive design with mobile-first approach
-
-### ⚠️ Areas for Attention
-- Uncommitted changes need to be properly tracked
-- New badge component needs integration testing
-- Content population required for full functionality
-- Performance optimization pending
-- Documentation could be expanded
-
-### 🚨 Risks
-- Package updates might introduce breaking changes
-- Uncommitted work could be lost
-- Missing content limits site functionality
-- Performance not yet optimized for production
-
-## Next Priority Actions
-
-1. **Immediate (Today)**:
-   - Commit current changes (badge block + package updates)
-   - Verify badge component functionality
-   - Test all existing components still work properly
-
-2. **Short Term (This Week)**:
-   - Populate CMS with real content
-   - Complete performance optimization
-   - Full testing across devices and browsers
-
-3. **Medium Term (This Month)**:
-   - Analytics and monitoring setup
-   - SEO optimization completion
-   - Documentation expansion
-   - Security audit
-
-## Technical Debt
-
-### Recently Resolved ✅
-- Code quality tooling migration (ESLint/Prettier → Biome)
-- Typography system standardization
-- Component architecture unification
-
-### Current Technical Debt 📋
-- Mixed component patterns (some custom, some standardized)
-- Incomplete test coverage
-- Missing documentation for newer components
-- Performance optimizations not yet implemented
-
-### Monitoring Requirements
-- Regular dependency updates
-- Security patch monitoring
-- Performance metric tracking
-- Error monitoring and alerting 
+## Phase 4: Future Exploration (Optional)
+- [ ] **Implement Full Theming**: Review and potentially implement a more robust theming system beyond simple color modes. 

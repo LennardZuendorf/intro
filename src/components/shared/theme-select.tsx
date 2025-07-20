@@ -2,17 +2,14 @@
 
 import { CommandList } from 'cmdk';
 import { Monitor, Moon, Sun } from 'lucide-react';
-
+import { useTheme } from 'next-themes';
 import * as React from 'react';
-
+import { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Command, CommandGroup, CommandItem } from '@/components/ui/command';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { useToast } from '@/hooks/use-toast';
-
 import { cn } from '@/lib/utils/ui';
-import { useTheme } from 'next-themes';
-import { useEffect, useState } from 'react';
 
 const themes = [
   {

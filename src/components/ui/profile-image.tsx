@@ -1,8 +1,6 @@
 'use client';
 
-import { cn } from '@/lib/utils/ui';
 import type { Media } from '@/payload-types';
-import React from 'react';
 import ImageCard from './image-card';
 
 // Interface to match PayloadCMS Media structure

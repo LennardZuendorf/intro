@@ -1,3 +1,4 @@
+import { RichText } from '@payloadcms/richtext-lexical/react';
 import type { SectionProps as PageSectionProps } from '@/app/(app)/page';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { NeoBadge } from '@/components/ui/neoBadge';
@@ -8,60 +9,21 @@ import {
   SectionRight,
   SectionTop
 } from '@/components/ui/section';
-import { Code, M, S } from '@/components/ui/typography';
-import type { Experience, SectionContent, Tag } from '@/payload-types';
-import { aboutFallbackData } from '../../../content/AboutContent';
-import CarouselVertical from './components/experience-carousel';
+import { Code, M } from '@/components/ui/typography';
+import { fetchAllExperiences } from '@/lib/content/fetchExperiences';
+import { fetchSectionContent } from '@/lib/content/fetchSectionContent';
+import { fetchSkillTags } from '@/lib/content/fetchTags';
+import ExperienceCarousel from './components/experience-carousel';
 import SkillsShowcase from './components/skills-showcase';
 
-interface AboutSectionProps extends PageSectionProps {
-  sectionContent?: SectionContent | null;
-  allExperiences?: Experience[] | null;
-}
-
-type RichTextNode = {
-  type: string;
-  children?: RichTextNode[];
-  text?: string;
-};
-
-const extractTextFromRichText = (richText: { root: { children: RichTextNode[] } }): string => {
-  if (!richText?.root?.children) return '';
-
-  return richText.root.children
-    .map((child: RichTextNode) => {
-      if (child.type === 'paragraph' && child.children) {
-        return child.children
-          .filter((textNode: RichTextNode) => textNode.type === 'text')
-          .map((textNode: RichTextNode) => textNode.text)
-          .join('');
-      }
-      return '';
-    })
-    .filter(Boolean)
-    .join(' ');
-};
-
-export default function AboutSection({
-  className,
-  sectionContent,
-  allExperiences
-}: AboutSectionProps) {
-  const aboutMeText = sectionContent?.MainAboutMeSection
-    ? extractTextFromRichText(sectionContent.MainAboutMeSection)
-    : aboutFallbackData.aboutMeText;
-
-  const allSkills =
-    sectionContent?.selectedSkills?.map((skill) => (skill as Tag).name) || aboutFallbackData.skills;
+export default async function AboutSection({ className }: PageSectionProps) {
+  const sectionContent = await fetchSectionContent();
+  const allExperiences = await fetchAllExperiences();
+  const allSkills = await fetchSkillTags();
 
   return (
     <section id='about'>
-      <Section
-        className={className}
-        background='grid'
-        centerContent={true}
-        containerClassName='justify-center items-center mx-auto relative z-[2]'
-      >
+      <Section className={className} background='grid'>
         <SectionTop>
           <SectionLeft>
             {/* About Me Card */}
@@ -80,8 +42,21 @@ export default function AboutSection({
                   </div>
                 </CardHeader>
                 <CardContent className='p-5 pt-0 md:p-6 md:pt-0 2xl:p-8 2xl:pt-0'>
-                  <div className='prose dark:prose-invert max-w-none'>
-                    <M className='font-mono leading-relaxed'>{aboutMeText}</M>
+                  <div className='md:col-span-2'>
+                    {sectionContent?.MainAboutMeSection &&
+                    typeof sectionContent.MainAboutMeSection === 'object' &&
+                    'root' in sectionContent.MainAboutMeSection ? (
+                      <RichText
+                        className='font-mono leading-relaxed'
+                        data={sectionContent.MainAboutMeSection}
+                      />
+                    ) : (
+                      <M className='font-mono leading-relaxed'>
+                        {typeof sectionContent?.MainIntroSection === 'string'
+                          ? sectionContent.MainIntroSection
+                          : 'Welcome to my portfolio'}
+                      </M>
+                    )}
                   </div>
                 </CardContent>
               </Card>
@@ -104,22 +79,11 @@ export default function AboutSection({
                 </CardHeader>
                 <CardContent className='p-4 pt-0 md:p-5 md:pt-0 2xl:p-6 2xl:pt-0'>
                   <div className='grid grid-cols-4 gap-2'>
-                    <div className='text-center'>
-                      <M className='font-mono font-bold'>5+</M>
-                      <S className='font-mono text-muted-foreground text-xs'>Years</S>
-                    </div>
-                    <div className='text-center'>
-                      <M className='font-mono font-bold'>15+</M>
-                      <S className='font-mono text-muted-foreground text-xs'>Projects Built</S>
-                    </div>
-                    <div className='text-center'>
-                      <M className='font-mono font-bold'>3</M>
-                      <S className='font-mono text-muted-foreground text-xs'>Languages</S>
-                    </div>
-                    <div className='text-center'>
-                      <M className='font-mono font-bold'>Berlin</M>
-                      <S className='font-mono text-muted-foreground text-xs'>Based In</S>
-                    </div>
+                    {sectionContent?.quickSkills?.map((quickStat, index) => (
+                      <div key={quickStat.id || index} className='text-center'>
+                        <M className='font-mono font-bold'>{quickStat.skill}</M>
+                      </div>
+                    ))}
                   </div>
                 </CardContent>
               </Card>
@@ -149,7 +113,7 @@ export default function AboutSection({
                   </div>
                 </CardHeader>
                 <CardContent className='py-5 px-0'>
-                  <CarouselVertical experiences={allExperiences} visibleCount={1} />
+                  <ExperienceCarousel experiences={allExperiences} visibleCount={1} />
                 </CardContent>
               </Card>
             </div>
