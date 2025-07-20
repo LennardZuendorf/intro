@@ -24,6 +24,7 @@
     "@21st-extension/react": "^0.5.14",
     "@21st-extension/toolbar-next": "^0.5.14",
     "@floating-ui/react": "^0.27.3",
+    "@openpanel/nextjs": "^1.0.8",
     "@payloadcms/db-postgres": "3.48.0",
     "@payloadcms/email-resend": "3.48.0",
     "@payloadcms/live-preview-react": "3.48.0",

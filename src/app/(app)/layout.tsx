@@ -3,13 +3,11 @@ import './globals.css';
 import { ReactPlugin } from '@21st-extension/react';
 import { TwentyFirstToolbar } from '@21st-extension/toolbar-next';
 import { Inter } from 'next/font/google';
-import Script from 'next/script';
 import { Footer } from '@/components/footer';
 import { Nav } from '@/components/navbar';
 import { Providers } from '@/components/providers';
 import { ScrollArrow } from '@/components/scroll-arrow';
 import { Toaster } from '@/components/ui/toaster';
-import { env } from '@/env';
 import SetColorPreference from '@/lib/utils/setColorPreference';
 import { cn } from '@/lib/utils/ui';
 
@@ -29,12 +27,6 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         {/* Preconnect for performance */}
         <link rel='preconnect' href='https://fonts.googleapis.com' />
         <link rel='preconnect' href='https://fonts.gstatic.com' crossOrigin='anonymous' />
-
-        <Script
-          src={env.NEXT_PUBLIC_UMAMI_SCRIPT_SRC}
-          data-website-id={env.NEXT_PUBLIC_UMAMI_WEBSITE_ID}
-          strategy='lazyOnload'
-        />
       </head>
       <body className={cn('min-h-screen bg-primary font-sans antialiased relative')}>
         <div className='absolute inset-0 -z-10 h-full w-full bg-primary' />

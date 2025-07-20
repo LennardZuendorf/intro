@@ -15,8 +15,9 @@ export const env = createEnv({
     NEXT_PUBLIC_URL: z.string().min(1, 'NEXT_PUBLIC_URL is required')
   },
   client: {
-    NEXT_PUBLIC_UMAMI_SCRIPT_SRC: z.string().url(),
-    NEXT_PUBLIC_UMAMI_WEBSITE_ID: z.string().uuid()
+    NEXT_PUBLIC_OPENPANEL_CLIENT_ID: z
+      .string()
+      .min(1, 'NEXT_PUBLIC_OPENPANEL_CLIENT_ID is required')
   },
   runtimeEnv: {
     POSTGRES_URL: process.env.POSTGRES_URL,
@@ -27,8 +28,7 @@ export const env = createEnv({
     S3_STORAGE_BUCKET: process.env.S3_STORAGE_BUCKET,
     PAYLOAD_SECRET: process.env.PAYLOAD_SECRET,
     NODE_ENV: process.env.NODE_ENV,
-    NEXT_PUBLIC_UMAMI_SCRIPT_SRC: process.env.NEXT_PUBLIC_UMAMI_SCRIPT_SRC,
-    NEXT_PUBLIC_UMAMI_WEBSITE_ID: process.env.NEXT_PUBLIC_UMAMI_WEBSITE_ID,
+    NEXT_PUBLIC_OPENPANEL_CLIENT_ID: process.env.NEXT_PUBLIC_OPENPANEL_CLIENT_ID,
     RESEND_API_KEY: process.env.RESEND_API_KEY,
     NEXT_PUBLIC_URL: process.env.NEXT_PUBLIC_VERCEL_URL
       ? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`
