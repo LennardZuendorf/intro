@@ -77,6 +77,5 @@ export const Experiences: CollectionConfig = {
         }
       ]
     }
-  ],
-  upload: true
+  ]
 };
