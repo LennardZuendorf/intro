@@ -2,7 +2,13 @@ name: Build, Check, and Migrate DB
 
 on:
   push:
-    
+    branches:
+      - main
+
+  pull_request:
+    branches:
+      - main
+
   workflow_dispatch:
 
 env:
@@ -51,7 +57,7 @@ jobs:
         run: pnpm install
 
       - name: Run Payload Migrations (Fresh)
-        run: yes | pnpm payload migrate:fresh
+        run: yes | pnpm payload migrate --yes
 
       - name: Run Biome Check
         run: pnpm run check
