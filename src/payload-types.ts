@@ -589,21 +589,13 @@ export interface SectionContent {
    */
   avatar?: (number | null) | Media;
   /**
-   * selection of skills to showcase in the skills card
-   */
-  selectedSkills?: (number | Tag)[] | null;
-  /**
-   * selection of tech to showcase in the skills card
-   */
-  selectedTechStacks?: (number | Tag)[] | null;
-  /**
    * single project shown on the project preview card
    */
-  selectedProjects?: (number | null) | Project;
+  selectedProject?: (number | null) | Project;
   /**
    * single (current) experience shown on the experience preview card
    */
-  selectedExperiences?: (number | null) | Experience;
+  selectedExperience?: (number | null) | Experience;
   /**
    * exactly 4 skills to display in the quick skills section
    */
@@ -734,10 +726,8 @@ export interface SectionContentSelect<T extends boolean = true> {
   MainIntroSection?: T;
   MainAboutMeSection?: T;
   avatar?: T;
-  selectedSkills?: T;
-  selectedTechStacks?: T;
-  selectedProjects?: T;
-  selectedExperiences?: T;
+  selectedProject?: T;
+  selectedExperience?: T;
   quickSkills?:
     | T
     | {

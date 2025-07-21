@@ -48,13 +48,21 @@ export default buildConfig({
     outputFile: path.resolve(dirname, 'payload-types.ts')
   },
   db: postgresAdapter({
-    pool: {
-      user: env.POSTGRES_USER,
-      password: env.POSTGRES_PASSWORD,
-      database: env.POSTGRES_DB,
-      host: env.POSTGRES_HOST,
-      port: env.POSTGRES_PORT
-    }
+    ...(env.NEXT_PUBLIC_URL.includes('localhost')
+      ? {
+          pool: {
+            connectionString: env.POSTGRES_URL
+          }
+        }
+      : {
+          pool: {
+            user: env.POSTGRES_USER,
+            password: env.POSTGRES_PASSWORD,
+            database: env.POSTGRES_DB,
+            host: env.POSTGRES_HOST,
+            port: env.POSTGRES_PORT
+          }
+        })
   }),
   sharp,
   plugins: [

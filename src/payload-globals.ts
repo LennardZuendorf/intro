@@ -37,40 +37,7 @@ export const SectionContent: GlobalConfig = {
       type: 'row',
       fields: [
         {
-          name: 'selectedSkills',
-          type: 'relationship',
-          relationTo: 'tag', // ensure this matches your Skills collection slug
-          hasMany: true,
-          filterOptions: () => ({
-            type: {
-              equals: 'skill'
-            }
-          }),
-          admin: {
-            description: 'selection of skills to showcase in the skills card'
-          }
-        },
-        {
-          name: 'selectedTechStacks',
-          type: 'relationship',
-          relationTo: 'tag', // ensure this matches your Techstacks collection slug
-          hasMany: true,
-          filterOptions: () => ({
-            type: {
-              equals: 'techstack'
-            }
-          }),
-          admin: {
-            description: 'selection of tech to showcase in the skills card'
-          }
-        }
-      ]
-    },
-    {
-      type: 'row',
-      fields: [
-        {
-          name: 'selectedProjects',
+          name: 'selectedProject',
           type: 'relationship',
           relationTo: 'projects', // ensure this matches your Projects collection slug
           hasMany: false,
@@ -79,7 +46,7 @@ export const SectionContent: GlobalConfig = {
           }
         },
         {
-          name: 'selectedExperiences',
+          name: 'selectedExperience',
           type: 'relationship',
           relationTo: 'experiences', // ensure this matches your Experiences collection slug
           hasMany: false,

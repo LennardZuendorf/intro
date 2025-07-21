@@ -26,9 +26,9 @@ export const HeroSection = async ({ className, siteControls }: HeroSectionProps)
   const heroImageUrl =
     typeof sectionContent.avatar === 'object' && sectionContent.avatar?.url
       ? sectionContent.avatar.url
-      : '/img/avatar.png';
-  const project = await fetchProjectById(sectionContent.selectedProjects as number);
-  const experience = await fetchExperienceById(sectionContent.selectedExperiences as number);
+      : null;
+  const project = await fetchProjectById(sectionContent.selectedProject as number);
+  const experience = await fetchExperienceById(sectionContent.selectedExperience as number);
 
   return (
     <section id='hero'>
@@ -73,16 +73,18 @@ export const HeroSection = async ({ className, siteControls }: HeroSectionProps)
                     )}
                   </div>
 
-                  <ImageCard
-                    imageUrl={heroImageUrl}
-                    alt='Profile picture'
-                    className='hidden md:block relative min-w-[30px] md:w-[10vw] shadow-sm'
-                    aspectRatio='aspect-square'
-                    hideCaption={true}
-                    rotation='medium'
-                    interactive='slight'
-                    variant='outline'
-                  />
+                  {heroImageUrl && (
+                    <ImageCard
+                      imageUrl={heroImageUrl}
+                      alt='Profile picture'
+                      className='hidden md:block relative min-w-[30px] md:w-[10vw] shadow-sm'
+                      aspectRatio='aspect-square'
+                      hideCaption={true}
+                      rotation='medium'
+                      interactive='slight'
+                      variant='outline'
+                    />
+                  )}
                 </div>
 
                 <div className='flex flex-wrap gap-2 md:gap-3'>
@@ -146,47 +148,46 @@ export const HeroSection = async ({ className, siteControls }: HeroSectionProps)
           <SectionRight>
             {/*Project Card*/}
 
-            {siteControls.sectionVisibility?.showProjects ||
-              (sectionContent.selectedProjects !== null && (
-                <Card
-                  id='project-card'
-                  className='relative w-full'
-                  interactive='medium'
-                  rotation='medium'
-                >
-                  <CardHeader className='p-5 pb-2 md:p-6 md:pb-2 2xl:p-8 2xl:pb-2'>
-                    <div className='absolute -top-2 -left-2 md:-top-3 md:-left-3'>
-                      <NeoBadge
-                        variant='dark'
-                        rotation='slight'
-                        className='font-mono'
-                        interactive='bounce'
-                      >
-                        <Code>My Latest Project</Code>
-                      </NeoBadge>
-                    </div>
-                    <H3 className='rotate-1'>{project?.title}</H3>
-                  </CardHeader>
-                  <CardContent className='p-5 pt-0 md:p-6 md:pt-0 2xl:p-8 2xl:pt-0'>
-                    <div id='project-content' className='max-w-none mb-3'>
-                      <M className='font-mono leading-relaxed'>{project?.shortDescription}</M>
-                    </div>
-                    <div id='project-cta' className='flex justify-start'>
-                      <IconLink
-                        href={project?.liveUrl || '#'}
-                        icon={<HiMiniArrowTopRightOnSquare className='h-4 w-4' />}
-                        variant='default'
-                        size='default'
-                        iconPosition='right'
-                      >
-                        Learn More
-                      </IconLink>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
+            {sectionContent.selectedProject && (
+              <Card
+                id='project-card'
+                className='relative w-full'
+                interactive='medium'
+                rotation='medium'
+              >
+                <CardHeader className='p-5 pb-2 md:p-6 md:pb-2 2xl:p-8 2xl:pb-2'>
+                  <div className='absolute -top-2 -left-2 md:-top-3 md:-left-3'>
+                    <NeoBadge
+                      variant='dark'
+                      rotation='slight'
+                      className='font-mono'
+                      interactive='bounce'
+                    >
+                      <Code>My Latest Project</Code>
+                    </NeoBadge>
+                  </div>
+                  <H3 className='rotate-1'>{project?.title}</H3>
+                </CardHeader>
+                <CardContent className='p-5 pt-0 md:p-6 md:pt-0 2xl:p-8 2xl:pt-0'>
+                  <div id='project-content' className='max-w-none mb-3'>
+                    <M className='font-mono leading-relaxed'>{project?.shortDescription}</M>
+                  </div>
+                  <div id='project-cta' className='flex justify-start'>
+                    <IconLink
+                      href={project?.liveUrl || '#'}
+                      icon={<HiMiniArrowTopRightOnSquare className='h-4 w-4' />}
+                      variant='default'
+                      size='default'
+                      iconPosition='right'
+                    >
+                      Learn More
+                    </IconLink>
+                  </div>
+                </CardContent>
+              </Card>
+            )}
 
-            {siteControls.sectionVisibility?.showAbout && (
+            {sectionContent.selectedExperience && (
               <Card
                 id='current-role-card'
                 className='relative w-full'

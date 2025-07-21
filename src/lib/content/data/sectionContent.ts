@@ -49,8 +49,8 @@ export const sectionContentFallback: SectionContent = {
     }
   },
   avatar: null, // Will use default avatar
-  selectedProjects: 1, // Will be handled with individual fallback data
-  selectedExperiences: 1, // Will be handled with individual fallback data
+  selectedProject: 1, // Will be handled with individual fallback data
+  selectedExperience: 1, // Will be handled with individual fallback data
   quickSkills: [
     { skill: 'Product Management', id: '1' },
     { skill: 'Software Engineering', id: '2' },
