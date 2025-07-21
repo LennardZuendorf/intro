@@ -74,35 +74,23 @@ export default buildConfig({
       generateTitle: ({ doc }) => `Zuendorf.Me — ${doc.title}`,
       generateDescription: ({ doc }) => doc.excerpt
     }),
-    ...(env.PAYLOAD_USE_VERCEL_BLOB === 'true' && !env.BLOB_READ_WRITE_TOKEN
-      ? [
-          vercelBlobStorage({
-            enabled: true,
-            collections: {
-              media: true
-            },
-            token: env.BLOB_READ_WRITE_TOKEN
-          })
-        ]
-      : [
-          s3Storage({
-            collections: {
-              media: {
-                prefix: 'media'
-              }
-            },
-            bucket: env.S3_STORAGE_BUCKET,
-            config: {
-              forcePathStyle: true,
-              credentials: {
-                accessKeyId: env.S3_ACCESS_KEY,
-                secretAccessKey: env.S3_SECRET_KEY
-              },
-              region: env.S3_REGION,
-              endpoint: env.S3_STORAGE_URL
-            }
-          })
-        ])
+    s3Storage({
+      collections: {
+        media: {
+          prefix: 'media'
+        }
+      },
+      bucket: env.S3_STORAGE_BUCKET,
+      config: {
+        forcePathStyle: true,
+        credentials: {
+          accessKeyId: env.S3_ACCESS_KEY,
+          secretAccessKey: env.S3_SECRET_KEY
+        },
+        region: env.S3_REGION,
+        endpoint: env.S3_STORAGE_URL
+      }
+    })
   ],
   collections: [Media, Tag, Experiences, ProjectPost],
   globals: [SectionContent, LegalContent, SiteControls]
