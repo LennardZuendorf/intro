@@ -2,12 +2,11 @@
 
 import configPromise from '@payload-config';
 import { getPayload } from 'payload';
-import { cache } from 'react';
 import type { SectionContent } from '@/payload-types';
 import { sectionContentFallback } from './data/sectionContent';
 
-// Base query functions - CACHED for deduplication across multiple composite functions
-const querySectionContentRaw = cache(async (): Promise<SectionContent | null> => {
+// Base query functions - removed cache for direct data loading
+const querySectionContentRaw = async (): Promise<SectionContent | null> => {
   try {
     const payload = await getPayload({ config: configPromise });
     const sectionContent = await payload.findGlobal({
@@ -19,10 +18,10 @@ const querySectionContentRaw = cache(async (): Promise<SectionContent | null> =>
     console.error('Error fetching section content:', error);
     return null;
   }
-});
+};
 
 // MAIN FUNCTION: Returns complete SectionContent with guaranteed fallbacks
-export const fetchSectionContent = cache(async (): Promise<SectionContent> => {
+export const fetchSectionContent = async (): Promise<SectionContent> => {
   const rawSectionContent = await querySectionContentRaw();
 
   // If we have PayloadCMS data, return it; otherwise return complete fallback
@@ -32,4 +31,4 @@ export const fetchSectionContent = cache(async (): Promise<SectionContent> => {
 
   // Return complete fallback with proper PayloadCMS structure
   return sectionContentFallback;
-});
+};

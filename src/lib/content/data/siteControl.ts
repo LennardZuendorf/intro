@@ -12,11 +12,11 @@ const image: Media = {
   createdAt: new Date().toISOString()
 };
 
-export const contentSettings: SiteControl = {
+export const siteControlFallback: SiteControl = {
   id: 1,
   sectionVisibility: {
-    showProjects: true,
-    showAbout: true
+    showProjects: false,
+    showAbout: false
   },
   socials: {
     linkedin: tags[0],

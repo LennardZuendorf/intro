@@ -2,12 +2,11 @@
 
 import configPromise from '@payload-config';
 import { getPayload } from 'payload';
-import { cache } from 'react';
+import { siteControlFallback } from '@/lib/content/data/siteControl';
 import type { SiteControl } from '@/payload-types';
-import { contentSettings } from './data/contentSettings';
 
-// MAIN FUNCTION: Returns complete SiteControl with guaranteed fallbacks - CACHED for deduplication
-export const fetchSiteControls = cache(async (): Promise<SiteControl> => {
+// MAIN FUNCTION: Returns complete SiteControl with guaranteed fallbacks
+export const fetchSiteControls = async (): Promise<SiteControl> => {
   try {
     const payload = await getPayload({ config: configPromise });
     const siteControls = await payload.findGlobal({
@@ -23,5 +22,5 @@ export const fetchSiteControls = cache(async (): Promise<SiteControl> => {
   }
 
   // Return complete fallback from ContentSettings
-  return contentSettings;
-});
+  return siteControlFallback;
+};

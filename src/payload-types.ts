@@ -196,6 +196,10 @@ export interface Experience {
   id: number;
   company: string;
   position: string;
+  /**
+   * Company website URL (optional)
+   */
+  url?: string | null;
   startDate: string;
   /**
    * Leave blank if still working here
@@ -208,15 +212,6 @@ export interface Experience {
   responsibilityThree?: string | null;
   updatedAt: string;
   createdAt: string;
-  url?: string | null;
-  thumbnailURL?: string | null;
-  filename?: string | null;
-  mimeType?: string | null;
-  filesize?: number | null;
-  width?: number | null;
-  height?: number | null;
-  focalX?: number | null;
-  focalY?: number | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -462,6 +457,7 @@ export interface TagSelect<T extends boolean = true> {
 export interface ExperiencesSelect<T extends boolean = true> {
   company?: T;
   position?: T;
+  url?: T;
   startDate?: T;
   endDate?: T;
   skills?: T;
@@ -471,15 +467,6 @@ export interface ExperiencesSelect<T extends boolean = true> {
   responsibilityThree?: T;
   updatedAt?: T;
   createdAt?: T;
-  url?: T;
-  thumbnailURL?: T;
-  filename?: T;
-  mimeType?: T;
-  filesize?: T;
-  width?: T;
-  height?: T;
-  focalX?: T;
-  focalY?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

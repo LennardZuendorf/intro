@@ -19,6 +19,9 @@ const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
 
 export default buildConfig({
+  upload: {
+    uploadTimeout: 90000
+  },
   admin: {
     importMap: {
       baseDir: path.resolve(dirname)

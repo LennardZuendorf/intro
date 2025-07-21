@@ -2,12 +2,11 @@
 
 import configPromise from '@payload-config';
 import { getPayload } from 'payload';
-import { cache } from 'react';
 import { tags as fallbackTags } from '@/lib/content/data/tagContent';
 import type { Tag } from '@/payload-types';
 
-// Base query functions - CACHED for deduplication
-const fetchAllTags = cache(async (): Promise<Tag[]> => {
+// Base query functions - removed cache for direct data loading
+const fetchAllTags = async (): Promise<Tag[]> => {
   try {
     const payload = await getPayload({ config: configPromise });
     const allTags = await payload.find({
@@ -27,9 +26,9 @@ const fetchAllTags = cache(async (): Promise<Tag[]> => {
     // Fallback to static tag data
     return fallbackTags;
   }
-});
+};
 
-export const fetchSkillTags = cache(async (): Promise<Tag[]> => {
+export const fetchSkillTags = async (): Promise<Tag[]> => {
   const tags = await fetchAllTags();
   const skills = tags.filter((tag) => tag.type === 'skill');
 
@@ -38,9 +37,9 @@ export const fetchSkillTags = cache(async (): Promise<Tag[]> => {
   }
 
   return skills;
-});
+};
 
-export const fetchTechStackTags = cache(async (): Promise<Tag[]> => {
+export const fetchTechStackTags = async (): Promise<Tag[]> => {
   const tags = await fetchAllTags();
   const techStack = tags.filter((tag) => tag.type === 'techstack');
 
@@ -49,9 +48,9 @@ export const fetchTechStackTags = cache(async (): Promise<Tag[]> => {
   }
 
   return techStack;
-});
+};
 
-export const fetchSocialTags = cache(async (): Promise<Tag[]> => {
+export const fetchSocialTags = async (): Promise<Tag[]> => {
   const tags = await fetchAllTags();
   const socials = tags.filter((tag) => tag.type === 'socials');
 
@@ -60,4 +59,4 @@ export const fetchSocialTags = cache(async (): Promise<Tag[]> => {
   }
 
   return socials;
-});
+};

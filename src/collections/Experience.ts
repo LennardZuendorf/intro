@@ -24,6 +24,14 @@ export const Experiences: CollectionConfig = {
       ]
     },
     {
+      name: 'url',
+      type: 'text',
+      required: false,
+      admin: {
+        description: 'Company website URL (optional)'
+      }
+    },
+    {
       type: 'row',
       fields: [
         {

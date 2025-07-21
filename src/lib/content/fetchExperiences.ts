@@ -2,12 +2,11 @@
 
 import configPromise from '@payload-config';
 import { getPayload } from 'payload';
-import { cache } from 'react';
 import { experienceData } from '@/lib/content/data/experienceContent';
 import type { Experience, Tag } from '@/payload-types';
 
 // Raw query for all projects from PayloadCMS
-export const fetchAllExperiences = cache(async (): Promise<Experience[]> => {
+export const fetchAllExperiences = async (): Promise<Experience[]> => {
   try {
     const payload = await getPayload({ config: configPromise });
 
@@ -119,17 +118,15 @@ export const fetchAllExperiences = cache(async (): Promise<Experience[]> => {
 
     return experienceData;
   }
-});
+};
 
 // MAIN FUNCTION: Returns single project by ID (no fallback - null if not found)
-export const fetchExperienceById = cache(
-  async (experienceId: number): Promise<Experience | null> => {
-    const experiences = await fetchAllExperiences();
+export const fetchExperienceById = async (experienceId: number): Promise<Experience | null> => {
+  const experiences = await fetchAllExperiences();
 
-    if (experiences.length <= 1) {
-      return experienceData.find((experience) => experience.id === experienceId) || null;
-    }
-
-    return experiences.find((experience) => experience.id === experienceId) || null;
+  if (experiences.length <= 1) {
+    return experienceData.find((experience) => experience.id === experienceId) || null;
   }
-);
+
+  return experiences.find((experience) => experience.id === experienceId) || null;
+};

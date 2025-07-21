@@ -27,15 +27,7 @@ export const experienceData: Experience[] = [
       'Agile sprint management and support in regular Scrum ceremonies in close collaboration with the product management and IT teams.',
     updatedAt: '2024-03-01T00:00:00.000Z',
     createdAt: '2024-03-01T00:00:00.000Z',
-    url: 'https://flug.check24.de',
-    thumbnailURL: null,
-    filename: null,
-    mimeType: null,
-    filesize: null,
-    width: null,
-    height: null,
-    focalX: null,
-    focalY: null
+    url: 'https://flug.check24.de'
   },
   {
     id: 2,
@@ -60,15 +52,7 @@ export const experienceData: Experience[] = [
       'Release management, testing, and quality assurance of weekly product updates.',
     updatedAt: '2023-09-01T00:00:00.000Z',
     createdAt: '2023-09-01T00:00:00.000Z',
-    url: 'https://flug.check24.de',
-    thumbnailURL: null,
-    filename: null,
-    mimeType: null,
-    filesize: null,
-    width: null,
-    height: null,
-    focalX: null,
-    focalY: null
+    url: 'https://flug.check24.de'
   },
   {
     id: 3,
@@ -92,15 +76,7 @@ export const experienceData: Experience[] = [
       'Supported product strategy in the segment through analysis, research, conception, and execution with the CPO.',
     updatedAt: '2022-08-01T00:00:00.000Z',
     createdAt: '2022-08-01T00:00:00.000Z',
-    url: 'https://hypoport.de',
-    thumbnailURL: null,
-    filename: null,
-    mimeType: null,
-    filesize: null,
-    width: null,
-    height: null,
-    focalX: null,
-    focalY: null
+    url: 'https://hypoport.de'
   },
   {
     id: 4,
@@ -125,14 +101,6 @@ export const experienceData: Experience[] = [
       'Was involved in numerous new venture development cases and ran the internal business case development tool.',
     updatedAt: '2019-05-01T00:00:00.000Z',
     createdAt: '2019-05-01T00:00:00.000Z',
-    url: 'https://hypoport.de',
-    thumbnailURL: null,
-    filename: null,
-    mimeType: null,
-    filesize: null,
-    width: null,
-    height: null,
-    focalX: null,
-    focalY: null
+    url: 'https://hypoport.de'
   }
 ];

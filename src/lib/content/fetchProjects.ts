@@ -3,12 +3,11 @@
 import configPromise from '@payload-config';
 import { draftMode } from 'next/headers';
 import { getPayload } from 'payload';
-import { cache } from 'react';
 import { fetchTechStackTags } from '@/lib/content/fetchTags';
 import type { Project, Tag } from '@/payload-types';
 
 // Raw query for all projects from PayloadCMS
-export const fetchAllProjects = cache(async (): Promise<Project[]> => {
+export const fetchAllProjects = async (): Promise<Project[]> => {
   try {
     const { isEnabled: draft } = await draftMode();
     const payload = await getPayload({ config: configPromise });
@@ -105,18 +104,18 @@ export const fetchAllProjects = cache(async (): Promise<Project[]> => {
     console.error('Error fetching projects:', error);
     return [];
   }
-});
+};
 
 // MAIN FUNCTION: Returns single project by ID (no fallback - null if not found)
-export const fetchProjectById = cache(async (projectId: number): Promise<Project | null> => {
+export const fetchProjectById = async (projectId: number): Promise<Project | null> => {
   const projects = await fetchAllProjects();
 
   return projects.find((project) => project.id === projectId) || null;
-});
+};
 
 // MAIN FUNCTION: Returns single project by slug (no fallback - null if not found)
-export const fetchProjectBySlug = cache(async (slug: string): Promise<Project | null> => {
+export const fetchProjectBySlug = async (slug: string): Promise<Project | null> => {
   const projects = await fetchAllProjects();
 
   return projects.find((project) => project.slug === slug) || null;
-});
+};
