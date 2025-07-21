@@ -5,7 +5,6 @@ import { resendAdapter } from '@payloadcms/email-resend';
 import { seoPlugin } from '@payloadcms/plugin-seo';
 import { lexicalEditor } from '@payloadcms/richtext-lexical';
 import { s3Storage } from '@payloadcms/storage-s3';
-import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob';
 import { buildConfig } from 'payload';
 import sharp from 'sharp';
 import { Experiences } from '@/collections/Experience';
@@ -49,21 +48,13 @@ export default buildConfig({
     outputFile: path.resolve(dirname, 'payload-types.ts')
   },
   db: postgresAdapter({
-    ...(env.NEXT_PUBLIC_URL.includes('localhost') || env.PAYLOAD_USE_PG_URL === 'true'
-      ? {
-          pool: {
-            connectionString: env.POSTGRES_URL
-          }
-        }
-      : {
-          pool: {
-            user: env.POSTGRES_USER,
-            password: env.POSTGRES_PASSWORD,
-            database: env.POSTGRES_DB,
-            host: env.POSTGRES_HOST,
-            port: env.POSTGRES_PORT
-          }
-        })
+    pool: {
+      user: env.POSTGRES_USER,
+      password: env.POSTGRES_PASSWORD,
+      database: env.POSTGRES_DB,
+      host: env.POSTGRES_HOST,
+      port: env.POSTGRES_PORT
+    }
   }),
   sharp,
   plugins: [
