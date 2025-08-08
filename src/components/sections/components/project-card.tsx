@@ -8,12 +8,32 @@ import { IconLink } from '@/components/ui/icon-link';
 import { NeoBadge } from '@/components/ui/neoBadge';
 import { H4, M } from '@/components/ui/typography';
 import { cn } from '@/lib/utils/ui';
-import type { Project } from '@/payload-types';
+
+// Create a type that matches what we actually query from BaseHub
+type ProjectData = {
+  _id: string;
+  _title: string;
+  _slug: string;
+  shortDescription?: string | null;
+  date?: string | null;
+  meta?: {
+    title?: string | null;
+    desc?: string | null;
+  } | null;
+  technology?:
+    | {
+        _id: string;
+        _title: string;
+        url?: string | null;
+        badgeUrl?: string | null;
+      }[]
+    | null;
+};
 
 type CardVariants = VariantProps<typeof cardVariants>;
 
 interface ProjectCardProps {
-  project: Project;
+  project: ProjectData;
   className?: string;
   rotation?: CardVariants['rotation'];
   interactive?: CardVariants['interactive'];
@@ -25,26 +45,8 @@ export default function ProjectCard({
   rotation = 'none',
   interactive = 'slight'
 }: ProjectCardProps) {
-  // Handle hero image - it can be a number (ID) or Media object
-  const heroImageUrl =
-    typeof project.heroImage === 'object' && project.heroImage?.url ? project.heroImage.url : null;
-
-  // Handle technologies - they should now always be populated Tag objects
-  const technologies =
-    project.technologies
-      ?.map((tech) => {
-        // With our optimized query, these should always be Tag objects with name property
-        if (typeof tech === 'object' && tech && 'name' in tech && tech.name) {
-          return tech.name;
-        }
-
-        // This shouldn't happen with our new approach, but safety fallback
-        console.warn('Unexpected technology format:', tech);
-        return null;
-      })
-      .filter((tech): tech is string => tech !== null && tech.length > 0) || [];
-
-  console.log('Technologies for project:', project.title, technologies);
+  // Handle technologies from BaseHub
+  const technologies = project.technology?.map((tech) => tech._title) || [];
 
   return (
     <Card
@@ -54,23 +56,9 @@ export default function ProjectCard({
       shadow='lg'
       interactive={interactive}
     >
-      {/* Title Picture */}
-      {heroImageUrl && (
-        <div className='h-48 overflow-hidden'>
-          <Image
-            src={heroImageUrl}
-            alt={project.title}
-            width={400}
-            height={192}
-            className='w-full h-full object-cover hover:scale-105 transition-transform duration-300'
-            loading='lazy'
-          />
-        </div>
-      )}
-
       <CardHeader className='pb-2'>
         {/* Title */}
-        <H4 className='line-clamp-1'>{project.title}</H4>
+        <H4 className='line-clamp-1'>{project._title}</H4>
       </CardHeader>
 
       <CardContent className='pt-0 pb-2'>
@@ -85,7 +73,7 @@ export default function ProjectCard({
             <div className='flex flex-wrap gap-1.5'>
               {technologies.slice(0, 3).map((tech) => (
                 <NeoBadge
-                  key={`${project.id}-tech-${tech}`}
+                  key={`${project._id}-tech-${tech}`}
                   variant='light'
                   size='sm'
                   rotation='none'
@@ -97,7 +85,7 @@ export default function ProjectCard({
               ))}
               {technologies.length > 3 && (
                 <NeoBadge
-                  key={`${project.id}-tech-more`}
+                  key={`${project._id}-tech-more`}
                   variant='outline'
                   size='sm'
                   rotation='none'
@@ -115,29 +103,14 @@ export default function ProjectCard({
       <CardFooter className='pt-2 mt-auto'>
         <div className='flex gap-2 w-full'>
           {/* Button to read in full */}
-          {project.slug && (
+          {project._slug && (
             <IconLink
-              href={`/projects/${project.slug}`}
+              href={`/projects/${project._slug}`}
               variant='accent'
               size='sm'
               className='flex-1'
             >
               Read More
-            </IconLink>
-          )}
-
-          {/* Button to see it live */}
-          {project.liveUrl && (
-            <IconLink
-              href={project.liveUrl}
-              external={project.liveUrl.startsWith('http')}
-              variant='neutral'
-              size='sm'
-              iconPosition='right'
-              className='flex-1'
-            >
-              <ExternalLink className='w-3 h-3' />
-              Preview
             </IconLink>
           )}
         </div>

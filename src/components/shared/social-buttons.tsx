@@ -6,7 +6,14 @@ import type React from 'react';
 import { FaGithub, FaLinkedin } from 'react-icons/fa6';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils/ui';
-import type { Tag } from '@/payload-types';
+
+// Create a type that matches what we actually query from BaseHub
+type SocialData = {
+  _id: string;
+  _title: string;
+  url?: string | null;
+  icon?: string | null;
+};
 
 // Icon mapping for common social platforms
 const iconMap = {
@@ -18,7 +25,7 @@ const iconMap = {
 type IconMapKeys = keyof typeof iconMap;
 
 interface SocialButtonsProps {
-  socials?: Tag[];
+  socials?: SocialData[];
   useDefaultLinks?: boolean;
   className?: string;
   buttonVariant?: 'default' | 'neutral' | 'noShadow' | 'accent' | 'link' | 'action';
@@ -37,13 +44,13 @@ export const SocialButtons: React.FC<SocialButtonsProps> = ({
   if (!socials || socials.length === 0) return null;
 
   // Filter socials to only include those with valid icons and links
-  const validSocials = socials.filter((social): social is Tag => {
+  const validSocials = socials.filter((social): social is SocialData => {
     // Check if the social has a valid type that maps to an icon
     const hasValidIcon = Boolean(
-      social.name && (social.name.toLowerCase() as IconMapKeys) in iconMap
+      social._title && (social._title.toLowerCase() as IconMapKeys) in iconMap
     );
     // Check if the social has a link
-    const hasLink = Boolean(social.link && typeof social.link === 'string');
+    const hasLink = Boolean(social.url && typeof social.url === 'string');
 
     return hasValidIcon && hasLink;
   });
@@ -60,20 +67,20 @@ export const SocialButtons: React.FC<SocialButtonsProps> = ({
       {validSocials.map((social, index) => {
         return (
           <Link
-            href={social.link!}
-            key={`${social.type}-${index}`}
-            aria-label={social.name || social.type}
+            href={social.url!}
+            key={`${social._id}-${index}`}
+            aria-label={social._title}
             target='_blank'
             rel='noopener noreferrer'
           >
             <Button variant={buttonVariant} size='icon'>
-              {social.name.toLowerCase() === 'github' && (
+              {social._title.toLowerCase() === 'github' && (
                 <FaGithub size={iconSize} className='w-5 h-5' />
               )}
-              {social.name.toLowerCase() === 'linkedin' && (
+              {social._title.toLowerCase() === 'linkedin' && (
                 <FaLinkedin size={iconSize} className='w-5 h-5' />
               )}
-              {social.name.toLowerCase() === 'mail' && (
+              {social._title.toLowerCase() === 'mail' && (
                 <MailboxIcon size={iconSize} className='w-5 h-5' />
               )}
             </Button>

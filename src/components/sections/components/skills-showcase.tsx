@@ -3,10 +3,15 @@
 import { useState } from 'react';
 import { NeoBadge } from '@/components/ui/neoBadge';
 import { H4 } from '@/components/ui/typography';
-import type { Tag } from '@/payload-types';
+
+// Create a type that matches what we actually query from BaseHub
+type SkillData = {
+  _id: string;
+  _title: string;
+};
 
 interface SkillsShowcaseProps {
-  skills: Tag[];
+  skills: SkillData[];
 }
 
 export default function SkillsShowcase({ skills }: SkillsShowcaseProps) {
@@ -37,7 +42,7 @@ export default function SkillsShowcase({ skills }: SkillsShowcaseProps) {
       <div className='flex flex-wrap gap-2 md:gap-3 relative w-full transition-all duration-500 ease-in-out'>
         {(showAllSkills ? skillsToDisplay : visibleSkills).map((skill, index) => (
           <NeoBadge
-            key={skill.id}
+            key={skill._id}
             variant={index % 3 === 0 ? 'default' : index % 3 === 1 ? 'light' : 'dark'}
             size='sm'
             className={`skill-badge transition-all duration-300 ease-in-out ${
@@ -49,7 +54,7 @@ export default function SkillsShowcase({ skills }: SkillsShowcaseProps) {
             rotation={index % 3 === 0 ? 'slight' : index % 3 === 1 ? 'negative' : 'none'}
             interactive={index % 3 === 0 ? 'lift' : index % 3 === 1 ? 'bounce' : 'wiggle'}
           >
-            {skill.name}
+            {skill._title}
           </NeoBadge>
         ))}
         {hasMoreSkills && !showAllSkills && (

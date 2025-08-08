@@ -9,10 +9,30 @@ import {
   CarouselPrevious
 } from '@/components/ui/carousel';
 import { cn } from '@/lib/utils/ui';
-import type { Experience } from '@/payload-types';
+
+// Create a type that matches what we actually query from BaseHub
+type ExperienceData = {
+  _id: string;
+  _title: string;
+  companyDescription?: string | null;
+  companyLink?: string | null;
+  startDate?: string | null;
+  endDate?: string | null;
+  jobActivities?: {
+    json: {
+      content: any;
+    };
+  } | null;
+  skills?:
+    | {
+        _id: string;
+        _title: string;
+      }[]
+    | null;
+};
 
 interface ExperienceCarouselProps {
-  experiences: Experience[];
+  experiences: ExperienceData[];
   visibleCount?: number;
 }
 
@@ -55,7 +75,7 @@ export default function ExperienceCarousel({
       >
         {experiences.map((exp, idx) => (
           <CarouselItem
-            key={`experience-${exp.id}`}
+            key={`experience-${exp._id}`}
             className={`w-full ${getBasisClass()}`}
             style={{
               marginBottom: 0

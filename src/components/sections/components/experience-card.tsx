@@ -4,15 +4,35 @@ import Link from 'next/link';
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
 import { H4, M, Muted, S } from '@/components/ui/typography';
 import { cn } from '@/lib/utils/ui';
-import type { Experience, Tag } from '@/payload-types';
+
+// Create a type that matches what we actually query from BaseHub
+type ExperienceData = {
+  _id: string;
+  _title: string;
+  companyDescription?: string | null;
+  companyLink?: string | null;
+  startDate?: string | null;
+  endDate?: string | null;
+  jobActivities?: {
+    json: {
+      content: any;
+    };
+  } | null;
+  skills?:
+    | {
+        _id: string;
+        _title: string;
+      }[]
+    | null;
+};
 
 interface ExperienceCardProps {
-  experience: Experience;
+  experience: ExperienceData;
   className?: string;
 }
 
 export default function ExperienceCard({ experience: exp, className }: ExperienceCardProps) {
-  const skills = (exp.skills as Tag[] | undefined)?.map((skill) => skill.name) || [];
+  const skills = exp.skills?.map((skill) => skill._title) || [];
 
   return (
     <Card
@@ -24,10 +44,10 @@ export default function ExperienceCard({ experience: exp, className }: Experienc
       <CardHeader className='pb-3'>
         <div className='flex justify-between items-start'>
           <H4 className='flex items-center gap-1.5'>
-            {exp.company}
-            {exp.url && (
+            {exp._title} {/* Position: e.g. "Senior Product Manager" */}
+            {exp.companyLink && (
               <Link
-                href={exp.url}
+                href={exp.companyLink}
                 target='_blank'
                 rel='noopener noreferrer'
                 className='text-sm text-gray-500 hover:text-accent-foreground transition-colors'
@@ -53,38 +73,35 @@ export default function ExperienceCard({ experience: exp, className }: Experienc
             )}
           </H4>
           <Muted className='text-right'>
-            {new Date(exp.startDate).getFullYear()} -{' '}
+            {exp.startDate ? new Date(exp.startDate).getFullYear() : ''} -{' '}
             {exp.endDate ? new Date(exp.endDate).getFullYear() : 'Present'}
           </Muted>
         </div>
-
-        <M className='text-gray-600 dark:text-gray-400 line-clamp-2 !mt-2'>{exp.description}</M>
+        <M className='text-gray-600 dark:text-gray-400 line-clamp-2 !mt-2'>
+          {exp.companyDescription}
+        </M>{' '}
+        {/* Company name and description */}
       </CardHeader>
 
       <CardContent className='border-t border-gray-200 dark:border-gray-700 pt-3'>
-        <div className='flex justify-between items-start mb-2'>
-          <M className='font-medium'>{exp.position}</M>
+        {/* Job activities/responsibilities content */}
+        <div className='text-sm text-gray-600 dark:text-gray-400 mb-3'>
+          {exp.jobActivities?.json?.content ? (
+            <div className='prose prose-sm'>
+              {/* Rich text content would be rendered here - simplified for now */}
+              <S>Job responsibilities and activities</S>
+            </div>
+          ) : (
+            <S>Experience details</S>
+          )}
         </div>
-
-        <ul className='list-disc pl-4 space-y-1 mb-3'>
-          {exp.responsibilityOne && (
-            <li className='text-sm text-gray-600 dark:text-gray-400'>
-              <S>{exp.responsibilityOne}</S>
-            </li>
-          )}
-          {exp.responsibilityTwo && (
-            <li className='text-sm text-gray-600 dark:text-gray-400'>
-              <S>{exp.responsibilityTwo}</S>
-            </li>
-          )}
-        </ul>
       </CardContent>
 
       <CardFooter className='pt-0'>
         <div className='flex flex-wrap gap-2 w-full'>
           {skills.slice(0, 3).map((skill, i) => (
             <span
-              key={`${exp.company}-skill-${skill}`}
+              key={`${exp._id}-skill-${skill}`}
               className={`px-2.5 py-0.5 bg-accent-light/20 text-sm font-medium rounded-sm ${i % 2 === 0 ? 'rotate-[0.5deg]' : '-rotate-[0.5deg]'}`}
             >
               {skill}

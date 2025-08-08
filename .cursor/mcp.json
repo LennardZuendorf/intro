@@ -1,8 +1,10 @@
 {
   "mcpServers": {
-    "stagewise": {
-      "url": "https://localhost:5746/sse",
-      "env": {}
+    "basehub:intro": {
+      "url": "https://basehub.com/api/mcp",
+      "headers": {
+        "Authorization": "Bearer bshb_mcp_0ycXqqf2EXj1koy8Q0Kv5TCv7q5Ri9WE1hOiipGKb8Ax2tJ7mimMkxtldlD54393"
+      }
     }
   }
 }

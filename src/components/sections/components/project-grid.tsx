@@ -5,10 +5,30 @@ import ProjectCard from '@/components/sections/components/project-card';
 import { NeoBadge } from '@/components/ui/neoBadge';
 import { Code, S } from '@/components/ui/typography';
 import { getRandomCardProps } from '@/lib/utils/randomCardProps';
-import type { Project } from '@/payload-types';
+
+// Create a type that matches what we actually query from BaseHub
+type ProjectData = {
+  _id: string;
+  _title: string;
+  _slug: string;
+  shortDescription?: string | null;
+  date?: string | null;
+  meta?: {
+    title?: string | null;
+    desc?: string | null;
+  } | null;
+  technology?:
+    | {
+        _id: string;
+        _title: string;
+        url?: string | null;
+        badgeUrl?: string | null;
+      }[]
+    | null;
+};
 
 interface ProjectsGridProps {
-  projects: Project[];
+  projects: ProjectData[];
   className?: string;
 }
 
@@ -55,11 +75,11 @@ export function ProjectsGrid({ projects, className }: ProjectsGridProps) {
           }}
         >
           {visibleProjects.map((project, index) => {
-            const { rotation, interactive } = getRandomCardProps(project.id);
+            const { rotation, interactive } = getRandomCardProps(project._id);
 
             return (
               <div
-                key={project.id}
+                key={project._id}
                 className='transition-all duration-300 ease-in-out'
                 style={{
                   transitionDelay: `${index * 50}ms`

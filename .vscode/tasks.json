@@ -90,34 +90,5 @@
       },
       "problemMatcher": []
     },
-    {
-      "label": "Start Supabase",
-      "type": "shell",
-      "command": "npx supabase stop --all && npx supabase start",
-      "group": "none",
-      "isBackground": true,
-      "presentation": {
-        "reveal": "always",
-        "panel": "dedicated",
-        "clear": true,
-        "focus": true
-      },
-      "problemMatcher": [],
-      "detail": "Stop any running Supabase instances and start the local Supabase development stack"
-    },
-    {
-      "label": "Stop Supabase",
-      "type": "shell",
-      "command": "npx supabase stop --all",
-      "group": "none",
-      "presentation": {
-        "reveal": "always",
-        "panel": "dedicated",
-        "clear": true,
-        "focus": false
-      },
-      "problemMatcher": [],
-      "detail": "Stop the local Supabase development stack"
-    }
   ]
 }

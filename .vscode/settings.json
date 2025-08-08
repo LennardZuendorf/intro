@@ -33,18 +33,6 @@
       "task": "Lint Staged",
       "tooltip": "Lint Staged Files"
     },
-    {
-      "label": "🗃️ Start Supabase",
-      "singleInstance": true,
-      "task": "Start Supabase",
-      "tooltip": "Start local Supabase Env"
-    },
-    {
-      "label": "🛑 Stop Supabase",
-      "singleInstance": true,
-      "task": "Stop Supabase",
-      "tooltip": "Stop local Supabase Env"
-    }
   ],
   "typescript.tsdk": "node_modules/typescript/lib",
   "typescript.enablePromptUseWorkspaceTsdk": true,

@@ -2,11 +2,19 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
-import type { Tag } from '@/payload-types';
+
+// Create a type that matches what we actually query from BaseHub
+type TechnologyData = {
+  _id: string;
+  _title: string;
+  url?: string | null;
+  badgeUrl?: string | null;
+};
+
 import { NeoBadge } from '../ui/neoBadge';
 
 interface TechStackCompactProps {
-  techStackData: Tag[];
+  techStackData: TechnologyData[];
 }
 
 export function TechStackCompact({ techStackData }: TechStackCompactProps) {
@@ -37,7 +45,7 @@ export function TechStackCompact({ techStackData }: TechStackCompactProps) {
     <div className='flex flex-wrap gap-2 md:gap-3 relative transition-all duration-500 ease-in-out'>
       {(showAllTech ? techStackData : visibleTech).map((tech, index) => (
         <NeoBadge
-          key={`tech-${tech.id}-${index}`}
+          key={`tech-${tech._id}-${index}`}
           variant='dark'
           size='sm'
           className={`tech-badge transition-all duration-300 ease-in-out ${
@@ -50,12 +58,12 @@ export function TechStackCompact({ techStackData }: TechStackCompactProps) {
           interactive='lift'
         >
           <Link
-            href={tech.link || '#'}
+            href={tech.url || '#'}
             target='_blank'
             rel='noopener noreferrer'
             className='inline-block'
           >
-            {tech.name}
+            {tech._title}
           </Link>
         </NeoBadge>
       ))}

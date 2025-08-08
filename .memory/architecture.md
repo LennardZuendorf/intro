@@ -2,225 +2,324 @@
 
 ## Architecture Overview
 
-The project is built on a modern web development stack with the following architecture:
+The project is transitioning from a modern web development stack to a BaseHub-powered architecture:
 
-### Frontend Architecture
-
+### Current Architecture (Payload CMS)
 - **Framework**: Next.js 15 (App Router)
 - **Language**: TypeScript (TSX)
 - **Styling**: TailwindCSS with PostCSS
 - **UI Components**: Custom components based on shadcn/ui with Neobrutalism design approach from neobrutalism.dev
-
-### Backend & CMS Architecture
-
 - **CMS**: Payload CMS (self-hosted, integrated into Next.js)
 - **Database**: PostgreSQL via Supabase
 - **Storage**: Supabase Blob Storage (via @payloadcms/storage-s3 adapter)
 - **Email Service**: Resend (via @payloadcms/email-resend)
 - **Hosting**: Vercel with CI/CD via GitHub Actions
 
-### Project Structure
+### Target Architecture (BaseHub CMS)
+- **Framework**: Next.js 15 (App Router) - *UNCHANGED*
+- **Language**: TypeScript (TSX) - *UNCHANGED*
+- **Styling**: TailwindCSS with PostCSS - *UNCHANGED*
+- **UI Components**: Custom components based on shadcn/ui - *UNCHANGED*
+- **CMS**: BaseHub CMS (AI-native headless CMS)
+- **Database**: BaseHub's managed GraphQL API
+- **Storage**: BaseHub CDN (with automatic optimization)
+- **Email Service**: Maintained separately (Resend)
+- **Hosting**: Vercel with CI/CD via GitHub Actions - *UNCHANGED*
+
+### Project Structure (Migrated)
 
 ```
-/src/app/(app)           # Main application routes
-/src/app/(payload)       # Payload CMS related routes
-/src/components/         # UI components organized by type
-  /ui/                   # Base UI primitives (shadcn/ui + custom)
-  /sections/             # Page section components
-  /shared/               # Reusable components
-  /blocks/               # CMS block components
-/src/collections/        # Payload CMS collection definitions
-/src/hooks/              # Custom React hooks
+/src/app/(app)           # Main application routes - UNCHANGED
+/src/components/         # UI components organized by type - UNCHANGED
+  /ui/                   # Base UI primitives (shadcn/ui + custom) - UNCHANGED
+  /sections/             # Page section components - UPDATED (BaseHub data)
+  /shared/               # Reusable components - UNCHANGED
+  /blocks/               # CMS block components - MIGRATED to BaseHub
 /src/lib/                # Utility functions and shared logic
-/src/public/             # Static assets
-/supabase/               # Supabase configuration
+  /content/              # MIGRATED: BaseHub GraphQL fetching functions
+  /basehub/              # NEW: BaseHub SDK integration
+/.basehub/               # NEW: Generated BaseHub types and client
+/basehub.config.ts       # NEW: BaseHub configuration
 ```
 
-## Design Architecture Decisions
+## BaseHub Schema Architecture (IMPLEMENTED)
 
-### Component Design System
+Based on the generated types analysis, the BaseHub schema is already implemented with:
 
-#### Typography System (Priority #1)
-**Decision**: Implement comprehensive 5-breakpoint responsive typography system
-- **Rationale**: Eliminates scattered responsive sizing, provides consistent scaling
-- **Implementation**: 11 typography components (H1-H4, Lead, L, M, S, XS, Muted, Code)
-- **Breakpoints**: base, sm (640px), md (768px), lg (1024px), xl (1280px), 2xl (1536px)
-- **Optimization**: MacBook Pro 14" specific tuning at lg: breakpoint (1024px)
+### Collections (Implemented)
+1. **Projects Collection**
+   - Type: `ProjectsItem`
+   - Fields: title, shortDescription, meta, technology references
+   - Status: ✅ IMPLEMENTED
 
-#### Layout Architecture
-**Decision**: Reusable Section component for consistent layouts
-- **Rationale**: Standardizes layout patterns, reduces code duplication
-- **Features**: Grid/mask backgrounds, 1-2 column support, responsive behavior
-- **Grid Layout**: CSS Grid for two-column layouts with Section.Left/Right/Bottom subcomponents
-- **Flexibility**: Configurable backgrounds, spacing, alignment, and element types
+2. **Experiences Collection**
+   - Type: `ExperiencesItem`
+   - Fields: company description, start/end dates, job activities, skills
+   - Status: ✅ IMPLEMENTED
 
-#### Component Hierarchy
-**Decision**: Composition-based component architecture
-- **Base Layer**: Radix UI primitives for accessibility
-- **Enhancement Layer**: shadcn/ui components for consistent patterns
-- **Design Layer**: Neobrutalism styling for visual distinctiveness
-- **Application Layer**: Project-specific components and layouts
+3. **Component Types (Implemented)**
+   - `TechComponent` - Technology tags and links
+   - `SkillComponent` - Skill categorization
+   - `SocialsComponent` - Social media links
+   - `UntitledComponent` - Generic component type
+   - Status: ✅ IMPLEMENTED
 
-### Neobrutalism Design Decisions
+### Global Content (Implemented)
+1. **AboutSection**
+   - aboutMeText (Rich Text)
+   - quickSkillsShowcase
+   - Status: ✅ IMPLEMENTED
 
-#### Visual Philosophy
-**Decision**: Bold, high-contrast Neobrutalism aesthetic
-- **Rationale**: Creates memorable impression, aids accessibility, stands out professionally
-- **Characteristics**: Thick borders, strong shadows, high contrast, playful rotations
-- **Typography**: Aggressive font weights, title-case headings, hierarchical scaling
-- **Interactions**: Clear hover states, engaging animations, obvious button styling
+2. **HeroSection**
+   - mainHeroText
+   - Status: ✅ IMPLEMENTED
 
-#### Color and Contrast
-**Decision**: High-contrast color scheme with limited palette
-- **Rationale**: Improves accessibility, reinforces brand personality
-- **Implementation**: CSS variables for consistent theming
-- **Accessibility**: Ensures WCAG compliance with contrast ratios
+3. **Collection Management**
+   - CallsToActions, Socials, etc.
+   - Status: ✅ IMPLEMENTED
 
-### Responsive Design Architecture
+## Migration Architecture Strategy
 
-#### Mobile-First Strategy
-**Decision**: Mobile-first responsive design with progressive enhancement
-- **Rationale**: Majority of users access on mobile devices
-- **Implementation**: Base styles for mobile, progressive enhancement for larger screens
-- **Touch Optimization**: Touch-friendly interactive elements, appropriate spacing
+### Current Status Assessment
+✅ **BaseHub Schema**: Fully implemented and typed  
+✅ **BaseHub SDK**: Installed and configured (`basehub@9.2.3`)  
+✅ **Type Generation**: Working and up-to-date  
+✅ **MCP Integration**: Configured for schema management  
+🔄 **Content Migration**: NEEDED  
+🔄 **API Integration**: NEEDED  
+🔄 **Admin Interface**: NEEDED  
 
-#### Breakpoint Strategy
-**Decision**: 5-breakpoint system with smooth progression
-- **Rationale**: Eliminates jarring size jumps, provides granular control
-- **Mobile**: 320px+ base sizing
-- **Tablet**: 640px+ (sm) enhanced layouts
-- **Laptop**: 768px+ (md) expanded content
-- **Desktop**: 1024px+ (lg) optimal viewing (MacBook Pro 14" target)
-- **Large**: 1280px+ (xl) and 1536px+ (2xl) for large displays
+### Migration Phases (Revised)
 
-## Content Management Architecture
+#### Phase 1: Content Data Export (READY TO EXECUTE)
+**Status**: Ready - BaseHub schema matches Payload structure
 
-### Payload CMS Integration
-**Decision**: Integrate Payload CMS directly into Next.js application
-- **Rationale**: Single deployment, shared authentication, type safety
-- **Benefits**: Real-time updates, unified codebase, simplified hosting
+**Payload → BaseHub Mapping**:
+```typescript
+// Current Payload Collections → BaseHub Collections
+PayloadProjectPost → ProjectsItem {
+  title → title
+  shortDescription → shortDescription  
+  slug → _slug
+  featuredImage → meta
+  technologies → technology (references)
+  content → (rich text content)
+  publishedAt → _sys.createdAt
+}
 
-#### Collection Design
-**Content Models Defined**:
-- **Users**: Authentication and user management
-- **Media**: File upload and management with Supabase storage
-- **Experiences**: Professional background and resume data
-- **Tags**: Categorization system for projects and content
-- **ProjectPost**: Portfolio project entries with rich content
-- **PageContent**: General site content (Global)
-- **LegalTexts**: Privacy policy, terms, etc. (Global)
+PayloadExperience → ExperiencesItem {
+  company → companyDescription
+  position → _title
+  startDate → startDate
+  endDate → endDate
+  technologies → skills (UntitledComponent references)
+  responsibilities → jobActivities (rich text)
+}
 
-**Block Components**:
-- **Badge Block**: Dynamic badge component with customizable styling and optional linking
+PayloadTag → TechComponent/SkillComponent/SocialsComponent {
+  name → _title
+  type → component type selection
+  link → link field
+}
+```
 
-#### Data Flow Architecture
-1. **Content Creation**: Payload CMS admin interface
-2. **Data Storage**: PostgreSQL database via Supabase
-3. **Media Storage**: Supabase Blob Storage
-4. **Data Fetching**: Next.js server components via Payload API
-5. **Rendering**: Server-side rendering with client hydration
+#### Phase 2: Application Integration (ARCHITECTURE DEFINED)
+**Content Fetching Pattern**:
+```typescript
+// lib/basehub.ts (NEW)
+import { basehub } from 'basehub'
 
-### Site Structure Decisions
+export const client = basehub({
+  draft: process.env.NODE_ENV === 'development'
+})
 
-#### Navigation Architecture
-**Decision**: Hybrid single-page + detail pages approach
-- **Homepage**: Single scrollable page with sections (Hero, About, Projects)
-- **Project Pages**: Individual detail pages with dynamic routing (/projects/[slug])
-- **Legal Page**: Standalone page with localization support
-- **Redirects**: /projects redirects to homepage projects section
+// lib/content/fetchProjects.ts (MIGRATED)
+export async function fetchProjects() {
+  const data = await client.query({
+    projects: {
+      items: {
+        _id: true,
+        _title: true,
+        _slug: true,
+        shortDescription: true,
+        meta: {
+          _id: true,
+          title: true,
+          desc: true
+        },
+        technology: {
+          _title: true,
+          link: { url: true }
+        }
+      }
+    }
+  })
+  
+  return data.projects.items
+}
+```
 
-**Rationale**: 
-- Single-page homepage provides smooth browsing experience
-- Detail pages allow deep-linking and comprehensive project information
-- Maintains SEO benefits while supporting different content needs
+#### Phase 3: Component Migration (STRAIGHTFORWARD)
+**Server Component Updates**:
+```typescript
+// app/(app)/page.tsx (UPDATED)
+import { fetchProjects } from '@/lib/content/fetchProjects'
+import { fetchExperiences } from '@/lib/content/fetchExperiences'
+import { fetchAboutSection } from '@/lib/content/fetchAboutSection'
 
-#### Section-Based Homepage
-**Decision**: Distinct homepage sections with smooth navigation
-- **Hero Section**: First impression and main branding
-- **About Section**: Personal/professional background
-- **Projects Section**: Portfolio showcase with project links
+export default async function HomePage() {
+  const [projects, experiences, aboutSection] = await Promise.all([
+    fetchProjects(),
+    fetchExperiences(), 
+    fetchAboutSection()
+  ])
 
-## Component Architecture Decisions
+  return (
+    <>
+      <HeroSection />
+      <AboutSection content={aboutSection} />
+      <ProjectsSection projects={projects} />
+    </>
+  )
+}
+```
 
-### Card System
-**Decision**: Unified Card component with multiple variants
-- **Variants**: default, reversed, outline, accent, clickable
-- **Features**: Rotation effects, interactive hover states, shadow options
-- **Composition**: CardHeader, CardContent, CardFooter for semantic structure
-- **Usage**: Experience cards, project cards, content containers
+#### Phase 4: Admin and Build Integration (FINAL)
+**Remove Payload Dependencies**:
+- Remove Payload CMS routes: `src/app/(payload)/`
+- Remove Payload collections: `src/collections/`
+- Remove Payload config: `src/payload.config.ts`
+- Update build scripts: Remove Payload-specific commands
+- Update environment variables: Remove Payload/Supabase vars
 
-### Button System
-**Decision**: Comprehensive button variants for different use cases
-- **Variants**: default, neutral, noShadow, accent, link, action
-- **Features**: Neobrutalism shadows, clear focus states, size options
-- **Accessibility**: Keyboard navigation, screen reader support
+**Add BaseHub Production Integration**:
+- Production environment variables for BaseHub
+- Webhook configuration for ISR revalidation
+- BaseHub admin access via external dashboard
 
-### Interactive Components
-**Decision**: Rich interactive component library
-- **NeoBadge**: Rotatable, animated badges for categories and tags
-- **IconLink**: Button-style links with icon positioning
-- **Carousel**: Touch and keyboard navigable content carousels
-- **Navigation**: Dropdown menus, tabs, pagination with consistent styling
+## Technical Implementation Decisions
 
-## Performance Architecture Decisions
+### BaseHub SDK Integration Architecture
 
-### Code Quality Tools
-**Decision**: Migrate to Biome for unified linting and formatting
-- **Rationale**: Single tool reduces complexity, faster performance than ESLint + Prettier
-- **Configuration**: Centralized rules, pre-commit hooks, consistent formatting
-- **Benefits**: Improved developer experience, faster CI/CD, unified standards
+#### Client Configuration
+```typescript
+// lib/basehub.ts
+import { basehub } from 'basehub'
 
-### Build and Deployment
-**Decision**: Vercel hosting with GitHub Actions CI/CD
-- **Rationale**: Seamless Next.js integration, automatic deployments, performance optimization
-- **Database**: Supabase PostgreSQL for reliability and performance
-- **Storage**: Supabase Blob Storage for media assets
-- **Monitoring**: Built-in Vercel analytics and performance monitoring
+export const client = basehub({
+  // Uses environment variables from basehub.config.ts
+  draft: process.env.NODE_ENV === 'development'
+})
+```
 
-### Accessibility Architecture
-**Decision**: Accessibility-first component design
-- **Implementation**: Semantic HTML, proper ARIA labels, keyboard navigation
-- **Testing**: Screen reader compatibility, color contrast compliance
-- **Benefits**: WCAG compliance, improved usability for all users
+#### Type Safety Strategy
+- Generated types from BaseHub schema: `.basehub/basehub-types.d.ts`
+- Automatic regeneration via `pnpm basehub` script
+- Type-safe GraphQL queries with IntelliSense support
 
-## Technical Debt and Refactoring Decisions
+#### Caching and Performance Strategy
+```typescript
+// Next.js ISR with BaseHub
+export async function fetchProjects() {
+  const data = await client.query(
+    { /* GraphQL query */ },
+    { 
+      next: { 
+        tags: ['projects'],
+        revalidate: 3600 // 1 hour fallback
+      }
+    }
+  )
+  return data.projects.items
+}
 
-### Recent Architecture Improvements
+// Webhook revalidation
+// app/api/revalidate/route.ts
+export async function POST(request: Request) {
+  const { type } = await request.json()
+  
+  switch (type) {
+    case 'projects':
+      revalidateTag('projects')
+      break
+    case 'experiences':
+      revalidateTag('experiences')
+      break
+  }
+  
+  return Response.json({ revalidated: true })
+}
+```
 
-#### Typography Migration (2024-12-20)
-**Decision**: Replace scattered responsive classes with unified typography system
-- **Problem**: Inconsistent sizing, scattered `text-sm md:text-base` patterns
-- **Solution**: Centralized typography components with 5-breakpoint scaling
-- **Impact**: Consistent scaling, easier maintenance, better mobile experience
+### Content Management Architecture
 
-#### Component Standardization (2024-12-20)
-**Decision**: Migrate custom card implementations to reusable Card component
-- **Problem**: Inconsistent styling, duplicated layout code
-- **Solution**: Unified Card component with variants and proper semantic structure
-- **Impact**: Consistent theming, reduced code duplication, better maintainability
+#### BaseHub Admin Access
+- **External Admin**: Access via BaseHub.com dashboard
+- **MCP Integration**: Schema management via Cursor MCP tools
+- **Draft Preview**: Built-in draft mode with BaseHub SDK
+- **Content Workflow**: Direct content editing in BaseHub interface
 
-#### Badge Block System (2025-01-XX)
-**Decision**: Create reusable Badge block component for Payload CMS
-- **Problem**: Need for dynamic badge content manageable through CMS
-- **Solution**: Block component with full NeoBadge integration and optional linking
-- **Impact**: Content editors can add badges with various styling options without developer intervention
+#### Rich Text and Media Management
+- **Rich Text**: BaseHub native rich text with blocks
+- **Media Storage**: BaseHub CDN with automatic optimization
+- **Asset Migration**: Transfer from Supabase to BaseHub CDN
+- **Image Optimization**: Automatic responsive image generation
 
-#### Code Quality Migration (2024-12-19)
-**Decision**: Replace ESLint + Prettier with Biome
-- **Problem**: Complex configuration, slower performance, tooling conflicts
-- **Solution**: Single unified tool with consistent rules
-- **Impact**: Faster development workflow, simplified configuration, better performance
+## Performance and Scalability Decisions
 
-## Future Architecture Considerations
+### Content Delivery Optimization
+- **Global CDN**: BaseHub's global content delivery network
+- **Image Optimization**: Automatic WebP/AVIF conversion and sizing
+- **Edge Caching**: GraphQL response caching at edge locations
+- **Incremental Regeneration**: Smart cache invalidation via webhooks
 
-### Scalability Decisions
-- **Content Growth**: CMS architecture supports new content types and collections
-- **Performance**: Image optimization, caching strategies, CDN integration
-- **Internationalization**: Structure supports future multi-language content
-- **API Integration**: Architecture allows for external API integrations
+### Development Experience Improvements
+- **Type Safety**: Complete TypeScript integration with generated types
+- **MCP Schema Management**: AI-assisted schema modifications
+- **Real-time Preview**: Instant content preview in development
+- **Hot Reload**: Content changes reflected immediately in dev mode
 
-### Maintenance Strategy
-- **Component Library**: Documented components for consistent development
-- **Type Safety**: TypeScript throughout for reduced runtime errors
-- **Testing Strategy**: Foundation for unit and integration testing
-- **Version Control**: Semantic versioning and change documentation 
+## Migration Risk Mitigation
+
+### Data Safety Strategy
+- **Parallel Development**: Maintain Payload CMS during migration
+- **Content Backup**: Export all Payload data before migration
+- **Rollback Plan**: Environment variable switch for quick rollback
+- **Validation**: Compare content integrity before/after migration
+
+### Performance Validation
+- **Baseline Metrics**: Current Payload CMS performance benchmarks
+- **Migration Testing**: Performance testing in staging environment
+- **Monitoring**: Post-migration performance monitoring
+- **Optimization**: Iterative performance improvements
+
+### SEO Preservation
+- **URL Structure**: Maintain existing URL patterns
+- **Meta Data**: Migrate all SEO metadata to BaseHub
+- **Redirects**: Implement redirects for any URL changes
+- **Search Console**: Monitor search engine indexing post-migration
+
+## Future Architectural Considerations
+
+### AI-Powered Features (BaseHub Native)
+- **Content Generation**: AI-assisted content creation
+- **SEO Optimization**: AI-powered SEO recommendations  
+- **Content Analytics**: Advanced content performance insights
+- **Personalization**: AI-driven content personalization
+
+### Enhanced Developer Experience
+- **Schema Evolution**: Version-controlled schema changes
+- **Content Localization**: Multi-language content support
+- **Advanced Workflows**: Content approval and publishing workflows
+- **Integration Ecosystem**: Third-party service integrations
+
+### Scalability Enhancements
+- **Global Content Distribution**: Multi-region content delivery
+- **Advanced Caching**: Intelligent cache warming and invalidation
+- **Content Optimization**: Automatic content optimization
+- **Performance Monitoring**: Advanced performance analytics
+
+---
+
+**Architecture Status**: ✅ BaseHub Schema Implemented, Ready for Content Migration
+**Next Phase**: Execute content migration scripts and API integration 

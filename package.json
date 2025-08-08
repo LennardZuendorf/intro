@@ -5,19 +5,15 @@
   "license": "MIT",
   "type": "module",
   "scripts": {
-    "build": "cross-env NODE_OPTIONS=--no-deprecation next build",
-    "dev": "cross-env NODE_OPTIONS=--no-deprecation next dev",
-    "generate:importmap": "cross-env NODE_OPTIONS=--no-deprecation payload generate:importmap",
-    "generate:types": "cross-env NODE_OPTIONS=--no-deprecation payload generate:types",
-    "payload:migrate:create": "cross-env NODE_OPTIONS=--no-deprecation payload migrate:create",
-    "lint": "biome lint .",
-    "format": "biome format --write .",
-    "check": "biome check --write .",
+    "build": "basehub && cross-env NODE_OPTIONS=--no-deprecation next build",
+    "dev": "basehub --draft && cross-env NODE_OPTIONS=--no-deprecation next dev",
+    "basehub": "basehub",
+    "lint": "biome lint . --no-errors-on-unmatched",
+    "format": "biome format --write . --no-errors-on-unmatched",
+    "check": "biome check --write . --no-errors-on-unmatched",
     "start": "cross-env NODE_OPTIONS=--no-deprecation next start",
     "lint-staged": "lint-staged",
     "prepare": "husky",
-    "ci:hard": "payload migrate:fresh --yes && pnpm build",
-    "ci": "payload migrate --yes && pnpm build",
     "test": "jest --watch"
   },
   "dependencies": {
@@ -25,17 +21,6 @@
     "@21st-extension/toolbar-next": "^0.5.14",
     "@floating-ui/react": "^0.27.3",
     "@openpanel/nextjs": "^1.0.8",
-    "@payloadcms/db-postgres": "3.20.0",
-    "@payloadcms/email-resend": "3.20.0",
-    "@payloadcms/live-preview-react": "3.20.0",
-    "@payloadcms/next": "3.20.0",
-    "@payloadcms/payload-cloud": "3.20.0",
-    "@payloadcms/plugin-redirects": "3.20.0",
-    "@payloadcms/plugin-seo": "3.20.0",
-    "@payloadcms/richtext-lexical": "3.20.0",
-    "@payloadcms/storage-s3": "3.20.0",
-    "@payloadcms/storage-vercel-blob": "3.20.0",
-    "@payloadcms/ui": "3.20.0",
     "@radix-ui/react-accordion": "^1.2.2",
     "@radix-ui/react-dialog": "^1.1.5",
     "@radix-ui/react-dropdown-menu": "^2.1.4",
@@ -53,6 +38,7 @@
     "@tailwindcss/typography": "^0.5.15",
     "@vercel/analytics": "^1.4.1",
     "@vercel/speed-insights": "^1.1.0",
+    "basehub": "^9.2.3",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cmdk": "^1.0.4",
@@ -66,12 +52,10 @@
     "husky": "^9.1.7",
     "install": "^0.13.0",
     "lint-staged": "^15.2.10",
-    "live-preview-react:3.20.0": "link:@payloadcms/live-preview-react:3.20.0",
     "lucide-react": "^0.468.0",
     "motion": "^11.18.1",
     "next": "15.2.3",
     "next-themes": "^0.4.4",
-    "payload": "3.20.0",
     "react": "19.0.0",
     "react-dom": "19.0.0",
     "react-dropdown-menu,": "link:@radix-ui/react-dropdown-menu,",
@@ -81,7 +65,7 @@
     "tailwind-merge": "^2.5.5",
     "tailwindcss-animate": "^1.0.7",
     "title-case": "^4.3.2",
-    "zod": "^3.24.1"
+    "zod": "^3.25.0"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.0.0",
@@ -106,10 +90,10 @@
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
-      "biome check --write"
+      "biome check --write --no-errors-on-unmatched"
     ],
     "*.{json,html}": [
-      "biome format --write"
+      "biome format --write --no-errors-on-unmatched"
     ]
   },
   "packageManager": "pnpm@9.15.0+sha512.76e2379760a4328ec4415815bcd6628dee727af3779aaa4c914e3944156c4299921a89f976381ee107d41f12cfa4b66681ca9c718f0668fa0831ed4c6d8ba56c"

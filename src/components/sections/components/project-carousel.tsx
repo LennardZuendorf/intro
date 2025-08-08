@@ -10,10 +10,30 @@ import {
   CarouselPrevious
 } from '@/components/ui/carousel';
 import { getRandomCardProps } from '@/lib/utils/randomCardProps';
-import type { Project } from '@/payload-types';
+
+// Create a type that matches what we actually query from BaseHub
+type ProjectData = {
+  _id: string;
+  _title: string;
+  _slug: string;
+  shortDescription?: string | null;
+  date?: string | null;
+  meta?: {
+    title?: string | null;
+    desc?: string | null;
+  } | null;
+  technology?:
+    | {
+        _id: string;
+        _title: string;
+        url?: string | null;
+        badgeUrl?: string | null;
+      }[]
+    | null;
+};
 
 interface ProjectCarouselProps {
-  projects: Project[];
+  projects: ProjectData[];
   visibleCount?: number;
 }
 
@@ -42,10 +62,10 @@ export default function ProjectCarousel({ projects, visibleCount = 3 }: ProjectC
       >
         <CarouselContent className='w-full flex-row p-4'>
           {projects.map((project, idx) => {
-            const { rotation, interactive } = getRandomCardProps(project.id);
+            const { rotation, interactive } = getRandomCardProps(project._id);
 
             return (
-              <CarouselItem key={project.id} className={`${getBasisClass()} pl-4`}>
+              <CarouselItem key={project._id} className={`${getBasisClass()} pl-4`}>
                 <div ref={idx === 0 ? cardRef : undefined} className='h-full flex justify-center'>
                   <ProjectCard
                     project={project}

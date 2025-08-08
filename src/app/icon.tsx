@@ -1,5 +1,4 @@
-import { readFile } from 'node:fs/promises';
-import { join } from 'node:path';
+import { basehub } from 'basehub';
 import { ImageResponse } from 'next/og';
 
 // Image metadata - standard favicon size
@@ -9,12 +8,19 @@ export const size = {
 };
 export const contentType = 'image/png';
 
-// Image generation function using existing SVG logo
+// Image generation function using SVG logo from BaseHub CMS
 export default async function Icon() {
-  // Read the existing SVG logo file
-  const logoData = await readFile(join(process.cwd(), 'src/public/img/logo-dark.svg'));
-  // Convert to data URL for img src
-  const logoSrc = `data:image/svg+xml;base64,${Buffer.from(logoData).toString('base64')}`;
+  // Fetch the logo SVG from BaseHub CMS
+  const data = await basehub().query({
+    globals: {
+      icon: {
+        url: true
+      }
+    }
+  });
+
+  // Use the logo URL from CMS, fallback to local file if not available
+  const logoSrc = data.globals.icon?.url || '/img/logo-dark.svg';
 
   return new ImageResponse(
     <div
