@@ -51,4 +51,6 @@ next-env.d.ts
 .cursor/**
 .cursor/
 .memory/
+.memory/**
+
 
