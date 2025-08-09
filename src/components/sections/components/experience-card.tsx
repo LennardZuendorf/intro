@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
-import { H4, M, Muted, S } from '@/components/ui/typography';
+import { H4, M, Muted, S, SMuted } from '@/components/ui/typography';
 import { cn } from '@/lib/utils/ui';
 
 // Create a type that matches what we actually query from BaseHub
@@ -44,7 +44,7 @@ export default function ExperienceCard({ experience: exp, className }: Experienc
       <CardHeader className='pb-3'>
         <div className='flex justify-between items-start'>
           <H4 className='flex items-center gap-1.5'>
-            {exp._title} {/* Position: e.g. "Senior Product Manager" */}
+            {exp._title}
             {exp.companyLink && (
               <Link
                 href={exp.companyLink}
@@ -72,15 +72,14 @@ export default function ExperienceCard({ experience: exp, className }: Experienc
               </Link>
             )}
           </H4>
-          <Muted className='text-right'>
+          <SMuted className='text-right'>
             {exp.startDate ? new Date(exp.startDate).getFullYear() : ''} -{' '}
             {exp.endDate ? new Date(exp.endDate).getFullYear() : 'Present'}
-          </Muted>
+          </SMuted>
         </div>
-        <M className='text-gray-600 dark:text-gray-400 line-clamp-2 !mt-2'>
+        <S className='text-gray-600 dark:text-gray-400 line-clamp-2 !mt-2'>
           {exp.companyDescription}
-        </M>{' '}
-        {/* Company name and description */}
+        </S>{' '}
       </CardHeader>
 
       <CardContent className='border-t border-gray-200 dark:border-gray-700 pt-3'>

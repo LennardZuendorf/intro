@@ -47,20 +47,6 @@
       "problemMatcher": []
     },
     {
-      "label": "Generate Types",
-      "type": "shell",
-      "command": "pnpm",
-      "args": ["run", "generate:types"],
-      "group": "build",
-      "presentation": {
-        "reveal": "always",
-        "panel": "dedicated",
-        "clear": true,
-        "focus": false
-      },
-      "problemMatcher": []
-    },
-    {
       "label": "Validate Types",
       "type": "shell",
       "command": "pnpm",
@@ -77,7 +63,7 @@
     {
       "label": "Full Code Quality Check",
       "dependsOrder": "sequence",
-      "dependsOn": ["Generate Types", "Lint", "Format", "Validate Types"],
+      "dependsOn": ["Lint", "Format", "Validate Types"],
       "group": {
         "kind": "build",
         "isDefault": true

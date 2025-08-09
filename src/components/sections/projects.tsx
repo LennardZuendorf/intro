@@ -38,16 +38,6 @@ export async function Projects({ className }: SectionProps) {
                 }
               }
             }
-          },
-          types: {
-            technologies: {
-              items: {
-                _id: true,
-                _title: true,
-                url: true,
-                badgeUrl: true
-              }
-            }
           }
         }
       ]}
@@ -56,7 +46,13 @@ export async function Projects({ className }: SectionProps) {
         'use server';
 
         const projectsData = data.sectionsAndPages.projectsSection.items;
-        const technologiesData = data.types.technologies.items;
+        const technologies = Array.from(
+          new Map(
+            projectsData?.flatMap(
+              (project) => project.technology?.map((tech) => [tech._id, tech]) || []
+            )
+          ).values()
+        );
 
         return (
           <section id='projects' className='min-h-screen'>
@@ -109,17 +105,19 @@ export async function Projects({ className }: SectionProps) {
                   </Card>
                 </div>
               </SectionTop>
-              <SectionBottom>
-                {/* Tech Stack Section */}
-                <div className='w-full flex flex-col items-center'>
-                  <H4 className='font-mono uppercase tracking-wider mb-4 text-center'>
-                    Tech Stack
-                  </H4>
-                  <div className='flex justify-center w-full'>
-                    <TechStackCompact techStackData={technologiesData} />
+              {technologies.length > 0 && (
+                <SectionBottom>
+                  {/* Tech Stack Section */}
+                  <div className='w-full flex flex-col items-center'>
+                    <H4 className='font-mono uppercase tracking-wider mb-4 text-center'>
+                      Tech Stack
+                    </H4>
+                    <div className='flex justify-center w-full'>
+                      <TechStackCompact techStackData={technologies} />
+                    </div>
                   </div>
-                </div>
-              </SectionBottom>
+                </SectionBottom>
+              )}
             </Section>
           </section>
         );
