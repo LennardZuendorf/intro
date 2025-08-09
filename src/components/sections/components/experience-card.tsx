@@ -10,6 +10,7 @@ type ExperienceData = {
   _id: string;
   _title: string;
   companyDescription?: string | null;
+  companyTitle?: string | null;
   companyLink?: string | null;
   startDate?: string | null;
   endDate?: string | null;
@@ -44,33 +45,7 @@ export default function ExperienceCard({ experience: exp, className }: Experienc
       <CardHeader className='pb-3'>
         <div className='flex justify-between items-start'>
           <H4 className='flex items-center gap-1.5'>
-            {exp._title}
-            {exp.companyLink && (
-              <Link
-                href={exp.companyLink}
-                target='_blank'
-                rel='noopener noreferrer'
-                className='text-sm text-gray-500 hover:text-accent-foreground transition-colors'
-              >
-                <svg
-                  xmlns='http://www.w3.org/2000/svg'
-                  width='14'
-                  height='14'
-                  viewBox='0 0 24 24'
-                  fill='none'
-                  stroke='currentColor'
-                  strokeWidth='2'
-                  strokeLinecap='round'
-                  strokeLinejoin='round'
-                  aria-hidden='true'
-                  className='hover:rotate-[10deg] transition-transform'
-                >
-                  <path d='M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6' />
-                  <polyline points='15 3 21 3 21 9' />
-                  <line x1='10' y1='14' x2='21' y2='3' />
-                </svg>
-              </Link>
-            )}
+            {exp._title} @ {exp.companyTitle}
           </H4>
           <SMuted className='text-right'>
             {exp.startDate ? new Date(exp.startDate).getFullYear() : ''} -{' '}

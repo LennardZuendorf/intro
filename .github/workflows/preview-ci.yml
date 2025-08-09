@@ -56,11 +56,11 @@ jobs:
       - name: Dependency Install
         run: pnpm install
 
-      - name: Run Payload Migrations (Fresh)
-        run: yes | pnpm payload migrate --yes
-
       - name: Run Biome Check
         run: pnpm run check
+
+      - name: Run Jest Tests
+        run: pnpm run test
 
       - name: Build with Next.js
         run: pnpm run build

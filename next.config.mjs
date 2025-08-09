@@ -13,8 +13,14 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'assets.basehub.com',
         pathname: '/**'
+      },
+      {
+        protocol: 'https',
+        hostname: 'img.shields.io',
+        pathname: '/badge/**'
       }
-    ]
+    ],
+    dangerouslyAllowSVG: true,
   },
   async redirects() {
     return [

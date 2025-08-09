@@ -323,3 +323,50 @@ export async function POST(request: Request) {
 
 **Architecture Status**: ✅ BaseHub Schema Implemented, Ready for Content Migration
 **Next Phase**: Execute content migration scripts and API integration 
+
+## Page Architecture: Single Project Detail (`/projects/[slug]`)
+
+### Overview
+Implements a Neobrutalism-aligned two-column layout using shared UI primitives:
+- Layout: `Section` with `background='grid'`, `columns={2}`
+- Header: `Card` with `NeoBadge` label, `H1` title, `M` description, stats (`NeoBadge`s), and actions (`IconLink`s)
+- Left Column: Reading `Card` renders BaseHub `RichText`
+- Right Column: Sticky stack of `Card`s: Tech Stack, Table of Contents, Project Info
+
+### Data Flow
+- Server-side fetch via BaseHub SDK using a single-item filter:
+  - Filter by `_sys_slug` (preferred); `_id` variant also supported
+  - `first: 1` to return only one item
+  - When using `Pump`, destructure like:
+    - `{async ([{ sectionsAndPages: { projectsSection } }]) => { ... }}`
+- Selection fields:
+  - `_id`, `_title`, `_slug`, `shortDescription`, `date`
+  - `meta { title, desc, img { url, width, height } }`
+  - `text { json { content, toc }, readingTime(wpm: 183) }`
+  - `technology { _id, _title, url, badgeUrl }`
+  - `githubLink`, `showcaseLink`
+
+### SEO Strategy
+- `generateStaticParams()`: `basehub({ cache: 'no-store' })`
+- `generateMetadata({ params })`: `basehub({ draft: (await draftMode()).isEnabled })`
+- Title: `meta.title ?? _title`
+- Description: `meta.desc ?? shortDescription`
+- Open Graph/Twitter image: `meta.img { url, width, height }`
+- Twitter card: `summary_large_image` when image exists, else `summary`
+
+### Component Integration
+- Typography components only (`H1`, `L`, `M`, `S`, `Code`) for chrome text
+- `RichText` renders content with custom `img` → Next `Image` mapping (same as `about.tsx`)
+- `NeoBadge` for playful chips (stats and tech labels)
+- `IconLink` for actions (Back to Projects, optional external links)
+
+### Responsiveness & Accessibility
+- Mobile: single-column stack; Sidebar cards appear below reading area
+- Desktop (lg+): sticky sidebar (`top-24`) for TOC/Tech/Info
+- High-contrast borders/shadows consistent with design system
+- Keyboard focus on all actions; alt text propagated from BaseHub images
+
+### Risks & Mitigations
+- Missing `toc` or `technology`: cards are conditionally hidden
+- Missing `meta.img`: fall back to default OG; still set title/description
+- Large images in content: constrain via Next `Image` sizing and bordered container 

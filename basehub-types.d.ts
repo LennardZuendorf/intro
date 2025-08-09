@@ -220,7 +220,7 @@ export interface CallToActionComponent {
     _analyticsKey: Scalars['String']
     _dashboardUrl: Scalars['String']
     /** Array of search highlight information with field names and HTML markup */
-    _highlight: (SearchHighlight_85VxKYnAosVtSTLeQBp53[] | null)
+    _highlight: (SearchHighlight_YsC2f3DvVIou0I1VVORww[] | null)
     _id: Scalars['String']
     _idPath: Scalars['String']
     _slug: Scalars['String']
@@ -268,7 +268,7 @@ export interface ExperienceComponent {
     _analyticsKey: Scalars['String']
     _dashboardUrl: Scalars['String']
     /** Array of search highlight information with field names and HTML markup */
-    _highlight: (SearchHighlight_4dee20529724d4d070a0d[] | null)
+    _highlight: (SearchHighlight_O1oSW4VnJ6I9pjssF5k7e[] | null)
     _id: Scalars['String']
     _idPath: Scalars['String']
     _slug: Scalars['String']
@@ -276,7 +276,8 @@ export interface ExperienceComponent {
     _sys: BlockDocumentSys
     _title: Scalars['String']
     companyDescription: Scalars['String']
-    companyLink: (Scalars['String'] | null)
+    companyLink: Scalars['String']
+    companyTitle: (Scalars['String'] | null)
     /** ISO 8601 date string. */
     endDate: (Scalars['String'] | null)
     jobActivities: JobActivities
@@ -286,7 +287,7 @@ export interface ExperienceComponent {
     __typename: 'ExperienceComponent'
 }
 
-export type ExperienceComponentOrderByEnum = '_sys_createdAt__ASC' | '_sys_createdAt__DESC' | '_sys_hash__ASC' | '_sys_hash__DESC' | '_sys_id__ASC' | '_sys_id__DESC' | '_sys_lastModifiedAt__ASC' | '_sys_lastModifiedAt__DESC' | '_sys_slug__ASC' | '_sys_slug__DESC' | '_sys_title__ASC' | '_sys_title__DESC' | 'companyDescription__ASC' | 'companyDescription__DESC' | 'companyLink__ASC' | 'companyLink__DESC' | 'endDate__ASC' | 'endDate__DESC' | 'jobActivities__ASC' | 'jobActivities__DESC' | 'skills__ASC' | 'skills__DESC' | 'startDate__ASC' | 'startDate__DESC' | 'untitled__ASC' | 'untitled__DESC'
+export type ExperienceComponentOrderByEnum = '_sys_createdAt__ASC' | '_sys_createdAt__DESC' | '_sys_hash__ASC' | '_sys_hash__DESC' | '_sys_id__ASC' | '_sys_id__DESC' | '_sys_lastModifiedAt__ASC' | '_sys_lastModifiedAt__DESC' | '_sys_slug__ASC' | '_sys_slug__DESC' | '_sys_title__ASC' | '_sys_title__DESC' | 'companyDescription__ASC' | 'companyDescription__DESC' | 'companyLink__ASC' | 'companyLink__DESC' | 'companyTitle__ASC' | 'companyTitle__DESC' | 'endDate__ASC' | 'endDate__DESC' | 'jobActivities__ASC' | 'jobActivities__DESC' | 'skills__ASC' | 'skills__DESC' | 'startDate__ASC' | 'startDate__DESC'
 
 export interface Experiences {
     _analyticsKey: Scalars['String']
@@ -366,19 +367,20 @@ export interface ImgComponent {
     _analyticsKey: Scalars['String']
     _dashboardUrl: Scalars['String']
     /** Array of search highlight information with field names and HTML markup */
-    _highlight: (SearchHighlight_abxbhcLm3zdLVSVl3VrW7[] | null)
+    _highlight: (SearchHighlight_pipK6Lp3y7KiHmhfYPI1Y[] | null)
     _id: Scalars['String']
     _idPath: Scalars['String']
     _slug: Scalars['String']
     _slugPath: Scalars['String']
     _sys: BlockDocumentSys
     _title: Scalars['String']
+    alt: (Scalars['String'] | null)
     darkImg: (BlockImage | null)
     lightImg: (BlockImage | null)
     __typename: 'ImgComponent'
 }
 
-export type ImgComponentOrderByEnum = '_sys_createdAt__ASC' | '_sys_createdAt__DESC' | '_sys_hash__ASC' | '_sys_hash__DESC' | '_sys_id__ASC' | '_sys_id__DESC' | '_sys_lastModifiedAt__ASC' | '_sys_lastModifiedAt__DESC' | '_sys_slug__ASC' | '_sys_slug__DESC' | '_sys_title__ASC' | '_sys_title__DESC' | 'darkImg__ASC' | 'darkImg__DESC' | 'lightImg__ASC' | 'lightImg__DESC'
+export type ImgComponentOrderByEnum = '_sys_createdAt__ASC' | '_sys_createdAt__DESC' | '_sys_hash__ASC' | '_sys_hash__DESC' | '_sys_id__ASC' | '_sys_id__DESC' | '_sys_lastModifiedAt__ASC' | '_sys_lastModifiedAt__DESC' | '_sys_slug__ASC' | '_sys_slug__DESC' | '_sys_title__ASC' | '_sys_title__DESC' | 'alt__ASC' | 'alt__DESC' | 'darkImg__ASC' | 'darkImg__DESC' | 'lightImg__ASC' | 'lightImg__DESC' | 'untitled__ASC' | 'untitled__DESC'
 
 export interface JobActivities {
     html: Scalars['String']
@@ -440,7 +442,7 @@ export interface MetaComponent {
     _analyticsKey: Scalars['String']
     _dashboardUrl: Scalars['String']
     /** Array of search highlight information with field names and HTML markup */
-    _highlight: (SearchHighlight_TDKQhu3Q8Y2OHVvaXLOiN[] | null)
+    _highlight: (SearchHighlight_fbQN1WPmtMie0CMjuGaXk[] | null)
     _id: Scalars['String']
     _idPath: Scalars['String']
     _slug: Scalars['String']
@@ -492,7 +494,7 @@ export interface ProjectComponent {
     _analyticsKey: Scalars['String']
     _dashboardUrl: Scalars['String']
     /** Array of search highlight information with field names and HTML markup */
-    _highlight: (SearchHighlight_50dd87f1afc8457c86b6f[] | null)
+    _highlight: (SearchHighlight_spQgN1sJaD3Mz2ESUs5iQ[] | null)
     _id: Scalars['String']
     _idPath: Scalars['String']
     _slug: Scalars['String']
@@ -502,6 +504,7 @@ export interface ProjectComponent {
     /** ISO 8601 date string. */
     date: Scalars['String']
     githubLink: (Scalars['String'] | null)
+    images: (ImgComponent[] | null)
     meta: MetaComponent
     shortDescription: Scalars['String']
     showcaseLink: (Scalars['String'] | null)
@@ -510,7 +513,7 @@ export interface ProjectComponent {
     __typename: 'ProjectComponent'
 }
 
-export type ProjectComponentOrderByEnum = '_sys_createdAt__ASC' | '_sys_createdAt__DESC' | '_sys_hash__ASC' | '_sys_hash__DESC' | '_sys_id__ASC' | '_sys_id__DESC' | '_sys_lastModifiedAt__ASC' | '_sys_lastModifiedAt__DESC' | '_sys_slug__ASC' | '_sys_slug__DESC' | '_sys_title__ASC' | '_sys_title__DESC' | 'date__ASC' | 'date__DESC' | 'githubLink__ASC' | 'githubLink__DESC' | 'meta__ASC' | 'meta__DESC' | 'shortDescription__ASC' | 'shortDescription__DESC' | 'showcaseLink__ASC' | 'showcaseLink__DESC' | 'technology__ASC' | 'technology__DESC' | 'text__ASC' | 'text__DESC'
+export type ProjectComponentOrderByEnum = '_sys_createdAt__ASC' | '_sys_createdAt__DESC' | '_sys_hash__ASC' | '_sys_hash__DESC' | '_sys_id__ASC' | '_sys_id__DESC' | '_sys_lastModifiedAt__ASC' | '_sys_lastModifiedAt__DESC' | '_sys_slug__ASC' | '_sys_slug__DESC' | '_sys_title__ASC' | '_sys_title__DESC' | 'date__ASC' | 'date__DESC' | 'githubLink__ASC' | 'githubLink__DESC' | 'images__ASC' | 'images__DESC' | 'meta__ASC' | 'meta__DESC' | 'shortDescription__ASC' | 'shortDescription__DESC' | 'showcaseLink__ASC' | 'showcaseLink__DESC' | 'technology__ASC' | 'technology__DESC' | 'text__ASC' | 'text__DESC' | 'untitled__ASC' | 'untitled__DESC'
 
 export interface ProjectsSection {
     _analyticsKey: Scalars['String']
@@ -571,7 +574,7 @@ export interface QuickSkillsShowcaseItem {
     _analyticsKey: Scalars['String']
     _dashboardUrl: Scalars['String']
     /** Array of search highlight information with field names and HTML markup */
-    _highlight: (SearchHighlight_9e3cc7a098494a9d7de72[] | null)
+    _highlight: (SearchHighlight_m6IoglgbtsGLy7AY6IPea[] | null)
     _id: Scalars['String']
     _idPath: Scalars['String']
     _slug: Scalars['String']
@@ -595,84 +598,84 @@ export interface RepoSys {
 
 export type RichTextJson = (AboutMeTextRichText | BaseRichTextJson | CtaTextRichText | EnglishLegalTextRichText | GermanLegalTextRichText | JobActivitiesRichText | MainHeroTextRichText | TextRichText) & { __isUnion?: true }
 
-export interface SearchHighlight_0266a75a397b6ef275f88 {
+export interface SearchHighlight_4NoMvP7ym5wkK9C3WtHZi {
     /** The field/path that was matched (e.g., "title", "body.content") */
     by: Scalars['String']
     /** HTML snippet with <mark> tags around the matched terms */
     snippet: Scalars['String']
-    __typename: 'SearchHighlight_0266a75a397b6ef275f88'
+    __typename: 'SearchHighlight_4NoMvP7ym5wkK9C3WtHZi'
 }
 
-export interface SearchHighlight_4dee20529724d4d070a0d {
+export interface SearchHighlight_O1oSW4VnJ6I9pjssF5k7e {
     /** The field/path that was matched (e.g., "title", "body.content") */
     by: Scalars['String']
     /** HTML snippet with <mark> tags around the matched terms */
     snippet: Scalars['String']
-    __typename: 'SearchHighlight_4dee20529724d4d070a0d'
+    __typename: 'SearchHighlight_O1oSW4VnJ6I9pjssF5k7e'
 }
 
-export interface SearchHighlight_4y7LzNdcowhzz4qd2x5w0 {
+export interface SearchHighlight_YsC2f3DvVIou0I1VVORww {
     /** The field/path that was matched (e.g., "title", "body.content") */
     by: Scalars['String']
     /** HTML snippet with <mark> tags around the matched terms */
     snippet: Scalars['String']
-    __typename: 'SearchHighlight_4y7LzNdcowhzz4qd2x5w0'
+    __typename: 'SearchHighlight_YsC2f3DvVIou0I1VVORww'
 }
 
-export interface SearchHighlight_50dd87f1afc8457c86b6f {
+export interface SearchHighlight_fbQN1WPmtMie0CMjuGaXk {
     /** The field/path that was matched (e.g., "title", "body.content") */
     by: Scalars['String']
     /** HTML snippet with <mark> tags around the matched terms */
     snippet: Scalars['String']
-    __typename: 'SearchHighlight_50dd87f1afc8457c86b6f'
+    __typename: 'SearchHighlight_fbQN1WPmtMie0CMjuGaXk'
 }
 
-export interface SearchHighlight_632e21b4ed0379cda0a7d {
+export interface SearchHighlight_hjIGZO50yCrWt02ao4q6J {
     /** The field/path that was matched (e.g., "title", "body.content") */
     by: Scalars['String']
     /** HTML snippet with <mark> tags around the matched terms */
     snippet: Scalars['String']
-    __typename: 'SearchHighlight_632e21b4ed0379cda0a7d'
+    __typename: 'SearchHighlight_hjIGZO50yCrWt02ao4q6J'
 }
 
-export interface SearchHighlight_85VxKYnAosVtSTLeQBp53 {
+export interface SearchHighlight_m6IoglgbtsGLy7AY6IPea {
     /** The field/path that was matched (e.g., "title", "body.content") */
     by: Scalars['String']
     /** HTML snippet with <mark> tags around the matched terms */
     snippet: Scalars['String']
-    __typename: 'SearchHighlight_85VxKYnAosVtSTLeQBp53'
+    __typename: 'SearchHighlight_m6IoglgbtsGLy7AY6IPea'
 }
 
-export interface SearchHighlight_9e3cc7a098494a9d7de72 {
+export interface SearchHighlight_mRy1NXhawxgi5Iwl78Kjy {
     /** The field/path that was matched (e.g., "title", "body.content") */
     by: Scalars['String']
     /** HTML snippet with <mark> tags around the matched terms */
     snippet: Scalars['String']
-    __typename: 'SearchHighlight_9e3cc7a098494a9d7de72'
+    __typename: 'SearchHighlight_mRy1NXhawxgi5Iwl78Kjy'
 }
 
-export interface SearchHighlight_TDKQhu3Q8Y2OHVvaXLOiN {
+export interface SearchHighlight_mgFizXUBTMkUhtZPRCkkr {
     /** The field/path that was matched (e.g., "title", "body.content") */
     by: Scalars['String']
     /** HTML snippet with <mark> tags around the matched terms */
     snippet: Scalars['String']
-    __typename: 'SearchHighlight_TDKQhu3Q8Y2OHVvaXLOiN'
+    __typename: 'SearchHighlight_mgFizXUBTMkUhtZPRCkkr'
 }
 
-export interface SearchHighlight_a074491c87bf0e119ad3c {
+export interface SearchHighlight_pipK6Lp3y7KiHmhfYPI1Y {
     /** The field/path that was matched (e.g., "title", "body.content") */
     by: Scalars['String']
     /** HTML snippet with <mark> tags around the matched terms */
     snippet: Scalars['String']
-    __typename: 'SearchHighlight_a074491c87bf0e119ad3c'
+    __typename: 'SearchHighlight_pipK6Lp3y7KiHmhfYPI1Y'
 }
 
-export interface SearchHighlight_abxbhcLm3zdLVSVl3VrW7 {
+export interface SearchHighlight_spQgN1sJaD3Mz2ESUs5iQ {
     /** The field/path that was matched (e.g., "title", "body.content") */
     by: Scalars['String']
     /** HTML snippet with <mark> tags around the matched terms */
     snippet: Scalars['String']
-    __typename: 'SearchHighlight_abxbhcLm3zdLVSVl3VrW7'
+    __typename: 'SearchHighlight_spQgN1sJaD3Mz2ESUs5iQ'
 }
 
 export interface SectionsAndPages {
@@ -695,7 +698,7 @@ export interface SkillComponent {
     _analyticsKey: Scalars['String']
     _dashboardUrl: Scalars['String']
     /** Array of search highlight information with field names and HTML markup */
-    _highlight: (SearchHighlight_632e21b4ed0379cda0a7d[] | null)
+    _highlight: (SearchHighlight_hjIGZO50yCrWt02ao4q6J[] | null)
     _id: Scalars['String']
     _idPath: Scalars['String']
     _slug: Scalars['String']
@@ -749,7 +752,7 @@ export interface SocialsComponent {
     _analyticsKey: Scalars['String']
     _dashboardUrl: Scalars['String']
     /** Array of search highlight information with field names and HTML markup */
-    _highlight: (SearchHighlight_a074491c87bf0e119ad3c[] | null)
+    _highlight: (SearchHighlight_4NoMvP7ym5wkK9C3WtHZi[] | null)
     _id: Scalars['String']
     _idPath: Scalars['String']
     _slug: Scalars['String']
@@ -786,7 +789,7 @@ export interface TechnologyComponent {
     _analyticsKey: Scalars['String']
     _dashboardUrl: Scalars['String']
     /** Array of search highlight information with field names and HTML markup */
-    _highlight: (SearchHighlight_0266a75a397b6ef275f88[] | null)
+    _highlight: (SearchHighlight_mRy1NXhawxgi5Iwl78Kjy[] | null)
     _id: Scalars['String']
     _idPath: Scalars['String']
     _slug: Scalars['String']
@@ -852,7 +855,7 @@ export interface UntitledComponent {
     _analyticsKey: Scalars['String']
     _dashboardUrl: Scalars['String']
     /** Array of search highlight information with field names and HTML markup */
-    _highlight: (SearchHighlight_4y7LzNdcowhzz4qd2x5w0[] | null)
+    _highlight: (SearchHighlight_mgFizXUBTMkUhtZPRCkkr[] | null)
     _id: Scalars['String']
     _idPath: Scalars['String']
     _slug: Scalars['String']
@@ -1476,7 +1479,7 @@ export interface CallToActionComponentGenqlSelection{
     scope?: (AnalyticsKeyScope | null)} } | boolean | number
     _dashboardUrl?: boolean | number
     /** Array of search highlight information with field names and HTML markup */
-    _highlight?: SearchHighlight_85VxKYnAosVtSTLeQBp53GenqlSelection
+    _highlight?: SearchHighlight_YsC2f3DvVIou0I1VVORwwGenqlSelection
     _id?: boolean | number
     _idPath?: boolean | number
     _slug?: boolean | number
@@ -1550,7 +1553,7 @@ export interface ExperienceComponentGenqlSelection{
     scope?: (AnalyticsKeyScope | null)} } | boolean | number
     _dashboardUrl?: boolean | number
     /** Array of search highlight information with field names and HTML markup */
-    _highlight?: SearchHighlight_4dee20529724d4d070a0dGenqlSelection
+    _highlight?: SearchHighlight_O1oSW4VnJ6I9pjssF5k7eGenqlSelection
     _id?: boolean | number
     _idPath?: boolean | number
     _slug?: boolean | number
@@ -1559,6 +1562,7 @@ export interface ExperienceComponentGenqlSelection{
     _title?: boolean | number
     companyDescription?: boolean | number
     companyLink?: boolean | number
+    companyTitle?: boolean | number
     /** ISO 8601 date string. */
     endDate?: boolean | number
     jobActivities?: JobActivitiesGenqlSelection
@@ -1568,7 +1572,7 @@ export interface ExperienceComponentGenqlSelection{
     __typename?: boolean | number
 }
 
-export interface ExperienceComponentFilterInput {AND?: (ExperienceComponentFilterInput | null),OR?: (ExperienceComponentFilterInput | null),_id?: (StringFilter | null),_slug?: (StringFilter | null),_sys_apiNamePath?: (StringFilter | null),_sys_createdAt?: (DateFilter | null),_sys_hash?: (StringFilter | null),_sys_id?: (StringFilter | null),_sys_idPath?: (StringFilter | null),_sys_lastModifiedAt?: (DateFilter | null),_sys_slug?: (StringFilter | null),_sys_slugPath?: (StringFilter | null),_sys_title?: (StringFilter | null),_title?: (StringFilter | null),companyDescription?: (StringFilter | null),companyLink?: (StringFilter | null),endDate?: (DateFilter | null),skills?: (ExperienceComponentFilterInput__skills_0___skill | null),startDate?: (DateFilter | null)}
+export interface ExperienceComponentFilterInput {AND?: (ExperienceComponentFilterInput | null),OR?: (ExperienceComponentFilterInput | null),_id?: (StringFilter | null),_slug?: (StringFilter | null),_sys_apiNamePath?: (StringFilter | null),_sys_createdAt?: (DateFilter | null),_sys_hash?: (StringFilter | null),_sys_id?: (StringFilter | null),_sys_idPath?: (StringFilter | null),_sys_lastModifiedAt?: (DateFilter | null),_sys_slug?: (StringFilter | null),_sys_slugPath?: (StringFilter | null),_sys_title?: (StringFilter | null),_title?: (StringFilter | null),companyDescription?: (StringFilter | null),companyLink?: (StringFilter | null),companyTitle?: (StringFilter | null),endDate?: (DateFilter | null),skills?: (ExperienceComponentFilterInput__skills_0___skill | null),startDate?: (DateFilter | null)}
 
 export interface ExperienceComponentFilterInput__skills_0___skill {_id?: (StringFilter | null),_slug?: (StringFilter | null),_sys_apiNamePath?: (StringFilter | null),_sys_createdAt?: (DateFilter | null),_sys_hash?: (StringFilter | null),_sys_id?: (StringFilter | null),_sys_idPath?: (StringFilter | null),_sys_lastModifiedAt?: (DateFilter | null),_sys_slug?: (StringFilter | null),_sys_slugPath?: (StringFilter | null),_sys_title?: (StringFilter | null),_title?: (StringFilter | null)}
 
@@ -1696,19 +1700,20 @@ export interface ImgComponentGenqlSelection{
     scope?: (AnalyticsKeyScope | null)} } | boolean | number
     _dashboardUrl?: boolean | number
     /** Array of search highlight information with field names and HTML markup */
-    _highlight?: SearchHighlight_abxbhcLm3zdLVSVl3VrW7GenqlSelection
+    _highlight?: SearchHighlight_pipK6Lp3y7KiHmhfYPI1YGenqlSelection
     _id?: boolean | number
     _idPath?: boolean | number
     _slug?: boolean | number
     _slugPath?: boolean | number
     _sys?: BlockDocumentSysGenqlSelection
     _title?: boolean | number
+    alt?: boolean | number
     darkImg?: BlockImageGenqlSelection
     lightImg?: BlockImageGenqlSelection
     __typename?: boolean | number
 }
 
-export interface ImgComponentFilterInput {AND?: (ImgComponentFilterInput | null),OR?: (ImgComponentFilterInput | null),_id?: (StringFilter | null),_slug?: (StringFilter | null),_sys_apiNamePath?: (StringFilter | null),_sys_createdAt?: (DateFilter | null),_sys_hash?: (StringFilter | null),_sys_id?: (StringFilter | null),_sys_idPath?: (StringFilter | null),_sys_lastModifiedAt?: (DateFilter | null),_sys_slug?: (StringFilter | null),_sys_slugPath?: (StringFilter | null),_sys_title?: (StringFilter | null),_title?: (StringFilter | null)}
+export interface ImgComponentFilterInput {AND?: (ImgComponentFilterInput | null),OR?: (ImgComponentFilterInput | null),_id?: (StringFilter | null),_slug?: (StringFilter | null),_sys_apiNamePath?: (StringFilter | null),_sys_createdAt?: (DateFilter | null),_sys_hash?: (StringFilter | null),_sys_id?: (StringFilter | null),_sys_idPath?: (StringFilter | null),_sys_lastModifiedAt?: (DateFilter | null),_sys_slug?: (StringFilter | null),_sys_slugPath?: (StringFilter | null),_sys_title?: (StringFilter | null),_title?: (StringFilter | null),alt?: (StringFilter | null)}
 
 export interface ImgComponentSearchInput {
 /** Searchable fields for query */
@@ -1820,7 +1825,7 @@ export interface MetaComponentGenqlSelection{
     scope?: (AnalyticsKeyScope | null)} } | boolean | number
     _dashboardUrl?: boolean | number
     /** Array of search highlight information with field names and HTML markup */
-    _highlight?: SearchHighlight_TDKQhu3Q8Y2OHVvaXLOiNGenqlSelection
+    _highlight?: SearchHighlight_fbQN1WPmtMie0CMjuGaXkGenqlSelection
     _id?: boolean | number
     _idPath?: boolean | number
     _slug?: boolean | number
@@ -1910,7 +1915,7 @@ export interface ProjectComponentGenqlSelection{
     scope?: (AnalyticsKeyScope | null)} } | boolean | number
     _dashboardUrl?: boolean | number
     /** Array of search highlight information with field names and HTML markup */
-    _highlight?: SearchHighlight_50dd87f1afc8457c86b6fGenqlSelection
+    _highlight?: SearchHighlight_spQgN1sJaD3Mz2ESUs5iQGenqlSelection
     _id?: boolean | number
     _idPath?: boolean | number
     _slug?: boolean | number
@@ -1920,6 +1925,7 @@ export interface ProjectComponentGenqlSelection{
     /** ISO 8601 date string. */
     date?: boolean | number
     githubLink?: boolean | number
+    images?: ImgComponentGenqlSelection
     meta?: MetaComponentGenqlSelection
     shortDescription?: boolean | number
     showcaseLink?: boolean | number
@@ -1928,7 +1934,9 @@ export interface ProjectComponentGenqlSelection{
     __typename?: boolean | number
 }
 
-export interface ProjectComponentFilterInput {AND?: (ProjectComponentFilterInput | null),OR?: (ProjectComponentFilterInput | null),_id?: (StringFilter | null),_slug?: (StringFilter | null),_sys_apiNamePath?: (StringFilter | null),_sys_createdAt?: (DateFilter | null),_sys_hash?: (StringFilter | null),_sys_id?: (StringFilter | null),_sys_idPath?: (StringFilter | null),_sys_lastModifiedAt?: (DateFilter | null),_sys_slug?: (StringFilter | null),_sys_slugPath?: (StringFilter | null),_sys_title?: (StringFilter | null),_title?: (StringFilter | null),date?: (DateFilter | null),githubLink?: (StringFilter | null),meta?: (ProjectComponentFilterInput__meta | null),shortDescription?: (StringFilter | null),showcaseLink?: (StringFilter | null),technology?: (ProjectComponentFilterInput__technology_0___technology | null)}
+export interface ProjectComponentFilterInput {AND?: (ProjectComponentFilterInput | null),OR?: (ProjectComponentFilterInput | null),_id?: (StringFilter | null),_slug?: (StringFilter | null),_sys_apiNamePath?: (StringFilter | null),_sys_createdAt?: (DateFilter | null),_sys_hash?: (StringFilter | null),_sys_id?: (StringFilter | null),_sys_idPath?: (StringFilter | null),_sys_lastModifiedAt?: (DateFilter | null),_sys_slug?: (StringFilter | null),_sys_slugPath?: (StringFilter | null),_sys_title?: (StringFilter | null),_title?: (StringFilter | null),date?: (DateFilter | null),githubLink?: (StringFilter | null),images?: (ProjectComponentFilterInput__images_0___img | null),meta?: (ProjectComponentFilterInput__meta | null),shortDescription?: (StringFilter | null),showcaseLink?: (StringFilter | null),technology?: (ProjectComponentFilterInput__technology_0___technology | null)}
+
+export interface ProjectComponentFilterInput__images_0___img {_id?: (StringFilter | null),_slug?: (StringFilter | null),_sys_apiNamePath?: (StringFilter | null),_sys_createdAt?: (DateFilter | null),_sys_hash?: (StringFilter | null),_sys_id?: (StringFilter | null),_sys_idPath?: (StringFilter | null),_sys_lastModifiedAt?: (DateFilter | null),_sys_slug?: (StringFilter | null),_sys_slugPath?: (StringFilter | null),_sys_title?: (StringFilter | null),_title?: (StringFilter | null),alt?: (StringFilter | null)}
 
 export interface ProjectComponentFilterInput__meta {_id?: (StringFilter | null),_slug?: (StringFilter | null),_sys_apiNamePath?: (StringFilter | null),_sys_createdAt?: (DateFilter | null),_sys_hash?: (StringFilter | null),_sys_id?: (StringFilter | null),_sys_idPath?: (StringFilter | null),_sys_lastModifiedAt?: (DateFilter | null),_sys_slug?: (StringFilter | null),_sys_slugPath?: (StringFilter | null),_sys_title?: (StringFilter | null),_title?: (StringFilter | null),desc?: (StringFilter | null),title?: (StringFilter | null)}
 
@@ -2033,7 +2041,7 @@ export interface QuickSkillsShowcaseItemGenqlSelection{
     scope?: (AnalyticsKeyScope | null)} } | boolean | number
     _dashboardUrl?: boolean | number
     /** Array of search highlight information with field names and HTML markup */
-    _highlight?: SearchHighlight_9e3cc7a098494a9d7de72GenqlSelection
+    _highlight?: SearchHighlight_m6IoglgbtsGLy7AY6IPeaGenqlSelection
     _id?: boolean | number
     _idPath?: boolean | number
     _slug?: boolean | number
@@ -2075,7 +2083,7 @@ export interface RichTextJsonGenqlSelection{
     __typename?: boolean | number
 }
 
-export interface SearchHighlight_0266a75a397b6ef275f88GenqlSelection{
+export interface SearchHighlight_4NoMvP7ym5wkK9C3WtHZiGenqlSelection{
     /** The field/path that was matched (e.g., "title", "body.content") */
     by?: boolean | number
     /** HTML snippet with <mark> tags around the matched terms */
@@ -2083,7 +2091,7 @@ export interface SearchHighlight_0266a75a397b6ef275f88GenqlSelection{
     __typename?: boolean | number
 }
 
-export interface SearchHighlight_4dee20529724d4d070a0dGenqlSelection{
+export interface SearchHighlight_O1oSW4VnJ6I9pjssF5k7eGenqlSelection{
     /** The field/path that was matched (e.g., "title", "body.content") */
     by?: boolean | number
     /** HTML snippet with <mark> tags around the matched terms */
@@ -2091,7 +2099,7 @@ export interface SearchHighlight_4dee20529724d4d070a0dGenqlSelection{
     __typename?: boolean | number
 }
 
-export interface SearchHighlight_4y7LzNdcowhzz4qd2x5w0GenqlSelection{
+export interface SearchHighlight_YsC2f3DvVIou0I1VVORwwGenqlSelection{
     /** The field/path that was matched (e.g., "title", "body.content") */
     by?: boolean | number
     /** HTML snippet with <mark> tags around the matched terms */
@@ -2099,7 +2107,7 @@ export interface SearchHighlight_4y7LzNdcowhzz4qd2x5w0GenqlSelection{
     __typename?: boolean | number
 }
 
-export interface SearchHighlight_50dd87f1afc8457c86b6fGenqlSelection{
+export interface SearchHighlight_fbQN1WPmtMie0CMjuGaXkGenqlSelection{
     /** The field/path that was matched (e.g., "title", "body.content") */
     by?: boolean | number
     /** HTML snippet with <mark> tags around the matched terms */
@@ -2107,7 +2115,7 @@ export interface SearchHighlight_50dd87f1afc8457c86b6fGenqlSelection{
     __typename?: boolean | number
 }
 
-export interface SearchHighlight_632e21b4ed0379cda0a7dGenqlSelection{
+export interface SearchHighlight_hjIGZO50yCrWt02ao4q6JGenqlSelection{
     /** The field/path that was matched (e.g., "title", "body.content") */
     by?: boolean | number
     /** HTML snippet with <mark> tags around the matched terms */
@@ -2115,7 +2123,7 @@ export interface SearchHighlight_632e21b4ed0379cda0a7dGenqlSelection{
     __typename?: boolean | number
 }
 
-export interface SearchHighlight_85VxKYnAosVtSTLeQBp53GenqlSelection{
+export interface SearchHighlight_m6IoglgbtsGLy7AY6IPeaGenqlSelection{
     /** The field/path that was matched (e.g., "title", "body.content") */
     by?: boolean | number
     /** HTML snippet with <mark> tags around the matched terms */
@@ -2123,7 +2131,7 @@ export interface SearchHighlight_85VxKYnAosVtSTLeQBp53GenqlSelection{
     __typename?: boolean | number
 }
 
-export interface SearchHighlight_9e3cc7a098494a9d7de72GenqlSelection{
+export interface SearchHighlight_mRy1NXhawxgi5Iwl78KjyGenqlSelection{
     /** The field/path that was matched (e.g., "title", "body.content") */
     by?: boolean | number
     /** HTML snippet with <mark> tags around the matched terms */
@@ -2131,7 +2139,7 @@ export interface SearchHighlight_9e3cc7a098494a9d7de72GenqlSelection{
     __typename?: boolean | number
 }
 
-export interface SearchHighlight_TDKQhu3Q8Y2OHVvaXLOiNGenqlSelection{
+export interface SearchHighlight_mgFizXUBTMkUhtZPRCkkrGenqlSelection{
     /** The field/path that was matched (e.g., "title", "body.content") */
     by?: boolean | number
     /** HTML snippet with <mark> tags around the matched terms */
@@ -2139,7 +2147,7 @@ export interface SearchHighlight_TDKQhu3Q8Y2OHVvaXLOiNGenqlSelection{
     __typename?: boolean | number
 }
 
-export interface SearchHighlight_a074491c87bf0e119ad3cGenqlSelection{
+export interface SearchHighlight_pipK6Lp3y7KiHmhfYPI1YGenqlSelection{
     /** The field/path that was matched (e.g., "title", "body.content") */
     by?: boolean | number
     /** HTML snippet with <mark> tags around the matched terms */
@@ -2147,7 +2155,7 @@ export interface SearchHighlight_a074491c87bf0e119ad3cGenqlSelection{
     __typename?: boolean | number
 }
 
-export interface SearchHighlight_abxbhcLm3zdLVSVl3VrW7GenqlSelection{
+export interface SearchHighlight_spQgN1sJaD3Mz2ESUs5iQGenqlSelection{
     /** The field/path that was matched (e.g., "title", "body.content") */
     by?: boolean | number
     /** HTML snippet with <mark> tags around the matched terms */
@@ -2199,7 +2207,7 @@ export interface SkillComponentGenqlSelection{
     scope?: (AnalyticsKeyScope | null)} } | boolean | number
     _dashboardUrl?: boolean | number
     /** Array of search highlight information with field names and HTML markup */
-    _highlight?: SearchHighlight_632e21b4ed0379cda0a7dGenqlSelection
+    _highlight?: SearchHighlight_hjIGZO50yCrWt02ao4q6JGenqlSelection
     _id?: boolean | number
     _idPath?: boolean | number
     _slug?: boolean | number
@@ -2277,7 +2285,7 @@ export interface SocialsComponentGenqlSelection{
     scope?: (AnalyticsKeyScope | null)} } | boolean | number
     _dashboardUrl?: boolean | number
     /** Array of search highlight information with field names and HTML markup */
-    _highlight?: SearchHighlight_a074491c87bf0e119ad3cGenqlSelection
+    _highlight?: SearchHighlight_4NoMvP7ym5wkK9C3WtHZiGenqlSelection
     _id?: boolean | number
     _idPath?: boolean | number
     _slug?: boolean | number
@@ -2338,7 +2346,7 @@ export interface TechnologyComponentGenqlSelection{
     scope?: (AnalyticsKeyScope | null)} } | boolean | number
     _dashboardUrl?: boolean | number
     /** Array of search highlight information with field names and HTML markup */
-    _highlight?: SearchHighlight_0266a75a397b6ef275f88GenqlSelection
+    _highlight?: SearchHighlight_mRy1NXhawxgi5Iwl78KjyGenqlSelection
     _id?: boolean | number
     _idPath?: boolean | number
     _slug?: boolean | number
@@ -2450,7 +2458,7 @@ export interface UntitledComponentGenqlSelection{
     scope?: (AnalyticsKeyScope | null)} } | boolean | number
     _dashboardUrl?: boolean | number
     /** Array of search highlight information with field names and HTML markup */
-    _highlight?: SearchHighlight_4y7LzNdcowhzz4qd2x5w0GenqlSelection
+    _highlight?: SearchHighlight_mgFizXUBTMkUhtZPRCkkrGenqlSelection
     _id?: boolean | number
     _idPath?: boolean | number
     _slug?: boolean | number
@@ -3118,45 +3126,45 @@ export interface FragmentsMap {
     root: RichTextJson,
     selection: RichTextJsonGenqlSelection,
 }
-  SearchHighlight_0266a75a397b6ef275f88: {
-    root: SearchHighlight_0266a75a397b6ef275f88,
-    selection: SearchHighlight_0266a75a397b6ef275f88GenqlSelection,
+  SearchHighlight_4NoMvP7ym5wkK9C3WtHZi: {
+    root: SearchHighlight_4NoMvP7ym5wkK9C3WtHZi,
+    selection: SearchHighlight_4NoMvP7ym5wkK9C3WtHZiGenqlSelection,
 }
-  SearchHighlight_4dee20529724d4d070a0d: {
-    root: SearchHighlight_4dee20529724d4d070a0d,
-    selection: SearchHighlight_4dee20529724d4d070a0dGenqlSelection,
+  SearchHighlight_O1oSW4VnJ6I9pjssF5k7e: {
+    root: SearchHighlight_O1oSW4VnJ6I9pjssF5k7e,
+    selection: SearchHighlight_O1oSW4VnJ6I9pjssF5k7eGenqlSelection,
 }
-  SearchHighlight_4y7LzNdcowhzz4qd2x5w0: {
-    root: SearchHighlight_4y7LzNdcowhzz4qd2x5w0,
-    selection: SearchHighlight_4y7LzNdcowhzz4qd2x5w0GenqlSelection,
+  SearchHighlight_YsC2f3DvVIou0I1VVORww: {
+    root: SearchHighlight_YsC2f3DvVIou0I1VVORww,
+    selection: SearchHighlight_YsC2f3DvVIou0I1VVORwwGenqlSelection,
 }
-  SearchHighlight_50dd87f1afc8457c86b6f: {
-    root: SearchHighlight_50dd87f1afc8457c86b6f,
-    selection: SearchHighlight_50dd87f1afc8457c86b6fGenqlSelection,
+  SearchHighlight_fbQN1WPmtMie0CMjuGaXk: {
+    root: SearchHighlight_fbQN1WPmtMie0CMjuGaXk,
+    selection: SearchHighlight_fbQN1WPmtMie0CMjuGaXkGenqlSelection,
 }
-  SearchHighlight_632e21b4ed0379cda0a7d: {
-    root: SearchHighlight_632e21b4ed0379cda0a7d,
-    selection: SearchHighlight_632e21b4ed0379cda0a7dGenqlSelection,
+  SearchHighlight_hjIGZO50yCrWt02ao4q6J: {
+    root: SearchHighlight_hjIGZO50yCrWt02ao4q6J,
+    selection: SearchHighlight_hjIGZO50yCrWt02ao4q6JGenqlSelection,
 }
-  SearchHighlight_85VxKYnAosVtSTLeQBp53: {
-    root: SearchHighlight_85VxKYnAosVtSTLeQBp53,
-    selection: SearchHighlight_85VxKYnAosVtSTLeQBp53GenqlSelection,
+  SearchHighlight_m6IoglgbtsGLy7AY6IPea: {
+    root: SearchHighlight_m6IoglgbtsGLy7AY6IPea,
+    selection: SearchHighlight_m6IoglgbtsGLy7AY6IPeaGenqlSelection,
 }
-  SearchHighlight_9e3cc7a098494a9d7de72: {
-    root: SearchHighlight_9e3cc7a098494a9d7de72,
-    selection: SearchHighlight_9e3cc7a098494a9d7de72GenqlSelection,
+  SearchHighlight_mRy1NXhawxgi5Iwl78Kjy: {
+    root: SearchHighlight_mRy1NXhawxgi5Iwl78Kjy,
+    selection: SearchHighlight_mRy1NXhawxgi5Iwl78KjyGenqlSelection,
 }
-  SearchHighlight_TDKQhu3Q8Y2OHVvaXLOiN: {
-    root: SearchHighlight_TDKQhu3Q8Y2OHVvaXLOiN,
-    selection: SearchHighlight_TDKQhu3Q8Y2OHVvaXLOiNGenqlSelection,
+  SearchHighlight_mgFizXUBTMkUhtZPRCkkr: {
+    root: SearchHighlight_mgFizXUBTMkUhtZPRCkkr,
+    selection: SearchHighlight_mgFizXUBTMkUhtZPRCkkrGenqlSelection,
 }
-  SearchHighlight_a074491c87bf0e119ad3c: {
-    root: SearchHighlight_a074491c87bf0e119ad3c,
-    selection: SearchHighlight_a074491c87bf0e119ad3cGenqlSelection,
+  SearchHighlight_pipK6Lp3y7KiHmhfYPI1Y: {
+    root: SearchHighlight_pipK6Lp3y7KiHmhfYPI1Y,
+    selection: SearchHighlight_pipK6Lp3y7KiHmhfYPI1YGenqlSelection,
 }
-  SearchHighlight_abxbhcLm3zdLVSVl3VrW7: {
-    root: SearchHighlight_abxbhcLm3zdLVSVl3VrW7,
-    selection: SearchHighlight_abxbhcLm3zdLVSVl3VrW7GenqlSelection,
+  SearchHighlight_spQgN1sJaD3Mz2ESUs5iQ: {
+    root: SearchHighlight_spQgN1sJaD3Mz2ESUs5iQ,
+    selection: SearchHighlight_spQgN1sJaD3Mz2ESUs5iQGenqlSelection,
 }
   SectionsAndPages: {
     root: SectionsAndPages,

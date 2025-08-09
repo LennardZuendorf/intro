@@ -49,6 +49,15 @@ if [ $? -ne 0 ]; then
 fi
 echo "Lint & format on HEAD passed."
 
+# Step 1.5: Run Jest Tests
+echo "Running Jest Tests on HEAD..."
+pnpm run test
+if [ $? -ne 0 ]; then
+  echo "Jest Tests failed on HEAD. Aborting push."
+  exit 1 # pop_stash will be called by EXIT trap
+fi
+echo "Jest Tests on HEAD passed."
+
 # Step 2: Run build on HEAD
 echo "Running build on HEAD..."
 pnpm run build

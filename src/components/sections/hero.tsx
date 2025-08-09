@@ -90,11 +90,7 @@ export const HeroSection = async ({
               <CardFooter className='pl-5'>
                 {/* Social Buttons */}
                 <div id='hero-social-buttons' className='mt-1'>
-                  <SocialButtons
-                    socials={socials.items}
-                    iconSize='1.25rem'
-                    buttonVariant='default'
-                  />
+                  <SocialButtons buttonVariant='default' />
                 </div>
               </CardFooter>
             </Card>

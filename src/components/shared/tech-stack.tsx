@@ -21,6 +21,11 @@ export function TechStackCompact({ techStackData }: TechStackCompactProps) {
   const [showAllTech, setShowAllTech] = useState(false);
   const [animatingTech, setAnimatingTech] = useState(false);
 
+  // If no tech stack data, don't render anything
+  if (!techStackData || techStackData.length === 0) {
+    return null;
+  }
+
   // Display only 4 tech stack items initially (reduced for compact display)
   const visibleTech = techStackData.slice(0, 4);
   const hasMoreTech = techStackData.length > 4;
@@ -35,11 +40,6 @@ export function TechStackCompact({ techStackData }: TechStackCompactProps) {
       setAnimatingTech(false);
     }, 500);
   };
-
-  // If no tech stack data, don't render anything
-  if (!techStackData || techStackData.length === 0) {
-    return null;
-  }
 
   return (
     <div className='flex flex-wrap gap-2 md:gap-3 relative transition-all duration-500 ease-in-out'>

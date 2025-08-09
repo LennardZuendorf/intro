@@ -16,7 +16,7 @@ import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { IconLink } from '@/components/ui/icon-link';
 import { NeoBadge } from '@/components/ui/neoBadge';
 import { Section } from '@/components/ui/section';
-import { Code, H1, H3, L, M } from '@/components/ui/typography';
+import { Code, H1, L, M } from '@/components/ui/typography';
 
 export interface SectionProps {
   className?: string;
