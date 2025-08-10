@@ -204,13 +204,15 @@ const Page: NextPage = async () => {
               showAbout={data.globals.showAbout}
               showProjects={data.globals.showProjects}
             />
-            {data.globals?.showAbout && (
+            {data.globals?.showAbout === true && (
               <AboutSection
                 content={data.sectionsAndPages.aboutSection as unknown as AboutSectionType}
                 skills={data.types.skills.items as unknown as SkillsType}
               />
             )}
-            {data.globals?.showProjects && <Projects className='border-t-4 border-border' />}
+            {data.globals?.showProjects === true && (
+              <Projects className='border-t-4 border-border' />
+            )}
             <Banner />
           </div>
         );

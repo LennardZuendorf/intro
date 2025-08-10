@@ -27,7 +27,9 @@ export async function generateMetadata(): Promise<Metadata> {
         img: {
           url: true
         }
-      }
+      },
+      showAbout: true,
+      showProjects: true
     }
   });
 
@@ -69,6 +71,13 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     plugins: [ReactPlugin]
   };
 
+  const data = await basehub().query({
+    globals: {
+      showAbout: true,
+      showProjects: true
+    }
+  });
+
   return (
     <html lang='en' suppressHydrationWarning className={inter.className}>
       <head>
@@ -79,7 +88,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       <body className={cn('min-h-screen bg-primary font-sans antialiased relative')}>
         <div className='absolute inset-0 -z-10 h-full w-full bg-primary' />
         <Providers attribute='class' defaultTheme='system' enableSystem disableTransitionOnChange>
-          <Nav />
+          <Nav showAbout={data.globals.showAbout} showProjects={data.globals.showProjects} />
           <div className='w-full'>
             {children}
             <SetColorPreference />
@@ -87,7 +96,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           </div>
           <Footer />
         </Providers>
-        <ScrollArrow />
+        {data.globals.showAbout && data.globals.showProjects && <ScrollArrow />}
         {process.env.NODE_ENV === 'development' && (
           <TwentyFirstToolbar config={twentyFirstConfig} />
         )}

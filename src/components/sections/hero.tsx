@@ -163,15 +163,17 @@ export const HeroSection = async ({
                     </M>
                   </div>
                   <div id='project-cta' className='flex justify-start gap-2'>
-                    <IconLink
-                      href={`/projects/${content.selectedProject._slug}`}
-                      icon={<HiMiniArrowTopRightOnSquare className='h-4 w-4' />}
-                      variant='default'
-                      size='default'
-                      iconPosition='right'
-                    >
-                      Learn More
-                    </IconLink>
+                    {showProjects && (
+                      <IconLink
+                        href={`/projects/${content.selectedProject._slug}`}
+                        icon={<HiMiniArrowTopRightOnSquare className='h-4 w-4' />}
+                        variant='default'
+                        size='default'
+                        iconPosition='right'
+                      >
+                        Learn More
+                      </IconLink>
+                    )}
                     {content.selectedProject.showcaseLink && (
                       <IconLink
                         href={content.selectedProject.showcaseLink || '#'}

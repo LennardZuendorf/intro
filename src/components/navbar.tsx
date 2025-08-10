@@ -23,7 +23,15 @@ type navItemsType = Array<{
   link: string;
 }>;
 
-export const Nav = ({ className }: { className?: string }) => {
+export const Nav = ({
+  className,
+  showAbout,
+  showProjects
+}: {
+  className?: string;
+  showAbout: boolean;
+  showProjects: boolean;
+}) => {
   const { scrollYProgress } = useScroll();
   const [visible, setVisible] = useState(false);
   const [isPinned, setIsPinned] = useState(false);
@@ -102,6 +110,8 @@ export const Nav = ({ className }: { className?: string }) => {
             navItems={navItems}
             isPinned={isPinned}
             togglePin={togglePin}
+            showAbout={showAbout}
+            showProjects={showProjects}
           />
         </motion.div>
       </AnimatePresence>
@@ -117,6 +127,8 @@ export const Nav = ({ className }: { className?: string }) => {
       navItems={navItems}
       isPinned={isPinned}
       togglePin={togglePin}
+      showAbout={showAbout}
+      showProjects={showProjects}
     />
   );
 };
@@ -126,14 +138,28 @@ const Navbar = ({
   pathname,
   className = '',
   isPinned,
-  togglePin
+  togglePin,
+  showAbout,
+  showProjects
 }: {
   navItems: navItemsType;
   pathname: string;
   className?: string;
   isPinned: boolean;
+  showAbout: boolean;
+  showProjects: boolean;
   togglePin: () => void;
 }) => {
+  const filteredNavItems = navItems.filter((item) => {
+    if (item.name.toLowerCase() === 'about' && !showAbout) {
+      return false;
+    }
+    if (item.name.toLowerCase() === 'projects' && !showProjects) {
+      return false;
+    }
+    return true;
+  });
+
   return (
     <motion.header
       className={cn(
@@ -146,7 +172,7 @@ const Navbar = ({
       <NavigationMenu className='bg-primary w-full md:w-auto'>
         <NavigationMenuList className='flex justify-between w-full'>
           <div className='flex items-center space-x-1 md:space-x-2'>
-            {navItems.map((item) => (
+            {filteredNavItems.map((item) => (
               <NavigationMenuItem key={item.name}>
                 <Link href={item.link} legacyBehavior passHref>
                   <NavigationMenuLink
