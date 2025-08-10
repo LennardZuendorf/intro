@@ -1,10 +1,14 @@
 import { Pump } from 'basehub/react-pump';
-import { RichText } from 'basehub/react-rich-text';
+import type { LegalInfoComponent } from 'basehub-types';
 import type { NextPage } from 'next';
 import { draftMode } from 'next/headers';
-import Image from 'next/image';
+import { RichTextBlock } from '@/components/sections/components/richtext-block';
 import { Card, CardContent } from '@/components/ui/card';
+import { NeoBadge } from '@/components/ui/neoBadge';
+import { Section, SectionTop } from '@/components/ui/section';
+import { Separator } from '@/components/ui/separator';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Code, H1 } from '@/components/ui/typography';
 
 const LegalPage: NextPage = async () => {
   const { isEnabled: draft } = await draftMode();
@@ -16,16 +20,18 @@ const LegalPage: NextPage = async () => {
         {
           sectionsAndPages: {
             legalPage: {
-              germanLegalText: {
-                html: true,
-                json: {
-                  content: true
-                }
-              },
-              englishLegalText: {
-                html: true,
-                json: {
-                  content: true
+              dataPrivacyRegulations: {
+                _id: true,
+                _title: true,
+                impressum: {
+                  json: {
+                    content: true
+                  }
+                },
+                dataProtectionRules: {
+                  json: {
+                    content: true
+                  }
                 }
               }
             }
@@ -36,62 +42,73 @@ const LegalPage: NextPage = async () => {
       {async ([data]) => {
         'use server';
 
-        const legalContent = data.sectionsAndPages.legalPage;
+        const dataPrivacyRegulations = data.sectionsAndPages.legalPage.dataPrivacyRegulations;
+
+        if (!dataPrivacyRegulations) {
+          console.log('No data privacy regulations found');
+          return null;
+        }
+
+        const de = dataPrivacyRegulations.find((item) => item._title === 'German');
+        const en = dataPrivacyRegulations.find((item) => item._title === 'English');
+
+        if (!de || !en) {
+          console.log('No data privacy regulations found for german or english');
+          return null;
+        }
 
         return (
-          <article className='lg:pt-5 lg:pb-5 pt-2.5 pb-2.5 space-y-2.5 lg:space-y-5'>
-            <section className='container mx-auto' id='data-protection'>
-              <Tabs defaultValue='de' className='w-full'>
-                <TabsList className='grid w-full grid-cols-2 mb-6'>
-                  <TabsTrigger value='de'>Deutsch</TabsTrigger>
-                  <TabsTrigger value='en'>English</TabsTrigger>
-                </TabsList>
+          <article>
+            <Section className='container mx-auto' id='data-protection'>
+              <SectionTop>
+                <div className='relative'>
+                  <div className='absolute -top-6 -left-4 md:-top-6 md:-left-6'>
+                    <NeoBadge
+                      variant='light'
+                      rotation='medium'
+                      className='font-mono'
+                      interactive='lift'
+                    >
+                      <Code>⚖️ Legal</Code>
+                    </NeoBadge>
+                  </div>
+                  <Tabs defaultValue='de' className='w-full'>
+                    <TabsList className='grid w-full grid-cols-2 mb-6'>
+                      <TabsTrigger value='de'>Deutsch</TabsTrigger>
+                      <TabsTrigger value='en'>English</TabsTrigger>
+                    </TabsList>
 
-                <TabsContent value='de'>
-                  <Card>
-                    <CardContent className='prose prose-lg max-w-none p-6'>
-                      <RichText
-                        components={{
-                          img: (props) => (
-                            <Image
-                              src={props.src || ''}
-                              alt={props.alt || ''}
-                              width={800}
-                              height={400}
-                              className='rounded-lg border-2 border-black dark:border-white'
-                            />
-                          )
-                        }}
-                      >
-                        {legalContent.germanLegalText?.json.content}
-                      </RichText>
-                    </CardContent>
-                  </Card>
-                </TabsContent>
+                    <TabsContent value='de'>
+                      <Card>
+                        <CardContent className='flex flex-col gap-4 pt-2 m-1'>
+                          {de.impressum && (
+                            <RichTextBlock>{de.impressum.json.content}</RichTextBlock>
+                          )}
+                          <Separator />
+                          {de.dataProtectionRules && (
+                            <RichTextBlock>{de.dataProtectionRules.json.content}</RichTextBlock>
+                          )}
+                        </CardContent>
+                      </Card>
+                    </TabsContent>
 
-                <TabsContent value='en'>
-                  <Card>
-                    <CardContent className='prose prose-lg max-w-none p-6'>
-                      <RichText
-                        components={{
-                          img: (props) => (
-                            <Image
-                              src={props.src || ''}
-                              alt={props.alt || ''}
-                              width={800}
-                              height={400}
-                              className='rounded-lg border-2 border-black dark:border-white'
-                            />
-                          )
-                        }}
-                      >
-                        {legalContent.englishLegalText?.json.content}
-                      </RichText>
-                    </CardContent>
-                  </Card>
-                </TabsContent>
-              </Tabs>
-            </section>
+                    <TabsContent value='en'>
+                      <Card>
+                        <CardContent className='flex flex-col gap-4 pt-2 m-1'>
+                          {en.impressum && (
+                            <RichTextBlock>{en.impressum.json.content}</RichTextBlock>
+                          )}
+                          <Separator />
+                          {en.dataProtectionRules && (
+                            <RichTextBlock>{en.dataProtectionRules.json.content}</RichTextBlock>
+                          )}
+                        </CardContent>
+                      </Card>
+                    </TabsContent>
+                  </Tabs>
+                </div>
+              </SectionTop>
+            </Section>
           </article>
         );
       }}

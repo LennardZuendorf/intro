@@ -6,8 +6,9 @@
   "type": "module",
   "scripts": {
     "build": "basehub && cross-env NODE_OPTIONS=--no-deprecation next build",
-    "dev": "basehub --draft && cross-env NODE_OPTIONS=--no-deprecation next dev",
+    "dev": "basehub dev & cross-env NODE_OPTIONS=--no-deprecation next dev",
     "basehub": "basehub",
+    "basehub:dev": "basehub --draft",
     "lint": "biome lint . --no-errors-on-unmatched",
     "format": "biome format --write . --no-errors-on-unmatched",
     "check": "biome check --write . --no-errors-on-unmatched",

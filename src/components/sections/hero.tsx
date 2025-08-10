@@ -1,7 +1,7 @@
-import { RichText } from 'basehub/react-rich-text';
 import type { HeroSection as HeroSectionType, Socials as SocialsType } from 'basehub-types';
 import { CheckCircle2Icon } from 'lucide-react';
 import { HiMiniArrowTopRightOnSquare } from 'react-icons/hi2';
+import { RichTextBlock as RichText } from '@/components/sections/shared/richtext-block';
 import { SocialButtons } from '@/components/shared/social-buttons';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
@@ -213,7 +213,7 @@ export const HeroSection = async ({
                 <CardContent className='p-5 pt-0 md:p-6 md:pt-0 2xl:p-8 2xl:pt-0'>
                   <div id='current-role-content' className='max-w-none mb-3'>
                     <M className='font-mono leading-relaxed'>
-                      {content.selectedExperience.companyDescription}
+                      {content.selectedExperience.shortDescription}
                     </M>
                   </div>
                   <div id='current-role-cta' className='flex justify-start'>

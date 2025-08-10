@@ -51,7 +51,7 @@ const Page: NextPage = async () => {
               selectedExperience: {
                 _id: true,
                 _title: true,
-                companyDescription: true,
+                shortDescription: true,
                 companyLink: true
               },
               callToAction: {
@@ -79,7 +79,7 @@ const Page: NextPage = async () => {
                 items: {
                   _id: true,
                   _title: true,
-                  companyDescription: true,
+                  shortDescription: true,
                   companyLink: true,
                   startDate: true,
                   endDate: true,

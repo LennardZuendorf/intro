@@ -1,31 +1,10 @@
 'use client';
 
+import type { ExperienceComponent as ExperienceData } from 'basehub-types';
 import Link from 'next/link';
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
 import { H4, M, Muted, S, SMuted } from '@/components/ui/typography';
 import { cn } from '@/lib/utils/ui';
-
-// Create a type that matches what we actually query from BaseHub
-type ExperienceData = {
-  _id: string;
-  _title: string;
-  companyDescription?: string | null;
-  companyTitle?: string | null;
-  companyLink?: string | null;
-  startDate?: string | null;
-  endDate?: string | null;
-  jobActivities?: {
-    json: {
-      content: any;
-    };
-  } | null;
-  skills?:
-    | {
-        _id: string;
-        _title: string;
-      }[]
-    | null;
-};
 
 interface ExperienceCardProps {
   experience: ExperienceData;
@@ -53,7 +32,7 @@ export default function ExperienceCard({ experience: exp, className }: Experienc
           </SMuted>
         </div>
         <S className='text-gray-600 dark:text-gray-400 line-clamp-2 !mt-2'>
-          {exp.companyDescription}
+          {exp.shortDescription}
         </S>{' '}
       </CardHeader>
 
