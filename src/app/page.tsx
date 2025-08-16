@@ -2,8 +2,7 @@ import { Pump } from 'basehub/react-pump';
 import type {
   AboutSection as AboutSectionType,
   HeroSection as HeroSectionType,
-  Skills as SkillsType,
-  Socials as SocialsType
+  Skills as SkillsType
 } from 'basehub-types';
 import { GithubIcon, LinkedinIcon, MailIcon } from 'lucide-react';
 import type { NextPage } from 'next';
@@ -200,7 +199,6 @@ const Page: NextPage = async () => {
           <div className='min-h-screen'>
             <HeroSection
               content={data.sectionsAndPages.heroSection as unknown as HeroSectionType}
-              socials={data.globals.socials.items as unknown as SocialsType}
               showAbout={data.globals.showAbout}
               showProjects={data.globals.showProjects}
             />

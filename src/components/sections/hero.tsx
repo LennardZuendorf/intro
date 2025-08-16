@@ -1,7 +1,7 @@
-import type { HeroSection as HeroSectionType, Socials as SocialsType } from 'basehub-types';
+import type { HeroSection as HeroSectionType } from 'basehub-types';
 import { CheckCircle2Icon } from 'lucide-react';
 import { HiMiniArrowTopRightOnSquare } from 'react-icons/hi2';
-import { RichTextBlock as RichText } from '@/components/sections/shared/richtext-block';
+import { RichTextBlock as RichText } from '@/components/sections/components/richtext-block';
 import { SocialButtons } from '@/components/shared/social-buttons';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
@@ -19,12 +19,10 @@ import { Code, H1, H3, L, M } from '@/components/ui/typography';
 
 export const HeroSection = async ({
   content,
-  socials,
   showAbout,
   showProjects
 }: {
   content: HeroSectionType;
-  socials: SocialsType;
   showAbout: boolean;
   showProjects: boolean;
 }) => {

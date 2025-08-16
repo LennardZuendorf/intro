@@ -131,16 +131,20 @@ const L: React.FC<TypographyProps> = ({ className = '', children }) => {
   );
 };
 
-const M: React.FC<TypographyProps> = ({ className = '', children }) => {
+interface MProps extends TypographyProps {
+  as?: React.ElementType;
+}
+
+const M: React.FC<MProps> = ({ as: Component = 'p', className = '', children }) => {
   return (
-    <p
+    <Component
       className={cn(
-        'text-xs font-medium leading-7 [&:not(:first-child)]:mt-1 sm:text-xs md:text-xs lg:text-sm xl:text-sm 2xl:text-base',
+        'text-xs font-medium leading-7 not-first:mt-1 sm:text-xs md:text-xs lg:text-sm xl:text-sm 2xl:text-base',
         className
       )}
     >
       {children}
-    </p>
+    </Component>
   );
 };
 
@@ -201,7 +205,7 @@ const Code: React.FC<TypographyProps> = ({ className = '', children }) => {
     <p className={cn(className)}>
       <code
         className={cn(
-          'relative rounded px-[0.3rem] py-[0.2rem] font-mono text-xs font-semibold sm:text-xs md:text-xs lg:text-sm xl:text-sm 2xl:text-base'
+          'relative rounded-sm px-[0.3rem] py-[0.2rem] font-mono text-xs font-semibold sm:text-xs md:text-xs lg:text-sm xl:text-sm 2xl:text-base'
         )}
       >
         {children}

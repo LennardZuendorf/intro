@@ -1,4 +1,5 @@
 'use client';
+import type { ExperienceComponent } from 'basehub-types';
 import React from 'react';
 import ExperienceCard from '@/components/sections/components/experience-card';
 import {
@@ -10,29 +11,8 @@ import {
 } from '@/components/ui/carousel';
 import { cn } from '@/lib/utils/ui';
 
-// Create a type that matches what we actually query from BaseHub
-type ExperienceData = {
-  _id: string;
-  _title: string;
-  companyDescription?: string | null;
-  companyLink?: string | null;
-  startDate?: string | null;
-  endDate?: string | null;
-  jobActivities?: {
-    json: {
-      content: any;
-    };
-  } | null;
-  skills?:
-    | {
-        _id: string;
-        _title: string;
-      }[]
-    | null;
-};
-
 interface ExperienceCarouselProps {
-  experiences: ExperienceData[];
+  experiences: ExperienceComponent[];
   visibleCount?: number;
 }
 

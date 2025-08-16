@@ -46,7 +46,9 @@ interface MockImageProps {
 
 jest.mock('next/image', () => {
   return function MockImage(props: MockImageProps) {
-    return <img {...props} alt={props.alt || 'Mock image'} data-testid='next-image' />;
+    return (
+      <div {...props} data-testid='next-image' role='img' aria-label={props.alt || 'Mock image'} />
+    );
   };
 });
 
@@ -74,12 +76,9 @@ describe('HeroSection', () => {
     }
   };
 
-  const mockSocials = { items: [] };
-
   it('renders hero section with basic content', async () => {
     const component = await HeroSection({
       content: mockContent as Parameters<typeof HeroSection>[0]['content'],
-      socials: mockSocials as Parameters<typeof HeroSection>[0]['socials'],
       showAbout: true,
       showProjects: true
     });

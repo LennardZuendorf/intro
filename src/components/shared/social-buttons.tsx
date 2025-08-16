@@ -1,7 +1,6 @@
 import { basehub } from 'basehub';
 import { Icon } from 'basehub/react-icon';
 import Link from 'next/link';
-import type React from 'react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils/ui';
 

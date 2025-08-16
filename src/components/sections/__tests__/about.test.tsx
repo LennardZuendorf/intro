@@ -51,7 +51,9 @@ interface MockImageProps {
 
 jest.mock('next/image', () => {
   return function MockImage(props: MockImageProps) {
-    return <img {...props} alt={props.alt || 'Mock image'} data-testid='next-image' />;
+    return (
+      <div {...props} data-testid='next-image' role='img' aria-label={props.alt || 'Mock image'} />
+    );
   };
 });
 

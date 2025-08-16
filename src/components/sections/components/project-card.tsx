@@ -1,8 +1,6 @@
 'use client';
 
 import type { VariantProps } from 'class-variance-authority';
-import { ExternalLink } from 'lucide-react';
-import Image from 'next/image';
 import { Card, CardContent, CardFooter, CardHeader, type cardVariants } from '@/components/ui/card';
 import { IconLink } from '@/components/ui/icon-link';
 import { NeoBadge } from '@/components/ui/neoBadge';

@@ -46,8 +46,7 @@ export interface Scalars {
   options: string[];
   multiple: boolean
 } | {
-  type: "file";
-  private: boolean
+  type: "file"
 }))[],
     BSHBRichTextContentSchema: RichTextNode[],
     BSHBRichTextTOCSchema: RichTextTocNode[],
@@ -146,7 +145,7 @@ export interface BlockColor {
     __typename: 'BlockColor'
 }
 
-export type BlockDocument = (AboutSection | CallToActionComponent | ExperienceComponent | Experiences | Globals | HeroSection | ImgComponent | LegalInfoComponent | LegalPage | MetaComponent | ProjectComponent | ProjectsSection | QuickSkillsShowcase | QuickSkillsShowcaseItem | SectionsAndPages | SkillComponent | Skills | Socials | SocialsComponent | Technologies | TechnologyComponent | Types | UntitledComponent | callToActionComponent_AsList | experienceComponent_AsList | imgComponent_AsList | legalInfoComponent_AsList | metaComponent_AsList | projectComponent_AsList | quickSkillsShowcaseItem_AsList | skillComponent_AsList | socialsComponent_AsList | technologyComponent_AsList | untitledComponent_AsList) & { __isUnion?: true }
+export type BlockDocument = (AboutSection | CallToActionComponent | ExperienceComponent | Experiences | Globals | HeroSection | ImgComponent | LegalInfoComponent | LegalPage | MetaComponent | ProjectComponent | ProjectsSection | QuickSkillsShowcase | QuickSkillsShowcaseItem | SectionsAndPages | SkillComponent | Skills | Socials | SocialsComponent | Technologies | TechnologyComponent | Types | UntitledComponent | _AgentStart | callToActionComponent_AsList | experienceComponent_AsList | imgComponent_AsList | legalInfoComponent_AsList | metaComponent_AsList | projectComponent_AsList | quickSkillsShowcaseItem_AsList | skillComponent_AsList | socialsComponent_AsList | technologyComponent_AsList | untitledComponent_AsList) & { __isUnion?: true }
 
 export interface BlockDocumentSys {
     apiNamePath: Scalars['String']
@@ -569,6 +568,9 @@ export interface ProjectsSection {
 }
 
 export interface Query {
+    _agent: (_AgentStart | null)
+    /** Query across the custom AI agents in the repository. */
+    _agents: _agents
     /** Query across all of the instances of a component. Pass in filters and sorts if you want, and get each instance via the `items` key. */
     _componentInstances: _components
     /** The diff between the current branch and the head commit. */
@@ -916,6 +918,34 @@ export interface Variant {
     __typename: 'Variant'
 }
 
+export interface _AgentStart {
+    _agentKey: Scalars['String']
+    _analyticsKey: Scalars['String']
+    _dashboardUrl: Scalars['String']
+    _id: Scalars['String']
+    _idPath: Scalars['String']
+    _slug: Scalars['String']
+    _slugPath: Scalars['String']
+    _sys: BlockDocumentSys
+    _title: Scalars['String']
+    accent: Scalars['String']
+    avatar: Scalars['String']
+    chatUrl: Scalars['String']
+    commit: Scalars['Boolean']
+    description: Scalars['String']
+    edit: Scalars['Boolean']
+    embedUrl: Scalars['String']
+    getUserInfo: Scalars['Boolean']
+    grayscale: Scalars['String']
+    manageBranches: Scalars['Boolean']
+    mcpUrl: Scalars['String']
+    model: Scalars['String']
+    searchTheWeb: Scalars['Boolean']
+    slackInstallUrl: Scalars['String']
+    systemPrompt: Scalars['String']
+    __typename: '_AgentStart'
+}
+
 export interface _BranchInfo {
     archivedAt: (Scalars['String'] | null)
     archivedBy: (Scalars['String'] | null)
@@ -980,6 +1010,11 @@ export interface _PlaygroundInfo {
 export type _ResolveTargetsWithEnum = 'id' | 'objectName'
 
 export type _StructureFormatEnum = 'json' | 'xml'
+
+export interface _agents {
+    start: _AgentStart
+    __typename: '_agents'
+}
 
 export interface _components {
     callToAction: callToActionComponent_AsList
@@ -1366,6 +1401,7 @@ export interface BlockDocumentGenqlSelection{
     on_TechnologyComponent?: TechnologyComponentGenqlSelection
     on_Types?: TypesGenqlSelection
     on_UntitledComponent?: UntitledComponentGenqlSelection
+    on__AgentStart?: _AgentStartGenqlSelection
     on_callToActionComponent_AsList?: callToActionComponent_AsListGenqlSelection
     on_experienceComponent_AsList?: experienceComponent_AsListGenqlSelection
     on_imgComponent_AsList?: imgComponent_AsListGenqlSelection
@@ -2056,6 +2092,11 @@ export interface ProjectsSectionGenqlSelection{
 }
 
 export interface QueryGenqlSelection{
+    _agent?: (_AgentStartGenqlSelection & { __args: {
+    /** The ID of the agent. */
+    id: Scalars['String']} })
+    /** Query across the custom AI agents in the repository. */
+    _agents?: _agentsGenqlSelection
     /** Query across all of the instances of a component. Pass in filters and sorts if you want, and get each instance via the `items` key. */
     _componentInstances?: _componentsGenqlSelection
     /** The diff between the current branch and the head commit. */
@@ -2572,6 +2613,40 @@ export interface VariantGenqlSelection{
     __typename?: boolean | number
 }
 
+export interface _AgentStartGenqlSelection{
+    _agentKey?: boolean | number
+    _analyticsKey?: { __args: {
+    /**
+     * The scope of the analytics key. Use `send` for just ingesting data. Use `query` if you need to show an analytics data in your website.
+     * 
+     * Have in mind, if you expose your `query` analytics key in the frontend, you'll be exposing all of this block's analytics data to the public. This is generally safe, but it might not be in your case.
+     */
+    scope?: (AnalyticsKeyScope | null)} } | boolean | number
+    _dashboardUrl?: boolean | number
+    _id?: boolean | number
+    _idPath?: boolean | number
+    _slug?: boolean | number
+    _slugPath?: boolean | number
+    _sys?: BlockDocumentSysGenqlSelection
+    _title?: boolean | number
+    accent?: boolean | number
+    avatar?: boolean | number
+    chatUrl?: boolean | number
+    commit?: boolean | number
+    description?: boolean | number
+    edit?: boolean | number
+    embedUrl?: boolean | number
+    getUserInfo?: boolean | number
+    grayscale?: boolean | number
+    manageBranches?: boolean | number
+    mcpUrl?: boolean | number
+    model?: boolean | number
+    searchTheWeb?: boolean | number
+    slackInstallUrl?: boolean | number
+    systemPrompt?: boolean | number
+    __typename?: boolean | number
+}
+
 export interface _BranchInfoGenqlSelection{
     archivedAt?: boolean | number
     archivedBy?: boolean | number
@@ -2630,6 +2705,11 @@ export interface _PlaygroundInfoGenqlSelection{
     editUrl?: boolean | number
     expiresAt?: boolean | number
     id?: boolean | number
+    __typename?: boolean | number
+}
+
+export interface _agentsGenqlSelection{
+    start?: _AgentStartGenqlSelection
     __typename?: boolean | number
 }
 
@@ -3318,6 +3398,10 @@ export interface FragmentsMap {
     root: Variant,
     selection: VariantGenqlSelection,
 }
+  _AgentStart: {
+    root: _AgentStart,
+    selection: _AgentStartGenqlSelection,
+}
   _BranchInfo: {
     root: _BranchInfo,
     selection: _BranchInfoGenqlSelection,
@@ -3337,6 +3421,10 @@ export interface FragmentsMap {
   _PlaygroundInfo: {
     root: _PlaygroundInfo,
     selection: _PlaygroundInfoGenqlSelection,
+}
+  _agents: {
+    root: _agents,
+    selection: _agentsGenqlSelection,
 }
   _components: {
     root: _components,

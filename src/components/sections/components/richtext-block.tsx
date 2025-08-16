@@ -22,7 +22,7 @@ export const RichTextBlock = ({ children }: RichTextBlockProps) => {
     >
       <RichText
         components={{
-          img: (props: any) => (
+          img: (props: { src?: string; alt?: string; [key: string]: unknown }) => (
             <Image
               src={props.src || ''}
               alt={props.alt || ''}
@@ -34,7 +34,11 @@ export const RichTextBlock = ({ children }: RichTextBlockProps) => {
           h1: ({ children }) => <H1>{children}</H1>,
           h2: ({ children }) => <H2>{children}</H2>,
           h3: ({ children }) => <H3>{children}</H3>,
-          p: ({ children }) => <M className='first:mt-0 mt-2'>{children}</M>,
+          p: ({ children }) => (
+            <M as='div' className='first:mt-0 mt-2'>
+              {children}
+            </M>
+          ),
           h4: ({ children }) => <H4>{children}</H4>,
           blockquote: ({ children }) => <Quote className='my-4'>{children}</Quote>,
 
@@ -42,8 +46,10 @@ export const RichTextBlock = ({ children }: RichTextBlockProps) => {
           ul: ({ children }) => <ul className='my-2 ml-5 list-disc space-y-1'>{children}</ul>,
           ol: ({ children }) => <ol className='my-2 ml-5 list-decimal space-y-1'>{children}</ol>,
           li: ({ children }) => (
-            <li className='[&>p]:m-0'>
-              <M className='mt-0'>{children}</M>
+            <li className='[&>div]:m-0'>
+              <M as='div' className='mt-0'>
+                {children}
+              </M>
             </li>
           ),
           hr: () => <hr className='my-6 border-t-2 border-border' />,
@@ -59,17 +65,25 @@ export const RichTextBlock = ({ children }: RichTextBlockProps) => {
             </a>
           ),
           code: ({ children }) => (
-            <code className='relative rounded px-[0.3rem] py-[0.2rem] font-mono text-[0.9em] font-semibold'>
+            <code className='relative rounded-sm px-[0.3rem] py-[0.2rem] font-mono text-[0.9em] font-semibold'>
               {children}
             </code>
           ),
-          strong: ({ children }) => <M className='font-bold'>{children}</M>,
-          b: ({ children }) => <M className='font-bold'>{children}</M>,
+          strong: ({ children }) => (
+            <M as='strong' className='font-bold'>
+              {children}
+            </M>
+          ),
+          b: ({ children }) => (
+            <M as='strong' className='font-bold'>
+              {children}
+            </M>
+          ),
           em: ({ children }) => <em className='italic'>{children}</em>,
           highlight: ({ children }) => (
-            <span className='font-bold bg-accent-foreground text-accent-foreground px-1'>
+            <M as='span' className='font-bold bg-accent-foreground text-accent-foreground px-1'>
               {children}
-            </span>
+            </M>
           )
         }}
       >

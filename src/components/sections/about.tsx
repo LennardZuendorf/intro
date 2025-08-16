@@ -1,7 +1,5 @@
-import { Pump } from 'basehub/react-pump';
 import { RichText } from 'basehub/react-rich-text';
 import type { AboutSection as AboutSectionType, Skills as SkillsType } from 'basehub-types';
-import { draftMode } from 'next/headers';
 import Image from 'next/image';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { NeoBadge } from '@/components/ui/neoBadge';

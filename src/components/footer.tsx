@@ -36,7 +36,7 @@ export const Footer = async ({ className = '' }: FooterProps) => {
       {async ([data]) => {
         'use server';
 
-        const socialsData = data.globals.socials.items;
+        const _socialsData = data.globals.socials.items;
 
         return (
           <Section
@@ -48,7 +48,7 @@ export const Footer = async ({ className = '' }: FooterProps) => {
             centerContent={false}
           >
             <div className='w-full flex flex-col sm:flex-row items-center justify-between z-[10]'>
-              <SocialButtons socials={socialsData} iconSize='2vh' buttonVariant='default' />
+              <SocialButtons buttonVariant='default' />
               <div className='flex items-end gap-x-4'>
                 <ColorSelect
                   buttonVariant='default'

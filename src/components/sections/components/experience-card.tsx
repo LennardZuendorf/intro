@@ -1,9 +1,8 @@
 'use client';
 
 import type { ExperienceComponent as ExperienceData } from 'basehub-types';
-import Link from 'next/link';
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
-import { H4, M, Muted, S, SMuted } from '@/components/ui/typography';
+import { H4, S, SMuted } from '@/components/ui/typography';
 import { cn } from '@/lib/utils/ui';
 
 interface ExperienceCardProps {

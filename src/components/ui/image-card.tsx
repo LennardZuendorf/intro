@@ -25,7 +25,7 @@ export default function ImageCard({
   alt = 'image',
   className = 'w-[250px]',
   width = 'full',
-  aspectRatio = 'aspect-[4/3]',
+  aspectRatio = 'aspect-4/3',
   heightClass,
   imageClassName = '',
   fullHeight = false,
@@ -48,13 +48,14 @@ export default function ImageCard({
     >
       <div
         className={cn(
-          !fullHeight ? aspectRatio : 'flex-grow',
-          'overflow-hidden relative',
+          !fullHeight ? aspectRatio : 'grow',
+          'overflow-hidden',
           hideCaption ? 'h-full' : ''
         )}
+        style={{ position: 'relative' }}
       >
         <Image
-          className={cn(`w-${width} h-full object-cover`, imageClassName)}
+          className={cn('object-cover', imageClassName)}
           src={imageUrl}
           alt={alt}
           fill

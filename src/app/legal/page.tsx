@@ -1,5 +1,4 @@
 import { Pump } from 'basehub/react-pump';
-import type { LegalInfoComponent } from 'basehub-types';
 import type { NextPage } from 'next';
 import { draftMode } from 'next/headers';
 import { RichTextBlock } from '@/components/sections/components/richtext-block';
@@ -8,7 +7,7 @@ import { NeoBadge } from '@/components/ui/neoBadge';
 import { Section, SectionTop } from '@/components/ui/section';
 import { Separator } from '@/components/ui/separator';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Code, H1 } from '@/components/ui/typography';
+import { Code } from '@/components/ui/typography';
 
 const LegalPage: NextPage = async () => {
   const { isEnabled: draft } = await draftMode();
