@@ -10,7 +10,7 @@ import { Nav } from '@/components/navbar';
 import { Providers } from '@/components/providers';
 import { ScrollArrow } from '@/components/scroll-arrow';
 import { Toaster } from '@/components/ui/toaster';
-import SetColorPreference from '@/lib/utils/setColorPreference';
+
 import { cn } from '@/lib/utils/ui';
 
 const inter = Inter({
@@ -91,7 +91,6 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           <Nav showAbout={data.globals.showAbout} showProjects={data.globals.showProjects} />
           <div className='w-full'>
             {children}
-            <SetColorPreference />
             <Toaster />
           </div>
           <Footer />

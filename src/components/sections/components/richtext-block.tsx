@@ -2,23 +2,20 @@ import { RichText } from 'basehub/react-rich-text';
 import Image from 'next/image';
 import type { ReactNode } from 'react';
 import { H1, H2, H3, H4, M, Quote } from '@/components/ui/typography';
+import { cn } from '@/lib/utils/ui';
 
 interface RichTextBlockProps {
   children: ReactNode;
+  className?: string;
 }
 
-export const RichTextBlock = ({ children }: RichTextBlockProps) => {
+export const RichTextBlock = ({ children, className }: RichTextBlockProps) => {
   return (
     <article
-      className='
-        prose max-w-none prose-invert
-        prose-headings:text-[inherit] prose-headings:font-[inherit]
-        prose-p:text-[inherit] prose-p:leading-7
-        prose-a:no-underline hover:prose-a:underline
-        prose-ul:my-2 prose-ol:my-2 prose-li:my-0
-        prose-img:my-4 prose-blockquote:my-4
-        text-prettier subpixel-antialiased
-      '
+      className={cn(
+        className,
+        'prose max-w-none dark:prose-invert prose-headings:text-[inherit] prose-headings:font-[inherit] prose-p:text-[inherit] prose-p:leading-7 prose-a:no-underline hover:prose-a:underline prose-ul:my-2 prose-ol:my-2 prose-li:my-0 prose-img:my-4 prose-blockquote:my-4 text-prettier subpixel-antialiased'
+      )}
     >
       <RichText
         components={{
@@ -81,7 +78,7 @@ export const RichTextBlock = ({ children }: RichTextBlockProps) => {
           ),
           em: ({ children }) => <em className='italic'>{children}</em>,
           highlight: ({ children }) => (
-            <M as='span' className='font-bold bg-accent-foreground text-accent-foreground px-1'>
+            <M as='span' className='font-bold bg-accent text-accent-foreground px-1'>
               {children}
             </M>
           )

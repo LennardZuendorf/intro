@@ -1,6 +1,6 @@
-import { RichText } from 'basehub/react-rich-text';
 import type { AboutSection as AboutSectionType, Skills as SkillsType } from 'basehub-types';
 import Image from 'next/image';
+import { RichTextBlock as RichText } from '@/components/sections/components/richtext-block';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { NeoBadge } from '@/components/ui/neoBadge';
 import {
@@ -45,21 +45,7 @@ export default async function AboutSection({
                   <div className='md:col-span-2'>
                     {content.aboutMeText?.json?.content ? (
                       <div className='font-mono leading-relaxed'>
-                        <RichText
-                          components={{
-                            img: (props) => (
-                              <Image
-                                src={props.src || ''}
-                                alt={props.alt || ''}
-                                width={800}
-                                height={400}
-                                className='rounded-lg border-2 border-black dark:border-white'
-                              />
-                            )
-                          }}
-                        >
-                          {content.aboutMeText.json.content}
-                        </RichText>
+                        <RichText>{content.aboutMeText.json.content}</RichText>
                       </div>
                     ) : (
                       <M className='font-mono leading-relaxed'>Welcome to my about section</M>

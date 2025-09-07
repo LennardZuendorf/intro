@@ -5,8 +5,8 @@ import { Pin, PinOff } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
-import { ColorSelect } from '@/components/shared/color-select';
-import { ThemeSelect } from '@/components/shared/theme-select';
+import { ColorThemeSelect } from '@/components/theme/color-theme-select';
+import { ThemeSelect } from '@/components/theme/theme-select';
 import { Button } from '@/components/ui/button';
 import {
   NavigationMenu,
@@ -196,7 +196,7 @@ const Navbar = ({
                   noButtonShadow={true}
                   popoverClassName='z-[9999]'
                 />
-                <ColorSelect
+                <ColorThemeSelect
                   buttonVariant='default'
                   noButtonShadow={true}
                   popoverClassName='z-[9999]'

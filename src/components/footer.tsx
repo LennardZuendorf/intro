@@ -1,9 +1,9 @@
 import { Pump } from 'basehub/react-pump';
 import { draftMode } from 'next/headers';
 import Link from 'next/link';
-import { ColorSelect } from '@/components/shared/color-select';
 import { SocialButtons } from '@/components/shared/social-buttons';
-import { ThemeSelect } from '@/components/shared/theme-select';
+import { ColorThemeSelect } from '@/components/theme/color-theme-select';
+import { ThemeSelect } from '@/components/theme/theme-select';
 import { Button } from '@/components/ui/button';
 import { Section } from '@/components/ui/section';
 import { cn } from '@/lib/utils/ui';
@@ -50,7 +50,7 @@ export const Footer = async ({ className = '' }: FooterProps) => {
             <div className='w-full flex flex-col sm:flex-row items-center justify-between z-[10]'>
               <SocialButtons buttonVariant='default' />
               <div className='flex items-end gap-x-4'>
-                <ColorSelect
+                <ColorThemeSelect
                   buttonVariant='default'
                   className='shadow-md'
                   popoverClassName='shadow-lg'

@@ -8,7 +8,6 @@ import { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Command, CommandGroup, CommandItem } from '@/components/ui/command';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-import { useToast } from '@/hooks/use-toast';
 import { cn } from '@/lib/utils/ui';
 
 const themes = [
@@ -44,7 +43,6 @@ export const ThemeSelect: React.FC<ThemeSwitcherProps> = ({
 }) => {
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState('');
-  const { toast } = useToast();
 
   const [mounted, setMounted] = useState(false);
   const { theme, setTheme } = useTheme();
@@ -58,41 +56,9 @@ export const ThemeSelect: React.FC<ThemeSwitcherProps> = ({
     return null;
   }
 
-  /**
-   * Handles theme changes and displays a themed toast notification.
-   *
-   * Custom messages for each theme:
-   * - Light Mode: "Sunglasses Off! Brightness cranked to 11. Hope you had your coffee today."
-   * - Dark Mode: "Embrace the Dark Side. We have cookies, better battery life, and fewer judging looks from strangers."
-   * - System Mode: "Device Harmony Achieved. Going with the flow like a digital zen master. Your OS is in charge now."
-   *
-   * @param selectedTheme The theme to apply ('light', 'dark', or 'system')
-   */
+  // Apply theme without any toast notifications
   const handleThemeChange = (selectedTheme: string) => {
     setTheme(selectedTheme);
-
-    // Show toast notification for theme change with fun messages
-    const themeMessages = {
-      light: {
-        title: 'Sunglasses Off!',
-        description: 'Brightness cranked to 11. Hope you had your coffee today.'
-      },
-      dark: {
-        title: 'Embrace the Dark Side',
-        description: 'We have cookies, better battery life, and fewer judging looks from strangers.'
-      },
-      system: {
-        title: 'Device Harmony Achieved',
-        description: 'Going with the flow like a digital zen master. Your OS is in charge now.'
-      }
-    };
-
-    toast({
-      title: themeMessages[selectedTheme as keyof typeof themeMessages].title,
-      description: themeMessages[selectedTheme as keyof typeof themeMessages].description,
-      variant: 'default',
-      duration: 1000
-    });
   };
 
   return (

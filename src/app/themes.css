@@ -1,0 +1,66 @@
+.theme-default .theme-container {
+  /* Grid and accent system. Editing based on Color Styles */
+  --grid: oklch(0.9 0 0); /* Slightly brighter light gray for grid lines */
+  --accent: oklch(0.3 0 0); /* Medium black */
+  --accent-foreground: oklch(1 0 0); /* Light gray text for accents (#e6e6e6) */
+  --accent-light: oklch(0.5 0 0); /* Light black */
+  --accent-dark: oklch(0.1 0 0); /* Dark black */
+}
+
+.theme-default.dark .theme-container {
+    --grid: oklch(0.32 0 0);
+    --accent: oklch(1 0 0);
+    --accent-foreground: oklch(0 0 0);
+    --accent-light: oklch(1 0 0);
+    --accent-dark: oklch(0.8 0 0);
+  }
+
+.theme-amber .theme-container {
+  /* Amber theme - warm golden colors */
+  --grid: oklch(0.766 0.179 58.318); /* Light amber for grid */
+  --accent: oklch(0.666 0.179 58.318); /* Base amber */
+  --accent-foreground: oklch(1 0 0); /* White text for accents */
+  --accent-light: oklch(0.766 0.179 58.318); /* Light amber */
+  --accent-dark: oklch(0.566 0.179 58.318); /* Dark amber */
+
+}
+
+.theme-green .theme-container {
+  /* Green theme - emerald colors */
+  --grid: oklch(0.6 0.118 184.704); /* Light emerald for grid */
+  --accent: oklch(0.5 0.118 184.704); /* Base emerald */
+  --accent-foreground: oklch(1.0 0 0); /* White text for accents */
+  --accent-light: oklch(0.6 0.118 184.704); /* Light emerald */
+  --accent-dark: oklch(0.4 0.118 184.704); /* Dark emerald */
+
+}
+
+.theme-rose .theme-container {
+  /* Rose theme - pink colors */
+  --grid: oklch(0.812 0.194 13.428); /* Light rose for grid */
+  --accent: oklch(0.712 0.194 13.428); /* Base rose */
+  --accent-foreground: oklch(1 0 0); /* White text for accents */
+  --accent-light: oklch(0.812 0.194 13.428); /* Light rose */
+  --accent-dark: oklch(0.612 0.194 13.428); /* Dark rose */
+
+}
+
+.theme-purple .theme-container {
+  /* Purple theme - indigo colors */
+  --grid: oklch(0.611 0.262 276.966); /* Light indigo for grid */
+  --accent: oklch(0.511 0.262 276.966); /* Base indigo */
+  --accent-foreground: oklch(1.0 0 0); /* White text for accents */
+  --accent-light: oklch(0.611 0.262 276.966); /* Light indigo */
+  --accent-dark: oklch(0.411 0.262 276.966); /* Dark indigo */
+
+}
+
+.theme-teal .theme-container {
+  /* Teal theme - cyan-green colors */
+  --grid: oklch(0.65 0.15 180); /* Light teal for grid */
+  --accent: oklch(0.55 0.15 180); /* Base teal */
+  --accent-foreground: oklch(1 0 0); /* White text for accents */
+  --accent-light: oklch(0.65 0.15 180); /* Light teal */
+  --accent-dark: oklch(0.45 0.15 180); /* Dark teal */
+
+}
