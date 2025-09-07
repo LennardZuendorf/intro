@@ -16,7 +16,9 @@
       "package.json",
       "!src/**/ui/*tsx",
       "!src/**/migrations/*ts",
-      "!src/**/payload-generated-schema.ts"
+      "!src/**/payload-generated-schema.ts",
+      "!src/**/*.test.ts",
+      "!src/**/*.test.tsx"
     ]
   },
   "formatter": {

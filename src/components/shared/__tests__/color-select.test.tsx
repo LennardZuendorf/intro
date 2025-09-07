@@ -1,25 +1,21 @@
-import { render, screen, fireEvent } from '@testing-library/react';
-import { ColorThemeSelect } from '../../theme/color-theme-select';
+import { fireEvent, render, screen } from '@testing-library/react';
 import { ActiveColorThemeProvider } from '../../theme/active-theme';
+import { ColorThemeSelect } from '../../theme/color-theme-select';
 
 // Mock localStorage
 const mockLocalStorage = {
   getItem: jest.fn(),
   setItem: jest.fn(),
-  removeItem: jest.fn(),
+  removeItem: jest.fn()
 };
 
 Object.defineProperty(window, 'localStorage', {
-  value: mockLocalStorage,
+  value: mockLocalStorage
 });
 
 // Wrapper component with theme provider
 function TestWrapper({ children }: { children: React.ReactNode }) {
-  return (
-    <ActiveColorThemeProvider>
-      {children}
-    </ActiveColorThemeProvider>
-  );
+  return <ActiveColorThemeProvider>{children}</ActiveColorThemeProvider>;
 }
 
 describe('ColorSelect', () => {
@@ -36,7 +32,7 @@ describe('ColorSelect', () => {
         <ColorThemeSelect />
       </TestWrapper>
     );
-    
+
     expect(screen.getByRole('combobox')).toBeInTheDocument();
   });
 
@@ -46,10 +42,10 @@ describe('ColorSelect', () => {
         <ColorThemeSelect />
       </TestWrapper>
     );
-    
+
     const button = screen.getByRole('combobox');
     fireEvent.click(button);
-    
+
     // Wait for popover to open
     await screen.findByText('Amber');
     expect(screen.getByText('Emerald')).toBeInTheDocument();
@@ -63,15 +59,15 @@ describe('ColorSelect', () => {
         <ColorThemeSelect />
       </TestWrapper>
     );
-    
+
     // Open popover
     const button = screen.getByRole('combobox');
     fireEvent.click(button);
-    
+
     // Wait for popover and click amber color
     const amberOption = await screen.findByText('Amber');
     fireEvent.click(amberOption);
-    
+
     // Check that theme was applied to DOM
     expect(document.documentElement.classList.contains('theme-amber')).toBe(true);
     expect(mockLocalStorage.setItem).toHaveBeenCalledWith('theme', 'amber');
@@ -83,13 +79,13 @@ describe('ColorSelect', () => {
         <ColorThemeSelect />
       </TestWrapper>
     );
-    
+
     const button = screen.getByRole('combobox');
     fireEvent.click(button);
-    
+
     const emeraldOption = await screen.findByText('Emerald');
     fireEvent.click(emeraldOption);
-    
+
     expect(document.documentElement.classList.contains('theme-green')).toBe(true);
   });
 });
