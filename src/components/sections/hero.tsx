@@ -1,12 +1,11 @@
 import type { HeroSection as HeroSectionType } from 'basehub-types';
 import { CheckCircle2Icon } from 'lucide-react';
 import { HiMiniArrowTopRightOnSquare } from 'react-icons/hi2';
-import { RichTextBlock as RichText } from '@/components/sections/components/richtext-block';
+import { RichTextBlock as RichText } from '@/components/shared/richtext-block';
 import { SocialButtons } from '@/components/shared/social-buttons';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
 import { IconLink } from '@/components/ui/icon-link';
-import ImageCard from '@/components/ui/image-card';
 import { NeoBadge } from '@/components/ui/neoBadge';
 import {
   Section,
@@ -15,7 +14,7 @@ import {
   SectionRight,
   SectionTop
 } from '@/components/ui/section';
-import { Code, H1, H3, L, M } from '@/components/ui/typography';
+import { H1, H3, L, M } from '@/components/ui/typography';
 
 export const HeroSection = async ({
   content,
@@ -41,7 +40,7 @@ export const HeroSection = async ({
                     className='font-mono'
                     interactive='lift'
                   >
-                    <Code>👋 Hey there!</Code>
+                    <M className='font-mono'>👋 Hey there!</M>
                   </NeoBadge>
                 </div>
                 <H1 className='-rotate-1'>I'm Lennard</H1>
@@ -57,19 +56,6 @@ export const HeroSection = async ({
                       <M className='font-mono leading-relaxed'>Welcome to my portfolio</M>
                     )}
                   </div>
-
-                  {content.avatarImage?.url && (
-                    <ImageCard
-                      imageUrl={content.avatarImage.url}
-                      alt={content.avatarImage.alt || 'Profile picture'}
-                      className='hidden md:block relative min-w-[30px] md:w-[10vw] shadow-sm'
-                      aspectRatio='aspect-square'
-                      hideCaption={true}
-                      rotation='medium'
-                      interactive='slight'
-                      variant='outline'
-                    />
-                  )}
                 </div>
 
                 <div className='flex flex-wrap gap-2 md:gap-3'>
@@ -131,63 +117,6 @@ export const HeroSection = async ({
           </SectionLeft>
 
           <SectionRight>
-            {/*Project Card*/}
-            {content.selectedProject && (
-              <Card
-                id='project-card'
-                className='relative w-full'
-                interactive='medium'
-                rotation='medium'
-              >
-                <CardHeader className='p-5 pb-2 md:p-6 md:pb-2 2xl:p-8 2xl:pb-2'>
-                  <div className='absolute -top-2 -left-2 md:-top-3 md:-left-3'>
-                    <NeoBadge
-                      variant='dark'
-                      rotation='slight'
-                      className='font-mono'
-                      interactive='bounce'
-                    >
-                      <Code>🚀 My Latest Project</Code>
-                    </NeoBadge>
-                  </div>
-                  <H3 className='rotate-1'>{content.selectedProject._title}</H3>
-                </CardHeader>
-                <CardContent className='p-5 pt-0 md:p-6 md:pt-0 2xl:p-8 2xl:pt-0'>
-                  <div id='project-content' className='max-w-none mb-3'>
-                    <M className='font-mono leading-relaxed'>
-                      {content.selectedProject.shortDescription?.length > 100
-                        ? `${content.selectedProject.shortDescription.slice(0, 100)}...`
-                        : content.selectedProject.shortDescription}
-                    </M>
-                  </div>
-                  <div id='project-cta' className='flex justify-start gap-2'>
-                    {showProjects && (
-                      <IconLink
-                        href={`/projects/${content.selectedProject._slug}`}
-                        icon={<HiMiniArrowTopRightOnSquare className='h-4 w-4' />}
-                        variant='default'
-                        size='default'
-                        iconPosition='right'
-                      >
-                        Learn More
-                      </IconLink>
-                    )}
-                    {content.selectedProject.showcaseLink && (
-                      <IconLink
-                        href={content.selectedProject.showcaseLink || '#'}
-                        icon={<HiMiniArrowTopRightOnSquare className='h-4 w-4' />}
-                        variant='default'
-                        size='default'
-                        iconPosition='right'
-                      >
-                        View Project
-                      </IconLink>
-                    )}
-                  </div>
-                </CardContent>
-              </Card>
-            )}
-
             {content.selectedExperience && (
               <Card
                 id='current-role-card'
@@ -203,7 +132,7 @@ export const HeroSection = async ({
                       className='font-mono'
                       interactive='bounce'
                     >
-                      <Code>💼 Current Role</Code>
+                      <M className='font-mono'>💼 Current Role</M>
                     </NeoBadge>
                   </div>
                   <H3 className='rotate-1'>{content.selectedExperience._title}</H3>
@@ -261,18 +190,6 @@ export const HeroSection = async ({
             </div>
           </SectionRight>
         </SectionTop>
-
-        {content.callToAction && (
-          <SectionBottom>
-            <Alert>
-              <CheckCircle2Icon />
-              <AlertTitle>Success! Your changes have been saved</AlertTitle>
-              <AlertDescription>
-                This is an alert with icon, title and description.
-              </AlertDescription>
-            </Alert>
-          </SectionBottom>
-        )}
       </Section>
     </section>
   );
