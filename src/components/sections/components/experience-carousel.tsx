@@ -1,74 +1,47 @@
 'use client';
 import type { ExperienceComponent } from 'basehub-types';
-import React from 'react';
 import ExperienceCard from '@/components/sections/components/experience-card';
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious
-} from '@/components/ui/carousel';
 import { cn } from '@/lib/utils/ui';
 
 interface ExperienceCarouselProps {
   experiences: ExperienceComponent[];
-  visibleCount?: number;
 }
 
-export default function ExperienceCarousel({
-  experiences,
-  visibleCount = 2
-}: ExperienceCarouselProps) {
-  const cardRef = React.useRef<HTMLDivElement>(null);
-  const cardHeight = 345;
-
-  // Calculate basis for responsive design
-  const getBasisClass = () => {
-    if (visibleCount === 1) return 'basis-full';
-    if (visibleCount === 2) return 'basis-full md:basis-1/2';
-    return `basis-full md:basis-1/${Math.min(visibleCount, 3)}`;
-  };
-
+export default function ExperienceCarousel({ experiences }: ExperienceCarouselProps) {
   if (!experiences || experiences.length === 0) {
     return (
-      <div
-        className='w-full p-2 flex items-center justify-center'
-        style={{ height: `${cardHeight}px` }}
-      >
+      <div className='w-full p-2 flex items-center justify-center h-full min-h-[300px]'>
         <div className='text-muted-foreground'>No experiences available</div>
       </div>
     );
   }
 
   return (
-    <Carousel
-      opts={{ align: 'start', dragFree: false }}
-      orientation='vertical'
-      className='w-full p-2'
+    <div
+      className={cn(
+        'flex flex-col gap-3 max-h-[500px] md:max-h-[600px] overflow-y-auto pr-2',
+        // Custom scrollbar styling using webkit pseudo-elements
+        '[&::-webkit-scrollbar]:w-2',
+        '[&::-webkit-scrollbar-track]:bg-transparent',
+        '[&::-webkit-scrollbar-thumb]:bg-border',
+        '[&::-webkit-scrollbar-thumb]:rounded-full',
+        '[&::-webkit-scrollbar-thumb]:border-2',
+        '[&::-webkit-scrollbar-thumb]:border-solid',
+        '[&::-webkit-scrollbar-thumb]:border-transparent',
+        '[&::-webkit-scrollbar-thumb]:bg-clip-padding',
+        // Hover state
+        'hover:[&::-webkit-scrollbar-thumb]:bg-accent'
+      )}
+      style={{
+        scrollbarWidth: 'thin',
+        scrollbarColor: 'var(--border) transparent'
+      }}
     >
-      <CarouselContent
-        className={cn('w-full flex-col mt-2 mb-2')}
-        style={{
-          height: `${cardHeight}px`
-        }}
-      >
-        {experiences.map((exp, idx) => (
-          <CarouselItem
-            key={`experience-${exp._id}`}
-            className={`w-full ${getBasisClass()}`}
-            style={{
-              marginBottom: 0
-            }}
-          >
-            <div ref={idx === 0 ? cardRef : undefined} className='h-full'>
-              <ExperienceCard experience={exp} className='w-full max-h-[345px]' />
-            </div>
-          </CarouselItem>
-        ))}
-      </CarouselContent>
-      <CarouselPrevious className='-top-3 left-1/2 -translate-x-1/2' />
-      <CarouselNext className='-bottom-3 left-1/2 -translate-x-1/2' />
-    </Carousel>
+      {experiences.map((exp) => (
+        <div key={`experience-${exp._id}`} className='flex-shrink-0'>
+          <ExperienceCard experience={exp} className='w-full' />
+        </div>
+      ))}
+    </div>
   );
 }

@@ -17,20 +17,8 @@ const cardVariants = cva(
         reversed: 'bg-primary',
         outline: 'bg-transparent ',
         accent: 'bg-accent text-accent-foreground ',
-        clickable: 'bg-primary hover:bg-accent-dark hover:text-accent-foreground',
-        invisible: 'bg-transparent border-none shadow-none'
-      },
-      rotation: {
-        none: '',
-        slight: 'rotate-slight',
-        slightNegative: 'rotate-negative',
-        medium: 'rotate-medium',
-        mediumNegative: 'rotate-negative-medium'
-      },
-      interactive: {
-        none: '',
-        slight: 'hover-lift transition-all duration-300',
-        medium: 'hover-grow hover:shadow-xl transition-all duration-300'
+        // Completely remove border and shadow, background is transparent, no outline at all
+        invisible: '!bg-transparent !border-none !shadow-none'
       },
       shadow: {
         none: 'shadow-none',
@@ -43,14 +31,26 @@ const cardVariants = cva(
         default: 'border-4 border-border',
         accent: 'border-4 border-accent',
         none: 'border-0'
+      },
+      rotation: {
+        none: '',
+        slight: '-rotate-1',
+        slightNegative: 'rotate-1',
+        medium: '-rotate-2',
+        mediumNegative: 'rotate-2'
+      },
+      interactive: {
+        none: '',
+        slight: 'hover:-translate-y-0.5',
+        medium: 'hover:-translate-y-1'
       }
     },
     defaultVariants: {
       variant: 'default',
-      rotation: 'none',
-      interactive: 'none',
       shadow: 'lg',
-      borderStyle: 'default'
+      borderStyle: 'default',
+      rotation: 'none',
+      interactive: 'none'
     }
   }
 );
@@ -60,10 +60,10 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
     {
       className,
       variant,
-      rotation,
-      interactive,
       shadow,
       borderStyle,
+      rotation,
+      interactive,
       disableScale = false,
       ...props
     },
@@ -73,7 +73,7 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
       ref={ref}
       className={cn(
         !disableScale && 'scale-100',
-        cardVariants({ variant, rotation, interactive, shadow, borderStyle }),
+        cardVariants({ variant, shadow, borderStyle, rotation, interactive }),
         className
       )}
       {...props}
@@ -84,7 +84,7 @@ Card.displayName = 'Card';
 
 const CardHeader = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
   ({ className, ...props }, ref) => (
-    <div ref={ref} className={cn('flex flex-col space-y-1.5 p-6', className)} {...props} />
+    <div ref={ref} className={cn('flex flex-col space-y-1.5 p-3 pt-6', className)} {...props} />
   )
 );
 CardHeader.displayName = 'CardHeader';
@@ -114,14 +114,14 @@ CardDescription.displayName = 'CardDescription';
 
 const CardContent = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
   ({ className, ...props }, ref) => (
-    <div ref={ref} className={cn('p-6 pt-0', className)} {...props} />
+    <div ref={ref} className={cn('p-3', className)} {...props} />
   )
 );
 CardContent.displayName = 'CardContent';
 
 const CardFooter = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
   ({ className, ...props }, ref) => (
-    <div ref={ref} className={cn('flex items-center p-3 pt-0', className)} {...props} />
+    <div ref={ref} className={cn('flex items-center p-2 pt-0', className)} {...props} />
   )
 );
 CardFooter.displayName = 'CardFooter';

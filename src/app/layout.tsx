@@ -1,15 +1,13 @@
 import type React from 'react';
 import './globals.css';
 import { ReactPlugin } from '@21st-extension/react';
-import { TwentyFirstToolbar } from '@21st-extension/toolbar-next';
 import { basehub } from 'basehub';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { Footer } from '@/components/footer';
-import { Nav } from '@/components/navbar';
 import { Providers } from '@/components/providers';
 import { ScrollArrow } from '@/components/scroll-arrow';
-import { Toaster } from '@/components/ui/toaster';
+import { Toaster } from '@/components/ui/sonner';
 
 import { cn } from '@/lib/utils/ui';
 
@@ -67,14 +65,22 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  const twentyFirstConfig = {
+  const _twentyFirstConfig = {
     plugins: [ReactPlugin]
   };
 
-  const data = await basehub().query({
+  const _data = await basehub().query({
     globals: {
       showAbout: true,
-      showProjects: true
+      showProjects: true,
+      socials: {
+        items: {
+          _id: true,
+          _title: true,
+          url: true,
+          icon: true
+        }
+      }
     }
   });
 
@@ -88,17 +94,13 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       <body className={cn('min-h-screen bg-primary font-sans antialiased relative')}>
         <div className='absolute inset-0 -z-10 h-full w-full bg-primary' />
         <Providers attribute='class' defaultTheme='system' enableSystem disableTransitionOnChange>
-          <Nav showAbout={data.globals.showAbout} showProjects={data.globals.showProjects} />
           <div className='w-full'>
             {children}
             <Toaster />
           </div>
           <Footer />
         </Providers>
-        {data.globals.showAbout && data.globals.showProjects && <ScrollArrow />}
-        {process.env.NODE_ENV === 'development' && (
-          <TwentyFirstToolbar config={twentyFirstConfig} />
-        )}
+        <ScrollArrow />
       </body>
     </html>
   );

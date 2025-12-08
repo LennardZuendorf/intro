@@ -1,79 +1,53 @@
 'use client';
 
-import { CheckCircle, CircleHelp } from 'lucide-react';
-import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
+import { toast } from 'sonner';
 import type { SectionProps } from '@/app/page';
-import { Button, buttonVariants } from '@/components/ui/button';
-import { S, XS } from '@/components/ui/typography';
-import { cn } from '@/lib/utils/ui';
 
-export function Banner({ className }: SectionProps) {
-  const [isAcknowledged, setIsAcknowledged] = useState(true);
-
+export function Banner(_props: SectionProps) {
   useEffect(() => {
-    const acknowledgment = localStorage.getItem('trackingCheck');
-    if (acknowledgment !== 'true') {
-      setIsAcknowledged(false);
-    }
+    // Wait for client-side hydration and DOM to be ready
+    if (typeof window === 'undefined') return;
+
+    // Use requestAnimationFrame to ensure DOM is ready, then add a small delay
+    const showToast = () => {
+      // Check if user has already seen the notification
+      const acknowledgment = localStorage.getItem('trackingCheck');
+
+      if (acknowledgment !== 'true') {
+        // Save to localStorage immediately when toast is shown (user has seen it)
+        localStorage.setItem('trackingCheck', 'true');
+
+        // Show toast notification on first visit
+        toast('Privacy-Friendly Tracking', {
+          description: (
+            <p className='text-xs'>
+              I use <strong>privacy-friendly, cookieless tracking powered by Vercel</strong> to
+              enhance my website. This method doesn&apos;t require consent and avoids cross-session
+              tracking.
+            </p>
+          ),
+          action: {
+            label: 'Learn More',
+            onClick: () => {
+              window.open(
+                'https://vercel.com/docs/analytics/privacy-policy',
+                '_blank',
+                'noopener,noreferrer'
+              );
+            }
+          },
+          duration: 10000 // Show for 10 seconds
+        });
+      }
+    };
+
+    // Wait for next frame, then add a small delay to ensure Toaster is mounted
+    requestAnimationFrame(() => {
+      setTimeout(showToast, 200);
+    });
   }, []);
 
-  // Handle button click
-  const handleButtonClick = () => {
-    localStorage.setItem('trackingCheck', JSON.stringify(true));
-    setIsAcknowledged(true); // Hide the banner
-  };
-
-  if (isAcknowledged) {
-    return null;
-  }
-
-  return (
-    <div
-      className={cn(
-        'z-[5000] bg-card fixed inset-x-0 bottom-5 2xl:w-6/12 lg:8/12 10/12 mx-auto mt-4 rounded-base shadow-shadow shadow-md font-heading border-2 border-border p-4 bg-primary hover:bg-accent-light transition-colors',
-        className
-      )}
-    >
-      <div className='flex flex-row justify-between gap-3 md:flex-row md:items-center'>
-        <div className='flex flex-col space-y-2 col-span-5 pt-2'>
-          <XS>
-            I use <b>privacy-friendly, cookieless tracking</b> to enhance my website while
-            respecting your privacy. <br />
-            This cookie-less method doesn&apos;t require consent and avoids tracking you across
-            sessions.
-          </XS>
-          <S>
-            Used tools include{' '}
-            <a className='underline' href='https://umami.ts'>
-              Umami
-            </a>{' '}
-            and{' '}
-            <a className='underline' href='https://vercel.com/docs/speed-insights'>
-              Vercel Speed Insights
-            </a>
-          </S>
-        </div>
-        <div className='space-y-2 flex flex-col'>
-          <Button onClick={handleButtonClick} className='flex-1' size='sm'>
-            <S className='hidden sm:block'>OK</S>
-            <CheckCircle className='block sm:hidden h-4 w-4' />{' '}
-          </Button>
-          <Link
-            className={buttonVariants({
-              variant: 'accent',
-              size: 'sm',
-              className: 'sm:text-wrap'
-            })}
-            href='/legal#privacy'
-          >
-            <S className='hidden sm:block'>Learn More</S>{' '}
-            {/* Text visible on sm screens and larger */}
-            <CircleHelp className='block sm:hidden h-4 w-4' />{' '}
-            {/* Icon visible on screens smaller than sm */}
-          </Link>
-        </div>
-      </div>
-    </div>
-  );
+  // This component doesn't render anything, it just triggers the toast
+  return null;
 }

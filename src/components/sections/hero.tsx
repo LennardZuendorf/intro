@@ -1,20 +1,12 @@
 import type { HeroSection as HeroSectionType } from 'basehub-types';
-import { CheckCircle2Icon } from 'lucide-react';
 import { HiMiniArrowTopRightOnSquare } from 'react-icons/hi2';
 import { RichTextBlock as RichText } from '@/components/shared/richtext-block';
 import { SocialButtons } from '@/components/shared/social-buttons';
-import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
 import { IconLink } from '@/components/ui/icon-link';
 import { NeoBadge } from '@/components/ui/neoBadge';
-import {
-  Section,
-  SectionBottom,
-  SectionLeft,
-  SectionRight,
-  SectionTop
-} from '@/components/ui/section';
-import { H1, H3, L, M } from '@/components/ui/typography';
+import { Section, SectionLeft, SectionRight, SectionTop } from '@/components/ui/section';
+import { Code, H1, H3, L, M } from '@/components/ui/typography';
 
 export const HeroSection = async ({
   content,
@@ -117,6 +109,64 @@ export const HeroSection = async ({
           </SectionLeft>
 
           <SectionRight>
+            {/*Project Card*/}
+            {content.specialCards && content.specialCards.length > 0 && content.specialCards[0] && (
+              <Card
+                id='project-card'
+                className='relative w-full'
+                interactive='medium'
+                rotation='medium'
+              >
+                <CardHeader className='p-5 pb-2 md:p-6 md:pb-2 2xl:p-8 2xl:pb-2'>
+                  <div className='absolute -top-2 -left-2 md:-top-3 md:-left-3'>
+                    <NeoBadge
+                      variant='dark'
+                      rotation='slight'
+                      className='font-mono'
+                      interactive='bounce'
+                    >
+                      <Code>🚀 My Latest Project</Code>
+                    </NeoBadge>
+                  </div>
+                  <H3 className='rotate-1'>{content.specialCards[0]._title}</H3>
+                </CardHeader>
+                <CardContent className='p-5 pt-0 md:p-6 md:pt-0 2xl:p-8 2xl:pt-0'>
+                  <div id='project-content' className='max-w-none mb-3'>
+                    <M className='font-mono leading-relaxed'>
+                      {content.specialCards[0].shortDescription &&
+                      content.specialCards[0].shortDescription.length > 100
+                        ? `${content.specialCards[0].shortDescription.slice(0, 100)}...`
+                        : content.specialCards[0].shortDescription}
+                    </M>
+                  </div>
+                  <div id='project-cta' className='flex justify-start gap-2'>
+                    {showProjects && (
+                      <IconLink
+                        href={`/projects/${content.specialCards[0]._slug}`}
+                        icon={<HiMiniArrowTopRightOnSquare className='h-4 w-4' />}
+                        variant='default'
+                        size='default'
+                        iconPosition='right'
+                      >
+                        Learn More
+                      </IconLink>
+                    )}
+                    {content.specialCards[0].showcaseLink && (
+                      <IconLink
+                        href={content.specialCards[0].showcaseLink || '#'}
+                        icon={<HiMiniArrowTopRightOnSquare className='h-4 w-4' />}
+                        variant='default'
+                        size='default'
+                        iconPosition='right'
+                      >
+                        View Project
+                      </IconLink>
+                    )}
+                  </div>
+                </CardContent>
+              </Card>
+            )}
+
             {content.selectedExperience && (
               <Card
                 id='current-role-card'

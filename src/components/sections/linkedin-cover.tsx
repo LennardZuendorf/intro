@@ -20,7 +20,11 @@ export function LinkedinCover({
       interactive='none'
       disableScale
     >
-      <BackgroundGrid className='absolute inset-0 w-full h-full' maskType='none' gridSize={80}>
+      <BackgroundGrid
+        className='absolute inset-0 w-full h-full pr-10'
+        maskType='none'
+        gridSize={80}
+      >
         <CardContent className='relative z-[2] w-full h-full flex items-center justify-end p-8 md:p-10'>
           <div className='flex flex-col items-end text-right gap-3 md:gap-4'>
             <H1 className='m-0'>{name}</H1>

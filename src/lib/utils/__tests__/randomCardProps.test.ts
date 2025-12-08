@@ -9,14 +9,4 @@ describe('getRandomCardProps', () => {
     expect(getRandomCardProps(idString)).toEqual(getRandomCardProps(idString));
   });
 
-  it('returns only valid rotation and interactive values', () => {
-    const validRotations = ['none', 'slight', 'slightNegative', 'medium', 'mediumNegative'];
-    const validInteractives = ['none', 'slight', 'medium'];
-
-    for (let i = 0; i < 10; i++) {
-      const { rotation, interactive } = getRandomCardProps(i);
-      expect(validRotations).toContain(rotation);
-      expect(validInteractives).toContain(interactive);
-    }
-  });
 });

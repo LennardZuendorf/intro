@@ -1,9 +1,26 @@
 'use client';
 
-import type { ExperienceComponent as ExperienceData } from 'basehub-types';
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
 import { H4, S, SMuted } from '@/components/ui/typography';
 import { cn } from '@/lib/utils/ui';
+
+type ExperienceData = {
+  _id: string;
+  _title: string;
+  shortDescription?: string | null;
+  companyLink?: string | null;
+  startDate?: string | null;
+  endDate?: string | null;
+  jobActivities?: {
+    json?: {
+      content?: unknown;
+    } | null;
+  } | null;
+  skills?: Array<{
+    _id: string;
+    _title: string;
+  }> | null;
+};
 
 interface ExperienceCardProps {
   experience: ExperienceData;
@@ -14,17 +31,10 @@ export default function ExperienceCard({ experience: exp, className }: Experienc
   const skills = exp.skills?.map((skill) => skill._title) || [];
 
   return (
-    <Card
-      className={cn('w-full h-[300px] overflow-hidden', className)}
-      rotation='none'
-      shadow='none'
-      interactive='slight'
-    >
+    <Card className={cn('w-full h-[300px] overflow-hidden', className)} shadow='none'>
       <CardHeader className='pb-3'>
         <div className='flex justify-between items-start'>
-          <H4 className='flex items-center gap-1.5'>
-            {exp._title} @ {exp.companyTitle}
-          </H4>
+          <H4 className='flex items-center gap-1.5'>{exp._title}</H4>
           <SMuted className='text-right'>
             {exp.startDate ? new Date(exp.startDate).getFullYear() : ''} -{' '}
             {exp.endDate ? new Date(exp.endDate).getFullYear() : 'Present'}

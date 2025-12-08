@@ -2,7 +2,6 @@ import { Pump } from 'basehub/react-pump';
 import { draftMode } from 'next/headers';
 import Link from 'next/link';
 import { SocialButtons } from '@/components/shared/social-buttons';
-import { ColorThemeSelect } from '@/components/theme/color-theme-select';
 import { ThemeSelect } from '@/components/theme/theme-select';
 import { Button } from '@/components/ui/button';
 import { Section } from '@/components/ui/section';
@@ -43,26 +42,16 @@ export const Footer = async ({ className = '' }: FooterProps) => {
             as='footer'
             fullHeight={false}
             className={cn('border-t-4 border-black', className)}
-            padding='pt-6 pb-6'
-            background='grid'
+            padding='pt-6 pb-6 px-6 md:pt-4 md:pb-4'
             centerContent={false}
           >
-            <div className='w-full flex flex-col sm:flex-row items-center justify-between z-[10]'>
+            <div className='w-full flex flex-row items-center justify-between z-[10]'>
               <SocialButtons buttonVariant='default' />
               <div className='flex items-end gap-x-4'>
-                <ColorThemeSelect
-                  buttonVariant='default'
-                  className='shadow-md'
-                  popoverClassName='shadow-lg'
-                />
-                <ThemeSelect
-                  buttonVariant='default'
-                  className='shadow-md'
-                  popoverClassName='shadow-lg'
-                />
+                <ThemeSelect buttonVariant='default' />
               </div>
             </div>
-            <div>
+            <div className='w-full flex justify-center mt-4 md:mt-2'>
               <div className='flex items-center gap-x-2 text-sm font-mono'>
                 <div>Built by Lennard Zündorf</div>
                 <div> {`© ${new Date().getFullYear()}`}</div>

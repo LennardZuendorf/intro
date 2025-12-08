@@ -3,7 +3,7 @@
 import { useRef, useState } from 'react';
 import ProjectCard from '@/components/sections/components/project-card';
 import { NeoBadge } from '@/components/ui/neoBadge';
-import { Code, S } from '@/components/ui/typography';
+import { M, S } from '@/components/ui/typography';
 import { getRandomCardProps } from '@/lib/utils/randomCardProps';
 
 // Create a type that matches what we actually query from BaseHub
@@ -25,6 +25,11 @@ type ProjectData = {
         badgeUrl?: string | null;
       }[]
     | null;
+  color?: {
+    hex?: string | null;
+    rgb?: string | null;
+    hsl?: string | null;
+  } | null;
 };
 
 interface ProjectsGridProps {
@@ -75,7 +80,7 @@ export function ProjectsGrid({ projects, className }: ProjectsGridProps) {
           }}
         >
           {visibleProjects.map((project, index) => {
-            const { rotation, interactive } = getRandomCardProps(project._id);
+            const { rotation } = getRandomCardProps(project._id);
 
             return (
               <div
@@ -85,12 +90,7 @@ export function ProjectsGrid({ projects, className }: ProjectsGridProps) {
                   transitionDelay: `${index * 50}ms`
                 }}
               >
-                <ProjectCard
-                  project={project}
-                  className='h-full'
-                  rotation={rotation}
-                  interactive={interactive}
-                />
+                <ProjectCard project={project} className='h-full' rotation={rotation} />
               </div>
             );
           })}
@@ -109,7 +109,7 @@ export function ProjectsGrid({ projects, className }: ProjectsGridProps) {
               className='cursor-pointer'
               onClick={() => handleToggle(true)}
             >
-              <Code>Show More Projects</Code>
+              <M className='font-mono'>Show More Projects</M>
             </NeoBadge>
           ) : (
             <NeoBadge
@@ -120,7 +120,7 @@ export function ProjectsGrid({ projects, className }: ProjectsGridProps) {
               className='cursor-pointer'
               onClick={() => handleToggle(false)}
             >
-              <Code>Show Less</Code>
+              <M className='font-mono'>Show Less</M>
             </NeoBadge>
           )}
         </div>

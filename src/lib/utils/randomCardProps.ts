@@ -4,10 +4,8 @@ import type { cardVariants } from '@/components/ui/card';
 // Extract the variant types from the card component
 type CardVariants = VariantProps<typeof cardVariants>;
 type Rotation = NonNullable<CardVariants['rotation']>;
-type Interactive = NonNullable<CardVariants['interactive']>;
 
 const ROTATIONS: Rotation[] = ['none', 'slight', 'slightNegative', 'medium', 'mediumNegative'];
-const INTERACTIVES: Interactive[] = ['none', 'slight', 'medium'];
 
 function hashString(str: string): number {
   let hash = 0;
@@ -20,13 +18,12 @@ function hashString(str: string): number {
 
 /**
  * Returns deterministic random card properties based on project ID.
- * Same ID will always return the same rotation and interactive values.
+ * Same ID will always return the same rotation value.
  */
 export function getRandomCardProps(id: number | string) {
   const hash = typeof id === 'number' ? id : hashString(id.toString());
 
   return {
-    rotation: ROTATIONS[hash % ROTATIONS.length],
-    interactive: INTERACTIVES[(hash >> 3) % INTERACTIVES.length]
+    rotation: ROTATIONS[hash % ROTATIONS.length]
   } as const;
 }

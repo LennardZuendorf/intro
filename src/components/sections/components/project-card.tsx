@@ -6,6 +6,7 @@ import { IconLink } from '@/components/ui/icon-link';
 import { NeoBadge } from '@/components/ui/neoBadge';
 import { H4, M } from '@/components/ui/typography';
 import { cn } from '@/lib/utils/ui';
+import { StrideAnimatedCard } from './stride';
 
 // Create a type that matches what we actually query from BaseHub
 type ProjectData = {
@@ -26,6 +27,11 @@ type ProjectData = {
         badgeUrl?: string | null;
       }[]
     | null;
+  color?: {
+    hex?: string | null;
+    rgb?: string | null;
+    hsl?: string | null;
+  } | null;
 };
 
 type CardVariants = VariantProps<typeof cardVariants>;
@@ -34,17 +40,27 @@ interface ProjectCardProps {
   project: ProjectData;
   className?: string;
   rotation?: CardVariants['rotation'];
-  interactive?: CardVariants['interactive'];
 }
 
-export default function ProjectCard({
-  project,
-  className,
-  rotation = 'none',
-  interactive = 'slight'
-}: ProjectCardProps) {
+export default function ProjectCard({ project, className, rotation = 'none' }: ProjectCardProps) {
+  // Use StrideAnimatedCard only for Stride project
+  if (project._slug === 'stride') {
+    return <StrideAnimatedCard project={project} className={cn('h-[450px]', className)} />;
+  }
+
   // Handle technologies from BaseHub
   const technologies = project.technology?.map((tech) => tech._title) || [];
+
+  // Get project color, default to blue if none set
+  const projectColor = project.color?.hex || '#3b82f6';
+
+  // Convert hex to rgba with 10% opacity for subtle tint
+  const hexToRgba = (hex: string, alpha: number) => {
+    const r = parseInt(hex.slice(1, 3), 16);
+    const g = parseInt(hex.slice(3, 5), 16);
+    const b = parseInt(hex.slice(5, 7), 16);
+    return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+  };
 
   return (
     <Card
@@ -52,7 +68,9 @@ export default function ProjectCard({
       variant='default'
       rotation={rotation}
       shadow='lg'
-      interactive={interactive}
+      style={{
+        backgroundColor: hexToRgba(projectColor, 0.1) // Subtle tint with 10% opacity
+      }}
     >
       <CardHeader className='pb-2'>
         {/* Title */}

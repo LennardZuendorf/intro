@@ -2,6 +2,7 @@ import { Slot } from '@radix-ui/react-slot';
 import { cva, type VariantProps } from 'class-variance-authority';
 import type * as React from 'react';
 import { cn } from '@/lib/utils/ui';
+import { M, S, L } from './typography';
 
 const neoBadgeVariants = cva(
   'inline-block font-mono rounded-md border-2 border-black transition-all duration-300',
@@ -16,17 +17,16 @@ const neoBadgeVariants = cva(
       },
       rotation: {
         none: '',
-        slight: 'rotate-slight',
-        negative: 'rotate-negative',
-        medium: 'rotate-medium',
-        negativeMedium: 'rotate-negative-medium'
+        slight: '-rotate-1',
+        negative: 'rotate-1',
+        medium: '-rotate-2'
       },
       interactive: {
         none: '',
-        grow: 'hover-grow',
-        lift: 'hover-lift',
-        bounce: 'hover-bounce',
-        wiggle: 'hover-wiggle'
+        lift: 'hover:-translate-y-0.5',
+        grow: 'hover:scale-[1.03]',
+        bounce: 'hover:animate-bounce',
+        wiggle: 'hover:-rotate-1'
       },
       shadow: {
         none: '',
@@ -35,9 +35,9 @@ const neoBadgeVariants = cva(
         lg: 'shadow-lg'
       },
       size: {
-        sm: 'px-1 py-0.5 sm:px-1.5 sm:py-0.5 md:px-1.5 md:py-0.5 lg:px-2 lg:py-1 xl:px-2 xl:py-1 2xl:px-2.5 2xl:py-1',
-        md: 'px-1.5 py-0.5 sm:px-2 sm:py-1 md:px-2 md:py-1 lg:px-2.5 lg:py-1 xl:px-2.5 xl:py-1 2xl:px-3 2xl:py-1.5',
-        lg: 'px-2 py-1 sm:px-2.5 sm:py-1 md:px-2.5 md:py-1 lg:px-3 lg:py-1.5 xl:px-3 xl:py-1.5 2xl:px-4 2xl:py-2'
+        sm: 'px-[0.6rem] py-[0.30rem] xl:px-[0.5rem] xl:py-[0.25rem]',
+        md: 'px-[0.9rem] py-[0.45rem] xl:px-[0.7rem] xl:py-[0.35rem]',
+        lg: 'px-[1.2rem] py-[0.6rem] xl:px-[0.9rem] xl:py-[0.45rem]'
       }
     },
     defaultVariants: {
@@ -67,11 +67,22 @@ function NeoBadge({
   ...props
 }: NeoBadgeProps) {
   const Comp = asChild ? Slot : 'span';
+  const typographyBySize = {
+    sm: S,
+    md: M,
+    lg: L
+  };
+  const Typography = typographyBySize[size ?? 'md'] || M;
+
   return (
     <Comp
       className={cn(neoBadgeVariants({ variant, rotation, interactive, shadow, size }), className)}
       {...props}
-    />
+    >
+      <Typography as="span" className="m-0 p-0 leading-none">
+        {props.children}
+      </Typography>
+    </Comp>
   );
 }
 

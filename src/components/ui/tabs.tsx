@@ -1,7 +1,6 @@
 'use client';
 
 import * as TabsPrimitive from '@radix-ui/react-tabs';
-
 import * as React from 'react';
 
 import { cn } from '@/lib/utils/ui';
@@ -15,7 +14,8 @@ const TabsList = React.forwardRef<
   <TabsPrimitive.List
     ref={ref}
     className={cn(
-      'inline-flex items-center justify-center rounded-base border-2 border-border bg-primary p-1 text-primary-foreground space-x-1',
+      // Apply all default Card styling options from @card.tsx
+      'rounded-md border-4 border-border bg-primary text-primary-foreground shadow-black shadow-md transition-all space-x-1 p-1',
       className
     )}
     {...props}
@@ -23,6 +23,10 @@ const TabsList = React.forwardRef<
 ));
 TabsList.displayName = TabsPrimitive.List.displayName;
 
+// The trigger below implements:
+// - DEFAULT: transparent bg (shows parent bg, ie. primary)
+// - HOVER: accent bg + accent foreground (like Button "accent")
+// - ACTIVE: secondary bg + secondary foreground + border 
 const TabsTrigger = React.forwardRef<
   React.ElementRef<typeof TabsPrimitive.Trigger>,
   React.ComponentPropsWithoutRef<typeof TabsPrimitive.Trigger>
@@ -30,7 +34,14 @@ const TabsTrigger = React.forwardRef<
   <TabsPrimitive.Trigger
     ref={ref}
     className={cn(
-      'inline-flex items-center justify-center whitespace-nowrap rounded-base px-3 py-1.5 text-sm font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground data-[state=active]:bg-secondary data-[state=active]:border-border data-[state=active]:text-secondary-foreground data-[state=active]:font-bold',
+      'inline-flex items-center justify-center whitespace-nowrap rounded-base px-3 py-1.5 text-sm font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',
+      // Mutually exclusive: If active, secondary bg/text; else transparent
+      'bg-transparent text-primary-foreground',
+      // ACTIVE state: secondary colors override default/hover!
+      'data-[state=active]:bg-secondary data-[state=active]:text-secondary-foreground data-[state=active]:border-2 data-[state=active]:border-border data-[state=active]:font-bold',
+      // HOVER (but NOT when active)
+      'hover:bg-secondary hover:text-secondary-foreground',
+      // Remove shadow for tab triggers, match "noShadow" Button
       className
     )}
     {...props}

@@ -30,6 +30,11 @@ type ProjectData = {
         badgeUrl?: string | null;
       }[]
     | null;
+  color?: {
+    hex?: string | null;
+    rgb?: string | null;
+    hsl?: string | null;
+  } | null;
 };
 
 interface ProjectCarouselProps {
@@ -62,7 +67,7 @@ export default function ProjectCarousel({ projects, visibleCount = 3 }: ProjectC
       >
         <CarouselContent className='w-full flex-row p-4'>
           {projects.map((project, idx) => {
-            const { rotation, interactive } = getRandomCardProps(project._id);
+            const { rotation } = getRandomCardProps(project._id);
 
             return (
               <CarouselItem key={project._id} className={`${getBasisClass()} pl-4`}>
@@ -71,7 +76,6 @@ export default function ProjectCarousel({ projects, visibleCount = 3 }: ProjectC
                     project={project}
                     className='w-full max-w-sm h-[450px]'
                     rotation={rotation}
-                    interactive={interactive}
                   />
                 </div>
               </CarouselItem>

@@ -23,8 +23,8 @@ const config: Config = {
           foreground: 'var(--primary-foreground)'
         },
         secondary: {
-          DEFAULT: 'rgb(var(--secondary))',
-          foreground: 'rgb(var(--primary-foreground))'
+          DEFAULT: 'var(--secondary)',
+          foreground: 'var(--secondary-foreground)'
         },
         accent: {
           light: 'var(--accent-light)',
@@ -50,9 +50,9 @@ const config: Config = {
         }
       },
       borderRadius: {
-        base: '4px',
-        md: '8px',
-        lg: '12px'
+        base: '8px',
+        md: '16px',
+        lg: '24px'
       },
       boxShadow: {
         sm: 'var(--shadow-sm)',

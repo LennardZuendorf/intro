@@ -1,9 +1,6 @@
 import { Pump } from 'basehub/react-pump';
 import { RichText } from 'basehub/react-rich-text';
-import type {
-  AboutSection as AboutSectionType,
-  HeroSection as HeroSectionType
-} from 'basehub-types';
+import type { AboutSection, HeroSection } from 'basehub-types';
 import { GithubIcon, LinkedinIcon, MailIcon } from 'lucide-react';
 import type { NextPage } from 'next';
 import { draftMode } from 'next/headers';
@@ -280,8 +277,8 @@ const Page: NextPage = async () => {
 
             <div className='flex items-center justify-center w-full mt-10 lg:mt-0'>
               <IndexSection
-                heroContent={data.sectionsAndPages.heroSection as HeroSectionType}
-                aboutContent={data.sectionsAndPages.aboutSection as AboutSectionType}
+                heroContent={data.sectionsAndPages.heroSection as HeroSection}
+                aboutContent={data.sectionsAndPages.aboutSection as AboutSection}
               />
             </div>
             <Banner />

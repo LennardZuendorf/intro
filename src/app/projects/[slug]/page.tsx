@@ -11,7 +11,7 @@ import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { IconLink } from '@/components/ui/icon-link';
 import { NeoBadge } from '@/components/ui/neoBadge';
 import { Section, SectionLeft, SectionRight, SectionTop } from '@/components/ui/section';
-import { Code, H1, H3, L, M, S } from '@/components/ui/typography';
+import { H1, H3, L, M, S } from '@/components/ui/typography';
 
 export async function generateStaticParams() {
   try {
@@ -113,7 +113,7 @@ export default async function ProjectPage({
                         className='font-mono'
                         interactive='bounce'
                       >
-                        <Code>🚀 Project</Code>
+                        <M className='font-mono'>🚀 Project</M>
                       </NeoBadge>
                     </div>
                     <H1 className='-rotate-1'>{project._title}</H1>
@@ -242,7 +242,7 @@ export default async function ProjectPage({
                             className='font-mono'
                             interactive='lift'
                           >
-                            <Code>Tech Stack</Code>
+                            <M className='font-mono'>Tech Stack</M>
                           </NeoBadge>
                         </div>
                         <H3 className='rotate-1'>Technologies</H3>
@@ -283,7 +283,7 @@ export default async function ProjectPage({
                             className='font-mono'
                             interactive='grow'
                           >
-                            <Code>Contents</Code>
+                            <M className='font-mono'>Contents</M>
                           </NeoBadge>
                         </div>
                         <H3 className='rotate-1'>Table of Contents</H3>
@@ -318,7 +318,7 @@ export default async function ProjectPage({
                           className='font-mono'
                           interactive='lift'
                         >
-                          <Code>Overview</Code>
+                          <M className='font-mono'>Overview</M>
                         </NeoBadge>
                       </div>
                       <H3 className='rotate-1'>Project Info</H3>

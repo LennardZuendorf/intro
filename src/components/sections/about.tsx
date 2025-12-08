@@ -1,6 +1,5 @@
 import type { AboutSection as AboutSectionType, Skills as SkillsType } from 'basehub-types';
-import Image from 'next/image';
-import { RichTextBlock as RichText } from '@/components/sections/components/richtext-block';
+import { RichTextBlock as RichText } from '@/components/shared/richtext-block';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { NeoBadge } from '@/components/ui/neoBadge';
 import {
@@ -10,7 +9,7 @@ import {
   SectionRight,
   SectionTop
 } from '@/components/ui/section';
-import { Code, M } from '@/components/ui/typography';
+import { M } from '@/components/ui/typography';
 import ExperienceCarousel from './components/experience-carousel';
 import SkillsShowcase from './components/skills-showcase';
 
@@ -37,7 +36,7 @@ export default async function AboutSection({
                       className='font-mono'
                       interactive='lift'
                     >
-                      <Code>About Me</Code>
+                      <M className='font-mono'>About Me</M>
                     </NeoBadge>
                   </div>
                 </CardHeader>
@@ -66,7 +65,7 @@ export default async function AboutSection({
                       className='font-mono'
                       interactive='lift'
                     >
-                      <Code>Quick Stats</Code>
+                      <M className='font-mono'>Quick Stats</M>
                     </NeoBadge>
                   </div>
                 </CardHeader>
@@ -101,12 +100,12 @@ export default async function AboutSection({
                       className='font-mono'
                       interactive='grow'
                     >
-                      <Code>Experiences</Code>
+                      <M className='font-mono'>Experiences</M>
                     </NeoBadge>
                   </div>
                 </CardHeader>
                 <CardContent className='py-5 px-0'>
-                  <ExperienceCarousel experiences={content.experiences.items} visibleCount={1} />
+                  <ExperienceCarousel experiences={content.experiences.items} />
                 </CardContent>
               </Card>
             </div>

@@ -1,35 +1,39 @@
 import { fireEvent, render, screen } from '@testing-library/react';
-import { ActiveColorThemeProvider } from '../../theme/active-theme';
-import { ColorThemeSelect } from '../../theme/color-theme-select';
+import { ThemeProvider as NextThemeProvider } from 'next-themes';
+import { ThemeSelect } from '../../theme/theme-select';
 
-// Mock localStorage
-const mockLocalStorage = {
-  getItem: jest.fn(),
-  setItem: jest.fn(),
-  removeItem: jest.fn()
-};
-
-Object.defineProperty(window, 'localStorage', {
-  value: mockLocalStorage
-});
-
-// Wrapper component with theme provider
+// Wrapper using the current next-themes-based ThemeSelect
 function TestWrapper({ children }: { children: React.ReactNode }) {
-  return <ActiveColorThemeProvider>{children}</ActiveColorThemeProvider>;
+  return (
+    <NextThemeProvider attribute='class' defaultTheme='system'>
+      {children}
+    </NextThemeProvider>
+  );
 }
 
-describe('ColorSelect', () => {
+describe('ThemeSelect', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
-    mockLocalStorage.getItem.mockReturnValue(null);
     document.documentElement.className = '';
     document.body.className = '';
+
+    // next-themes relies on matchMedia; provide a basic mock for JSDOM
+    // @ts-expect-error - adding to window for test environment
+    window.matchMedia = window.matchMedia || ((query: string) => ({
+      matches: false,
+      media: query,
+      onchange: null,
+      addListener: () => {},
+      removeListener: () => {},
+      addEventListener: () => {},
+      removeEventListener: () => {},
+      dispatchEvent: () => false
+    }));
   });
 
-  it('renders color palette button', () => {
+  it('renders theme select button', () => {
     render(
       <TestWrapper>
-        <ColorThemeSelect />
+        <ThemeSelect />
       </TestWrapper>
     );
 
@@ -39,53 +43,16 @@ describe('ColorSelect', () => {
   it('opens popover when button is clicked', async () => {
     render(
       <TestWrapper>
-        <ColorThemeSelect />
+        <ThemeSelect />
       </TestWrapper>
     );
 
     const button = screen.getByRole('combobox');
     fireEvent.click(button);
 
-    // Wait for popover to open
-    await screen.findByText('Amber');
-    expect(screen.getByText('Emerald')).toBeInTheDocument();
-    expect(screen.getByText('Rose')).toBeInTheDocument();
-    expect(screen.getByText('Indigo')).toBeInTheDocument();
-  });
-
-  it('updates theme when color is selected', async () => {
-    render(
-      <TestWrapper>
-        <ColorThemeSelect />
-      </TestWrapper>
-    );
-
-    // Open popover
-    const button = screen.getByRole('combobox');
-    fireEvent.click(button);
-
-    // Wait for popover and click amber color
-    const amberOption = await screen.findByText('Amber');
-    fireEvent.click(amberOption);
-
-    // Check that theme was applied to DOM
-    expect(document.documentElement.classList.contains('theme-amber')).toBe(true);
-    expect(mockLocalStorage.setItem).toHaveBeenCalledWith('theme', 'amber');
-  });
-
-  it('maps Emerald to green theme', async () => {
-    render(
-      <TestWrapper>
-        <ColorThemeSelect />
-      </TestWrapper>
-    );
-
-    const button = screen.getByRole('combobox');
-    fireEvent.click(button);
-
-    const emeraldOption = await screen.findByText('Emerald');
-    fireEvent.click(emeraldOption);
-
-    expect(document.documentElement.classList.contains('theme-green')).toBe(true);
+    // Wait for popover to open and show theme options
+    await screen.findByText('System');
+    expect(screen.getByText('Dark')).toBeInTheDocument();
+    expect(screen.getByText('Light')).toBeInTheDocument();
   });
 });

@@ -7,7 +7,8 @@ export const env = createEnv({
     NEXT_PUBLIC_URL: z.string().min(1, 'NEXT_PUBLIC_URL is required'),
     BASEHUB_TOKEN: z.string().min(1, 'BASEHUB_TOKEN is required'),
     BASIC_USER: z.string().min(1, 'BASIC_USER is required'),
-    BASIC_PASS: z.string().min(1, 'BASIC_PASS is required')
+    BASIC_PASS: z.string().min(1, 'BASIC_PASS is required'),
+    NEXT_V2_RELEASE: z.boolean().default(false)
   },
   client: {
     NEXT_PUBLIC_OPENPANEL_CLIENT_ID: z
@@ -22,7 +23,8 @@ export const env = createEnv({
     // BaseHub environment variables
     BASEHUB_TOKEN: process.env.BASEHUB_TOKEN,
     BASIC_USER: process.env.BASIC_USER,
-    BASIC_PASS: process.env.BASIC_PASS
+    BASIC_PASS: process.env.BASIC_PASS,
+    NEXT_V2_RELEASE: process.env.NEXT_V2_RELEASE === 'true'
   },
   skipValidation: !!process.env.SKIP_ENV_VALIDATION,
   emptyStringAsUndefined: true

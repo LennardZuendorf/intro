@@ -5,7 +5,7 @@ import { TechStackCompact } from '@/components/shared/tech-stack';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { NeoBadge } from '@/components/ui/neoBadge';
 import { Section, SectionBottom, SectionTop } from '@/components/ui/section';
-import { Code, H4, S } from '@/components/ui/typography';
+import { H4, M, S } from '@/components/ui/typography';
 import { cn } from '@/lib/utils/ui';
 import ProjectCarousel from './components/project-carousel';
 import { ProjectsGrid } from './components/project-grid';
@@ -35,6 +35,11 @@ export async function Projects({ className }: SectionProps) {
                   _title: true,
                   url: true,
                   badgeUrl: true
+                },
+                color: {
+                  hex: true,
+                  rgb: true,
+                  hsl: true
                 }
               }
             }
@@ -79,7 +84,7 @@ export async function Projects({ className }: SectionProps) {
                           className='font-mono'
                           interactive='lift'
                         >
-                          <Code>Projects</Code>
+                          <M className='font-mono'>Projects</M>
                         </NeoBadge>
                       </div>
                     </CardHeader>

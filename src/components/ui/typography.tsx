@@ -741,11 +741,12 @@ const Code: React.FC<CodeProps> = ({
 };
 
 // Link component - composable with typography, defaults to M styling
-interface LinkProps extends Omit<BaseTypographyProps, keyof React.AnchorHTMLAttributes<HTMLAnchorElement>>, Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, 'color' | 'children'> {
-  href: string;
-  external?: boolean;
-  underline?: 'auto' | 'always' | 'hover' | 'none';
-}
+type LinkProps = BaseTypographyProps &
+  Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, 'color' | 'children'> & {
+    href: string;
+    external?: boolean;
+    underline?: 'auto' | 'always' | 'hover' | 'none';
+  };
 
 const TypographyLink: React.FC<LinkProps> = ({
   href,
@@ -761,7 +762,6 @@ const TypographyLink: React.FC<LinkProps> = ({
   trim,
   align,
   underline = 'hover',
-  // Accept all typography props but use M as base styling
   as,
   onClick,
   ...props
