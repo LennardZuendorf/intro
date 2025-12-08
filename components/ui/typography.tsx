@@ -73,6 +73,34 @@ const H4: React.FC<TypographyProps> = ({ className = '', children }) => {
   );
 };
 
+const H5: React.FC<TypographyProps> = ({ className = '', children }) => {
+  const content = formatContent(children);
+  return (
+    <h5
+      className={cn(
+        'scroll-m-20 text-lg font-semibold tracking-tight lg:text-xl 2xl:text-2xl',
+        className
+      )}
+    >
+      {content}
+    </h5>
+  );
+};
+
+const H6: React.FC<TypographyProps> = ({ className = '', children }) => {
+  const content = formatContent(children);
+  return (
+    <h6
+      className={cn(
+        'scroll-m-20 text-base font-semibold tracking-tight lg:text-lg 2xl:text-xl',
+        className
+      )}
+    >
+      {content}
+    </h6>
+  );
+};
+
 const Lead: React.FC<VariantTypographyProps> = ({ className = '', children, type = 'default' }) => {
   const content = formatContent(children);
   return (
@@ -162,4 +190,4 @@ const Code: React.FC<TypographyProps> = ({ className = '', children }) => {
   );
 };
 
-export { H1, H2, H3, H4, Lead, LQuote, Quote, L, M, S, XS, Muted, SMuted, Code };
+export { H1, H2, H3, H4, H5, H6, Lead, LQuote, Quote, L, M, S, XS, Muted, SMuted, Code };
