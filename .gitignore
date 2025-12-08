@@ -47,10 +47,8 @@ next-env.d.ts
 .history/**
 .history
 
-.cursor/mcp.json
-.cursor/**
-.cursor/
 .memory/
+.cursor/rules/
 .memory/**
 
 
