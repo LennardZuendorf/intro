@@ -1,4 +1,5 @@
 import { Pump } from 'basehub/react-pump';
+import type { LegalInfoComponent } from 'basehub-types';
 import type { NextPage } from 'next';
 import { draftMode } from 'next/headers';
 import { notFound } from 'next/navigation';
@@ -22,7 +23,7 @@ const LegalPage: NextPage = async () => {
             legalPage: {
               _id: true,
               _title: true,
-              dataPrivacyRegulations: {
+              legalTexts: {
                 _id: true,
                 _title: true,
                 dataProtectionRules: {
@@ -61,15 +62,20 @@ const LegalPage: NextPage = async () => {
           return null;
         }
 
-        const legalPage = data.sectionsAndPages.legalPage;
-        if (!legalPage?.dataPrivacyRegulations) {
+        const legalTexts = data.sectionsAndPages.legalPage.legalTexts as LegalInfoComponent[];
+
+        if (!legalTexts) {
           return notFound();
         }
 
-        const de = legalPage.dataPrivacyRegulations.find((item) => item._title === 'German');
-        const en = legalPage.dataPrivacyRegulations.find((item) => item._title === 'English');
+        const de = legalTexts.find(
+          (item: LegalInfoComponent) => item._title.toLowerCase() === 'german'
+        );
+        const en = legalTexts.find(
+          (item: LegalInfoComponent) => item._title.toLowerCase() === 'english'
+        );
 
-        if (!de || !en || !de.dataProtectionRules || !en.dataProtectionRules) {
+        if (!de || !en) {
           return notFound();
         }
 
