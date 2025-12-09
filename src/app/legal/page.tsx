@@ -19,32 +19,34 @@ const LegalPage: NextPage = async () => {
       queries={[
         {
           sectionsAndPages: {
-            legalPage: {
-              _id: true,
-              _title: true,
-              dataProtectionRules: {
-                json: {
-                  content: true,
-                  blocks: {
-                    on_BlockDocument: {
-                      __typename: true,
-                      _id: true
-                    },
-                    on_CalloutComponentComponent: {
-                      __typename: true,
-                      _id: true,
-                      type: true,
-                      title: true,
-                      content: {
-                        json: {
-                          content: true
+            legalPage: [
+              {
+                _id: true,
+                _title: true,
+                dataProtectionRules: {
+                  json: {
+                    content: true,
+                    blocks: {
+                      on_BlockDocument: {
+                        __typename: true,
+                        _id: true
+                      },
+                      on_CalloutComponentComponent: {
+                        __typename: true,
+                        _id: true,
+                        type: true,
+                        title: true,
+                        content: {
+                          json: {
+                            content: true
+                          }
                         }
                       }
                     }
                   }
                 }
               }
-            }
+            ]
           }
         }
       ]}
