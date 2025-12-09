@@ -50,7 +50,6 @@ export interface Scalars {
 }))[],
     BSHBRichTextContentSchema: RichTextNode[],
     BSHBRichTextTOCSchema: RichTextTocNode[],
-    BSHBSelect__1724115078: 'info' | 'check' | 'warning' | 'danger' | 'note',
     Boolean: boolean,
     CodeSnippetLanguage: B_Language,
     DateTime: any,
@@ -147,7 +146,7 @@ export interface BlockColor {
     __typename: 'BlockColor'
 }
 
-export type BlockDocument = (AboutSection | CalloutComponentComponent | ExperienceComponent | Experiences | Globals | HeroSection | ImgComponent | LegalInfoComponent | LegalPage | MetaComponent | ProjectComponent | ProjectsSection | QuickSkillsShowcase | QuickSkillsShowcaseItem | SectionsAndPages | SkillComponent | Skills | Socials | SocialsComponent | Technologies | TechnologyComponent | Types | UntitledComponent | _AgentStart | calloutComponentComponent_AsList | experienceComponent_AsList | imgComponent_AsList | legalInfoComponent_AsList | metaComponent_AsList | projectComponent_AsList | quickSkillsShowcaseItem_AsList | skillComponent_AsList | socialsComponent_AsList | technologyComponent_AsList | untitledComponent_AsList) & { __isUnion?: true }
+export type BlockDocument = (AboutSection | ExperienceComponent | Experiences | Globals | HeroSection | ImgComponent | LegalInfoComponent | LegalPage | MetaComponent | ProjectComponent | ProjectsSection | QuickSkillsShowcase | QuickSkillsShowcaseItem | SectionsAndPages | SkillComponent | Skills | Socials | SocialsComponent | Technologies | TechnologyComponent | Types | UntitledComponent | _AgentStart | experienceComponent_AsList | imgComponent_AsList | legalInfoComponent_AsList | metaComponent_AsList | projectComponent_AsList | quickSkillsShowcaseItem_AsList | skillComponent_AsList | socialsComponent_AsList | technologyComponent_AsList | untitledComponent_AsList) & { __isUnion?: true }
 
 export interface BlockDocumentSys {
     apiNamePath: Scalars['String']
@@ -206,7 +205,7 @@ export interface BlockImage {
     __typename: 'BlockImage'
 }
 
-export type BlockList = (Experiences | ProjectsSection | QuickSkillsShowcase | Skills | Socials | Technologies | calloutComponentComponent_AsList | experienceComponent_AsList | imgComponent_AsList | legalInfoComponent_AsList | metaComponent_AsList | projectComponent_AsList | quickSkillsShowcaseItem_AsList | skillComponent_AsList | socialsComponent_AsList | technologyComponent_AsList | untitledComponent_AsList) & { __isUnion?: true }
+export type BlockList = (Experiences | ProjectsSection | QuickSkillsShowcase | Skills | Socials | Technologies | experienceComponent_AsList | imgComponent_AsList | legalInfoComponent_AsList | metaComponent_AsList | projectComponent_AsList | quickSkillsShowcaseItem_AsList | skillComponent_AsList | socialsComponent_AsList | technologyComponent_AsList | untitledComponent_AsList) & { __isUnion?: true }
 
 export interface BlockOgImage {
     height: Scalars['Int']
@@ -217,7 +216,7 @@ export interface BlockOgImage {
 
 
 /** Rich text block */
-export type BlockRichText = (AboutMeText | AboutMeText2 | Content | DataProtectionRules | JobActivities | MainHeroText | Text) & { __isUnion?: true }
+export type BlockRichText = (AboutMeText | AboutMeText2 | DataProtectionRules | Impressum | JobActivities | MainHeroText | Text) & { __isUnion?: true }
 
 export interface BlockVideo {
     aspectRatio: Scalars['String']
@@ -233,40 +232,6 @@ export interface BlockVideo {
     __typename: 'BlockVideo'
 }
 
-export interface CalloutComponentComponent {
-    _analyticsKey: Scalars['String']
-    _dashboardUrl: Scalars['String']
-    /** Array of search highlight information with field names and HTML markup */
-    _highlight: (SearchHighlight[] | null)
-    _id: Scalars['String']
-    _idPath: Scalars['String']
-    _slug: Scalars['String']
-    _slugPath: Scalars['String']
-    _sys: BlockDocumentSys
-    _title: Scalars['String']
-    content: (Content | null)
-    title: (Scalars['String'] | null)
-    type: (Scalars['BSHBSelect__1724115078'] | null)
-    __typename: 'CalloutComponentComponent'
-}
-
-export type CalloutComponentComponentOrderByEnum = '_sys_createdAt__ASC' | '_sys_createdAt__DESC' | '_sys_hash__ASC' | '_sys_hash__DESC' | '_sys_id__ASC' | '_sys_id__DESC' | '_sys_lastModifiedAt__ASC' | '_sys_lastModifiedAt__DESC' | '_sys_slug__ASC' | '_sys_slug__DESC' | '_sys_title__ASC' | '_sys_title__DESC' | 'content__ASC' | 'content__DESC' | 'title__ASC' | 'title__DESC' | 'type__ASC' | 'type__DESC' | 'untitled__ASC' | 'untitled__DESC'
-
-export interface Content {
-    html: Scalars['String']
-    json: ContentRichText
-    markdown: Scalars['String']
-    plainText: Scalars['String']
-    readingTime: Scalars['Int']
-    __typename: 'Content'
-}
-
-export interface ContentRichText {
-    content: Scalars['BSHBRichTextContentSchema']
-    toc: Scalars['BSHBRichTextTOCSchema']
-    __typename: 'ContentRichText'
-}
-
 export interface DataProtectionRules {
     html: Scalars['String']
     json: DataProtectionRulesRichText
@@ -277,7 +242,6 @@ export interface DataProtectionRules {
 }
 
 export interface DataProtectionRulesRichText {
-    blocks: UnionCalloutComponentComponent[]
     content: Scalars['BSHBRichTextContentSchema']
     toc: Scalars['BSHBRichTextTOCSchema']
     __typename: 'DataProtectionRulesRichText'
@@ -384,6 +348,21 @@ export interface ImgComponent {
 
 export type ImgComponentOrderByEnum = '_sys_createdAt__ASC' | '_sys_createdAt__DESC' | '_sys_hash__ASC' | '_sys_hash__DESC' | '_sys_id__ASC' | '_sys_id__DESC' | '_sys_lastModifiedAt__ASC' | '_sys_lastModifiedAt__DESC' | '_sys_slug__ASC' | '_sys_slug__DESC' | '_sys_title__ASC' | '_sys_title__DESC' | 'alt__ASC' | 'alt__DESC' | 'darkImg__ASC' | 'darkImg__DESC' | 'lightImg__ASC' | 'lightImg__DESC' | 'untitled__ASC' | 'untitled__DESC'
 
+export interface Impressum {
+    html: Scalars['String']
+    json: ImpressumRichText
+    markdown: Scalars['String']
+    plainText: Scalars['String']
+    readingTime: Scalars['Int']
+    __typename: 'Impressum'
+}
+
+export interface ImpressumRichText {
+    content: Scalars['BSHBRichTextContentSchema']
+    toc: Scalars['BSHBRichTextTOCSchema']
+    __typename: 'ImpressumRichText'
+}
+
 export interface JobActivities {
     html: Scalars['String']
     json: JobActivitiesRichText
@@ -411,10 +390,11 @@ export interface LegalInfoComponent {
     _sys: BlockDocumentSys
     _title: Scalars['String']
     dataProtectionRules: DataProtectionRules
+    impressum: Impressum
     __typename: 'LegalInfoComponent'
 }
 
-export type LegalInfoComponentOrderByEnum = '_sys_createdAt__ASC' | '_sys_createdAt__DESC' | '_sys_hash__ASC' | '_sys_hash__DESC' | '_sys_id__ASC' | '_sys_id__DESC' | '_sys_lastModifiedAt__ASC' | '_sys_lastModifiedAt__DESC' | '_sys_slug__ASC' | '_sys_slug__DESC' | '_sys_title__ASC' | '_sys_title__DESC' | 'dataProtectionRules__ASC' | 'dataProtectionRules__DESC' | 'untitled_1__ASC' | 'untitled_1__DESC' | 'untitled__ASC' | 'untitled__DESC'
+export type LegalInfoComponentOrderByEnum = '_sys_createdAt__ASC' | '_sys_createdAt__DESC' | '_sys_hash__ASC' | '_sys_hash__DESC' | '_sys_id__ASC' | '_sys_id__DESC' | '_sys_lastModifiedAt__ASC' | '_sys_lastModifiedAt__DESC' | '_sys_slug__ASC' | '_sys_slug__DESC' | '_sys_title__ASC' | '_sys_title__DESC' | 'dataProtectionRules__ASC' | 'dataProtectionRules__DESC' | 'impressum__ASC' | 'impressum__DESC' | 'untitled_1__ASC' | 'untitled_1__DESC' | 'untitled__ASC' | 'untitled__DESC'
 
 export interface LegalPage {
     _analyticsKey: Scalars['String']
@@ -425,7 +405,7 @@ export interface LegalPage {
     _slugPath: Scalars['String']
     _sys: BlockDocumentSys
     _title: Scalars['String']
-    legalTexts: (LegalInfoComponent[] | null)
+    dataPrivacyRegulations: (LegalInfoComponent[] | null)
     meta: MetaComponent
     __typename: 'LegalPage'
 }
@@ -520,7 +500,6 @@ export interface ProjectComponent {
     _slugPath: Scalars['String']
     _sys: BlockDocumentSys
     _title: Scalars['String']
-    color: BlockColor
     /** ISO 8601 date string. */
     date: Scalars['String']
     githubLink: (Scalars['String'] | null)
@@ -533,7 +512,7 @@ export interface ProjectComponent {
     __typename: 'ProjectComponent'
 }
 
-export type ProjectComponentOrderByEnum = '_sys_createdAt__ASC' | '_sys_createdAt__DESC' | '_sys_hash__ASC' | '_sys_hash__DESC' | '_sys_id__ASC' | '_sys_id__DESC' | '_sys_lastModifiedAt__ASC' | '_sys_lastModifiedAt__DESC' | '_sys_slug__ASC' | '_sys_slug__DESC' | '_sys_title__ASC' | '_sys_title__DESC' | 'color__ASC' | 'color__DESC' | 'date__ASC' | 'date__DESC' | 'githubLink__ASC' | 'githubLink__DESC' | 'images__ASC' | 'images__DESC' | 'meta__ASC' | 'meta__DESC' | 'shortDescription__ASC' | 'shortDescription__DESC' | 'showcaseLink__ASC' | 'showcaseLink__DESC' | 'technology__ASC' | 'technology__DESC' | 'text__ASC' | 'text__DESC' | 'untitled__ASC' | 'untitled__DESC'
+export type ProjectComponentOrderByEnum = '_sys_createdAt__ASC' | '_sys_createdAt__DESC' | '_sys_hash__ASC' | '_sys_hash__DESC' | '_sys_id__ASC' | '_sys_id__DESC' | '_sys_lastModifiedAt__ASC' | '_sys_lastModifiedAt__DESC' | '_sys_slug__ASC' | '_sys_slug__DESC' | '_sys_title__ASC' | '_sys_title__DESC' | 'date__ASC' | 'date__DESC' | 'githubLink__ASC' | 'githubLink__DESC' | 'images__ASC' | 'images__DESC' | 'meta__ASC' | 'meta__DESC' | 'shortDescription__ASC' | 'shortDescription__DESC' | 'showcaseLink__ASC' | 'showcaseLink__DESC' | 'technology__ASC' | 'technology__DESC' | 'text__ASC' | 'text__DESC' | 'untitled__ASC' | 'untitled__DESC'
 
 export interface ProjectsSection {
     _analyticsKey: Scalars['String']
@@ -618,7 +597,7 @@ export interface RepoSys {
     __typename: 'RepoSys'
 }
 
-export type RichTextJson = (AboutMeText2RichText | AboutMeTextRichText | BaseRichTextJson | ContentRichText | DataProtectionRulesRichText | JobActivitiesRichText | MainHeroTextRichText | TextRichText) & { __isUnion?: true }
+export type RichTextJson = (AboutMeText2RichText | AboutMeTextRichText | BaseRichTextJson | DataProtectionRulesRichText | ImpressumRichText | JobActivitiesRichText | MainHeroTextRichText | TextRichText) & { __isUnion?: true }
 
 export interface SearchHighlight {
     /** The field/path that was matched (e.g., "title", "body.content") */
@@ -784,7 +763,6 @@ export interface TransactionStatus {
 export type TransactionStatusEnum = 'Cancelled' | 'Completed' | 'Failed' | 'Running' | 'Scheduled'
 
 export interface Types {
-    CalloutComponent: CalloutComponentComponent
     _analyticsKey: Scalars['String']
     _dashboardUrl: Scalars['String']
     _id: Scalars['String']
@@ -801,8 +779,6 @@ export interface Types {
     technologies: Technologies
     __typename: 'Types'
 }
-
-export type UnionCalloutComponentComponent = (CalloutComponentComponent) & { __isUnion?: true }
 
 export type UnionUntitledComponent = (UntitledComponent) & { __isUnion?: true }
 
@@ -931,7 +907,6 @@ export interface _agents {
 }
 
 export interface _components {
-    calloutComponent: calloutComponentComponent_AsList
     experience: experienceComponent_AsList
     img: imgComponent_AsList
     legalInfo: legalInfoComponent_AsList
@@ -943,25 +918,6 @@ export interface _components {
     technology: technologyComponent_AsList
     untitled: untitledComponent_AsList
     __typename: '_components'
-}
-
-export interface calloutComponentComponent_AsList {
-    _analyticsKey: Scalars['String']
-    _dashboardUrl: Scalars['String']
-    _id: Scalars['String']
-    _idPath: Scalars['String']
-    _meta: ListMeta
-    /** The key used to search from the frontend. */
-    _searchKey: Scalars['String']
-    _slug: Scalars['String']
-    _slugPath: Scalars['String']
-    _sys: BlockDocumentSys
-    _title: Scalars['String']
-    /** Returns the first item in the list, or null if the list is empty. Useful when you expect only one result. */
-    item: (CalloutComponentComponent | null)
-    /** Returns the list of items after filtering and paginating according to the arguments sent by the client. */
-    items: CalloutComponentComponent[]
-    __typename: 'calloutComponentComponent_AsList'
 }
 
 export interface experienceComponent_AsList {
@@ -1294,7 +1250,6 @@ export interface BlockDocumentGenqlSelection{
     _sys?: BlockDocumentSysGenqlSelection
     _title?: boolean | number
     on_AboutSection?: AboutSectionGenqlSelection
-    on_CalloutComponentComponent?: CalloutComponentComponentGenqlSelection
     on_ExperienceComponent?: ExperienceComponentGenqlSelection
     on_Experiences?: ExperiencesGenqlSelection
     on_Globals?: GlobalsGenqlSelection
@@ -1317,7 +1272,6 @@ export interface BlockDocumentGenqlSelection{
     on_Types?: TypesGenqlSelection
     on_UntitledComponent?: UntitledComponentGenqlSelection
     on__AgentStart?: _AgentStartGenqlSelection
-    on_calloutComponentComponent_AsList?: calloutComponentComponent_AsListGenqlSelection
     on_experienceComponent_AsList?: experienceComponent_AsListGenqlSelection
     on_imgComponent_AsList?: imgComponent_AsListGenqlSelection
     on_legalInfoComponent_AsList?: legalInfoComponent_AsListGenqlSelection
@@ -1412,7 +1366,6 @@ export interface BlockListGenqlSelection{
     on_Skills?: SkillsGenqlSelection
     on_Socials?: SocialsGenqlSelection
     on_Technologies?: TechnologiesGenqlSelection
-    on_calloutComponentComponent_AsList?: calloutComponentComponent_AsListGenqlSelection
     on_experienceComponent_AsList?: experienceComponent_AsListGenqlSelection
     on_imgComponent_AsList?: imgComponent_AsListGenqlSelection
     on_legalInfoComponent_AsList?: legalInfoComponent_AsListGenqlSelection
@@ -1449,8 +1402,8 @@ export interface BlockRichTextGenqlSelection{
     wpm?: (Scalars['Int'] | null)} } | boolean | number
     on_AboutMeText2?: AboutMeText2GenqlSelection
     on_AboutMeText?: AboutMeTextGenqlSelection
-    on_Content?: ContentGenqlSelection
     on_DataProtectionRules?: DataProtectionRulesGenqlSelection
+    on_Impressum?: ImpressumGenqlSelection
     on_JobActivities?: JobActivitiesGenqlSelection
     on_MainHeroText?: MainHeroTextGenqlSelection
     on_Text?: TextGenqlSelection
@@ -1471,58 +1424,6 @@ export interface BlockVideoGenqlSelection{
     __typename?: boolean | number
 }
 
-export interface CalloutComponentComponentGenqlSelection{
-    _analyticsKey?: { __args: {
-    /**
-     * The scope of the analytics key. Use `send` for just ingesting data. Use `query` if you need to show an analytics data in your website.
-     * 
-     * Have in mind, if you expose your `query` analytics key in the frontend, you'll be exposing all of this block's analytics data to the public. This is generally safe, but it might not be in your case.
-     */
-    scope?: (AnalyticsKeyScope | null)} } | boolean | number
-    _dashboardUrl?: boolean | number
-    /** Array of search highlight information with field names and HTML markup */
-    _highlight?: SearchHighlightGenqlSelection
-    _id?: boolean | number
-    _idPath?: boolean | number
-    _slug?: boolean | number
-    _slugPath?: boolean | number
-    _sys?: BlockDocumentSysGenqlSelection
-    _title?: boolean | number
-    content?: ContentGenqlSelection
-    title?: boolean | number
-    type?: boolean | number
-    __typename?: boolean | number
-}
-
-export interface CalloutComponentComponentFilterInput {AND?: (CalloutComponentComponentFilterInput | null),OR?: (CalloutComponentComponentFilterInput | null),_id?: (StringFilter | null),_slug?: (StringFilter | null),_sys_apiNamePath?: (StringFilter | null),_sys_createdAt?: (DateFilter | null),_sys_hash?: (StringFilter | null),_sys_id?: (StringFilter | null),_sys_idPath?: (StringFilter | null),_sys_lastModifiedAt?: (DateFilter | null),_sys_slug?: (StringFilter | null),_sys_slugPath?: (StringFilter | null),_sys_title?: (StringFilter | null),_title?: (StringFilter | null),title?: (StringFilter | null),type?: (SelectFilter | null)}
-
-export interface CalloutComponentComponentSearchInput {
-/** Searchable fields for query */
-by?: (Scalars['String'][] | null),
-/** Search query */
-q?: (Scalars['String'] | null)}
-
-export interface ContentGenqlSelection{
-    html?: { __args: {
-    /** It automatically generates a unique id for each heading present in the HTML. Enabled by default. */
-    slugs?: (Scalars['Boolean'] | null), 
-    /** Inserts a table of contents at the beginning of the HTML. */
-    toc?: (Scalars['Boolean'] | null)} } | boolean | number
-    json?: ContentRichTextGenqlSelection
-    markdown?: boolean | number
-    plainText?: boolean | number
-    readingTime?: { __args: {
-    /** Words per minute, defaults to average 183wpm */
-    wpm?: (Scalars['Int'] | null)} } | boolean | number
-    __typename?: boolean | number
-}
-
-export interface ContentRichTextGenqlSelection{
-    content?: boolean | number
-    toc?: boolean | number
-    __typename?: boolean | number
-}
-
 export interface DataProtectionRulesGenqlSelection{
     html?: { __args: {
     /** It automatically generates a unique id for each heading present in the HTML. Enabled by default. */
@@ -1539,7 +1440,6 @@ export interface DataProtectionRulesGenqlSelection{
 }
 
 export interface DataProtectionRulesRichTextGenqlSelection{
-    blocks?: UnionCalloutComponentComponentGenqlSelection
     content?: boolean | number
     toc?: boolean | number
     __typename?: boolean | number
@@ -1702,6 +1602,27 @@ by?: (Scalars['String'][] | null),
 /** Search query */
 q?: (Scalars['String'] | null)}
 
+export interface ImpressumGenqlSelection{
+    html?: { __args: {
+    /** It automatically generates a unique id for each heading present in the HTML. Enabled by default. */
+    slugs?: (Scalars['Boolean'] | null), 
+    /** Inserts a table of contents at the beginning of the HTML. */
+    toc?: (Scalars['Boolean'] | null)} } | boolean | number
+    json?: ImpressumRichTextGenqlSelection
+    markdown?: boolean | number
+    plainText?: boolean | number
+    readingTime?: { __args: {
+    /** Words per minute, defaults to average 183wpm */
+    wpm?: (Scalars['Int'] | null)} } | boolean | number
+    __typename?: boolean | number
+}
+
+export interface ImpressumRichTextGenqlSelection{
+    content?: boolean | number
+    toc?: boolean | number
+    __typename?: boolean | number
+}
+
 export interface JobActivitiesGenqlSelection{
     html?: { __args: {
     /** It automatically generates a unique id for each heading present in the HTML. Enabled by default. */
@@ -1741,6 +1662,7 @@ export interface LegalInfoComponentGenqlSelection{
     _sys?: BlockDocumentSysGenqlSelection
     _title?: boolean | number
     dataProtectionRules?: DataProtectionRulesGenqlSelection
+    impressum?: ImpressumGenqlSelection
     __typename?: boolean | number
 }
 
@@ -1767,7 +1689,7 @@ export interface LegalPageGenqlSelection{
     _slugPath?: boolean | number
     _sys?: BlockDocumentSysGenqlSelection
     _title?: boolean | number
-    legalTexts?: LegalInfoComponentGenqlSelection
+    dataPrivacyRegulations?: LegalInfoComponentGenqlSelection
     meta?: MetaComponentGenqlSelection
     __typename?: boolean | number
 }
@@ -1932,7 +1854,6 @@ export interface ProjectComponentGenqlSelection{
     _slugPath?: boolean | number
     _sys?: BlockDocumentSysGenqlSelection
     _title?: boolean | number
-    color?: BlockColorGenqlSelection
     /** ISO 8601 date string. */
     date?: boolean | number
     githubLink?: boolean | number
@@ -1945,7 +1866,7 @@ export interface ProjectComponentGenqlSelection{
     __typename?: boolean | number
 }
 
-export interface ProjectComponentFilterInput {AND?: (ProjectComponentFilterInput | null),OR?: (ProjectComponentFilterInput | null),_id?: (StringFilter | null),_slug?: (StringFilter | null),_sys_apiNamePath?: (StringFilter | null),_sys_createdAt?: (DateFilter | null),_sys_hash?: (StringFilter | null),_sys_id?: (StringFilter | null),_sys_idPath?: (StringFilter | null),_sys_lastModifiedAt?: (DateFilter | null),_sys_slug?: (StringFilter | null),_sys_slugPath?: (StringFilter | null),_sys_title?: (StringFilter | null),_title?: (StringFilter | null),color?: (StringFilter | null),date?: (DateFilter | null),githubLink?: (StringFilter | null),images?: (ProjectComponentFilterInput__images_0___img | null),meta?: (ProjectComponentFilterInput__meta | null),shortDescription?: (StringFilter | null),showcaseLink?: (StringFilter | null),technology?: (ProjectComponentFilterInput__technology_0___technology | null)}
+export interface ProjectComponentFilterInput {AND?: (ProjectComponentFilterInput | null),OR?: (ProjectComponentFilterInput | null),_id?: (StringFilter | null),_slug?: (StringFilter | null),_sys_apiNamePath?: (StringFilter | null),_sys_createdAt?: (DateFilter | null),_sys_hash?: (StringFilter | null),_sys_id?: (StringFilter | null),_sys_idPath?: (StringFilter | null),_sys_lastModifiedAt?: (DateFilter | null),_sys_slug?: (StringFilter | null),_sys_slugPath?: (StringFilter | null),_sys_title?: (StringFilter | null),_title?: (StringFilter | null),date?: (DateFilter | null),githubLink?: (StringFilter | null),images?: (ProjectComponentFilterInput__images_0___img | null),meta?: (ProjectComponentFilterInput__meta | null),shortDescription?: (StringFilter | null),showcaseLink?: (StringFilter | null),technology?: (ProjectComponentFilterInput__technology_0___technology | null)}
 
 export interface ProjectComponentFilterInput__images_0___img {_id?: (StringFilter | null),_slug?: (StringFilter | null),_sys_apiNamePath?: (StringFilter | null),_sys_createdAt?: (DateFilter | null),_sys_hash?: (StringFilter | null),_sys_id?: (StringFilter | null),_sys_idPath?: (StringFilter | null),_sys_lastModifiedAt?: (DateFilter | null),_sys_slug?: (StringFilter | null),_sys_slugPath?: (StringFilter | null),_sys_title?: (StringFilter | null),_title?: (StringFilter | null),alt?: (StringFilter | null)}
 
@@ -2088,8 +2009,8 @@ export interface RichTextJsonGenqlSelection{
     on_AboutMeText2RichText?: AboutMeText2RichTextGenqlSelection
     on_AboutMeTextRichText?: AboutMeTextRichTextGenqlSelection
     on_BaseRichTextJson?: BaseRichTextJsonGenqlSelection
-    on_ContentRichText?: ContentRichTextGenqlSelection
     on_DataProtectionRulesRichText?: DataProtectionRulesRichTextGenqlSelection
+    on_ImpressumRichText?: ImpressumRichTextGenqlSelection
     on_JobActivitiesRichText?: JobActivitiesRichTextGenqlSelection
     on_MainHeroTextRichText?: MainHeroTextRichTextGenqlSelection
     on_TextRichText?: TextRichTextGenqlSelection
@@ -2342,7 +2263,6 @@ export interface TransactionStatusGenqlSelection{
 }
 
 export interface TypesGenqlSelection{
-    CalloutComponent?: CalloutComponentComponentGenqlSelection
     _analyticsKey?: { __args: {
     /**
      * The scope of the analytics key. Use `send` for just ingesting data. Use `query` if you need to show an analytics data in your website.
@@ -2383,12 +2303,6 @@ export interface TypesGenqlSelection{
     search?: (TechnologyComponentSearchInput | null), 
     /** Skip the first n items. */
     skip?: (Scalars['Int'] | null)} })
-    __typename?: boolean | number
-}
-
-export interface UnionCalloutComponentComponentGenqlSelection{
-    on_CalloutComponentComponent?:CalloutComponentComponentGenqlSelection,
-    on_BlockDocument?: BlockDocumentGenqlSelection,
     __typename?: boolean | number
 }
 
@@ -2537,17 +2451,6 @@ export interface _agentsGenqlSelection{
 }
 
 export interface _componentsGenqlSelection{
-    calloutComponent?: (calloutComponentComponent_AsListGenqlSelection & { __args?: {
-    /** Filter by a field. */
-    filter?: (CalloutComponentComponentFilterInput | null), 
-    /** Limit the number of items returned. Defaults to 500. */
-    first?: (Scalars['Int'] | null), 
-    /** Order by a field. */
-    orderBy?: (CalloutComponentComponentOrderByEnum | null), 
-    /** Search configuration */
-    search?: (CalloutComponentComponentSearchInput | null), 
-    /** Skip the first n items. */
-    skip?: (Scalars['Int'] | null)} })
     experience?: (experienceComponent_AsListGenqlSelection & { __args?: {
     /** Filter by a field. */
     filter?: (ExperienceComponentFilterInput | null), 
@@ -2658,31 +2561,6 @@ export interface _componentsGenqlSelection{
     search?: (UntitledComponentSearchInput | null), 
     /** Skip the first n items. */
     skip?: (Scalars['Int'] | null)} })
-    __typename?: boolean | number
-}
-
-export interface calloutComponentComponent_AsListGenqlSelection{
-    _analyticsKey?: { __args: {
-    /**
-     * The scope of the analytics key. Use `send` for just ingesting data. Use `query` if you need to show an analytics data in your website.
-     * 
-     * Have in mind, if you expose your `query` analytics key in the frontend, you'll be exposing all of this block's analytics data to the public. This is generally safe, but it might not be in your case.
-     */
-    scope?: (AnalyticsKeyScope | null)} } | boolean | number
-    _dashboardUrl?: boolean | number
-    _id?: boolean | number
-    _idPath?: boolean | number
-    _meta?: ListMetaGenqlSelection
-    /** The key used to search from the frontend. */
-    _searchKey?: boolean | number
-    _slug?: boolean | number
-    _slugPath?: boolean | number
-    _sys?: BlockDocumentSysGenqlSelection
-    _title?: boolean | number
-    /** Returns the first item in the list, or null if the list is empty. Useful when you expect only one result. */
-    item?: CalloutComponentComponentGenqlSelection
-    /** Returns the list of items after filtering and paginating according to the arguments sent by the client. */
-    items?: CalloutComponentComponentGenqlSelection
     __typename?: boolean | number
 }
 
@@ -3005,18 +2883,6 @@ export interface FragmentsMap {
     root: BlockVideo,
     selection: BlockVideoGenqlSelection,
 }
-  CalloutComponentComponent: {
-    root: CalloutComponentComponent,
-    selection: CalloutComponentComponentGenqlSelection,
-}
-  Content: {
-    root: Content,
-    selection: ContentGenqlSelection,
-}
-  ContentRichText: {
-    root: ContentRichText,
-    selection: ContentRichTextGenqlSelection,
-}
   DataProtectionRules: {
     root: DataProtectionRules,
     selection: DataProtectionRulesGenqlSelection,
@@ -3048,6 +2914,14 @@ export interface FragmentsMap {
   ImgComponent: {
     root: ImgComponent,
     selection: ImgComponentGenqlSelection,
+}
+  Impressum: {
+    root: Impressum,
+    selection: ImpressumGenqlSelection,
+}
+  ImpressumRichText: {
+    root: ImpressumRichText,
+    selection: ImpressumRichTextGenqlSelection,
 }
   JobActivities: {
     root: JobActivities,
@@ -3204,10 +3078,6 @@ export interface FragmentsMap {
   _components: {
     root: _components,
     selection: _componentsGenqlSelection,
-}
-  calloutComponentComponent_AsList: {
-    root: calloutComponentComponent_AsList,
-    selection: calloutComponentComponent_AsListGenqlSelection,
 }
   experienceComponent_AsList: {
     root: experienceComponent_AsList,

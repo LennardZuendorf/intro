@@ -20,26 +20,24 @@ const LegalPage: NextPage = async () => {
         {
           sectionsAndPages: {
             legalPage: {
-              legalTexts: {
-                _id: true,
-                _title: true,
-                dataProtectionRules: {
-                  json: {
-                    content: true,
-                    blocks: {
-                      on_BlockDocument: {
-                        __typename: true,
-                        _id: true
-                      },
-                      on_CalloutComponentComponent: {
-                        __typename: true,
-                        _id: true,
-                        type: true,
-                        title: true,
-                        content: {
-                          json: {
-                            content: true
-                          }
+              _id: true,
+              _title: true,
+              dataProtectionRules: {
+                json: {
+                  content: true,
+                  blocks: {
+                    on_BlockDocument: {
+                      __typename: true,
+                      _id: true
+                    },
+                    on_CalloutComponentComponent: {
+                      __typename: true,
+                      _id: true,
+                      type: true,
+                      title: true,
+                      content: {
+                        json: {
+                          content: true
                         }
                       }
                     }
@@ -59,12 +57,8 @@ const LegalPage: NextPage = async () => {
           return null;
         }
 
-        const de = data.sectionsAndPages.legalPage.legalTexts?.find(
-          (item) => item._title === 'German'
-        );
-        const en = data.sectionsAndPages.legalPage.legalTexts?.find(
-          (item) => item._title === 'English'
-        );
+        const de = data.sectionsAndPages.legalPage?.find((item) => item._title === 'German');
+        const en = data.sectionsAndPages.legalPage?.find((item) => item._title === 'English');
 
         if (!de || !en || !de.dataProtectionRules || !en.dataProtectionRules) {
           return notFound();
