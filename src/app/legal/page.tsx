@@ -19,8 +19,10 @@ const LegalPage: NextPage = async () => {
       queries={[
         {
           sectionsAndPages: {
-            legalPage: [
-              {
+            legalPage: {
+              _id: true,
+              _title: true,
+              dataPrivacyRegulations: {
                 _id: true,
                 _title: true,
                 dataProtectionRules: {
@@ -46,7 +48,7 @@ const LegalPage: NextPage = async () => {
                   }
                 }
               }
-            ]
+            }
           }
         }
       ]}
@@ -59,8 +61,13 @@ const LegalPage: NextPage = async () => {
           return null;
         }
 
-        const de = data.sectionsAndPages.legalPage?.find((item) => item._title === 'German');
-        const en = data.sectionsAndPages.legalPage?.find((item) => item._title === 'English');
+        const legalPage = data.sectionsAndPages.legalPage;
+        if (!legalPage?.dataPrivacyRegulations) {
+          return notFound();
+        }
+
+        const de = legalPage.dataPrivacyRegulations.find((item) => item._title === 'German');
+        const en = legalPage.dataPrivacyRegulations.find((item) => item._title === 'English');
 
         if (!de || !en || !de.dataProtectionRules || !en.dataProtectionRules) {
           return notFound();
@@ -94,10 +101,22 @@ const LegalPage: NextPage = async () => {
                           {de.dataProtectionRules?.json && (
                             <div className='font-mono leading-relaxed pb-4'>
                               <H3>Datenschutz</H3>
-                              {/* biome-ignore lint/suspicious/noExplicitAny: basehub RichText blocks typing is external */}
-                              <RichTextBlock blocks={(de.dataProtectionRules.json as any).blocks}>
-                                {de.dataProtectionRules.json.content}
-                              </RichTextBlock>
+                              <RichTextBlock>{de.dataProtectionRules.json.content}</RichTextBlock>
+                            </div>
+                          )}
+                        </ScrollArea>
+                      </CardContent>
+                    </Card>
+                  </TabsContent>
+
+                  <TabsContent value='en' className='w-full'>
+                    <Card className='relative w-full mb-3 md:mb-0'>
+                      <CardContent>
+                        <ScrollArea>
+                          {en.dataProtectionRules?.json && (
+                            <div className='font-mono leading-relaxed pb-4'>
+                              <H3>Data Protection</H3>
+                              <RichTextBlock>{en.dataProtectionRules.json.content}</RichTextBlock>
                             </div>
                           )}
                         </ScrollArea>
