@@ -2,15 +2,20 @@
 
 #### Intro V2 is the next generation of my personal website, merging my personal website and portfolio page.
 
-#### Build using Next.js 13 and shadcn/ui components (powered by tailwindcss and radix primitives). Uses a completely custom layout using Contentlayer for mdx based content.
+#### Build using Next.js 15 and shadcn/ui components (powered by tailwindcss and radix primitives). Uses a completely custom layout using Payload CMS for content delivery.
+
+## Details
+
+- Fully relies on customized shacn/ui, magic UI and acernity UI components.
+- Ships with included CMS via Payload, enabling on the fly content changes.
 
 ## 🏗️ Tech Stack:
 
-**Languages:** Typescript, Javascript, CSS, MDX
+**Languages:** Typescript (tsx)
 
-**Frameworks:** Next.js, TailwindCSS, Contentlayer
+**Frameworks:** Next.js, TailwindCSS, PostCSS
 
-**Hosting:** Vercel
+**Hosting/Additionals:** Vercel, Payload CMS
 
 ## 🗳️ Status (Main):
 

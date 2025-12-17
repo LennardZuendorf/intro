@@ -1,6 +1,27 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  turbopack: {},
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'http',
+        hostname: 'localhost',
+        port: '3000',
+        pathname: '/api/media/**',
+        search: ''
+      },
+      {
+        protocol: 'https',
+        hostname: 'assets.basehub.com',
+        pathname: '/**'
+      },
+      {
+        protocol: 'https',
+        hostname: 'img.shields.io',
+        pathname: '/badge/**'
+      }
+    ],
+    dangerouslyAllowSVG: true,
+  },
   async redirects() {
     return [
       {

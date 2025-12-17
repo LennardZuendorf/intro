@@ -1,0 +1,50 @@
+{
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "files.exclude": {
+    "**/.git": true,
+    "**/.DS_Store": true,
+    "**/node_modules": true,
+    "**/.next": false
+  },
+  "afterDelay": 1000,
+  "VsCodeTaskButtons.tasks": [
+    {
+      "label": "✅ Full Quality Check",
+      "color": "#007acc",
+      "singleInstance": true,
+      "task": "Full Code Quality Check",
+      "tooltip": "Run Full Code Quality Check"
+    },
+    {
+      "label": "🧹 Format",
+      "color": "#007acc",
+      "singleInstance": true,
+      "task": "Format",
+      "tooltip": "Format Code"
+    },
+    {
+      "label": "🔄 Lint Staged",
+      "color": "#007acc",
+      "singleInstance": true,
+      "task": "Lint Staged",
+      "tooltip": "Lint Staged Files"
+    },
+  ],
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+  "tailwindCSS.includeLanguages": {
+    "typescript": "javascript",
+    "typescriptreact": "javascript"
+  },
+  "tailwindCSS.experimental.classRegex": [
+    ["cn\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"],
+    ["cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"]
+  ],
+  "editor.quickSuggestions": {
+    "strings": true
+  }
+}

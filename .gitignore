@@ -6,6 +6,9 @@
 .pnp.js
 .yarn/install-state.gz
 
+/.idea/*
+!/.idea/runConfigurations
+
 # testing
 /coverage
 
@@ -34,8 +37,18 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
-/.contentlayer/
 
-# cursor
-.history/
-.cursor/
+.env
+*/.env
+*.env
+
+/media
+
+.history/**
+.history
+
+.memory/
+.cursor/rules/
+.memory/**
+
+

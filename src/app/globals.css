@@ -1,0 +1,141 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Main Color System - Theme Dependent */
+  /* Main Background Colors */
+  --primary: oklch(97.61% 0 0); /* Light gray background (#f6f6f6) */
+  --primary-foreground: oklch(0 0 0); /* Main text color - black */
+  --secondary: oklch(95 0 0); /* Strong white */
+  --secondary-foreground: oklch(0 0 0);
+  --blank: oklch(0 0 0); /* Pure black (#000000) */
+
+  /* Core UI Settings, Shadow Sizes, Typography - Theme Independent */
+  /* Shadow Sizes */
+  --shadow-sm-x: 0px;
+  --shadow-sm-y: 0px;
+  --shadow-md-x: 1px;
+  --shadow-md-y: 1px;
+  --shadow-lg-x: 3px;
+  --shadow-lg-y: 3px;
+
+  /* Typography */
+  --base-font-weight: 500;
+  --heading-font-weight: 900;
+  --mono-font-family:
+    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New",
+    monospace;
+
+  /* Shadows */
+  --shadow-sm: var(--shadow-sm-x) var(--shadow-sm-y) 0px 0px var(--blank);
+  --shadow-md: var(--shadow-md-x) var(--shadow-md-y) 0px 0px var(--blank);
+  --shadow-lg: var(--shadow-lg-x) var(--shadow-lg-y) 0px 0px var(--blank);
+
+    /* Grid and accent system. Editing based on Color Styles */
+    --grid: oklch(0.9 0 0); /* Slightly brighter light gray for grid lines */
+    --accent: oklch(0.3 0 0); /* Medium black */
+    --accent-foreground: oklch(1 0 0); /* Light gray text for accents (#e6e6e6) */
+    --accent-light: oklch(0.5 0 0); /* Light black */
+    --accent-dark: oklch(0.1 0 0); /* Dark black */
+}
+
+.dark {
+  /* Main Color System - Theme Dependent */
+  /* Main Background Colors */
+  --primary: oklch(27.27% 0 0); /* Slightly lighter dark gray background */
+  --primary-foreground: oklch(0.9 0 0); /* Light gray text (#e6e6e6) */
+  --secondary: oklch(23% 0 0); /* Slightly lighter very dark gray */
+  --secondary-foreground: oklch(0.9 0 0);
+  --blank: oklch(0 0 0); /* Pure black (#000000) */
+
+  --grid: oklch(0.32 0 0);
+  --accent: oklch(1 0 0);
+  --accent-foreground: oklch(0 0 0);
+  --accent-light: oklch(1 0 0);
+  --accent-dark: oklch(0.8 0 0);
+}
+
+
+
+/* Interactive Components Layer */
+@layer components {
+  /* Hover effects */
+  .hover-grow {
+    @apply transition-transform duration-300 hover:scale-105 hover:shadow-lg;
+  }
+
+  .hover-lift {
+    @apply transition-all duration-300 hover:-translate-y-1 hover:shadow-lg;
+  }
+
+  .hover-bounce {
+    @apply transition-all duration-300 hover:-translate-y-2 hover:shadow-xl;
+  }
+
+  .hover-wiggle {
+    @apply transition-all duration-300 hover:rotate-3 hover:scale-105;
+  }
+
+  .hover-flip {
+    @apply transition-all duration-300 hover:-rotate-1;
+  }
+
+  .hover-glow {
+    @apply transition-shadow duration-300 hover:shadow-[0_0_15px_rgba(0,0,0,0.3)];
+  }
+
+  .hover-zoom-content {
+    @apply overflow-hidden;
+  }
+
+  .hover-zoom-content > * {
+    @apply transition-transform duration-500 hover:scale-110;
+  }
+
+  /* Animations */
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  .animate-wiggle {
+    animation: wiggle 0.5s ease-in-out;
+  }
+
+  .animate-shimmer {
+    @apply bg-gradient-to-r from-transparent via-white/20 to-transparent bg-[length:200%_100%];
+    animation: shimmer 2s linear infinite;
+  }
+
+  .animate-pulse {
+    animation: pulse 3s ease-in-out infinite;
+  }
+
+  /* Rotation variants for consistent styling */
+  .rotate-slight {
+    @apply rotate-1;
+  }
+
+  .rotate-negative {
+    @apply -rotate-1;
+  }
+
+  .rotate-medium {
+    @apply rotate-2;
+  }
+
+  .rotate-negative-medium {
+    @apply -rotate-2;
+  }
+}
+
+/* Keyframe animations */
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
