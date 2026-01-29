@@ -21,6 +21,8 @@ const LegalPage: NextPage = async () => {
         {
           sectionsAndPages: {
             legalPage: {
+              _id: true,
+              _title: true,
               legalTexts: {
                 _id: true,
                 _title: true,

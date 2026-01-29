@@ -302,29 +302,117 @@ export const Pump = ({
           __typename: 'BlockDocumentSys'
         },
         _title: 'Mock Legal Page',
-        germanLegalText: {
-          html: '<p>Mock German Legal Text</p>',
-          json: {
-            content: [{ type: 'paragraph', children: [{ text: 'Mock German Legal Text' }] }],
-            toc: [],
-            __typename: 'GermanLegalTextRichText'
+        dataPrivacyRegulations: [
+          {
+            _analyticsKey: 'mock-legal-de-analytics-key',
+            _dashboardUrl: 'mock-legal-de-dashboard-url',
+            _id: 'mock-legal-de-id',
+            _idPath: 'mock-legal-de-id-path',
+            _slug: 'mock-legal-de-slug',
+            _slugPath: 'mock-legal-de-slug-path',
+            _sys: {
+              id: 'mock-legal-de-sys-id',
+              lastModifiedAt: '2024-01-01T00:00:00Z',
+              firstPublishedAt: '2024-01-01T00:00:00Z',
+              publishedAt: '2024-01-01T00:00:00Z',
+              __typename: 'BlockDocumentSys'
+            },
+            _title: 'German',
+            dataProtectionRules: {
+              html: '<p>Mock German Legal Text</p>',
+              json: {
+                content: [{ type: 'paragraph', children: [{ text: 'Mock German Legal Text' }] }],
+                toc: [],
+                __typename: 'DataProtectionRulesRichText'
+              },
+              markdown: 'Mock German Legal Text',
+              plainText: 'Mock German Legal Text',
+              readingTime: 1,
+              __typename: 'DataProtectionRules'
+            },
+            impressum: {
+              html: '<p>Mock German Impressum</p>',
+              json: {
+                content: [{ type: 'paragraph', children: [{ text: 'Mock German Impressum' }] }],
+                toc: [],
+                __typename: 'ImpressumRichText'
+              },
+              markdown: 'Mock German Impressum',
+              plainText: 'Mock German Impressum',
+              readingTime: 1,
+              __typename: 'Impressum'
+            },
+            __typename: 'LegalInfoComponent'
           },
-          markdown: 'Mock German Legal Text',
-          plainText: 'Mock German Legal Text',
-          readingTime: 1,
-          __typename: 'GermanLegalText'
-        },
-        englishLegalText: {
-          html: '<p>Mock English Legal Text</p>',
-          json: {
-            content: [{ type: 'paragraph', children: [{ text: 'Mock English Legal Text' }] }],
-            toc: [],
-            __typename: 'EnglishLegalTextRichText'
+          {
+            _analyticsKey: 'mock-legal-en-analytics-key',
+            _dashboardUrl: 'mock-legal-en-dashboard-url',
+            _id: 'mock-legal-en-id',
+            _idPath: 'mock-legal-en-id-path',
+            _slug: 'mock-legal-en-slug',
+            _slugPath: 'mock-legal-en-slug-path',
+            _sys: {
+              id: 'mock-legal-en-sys-id',
+              lastModifiedAt: '2024-01-01T00:00:00Z',
+              firstPublishedAt: '2024-01-01T00:00:00Z',
+              publishedAt: '2024-01-01T00:00:00Z',
+              __typename: 'BlockDocumentSys'
+            },
+            _title: 'English',
+            dataProtectionRules: {
+              html: '<p>Mock English Legal Text</p>',
+              json: {
+                content: [{ type: 'paragraph', children: [{ text: 'Mock English Legal Text' }] }],
+                toc: [],
+                __typename: 'DataProtectionRulesRichText'
+              },
+              markdown: 'Mock English Legal Text',
+              plainText: 'Mock English Legal Text',
+              readingTime: 1,
+              __typename: 'DataProtectionRules'
+            },
+            impressum: {
+              html: '<p>Mock English Impressum</p>',
+              json: {
+                content: [{ type: 'paragraph', children: [{ text: 'Mock English Impressum' }] }],
+                toc: [],
+                __typename: 'ImpressumRichText'
+              },
+              markdown: 'Mock English Impressum',
+              plainText: 'Mock English Impressum',
+              readingTime: 1,
+              __typename: 'Impressum'
+            },
+            __typename: 'LegalInfoComponent'
+          }
+        ],
+        meta: {
+          _analyticsKey: 'mock-legal-meta-analytics-key',
+          _dashboardUrl: 'mock-legal-meta-dashboard-url',
+          _id: 'mock-legal-meta-id',
+          _idPath: 'mock-legal-meta-id-path',
+          _slug: 'mock-legal-meta-slug',
+          _slugPath: 'mock-legal-meta-slug-path',
+          _sys: {
+            id: 'mock-legal-meta-sys-id',
+            lastModifiedAt: '2024-01-01T00:00:00Z',
+            firstPublishedAt: '2024-01-01T00:00:00Z',
+            publishedAt: '2024-01-01T00:00:00Z',
+            __typename: 'BlockDocumentSys'
           },
-          markdown: 'Mock English Legal Text',
-          plainText: 'Mock English Legal Text',
-          readingTime: 1,
-          __typename: 'EnglishLegalText'
+          _title: 'Mock Legal Meta',
+          desc: 'Mock legal meta description',
+          img: {
+            url: '/mock-og-image.jpg',
+            rawUrl: '/mock-og-image.jpg',
+            fileName: 'mock-og-image.jpg',
+            width: 1200,
+            height: 630,
+            mimeType: 'image/jpeg',
+            __typename: 'BlockOgImage'
+          },
+          title: 'Mock Legal Page Title',
+          __typename: 'MetaComponent'
         },
         __typename: 'LegalPage'
       },
