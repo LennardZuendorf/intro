@@ -13,7 +13,7 @@ export const isAuthorized = (authHeader: string | null): boolean => {
   return user === BASIC_USER && pass === BASIC_PASS;
 };
 
-export function middleware(req: NextRequest) {
+export function proxy(req: NextRequest) {
   const authHeader = req.headers.get('authorization');
 
   if (isAuthorized(authHeader)) {

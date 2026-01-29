@@ -10,13 +10,9 @@ export const env = createEnv({
     BASIC_PASS: z.string().min(1, 'BASIC_PASS is required'),
     NEXT_V2_RELEASE: z.boolean().default(false)
   },
-  client: {
-    NEXT_PUBLIC_OPENPANEL_CLIENT_ID: z
-      .string()
-      .min(1, 'NEXT_PUBLIC_OPENPANEL_CLIENT_ID is required')
-  },
+  client: {},
   runtimeEnv: {
-    NEXT_PUBLIC_OPENPANEL_CLIENT_ID: process.env.NEXT_PUBLIC_OPENPANEL_CLIENT_ID,
+    NODE_ENV: process.env.NODE_ENV,
     NEXT_PUBLIC_URL: process.env.NEXT_PUBLIC_VERCEL_URL
       ? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`
       : 'http://localhost:3000',
