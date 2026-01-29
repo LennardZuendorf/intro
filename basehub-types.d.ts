@@ -147,7 +147,7 @@ export interface BlockColor {
     __typename: 'BlockColor'
 }
 
-export type BlockDocument = (AboutSection | CalloutComponentComponent | ExperienceComponent | Experiences | Globals | HeroSection | ImgComponent | LegalInfoComponent | LegalPage | MetaComponent | ProjectComponent | ProjectsSection | QuickSkillsShowcase | QuickSkillsShowcaseItem | SectionsAndPages | SkillComponent | Skills | Socials | SocialsComponent | Technologies | TechnologyComponent | Types | UntitledComponent | _AgentStart | calloutComponentComponent_AsList | experienceComponent_AsList | imgComponent_AsList | legalInfoComponent_AsList | metaComponent_AsList | projectComponent_AsList | quickSkillsShowcaseItem_AsList | skillComponent_AsList | socialsComponent_AsList | technologyComponent_AsList | untitledComponent_AsList) & { __isUnion?: true }
+export type BlockDocument = (AboutSection | CalloutComponentComponent | ExperienceComponent | Experiences | Globals | HeroSection | HoverCardLinkComponent | HoverLinkComponent | ImgComponent | LegalInfoComponent | LegalPage | MetaComponent | ProjectComponent | ProjectsSection | QuickSkillsShowcase | QuickSkillsShowcaseItem | SectionsAndPages | SkillComponent | Skills | Socials | SocialsComponent | Technologies | TechnologyComponent | Types | UntitledComponent | _AgentStart | calloutComponentComponent_AsList | experienceComponent_AsList | hoverCardLinkComponent_AsList | hoverLinkComponent_AsList | imgComponent_AsList | legalInfoComponent_AsList | metaComponent_AsList | projectComponent_AsList | quickSkillsShowcaseItem_AsList | skillComponent_AsList | socialsComponent_AsList | technologyComponent_AsList | untitledComponent_AsList) & { __isUnion?: true }
 
 export interface BlockDocumentSys {
     apiNamePath: Scalars['String']
@@ -206,7 +206,7 @@ export interface BlockImage {
     __typename: 'BlockImage'
 }
 
-export type BlockList = (Experiences | ProjectsSection | QuickSkillsShowcase | Skills | Socials | Technologies | calloutComponentComponent_AsList | experienceComponent_AsList | imgComponent_AsList | legalInfoComponent_AsList | metaComponent_AsList | projectComponent_AsList | quickSkillsShowcaseItem_AsList | skillComponent_AsList | socialsComponent_AsList | technologyComponent_AsList | untitledComponent_AsList) & { __isUnion?: true }
+export type BlockList = (Experiences | ProjectsSection | QuickSkillsShowcase | Skills | Socials | Technologies | calloutComponentComponent_AsList | experienceComponent_AsList | hoverCardLinkComponent_AsList | hoverLinkComponent_AsList | imgComponent_AsList | legalInfoComponent_AsList | metaComponent_AsList | projectComponent_AsList | quickSkillsShowcaseItem_AsList | skillComponent_AsList | socialsComponent_AsList | technologyComponent_AsList | untitledComponent_AsList) & { __isUnion?: true }
 
 export interface BlockOgImage {
     height: Scalars['Int']
@@ -217,7 +217,7 @@ export interface BlockOgImage {
 
 
 /** Rich text block */
-export type BlockRichText = (AboutMeText | AboutMeText2 | Content | DataProtectionRules | JobActivities | MainHeroText | Text) & { __isUnion?: true }
+export type BlockRichText = (AboutMeText | AboutMeText2 | Content | DataProtectionRules | JobActivities | MainHeroText | SecondaryHeroText | Text) & { __isUnion?: true }
 
 export interface BlockVideo {
     aspectRatio: Scalars['String']
@@ -360,10 +360,47 @@ export interface HeroSection {
     _sys: BlockDocumentSys
     _title: Scalars['String']
     mainHeroText: (MainHeroText | null)
+    secondaryHeroText: (SecondaryHeroText | null)
     selectedExperience: (ExperienceComponent | null)
     specialCards: (ProjectComponent[] | null)
     __typename: 'HeroSection'
 }
+
+export interface HoverCardLinkComponent {
+    _analyticsKey: Scalars['String']
+    _dashboardUrl: Scalars['String']
+    /** Array of search highlight information with field names and HTML markup */
+    _highlight: (SearchHighlight[] | null)
+    _id: Scalars['String']
+    _idPath: Scalars['String']
+    _slug: Scalars['String']
+    _slugPath: Scalars['String']
+    _sys: BlockDocumentSys
+    _title: Scalars['String']
+    description: (Scalars['String'] | null)
+    text: (Scalars['String'] | null)
+    url: (Scalars['String'] | null)
+    __typename: 'HoverCardLinkComponent'
+}
+
+export type HoverCardLinkComponentOrderByEnum = '_sys_createdAt__ASC' | '_sys_createdAt__DESC' | '_sys_hash__ASC' | '_sys_hash__DESC' | '_sys_id__ASC' | '_sys_id__DESC' | '_sys_lastModifiedAt__ASC' | '_sys_lastModifiedAt__DESC' | '_sys_slug__ASC' | '_sys_slug__DESC' | '_sys_title__ASC' | '_sys_title__DESC' | 'description__ASC' | 'description__DESC' | 'text__ASC' | 'text__DESC' | 'untitled__ASC' | 'untitled__DESC' | 'url__ASC' | 'url__DESC'
+
+export interface HoverLinkComponent {
+    _analyticsKey: Scalars['String']
+    _dashboardUrl: Scalars['String']
+    /** Array of search highlight information with field names and HTML markup */
+    _highlight: (SearchHighlight[] | null)
+    _id: Scalars['String']
+    _idPath: Scalars['String']
+    _slug: Scalars['String']
+    _slugPath: Scalars['String']
+    _sys: BlockDocumentSys
+    _title: Scalars['String']
+    link: (Scalars['String'] | null)
+    __typename: 'HoverLinkComponent'
+}
+
+export type HoverLinkComponentOrderByEnum = '_sys_createdAt__ASC' | '_sys_createdAt__DESC' | '_sys_hash__ASC' | '_sys_hash__DESC' | '_sys_id__ASC' | '_sys_id__DESC' | '_sys_lastModifiedAt__ASC' | '_sys_lastModifiedAt__DESC' | '_sys_slug__ASC' | '_sys_slug__DESC' | '_sys_title__ASC' | '_sys_title__DESC' | 'link__ASC' | 'link__DESC' | 'untitled__ASC' | 'untitled__DESC'
 
 export interface ImgComponent {
     _analyticsKey: Scalars['String']
@@ -410,11 +447,11 @@ export interface LegalInfoComponent {
     _slugPath: Scalars['String']
     _sys: BlockDocumentSys
     _title: Scalars['String']
-    dataProtectionRules: DataProtectionRules
+    dataProtectionRules: (DataProtectionRules | null)
     __typename: 'LegalInfoComponent'
 }
 
-export type LegalInfoComponentOrderByEnum = '_sys_createdAt__ASC' | '_sys_createdAt__DESC' | '_sys_hash__ASC' | '_sys_hash__DESC' | '_sys_id__ASC' | '_sys_id__DESC' | '_sys_lastModifiedAt__ASC' | '_sys_lastModifiedAt__DESC' | '_sys_slug__ASC' | '_sys_slug__DESC' | '_sys_title__ASC' | '_sys_title__DESC' | 'dataProtectionRules__ASC' | 'dataProtectionRules__DESC' | 'untitled_1__ASC' | 'untitled_1__DESC' | 'untitled__ASC' | 'untitled__DESC'
+export type LegalInfoComponentOrderByEnum = '_sys_createdAt__ASC' | '_sys_createdAt__DESC' | '_sys_hash__ASC' | '_sys_hash__DESC' | '_sys_id__ASC' | '_sys_id__DESC' | '_sys_lastModifiedAt__ASC' | '_sys_lastModifiedAt__DESC' | '_sys_slug__ASC' | '_sys_slug__DESC' | '_sys_title__ASC' | '_sys_title__DESC' | 'dataProtectionRules__ASC' | 'dataProtectionRules__DESC' | 'untitled__ASC' | 'untitled__DESC'
 
 export interface LegalPage {
     _analyticsKey: Scalars['String']
@@ -448,6 +485,7 @@ export interface MainHeroText {
 }
 
 export interface MainHeroTextRichText {
+    blocks: UnionHoverCardLinkComponent[]
     content: Scalars['BSHBRichTextContentSchema']
     toc: Scalars['BSHBRichTextTOCSchema']
     __typename: 'MainHeroTextRichText'
@@ -618,7 +656,7 @@ export interface RepoSys {
     __typename: 'RepoSys'
 }
 
-export type RichTextJson = (AboutMeText2RichText | AboutMeTextRichText | BaseRichTextJson | ContentRichText | DataProtectionRulesRichText | JobActivitiesRichText | MainHeroTextRichText | TextRichText) & { __isUnion?: true }
+export type RichTextJson = (AboutMeText2RichText | AboutMeTextRichText | BaseRichTextJson | ContentRichText | DataProtectionRulesRichText | JobActivitiesRichText | MainHeroTextRichText | SecondaryHeroTextRichText | TextRichText) & { __isUnion?: true }
 
 export interface SearchHighlight {
     /** The field/path that was matched (e.g., "title", "body.content") */
@@ -626,6 +664,21 @@ export interface SearchHighlight {
     /** HTML snippet with <mark> tags around the matched terms */
     snippet: Scalars['String']
     __typename: 'SearchHighlight'
+}
+
+export interface SecondaryHeroText {
+    html: Scalars['String']
+    json: SecondaryHeroTextRichText
+    markdown: Scalars['String']
+    plainText: Scalars['String']
+    readingTime: Scalars['Int']
+    __typename: 'SecondaryHeroText'
+}
+
+export interface SecondaryHeroTextRichText {
+    content: Scalars['BSHBRichTextContentSchema']
+    toc: Scalars['BSHBRichTextTOCSchema']
+    __typename: 'SecondaryHeroTextRichText'
 }
 
 export interface SectionsAndPages {
@@ -784,7 +837,6 @@ export interface TransactionStatus {
 export type TransactionStatusEnum = 'Cancelled' | 'Completed' | 'Failed' | 'Running' | 'Scheduled'
 
 export interface Types {
-    CalloutComponent: CalloutComponentComponent
     _analyticsKey: Scalars['String']
     _dashboardUrl: Scalars['String']
     _id: Scalars['String']
@@ -793,6 +845,8 @@ export interface Types {
     _slugPath: Scalars['String']
     _sys: BlockDocumentSys
     _title: Scalars['String']
+    calloutComponent: CalloutComponentComponent
+    hoverLink: HoverLinkComponent
     img: ImgComponent
     legalInfo: LegalInfoComponent
     meta: MetaComponent
@@ -803,6 +857,8 @@ export interface Types {
 }
 
 export type UnionCalloutComponentComponent = (CalloutComponentComponent) & { __isUnion?: true }
+
+export type UnionHoverCardLinkComponent = (HoverCardLinkComponent) & { __isUnion?: true }
 
 export type UnionUntitledComponent = (UntitledComponent) & { __isUnion?: true }
 
@@ -933,6 +989,8 @@ export interface _agents {
 export interface _components {
     calloutComponent: calloutComponentComponent_AsList
     experience: experienceComponent_AsList
+    hoverCardLink: hoverCardLinkComponent_AsList
+    hoverLink: hoverLinkComponent_AsList
     img: imgComponent_AsList
     legalInfo: legalInfoComponent_AsList
     meta: metaComponent_AsList
@@ -981,6 +1039,44 @@ export interface experienceComponent_AsList {
     /** Returns the list of items after filtering and paginating according to the arguments sent by the client. */
     items: ExperienceComponent[]
     __typename: 'experienceComponent_AsList'
+}
+
+export interface hoverCardLinkComponent_AsList {
+    _analyticsKey: Scalars['String']
+    _dashboardUrl: Scalars['String']
+    _id: Scalars['String']
+    _idPath: Scalars['String']
+    _meta: ListMeta
+    /** The key used to search from the frontend. */
+    _searchKey: Scalars['String']
+    _slug: Scalars['String']
+    _slugPath: Scalars['String']
+    _sys: BlockDocumentSys
+    _title: Scalars['String']
+    /** Returns the first item in the list, or null if the list is empty. Useful when you expect only one result. */
+    item: (HoverCardLinkComponent | null)
+    /** Returns the list of items after filtering and paginating according to the arguments sent by the client. */
+    items: HoverCardLinkComponent[]
+    __typename: 'hoverCardLinkComponent_AsList'
+}
+
+export interface hoverLinkComponent_AsList {
+    _analyticsKey: Scalars['String']
+    _dashboardUrl: Scalars['String']
+    _id: Scalars['String']
+    _idPath: Scalars['String']
+    _meta: ListMeta
+    /** The key used to search from the frontend. */
+    _searchKey: Scalars['String']
+    _slug: Scalars['String']
+    _slugPath: Scalars['String']
+    _sys: BlockDocumentSys
+    _title: Scalars['String']
+    /** Returns the first item in the list, or null if the list is empty. Useful when you expect only one result. */
+    item: (HoverLinkComponent | null)
+    /** Returns the list of items after filtering and paginating according to the arguments sent by the client. */
+    items: HoverLinkComponent[]
+    __typename: 'hoverLinkComponent_AsList'
 }
 
 export interface imgComponent_AsList {
@@ -1299,6 +1395,8 @@ export interface BlockDocumentGenqlSelection{
     on_Experiences?: ExperiencesGenqlSelection
     on_Globals?: GlobalsGenqlSelection
     on_HeroSection?: HeroSectionGenqlSelection
+    on_HoverCardLinkComponent?: HoverCardLinkComponentGenqlSelection
+    on_HoverLinkComponent?: HoverLinkComponentGenqlSelection
     on_ImgComponent?: ImgComponentGenqlSelection
     on_LegalInfoComponent?: LegalInfoComponentGenqlSelection
     on_LegalPage?: LegalPageGenqlSelection
@@ -1319,6 +1417,8 @@ export interface BlockDocumentGenqlSelection{
     on__AgentStart?: _AgentStartGenqlSelection
     on_calloutComponentComponent_AsList?: calloutComponentComponent_AsListGenqlSelection
     on_experienceComponent_AsList?: experienceComponent_AsListGenqlSelection
+    on_hoverCardLinkComponent_AsList?: hoverCardLinkComponent_AsListGenqlSelection
+    on_hoverLinkComponent_AsList?: hoverLinkComponent_AsListGenqlSelection
     on_imgComponent_AsList?: imgComponent_AsListGenqlSelection
     on_legalInfoComponent_AsList?: legalInfoComponent_AsListGenqlSelection
     on_metaComponent_AsList?: metaComponent_AsListGenqlSelection
@@ -1414,6 +1514,8 @@ export interface BlockListGenqlSelection{
     on_Technologies?: TechnologiesGenqlSelection
     on_calloutComponentComponent_AsList?: calloutComponentComponent_AsListGenqlSelection
     on_experienceComponent_AsList?: experienceComponent_AsListGenqlSelection
+    on_hoverCardLinkComponent_AsList?: hoverCardLinkComponent_AsListGenqlSelection
+    on_hoverLinkComponent_AsList?: hoverLinkComponent_AsListGenqlSelection
     on_imgComponent_AsList?: imgComponent_AsListGenqlSelection
     on_legalInfoComponent_AsList?: legalInfoComponent_AsListGenqlSelection
     on_metaComponent_AsList?: metaComponent_AsListGenqlSelection
@@ -1453,6 +1555,7 @@ export interface BlockRichTextGenqlSelection{
     on_DataProtectionRules?: DataProtectionRulesGenqlSelection
     on_JobActivities?: JobActivitiesGenqlSelection
     on_MainHeroText?: MainHeroTextGenqlSelection
+    on_SecondaryHeroText?: SecondaryHeroTextGenqlSelection
     on_Text?: TextGenqlSelection
     __typename?: boolean | number
 }
@@ -1666,10 +1769,71 @@ export interface HeroSectionGenqlSelection{
     _sys?: BlockDocumentSysGenqlSelection
     _title?: boolean | number
     mainHeroText?: MainHeroTextGenqlSelection
+    secondaryHeroText?: SecondaryHeroTextGenqlSelection
     selectedExperience?: ExperienceComponentGenqlSelection
     specialCards?: ProjectComponentGenqlSelection
     __typename?: boolean | number
 }
+
+export interface HoverCardLinkComponentGenqlSelection{
+    _analyticsKey?: { __args: {
+    /**
+     * The scope of the analytics key. Use `send` for just ingesting data. Use `query` if you need to show an analytics data in your website.
+     * 
+     * Have in mind, if you expose your `query` analytics key in the frontend, you'll be exposing all of this block's analytics data to the public. This is generally safe, but it might not be in your case.
+     */
+    scope?: (AnalyticsKeyScope | null)} } | boolean | number
+    _dashboardUrl?: boolean | number
+    /** Array of search highlight information with field names and HTML markup */
+    _highlight?: SearchHighlightGenqlSelection
+    _id?: boolean | number
+    _idPath?: boolean | number
+    _slug?: boolean | number
+    _slugPath?: boolean | number
+    _sys?: BlockDocumentSysGenqlSelection
+    _title?: boolean | number
+    description?: boolean | number
+    text?: boolean | number
+    url?: boolean | number
+    __typename?: boolean | number
+}
+
+export interface HoverCardLinkComponentFilterInput {AND?: (HoverCardLinkComponentFilterInput | null),OR?: (HoverCardLinkComponentFilterInput | null),_id?: (StringFilter | null),_slug?: (StringFilter | null),_sys_apiNamePath?: (StringFilter | null),_sys_createdAt?: (DateFilter | null),_sys_hash?: (StringFilter | null),_sys_id?: (StringFilter | null),_sys_idPath?: (StringFilter | null),_sys_lastModifiedAt?: (DateFilter | null),_sys_slug?: (StringFilter | null),_sys_slugPath?: (StringFilter | null),_sys_title?: (StringFilter | null),_title?: (StringFilter | null),description?: (StringFilter | null),text?: (StringFilter | null),url?: (StringFilter | null)}
+
+export interface HoverCardLinkComponentSearchInput {
+/** Searchable fields for query */
+by?: (Scalars['String'][] | null),
+/** Search query */
+q?: (Scalars['String'] | null)}
+
+export interface HoverLinkComponentGenqlSelection{
+    _analyticsKey?: { __args: {
+    /**
+     * The scope of the analytics key. Use `send` for just ingesting data. Use `query` if you need to show an analytics data in your website.
+     * 
+     * Have in mind, if you expose your `query` analytics key in the frontend, you'll be exposing all of this block's analytics data to the public. This is generally safe, but it might not be in your case.
+     */
+    scope?: (AnalyticsKeyScope | null)} } | boolean | number
+    _dashboardUrl?: boolean | number
+    /** Array of search highlight information with field names and HTML markup */
+    _highlight?: SearchHighlightGenqlSelection
+    _id?: boolean | number
+    _idPath?: boolean | number
+    _slug?: boolean | number
+    _slugPath?: boolean | number
+    _sys?: BlockDocumentSysGenqlSelection
+    _title?: boolean | number
+    link?: boolean | number
+    __typename?: boolean | number
+}
+
+export interface HoverLinkComponentFilterInput {AND?: (HoverLinkComponentFilterInput | null),OR?: (HoverLinkComponentFilterInput | null),_id?: (StringFilter | null),_slug?: (StringFilter | null),_sys_apiNamePath?: (StringFilter | null),_sys_createdAt?: (DateFilter | null),_sys_hash?: (StringFilter | null),_sys_id?: (StringFilter | null),_sys_idPath?: (StringFilter | null),_sys_lastModifiedAt?: (DateFilter | null),_sys_slug?: (StringFilter | null),_sys_slugPath?: (StringFilter | null),_sys_title?: (StringFilter | null),_title?: (StringFilter | null),link?: (StringFilter | null)}
+
+export interface HoverLinkComponentSearchInput {
+/** Searchable fields for query */
+by?: (Scalars['String'][] | null),
+/** Search query */
+q?: (Scalars['String'] | null)}
 
 export interface ImgComponentGenqlSelection{
     _analyticsKey?: { __args: {
@@ -1798,6 +1962,7 @@ export interface MainHeroTextGenqlSelection{
 }
 
 export interface MainHeroTextRichTextGenqlSelection{
+    blocks?: UnionHoverCardLinkComponentGenqlSelection
     content?: boolean | number
     toc?: boolean | number
     __typename?: boolean | number
@@ -2092,6 +2257,7 @@ export interface RichTextJsonGenqlSelection{
     on_DataProtectionRulesRichText?: DataProtectionRulesRichTextGenqlSelection
     on_JobActivitiesRichText?: JobActivitiesRichTextGenqlSelection
     on_MainHeroTextRichText?: MainHeroTextRichTextGenqlSelection
+    on_SecondaryHeroTextRichText?: SecondaryHeroTextRichTextGenqlSelection
     on_TextRichText?: TextRichTextGenqlSelection
     __typename?: boolean | number
 }
@@ -2101,6 +2267,27 @@ export interface SearchHighlightGenqlSelection{
     by?: boolean | number
     /** HTML snippet with <mark> tags around the matched terms */
     snippet?: boolean | number
+    __typename?: boolean | number
+}
+
+export interface SecondaryHeroTextGenqlSelection{
+    html?: { __args: {
+    /** It automatically generates a unique id for each heading present in the HTML. Enabled by default. */
+    slugs?: (Scalars['Boolean'] | null), 
+    /** Inserts a table of contents at the beginning of the HTML. */
+    toc?: (Scalars['Boolean'] | null)} } | boolean | number
+    json?: SecondaryHeroTextRichTextGenqlSelection
+    markdown?: boolean | number
+    plainText?: boolean | number
+    readingTime?: { __args: {
+    /** Words per minute, defaults to average 183wpm */
+    wpm?: (Scalars['Int'] | null)} } | boolean | number
+    __typename?: boolean | number
+}
+
+export interface SecondaryHeroTextRichTextGenqlSelection{
+    content?: boolean | number
+    toc?: boolean | number
     __typename?: boolean | number
 }
 
@@ -2342,7 +2529,6 @@ export interface TransactionStatusGenqlSelection{
 }
 
 export interface TypesGenqlSelection{
-    CalloutComponent?: CalloutComponentComponentGenqlSelection
     _analyticsKey?: { __args: {
     /**
      * The scope of the analytics key. Use `send` for just ingesting data. Use `query` if you need to show an analytics data in your website.
@@ -2357,6 +2543,8 @@ export interface TypesGenqlSelection{
     _slugPath?: boolean | number
     _sys?: BlockDocumentSysGenqlSelection
     _title?: boolean | number
+    calloutComponent?: CalloutComponentComponentGenqlSelection
+    hoverLink?: HoverLinkComponentGenqlSelection
     img?: ImgComponentGenqlSelection
     legalInfo?: LegalInfoComponentGenqlSelection
     meta?: MetaComponentGenqlSelection
@@ -2388,6 +2576,12 @@ export interface TypesGenqlSelection{
 
 export interface UnionCalloutComponentComponentGenqlSelection{
     on_CalloutComponentComponent?:CalloutComponentComponentGenqlSelection,
+    on_BlockDocument?: BlockDocumentGenqlSelection,
+    __typename?: boolean | number
+}
+
+export interface UnionHoverCardLinkComponentGenqlSelection{
+    on_HoverCardLinkComponent?:HoverCardLinkComponentGenqlSelection,
     on_BlockDocument?: BlockDocumentGenqlSelection,
     __typename?: boolean | number
 }
@@ -2559,6 +2753,28 @@ export interface _componentsGenqlSelection{
     search?: (ExperienceComponentSearchInput | null), 
     /** Skip the first n items. */
     skip?: (Scalars['Int'] | null)} })
+    hoverCardLink?: (hoverCardLinkComponent_AsListGenqlSelection & { __args?: {
+    /** Filter by a field. */
+    filter?: (HoverCardLinkComponentFilterInput | null), 
+    /** Limit the number of items returned. Defaults to 500. */
+    first?: (Scalars['Int'] | null), 
+    /** Order by a field. */
+    orderBy?: (HoverCardLinkComponentOrderByEnum | null), 
+    /** Search configuration */
+    search?: (HoverCardLinkComponentSearchInput | null), 
+    /** Skip the first n items. */
+    skip?: (Scalars['Int'] | null)} })
+    hoverLink?: (hoverLinkComponent_AsListGenqlSelection & { __args?: {
+    /** Filter by a field. */
+    filter?: (HoverLinkComponentFilterInput | null), 
+    /** Limit the number of items returned. Defaults to 500. */
+    first?: (Scalars['Int'] | null), 
+    /** Order by a field. */
+    orderBy?: (HoverLinkComponentOrderByEnum | null), 
+    /** Search configuration */
+    search?: (HoverLinkComponentSearchInput | null), 
+    /** Skip the first n items. */
+    skip?: (Scalars['Int'] | null)} })
     img?: (imgComponent_AsListGenqlSelection & { __args?: {
     /** Filter by a field. */
     filter?: (ImgComponentFilterInput | null), 
@@ -2708,6 +2924,56 @@ export interface experienceComponent_AsListGenqlSelection{
     item?: ExperienceComponentGenqlSelection
     /** Returns the list of items after filtering and paginating according to the arguments sent by the client. */
     items?: ExperienceComponentGenqlSelection
+    __typename?: boolean | number
+}
+
+export interface hoverCardLinkComponent_AsListGenqlSelection{
+    _analyticsKey?: { __args: {
+    /**
+     * The scope of the analytics key. Use `send` for just ingesting data. Use `query` if you need to show an analytics data in your website.
+     * 
+     * Have in mind, if you expose your `query` analytics key in the frontend, you'll be exposing all of this block's analytics data to the public. This is generally safe, but it might not be in your case.
+     */
+    scope?: (AnalyticsKeyScope | null)} } | boolean | number
+    _dashboardUrl?: boolean | number
+    _id?: boolean | number
+    _idPath?: boolean | number
+    _meta?: ListMetaGenqlSelection
+    /** The key used to search from the frontend. */
+    _searchKey?: boolean | number
+    _slug?: boolean | number
+    _slugPath?: boolean | number
+    _sys?: BlockDocumentSysGenqlSelection
+    _title?: boolean | number
+    /** Returns the first item in the list, or null if the list is empty. Useful when you expect only one result. */
+    item?: HoverCardLinkComponentGenqlSelection
+    /** Returns the list of items after filtering and paginating according to the arguments sent by the client. */
+    items?: HoverCardLinkComponentGenqlSelection
+    __typename?: boolean | number
+}
+
+export interface hoverLinkComponent_AsListGenqlSelection{
+    _analyticsKey?: { __args: {
+    /**
+     * The scope of the analytics key. Use `send` for just ingesting data. Use `query` if you need to show an analytics data in your website.
+     * 
+     * Have in mind, if you expose your `query` analytics key in the frontend, you'll be exposing all of this block's analytics data to the public. This is generally safe, but it might not be in your case.
+     */
+    scope?: (AnalyticsKeyScope | null)} } | boolean | number
+    _dashboardUrl?: boolean | number
+    _id?: boolean | number
+    _idPath?: boolean | number
+    _meta?: ListMetaGenqlSelection
+    /** The key used to search from the frontend. */
+    _searchKey?: boolean | number
+    _slug?: boolean | number
+    _slugPath?: boolean | number
+    _sys?: BlockDocumentSysGenqlSelection
+    _title?: boolean | number
+    /** Returns the first item in the list, or null if the list is empty. Useful when you expect only one result. */
+    item?: HoverLinkComponentGenqlSelection
+    /** Returns the list of items after filtering and paginating according to the arguments sent by the client. */
+    items?: HoverLinkComponentGenqlSelection
     __typename?: boolean | number
 }
 
@@ -3045,6 +3311,14 @@ export interface FragmentsMap {
     root: HeroSection,
     selection: HeroSectionGenqlSelection,
 }
+  HoverCardLinkComponent: {
+    root: HoverCardLinkComponent,
+    selection: HoverCardLinkComponentGenqlSelection,
+}
+  HoverLinkComponent: {
+    root: HoverLinkComponent,
+    selection: HoverLinkComponentGenqlSelection,
+}
   ImgComponent: {
     root: ImgComponent,
     selection: ImgComponentGenqlSelection,
@@ -3120,6 +3394,14 @@ export interface FragmentsMap {
   SearchHighlight: {
     root: SearchHighlight,
     selection: SearchHighlightGenqlSelection,
+}
+  SecondaryHeroText: {
+    root: SecondaryHeroText,
+    selection: SecondaryHeroTextGenqlSelection,
+}
+  SecondaryHeroTextRichText: {
+    root: SecondaryHeroTextRichText,
+    selection: SecondaryHeroTextRichTextGenqlSelection,
 }
   SectionsAndPages: {
     root: SectionsAndPages,
@@ -3212,6 +3494,14 @@ export interface FragmentsMap {
   experienceComponent_AsList: {
     root: experienceComponent_AsList,
     selection: experienceComponent_AsListGenqlSelection,
+}
+  hoverCardLinkComponent_AsList: {
+    root: hoverCardLinkComponent_AsList,
+    selection: hoverCardLinkComponent_AsListGenqlSelection,
+}
+  hoverLinkComponent_AsList: {
+    root: hoverLinkComponent_AsList,
+    selection: hoverLinkComponent_AsListGenqlSelection,
 }
   imgComponent_AsList: {
     root: imgComponent_AsList,

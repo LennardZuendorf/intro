@@ -1,5 +1,4 @@
 import { Pump } from 'basehub/react-pump';
-import { RichText } from 'basehub/react-rich-text';
 import type { AboutSection, HeroSection } from 'basehub-types';
 import { GithubIcon, LinkedinIcon, MailIcon } from 'lucide-react';
 import type { NextPage } from 'next';
@@ -7,6 +6,7 @@ import { draftMode } from 'next/headers';
 import { Banner } from '@/components/banner';
 import { Nav } from '@/components/navbar';
 import { IndexSection } from '@/components/sections/index-section';
+import { RichTextBlock as RichText } from '@/components/shared/richtext-block';
 import { BackgroundGrid } from '@/components/ui/background-grid';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { IconLink } from '@/components/ui/icon-link';
@@ -30,6 +30,21 @@ const Page: NextPage = async () => {
           sectionsAndPages: {
             heroSection: {
               mainHeroText: {
+                json: {
+                  content: true,
+                  blocks: {
+                    on_HoverCardLinkComponent: {
+                      _id: true,
+                      _title: true,
+                      url: true,
+                      description: true,
+                      text: true,
+                      __typename: true
+                    }
+                  }
+                }
+              },
+              secondaryHeroText: {
                 json: {
                   content: true
                 }
@@ -197,10 +212,18 @@ const Page: NextPage = async () => {
                     </div>
                     <H1>I'm Lennard!</H1>
                   </CardHeader>
-                  <CardContent className=''>
+                  <CardContent className='flex flex-col gap-4'>
                     {heroContent.mainHeroText?.json?.content ? (
-                      <div className='font-mono leading-relaxed pb-4'>
-                        <RichText>{heroContent.mainHeroText.json.content}</RichText>
+                      <div className='font-mono leading-relaxed inline [&_article>*]:!inline'>
+                        <RichText blocks={heroContent.mainHeroText.json.blocks} className='!inline'>
+                          {heroContent.mainHeroText.json.content}
+                        </RichText>
+
+                        {heroContent.secondaryHeroText?.json?.content && (
+                          <RichText className='pt-1'>
+                            {heroContent.secondaryHeroText.json.content}
+                          </RichText>
+                        )}
                       </div>
                     ) : (
                       <M className='font-mono leading-relaxed'>
@@ -212,7 +235,7 @@ const Page: NextPage = async () => {
                       <NeoBadge variant='default'>
                         <L>Product</L>
                       </NeoBadge>
-                      <NeoBadge variant='dark'>
+                      <NeoBadge variant='default' interactive='grow'>
                         <L>Technology</L>
                       </NeoBadge>
                       <NeoBadge variant='light' interactive='lift'>

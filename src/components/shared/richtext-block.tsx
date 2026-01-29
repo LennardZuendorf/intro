@@ -1,10 +1,17 @@
 'use client';
 
 import { RichText } from 'basehub/react-rich-text';
-import type { CalloutComponentComponent, UnionCalloutComponentComponent } from 'basehub-types';
+import type {
+  CalloutComponentComponent,
+  HoverCardLinkComponent,
+  UnionCalloutComponentComponent,
+  UnionHoverCardLinkComponent
+} from 'basehub-types';
 import Image from 'next/image';
+import NextLink from 'next/link';
 import type { ReactNode } from 'react';
 import { CalloutComponent, type CalloutComponentProps } from '@/components/shared/richtext/callout';
+import { HoverCardLinkComponent as HoverCardLink } from '@/components/shared/richtext/hover-card-link';
 import {
   Code,
   Em,
@@ -24,7 +31,7 @@ import { cn } from '@/lib/utils/ui';
 interface RichTextBlockProps {
   children: ReactNode;
   className?: string;
-  blocks?: UnionCalloutComponentComponent[];
+  blocks?: (UnionCalloutComponentComponent | UnionHoverCardLinkComponent)[];
 }
 
 // Only H1-H3 headings get links. H4-H6 do not have anchored links.
@@ -45,11 +52,10 @@ const Heading = ({
 
   return (
     <HeadingComponent id={id}>
-      <Link
+      <NextLink
         href={`#${id}`}
-        underline='hover'
         color='default'
-        className='text-inherit'
+        className='text-inherit hover:underline'
         onClick={(e: React.MouseEvent<HTMLAnchorElement>) => {
           e.preventDefault();
           const element = document.getElementById(id);
@@ -60,7 +66,7 @@ const Heading = ({
         }}
       >
         {children}
-      </Link>
+      </NextLink>
     </HeadingComponent>
   );
 };
@@ -155,10 +161,9 @@ export const RichTextBlock = ({ children, className, blocks }: RichTextBlockProp
 
           // inline elements
           a: ({ children, href, ...rest }) => {
-            // Check if it's an external link
             const isExternal = href?.startsWith('http') || href?.startsWith('//');
             return (
-              <Link href={href || '#'} external={isExternal} underline='hover' {...rest}>
+              <Link href={href || '#'} external={isExternal} {...rest}>
                 {children}
               </Link>
             );
@@ -177,6 +182,16 @@ export const RichTextBlock = ({ children, className, blocks }: RichTextBlockProp
               type={props.type as CalloutComponentProps['type']}
               title={props.title}
               content={props.content}
+              _id={props._id}
+              __typename={props.__typename}
+            />
+          ),
+          HoverCardLinkComponent: (props: HoverCardLinkComponent) => (
+            <HoverCardLink
+              url={props.url}
+              _title={props._title}
+              description={props.description}
+              text={props.text}
               _id={props._id}
               __typename={props.__typename}
             />

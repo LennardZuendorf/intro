@@ -217,7 +217,6 @@ const H3: React.FC<TypographyProps> = ({
     <Comp
       className={cn(
         'scroll-m-20 tracking-tight',
-        // Responsive sizing: base smaller, sm/md bigger, lg/xl regular, 2xl bigger
         'text-[0.625rem] sm:text-xs md:text-sm lg:text-sm xl:text-base 2xl:text-lg',
         getWeightClass(weight),
         getColorClass(color, highContrast),
@@ -745,7 +744,6 @@ type LinkProps = BaseTypographyProps &
   Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, 'color' | 'children'> & {
     href: string;
     external?: boolean;
-    underline?: 'auto' | 'always' | 'hover' | 'none';
   };
 
 const TypographyLink: React.FC<LinkProps> = ({
@@ -761,7 +759,6 @@ const TypographyLink: React.FC<LinkProps> = ({
   wrap,
   trim,
   align,
-  underline = 'hover',
   as,
   onClick,
   ...props
@@ -773,29 +770,19 @@ const TypographyLink: React.FC<LinkProps> = ({
       }
     : {};
 
-  const underlineClasses = {
-    auto: 'underline-offset-4',
-    always: 'underline underline-offset-4',
-    hover: 'hover:underline hover:underline-offset-4 hover:decoration-2',
-    none: 'no-underline'
-  };
-
   // If asChild, use Slot; otherwise use Next.js Link
   if (asChild) {
     const Comp = Slot;
   return (
       <Comp
         className={cn(
-          // M component base styling
           'leading-6 not-first:mt-1',
-          // Responsive sizing: base smaller, sm/md bigger, lg/xl regular, 2xl bigger
-          'text-[0.625rem] sm:text-xs md:text-sm lg:text-xs xl:text-xs 2xl:text-sm',
+          'text-[0.625rem] sm:text-xs md:text-sm lg:text-xs xl:text-xs 2xl:text-sm underline',
           getWeightClass(weight),
           getColorClass(color, highContrast),
           getWrapClass(wrap),
           getTrimClass(trim),
           getAlignClass(align),
-          underlineClasses[underline],
           truncate && 'truncate',
           'transition-all duration-200',
           className
@@ -820,7 +807,6 @@ const TypographyLink: React.FC<LinkProps> = ({
         getWrapClass(wrap),
         getTrimClass(trim),
         getAlignClass(align),
-        underlineClasses[underline],
         truncate && 'truncate',
         'transition-all duration-200',
         className

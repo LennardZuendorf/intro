@@ -95,7 +95,7 @@ CalloutIcon.displayName = 'CalloutIcon';
 
 const CalloutHeader = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
   ({ className, ...props }, ref) => (
-    <div ref={ref} className={cn('flex flex-col space-y-1.5 p-4 pt-6', className)} {...props} />
+    <div ref={ref} className={cn('flex flex-col space-y-1 p-3', className)} {...props} />
   )
 );
 CalloutHeader.displayName = 'CalloutHeader';
@@ -104,11 +104,7 @@ const CalloutTitle = React.forwardRef<
   HTMLParagraphElement,
   React.HTMLAttributes<HTMLHeadingElement>
 >(({ className, ...props }, ref) => (
-  <div
-    ref={ref}
-    className={cn('text-xl leading-none font-heading tracking-tight', className)}
-    {...props}
-  />
+  <div ref={ref} className={cn('text-base font-heading tracking-tight', className)} {...props} />
 ));
 CalloutTitle.displayName = 'CalloutTitle';
 
@@ -118,14 +114,16 @@ const CalloutDescription = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn('text-sm text-primary-foreground font-base !mt-3 text-center', className)}
+    className={cn('text-sm text-primary-foreground font-base !mt-1', className)}
     {...props}
   />
 ));
 CalloutDescription.displayName = 'CalloutDescription';
 
 const CalloutContent = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
-  ({ className, ...props }, ref) => <div ref={ref} className={cn('p-4', className)} {...props} />
+  ({ className, ...props }, ref) => (
+    <div ref={ref} className={cn('p-3 pt-0', className)} {...props} />
+  )
 );
 CalloutContent.displayName = 'CalloutContent';
 
@@ -171,7 +169,6 @@ const Heading = ({
     <HeadingComponent id={id}>
       <Link
         href={`#${id}`}
-        underline='hover'
         color='default'
         className='text-inherit'
         onClick={(e: React.MouseEvent<HTMLAnchorElement>) => {
@@ -296,17 +293,17 @@ const richTextComponents = {
 const getCalloutIcon = (type: CalloutType) => {
   switch (type) {
     case 'info':
-      return <InfoIcon className='w-5 h-5' />;
+      return <InfoIcon className='w-4 h-4' />;
     case 'check':
-      return <CircleCheckIcon className='w-5 h-5' />;
+      return <CircleCheckIcon className='w-4 h-4' />;
     case 'warning':
-      return <TriangleAlertIcon className='w-5 h-5' />;
+      return <TriangleAlertIcon className='w-4 h-4' />;
     case 'danger':
-      return <OctagonXIcon className='w-5 h-5' />;
+      return <OctagonXIcon className='w-4 h-4' />;
     case 'note':
-      return <PencilIcon className='w-5 h-5' />;
+      return <PencilIcon className='w-4 h-4' />;
     default:
-      return <InfoIcon className='w-5 h-5' />;
+      return <InfoIcon className='w-4 h-4' />;
   }
 };
 
@@ -328,10 +325,6 @@ export interface CalloutComponentProps {
 export const CalloutComponent = ({ type = 'info', title, content }: CalloutComponentProps) => {
   const calloutType: CalloutType = type || 'info';
   const richTextJson = content?.json;
-  const hasContent =
-    richTextJson &&
-    typeof richTextJson === 'object' &&
-    'content' in (richTextJson as Record<string, unknown>);
 
   return (
     <Callout
@@ -341,7 +334,7 @@ export const CalloutComponent = ({ type = 'info', title, content }: CalloutCompo
       data-callout-type={calloutType}
     >
       {title ? (
-        <CalloutHeader className='flex items-center gap-3'>
+        <CalloutHeader className='flex flex-row items-center gap-2'>
           <CalloutIcon type={calloutType} className='flex-shrink-0'>
             {getCalloutIcon(calloutType)}
             <span className='sr-only'>{calloutType}: </span>
@@ -349,24 +342,19 @@ export const CalloutComponent = ({ type = 'info', title, content }: CalloutCompo
           <CalloutTitle>{title}</CalloutTitle>
         </CalloutHeader>
       ) : null}
-      <CalloutContent className={cn('flex gap-3', !title && 'pt-6')}>
+      <CalloutContent className={cn('flex gap-2', !title && 'pt-3')}>
         {!title && (
-          <CalloutIcon type={calloutType} className='mt-1 flex-shrink-0'>
+          <CalloutIcon type={calloutType} className='mt-0.5 flex-shrink-0'>
             {getCalloutIcon(calloutType)}
             <span className='sr-only'>{calloutType}: </span>
           </CalloutIcon>
         )}
         <div className='flex-1'>
-          {hasContent &&
-            richTextJson &&
-            typeof richTextJson === 'object' &&
-            'blocks' in richTextJson &&
-            'content' in richTextJson &&
-            Array.isArray(richTextJson.blocks) && (
-              <RichText blocks={richTextJson.blocks} components={richTextComponents}>
-                {richTextJson.content as ReactNode}
-              </RichText>
-            )}
+          {richTextJson?.content && (
+            <RichText blocks={richTextJson.blocks} components={richTextComponents}>
+              {richTextJson.content as ReactNode}
+            </RichText>
+          )}
         </div>
       </CalloutContent>
     </Callout>

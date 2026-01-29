@@ -43,20 +43,18 @@
 .dark {
   /* Main Color System - Theme Dependent */
   /* Main Background Colors */
-  --primary: oklch(27.27% 0 0); /* Slightly lighter dark gray background */
+  --primary: oklch(15.27% 0 0); /* Slightly lighter dark gray background */
   --primary-foreground: oklch(0.9 0 0); /* Light gray text (#e6e6e6) */
-  --secondary: oklch(23% 0 0); /* Slightly lighter very dark gray */
+  --secondary: oklch(30% 0 0); /* Slightly lighter very dark gray */
   --secondary-foreground: oklch(0.9 0 0);
   --blank: oklch(0 0 0); /* Pure black (#000000) */
 
-  --grid: oklch(0.32 0 0);
-  --accent: oklch(1 0 0);
+  --grid: oklch(32% 0 0);
+  --accent: oklch(80 0 0);
   --accent-foreground: oklch(0 0 0);
-  --accent-light: oklch(1 0 0);
-  --accent-dark: oklch(0.8 0 0);
+  --accent-light: oklch(90% 0 0);
+  --accent-dark: oklch(70% 0 0);
 }
-
-
 
 /* Interactive Components Layer */
 @layer components {
