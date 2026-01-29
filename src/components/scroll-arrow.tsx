@@ -2,7 +2,7 @@
 
 import { AnimatePresence, motion, useScroll } from 'framer-motion';
 import type React from 'react';
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils/ui';
 
@@ -27,35 +27,64 @@ function useMediaQuery(query: string): boolean {
 
 export const ScrollArrow: React.FC = () => {
   const { scrollY } = useScroll();
-  const [isAtBottom, setIsAtBottom] = useState(false);
+  const [shouldShowArrow, setShouldShowArrow] = useState(false);
   const [isScrolling, setIsScrolling] = useState(false);
-  const [hasMoreContent, setHasMoreContent] = useState(false);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   // Only show on screens smaller than 'lg'
   const isMobile = useMediaQuery('(max-width: 1023.5px)'); // aligns with Tailwind 'lg' breakpoint
 
-  // Effect: Determine if there's any scrollable content below
-  useEffect(() => {
-    function checkHasMoreContent() {
-      // Is there more content below the current viewport?
-      const scrollable = document.body.offsetHeight - window.innerHeight > 10;
-      // Also check if we are NOT already at the bottom
-      const notAtBottom = window.innerHeight + window.scrollY < document.body.offsetHeight - 100;
-      setHasMoreContent(scrollable && notAtBottom);
-    }
-    checkHasMoreContent();
+  // Unified check for whether to show the arrow
+  const checkShouldShowArrow = useCallback(() => {
+    // Get the document's scrollable height
+    const documentHeight = Math.max(
+      document.body.scrollHeight,
+      document.body.offsetHeight,
+      document.documentElement.scrollHeight,
+      document.documentElement.offsetHeight
+    );
+    const windowHeight = window.innerHeight;
+    const currentScroll = window.scrollY;
 
-    // On resize or scroll, re-check
-    window.addEventListener('resize', checkHasMoreContent);
-    window.addEventListener('scroll', checkHasMoreContent);
-    return () => {
-      window.removeEventListener('resize', checkHasMoreContent);
-      window.removeEventListener('scroll', checkHasMoreContent);
-    };
+    // Check if there's any scrollable content at all (more than 10px buffer)
+    const hasScrollableContent = documentHeight - windowHeight > 10;
+
+    // Check if footer is visible in the viewport
+    const footerSection = document.querySelector('footer');
+    let isFooterVisible = false;
+    if (footerSection) {
+      const footerRect = footerSection.getBoundingClientRect();
+      // Footer is visible if its top is within the viewport
+      isFooterVisible = footerRect.top <= windowHeight;
+    }
+
+    // Check if we're at or near the bottom of the page
+    // Use a generous threshold to account for mobile browser chrome variations
+    const distanceFromBottom = documentHeight - (currentScroll + windowHeight);
+    const isAtBottom = distanceFromBottom < 50;
+
+    // Only show if there's scrollable content AND we're not at the bottom AND footer isn't visible
+    const shouldShow = hasScrollableContent && !isAtBottom && !isFooterVisible;
+    setShouldShowArrow(shouldShow);
   }, []);
 
-  // Track scrolling activity and check positions
+  // Effect: Check visibility on mount, resize, and scroll
+  useEffect(() => {
+    // Initial check - run after a brief delay to ensure DOM is fully rendered
+    const initialTimeout = setTimeout(checkShouldShowArrow, 100);
+
+    // Re-check on resize
+    window.addEventListener('resize', checkShouldShowArrow);
+    window.addEventListener('scroll', checkShouldShowArrow, { passive: true });
+
+    return () => {
+      clearTimeout(initialTimeout);
+      window.removeEventListener('resize', checkShouldShowArrow);
+      window.removeEventListener('scroll', checkShouldShowArrow);
+    };
+  }, [checkShouldShowArrow]);
+
+  // Track scrolling activity for hiding during scroll
   useEffect(() => {
     const unsubscribe = scrollY.on('change', () => {
       setIsScrolling(true);
@@ -69,34 +98,7 @@ export const ScrollArrow: React.FC = () => {
       timeoutRef.current = setTimeout(() => {
         setIsScrolling(false);
       }, 300);
-
-      // Check if we're at the bottom of the page
-      const footerSection = document.querySelector('footer');
-
-      if (footerSection) {
-        const footerRect = footerSection.getBoundingClientRect();
-        const isNearFooter = footerRect.top <= window.innerHeight;
-        const actuallyAtBottom =
-          window.innerHeight + window.scrollY >= document.body.offsetHeight - 100;
-        setIsAtBottom(isNearFooter || actuallyAtBottom);
-      } else {
-        const atBottom = window.innerHeight + window.scrollY >= document.body.offsetHeight - 100;
-        setIsAtBottom(atBottom);
-      }
     });
-
-    // Initial check on mount
-    const footerSection = document.querySelector('footer');
-    if (footerSection) {
-      const footerRect = footerSection.getBoundingClientRect();
-      const isNearFooter = footerRect.top <= window.innerHeight;
-      const actuallyAtBottom =
-        window.innerHeight + window.scrollY >= document.body.offsetHeight - 100;
-      setIsAtBottom(isNearFooter || actuallyAtBottom);
-    } else {
-      const atBottom = window.innerHeight + window.scrollY >= document.body.offsetHeight - 100;
-      setIsAtBottom(atBottom);
-    }
 
     return () => {
       unsubscribe();
@@ -184,11 +186,10 @@ export const ScrollArrow: React.FC = () => {
   };
 
   // Show only if:
-  // 1. User is not actively scrolling
-  // 2. User is not at the bottom of page or near the footer
-  // 3. There is more content below to scroll to
-  // 4. On screens < lg breakpoint
-  const shouldShow = isMobile && !isScrolling && !isAtBottom && hasMoreContent;
+  // 1. On screens < lg breakpoint
+  // 2. User is not actively scrolling
+  // 3. There is more content below (not at bottom, footer not visible)
+  const shouldShow = isMobile && !isScrolling && shouldShowArrow;
 
   // Create a motion version of Button
   const MotionButton = motion.create(Button);
