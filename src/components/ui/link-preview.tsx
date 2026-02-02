@@ -1,7 +1,7 @@
 "use client"
 
 import { ExternalLink } from "lucide-react"
-import { HoverCard, HoverCardContent, HoverCardTrigger } from "~/components/ui/hover-card"
+import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card"
 
 export const title = "Link Preview"
 

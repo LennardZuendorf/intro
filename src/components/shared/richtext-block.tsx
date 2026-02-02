@@ -176,7 +176,6 @@ export const RichTextBlock = ({ children, className, blocks }: RichTextBlockProp
               {children}
             </M>
           ),
-          // Custom components
           CalloutComponentComponent: (props: CalloutComponentComponent) => (
             <CalloutComponent
               type={props.type as CalloutComponentProps['type']}

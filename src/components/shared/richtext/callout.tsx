@@ -1,6 +1,6 @@
 'use client';
 
-import { RichText } from 'basehub/react-rich-text';
+import { RichText, type RichTextNode } from 'basehub/react-rich-text';
 import { cva, type VariantProps } from 'class-variance-authority';
 import {
   CircleCheckIcon,
@@ -274,7 +274,7 @@ const richTextComponents = {
   }) => {
     const isExternal = href?.startsWith('http') || href?.startsWith('//');
     return (
-      <Link href={href || '#'} external={isExternal} underline='hover' {...rest}>
+      <Link href={href || '#'} external={isExternal} {...rest}>
         {children}
       </Link>
     );
@@ -314,7 +314,7 @@ export interface CalloutComponentProps {
   title?: string | null;
   content?: {
     json?: {
-      content?: unknown;
+      content?: RichTextNode | RichTextNode[];
       blocks?: UnionCalloutComponentComponent[];
     };
   } | null;
