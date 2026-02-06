@@ -5,6 +5,7 @@ import { SocialButtons } from '@/components/shared/social-buttons';
 import { ThemeSelect } from '@/components/theme/theme-select';
 import { Button } from '@/components/ui/button';
 import { Section } from '@/components/ui/section';
+import { S } from '@/components/ui/typography';
 import { cn } from '@/lib/utils/ui';
 
 interface FooterProps {
@@ -52,10 +53,10 @@ export const Footer = async ({ className = '' }: FooterProps) => {
               </div>
             </div>
             <div className='w-full flex justify-center mt-4 md:mt-2'>
-              <div className='flex items-center gap-x-2 text-sm font-mono'>
-                <div>Built by Lennard Zündorf</div>
-                <div> {`© ${new Date().getFullYear()}`}</div>
-                <div>{' | '}</div>
+              <div className='flex items-center gap-x-2 font-mono'>
+                <S>Built by Lennard Zündorf</S>
+                <S>{`© ${new Intl.DateTimeFormat('en', { year: 'numeric' }).format(new Date())}`}</S>
+                <S>|</S>
                 <Link href='/legal'>
                   <Button variant='link' className='justify-center items-center' size='icon'>
                     legal

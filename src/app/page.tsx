@@ -60,6 +60,9 @@ const Page: NextPage = async () => {
                   _title: true,
                   url: true,
                   badgeUrl: true
+                },
+                color: {
+                  hex: true
                 }
               },
               selectedExperience: {
@@ -294,7 +297,7 @@ const Page: NextPage = async () => {
               </div>
             </div>
 
-            <div className='flex items-center justify-center w-full mt-10 lg:mt-0'>
+            <div className='flex items-center justify-center w-full pt-16 lg:pt-12'>
               <IndexSection
                 heroContent={data.sectionsAndPages.heroSection as HeroSection}
                 aboutContent={data.sectionsAndPages.aboutSection as AboutSection}

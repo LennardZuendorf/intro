@@ -3,7 +3,7 @@
 import type * as React from 'react';
 import { IconLink } from '@/components/ui/icon-link';
 import { NeoBadge } from '@/components/ui/neoBadge';
-import { H4, M } from '@/components/ui/typography';
+import { H4, M, S, XS } from '@/components/ui/typography';
 import type { ProjectData } from '@/lib/types/projects';
 import { cn } from '@/lib/utils/ui';
 
@@ -356,11 +356,15 @@ const Layer3 = ({ color, secondaryColor }: LayerProps) => {
     >
       <div className='flex shrink-0 items-center rounded-full border border-zinc-200 bg-white/25 px-1.5 py-0.5 backdrop-blur-sm transition-opacity duration-300 ease-in-out group-hover/animated-card:opacity-0 dark:border-zinc-800 dark:bg-black/25'>
         <div className='h-1.5 w-1.5 rounded-full bg-[var(--color)]' />
-        <span className='ml-1 text-[10px] text-black dark:text-white'>Tommy</span>
+        <XS as='span' className='ml-1 text-black dark:text-white'>
+          Tommy
+        </XS>
       </div>
       <div className='flex shrink-0 items-center rounded-full border border-zinc-200 bg-white/25 px-1.5 py-0.5 backdrop-blur-sm transition-opacity duration-300 ease-in-out group-hover/animated-card:opacity-0 dark:border-zinc-800 dark:bg-black/25'>
         <div className='h-1.5 w-1.5 rounded-full bg-[var(--secondary-color)]' />
-        <span className='ml-1 text-[10px] text-black dark:text-white'>Megan</span>
+        <XS as='span' className='ml-1 text-black dark:text-white'>
+          Megan
+        </XS>
       </div>
     </div>
   );
@@ -371,12 +375,12 @@ const Layer4 = () => {
     <div className='group relative h-full w-[356px]'>
       <div className='ease-[cubic-bezier(0.6, 0.6, 0, 1)] absolute inset-0 z-[7] flex max-w-[356px] -translate-y-full items-start justify-start bg-transparent p-4 transition-transform duration-500 group-hover/animated-card:translate-y-0'>
         <div className='ease-[cubic-bezier(0.6, 0.6, 0, 1)] rounded-md border border-zinc-200 bg-white/25 p-1.5 opacity-0 backdrop-blur-sm transition-opacity duration-500 group-hover/animated-card:opacity-100 dark:border-zinc-800 dark:bg-black/25'>
-          <p className='mb-1 text-xs font-semibold text-black dark:text-white'>
+          <M className='!mt-0 mb-1 text-xs font-semibold text-black dark:text-white'>
             Random Data Visualization
-          </p>
-          <p className='text-xs text-neutral-500 dark:text-neutral-400'>
+          </M>
+          <S className='text-neutral-500 dark:text-neutral-400'>
             Displaying some interesting stats.
-          </p>
+          </S>
         </div>
       </div>
     </div>

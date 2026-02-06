@@ -5,7 +5,7 @@ import { cn } from '@/lib/utils/ui';
 import { M, S, L } from './typography';
 
 const neoBadgeVariants = cva(
-  'inline-block font-mono rounded-md border-2 border-black transition-all duration-300',
+  'inline-block font-mono rounded-md border-2 border-black transition-[transform,background-color] duration-300',
   {
     variants: {
       variant: {

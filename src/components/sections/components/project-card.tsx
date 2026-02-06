@@ -7,6 +7,8 @@ import { NeoBadge } from '@/components/ui/neoBadge';
 import { H4, M } from '@/components/ui/typography';
 import type { ProjectData } from '@/lib/types/projects';
 import { cn } from '@/lib/utils/ui';
+import { IndexedAnimatedCard } from './indexed';
+import { ShardsAnimatedCard } from './shards';
 import { StrideAnimatedCard } from './stride';
 
 type CardVariants = VariantProps<typeof cardVariants>;
@@ -18,9 +20,15 @@ interface ProjectCardProps {
 }
 
 export default function ProjectCard({ project, className, rotation = 'none' }: ProjectCardProps) {
-  // Use StrideAnimatedCard only for Stride project
+  // Route to specific animated cards by slug
   if (project._slug === 'stride') {
-    return <StrideAnimatedCard project={project} className={cn('h-[450px]', className)} />;
+    return <StrideAnimatedCard project={project} className={className} />;
+  }
+  if (project._slug === 'indexed') {
+    return <IndexedAnimatedCard project={project} className={className} />;
+  }
+  if (project._slug === 'shards') {
+    return <ShardsAnimatedCard project={project} className={className} />;
   }
 
   // Handle technologies from BaseHub
@@ -29,7 +37,6 @@ export default function ProjectCard({ project, className, rotation = 'none' }: P
   // Get project color, default to blue if none set
   const projectColor = project.color?.hex || '#3b82f6';
 
-  // Convert hex to rgba with 10% opacity for subtle tint
   const hexToRgba = (hex: string, alpha: number) => {
     const r = parseInt(hex.slice(1, 3), 16);
     const g = parseInt(hex.slice(3, 5), 16);
@@ -39,26 +46,23 @@ export default function ProjectCard({ project, className, rotation = 'none' }: P
 
   return (
     <Card
-      className={cn('w-full h-[450px] overflow-hidden', className)}
+      className={cn('w-full overflow-hidden', className)}
       variant='default'
       rotation={rotation}
       shadow='lg'
       style={{
-        backgroundColor: hexToRgba(projectColor, 0.1) // Subtle tint with 10% opacity
+        backgroundColor: hexToRgba(projectColor, 0.1)
       }}
     >
       <CardHeader className='pb-2'>
-        {/* Title */}
         <H4 className='line-clamp-1'>{project._title}</H4>
       </CardHeader>
 
       <CardContent className='pt-0 pb-2'>
-        {/* Description */}
         <M className='text-muted-foreground line-clamp-3 mb-3 text-sm leading-relaxed'>
           {project.shortDescription}
         </M>
 
-        {/* Used Technologies */}
         {technologies.length > 0 && (
           <div className='space-y-2'>
             <div className='flex flex-wrap gap-1.5'>
@@ -93,7 +97,6 @@ export default function ProjectCard({ project, className, rotation = 'none' }: P
 
       <CardFooter className='pt-2 mt-auto'>
         <div className='flex gap-2 w-full'>
-          {/* Button to read in full */}
           {project._slug && (
             <IconLink
               href={`/projects/${project._slug}`}

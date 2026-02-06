@@ -1,7 +1,7 @@
 'use client';
 
-import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
-import { H4, S, SMuted } from '@/components/ui/typography';
+import { NeoBadge } from '@/components/ui/neoBadge';
+import { S, SMuted } from '@/components/ui/typography';
 import { cn } from '@/lib/utils/ui';
 
 type ExperienceData = {
@@ -25,52 +25,49 @@ type ExperienceData = {
 interface ExperienceCardProps {
   experience: ExperienceData;
   className?: string;
+  isLatest?: boolean;
 }
 
-export default function ExperienceCard({ experience: exp, className }: ExperienceCardProps) {
+export default function ExperienceCard({
+  experience: exp,
+  className,
+  isLatest = false
+}: ExperienceCardProps) {
   const skills = exp.skills?.map((skill) => skill._title) || [];
+  const startYear = exp.startDate ? new Date(exp.startDate).getFullYear() : '';
+  const endYear = exp.endDate ? new Date(exp.endDate).getFullYear() : 'Present';
 
   return (
-    <Card className={cn('w-full h-[300px] overflow-hidden', className)} shadow='none'>
-      <CardHeader className='pb-3'>
-        <div className='flex justify-between items-start'>
-          <H4 className='flex items-center gap-1.5'>{exp._title}</H4>
-          <SMuted className='text-right'>
-            {exp.startDate ? new Date(exp.startDate).getFullYear() : ''} -{' '}
-            {exp.endDate ? new Date(exp.endDate).getFullYear() : 'Present'}
-          </SMuted>
-        </div>
-        <S className='text-gray-600 dark:text-gray-400 line-clamp-2 !mt-2'>
-          {exp.shortDescription}
-        </S>{' '}
-      </CardHeader>
+    <div className={cn('flex items-start gap-3 py-1.5', className)}>
+      {/* Year column */}
+      <div className='shrink-0 w-[80px] pt-0.5'>
+        <SMuted
+          className={cn('font-mono whitespace-nowrap', isLatest && 'font-bold text-foreground')}
+        >
+          {startYear} – {endYear}
+        </SMuted>
+      </div>
 
-      <CardContent className='border-t border-gray-200 dark:border-gray-700 pt-3'>
-        {/* Job activities/responsibilities content */}
-        <div className='text-sm text-gray-600 dark:text-gray-400 mb-3'>
-          {exp.jobActivities?.json?.content ? (
-            <div className='prose prose-sm'>
-              {/* Rich text content would be rendered here - simplified for now */}
-              <S>Job responsibilities and activities</S>
-            </div>
-          ) : (
-            <S>Experience details</S>
-          )}
-        </div>
-      </CardContent>
+      {/* Content */}
+      <div className='flex flex-col gap-1 min-w-0 flex-1'>
+        <S className={cn('font-mono', isLatest && 'font-bold')}>{exp._title}</S>
 
-      <CardFooter className='pt-0'>
-        <div className='flex flex-wrap gap-2 w-full'>
-          {skills.slice(0, 3).map((skill, i) => (
-            <span
-              key={`${exp._id}-skill-${skill}`}
-              className={`px-2.5 py-0.5 bg-accent-light/20 text-sm font-medium rounded-sm ${i % 2 === 0 ? 'rotate-[0.5deg]' : '-rotate-[0.5deg]'}`}
-            >
-              {skill}
-            </span>
-          ))}
-        </div>
-      </CardFooter>
-    </Card>
+        {skills.length > 0 && (
+          <div className='flex flex-wrap gap-1'>
+            {skills.slice(0, 3).map((skill) => (
+              <NeoBadge
+                key={`${exp._id}-skill-${skill}`}
+                variant='outline'
+                size='sm'
+                rotation='none'
+                interactive='none'
+              >
+                {skill}
+              </NeoBadge>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
   );
 }

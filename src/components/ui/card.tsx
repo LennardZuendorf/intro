@@ -7,7 +7,7 @@ export interface CardProps
     VariantProps<typeof cardVariants> {}
 
 const cardVariants = cva(
-  'rounded-md border-4 border-border text-primary-foreground shadow-black shadow-md transition-all',
+  'rounded-md border-4 border-border text-primary-foreground shadow-black shadow-md transition-[transform,box-shadow] duration-200',
   {
     variants: {
       variant: {
