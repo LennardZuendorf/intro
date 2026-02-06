@@ -44,11 +44,9 @@ next-env.d.ts
 
 /media
 
-.history/**
 .history
-
 .memory/
-.cursor/rules/
-.memory/**
+.agents/
+.claude/
 
 
