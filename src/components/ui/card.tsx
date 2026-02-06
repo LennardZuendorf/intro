@@ -4,9 +4,7 @@ import { cn } from '@/lib/utils/ui';
 
 export interface CardProps
   extends React.HTMLAttributes<HTMLDivElement>,
-    VariantProps<typeof cardVariants> {
-  disableScale?: boolean;
-}
+    VariantProps<typeof cardVariants> {}
 
 const cardVariants = cva(
   'rounded-md border-4 border-border text-primary-foreground shadow-black shadow-md transition-all',
@@ -64,7 +62,6 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
       borderStyle,
       rotation,
       interactive,
-      disableScale = false,
       ...props
     },
     ref
@@ -72,7 +69,6 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
     <div
       ref={ref}
       className={cn(
-        !disableScale && 'scale-100',
         cardVariants({ variant, shadow, borderStyle, rotation, interactive }),
         className
       )}

@@ -1,4 +1,8 @@
-import type { VisualProps } from './animated-card';
+export interface VisualProps {
+  mainColor?: string;
+  secondaryColor?: string;
+  gridColor?: string;
+}
 
 export function Visual({
   mainColor = '#8b5cf6',

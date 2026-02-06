@@ -1,6 +1,5 @@
 import type React from 'react';
 import './globals.css';
-import { ReactPlugin } from '@21st-extension/react';
 import { basehub } from 'basehub';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
@@ -65,25 +64,6 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  const _twentyFirstConfig = {
-    plugins: [ReactPlugin]
-  };
-
-  const _data = await basehub().query({
-    globals: {
-      showAbout: true,
-      showProjects: true,
-      socials: {
-        items: {
-          _id: true,
-          _title: true,
-          url: true,
-          icon: true
-        }
-      }
-    }
-  });
-
   return (
     <html lang='en' suppressHydrationWarning className={inter.className}>
       <head>

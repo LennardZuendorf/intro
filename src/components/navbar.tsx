@@ -19,15 +19,7 @@ type SocialItem = {
   icon: string | null;
 };
 
-export const Nav = ({
-  className,
-  socials
-}: {
-  className?: string;
-  showAbout: boolean;
-  showProjects: boolean;
-  socials: SocialItem[];
-}) => {
+export const Nav = ({ className, socials }: { className?: string; socials: SocialItem[] }) => {
   return <Navbar className={cn('flex max-w-fit mx-auto', className)} socials={socials} />;
 };
 

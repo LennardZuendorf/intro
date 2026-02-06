@@ -36,6 +36,10 @@ export default function SkillsShowcase({ skills }: SkillsShowcaseProps) {
     }, 500);
   };
 
+  const variants = ['default', 'light', 'dark'] as const;
+  const rotations = ['slight', 'negative', 'none'] as const;
+  const interactions = ['lift', 'bounce', 'wiggle'] as const;
+
   return (
     <div className='w-full'>
       <H4 className='font-mono uppercase tracking-wider ml-2 mb-4'>What I Do</H4>
@@ -43,7 +47,7 @@ export default function SkillsShowcase({ skills }: SkillsShowcaseProps) {
         {(showAllSkills ? skillsToDisplay : visibleSkills).map((skill, index) => (
           <NeoBadge
             key={skill._id}
-            variant={index % 3 === 0 ? 'default' : index % 3 === 1 ? 'light' : 'dark'}
+            variant={variants[index % 3]}
             size='sm'
             className={`skill-badge transition-all duration-300 ease-in-out ${
               animatingSkills ? 'scale-95 opacity-80' : 'scale-100 opacity-100'
@@ -51,8 +55,8 @@ export default function SkillsShowcase({ skills }: SkillsShowcaseProps) {
             style={{
               transitionDelay: `${index * 25}ms`
             }}
-            rotation={index % 3 === 0 ? 'slight' : index % 3 === 1 ? 'negative' : 'none'}
-            interactive={index % 3 === 0 ? 'lift' : index % 3 === 1 ? 'bounce' : 'wiggle'}
+            rotation={rotations[index % 3]}
+            interactive={interactions[index % 3]}
           >
             {skill._title}
           </NeoBadge>

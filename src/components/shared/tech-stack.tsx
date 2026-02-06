@@ -41,6 +41,8 @@ export function TechStackCompact({ techStackData }: TechStackCompactProps) {
     }, 500);
   };
 
+  const rotations = ['slight', 'negative', 'none'] as const;
+
   return (
     <div className='flex flex-wrap gap-2 md:gap-3 relative transition-all duration-500 ease-in-out'>
       {(showAllTech ? techStackData : visibleTech).map((tech, index) => (
@@ -54,7 +56,7 @@ export function TechStackCompact({ techStackData }: TechStackCompactProps) {
           style={{
             transitionDelay: `${index * 25}ms`
           }}
-          rotation={index % 3 === 0 ? 'slight' : index % 3 === 1 ? 'negative' : 'none'}
+          rotation={rotations[index % 3]}
           interactive='lift'
         >
           <Link

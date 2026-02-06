@@ -107,6 +107,7 @@ export const RichTextBlock = ({ children, className, blocks }: RichTextBlockProp
               alt={props.alt || ''}
               width={800}
               height={400}
+              sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 800px'
               className='rounded-lg border-2 border-black dark:border-white my-4'
             />
           ),

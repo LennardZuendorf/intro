@@ -4,33 +4,8 @@ import { useRef, useState } from 'react';
 import ProjectCard from '@/components/sections/components/project-card';
 import { NeoBadge } from '@/components/ui/neoBadge';
 import { M, S } from '@/components/ui/typography';
+import type { ProjectData } from '@/lib/types/projects';
 import { getRandomCardProps } from '@/lib/utils/randomCardProps';
-
-// Create a type that matches what we actually query from BaseHub
-type ProjectData = {
-  _id: string;
-  _title: string;
-  _slug: string;
-  shortDescription?: string | null;
-  date?: string | null;
-  meta?: {
-    title?: string | null;
-    desc?: string | null;
-  } | null;
-  technology?:
-    | {
-        _id: string;
-        _title: string;
-        url?: string | null;
-        badgeUrl?: string | null;
-      }[]
-    | null;
-  color?: {
-    hex?: string | null;
-    rgb?: string | null;
-    hsl?: string | null;
-  } | null;
-};
 
 interface ProjectsGridProps {
   projects: ProjectData[];

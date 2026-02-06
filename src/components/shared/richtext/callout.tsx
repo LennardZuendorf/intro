@@ -33,7 +33,6 @@ export type CalloutType = 'info' | 'check' | 'warning' | 'danger' | 'note';
 export interface CalloutProps
   extends React.HTMLAttributes<HTMLDivElement>,
     VariantProps<typeof calloutVariants> {
-  disableScale?: boolean;
   type?: CalloutType;
 }
 
@@ -66,18 +65,14 @@ const calloutVariants = cva(
 );
 
 const Callout = React.forwardRef<HTMLDivElement, CalloutProps>(
-  ({ className, variant, borderStyle, disableScale = false, type, ...props }, ref) => {
+  ({ className, variant, borderStyle, type, ...props }, ref) => {
     // If type is provided, use it as variant; otherwise use provided variant
     const finalVariant = type ? (type as CalloutProps['variant']) : variant;
 
     return (
       <div
         ref={ref}
-        className={cn(
-          !disableScale && 'scale-100',
-          calloutVariants({ variant: finalVariant, borderStyle }),
-          className
-        )}
+        className={cn(calloutVariants({ variant: finalVariant, borderStyle }), className)}
         {...props}
       />
     );
@@ -210,6 +205,7 @@ const richTextComponents = {
       alt={props.alt || ''}
       width={800}
       height={400}
+      sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 800px'
       className='rounded-lg border-2 border-black dark:border-white my-4'
     />
   ),

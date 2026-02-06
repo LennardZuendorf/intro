@@ -18,7 +18,6 @@ export function LinkedinCover({
       className='relative w-[1584px] h-[396px] overflow-hidden'
       rotation='none'
       interactive='none'
-      disableScale
     >
       <BackgroundGrid
         className='absolute inset-0 w-full h-full pr-10'

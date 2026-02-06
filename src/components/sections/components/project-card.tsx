@@ -5,34 +5,9 @@ import { Card, CardContent, CardFooter, CardHeader, type cardVariants } from '@/
 import { IconLink } from '@/components/ui/icon-link';
 import { NeoBadge } from '@/components/ui/neoBadge';
 import { H4, M } from '@/components/ui/typography';
+import type { ProjectData } from '@/lib/types/projects';
 import { cn } from '@/lib/utils/ui';
 import { StrideAnimatedCard } from './stride';
-
-// Create a type that matches what we actually query from BaseHub
-type ProjectData = {
-  _id: string;
-  _title: string;
-  _slug: string;
-  shortDescription?: string | null;
-  date?: string | null;
-  meta?: {
-    title?: string | null;
-    desc?: string | null;
-  } | null;
-  technology?:
-    | {
-        _id: string;
-        _title: string;
-        url?: string | null;
-        badgeUrl?: string | null;
-      }[]
-    | null;
-  color?: {
-    hex?: string | null;
-    rgb?: string | null;
-    hsl?: string | null;
-  } | null;
-};
 
 type CardVariants = VariantProps<typeof cardVariants>;
 

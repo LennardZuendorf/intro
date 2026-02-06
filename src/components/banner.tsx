@@ -2,9 +2,8 @@
 
 import { useEffect } from 'react';
 import { toast } from 'sonner';
-import type { SectionProps } from '@/app/page';
 
-export function Banner(_props: SectionProps) {
+export function Banner() {
   useEffect(() => {
     // Wait for client-side hydration and DOM to be ready
     if (typeof window === 'undefined') return;

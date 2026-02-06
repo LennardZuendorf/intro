@@ -290,11 +290,7 @@ const Page: NextPage = async () => {
           >
             <div className='w-full flex justify-center fixed top-0 left-0 z-[9999] pointer-events-none'>
               <div className='pointer-events-auto w-full max-w-[1536px] px-2 md:px-8 pt-3'>
-                <Nav
-                  socials={data.globals.socials.items}
-                  showAbout={data.globals.showAbout}
-                  showProjects={data.globals.showProjects}
-                />
+                <Nav socials={data.globals.socials.items} />
               </div>
             </div>
 
