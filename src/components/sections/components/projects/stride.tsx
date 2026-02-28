@@ -317,7 +317,16 @@ const Layer2 = ({ color }: LayerProps) => {
   );
 };
 
-const Layer3 = ({ color, secondaryColor }: LayerProps) => {
+interface Layer3Props extends LayerProps {
+  contributors?: { name: string; colorVar: string }[];
+}
+
+const defaultContributors = [
+  { name: 'Tommy', colorVar: '--color' },
+  { name: 'Megan', colorVar: '--secondary-color' }
+];
+
+const Layer3 = ({ color, secondaryColor, contributors = defaultContributors }: Layer3Props) => {
   return (
     <div
       className='absolute top-4 right-4 z-[8] flex items-center gap-1'
@@ -331,14 +340,12 @@ const Layer3 = ({ color, secondaryColor }: LayerProps) => {
         }
       }
     >
-      <div className='flex shrink-0 items-center rounded-full border border-zinc-200 bg-white/25 px-1.5 py-0.5 backdrop-blur-sm transition-opacity duration-300 ease-in-out group-hover/animated-card:opacity-0 dark:border-zinc-800 dark:bg-black/25'>
-        <div className='h-1.5 w-1.5 rounded-full bg-[var(--color)]' />
-        <span className='ml-1 text-[10px] text-black dark:text-white'>Tommy</span>
-      </div>
-      <div className='flex shrink-0 items-center rounded-full border border-zinc-200 bg-white/25 px-1.5 py-0.5 backdrop-blur-sm transition-opacity duration-300 ease-in-out group-hover/animated-card:opacity-0 dark:border-zinc-800 dark:bg-black/25'>
-        <div className='h-1.5 w-1.5 rounded-full bg-[var(--secondary-color)]' />
-        <span className='ml-1 text-[10px] text-black dark:text-white'>Megan</span>
-      </div>
+      {contributors.map((contributor) => (
+        <div key={contributor.name} className='flex shrink-0 items-center rounded-full border border-zinc-200 bg-white/25 px-1.5 py-0.5 backdrop-blur-sm transition-opacity duration-300 ease-in-out group-hover/animated-card:opacity-0 dark:border-zinc-800 dark:bg-black/25'>
+          <div className={`h-1.5 w-1.5 rounded-full bg-[var(${contributor.colorVar})]`} />
+          <span className='ml-1 text-[10px] text-black dark:text-white'>{contributor.name}</span>
+        </div>
+      ))}
     </div>
   );
 };

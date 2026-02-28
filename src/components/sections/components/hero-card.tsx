@@ -21,6 +21,10 @@ interface HeroCardProps {
   secondaryText?: {
     json?: {
       content?: ReactNode;
+      blocks?: (
+        | UnionCalloutComponentComponent
+        | UnionTechnologyComponentExperienceComponentProjectComponentSkillComponentHoverCardLinkComponent
+      )[];
     } | null;
   } | null;
   className?: string;
@@ -39,7 +43,7 @@ export function HeroCard({ heroText, secondaryText, className }: HeroCardProps) 
               {heroText.json.content}
             </RichText>
             {secondaryText?.json?.content && (
-              <RichText className='pt-1'>{secondaryText.json.content}</RichText>
+              <RichText blocks={secondaryText.json.blocks} className='pt-1'>{secondaryText.json.content}</RichText>
             )}
           </div>
         ) : (

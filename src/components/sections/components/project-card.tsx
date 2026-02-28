@@ -1,5 +1,6 @@
 'use client';
 
+import type React from 'react';
 import type { VariantProps } from 'class-variance-authority';
 import { Card, CardContent, CardFooter, CardHeader, type cardVariants } from '@/components/ui/card';
 import { IconLink } from '@/components/ui/icon-link';
@@ -19,16 +20,16 @@ interface ProjectCardProps {
   rotation?: CardVariants['rotation'];
 }
 
+const animatedCardMap: Record<string, React.ComponentType<{ project: ProjectData; className?: string }>> = {
+  stride: StrideAnimatedCard,
+  indexed: IndexedAnimatedCard,
+  shards: ShardsAnimatedCard,
+};
+
 export default function ProjectCard({ project, className, rotation = 'none' }: ProjectCardProps) {
-  // Route to specific animated cards by slug
-  if (project._slug === 'stride') {
-    return <StrideAnimatedCard project={project} className={className} />;
-  }
-  if (project._slug === 'indexed') {
-    return <IndexedAnimatedCard project={project} className={className} />;
-  }
-  if (project._slug === 'shards') {
-    return <ShardsAnimatedCard project={project} className={className} />;
+  const AnimatedCard = animatedCardMap[project._slug];
+  if (AnimatedCard) {
+    return <AnimatedCard project={project} className={className} />;
   }
 
   // Handle technologies from BaseHub

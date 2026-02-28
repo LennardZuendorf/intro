@@ -18,23 +18,33 @@ function formatDateRange(startDate: string, endDate: string | null): string {
 export const ExperienceHoverCard = (props: ExperienceComponent) => {
   const { _title, shortDescription, companyTitle, companyLink, startDate, endDate, skills } = props;
 
-  const href = companyLink || '#';
-  const isExternal = isExternalUrl(href);
+  const isExternal = isExternalUrl(companyLink);
   const displayText = companyTitle || _title;
 
   return (
     <span style={{ display: 'inline' }}>
       <HoverCard>
         <HoverCardTrigger asChild>
-          <Link
-            href={href}
-            target={isExternal ? '_blank' : undefined}
-            rel={isExternal ? 'noopener noreferrer' : undefined}
-            style={{ display: 'inline' }}
-            className='!underline decoration-1 underline-offset-[3px] decoration-foreground/40 hover:decoration-foreground/70 transition-colors cursor-pointer'
-          >
-            {displayText}
-          </Link>
+          {companyLink ? (
+            <Link
+              href={companyLink}
+              target={isExternal ? '_blank' : undefined}
+              rel={isExternal ? 'noopener noreferrer' : undefined}
+              style={{ display: 'inline' }}
+              className='!underline decoration-1 underline-offset-[3px] decoration-foreground/40 hover:decoration-foreground/70 transition-colors cursor-pointer'
+            >
+              {displayText}
+            </Link>
+          ) : (
+            <span
+              role='button'
+              tabIndex={0}
+              style={{ display: 'inline' }}
+              className='!underline decoration-1 underline-offset-[3px] decoration-foreground/40 hover:decoration-foreground/70 transition-colors cursor-pointer'
+            >
+              {displayText}
+            </span>
+          )}
         </HoverCardTrigger>
         <HoverCardContent className='w-96 p-4'>
           <div className='space-y-3'>

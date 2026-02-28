@@ -31,11 +31,11 @@ export const Footer = async ({ className = '' }: FooterProps) => {
           <S>Built by Lennard Zündorf</S>
           <S>{`© ${new Intl.DateTimeFormat('en', { year: 'numeric' }).format(new Date())}`}</S>
           <S>|</S>
-          <Link href='/legal'>
-            <Button variant='link' className='justify-center items-center' size='icon'>
+          <Button variant='link' className='justify-center items-center' size='icon' asChild>
+            <Link href='/legal'>
               legal
-            </Button>
-          </Link>
+            </Link>
+          </Button>
         </div>
       </div>
     </Section>
