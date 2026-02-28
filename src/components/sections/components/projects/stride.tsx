@@ -341,8 +341,14 @@ const Layer3 = ({ color, secondaryColor, contributors = defaultContributors }: L
       }
     >
       {contributors.map((contributor) => (
-        <div key={contributor.name} className='flex shrink-0 items-center rounded-full border border-zinc-200 bg-white/25 px-1.5 py-0.5 backdrop-blur-sm transition-opacity duration-300 ease-in-out group-hover/animated-card:opacity-0 dark:border-zinc-800 dark:bg-black/25'>
-          <div className={`h-1.5 w-1.5 rounded-full bg-[var(${contributor.colorVar})]`} />
+        <div
+          key={contributor.name}
+          className='flex shrink-0 items-center rounded-full border border-zinc-200 bg-white/25 px-1.5 py-0.5 backdrop-blur-sm transition-opacity duration-300 ease-in-out group-hover/animated-card:opacity-0 dark:border-zinc-800 dark:bg-black/25'
+        >
+          <div
+            className='h-1.5 w-1.5 rounded-full'
+            style={{ backgroundColor: `var(${contributor.colorVar})` }}
+          />
           <span className='ml-1 text-[10px] text-black dark:text-white'>{contributor.name}</span>
         </div>
       ))}

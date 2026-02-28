@@ -32,9 +32,7 @@ export const Footer = async ({ className = '' }: FooterProps) => {
           <S>{`© ${new Intl.DateTimeFormat('en', { year: 'numeric' }).format(new Date())}`}</S>
           <S>|</S>
           <Button variant='link' className='justify-center items-center' size='icon' asChild>
-            <Link href='/legal'>
-              legal
-            </Link>
+            <Link href='/legal'>legal</Link>
           </Button>
         </div>
       </div>

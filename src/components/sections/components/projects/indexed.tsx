@@ -34,7 +34,11 @@ export function IndexedAnimatedCard({ project, className }: IndexedAnimatedCardP
     >
       {/* Visual Layer — Index/Document themed */}
       <div className='h-[140px] w-full overflow-hidden'>
-        <IndexVisual mainColor={mainColor} secondaryColor={secondaryColor} gradientId={`indexed-glow-${instanceId}`} />
+        <IndexVisual
+          mainColor={mainColor}
+          secondaryColor={secondaryColor}
+          gradientId={`indexed-glow-${instanceId}`}
+        />
       </div>
 
       {/* Body */}

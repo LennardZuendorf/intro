@@ -1,7 +1,7 @@
 'use client';
 
-import type React from 'react';
 import type { VariantProps } from 'class-variance-authority';
+import type React from 'react';
 import { Card, CardContent, CardFooter, CardHeader, type cardVariants } from '@/components/ui/card';
 import { IconLink } from '@/components/ui/icon-link';
 import { NeoBadge } from '@/components/ui/neoBadge';
@@ -20,10 +20,13 @@ interface ProjectCardProps {
   rotation?: CardVariants['rotation'];
 }
 
-const animatedCardMap: Record<string, React.ComponentType<{ project: ProjectData; className?: string }>> = {
+const animatedCardMap: Record<
+  string,
+  React.ComponentType<{ project: ProjectData; className?: string }>
+> = {
   stride: StrideAnimatedCard,
   indexed: IndexedAnimatedCard,
-  shards: ShardsAnimatedCard,
+  shards: ShardsAnimatedCard
 };
 
 export default function ProjectCard({ project, className, rotation = 'none' }: ProjectCardProps) {

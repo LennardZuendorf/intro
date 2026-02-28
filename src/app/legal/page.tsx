@@ -67,9 +67,7 @@ export default async function Page() {
         }
 
         const legalTexts = data.sectionsAndPages.legalPage.legalTexts;
-        const en = legalTexts?.find(
-          (item) => item._title === 'English'
-        );
+        const en = legalTexts?.find((item) => item._title === 'English');
 
         if (!en || !en.dataProtectionRules) {
           return notFound();
