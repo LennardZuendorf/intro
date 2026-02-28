@@ -50,7 +50,7 @@ export const ProjectHoverCard = (props: ProjectComponent) => {
               </div>
             )}
             {domain && (
-              <div className='flex items-center gap-2 text-xs text-primary-foreground/70 pt-1'>
+              <div className='flex items-center gap-2 text-primary-foreground/70 pt-1'>
                 <ExternalLink className='h-3 w-3' />
                 <XS>{domain}</XS>
               </div>

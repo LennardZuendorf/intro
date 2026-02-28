@@ -1,6 +1,7 @@
 'use client';
 
 import type * as React from 'react';
+import { useId } from 'react';
 import { IconLink } from '@/components/ui/icon-link';
 import { NeoBadge } from '@/components/ui/neoBadge';
 import { H4, M } from '@/components/ui/typography';
@@ -13,6 +14,7 @@ interface IndexedAnimatedCardProps {
 }
 
 export function IndexedAnimatedCard({ project, className }: IndexedAnimatedCardProps) {
+  const instanceId = useId();
   const mainColor = project.color?.hex || '#3b82f6';
 
   const rgb = hexToRgb(mainColor);
@@ -32,7 +34,11 @@ export function IndexedAnimatedCard({ project, className }: IndexedAnimatedCardP
     >
       {/* Visual Layer — Index/Document themed */}
       <div className='h-[140px] w-full overflow-hidden'>
-        <IndexVisual mainColor={mainColor} secondaryColor={secondaryColor} />
+        <IndexVisual
+          mainColor={mainColor}
+          secondaryColor={secondaryColor}
+          gradientId={`indexed-glow-${instanceId}`}
+        />
       </div>
 
       {/* Body */}
@@ -76,19 +82,17 @@ export function IndexedAnimatedCard({ project, className }: IndexedAnimatedCardP
           </div>
         )}
 
-        {(project.showcaseLink || project._slug) && (
-          <div className='pt-2'>
-            <IconLink
-              href={project.showcaseLink || `/projects/${project._slug}`}
-              variant='accent'
-              size='sm'
-              className='flex-1'
-              external={!!project.showcaseLink}
-            >
-              {project.showcaseLink ? 'Check it out' : 'Read More'}
-            </IconLink>
-          </div>
-        )}
+        <div className='pt-2'>
+          <IconLink
+            href={project.showcaseLink || `/projects/${project._slug}`}
+            variant='accent'
+            size='sm'
+            className='flex-1'
+            external={!!project.showcaseLink}
+          >
+            {project.showcaseLink ? 'Check it out' : 'Read More'}
+          </IconLink>
+        </div>
       </div>
     </div>
   );
@@ -97,9 +101,10 @@ export function IndexedAnimatedCard({ project, className }: IndexedAnimatedCardP
 interface IndexVisualProps {
   mainColor: string;
   secondaryColor: string;
+  gradientId: string;
 }
 
-function IndexVisual({ mainColor, secondaryColor }: IndexVisualProps) {
+function IndexVisual({ mainColor, secondaryColor, gradientId }: IndexVisualProps) {
   return (
     <div aria-hidden className='relative h-full w-full overflow-hidden'>
       {/* Background grid */}
@@ -121,12 +126,12 @@ function IndexVisual({ mainColor, secondaryColor }: IndexVisualProps) {
           preserveAspectRatio='xMidYMid slice'
         >
           <defs>
-            <radialGradient id='indexed-glow' cx='0.5' cy='0.5' r='0.6'>
+            <radialGradient id={gradientId} cx='0.5' cy='0.5' r='0.6'>
               <stop offset='0%' stopColor={mainColor} stopOpacity='0.2' />
               <stop offset='100%' stopColor={mainColor} stopOpacity='0' />
             </radialGradient>
           </defs>
-          <rect width='356' height='140' fill='url(#indexed-glow)' />
+          <rect width='356' height='140' fill={`url(#${gradientId})`} />
         </svg>
       </div>
 

@@ -800,6 +800,7 @@ const TypographyLink: React.FC<LinkProps> = ({
   return (
     <Link
       href={href}
+      onClick={onClick}
       className={cn(
         // M component base styling
         "leading-6 not-first:mt-1",
@@ -817,13 +818,7 @@ const TypographyLink: React.FC<LinkProps> = ({
       {...externalProps}
       {...props}
     >
-      {onClick ? (
-        <span onClick={onClick} className="contents">
-          {children}
-        </span>
-      ) : (
-        children
-      )}
+      {children}
     </Link>
   );
 };

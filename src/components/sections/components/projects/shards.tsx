@@ -1,6 +1,7 @@
 'use client';
 
 import type * as React from 'react';
+import { useId } from 'react';
 import { IconLink } from '@/components/ui/icon-link';
 import { NeoBadge } from '@/components/ui/neoBadge';
 import { H4, M } from '@/components/ui/typography';
@@ -13,6 +14,7 @@ interface ShardsAnimatedCardProps {
 }
 
 export function ShardsAnimatedCard({ project, className }: ShardsAnimatedCardProps) {
+  const instanceId = useId();
   const mainColor = project.color?.hex || '#a855f7';
 
   const rgb = hexToRgb(mainColor);
@@ -37,6 +39,7 @@ export function ShardsAnimatedCard({ project, className }: ShardsAnimatedCardPro
           mainColor={mainColor}
           secondaryColor={secondaryColor}
           tertiaryColor={tertiaryColor}
+          gradientId={`shards-glow-${instanceId}`}
         />
       </div>
 
@@ -103,9 +106,10 @@ interface ShardsVisualProps {
   mainColor: string;
   secondaryColor: string;
   tertiaryColor: string;
+  gradientId: string;
 }
 
-function ShardsVisual({ mainColor, secondaryColor, tertiaryColor }: ShardsVisualProps) {
+function ShardsVisual({ mainColor, secondaryColor, tertiaryColor, gradientId }: ShardsVisualProps) {
   return (
     <div aria-hidden className='relative h-full w-full overflow-hidden'>
       {/* Background grid */}
@@ -127,12 +131,12 @@ function ShardsVisual({ mainColor, secondaryColor, tertiaryColor }: ShardsVisual
           preserveAspectRatio='xMidYMid slice'
         >
           <defs>
-            <radialGradient id='shards-glow' cx='0.5' cy='0.6' r='0.5'>
+            <radialGradient id={gradientId} cx='0.5' cy='0.6' r='0.5'>
               <stop offset='0%' stopColor={mainColor} stopOpacity='0.25' />
               <stop offset='100%' stopColor={mainColor} stopOpacity='0' />
             </radialGradient>
           </defs>
-          <rect width='356' height='140' fill='url(#shards-glow)' />
+          <rect width='356' height='140' fill={`url(#${gradientId})`} />
         </svg>
       </div>
 

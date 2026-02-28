@@ -1,5 +1,4 @@
 import { Pump } from 'basehub/react-pump';
-import type { NextPage } from 'next';
 import { draftMode } from 'next/headers';
 import { notFound } from 'next/navigation';
 import { Banner } from '@/components/banner';
@@ -7,7 +6,7 @@ import { Nav } from '@/components/navbar';
 import { RichTextBlock } from '@/components/shared/richtext-block';
 import { Section, SectionHeader } from '@/components/ui/section';
 
-const LegalPage: NextPage = async () => {
+export default async function Page() {
   const { isEnabled: draft } = await draftMode();
 
   return (
@@ -63,24 +62,24 @@ const LegalPage: NextPage = async () => {
       {async ([data]) => {
         'use server';
 
-        if (!data) {
-          console.log('No data privacy regulations found');
-          return null;
+        if (!data || !data.sectionsAndPages?.legalPage) {
+          return notFound();
         }
 
-        const en = data.sectionsAndPages.legalPage.legalTexts?.find(
-          (item) => item._title === 'English'
-        );
+        const legalTexts = data.sectionsAndPages.legalPage.legalTexts;
+        const en = legalTexts?.find((item) => item._title === 'English');
 
         if (!en || !en.dataProtectionRules) {
           return notFound();
         }
 
+        const socials = data.globals?.socials?.items ?? [];
+
         return (
           <div className='flex w-full min-h-screen flex-col relative justify-center items-center'>
             <div className='w-full flex justify-center fixed bottom-0 md:bottom-auto md:top-0 left-0 z-[9999] pointer-events-none'>
               <div className='pointer-events-auto w-full max-w-[1536px] px-2 md:px-8 pb-3 md:pb-0 md:pt-3'>
-                <Nav socials={data.globals.socials.items} backHref='/' />
+                <Nav socials={socials} backHref='/' />
               </div>
             </div>
 
@@ -105,6 +104,4 @@ const LegalPage: NextPage = async () => {
       }}
     </Pump>
   );
-};
-
-export default LegalPage;
+}

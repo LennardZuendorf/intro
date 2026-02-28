@@ -1,7 +1,6 @@
 'use client';
 
 import { Icon } from 'basehub/react-icon';
-import { motion } from 'framer-motion';
 import { ArrowLeftIcon } from 'lucide-react';
 import Link from 'next/link';
 import { ThemeSelect } from '@/components/theme/theme-select';
@@ -28,7 +27,7 @@ interface NavProps {
 
 export const Nav = ({ className, socials, backHref }: NavProps) => {
   return (
-    <motion.header
+    <header
       className={cn(
         'flex justify-center items-center py-2',
         'w-full md:w-auto',
@@ -83,6 +82,6 @@ export const Nav = ({ className, socials, backHref }: NavProps) => {
           </div>
         </NavigationMenuList>
       </NavigationMenu>
-    </motion.header>
+    </header>
   );
 };

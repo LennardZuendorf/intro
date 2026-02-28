@@ -92,8 +92,9 @@ const Page: NextPage = async () => {
           );
         }
 
-        const heroText = (data.sectionsAndPages.heroSection as HeroSection).mainHeroText;
-        const secondaryText = (data.sectionsAndPages.heroSection as HeroSection).secondaryHeroText;
+        const heroSection = data.sectionsAndPages?.heroSection as HeroSection | undefined;
+        const heroText = heroSection?.mainHeroText;
+        const secondaryText = heroSection?.secondaryHeroText;
 
         return (
           <BackgroundGrid
