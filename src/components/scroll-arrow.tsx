@@ -6,6 +6,8 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils/ui';
 
+const MotionButton = motion.create(Button);
+
 // Helper: useMediaQuery for screen size detection (< lg)
 function useMediaQuery(query: string): boolean {
   const [matches, setMatches] = useState<boolean>(() => {
@@ -190,9 +192,6 @@ export const ScrollArrow: React.FC = () => {
   // 2. User is not actively scrolling
   // 3. There is more content below (not at bottom, footer not visible)
   const shouldShow = isMobile && !isScrolling && shouldShowArrow;
-
-  // Create a motion version of Button
-  const MotionButton = motion.create(Button);
 
   return (
     <AnimatePresence>

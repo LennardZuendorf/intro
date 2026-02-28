@@ -56,6 +56,6 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  return <div className='w-full pt-10 md:pt-15 lg:pt-20'>{children}</div>;
+export default function LegalLayout({ children }: { children: React.ReactNode }) {
+  return <>{children}</>;
 }

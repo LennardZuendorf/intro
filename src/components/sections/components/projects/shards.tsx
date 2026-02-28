@@ -5,7 +5,7 @@ import { IconLink } from '@/components/ui/icon-link';
 import { NeoBadge } from '@/components/ui/neoBadge';
 import { H4, M } from '@/components/ui/typography';
 import type { ProjectData } from '@/lib/types/projects';
-import { cn } from '@/lib/utils/ui';
+import { cn, hexToRgb } from '@/lib/utils/ui';
 
 interface ShardsAnimatedCardProps {
   project: ProjectData;
@@ -14,13 +14,6 @@ interface ShardsAnimatedCardProps {
 
 export function ShardsAnimatedCard({ project, className }: ShardsAnimatedCardProps) {
   const mainColor = project.color?.hex || '#a855f7';
-
-  const hexToRgb = (hex: string) => {
-    const r = parseInt(hex.slice(1, 3), 16);
-    const g = parseInt(hex.slice(3, 5), 16);
-    const b = parseInt(hex.slice(5, 7), 16);
-    return { r, g, b };
-  };
 
   const rgb = hexToRgb(mainColor);
   const secondaryColor = `rgb(${Math.min(255, rgb.r + 60)}, ${Math.min(255, rgb.g + 30)}, ${Math.min(255, rgb.b + 20)})`;
@@ -31,8 +24,8 @@ export function ShardsAnimatedCard({ project, className }: ShardsAnimatedCardPro
   return (
     <div
       role='region'
-      aria-labelledby='shards-card-title'
-      aria-describedby='shards-card-description'
+      aria-labelledby={`shards-card-title-${project._id}`}
+      aria-describedby={`shards-card-desc-${project._id}`}
       className={cn(
         'group/animated-card relative w-full overflow-hidden rounded-md border-4 border-border bg-primary text-primary-foreground shadow-black shadow-md',
         className
@@ -49,11 +42,11 @@ export function ShardsAnimatedCard({ project, className }: ShardsAnimatedCardPro
 
       {/* Body */}
       <div className='flex flex-col space-y-1.5 border-t-4 border-border p-3'>
-        <H4 id='shards-card-title' className='line-clamp-1'>
+        <H4 id={`shards-card-title-${project._id}`} className='line-clamp-1'>
           {project._title}
         </H4>
         <M
-          id='shards-card-description'
+          id={`shards-card-desc-${project._id}`}
           className='text-muted-foreground line-clamp-3 text-sm leading-relaxed'
         >
           {project.shortDescription}

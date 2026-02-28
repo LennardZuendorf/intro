@@ -1,15 +1,11 @@
 import { Pump } from 'basehub/react-pump';
-import { ArrowLeftIcon } from 'lucide-react';
 import type { NextPage } from 'next';
 import { draftMode } from 'next/headers';
 import { notFound } from 'next/navigation';
+import { Banner } from '@/components/banner';
+import { Nav } from '@/components/navbar';
 import { RichTextBlock } from '@/components/shared/richtext-block';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
-import { NeoBadge } from '@/components/ui/neoBadge';
-import { ScrollArea } from '@/components/ui/scroll-area';
-import { Section, SectionBottom, SectionTop } from '@/components/ui/section';
-import { H3, Link, M } from '@/components/ui/typography';
+import { Section, SectionHeader } from '@/components/ui/section';
 
 const LegalPage: NextPage = async () => {
   const { isEnabled: draft } = await draftMode();
@@ -50,6 +46,16 @@ const LegalPage: NextPage = async () => {
                 }
               }
             }
+          },
+          globals: {
+            socials: {
+              items: {
+                _id: true,
+                _title: true,
+                url: true,
+                icon: true
+              }
+            }
           }
         }
       ]}
@@ -71,44 +77,30 @@ const LegalPage: NextPage = async () => {
         }
 
         return (
-          <article>
-            <Section className='container mx-auto' id='data-protection' padding='px-6 py-4 md:py-6'>
-              <SectionTop>
-                {/* Back Button */}
-                <div className='flex justify-end mb-2'>
-                  <Button asChild variant='noShadow' size='sm'>
-                    <Link href='/' className='font-bold'>
-                      <ArrowLeftIcon className='w-4 h-4' />
-                      Back to Home
-                    </Link>
-                  </Button>
-                </div>
-              </SectionTop>
+          <div className='flex w-full min-h-screen flex-col relative justify-center items-center'>
+            <div className='w-full flex justify-center fixed bottom-0 md:bottom-auto md:top-0 left-0 z-[9999] pointer-events-none'>
+              <div className='pointer-events-auto w-full max-w-[1536px] px-2 md:px-8 pb-3 md:pb-0 md:pt-3'>
+                <Nav socials={data.globals.socials.items} backHref='/' />
+              </div>
+            </div>
 
-              <SectionBottom>
-                <Card className='relative w-full mb-3 md:mb-0'>
-                  <div className='absolute -top-6 -left-4 md:-top-6 md:-left-6 z-10'>
-                    <NeoBadge variant='light' interactive='lift' className='font-mono'>
-                      <M className='font-mono'>⚖️ Legal</M>
-                    </NeoBadge>
-                  </div>
-                  <CardContent>
-                    <ScrollArea>
-                      {en.dataProtectionRules?.json && (
-                        <div className='font-mono leading-relaxed pb-4'>
-                          <H3>Data Protection</H3>
-                          {/* biome-ignore lint/suspicious/noExplicitAny: basehub RichText blocks typing is external */}
-                          <RichTextBlock blocks={(en.dataProtectionRules.json as any).blocks}>
-                            {en.dataProtectionRules.json.content}
-                          </RichTextBlock>
-                        </div>
-                      )}
-                    </ScrollArea>
-                  </CardContent>
-                </Card>
-              </SectionBottom>
+            <Section
+              id='data-protection'
+              centerContent={false}
+              fullHeight={false}
+              className='pt-20 md:pt-24'
+            >
+              <SectionHeader badge='Legal'>
+                {en.dataProtectionRules?.json && (
+                  <RichTextBlock blocks={en.dataProtectionRules.json.blocks}>
+                    {en.dataProtectionRules.json.content}
+                  </RichTextBlock>
+                )}
+              </SectionHeader>
             </Section>
-          </article>
+
+            <Banner />
+          </div>
         );
       }}
     </Pump>

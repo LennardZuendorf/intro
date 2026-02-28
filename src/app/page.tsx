@@ -1,23 +1,45 @@
 import { Pump } from 'basehub/react-pump';
-import type { AboutSection, HeroSection } from 'basehub-types';
-import { GithubIcon, LinkedinIcon, MailIcon } from 'lucide-react';
+import type { HeroSection } from 'basehub-types';
 import type { NextPage } from 'next';
 import { draftMode } from 'next/headers';
 import { Banner } from '@/components/banner';
 import { Nav } from '@/components/navbar';
-import { IndexSection } from '@/components/sections/index-section';
-import { RichTextBlock as RichText } from '@/components/shared/richtext-block';
+import { HeroCard } from '@/components/sections/components/hero-card';
+import { RichTextBlock } from '@/components/shared/richtext-block';
 import { BackgroundGrid } from '@/components/ui/background-grid';
-import { Card, CardContent, CardHeader } from '@/components/ui/card';
-import { IconLink } from '@/components/ui/icon-link';
-import { NeoBadge } from '@/components/ui/neoBadge';
-import { Section } from '@/components/ui/section';
-import { H1, L, M } from '@/components/ui/typography';
+import { Section, SectionBody, SectionHeader } from '@/components/ui/section';
 import { env } from '@/env';
 
-export interface SectionProps {
-  className?: string;
-}
+const blocksQuery = {
+  on_HoverCardLinkComponent: {
+    _id: true,
+    _title: true,
+    url: true,
+    description: true,
+    text: true,
+    __typename: true
+  },
+  on_ProjectComponent: {
+    _id: true,
+    _title: true,
+    shortDescription: true,
+    technology: { _id: true, _title: true },
+    links: { items: { _title: true, url: true } },
+    color: { hex: true },
+    __typename: true
+  },
+  on_ExperienceComponent: {
+    _id: true,
+    _title: true,
+    shortDescription: true,
+    companyLink: true,
+    companyTitle: true,
+    startDate: true,
+    endDate: true,
+    skills: { _id: true, _title: true },
+    __typename: true
+  }
+} as const;
 
 const Page: NextPage = async () => {
   const { isEnabled: draft } = await draftMode();
@@ -32,75 +54,13 @@ const Page: NextPage = async () => {
               mainHeroText: {
                 json: {
                   content: true,
-                  blocks: {
-                    on_HoverCardLinkComponent: {
-                      _id: true,
-                      _title: true,
-                      url: true,
-                      description: true,
-                      text: true,
-                      __typename: true
-                    }
-                  }
+                  blocks: blocksQuery
                 }
               },
               secondaryHeroText: {
                 json: {
-                  content: true
-                }
-              },
-              specialCards: {
-                _id: true,
-                _title: true,
-                _slug: true,
-                shortDescription: true,
-                showcaseLink: true,
-                technology: {
-                  _id: true,
-                  _title: true,
-                  url: true,
-                  badgeUrl: true
-                },
-                color: {
-                  hex: true
-                }
-              },
-              selectedExperience: {
-                _id: true,
-                _title: true,
-                shortDescription: true,
-                companyLink: true
-              }
-            },
-            aboutSection: {
-              aboutMeText: {
-                json: {
-                  content: true
-                }
-              },
-              quickSkillsShowcase: {
-                items: {
-                  _id: true,
-                  _title: true
-                }
-              },
-              experiences: {
-                items: {
-                  _id: true,
-                  _title: true,
-                  shortDescription: true,
-                  companyLink: true,
-                  startDate: true,
-                  endDate: true,
-                  jobActivities: {
-                    json: {
-                      content: true
-                    }
-                  },
-                  skills: {
-                    _id: true,
-                    _title: true
-                  }
+                  content: true,
+                  blocks: blocksQuery
                 }
               }
             }
@@ -116,14 +76,6 @@ const Page: NextPage = async () => {
             },
             showAbout: true,
             showProjects: true
-          },
-          types: {
-            skills: {
-              items: {
-                _id: true,
-                _title: true
-              }
-            }
           }
         }
       ]}
@@ -131,178 +83,55 @@ const Page: NextPage = async () => {
       {async ([data]) => {
         'use server';
 
-        if (!data) {
+        if (!data || env.NEXT_V2_RELEASE === false) {
           return (
-            <div className='min-h-screen flex flex-col items-center justify-center'>
-              <Section background='grid' containerClassName='justify-center items-center mx-auto'>
-                <Card className='w-full max-w-lg mx-auto' variant='default'>
-                  <CardHeader className='p-6'>
-                    <div className='absolute -top-2 -left-2'>
-                      <NeoBadge variant='light' interactive='lift'>
-                        <M className='font-mono'>👋 Hey there!</M>
-                      </NeoBadge>
-                    </div>
-                    <H1>I'm Lennard!</H1>
-                  </CardHeader>
-                  <CardContent className='p-6 pt-0 space-y-4'>
-                    <L className='font-mono leading-relaxed'>
-                      Full-stack product leader crafting digital experiences. I blend technical
-                      expertise with business acumen to build products that matter.
-                    </L>
-                    <div className='flex flex-wrap gap-2'>
-                      <NeoBadge variant='default'>
-                        <L>Product</L>
-                      </NeoBadge>
-                      <NeoBadge variant='dark'>
-                        <L>Technology</L>
-                      </NeoBadge>
-                      <NeoBadge variant='light' interactive='lift'>
-                        <L>Business</L>
-                      </NeoBadge>
-                    </div>
-                    <div className='flex gap-3 pt-2'>
-                      <IconLink
-                        href='/github'
-                        icon={<GithubIcon className='h-4 w-4' />}
-                        external
-                        variant='neutral'
-                        size='sm'
-                        iconPosition='left'
-                      >
-                        GitHub
-                      </IconLink>
-                      <IconLink
-                        href='/linkedin'
-                        icon={<LinkedinIcon className='h-4 w-4' />}
-                        external
-                        variant='neutral'
-                        size='sm'
-                        iconPosition='left'
-                      >
-                        LinkedIn
-                      </IconLink>
-                      <IconLink
-                        href='/mail'
-                        icon={<MailIcon className='h-4 w-4' />}
-                        external
-                        variant='neutral'
-                        size='sm'
-                        iconPosition='left'
-                      >
-                        Mail
-                      </IconLink>
-                    </div>
-                  </CardContent>
-                </Card>
-              </Section>
+            <Section className='max-w-3xl mx-auto'>
+              <HeroCard className='border-0 shadow-none' />
               <Banner />
-            </div>
+            </Section>
           );
         }
 
-        const heroContent = data.sectionsAndPages.heroSection;
+        const heroText = (data.sectionsAndPages.heroSection as HeroSection).mainHeroText;
+        const secondaryText = (data.sectionsAndPages.heroSection as HeroSection).secondaryHeroText;
 
-        if (env.NEXT_V2_RELEASE === false) {
-          return (
-            <div className='min-h-screen flex flex-col items-center justify-center'>
-              <Section background='grid' containerClassName='justify-center items-center mx-auto'>
-                <Card className='w-full max-w-lg mx-auto' variant='default'>
-                  <CardHeader>
-                    <div className='absolute -top-2 -left-2'>
-                      <NeoBadge variant='light' interactive='lift'>
-                        <M className='font-mono'>👋 Hey there!</M>
-                      </NeoBadge>
-                    </div>
-                    <H1>I'm Lennard!</H1>
-                  </CardHeader>
-                  <CardContent className='flex flex-col gap-4'>
-                    {heroContent.mainHeroText?.json?.content ? (
-                      <div className='font-mono leading-relaxed inline [&_article>*]:!inline'>
-                        <RichText blocks={heroContent.mainHeroText.json.blocks} className='!inline'>
-                          {heroContent.mainHeroText.json.content}
-                        </RichText>
-
-                        {heroContent.secondaryHeroText?.json?.content && (
-                          <RichText className='pt-1'>
-                            {heroContent.secondaryHeroText.json.content}
-                          </RichText>
-                        )}
-                      </div>
-                    ) : (
-                      <M className='font-mono leading-relaxed'>
-                        A full-stack product leader crafting digital experiences. I blend technical
-                        expertise with business acumen to build products that matter.
-                      </M>
-                    )}
-                    <div className='flex flex-wrap gap-2'>
-                      <NeoBadge variant='default'>
-                        <L>Product</L>
-                      </NeoBadge>
-                      <NeoBadge variant='default' interactive='grow'>
-                        <L>Technology</L>
-                      </NeoBadge>
-                      <NeoBadge variant='light' interactive='lift'>
-                        <L>Business</L>
-                      </NeoBadge>
-                    </div>
-                    <div className='flex gap-3 pt-2'>
-                      <IconLink
-                        href='/github'
-                        icon={<GithubIcon className='h-4 w-4' />}
-                        external
-                        variant='neutral'
-                        size='sm'
-                        iconPosition='left'
-                      >
-                        GitHub
-                      </IconLink>
-                      <IconLink
-                        href='/linkedin'
-                        icon={<LinkedinIcon className='h-4 w-4' />}
-                        external
-                        variant='neutral'
-                        size='sm'
-                        iconPosition='left'
-                      >
-                        LinkedIn
-                      </IconLink>
-                      <IconLink
-                        href='/mail'
-                        icon={<MailIcon className='h-4 w-4' />}
-                        external
-                        variant='neutral'
-                        size='sm'
-                        iconPosition='left'
-                      >
-                        Mail
-                      </IconLink>
-                    </div>
-                  </CardContent>
-                </Card>
-              </Section>
-              <Banner />
-            </div>
-          );
-        }
-
-        // Center IndexSection horizontally & vertically, with navbar above it (centered within the top padding area)
         return (
           <BackgroundGrid
             maskType='radial'
             className='flex w-full min-h-screen flex-col relative justify-center items-center'
           >
-            <div className='w-full flex justify-center fixed top-0 left-0 z-[9999] pointer-events-none'>
-              <div className='pointer-events-auto w-full max-w-[1536px] px-2 md:px-8 pt-3'>
+            <div className='w-full flex justify-center fixed bottom-0 md:bottom-auto md:top-0 left-0 z-[9999] pointer-events-none'>
+              <div className='pointer-events-auto w-full max-w-[1536px] px-2 md:px-8 pb-3 md:pb-0 md:pt-3'>
                 <Nav socials={data.globals.socials.items} />
               </div>
             </div>
 
-            <div className='flex items-center justify-center w-full pt-16 lg:pt-12'>
-              <IndexSection
-                heroContent={data.sectionsAndPages.heroSection as HeroSection}
-                aboutContent={data.sectionsAndPages.aboutSection as AboutSection}
-              />
-            </div>
+            <Section id='hero'>
+              <SectionHeader badge='Hey there!' badgeRotation='slight' badgeVariant='default'>
+                {heroText?.json?.content && (
+                  <RichTextBlock
+                    blocks={heroText.json.blocks}
+                    anchors={false}
+                    className='[&>div]:inline [&>div+div]:block [&>div+div]:mt-4'
+                  >
+                    {heroText.json.content}
+                  </RichTextBlock>
+                )}
+              </SectionHeader>
+
+              {secondaryText?.json?.content && (
+                <SectionBody>
+                  <RichTextBlock
+                    blocks={secondaryText.json.blocks}
+                    anchors={false}
+                    className='[&>div]:inline [&>div+div]:block [&>div+div]:mt-4'
+                  >
+                    {secondaryText.json.content}
+                  </RichTextBlock>
+                </SectionBody>
+              )}
+            </Section>
+
             <Banner />
           </BackgroundGrid>
         );

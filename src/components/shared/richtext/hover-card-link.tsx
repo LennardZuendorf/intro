@@ -2,7 +2,8 @@
 
 import { ExternalLink } from 'lucide-react';
 import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card';
-import { Link } from '@/components/ui/typography';
+import { H4, Link, S, XS } from '@/components/ui/typography';
+import { isExternalUrl } from '@/lib/utils/ui';
 
 export interface HoverCardLinkComponentProps {
   url?: string | null;
@@ -19,12 +20,19 @@ export const HoverCardLinkComponent = ({
   description,
   text
 }: HoverCardLinkComponentProps) => {
-  const isExternal = url?.startsWith('http') || url?.startsWith('//');
+  const isExternal = isExternalUrl(url);
   const displayText = text || _title || url || 'this link';
   const href = url || '#';
 
   // Extract domain from URL for display
-  const domain = url ? new URL(url.startsWith('http') ? url : `https://${url}`).hostname : '';
+  let domain = '';
+  if (url) {
+    try {
+      domain = new URL(url.startsWith('http') ? url : `https://${url}`).hostname;
+    } catch {
+      domain = url;
+    }
+  }
 
   return (
     <span style={{ display: 'inline' }}>
@@ -35,25 +43,19 @@ export const HoverCardLinkComponent = ({
             target={isExternal ? '_blank' : undefined}
             rel={isExternal ? 'noopener noreferrer' : undefined}
             style={{ display: 'inline' }}
-            className='!underline underline-offset-4 hover:!text-primary-foreground hover:opacity-80 transition-all cursor-pointer'
+            className='!underline decoration-1 underline-offset-[3px] decoration-foreground/40 hover:decoration-foreground/70 transition-colors cursor-pointer'
           >
             {displayText}
           </Link>
         </HoverCardTrigger>
         <HoverCardContent className='w-80 p-4'>
           <div className='space-y-3'>
-            {_title && (
-              <h4 className='font-semibold font-heading text-base leading-tight text-primary-foreground'>
-                {_title}
-              </h4>
-            )}
-            {description && (
-              <p className='text-sm leading-relaxed text-primary-foreground/90'>{description}</p>
-            )}
+            {_title && <H4>{_title}</H4>}
+            {description && <S className='text-primary-foreground/90'>{description}</S>}
             {domain && (
-              <div className='flex items-center gap-2 text-xs text-primary-foreground/70 pt-1'>
+              <div className='flex items-center gap-2 text-primary-foreground/70 pt-1'>
                 <ExternalLink className='h-3 w-3' />
-                {domain}
+                <XS>{domain}</XS>
               </div>
             )}
           </div>

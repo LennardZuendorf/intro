@@ -1,3 +1,96 @@
+'use client';
+
+import type * as React from 'react';
+import { IconLink } from '@/components/ui/icon-link';
+import { NeoBadge } from '@/components/ui/neoBadge';
+import { H4, M } from '@/components/ui/typography';
+import type { ProjectData } from '@/lib/types/projects';
+import { cn, hexToRgb } from '@/lib/utils/ui';
+
+interface StrideAnimatedCardProps {
+  project: ProjectData;
+  className?: string;
+}
+
+export function StrideAnimatedCard({ project, className }: StrideAnimatedCardProps) {
+  const mainColor = project.color?.hex || '#8b5cf6';
+  const rgb = hexToRgb(mainColor);
+  const secondaryColor = `rgb(${Math.min(255, rgb.r + 40)}, ${Math.min(255, rgb.g + 40)}, ${Math.min(255, rgb.b + 40)})`;
+  const gridColor = '#80808015';
+  const technologies = project.technology?.map((tech) => tech._title) || [];
+
+  return (
+    <div
+      role='region'
+      aria-labelledby={`stride-card-title-${project._id}`}
+      aria-describedby={`stride-card-description-${project._id}`}
+      className={cn(
+        'group/animated-card relative w-full overflow-hidden rounded-md border-4 border-border bg-primary text-primary-foreground shadow-black shadow-md',
+        className
+      )}
+    >
+      <div className='h-[180px] w-full overflow-hidden'>
+        <Visual mainColor={mainColor} secondaryColor={secondaryColor} gridColor={gridColor} />
+      </div>
+
+      <div className='flex flex-col space-y-1.5 border-t-4 border-border p-3'>
+        <H4 id={`stride-card-title-${project._id}`} className='line-clamp-1'>
+          {project._title}
+        </H4>
+        <M
+          id={`stride-card-description-${project._id}`}
+          className='text-muted-foreground line-clamp-3 text-sm leading-relaxed'
+        >
+          {project.shortDescription}
+        </M>
+
+        {technologies.length > 0 && (
+          <div className='flex flex-wrap gap-1.5 pt-2'>
+            {technologies.slice(0, 3).map((tech) => (
+              <NeoBadge
+                key={`${project._id}-tech-${tech}`}
+                variant='light'
+                size='sm'
+                rotation='none'
+                interactive='none'
+                className='text-xs'
+              >
+                {tech}
+              </NeoBadge>
+            ))}
+            {technologies.length > 3 && (
+              <NeoBadge
+                key={`${project._id}-tech-more`}
+                variant='outline'
+                size='sm'
+                rotation='none'
+                interactive='none'
+                className='text-xs'
+              >
+                +{technologies.length - 3}
+              </NeoBadge>
+            )}
+          </div>
+        )}
+
+        {(project.showcaseLink || project._slug) && (
+          <div className='pt-2'>
+            <IconLink
+              href={project.showcaseLink || `/projects/${project._slug}`}
+              variant='accent'
+              size='sm'
+              className='flex-1'
+              external={!!project.showcaseLink}
+            >
+              {project.showcaseLink ? 'Check it out' : 'Read More'}
+            </IconLink>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
 export interface VisualProps {
   mainColor?: string;
   secondaryColor?: string;

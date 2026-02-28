@@ -6,10 +6,10 @@ import { IconLink } from '@/components/ui/icon-link';
 import { NeoBadge } from '@/components/ui/neoBadge';
 import { H4, M } from '@/components/ui/typography';
 import type { ProjectData } from '@/lib/types/projects';
-import { cn } from '@/lib/utils/ui';
-import { IndexedAnimatedCard } from './indexed';
-import { ShardsAnimatedCard } from './shards';
-import { StrideAnimatedCard } from './stride';
+import { cn, hexToRgba } from '@/lib/utils/ui';
+import { IndexedAnimatedCard } from './projects/indexed';
+import { ShardsAnimatedCard } from './projects/shards';
+import { StrideAnimatedCard } from './projects/stride';
 
 type CardVariants = VariantProps<typeof cardVariants>;
 
@@ -36,13 +36,6 @@ export default function ProjectCard({ project, className, rotation = 'none' }: P
 
   // Get project color, default to blue if none set
   const projectColor = project.color?.hex || '#3b82f6';
-
-  const hexToRgba = (hex: string, alpha: number) => {
-    const r = parseInt(hex.slice(1, 3), 16);
-    const g = parseInt(hex.slice(3, 5), 16);
-    const b = parseInt(hex.slice(5, 7), 16);
-    return `rgba(${r}, ${g}, ${b}, ${alpha})`;
-  };
 
   return (
     <Card

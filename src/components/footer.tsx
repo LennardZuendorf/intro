@@ -1,5 +1,3 @@
-import { Pump } from 'basehub/react-pump';
-import { draftMode } from 'next/headers';
 import Link from 'next/link';
 import { SocialButtons } from '@/components/shared/social-buttons';
 import { ThemeSelect } from '@/components/theme/theme-select';
@@ -13,60 +11,33 @@ interface FooterProps {
 }
 
 export const Footer = async ({ className = '' }: FooterProps) => {
-  const { isEnabled: draft } = await draftMode();
-
   return (
-    <Pump
-      draft={draft}
-      queries={[
-        {
-          globals: {
-            socials: {
-              items: {
-                _id: true,
-                _title: true,
-                url: true,
-                icon: true
-              }
-            }
-          }
-        }
-      ]}
+    <Section
+      as='footer'
+      fullHeight={false}
+      fullWidth={true}
+      className={cn('border-t-4 border-black', className)}
+      padding='pt-6 pb-6 px-6 md:pt-4 md:pb-4'
+      centerContent={false}
     >
-      {async ([data]) => {
-        'use server';
-
-        const _socialsData = data.globals.socials.items;
-
-        return (
-          <Section
-            as='footer'
-            fullHeight={false}
-            className={cn('border-t-4 border-black', className)}
-            padding='pt-6 pb-6 px-6 md:pt-4 md:pb-4'
-            centerContent={false}
-          >
-            <div className='w-full flex flex-row items-center justify-between z-[10]'>
-              <SocialButtons buttonVariant='default' />
-              <div className='flex items-end gap-x-4'>
-                <ThemeSelect buttonVariant='default' />
-              </div>
-            </div>
-            <div className='w-full flex justify-center mt-4 md:mt-2'>
-              <div className='flex items-center gap-x-2 font-mono'>
-                <S>Built by Lennard Zündorf</S>
-                <S>{`© ${new Intl.DateTimeFormat('en', { year: 'numeric' }).format(new Date())}`}</S>
-                <S>|</S>
-                <Link href='/legal'>
-                  <Button variant='link' className='justify-center items-center' size='icon'>
-                    legal
-                  </Button>
-                </Link>
-              </div>
-            </div>
-          </Section>
-        );
-      }}
-    </Pump>
+      <div className='w-full flex flex-row items-center justify-between z-[10]'>
+        <SocialButtons buttonVariant='default' />
+        <div className='flex items-end gap-x-4'>
+          <ThemeSelect buttonVariant='default' />
+        </div>
+      </div>
+      <div className='w-full flex justify-center mt-4 md:mt-2'>
+        <div className='flex items-center gap-x-2 font-mono'>
+          <S>Built by Lennard Zündorf</S>
+          <S>{`© ${new Intl.DateTimeFormat('en', { year: 'numeric' }).format(new Date())}`}</S>
+          <S>|</S>
+          <Link href='/legal'>
+            <Button variant='link' className='justify-center items-center' size='icon'>
+              legal
+            </Button>
+          </Link>
+        </div>
+      </div>
+    </Section>
   );
 };

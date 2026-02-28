@@ -35,27 +35,27 @@ export async function SocialButtons({
 
   return (
     <div className={cn('flex gap-2', className)} {...props}>
-      {socials.map((social) => {
-        return (
-          <Link
-            href={social.url!}
-            key={social._id}
-            aria-label={social._title}
-            target='_blank'
-            rel='noopener noreferrer'
-          >
-            <Button variant={buttonVariant} size='icon'>
-              <Icon
-                key={social._id}
-                content={social.icon || ''}
-                components={{
-                  svg: (props) => <svg {...props} className={iconClassName} />
-                }}
-              />
+      {socials
+        .filter((social) => social.url && social.icon)
+        .map((social) => {
+          return (
+            <Button key={social._id} variant={buttonVariant} size='icon' asChild>
+              <Link
+                href={social.url!}
+                aria-label={social._title}
+                target='_blank'
+                rel='noopener noreferrer'
+              >
+                <Icon
+                  content={social.icon || ''}
+                  components={{
+                    svg: (props) => <svg {...props} className={iconClassName} />
+                  }}
+                />
+              </Link>
             </Button>
-          </Link>
-        );
-      })}
+          );
+        })}
     </div>
   );
 }

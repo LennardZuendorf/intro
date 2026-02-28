@@ -2,6 +2,7 @@
 
 import { Icon } from 'basehub/react-icon';
 import { motion } from 'framer-motion';
+import { ArrowLeftIcon } from 'lucide-react';
 import Link from 'next/link';
 import { ThemeSelect } from '@/components/theme/theme-select';
 import { Button } from '@/components/ui/button';
@@ -19,46 +20,64 @@ type SocialItem = {
   icon: string | null;
 };
 
-export const Nav = ({ className, socials }: { className?: string; socials: SocialItem[] }) => {
-  return <Navbar className={cn('flex max-w-fit mx-auto', className)} socials={socials} />;
-};
+interface NavProps {
+  className?: string;
+  socials: SocialItem[];
+  backHref?: string;
+}
 
-const Navbar = ({ className = '', socials }: { className?: string; socials: SocialItem[] }) => {
+export const Nav = ({ className, socials, backHref }: NavProps) => {
   return (
     <motion.header
-      className={cn('flex justify-center items-center py-2', 'w-full md:w-auto', className)}
+      className={cn(
+        'flex justify-center items-center py-2',
+        'w-full md:w-auto',
+        'flex max-w-fit mx-auto',
+        className
+      )}
     >
       <NavigationMenu className='bg-primary w-full md:w-auto'>
         <NavigationMenuList className='flex justify-end w-full'>
           <div className='isolate relative z-[9999]'>
             <NavigationMenuItem key='settings' className='relative bg-primary'>
               <div className='flex space-x-1 items-center'>
+                {backHref && (
+                  <Button variant='default' size='icon' className='shadow-none' asChild>
+                    <Link href={backHref}>
+                      <ArrowLeftIcon className='w-4 h-4' />
+                    </Link>
+                  </Button>
+                )}
                 {socials
                   .filter((social) => social.url && social.icon)
                   .map((social) => (
-                    <Link
-                      href={social.url!}
+                    <Button
                       key={social._id}
-                      aria-label={social._title}
-                      target='_blank'
-                      rel='noopener noreferrer'
+                      variant='default'
+                      size='icon'
+                      className='shadow-none'
+                      asChild
                     >
-                      <Button variant='default' size='icon' className='shadow-none'>
+                      <Link
+                        href={social.url!}
+                        aria-label={social._title}
+                        target='_blank'
+                        rel='noopener noreferrer'
+                      >
                         <Icon
                           content={social.icon!}
                           components={{
                             svg: (props) => <svg {...props} className='w-4 h-4' />
                           }}
                         />
-                      </Button>
-                    </Link>
+                      </Link>
+                    </Button>
                   ))}
                 <ThemeSelect
                   buttonVariant='default'
                   noButtonShadow={true}
                   popoverClassName='z-[9999]'
                 />
-                {/* Pin button removed */}
               </div>
             </NavigationMenuItem>
           </div>
@@ -67,5 +86,3 @@ const Navbar = ({ className = '', socials }: { className?: string; socials: Soci
     </motion.header>
   );
 };
-
-// No ListItem export needed since nav items are removed
