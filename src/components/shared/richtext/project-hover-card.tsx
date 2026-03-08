@@ -1,26 +1,36 @@
 'use client';
 
 import type { ProjectComponent } from 'basehub-types';
-import { ExternalLink } from 'lucide-react';
+import { ExternalLink, Github } from 'lucide-react';
+import { type ComponentType, useMemo } from 'react';
+import {
+  IndexedHoverVisual,
+  ObsidianTaskHoverVisual,
+  ShardsAgentsHoverVisual,
+  StrideHoverVisual,
+  type VisualProps
+} from '@/components/sections/components/projects/hover-visuals';
 import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card';
 import { NeoBadge } from '@/components/ui/neoBadge';
 import { H4, Link, S, XS } from '@/components/ui/typography';
 import { isExternalUrl } from '@/lib/utils/ui';
 
+const visualMap: Record<string, ComponentType<VisualProps>> = {
+  indexed: IndexedHoverVisual,
+  'shards-agent': ShardsAgentsHoverVisual,
+  'obsidian-task-ui': ObsidianTaskHoverVisual,
+  stride: StrideHoverVisual
+};
+
 export const ProjectHoverCard = (props: ProjectComponent) => {
-  const { _title, shortDescription, technology, links } = props;
+  const { _title, _slug, shortDescription, technology, links, color } = props;
 
   const showcaseUrl = links?.items?.[0]?.url || '#';
   const isExternal = isExternalUrl(showcaseUrl);
-  let domain = '';
-  if (showcaseUrl !== '#') {
-    try {
-      domain = new URL(showcaseUrl.startsWith('http') ? showcaseUrl : `https://${showcaseUrl}`)
-        .hostname;
-    } catch {
-      domain = showcaseUrl;
-    }
-  }
+  const allLinks = useMemo(() => links?.items?.filter((l) => l.url) ?? [], [links]);
+
+  const Visual = _slug ? visualMap[_slug] : undefined;
+  const colorHex = color?.hex || '#3b82f6';
 
   return (
     <span style={{ display: 'inline' }}>
@@ -36,8 +46,13 @@ export const ProjectHoverCard = (props: ProjectComponent) => {
             {_title}
           </Link>
         </HoverCardTrigger>
-        <HoverCardContent className='w-96 p-4'>
-          <div className='space-y-3'>
+        <HoverCardContent className={Visual ? 'w-96 overflow-hidden p-0' : 'w-80 p-4'}>
+          {Visual && (
+            <div className='group/animated-card h-[120px] w-full overflow-hidden bg-primary'>
+              <Visual colorHex={colorHex} />
+            </div>
+          )}
+          <div className={Visual ? 'space-y-3 p-4' : 'space-y-3'}>
             <H4>{_title}</H4>
             <S>{shortDescription}</S>
             {technology && technology.length > 0 && (
@@ -49,10 +64,31 @@ export const ProjectHoverCard = (props: ProjectComponent) => {
                 ))}
               </div>
             )}
-            {domain && (
-              <div className='flex items-center gap-2 text-primary-foreground/70 pt-1'>
-                <ExternalLink className='h-3 w-3' />
-                <XS>{domain}</XS>
+            {allLinks.length > 0 && (
+              <div className='flex items-center gap-3 pt-1'>
+                {allLinks.map((link) => {
+                  const isGh = link.url?.includes('github.com');
+                  const Icon = isGh ? Github : ExternalLink;
+                  return (
+                    <Link
+                      key={link._id}
+                      href={link.url || '#'}
+                      target='_blank'
+                      rel='noopener noreferrer'
+                      className='flex items-center gap-1.5 text-primary-foreground/60 no-underline transition-colors hover:underline'
+                      style={{ '--hover-color': colorHex } as React.CSSProperties}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.color = colorHex;
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.color = '';
+                      }}
+                    >
+                      <Icon className='h-3.5 w-3.5' />
+                      <XS>{link._title}</XS>
+                    </Link>
+                  );
+                })}
               </div>
             )}
           </div>

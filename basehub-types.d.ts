@@ -547,13 +547,14 @@ export interface ProjectComponent {
     _title: Scalars['String']
     color: BlockColor
     description: Description_1
+    extendedPreview: Scalars['Boolean']
     links: Links
     shortDescription: Scalars['String']
     technology: (TechnologyComponent[] | null)
     __typename: 'ProjectComponent'
 }
 
-export type ProjectComponentOrderByEnum = '_sys_createdAt__ASC' | '_sys_createdAt__DESC' | '_sys_hash__ASC' | '_sys_hash__DESC' | '_sys_id__ASC' | '_sys_id__DESC' | '_sys_lastModifiedAt__ASC' | '_sys_lastModifiedAt__DESC' | '_sys_slug__ASC' | '_sys_slug__DESC' | '_sys_title__ASC' | '_sys_title__DESC' | 'color__ASC' | 'color__DESC' | 'description__ASC' | 'description__DESC' | 'links__ASC' | 'links__DESC' | 'shortDescription__ASC' | 'shortDescription__DESC' | 'technology__ASC' | 'technology__DESC' | 'untitled__ASC' | 'untitled__DESC'
+export type ProjectComponentOrderByEnum = '_sys_createdAt__ASC' | '_sys_createdAt__DESC' | '_sys_hash__ASC' | '_sys_hash__DESC' | '_sys_id__ASC' | '_sys_id__DESC' | '_sys_lastModifiedAt__ASC' | '_sys_lastModifiedAt__DESC' | '_sys_slug__ASC' | '_sys_slug__DESC' | '_sys_title__ASC' | '_sys_title__DESC' | 'color__ASC' | 'color__DESC' | 'description__ASC' | 'description__DESC' | 'extendedPreview__ASC' | 'extendedPreview__DESC' | 'links__ASC' | 'links__DESC' | 'shortDescription__ASC' | 'shortDescription__DESC' | 'technology__ASC' | 'technology__DESC' | 'untitled__ASC' | 'untitled__DESC'
 
 export interface Query {
     _agent: (_AgentStart | null)
@@ -1928,6 +1929,7 @@ export interface ProjectComponentGenqlSelection{
     _title?: boolean | number
     color?: BlockColorGenqlSelection
     description?: Description_1GenqlSelection
+    extendedPreview?: boolean | number
     links?: (LinksGenqlSelection & { __args?: {
     /** Filter by a field. */
     filter?: (LinkComponentFilterInput | null), 
@@ -1944,7 +1946,7 @@ export interface ProjectComponentGenqlSelection{
     __typename?: boolean | number
 }
 
-export interface ProjectComponentFilterInput {AND?: (ProjectComponentFilterInput | null),OR?: (ProjectComponentFilterInput | null),_id?: (StringFilter | null),_slug?: (StringFilter | null),_sys_apiNamePath?: (StringFilter | null),_sys_createdAt?: (DateFilter | null),_sys_hash?: (StringFilter | null),_sys_id?: (StringFilter | null),_sys_idPath?: (StringFilter | null),_sys_lastModifiedAt?: (DateFilter | null),_sys_slug?: (StringFilter | null),_sys_slugPath?: (StringFilter | null),_sys_title?: (StringFilter | null),_title?: (StringFilter | null),color?: (StringFilter | null),links?: (ListFilter | null),shortDescription?: (StringFilter | null),technology?: (ProjectComponentFilterInput__technology_0___technology | null)}
+export interface ProjectComponentFilterInput {AND?: (ProjectComponentFilterInput | null),OR?: (ProjectComponentFilterInput | null),_id?: (StringFilter | null),_slug?: (StringFilter | null),_sys_apiNamePath?: (StringFilter | null),_sys_createdAt?: (DateFilter | null),_sys_hash?: (StringFilter | null),_sys_id?: (StringFilter | null),_sys_idPath?: (StringFilter | null),_sys_lastModifiedAt?: (DateFilter | null),_sys_slug?: (StringFilter | null),_sys_slugPath?: (StringFilter | null),_sys_title?: (StringFilter | null),_title?: (StringFilter | null),color?: (StringFilter | null),extendedPreview?: (Scalars['Boolean'] | null),links?: (ListFilter | null),shortDescription?: (StringFilter | null),technology?: (ProjectComponentFilterInput__technology_0___technology | null)}
 
 export interface ProjectComponentFilterInput__technology_0___technology {_id?: (StringFilter | null),_slug?: (StringFilter | null),_sys_apiNamePath?: (StringFilter | null),_sys_createdAt?: (DateFilter | null),_sys_hash?: (StringFilter | null),_sys_id?: (StringFilter | null),_sys_idPath?: (StringFilter | null),_sys_lastModifiedAt?: (DateFilter | null),_sys_slug?: (StringFilter | null),_sys_slugPath?: (StringFilter | null),_sys_title?: (StringFilter | null),_title?: (StringFilter | null),badgeUrl?: (StringFilter | null),url?: (StringFilter | null)}
 

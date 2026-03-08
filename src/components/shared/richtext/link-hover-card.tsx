@@ -1,11 +1,12 @@
 'use client';
 
 import { ExternalLink } from 'lucide-react';
+import { useMemo } from 'react';
 import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card';
 import { H4, Link, S, XS } from '@/components/ui/typography';
 import { isExternalUrl } from '@/lib/utils/ui';
 
-export interface HoverCardLinkComponentProps {
+export interface LinkHoverCardProps {
   url?: string | null;
   _title?: string | null;
   description?: string | null;
@@ -14,25 +15,19 @@ export interface HoverCardLinkComponentProps {
   __typename?: string;
 }
 
-export const HoverCardLinkComponent = ({
-  url,
-  _title,
-  description,
-  text
-}: HoverCardLinkComponentProps) => {
+export const LinkHoverCard = ({ url, _title, description, text }: LinkHoverCardProps) => {
   const isExternal = isExternalUrl(url);
   const displayText = text || _title || url || 'this link';
   const href = url || '#';
 
-  // Extract domain from URL for display
-  let domain = '';
-  if (url) {
+  const domain = useMemo(() => {
+    if (!url) return '';
     try {
-      domain = new URL(url.startsWith('http') ? url : `https://${url}`).hostname;
+      return new URL(url.startsWith('http') ? url : `https://${url}`).hostname;
     } catch {
-      domain = url;
+      return url;
     }
-  }
+  }, [url]);
 
   return (
     <span style={{ display: 'inline' }}>

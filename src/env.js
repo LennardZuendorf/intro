@@ -6,9 +6,8 @@ export const env = createEnv({
     NODE_ENV: z.enum(['development', 'test', 'production']).default('development'),
     NEXT_PUBLIC_URL: z.string().min(1, 'NEXT_PUBLIC_URL is required'),
     BASEHUB_TOKEN: z.string().min(1, 'BASEHUB_TOKEN is required'),
-    BASIC_USER: z.string().min(1, 'BASIC_USER is required'),
-    BASIC_PASS: z.string().min(1, 'BASIC_PASS is required'),
-    NEXT_V2_RELEASE: z.boolean().default(false)
+    NEXT_V2_RELEASE: z.boolean().default(false),
+    BASEHUB_DRAFT: z.boolean().default(true)
   },
   client: {},
   runtimeEnv: {
@@ -18,8 +17,8 @@ export const env = createEnv({
       : 'http://localhost:3000',
     // BaseHub environment variables
     BASEHUB_TOKEN: process.env.BASEHUB_TOKEN,
-    BASIC_USER: process.env.BASIC_USER,
-    BASIC_PASS: process.env.BASIC_PASS,
+    BASEHUB_DRAFT: process.env.BASEHUB_DRAFT === 'true',
+    // Internal environment variables
     NEXT_V2_RELEASE: process.env.NEXT_V2_RELEASE === 'true'
   },
   skipValidation: !!process.env.SKIP_ENV_VALIDATION,

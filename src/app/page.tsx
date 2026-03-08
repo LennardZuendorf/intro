@@ -21,6 +21,7 @@ const blocksQuery = {
   },
   on_ProjectComponent: {
     _id: true,
+    _slug: true,
     _title: true,
     shortDescription: true,
     technology: { _id: true, _title: true },

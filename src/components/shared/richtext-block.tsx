@@ -14,7 +14,7 @@ import NextLink from 'next/link';
 import type { ReactNode } from 'react';
 import { CalloutComponent, type CalloutComponentProps } from '@/components/shared/richtext/callout';
 import { ExperienceHoverCard } from '@/components/shared/richtext/experience-hover-card';
-import { HoverCardLinkComponent as HoverCardLink } from '@/components/shared/richtext/hover-card-link';
+import { LinkHoverCard as HoverCardLink } from '@/components/shared/richtext/link-hover-card';
 import { ProjectHoverCard } from '@/components/shared/richtext/project-hover-card';
 import {
   Code,
@@ -92,13 +92,8 @@ const HeadingNoLink = ({
   id?: string;
   children: ReactNode;
 }) => {
-  if (as === 'h4') {
-    return <H4 id={id}>{children}</H4>;
-  } else if (as === 'h5') {
-    return <H5 id={id}>{children}</H5>;
-  }
-  // h6: use H6 from typography
-  return <H6 id={id}>{children}</H6>;
+  const Component = { h4: H4, h5: H5, h6: H6 }[as];
+  return <Component id={id}>{children}</Component>;
 };
 
 export const RichTextBlock = ({
