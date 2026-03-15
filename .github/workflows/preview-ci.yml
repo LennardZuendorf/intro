@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node_version: [22.x]
+        node_version: [24.x]
 
     name: Node ${{ matrix.node_version }} Build
     steps:
@@ -33,15 +33,13 @@ jobs:
           node-version: ${{ matrix.node_version }}
           cache: "pnpm"
 
-      - name: Create Environment File
-        run: |
-          echo "BASEHUB_TOKEN=${{ secrets.BASEHUB_TOKEN }}" >> .env.local
-
       - name: Install Dependencies
         run: pnpm install --frozen-lockfile
 
       - name: Run BaseHub CLI
         run: pnpm run basehub
+        env:
+          BASEHUB_TOKEN: ${{ secrets.BASEHUB_TOKEN }}
 
       - name: Run Biome Check
         run: pnpm run check
@@ -56,3 +54,4 @@ jobs:
         run: pnpm run build
         env:
           NODE_ENV: production
+          BASEHUB_TOKEN: ${{ secrets.BASEHUB_TOKEN }}

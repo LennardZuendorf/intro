@@ -1,6 +1,6 @@
 import type {
   UnionCalloutComponentComponent,
-  UnionTechnologyComponentExperienceComponentProjectComponentSkillComponentHoverCardLinkComponent
+  UnionTechnologyComponentProjectComponentExperienceComponentSkillComponentHoverCardLinkComponent
 } from 'basehub-types';
 import type { ReactNode } from 'react';
 import { RichTextBlock as RichText } from '@/components/shared/richtext-block';
@@ -14,7 +14,7 @@ interface HeroCardProps {
       content?: ReactNode;
       blocks?: (
         | UnionCalloutComponentComponent
-        | UnionTechnologyComponentExperienceComponentProjectComponentSkillComponentHoverCardLinkComponent
+        | UnionTechnologyComponentProjectComponentExperienceComponentSkillComponentHoverCardLinkComponent
       )[];
     } | null;
   } | null;
@@ -23,7 +23,7 @@ interface HeroCardProps {
       content?: ReactNode;
       blocks?: (
         | UnionCalloutComponentComponent
-        | UnionTechnologyComponentExperienceComponentProjectComponentSkillComponentHoverCardLinkComponent
+        | UnionTechnologyComponentProjectComponentExperienceComponentSkillComponentHoverCardLinkComponent
       )[];
     } | null;
   } | null;

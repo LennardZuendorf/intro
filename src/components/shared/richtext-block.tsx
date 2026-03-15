@@ -7,7 +7,7 @@ import type {
   HoverCardLinkComponent,
   ProjectComponent,
   UnionCalloutComponentComponent,
-  UnionTechnologyComponentExperienceComponentProjectComponentSkillComponentHoverCardLinkComponent
+  UnionTechnologyComponentProjectComponentExperienceComponentSkillComponentHoverCardLinkComponent
 } from 'basehub-types';
 import Image from 'next/image';
 import NextLink from 'next/link';
@@ -38,7 +38,7 @@ interface RichTextBlockProps {
   anchors?: boolean;
   blocks?: (
     | UnionCalloutComponentComponent
-    | UnionTechnologyComponentExperienceComponentProjectComponentSkillComponentHoverCardLinkComponent
+    | UnionTechnologyComponentProjectComponentExperienceComponentSkillComponentHoverCardLinkComponent
   )[];
 }
 
