@@ -6,7 +6,7 @@ export const env = createEnv({
     NODE_ENV: z.enum(['development', 'test', 'production']).default('development'),
     NEXT_PUBLIC_URL: z.string().min(1, 'NEXT_PUBLIC_URL is required'),
     BASEHUB_TOKEN: z.string().min(1, 'BASEHUB_TOKEN is required'),
-    NEXT_V2_RELEASE: z.boolean().default(false),
+    NEXT_V2_RELEASE: z.boolean().default(true),
     BASEHUB_DRAFT: z.boolean().default(true)
   },
   client: {},
