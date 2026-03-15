@@ -70,13 +70,12 @@ export const ProjectHoverCard = (props: ProjectComponent) => {
                   const isGh = link.url?.includes('github.com');
                   const Icon = isGh ? Github : ExternalLink;
                   return (
-                    <Link
+                    <a
                       key={link._id}
                       href={link.url || '#'}
                       target='_blank'
                       rel='noopener noreferrer'
                       className='flex items-center gap-1.5 text-primary-foreground/60 no-underline transition-colors hover:underline'
-                      style={{ '--hover-color': colorHex } as React.CSSProperties}
                       onMouseEnter={(e) => {
                         e.currentTarget.style.color = colorHex;
                       }}
@@ -86,7 +85,7 @@ export const ProjectHoverCard = (props: ProjectComponent) => {
                     >
                       <Icon className='h-3.5 w-3.5' />
                       <XS>{link._title}</XS>
-                    </Link>
+                    </a>
                   );
                 })}
               </div>
