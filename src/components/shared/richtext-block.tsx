@@ -6,10 +6,20 @@ import type {
   ExperienceComponent,
   HoverCardLinkComponent,
   ProjectComponent,
-  UnionCalloutComponentComponent,
-  UnionTechnologyComponentProjectComponentExperienceComponentSkillComponentHoverCardLinkComponent
+  SkillComponent,
+  TechnologyComponent,
+  UnionCalloutComponentComponent
 } from 'basehub-types';
+
 import Image from 'next/image';
+
+export type RichTextBlockUnion =
+  | ExperienceComponent
+  | HoverCardLinkComponent
+  | ProjectComponent
+  | SkillComponent
+  | TechnologyComponent;
+
 import NextLink from 'next/link';
 import type { ReactNode } from 'react';
 import { CalloutComponent, type CalloutComponentProps } from '@/components/shared/richtext/callout';
@@ -36,10 +46,7 @@ interface RichTextBlockProps {
   children: ReactNode;
   className?: string;
   anchors?: boolean;
-  blocks?: (
-    | UnionCalloutComponentComponent
-    | UnionTechnologyComponentProjectComponentExperienceComponentSkillComponentHoverCardLinkComponent
-  )[];
+  blocks?: (UnionCalloutComponentComponent | RichTextBlockUnion)[];
 }
 
 // Only H1-H3 headings get links. H4-H6 do not have anchored links.

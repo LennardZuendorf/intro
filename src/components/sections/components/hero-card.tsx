@@ -1,9 +1,9 @@
-import type {
-  UnionCalloutComponentComponent,
-  UnionTechnologyComponentProjectComponentExperienceComponentSkillComponentHoverCardLinkComponent
-} from 'basehub-types';
+import type { UnionCalloutComponentComponent } from 'basehub-types';
 import type { ReactNode } from 'react';
-import { RichTextBlock as RichText } from '@/components/shared/richtext-block';
+import {
+  RichTextBlock as RichText,
+  type RichTextBlockUnion
+} from '@/components/shared/richtext-block';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { NeoBadge } from '@/components/ui/neoBadge';
 import { H1, M } from '@/components/ui/typography';
@@ -12,19 +12,13 @@ interface HeroCardProps {
   heroText?: {
     json?: {
       content?: ReactNode;
-      blocks?: (
-        | UnionCalloutComponentComponent
-        | UnionTechnologyComponentProjectComponentExperienceComponentSkillComponentHoverCardLinkComponent
-      )[];
+      blocks?: (UnionCalloutComponentComponent | RichTextBlockUnion)[];
     } | null;
   } | null;
   secondaryText?: {
     json?: {
       content?: ReactNode;
-      blocks?: (
-        | UnionCalloutComponentComponent
-        | UnionTechnologyComponentProjectComponentExperienceComponentSkillComponentHoverCardLinkComponent
-      )[];
+      blocks?: (UnionCalloutComponentComponent | RichTextBlockUnion)[];
     } | null;
   } | null;
   className?: string;
