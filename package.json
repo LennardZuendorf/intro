@@ -19,8 +19,6 @@
     "test:watch": "jest --watch"
   },
   "dependencies": {
-    "@21st-extension/react": "^0.5.14",
-    "@21st-extension/toolbar-next": "^0.5.14",
     "@floating-ui/react": "^0.27.3",
     "@radix-ui/react-accordion": "^1.2.2",
     "@radix-ui/react-dialog": "^1.1.5",
@@ -69,8 +67,6 @@
     "tailwind-merge": "^2.5.5",
     "tailwindcss-animate": "^1.0.7",
     "title-case": "^4.3.2",
-    "unified": "^11.0.5",
-    "unist-util-visit": "^5.0.0",
     "zod": "^3.25.0"
   },
   "devDependencies": {
@@ -93,7 +89,7 @@
     "typescript": "5.7.2"
   },
   "engines": {
-    "node": "24.11.1"
+    "node": "24.14.0"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
