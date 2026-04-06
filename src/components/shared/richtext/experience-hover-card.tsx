@@ -36,14 +36,13 @@ export const ExperienceHoverCard = (props: ExperienceComponent) => {
               {displayText}
             </Link>
           ) : (
-            <span
-              role='button'
-              tabIndex={0}
+            <button
+              type='button'
               style={{ display: 'inline' }}
-              className='!underline decoration-1 underline-offset-[3px] decoration-foreground/40 hover:decoration-foreground/70 transition-colors cursor-pointer'
+              className='appearance-none bg-transparent border-none p-0 m-0 font-inherit cursor-pointer !underline decoration-1 underline-offset-[3px] decoration-foreground/40 hover:decoration-foreground/70 transition-colors'
             >
               {displayText}
-            </span>
+            </button>
           )}
         </HoverCardTrigger>
         <HoverCardContent className='w-96 p-4'>

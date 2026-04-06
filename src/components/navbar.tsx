@@ -42,7 +42,7 @@ export const Nav = ({ className, socials, backHref }: NavProps) => {
               <div className='flex space-x-1 items-center'>
                 {backHref && (
                   <Button variant='default' size='icon' className='shadow-none' asChild>
-                    <Link href={backHref}>
+                    <Link href={backHref} aria-label='Go back'>
                       <ArrowLeftIcon className='w-4 h-4' />
                     </Link>
                   </Button>

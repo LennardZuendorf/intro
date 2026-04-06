@@ -37,7 +37,7 @@ describe('ThemeSelect', () => {
       </TestWrapper>
     );
 
-    expect(screen.getByRole('combobox')).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /select theme/i })).toBeInTheDocument();
   });
 
   it('opens popover when button is clicked', async () => {
@@ -47,7 +47,7 @@ describe('ThemeSelect', () => {
       </TestWrapper>
     );
 
-    const button = screen.getByRole('combobox');
+    const button = screen.getByRole('button', { name: /select theme/i });
     fireEvent.click(button);
 
     // Wait for popover to open and show theme options
