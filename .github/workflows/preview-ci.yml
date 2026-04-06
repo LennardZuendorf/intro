@@ -1,3 +1,10 @@
+# Environment secrets only apply when `environment:` matches Settings → Environments.
+# GitHub does NOT auto-pick Preview vs Production from the branch — we map PR → Preview,
+# push to main / workflow_dispatch → Production (adjust names if yours differ).
+# https://docs.github.com/en/actions/deployment/targeting-different-environments/managing-environments-for-deployment
+#
+# Fork PRs: secrets are not passed from forks (except GITHUB_TOKEN).
+
 name: Check, Test, and Build
 
 on:
@@ -12,7 +19,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    # Single source for BaseHub + Next; must match package.json "engines.node"
+    environment: ${{ github.event_name == 'pull_request' && 'Preview' || 'Production' }}
     env:
       BASEHUB_TOKEN: ${{ secrets.BASEHUB_TOKEN }}
 
@@ -28,7 +35,7 @@ jobs:
       - name: Require BASEHUB_TOKEN secret
         run: |
           if [ -z "$BASEHUB_TOKEN" ]; then
-            echo "::error::BASEHUB_TOKEN is not set. Add it under GitHub → Settings → Secrets and variables → Actions → New repository secret (name: BASEHUB_TOKEN, value: your BaseHub API token)."
+            echo "::error::BASEHUB_TOKEN is empty. If it is an Environment secret, set jobs.build.environment in this workflow to the same name as Settings → Environments → (the env that lists this secret). Or add BASEHUB_TOKEN under Repository secrets. Fork PRs do not receive secrets."
             exit 1
           fi
 
