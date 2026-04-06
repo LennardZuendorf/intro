@@ -51,11 +51,11 @@ export default function ProjectCard({ project, className, rotation = 'none' }: P
         backgroundColor: hexToRgba(projectColor, 0.1)
       }}
     >
-      <CardHeader className='pb-2'>
+      <CardHeader spacing='compact' className='pb-2'>
         <H4 className='line-clamp-1'>{project._title}</H4>
       </CardHeader>
 
-      <CardContent className='pt-0 pb-2'>
+      <CardContent spacing='compact' className='pt-0 pb-2'>
         <M className='text-muted-foreground line-clamp-3 mb-3 text-sm leading-relaxed'>
           {project.shortDescription}
         </M>
@@ -92,7 +92,7 @@ export default function ProjectCard({ project, className, rotation = 'none' }: P
         )}
       </CardContent>
 
-      <CardFooter className='pt-2 mt-auto'>
+      <CardFooter spacing='compact' className='pt-2 mt-auto'>
         <div className='flex gap-2 w-full'>
           {project._slug && (
             <IconLink

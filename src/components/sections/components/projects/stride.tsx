@@ -176,7 +176,7 @@ const Layer1 = ({ color, secondaryColor }: LayerProps) => {
   return (
     <div className='ease-[cubic-bezier(0.6, 0.6, 0, 1)] absolute top-0 left-0 z-[6] transform transition-transform duration-500 group-hover/animated-card:translate-x-[-50%]'>
       <svg
-        className='w-[712px]'
+        className='w-[200%]'
         viewBox='0 0 712 180'
         fill='none'
         xmlns='http://www.w3.org/2000/svg'
@@ -286,9 +286,9 @@ const Layer1 = ({ color, secondaryColor }: LayerProps) => {
 
 const Layer2 = ({ color }: LayerProps) => {
   return (
-    <div className='absolute top-0 left-[-1px] h-full w-[356px]'>
+    <div className='absolute top-0 left-[-1px] h-full w-1/2'>
       <svg
-        className='h-full w-[356px]'
+        className='h-full w-full'
         viewBox='0 0 356 180'
         fill='none'
         xmlns='http://www.w3.org/2000/svg'
@@ -358,8 +358,8 @@ const Layer3 = ({ color, secondaryColor, contributors = defaultContributors }: L
 
 const Layer4 = () => {
   return (
-    <div className='group relative h-full w-[356px]'>
-      <div className='ease-[cubic-bezier(0.6, 0.6, 0, 1)] absolute inset-0 z-[7] flex max-w-[356px] -translate-y-full items-start justify-start bg-transparent p-4 transition-transform duration-500 group-hover/animated-card:translate-y-0'>
+    <div className='group relative h-full w-1/2'>
+      <div className='ease-[cubic-bezier(0.6, 0.6, 0, 1)] absolute inset-0 z-[7] flex w-full -translate-y-full items-start justify-start bg-transparent p-4 transition-transform duration-500 group-hover/animated-card:translate-y-0'>
         <div className='ease-[cubic-bezier(0.6, 0.6, 0, 1)] rounded-md border border-zinc-200 bg-white/25 p-1.5 opacity-0 backdrop-blur-sm transition-opacity duration-500 group-hover/animated-card:opacity-100 dark:border-zinc-800 dark:bg-black/25'>
           <p className='mb-1 text-xs font-semibold text-black dark:text-white'>
             Random Data Visualization

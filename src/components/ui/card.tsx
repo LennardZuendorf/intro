@@ -2,6 +2,36 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import * as React from 'react';
 import { cn } from '@/lib/utils/ui';
 
+const cardHeaderVariants = cva('flex flex-col space-y-1.5', {
+  variants: {
+    spacing: {
+      compact: 'p-3 pt-6',
+      default: 'p-3 pt-6 md:p-4 md:pt-6'
+    }
+  },
+  defaultVariants: { spacing: 'default' }
+});
+
+const cardContentVariants = cva('', {
+  variants: {
+    spacing: {
+      compact: 'p-3',
+      default: 'p-3 md:p-4'
+    }
+  },
+  defaultVariants: { spacing: 'default' }
+});
+
+const cardFooterVariants = cva('flex items-center', {
+  variants: {
+    spacing: {
+      compact: 'p-2 pt-0',
+      default: 'p-2 pt-0 md:p-3 md:pt-0'
+    }
+  },
+  defaultVariants: { spacing: 'default' }
+});
+
 export interface CardProps
   extends React.HTMLAttributes<HTMLDivElement>,
     VariantProps<typeof cardVariants> {}
@@ -78,9 +108,13 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
 );
 Card.displayName = 'Card';
 
-const CardHeader = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
-  ({ className, ...props }, ref) => (
-    <div ref={ref} className={cn('flex flex-col space-y-1.5 p-3 pt-6', className)} {...props} />
+interface CardSectionProps
+  extends React.HTMLAttributes<HTMLDivElement>,
+    VariantProps<typeof cardHeaderVariants> {}
+
+const CardHeader = React.forwardRef<HTMLDivElement, CardSectionProps>(
+  ({ className, spacing, ...props }, ref) => (
+    <div ref={ref} className={cn(cardHeaderVariants({ spacing }), className)} {...props} />
   )
 );
 CardHeader.displayName = 'CardHeader';
@@ -108,16 +142,16 @@ const CardDescription = React.forwardRef<
 ));
 CardDescription.displayName = 'CardDescription';
 
-const CardContent = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
-  ({ className, ...props }, ref) => (
-    <div ref={ref} className={cn('p-3', className)} {...props} />
+const CardContent = React.forwardRef<HTMLDivElement, CardSectionProps>(
+  ({ className, spacing, ...props }, ref) => (
+    <div ref={ref} className={cn(cardContentVariants({ spacing }), className)} {...props} />
   )
 );
 CardContent.displayName = 'CardContent';
 
-const CardFooter = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
-  ({ className, ...props }, ref) => (
-    <div ref={ref} className={cn('flex items-center p-2 pt-0', className)} {...props} />
+const CardFooter = React.forwardRef<HTMLDivElement, CardSectionProps>(
+  ({ className, spacing, ...props }, ref) => (
+    <div ref={ref} className={cn(cardFooterVariants({ spacing }), className)} {...props} />
   )
 );
 CardFooter.displayName = 'CardFooter';

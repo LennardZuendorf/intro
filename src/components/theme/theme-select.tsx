@@ -66,8 +66,9 @@ export const ThemeSelect: React.FC<ThemeSwitcherProps> = ({
       <PopoverTrigger asChild>
         <Button
           variant={buttonVariant}
-          role='combobox'
+          aria-haspopup='menu'
           aria-expanded={open}
+          aria-label='Select theme'
           size='icon'
           className={cn(noButtonShadow && 'shadow-none', className)}
         >

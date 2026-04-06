@@ -17,7 +17,6 @@ describe('ThemeSelect', () => {
     document.body.className = '';
 
     // next-themes relies on matchMedia; provide a basic mock for JSDOM
-    // @ts-expect-error - adding to window for test environment
     window.matchMedia = window.matchMedia || ((query: string) => ({
       matches: false,
       media: query,
@@ -37,7 +36,7 @@ describe('ThemeSelect', () => {
       </TestWrapper>
     );
 
-    expect(screen.getByRole('combobox')).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /select theme/i })).toBeInTheDocument();
   });
 
   it('opens popover when button is clicked', async () => {
@@ -47,7 +46,7 @@ describe('ThemeSelect', () => {
       </TestWrapper>
     );
 
-    const button = screen.getByRole('combobox');
+    const button = screen.getByRole('button', { name: /select theme/i });
     fireEvent.click(button);
 
     // Wait for popover to open and show theme options

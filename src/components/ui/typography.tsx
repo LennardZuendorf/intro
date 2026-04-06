@@ -37,27 +37,40 @@ interface VariantTypographyProps extends BaseTypographyProps {
   type?: "foreground" | "default";
 }
 
-// Helper function to get weight classes
+const weightClasses: Record<NonNullable<BaseTypographyProps["weight"]>, string> = {
+  light: "font-light",
+  regular: "font-normal",
+  medium: "font-medium",
+  semibold: "font-semibold",
+  bold: "font-bold",
+  black: "font-black",
+};
+
+const wrapClasses: Record<NonNullable<BaseTypographyProps["wrap"]>, string> = {
+  wrap: "",
+  nowrap: "whitespace-nowrap",
+  pretty: "text-pretty",
+  balance: "text-balance",
+};
+
+// Note: Leading trim uses margin adjustments as CSS leading-trim has limited support
+const trimClasses: Record<NonNullable<BaseTypographyProps["trim"]>, string> = {
+  normal: "",
+  start: "-mt-[0.42em]",
+  end: "-mb-[0.36em]",
+  both: "-mt-[0.42em] -mb-[0.36em]",
+};
+
+const alignClasses: Record<NonNullable<BaseTypographyProps["align"]>, string> = {
+  left: "text-left",
+  center: "text-center",
+  right: "text-right",
+};
+
 function getWeightClass(weight?: BaseTypographyProps["weight"]): string {
-  switch (weight) {
-    case "light":
-      return "font-light";
-    case "regular":
-      return "font-normal";
-    case "medium":
-      return "font-medium";
-    case "semibold":
-      return "font-semibold";
-    case "bold":
-      return "font-bold";
-    case "black":
-      return "font-black";
-    default:
-      return "";
-  }
+  return weight ? (weightClasses[weight] ?? "") : "";
 }
 
-// Helper function to get color classes
 function getColorClass(
   color?: BaseTypographyProps["color"],
   highContrast?: boolean,
@@ -66,57 +79,21 @@ function getColorClass(
   if (color === "muted" || type === "default") {
     return highContrast ? "text-foreground" : "text-muted-foreground";
   }
-  if (color === "accent") {
-    return "text-accent";
-  }
-  if (color === "foreground" || type === "foreground") {
-    return "text-foreground";
-  }
+  if (color === "accent") return "text-accent";
+  if (color === "foreground" || type === "foreground") return "text-foreground";
   return "";
 }
 
-// Helper function to get wrap classes
 function getWrapClass(wrap?: BaseTypographyProps["wrap"]): string {
-  switch (wrap) {
-    case "nowrap":
-      return "whitespace-nowrap";
-    case "pretty":
-      return "text-pretty";
-    case "balance":
-      return "text-balance";
-    default:
-      return "";
-  }
+  return wrap ? (wrapClasses[wrap] ?? "") : "";
 }
 
-// Helper function to get trim classes
-// Note: Leading trim requires CSS variables or custom implementation
-// For now, we'll use margin adjustments as a workaround
 function getTrimClass(trim?: BaseTypographyProps["trim"]): string {
-  switch (trim) {
-    case "start":
-      return "-mt-[0.42em]";
-    case "end":
-      return "-mb-[0.36em]";
-    case "both":
-      return "-mt-[0.42em] -mb-[0.36em]";
-    default:
-      return "";
-  }
+  return trim ? (trimClasses[trim] ?? "") : "";
 }
 
-// Helper function to get align classes
 function getAlignClass(align?: BaseTypographyProps["align"]): string {
-  switch (align) {
-    case "left":
-      return "text-left";
-    case "center":
-      return "text-center";
-    case "right":
-      return "text-right";
-    default:
-      return "";
-  }
+  return align ? (alignClasses[align] ?? "") : "";
 }
 
 // Responsive sizing: sm/md bigger, lg/xl regular, 2xl bigger, no scaling beyond
