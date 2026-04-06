@@ -12,14 +12,25 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    # Single source for BaseHub + Next; must match package.json "engines.node"
+    env:
+      BASEHUB_TOKEN: ${{ secrets.BASEHUB_TOKEN }}
+
     strategy:
       matrix:
-        node_version: [24.x]
+        node_version: ["24.14.0"]
 
     name: Node ${{ matrix.node_version }} Build
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Require BASEHUB_TOKEN secret
+        run: |
+          if [ -z "$BASEHUB_TOKEN" ]; then
+            echo "::error::BASEHUB_TOKEN is not set. Add it under GitHub → Settings → Secrets and variables → Actions → New repository secret (name: BASEHUB_TOKEN, value: your BaseHub API token)."
+            exit 1
+          fi
 
       - name: Install pnpm
         uses: pnpm/action-setup@v4
@@ -38,8 +49,6 @@ jobs:
 
       - name: Run BaseHub CLI
         run: pnpm run basehub
-        env:
-          BASEHUB_TOKEN: ${{ secrets.BASEHUB_TOKEN }}
 
       - name: Run Biome Check
         run: pnpm run check
@@ -54,4 +63,3 @@ jobs:
         run: pnpm run build
         env:
           NODE_ENV: production
-          BASEHUB_TOKEN: ${{ secrets.BASEHUB_TOKEN }}
