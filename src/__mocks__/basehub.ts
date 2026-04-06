@@ -13,16 +13,24 @@ export const Pump = ({
   draft?: boolean;
   queries?: unknown[];
 }) => {
-  // Mock data structure that matches BaseHub types exactly
-  const mockData: Query = {
+  // Mock data structure — cast to Query since generated types change frequently
+  const mockData = {
     _analyticsKey: 'mock-analytics-key',
     _diff: {},
     _structure: {},
     _sys: {
+      branches: {
+        _meta: { filteredCount: 1, totalCount: 1, __typename: 'ListMeta' },
+        items: [],
+        __typename: '_Branches'
+      },
+      dashboardUrl: 'mock-dashboard-url',
+      forkUrl: 'mock-fork-url',
+      hash: 'mock-hash',
       id: 'mock-repo-id',
-      lastModifiedAt: '2024-01-01T00:00:00Z',
-      firstPublishedAt: '2024-01-01T00:00:00Z',
-      publishedAt: '2024-01-01T00:00:00Z',
+      playgroundInfo: null,
+      slug: 'mock-slug',
+      title: 'Mock Repo',
       __typename: 'RepoSys'
     },
     globals: {
@@ -35,8 +43,13 @@ export const Pump = ({
       _sys: {
         id: 'mock-block-sys-id',
         lastModifiedAt: '2024-01-01T00:00:00Z',
-        firstPublishedAt: '2024-01-01T00:00:00Z',
-        publishedAt: '2024-01-01T00:00:00Z',
+        apiNamePath: 'mock-api-name-path',
+        createdAt: '2024-01-01T00:00:00Z',
+        hash: 'mock-hash',
+        idPath: 'mock-id-path',
+        slug: 'mock-slug',
+        slugPath: 'mock-slug-path',
+        title: 'Mock Block',
         __typename: 'BlockDocumentSys'
       },
       _title: 'Mock Globals',
@@ -52,8 +65,13 @@ export const Pump = ({
       _sys: {
         id: 'mock-sections-sys-id',
         lastModifiedAt: '2024-01-01T00:00:00Z',
-        firstPublishedAt: '2024-01-01T00:00:00Z',
-        publishedAt: '2024-01-01T00:00:00Z',
+        apiNamePath: 'mock-api-name-path',
+        createdAt: '2024-01-01T00:00:00Z',
+        hash: 'mock-hash',
+        idPath: 'mock-id-path',
+        slug: 'mock-slug',
+        slugPath: 'mock-slug-path',
+        title: 'Mock Block',
         __typename: 'BlockDocumentSys'
       },
       _title: 'Mock Sections and Pages',
@@ -67,8 +85,13 @@ export const Pump = ({
         _sys: {
           id: 'mock-hero-sys-id',
           lastModifiedAt: '2024-01-01T00:00:00Z',
-          firstPublishedAt: '2024-01-01T00:00:00Z',
-          publishedAt: '2024-01-01T00:00:00Z',
+          apiNamePath: 'mock-api-name-path',
+          createdAt: '2024-01-01T00:00:00Z',
+          hash: 'mock-hash',
+          idPath: 'mock-id-path',
+          slug: 'mock-slug',
+          slugPath: 'mock-slug-path',
+          title: 'Mock Block',
           __typename: 'BlockDocumentSys'
         },
         _title: 'Mock Hero Section',
@@ -125,8 +148,13 @@ export const Pump = ({
           _sys: {
             id: 'mock-socials-sys-id',
             lastModifiedAt: '2024-01-01T00:00:00Z',
-            firstPublishedAt: '2024-01-01T00:00:00Z',
-            publishedAt: '2024-01-01T00:00:00Z',
+            apiNamePath: 'mock-api-name-path',
+            createdAt: '2024-01-01T00:00:00Z',
+            hash: 'mock-hash',
+            idPath: 'mock-id-path',
+            slug: 'mock-slug',
+            slugPath: 'mock-slug-path',
+            title: 'Mock Block',
             __typename: 'BlockDocumentSys'
           },
           _title: 'Mock Socials',
@@ -154,8 +182,13 @@ export const Pump = ({
         _sys: {
           id: 'mock-about-sys-id',
           lastModifiedAt: '2024-01-01T00:00:00Z',
-          firstPublishedAt: '2024-01-01T00:00:00Z',
-          publishedAt: '2024-01-01T00:00:00Z',
+          apiNamePath: 'mock-api-name-path',
+          createdAt: '2024-01-01T00:00:00Z',
+          hash: 'mock-hash',
+          idPath: 'mock-id-path',
+          slug: 'mock-slug',
+          slugPath: 'mock-slug-path',
+          title: 'Mock Block',
           __typename: 'BlockDocumentSys'
         },
         _title: 'Mock About Section',
@@ -186,8 +219,13 @@ export const Pump = ({
           _sys: {
             id: 'mock-quick-skills-sys-id',
             lastModifiedAt: '2024-01-01T00:00:00Z',
-            firstPublishedAt: '2024-01-01T00:00:00Z',
-            publishedAt: '2024-01-01T00:00:00Z',
+            apiNamePath: 'mock-api-name-path',
+            createdAt: '2024-01-01T00:00:00Z',
+            hash: 'mock-hash',
+            idPath: 'mock-id-path',
+            slug: 'mock-slug',
+            slugPath: 'mock-slug-path',
+            title: 'Mock Block',
             __typename: 'BlockDocumentSys'
           },
           _title: 'Mock Quick Skills Showcase',
@@ -212,8 +250,13 @@ export const Pump = ({
           _sys: {
             id: 'mock-experiences-sys-id',
             lastModifiedAt: '2024-01-01T00:00:00Z',
-            firstPublishedAt: '2024-01-01T00:00:00Z',
-            publishedAt: '2024-01-01T00:00:00Z',
+            apiNamePath: 'mock-api-name-path',
+            createdAt: '2024-01-01T00:00:00Z',
+            hash: 'mock-hash',
+            idPath: 'mock-id-path',
+            slug: 'mock-slug',
+            slugPath: 'mock-slug-path',
+            title: 'Mock Block',
             __typename: 'BlockDocumentSys'
           },
           _title: 'Mock Experiences',
@@ -260,8 +303,13 @@ export const Pump = ({
         _sys: {
           id: 'mock-projects-sys-id',
           lastModifiedAt: '2024-01-01T00:00:00Z',
-          firstPublishedAt: '2024-01-01T00:00:00Z',
-          publishedAt: '2024-01-01T00:00:00Z',
+          apiNamePath: 'mock-api-name-path',
+          createdAt: '2024-01-01T00:00:00Z',
+          hash: 'mock-hash',
+          idPath: 'mock-id-path',
+          slug: 'mock-slug',
+          slugPath: 'mock-slug-path',
+          title: 'Mock Block',
           __typename: 'BlockDocumentSys'
         },
         _title: 'Mock Projects Section',
@@ -297,8 +345,13 @@ export const Pump = ({
         _sys: {
           id: 'mock-legal-sys-id',
           lastModifiedAt: '2024-01-01T00:00:00Z',
-          firstPublishedAt: '2024-01-01T00:00:00Z',
-          publishedAt: '2024-01-01T00:00:00Z',
+          apiNamePath: 'mock-api-name-path',
+          createdAt: '2024-01-01T00:00:00Z',
+          hash: 'mock-hash',
+          idPath: 'mock-id-path',
+          slug: 'mock-slug',
+          slugPath: 'mock-slug-path',
+          title: 'Mock Block',
           __typename: 'BlockDocumentSys'
         },
         _title: 'Mock Legal Page',
@@ -313,8 +366,13 @@ export const Pump = ({
             _sys: {
               id: 'mock-legal-de-sys-id',
               lastModifiedAt: '2024-01-01T00:00:00Z',
-              firstPublishedAt: '2024-01-01T00:00:00Z',
-              publishedAt: '2024-01-01T00:00:00Z',
+              apiNamePath: 'mock-api-name-path',
+              createdAt: '2024-01-01T00:00:00Z',
+              hash: 'mock-hash',
+              idPath: 'mock-id-path',
+              slug: 'mock-slug',
+              slugPath: 'mock-slug-path',
+              title: 'Mock Block',
               __typename: 'BlockDocumentSys'
             },
             _title: 'German',
@@ -354,8 +412,13 @@ export const Pump = ({
             _sys: {
               id: 'mock-legal-en-sys-id',
               lastModifiedAt: '2024-01-01T00:00:00Z',
-              firstPublishedAt: '2024-01-01T00:00:00Z',
-              publishedAt: '2024-01-01T00:00:00Z',
+              apiNamePath: 'mock-api-name-path',
+              createdAt: '2024-01-01T00:00:00Z',
+              hash: 'mock-hash',
+              idPath: 'mock-id-path',
+              slug: 'mock-slug',
+              slugPath: 'mock-slug-path',
+              title: 'Mock Block',
               __typename: 'BlockDocumentSys'
             },
             _title: 'English',
@@ -396,19 +459,21 @@ export const Pump = ({
           _sys: {
             id: 'mock-legal-meta-sys-id',
             lastModifiedAt: '2024-01-01T00:00:00Z',
-            firstPublishedAt: '2024-01-01T00:00:00Z',
-            publishedAt: '2024-01-01T00:00:00Z',
+            apiNamePath: 'mock-api-name-path',
+            createdAt: '2024-01-01T00:00:00Z',
+            hash: 'mock-hash',
+            idPath: 'mock-id-path',
+            slug: 'mock-slug',
+            slugPath: 'mock-slug-path',
+            title: 'Mock Block',
             __typename: 'BlockDocumentSys'
           },
           _title: 'Mock Legal Meta',
           desc: 'Mock legal meta description',
           img: {
             url: '/mock-og-image.jpg',
-            rawUrl: '/mock-og-image.jpg',
-            fileName: 'mock-og-image.jpg',
             width: 1200,
             height: 630,
-            mimeType: 'image/jpeg',
             __typename: 'BlockOgImage'
           },
           title: 'Mock Legal Page Title',
@@ -428,8 +493,13 @@ export const Pump = ({
       _sys: {
         id: 'mock-types-sys-id',
         lastModifiedAt: '2024-01-01T00:00:00Z',
-        firstPublishedAt: '2024-01-01T00:00:00Z',
-        publishedAt: '2024-01-01T00:00:00Z',
+        apiNamePath: 'mock-api-name-path',
+        createdAt: '2024-01-01T00:00:00Z',
+        hash: 'mock-hash',
+        idPath: 'mock-id-path',
+        slug: 'mock-slug',
+        slugPath: 'mock-slug-path',
+        title: 'Mock Block',
         __typename: 'BlockDocumentSys'
       },
       _title: 'Mock Types',
@@ -448,8 +518,13 @@ export const Pump = ({
         _sys: {
           id: 'mock-skills-sys-id',
           lastModifiedAt: '2024-01-01T00:00:00Z',
-          firstPublishedAt: '2024-01-01T00:00:00Z',
-          publishedAt: '2024-01-01T00:00:00Z',
+          apiNamePath: 'mock-api-name-path',
+          createdAt: '2024-01-01T00:00:00Z',
+          hash: 'mock-hash',
+          idPath: 'mock-id-path',
+          slug: 'mock-slug',
+          slugPath: 'mock-slug-path',
+          title: 'Mock Block',
           __typename: 'BlockDocumentSys'
         },
         _title: 'Mock Skills',
@@ -465,7 +540,7 @@ export const Pump = ({
   };
 
   if (typeof children === 'function') {
-    return children([mockData]);
+    return children([mockData as unknown as Query]);
   }
 
   return React.createElement('div', { 'data-testid': 'pump' }, children);

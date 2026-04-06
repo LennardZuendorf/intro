@@ -17,7 +17,6 @@ describe('ThemeSelect', () => {
     document.body.className = '';
 
     // next-themes relies on matchMedia; provide a basic mock for JSDOM
-    // @ts-expect-error - adding to window for test environment
     window.matchMedia = window.matchMedia || ((query: string) => ({
       matches: false,
       media: query,
