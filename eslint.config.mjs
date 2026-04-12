@@ -21,6 +21,7 @@ const eslintConfig = defineConfig([
     'next-env.d.ts',
     'node_modules/**',
     '.contentlayer/**',
+    '.source/**',
     'public/**',
     '.fleet/**',
     '.idea/**',

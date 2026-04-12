@@ -36,6 +36,11 @@ yarn-error.log*
 next-env.d.ts
 /.contentlayer/
 
-# cursor
-.history/
+# fumadocs
+.source/
+
+# IDE
+.fleet/
+.idea/
 .cursor/
+.history/

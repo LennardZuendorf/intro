@@ -1,7 +1,7 @@
-import { Card, CardContent } from '@/components/ui/card';
+import { Card, CardContent } from '@/components/retroui/Card';
 import { H1, Lead, Muted } from '@/components/ui/typography';
-import { IconButton } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
+import { IconButton } from '@/components/retroui/Button';
+import { Badge } from '@/components/retroui/Badge';
 import Link from 'next/link';
 import { RxEnvelopeOpen, RxGithubLogo, RxLinkedinLogo } from 'react-icons/rx';
 import { siteConfig, siteMetadata } from '@/data/site';
@@ -41,8 +41,7 @@ export default function Home() {
       />
       <section className='flex flex-col items-center justify-center gap-4 md:gap-6 min-h-[80vh] px-4'>
         <Card
-          className='w-full max-w-2xl shadow-2xl dark:shadow-[0_25px_50px_-12px_rgba(0,0,0,0.8)]'
-          variant='default'
+          className='w-full max-w-2xl'
         >
           <CardContent className='flex flex-col gap-4 sm:gap-6 md:gap-8 p-6 sm:p-8 md:p-12 text-center'>
             <div className='flex flex-col gap-2 sm:gap-3 md:gap-4'>

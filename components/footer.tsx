@@ -7,7 +7,7 @@ import { siteConfig } from '@/data/site';
 import { Separator } from '@/components/ui/separator';
 import Link from 'next/link';
 import { ToggleColor } from '@/components/custom/toggle-color';
-import { Button } from '@/components/ui/button';
+import { Button } from '@/components/retroui/Button';
 import { usePathname } from 'next/navigation';
 
 interface FooterProps {

@@ -1,8 +1,8 @@
 import * as React from 'react';
 import type { Metadata } from 'next';
 import { H4, Muted, M } from '@/components/ui/typography';
-import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
-import { IconButton } from '@/components/ui/button';
+import { Card, CardContent, CardFooter, CardHeader } from '@/components/retroui/Card';
+import { IconButton } from '@/components/retroui/Button';
 import Link from 'next/link';
 import { RxArrowLeft } from 'react-icons/rx';
 

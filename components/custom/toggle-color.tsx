@@ -4,7 +4,7 @@ import * as React from 'react';
 import { useTheme } from 'next-themes';
 import { IoSunny, IoMoon } from 'react-icons/io5';
 import { S } from '@/components/ui/typography';
-import { Button } from '@/components/ui/button';
+import { Button } from '@/components/retroui/Button';
 import {
   DropdownMenu,
   DropdownMenuContent,

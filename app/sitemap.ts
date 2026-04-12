@@ -2,7 +2,7 @@ import { MetadataRoute } from 'next';
 import { siteMetadata } from '@/data/site';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const routes = ['', '/about', '/legal'].map((route) => ({
+  const routes = ['', '/legal'].map((route) => ({
     url: `${siteMetadata.siteUrl}${route}`,
     lastModified: new Date().toISOString(),
     changeFrequency: route === '' ? ('weekly' as const) : ('monthly' as const),
