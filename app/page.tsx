@@ -74,6 +74,7 @@ export default function Home() {
             <div className='flex justify-center gap-3 sm:gap-4 pt-2 sm:pt-4'>
               <Link href={siteConfig.links.linkedin}>
                 <IconButton
+                  variant='outline'
                   icon={<RxLinkedinLogo className='h-5 w-5' />}
                   size='icon'
                   animationType='scale'
@@ -81,6 +82,7 @@ export default function Home() {
               </Link>
               <Link href={siteConfig.links.github}>
                 <IconButton
+                  variant='outline'
                   icon={<RxGithubLogo className='h-5 w-5' />}
                   size='icon'
                   animationType='rotate'
@@ -88,6 +90,7 @@ export default function Home() {
               </Link>
               <Link href={siteConfig.links.mail}>
                 <IconButton
+                  variant='outline'
                   icon={<RxEnvelopeOpen className='h-5 w-5' />}
                   size='icon'
                   animationType='bounce'
