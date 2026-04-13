@@ -32,17 +32,17 @@ export const Footer: React.FC<FooterProps> = ({ className = '' }) => {
               size='icon'
               className={cn('justify-center items-center h-auto p-0')}
             >
-              <h4 className='text-xs sm:text-sm'>Mail</h4>
+              <span className='text-xs sm:text-sm'>Mail</span>
             </Button>
           </Link>
           <Link href={siteConfig.links.linkedin}>
             <Button variant='link' size='icon' className='justify-center items-center h-auto p-0'>
-              <h4 className='text-xs sm:text-sm'>LinkedIn</h4>
+              <span className='text-xs sm:text-sm'>LinkedIn</span>
             </Button>
           </Link>
           <Link href={siteConfig.links.github}>
             <Button variant='link' size='icon' className='justify-center items-center h-auto p-0'>
-              <h4 className='text-xs sm:text-sm'>Github</h4>
+              <span className='text-xs sm:text-sm'>Github</span>
             </Button>
           </Link>
         </div>
@@ -57,8 +57,8 @@ export const Footer: React.FC<FooterProps> = ({ className = '' }) => {
           <div>{`© ${new Date().getFullYear()}`}</div>
           <div>{` | `}</div>
 
-          <Link href='/legal'>
-            <h4 className='text-sm font-medium leading-none hover:underline'>legal</h4>
+          <Link href='/legal' className='text-sm font-medium hover:underline'>
+            legal
           </Link>
         </div>
       </div>

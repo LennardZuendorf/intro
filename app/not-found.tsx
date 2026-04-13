@@ -1,6 +1,7 @@
 import * as React from 'react';
 import type { Metadata } from 'next';
-import { H4, Muted, M } from '@/components/ui/typography';
+import { Muted, M } from '@/components/ui/typography';
+import { Text } from '@/components/retroui/Text';
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/retroui/Card';
 import { IconButton } from '@/components/retroui/Button';
 import Link from 'next/link';
@@ -19,12 +20,12 @@ export default function Home() {
   return (
     <section className='flex flex-col items-center gap-2 sm:gap-4 lg:gap-8 py-4 h-full w-full'>
       <div>
-        <Card className='border-0'>
+        <Card>
           <CardHeader className='justify-end'>
             <Muted>404</Muted>
           </CardHeader>
           <CardContent className='justify-start'>
-            <H4>Page Not Found</H4>
+            <Text as='h4'>Page Not Found</Text>
             <M>The page your requested could not be found...</M>
           </CardContent>
           <CardFooter>

@@ -1,5 +1,6 @@
 import { Card, CardContent } from '@/components/retroui/Card';
-import { H1, Lead, Muted } from '@/components/ui/typography';
+import { Lead, Muted } from '@/components/ui/typography';
+import { Text } from '@/components/retroui/Text';
 import { IconButton } from '@/components/retroui/Button';
 import { Badge } from '@/components/retroui/Badge';
 import Link from 'next/link';
@@ -45,9 +46,12 @@ export default function Home() {
         >
           <CardContent className='flex flex-col gap-4 sm:gap-6 md:gap-8 p-6 sm:p-8 md:p-12 text-center'>
             <div className='flex flex-col gap-2 sm:gap-3 md:gap-4'>
-              <H1 className='font-title font-black text-3xl sm:text-4xl md:text-5xl lg:text-6xl'>
+              <Text
+                as='h1'
+                className='font-title font-black text-3xl sm:text-4xl md:text-5xl lg:text-6xl'
+              >
                 Lennard Zündorf
-              </H1>
+              </Text>
               <Lead type='foreground' className='font-semibold text-lg sm:text-xl md:text-2xl'>
                 Fullstack Product Builder
               </Lead>

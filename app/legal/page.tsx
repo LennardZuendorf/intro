@@ -6,8 +6,9 @@ import {
   CardHeader,
   CardTitle
 } from '@/components/retroui/Card';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/retroui/Tabs';
 import { Button } from '@/components/retroui/Button';
+import { Text } from '@/components/retroui/Text';
 import Link from 'next/link';
 import { siteMetadata } from '@/data/site';
 import { legal } from '@/lib/source';
@@ -34,8 +35,10 @@ export default function Legal() {
 
   return (
     <div className='flex flex-col gap-2 sm:gap-4 md:gap-8 lg:gap-16 py-2 md:py-4 lg:py-8'>
-      <div className='flex items-center justify-between'>
-        <h4 className='scroll-m-20 text-xl font-semibold tracking-tight lg:text-2xl'>Legal</h4>
+      <div className='flex items-center justify-between gap-4'>
+        <Text as='h4' className='leading-none'>
+          Legal
+        </Text>
         <Link href='/'>
           <Button variant='outline'>Back to Main</Button>
         </Link>
