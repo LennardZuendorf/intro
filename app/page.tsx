@@ -1,15 +1,13 @@
-import { Card, CardContent } from '@/components/retroui/Card';
-import { Lead, Muted } from '@/components/ui/typography';
-import { Text } from '@/components/retroui/Text';
-import { IconButton } from '@/components/retroui/Button';
 import { Badge } from '@/components/retroui/Badge';
-import Link from 'next/link';
-import { RxEnvelopeOpen, RxGithubLogo, RxLinkedinLogo } from 'react-icons/rx';
-import { siteConfig, siteMetadata } from '@/data/site';
-import { Loader2 } from 'lucide-react';
+import { Text } from '@/components/retroui/Text';
+import { siteMetadata } from '@/data/site';
+import { pages } from '@/lib/source';
 import * as React from 'react';
 
 export default function Home() {
+  const home = pages.find((p) => p.info.path === 'home.mdx');
+  const Body = home?.body;
+
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Person',
@@ -40,75 +38,27 @@ export default function Home() {
         type='application/ld+json'
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <section className='flex flex-col items-center justify-center gap-4 md:gap-6 min-h-[80vh] px-4'>
-        <Card
-          className='w-full max-w-2xl'
-        >
-          <CardContent className='flex flex-col gap-4 sm:gap-6 md:gap-8 p-6 sm:p-8 md:p-12 text-center'>
-            <div className='flex flex-col gap-2 sm:gap-3 md:gap-4'>
-              <Text
-                as='h1'
-                className='font-title font-black text-3xl sm:text-4xl md:text-5xl lg:text-6xl'
-              >
-                Lennard Zündorf
-              </Text>
-              <Lead type='foreground' className='font-semibold text-lg sm:text-xl md:text-2xl'>
-                Fullstack Product Builder
-              </Lead>
-            </div>
-
-            <p className='text-base sm:text-lg md:text-xl leading-relaxed font-medium'>
-              I turn user needs into real products and features that just work - along the entire
-              product development lifecycle.
-            </p>
-
-            <Muted className='text-sm sm:text-base md:text-lg'>
-              Currently building and leading at{' '}
-              <Link
-                href='https://flug.check24.de'
-                target='_blank'
-                rel='noopener noreferrer'
-                className='underline hover:text-foreground transition-colors'
-              >
-                Check24 Flug
-              </Link>
-              .
-            </Muted>
-
-            <div className='flex justify-center gap-3 sm:gap-4 pt-2 sm:pt-4'>
-              <Link href={siteConfig.links.linkedin}>
-                <IconButton
-                  variant='outline'
-                  icon={<RxLinkedinLogo className='h-5 w-5' />}
-                  size='icon'
-                  animationType='scale'
-                />
-              </Link>
-              <Link href={siteConfig.links.github}>
-                <IconButton
-                  variant='outline'
-                  icon={<RxGithubLogo className='h-5 w-5' />}
-                  size='icon'
-                  animationType='rotate'
-                />
-              </Link>
-              <Link href={siteConfig.links.mail}>
-                <IconButton
-                  variant='outline'
-                  icon={<RxEnvelopeOpen className='h-5 w-5' />}
-                  size='icon'
-                  animationType='bounce'
-                />
-              </Link>
-            </div>
-          </CardContent>
-        </Card>
-
-        <Badge variant='outline' className='flex items-center gap-2 py-2 px-4'>
-          <Loader2 className='h-3 w-3 animate-spin' />
-          <span className='text-xs font-mono'>New website coming soon</span>
-        </Badge>
-      </section>
+      <article className='mx-auto max-w-2xl px-4 sm:px-6 md:px-8 py-12 md:py-16 w-full'>
+        <div className='relative mb-10 md:mb-12'>
+          {home?.tagline && (
+            <Badge
+              variant='solid'
+              className='absolute -top-4 -left-2 -rotate-2 font-mono shadow-[2px_2px_0_0_var(--border)]'
+            >
+              {home.tagline}
+            </Badge>
+          )}
+          <Text
+            as='h1'
+            className='font-title font-black text-4xl sm:text-5xl md:text-6xl leading-tight'
+          >
+            {home?.title ?? "I'm Lennard"}
+          </Text>
+        </div>
+        <div className='prose prose-sm sm:prose-base dark:prose-invert max-w-none'>
+          {Body && <Body />}
+        </div>
+      </article>
     </>
   );
 }

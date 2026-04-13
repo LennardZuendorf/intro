@@ -1,1 +1,1 @@
-export { legal } from 'collections/server';
+export { legal, pages } from 'collections/server';

@@ -98,7 +98,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Nav />
           <main
             className={cn(
-              'container mx-auto flex items-center justify-center w-full md:w-9/12 min-h-screen py-8'
+              'container mx-auto flex items-start justify-center w-full md:w-9/12 min-h-screen pt-24 pb-8'
             )}
           >
             {children}

@@ -11,4 +11,13 @@ export const legal = defineCollections({
   })
 });
 
+export const pages = defineCollections({
+  type: 'doc',
+  dir: './content/pages',
+  schema: z.object({
+    title: z.string(),
+    tagline: z.string().optional()
+  })
+});
+
 export default defineConfig();
