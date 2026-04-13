@@ -34,10 +34,10 @@ export default async function Image() {
           alignItems: 'center',
           justifyContent: 'center',
           backgroundColor: '#171717',
-          border: '3px solid #000',
+          border: '3px solid #3a3a3a',
           borderRadius: '16px',
           padding: '80px 100px',
-          boxShadow: '8px 8px 0px 0px #ffdb33'
+          boxShadow: '8px 8px 0px 0px #f5f5f5'
         }}
       >
         <div
@@ -56,7 +56,7 @@ export default async function Image() {
           style={{
             fontSize: 40,
             fontWeight: 600,
-            color: '#ffdb33',
+            color: '#a3a3a3',
             marginBottom: 40
           }}
         >
@@ -95,15 +95,15 @@ export default async function Image() {
           alignItems: 'center',
           marginTop: 40,
           padding: '12px 24px',
-          backgroundColor: '#ffdb33',
-          border: '2px solid #000',
+          backgroundColor: '#f5f5f5',
+          border: '2px solid #0a0a0a',
           borderRadius: '8px'
         }}
       >
         <div
           style={{
             fontSize: 18,
-            color: '#000',
+            color: '#0a0a0a',
             fontFamily: 'monospace',
             fontWeight: 600
           }}
