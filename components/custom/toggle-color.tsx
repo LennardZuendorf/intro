@@ -3,7 +3,6 @@
 import * as React from 'react';
 import { useTheme } from 'next-themes';
 import { IoSunny, IoMoon } from 'react-icons/io5';
-import { S } from '@/components/ui/typography';
 import { Button } from '@/components/retroui/Button';
 import {
   DropdownMenu,
@@ -11,9 +10,16 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger
 } from '@/components/retroui/DropdownMenu';
+import { cn } from '@/lib/utils';
+
+const OPTIONS: { value: 'light' | 'dark' | 'system'; label: string }[] = [
+  { value: 'light', label: 'Light' },
+  { value: 'dark', label: 'Dark' },
+  { value: 'system', label: 'System' }
+];
 
 export function ToggleColor() {
-  const { setTheme } = useTheme();
+  const { theme, setTheme } = useTheme();
 
   return (
     <DropdownMenu>
@@ -25,15 +31,22 @@ export function ToggleColor() {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align='end'>
-        <DropdownMenuItem onClick={() => setTheme('light')}>
-          <S>Light</S>
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme('dark')}>
-          <S>Dark</S>
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme('system')}>
-          <S>System</S>
-        </DropdownMenuItem>
+        {OPTIONS.map((opt) => {
+          const active = theme === opt.value;
+          return (
+            <DropdownMenuItem
+              key={opt.value}
+              onClick={() => setTheme(opt.value)}
+              className={cn(
+                'justify-center',
+                active &&
+                  'bg-primary text-primary-foreground border-border shadow-[2px_2px_0_0_var(--border)] focus:bg-primary focus:text-primary-foreground'
+              )}
+            >
+              {opt.label}
+            </DropdownMenuItem>
+          );
+        })}
       </DropdownMenuContent>
     </DropdownMenu>
   );

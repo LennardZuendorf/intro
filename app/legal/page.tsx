@@ -34,7 +34,7 @@ export default function Legal() {
   const EnBody = enPage?.body;
 
   return (
-    <div className='flex flex-col gap-2 sm:gap-4 md:gap-8 lg:gap-16 py-2 md:py-4 lg:py-8'>
+    <div className='flex flex-col gap-4 sm:gap-6 md:gap-8 lg:gap-12 px-4 sm:px-6 md:px-8 py-4 md:py-6 lg:py-8'>
       <div className='flex items-center justify-between gap-4'>
         <Text as='h4' className='leading-none'>
           Legal
