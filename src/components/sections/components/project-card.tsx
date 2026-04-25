@@ -2,7 +2,13 @@
 
 import type { VariantProps } from 'class-variance-authority';
 import type React from 'react';
-import { Card, CardContent, CardFooter, CardHeader, type cardVariants } from '@/components/ui/card';
+import { Card } from '@/components/retroui/Card';
+import {
+  cardContentVariants,
+  cardFooterVariants,
+  cardHeaderVariants,
+  cardVariants
+} from '@/components/ui/card-variants';
 import { IconLink } from '@/components/ui/icon-link';
 import { NeoBadge } from '@/components/ui/neoBadge';
 import { H4, M } from '@/components/ui/typography';
@@ -43,19 +49,20 @@ export default function ProjectCard({ project, className, rotation = 'none' }: P
 
   return (
     <Card
-      className={cn('w-full overflow-hidden', className)}
-      variant='default'
-      rotation={rotation}
-      shadow='lg'
+      className={cn(
+        cardVariants({ variant: 'default', rotation, shadow: 'lg' }),
+        'w-full overflow-hidden',
+        className
+      )}
       style={{
         backgroundColor: hexToRgba(projectColor, 0.1)
       }}
     >
-      <CardHeader spacing='compact' className='pb-2'>
+      <Card.Header className={cn(cardHeaderVariants({ spacing: 'compact' }), 'pb-2')}>
         <H4 className='line-clamp-1'>{project._title}</H4>
-      </CardHeader>
+      </Card.Header>
 
-      <CardContent spacing='compact' className='pt-0 pb-2'>
+      <Card.Content className={cn(cardContentVariants({ spacing: 'compact' }), 'pt-0 pb-2')}>
         <M className='text-muted-foreground line-clamp-3 mb-3 text-sm leading-relaxed'>
           {project.shortDescription}
         </M>
@@ -90,9 +97,9 @@ export default function ProjectCard({ project, className, rotation = 'none' }: P
             </div>
           </div>
         )}
-      </CardContent>
+      </Card.Content>
 
-      <CardFooter spacing='compact' className='pt-2 mt-auto'>
+      <div className={cn(cardFooterVariants({ spacing: 'compact' }), 'pt-2 mt-auto')}>
         <div className='flex gap-2 w-full'>
           {project._slug && (
             <IconLink
@@ -105,7 +112,7 @@ export default function ProjectCard({ project, className, rotation = 'none' }: P
             </IconLink>
           )}
         </div>
-      </CardFooter>
+      </div>
     </Card>
   );
 }

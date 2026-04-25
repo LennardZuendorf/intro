@@ -1,12 +1,14 @@
 import type { UnionCalloutComponentComponent } from 'basehub-types';
 import type { ReactNode } from 'react';
+import { Card } from '@/components/retroui/Card';
 import {
   RichTextBlock as RichText,
   type RichTextBlockUnion
 } from '@/components/shared/richtext-block';
-import { Card, CardContent, CardHeader } from '@/components/ui/card';
+import { cardVariants } from '@/components/ui/card-variants';
 import { NeoBadge } from '@/components/ui/neoBadge';
 import { H1, M } from '@/components/ui/typography';
+import { cn } from '@/lib/utils/ui';
 
 interface HeroCardProps {
   heroText?: {
@@ -26,11 +28,11 @@ interface HeroCardProps {
 
 export function HeroCard({ heroText, secondaryText, className }: HeroCardProps) {
   return (
-    <Card id='hero-card' className={className}>
-      <CardHeader>
+    <Card id='hero-card' className={cn(cardVariants(), className)}>
+      <Card.Header>
         <H1>I'm Lennard</H1>
-      </CardHeader>
-      <CardContent className='space-y-3'>
+      </Card.Header>
+      <Card.Content className='space-y-3'>
         {heroText?.json?.content ? (
           <div className='font-mono leading-relaxed inline [&_article>*]:inline!'>
             <RichText blocks={heroText.json.blocks} className='inline!'>
@@ -59,7 +61,7 @@ export function HeroCard({ heroText, secondaryText, className }: HeroCardProps) 
             Technical excellence
           </NeoBadge>
         </div>
-      </CardContent>
+      </Card.Content>
     </Card>
   );
 }

@@ -1,5 +1,5 @@
 import type { VariantProps } from 'class-variance-authority';
-import type { cardVariants } from '@/components/ui/card';
+import type { cardVariants } from '@/components/ui/card-variants';
 
 // Extract the variant types from the card component
 type CardVariants = VariantProps<typeof cardVariants>;
