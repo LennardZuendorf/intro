@@ -31,7 +31,7 @@ export const ExperienceHoverCard = (props: ExperienceComponent) => {
               target={isExternal ? '_blank' : undefined}
               rel={isExternal ? 'noopener noreferrer' : undefined}
               style={{ display: 'inline' }}
-              className='!underline decoration-1 underline-offset-[3px] decoration-foreground/40 hover:decoration-foreground/70 transition-colors cursor-pointer'
+              className='underline! decoration-1 underline-offset-[3px] decoration-foreground/40 hover:decoration-foreground/70 transition-colors cursor-pointer'
             >
               {displayText}
             </Link>
@@ -39,7 +39,7 @@ export const ExperienceHoverCard = (props: ExperienceComponent) => {
             <button
               type='button'
               style={{ display: 'inline' }}
-              className='appearance-none bg-transparent border-none p-0 m-0 font-inherit cursor-pointer !underline decoration-1 underline-offset-[3px] decoration-foreground/40 hover:decoration-foreground/70 transition-colors'
+              className='appearance-none bg-transparent border-none p-0 m-0 font-inherit cursor-pointer underline! decoration-1 underline-offset-[3px] decoration-foreground/40 hover:decoration-foreground/70 transition-colors'
             >
               {displayText}
             </button>

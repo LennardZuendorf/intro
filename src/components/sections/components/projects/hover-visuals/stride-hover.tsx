@@ -57,7 +57,7 @@ const barChartData = [
 ];
 
 const BarChartLayer = ({ hovered, color, secondaryColor }: LayerProps) => (
-  <div className='ease-[cubic-bezier(0.6,0.6,0,1)] absolute inset-0 z-[8] flex h-[120px] w-full items-center justify-center text-neutral-800/10 transition-transform duration-500 group-hover/animated-card:scale-150 dark:text-white/15'>
+  <div className='ease-[cubic-bezier(0.6,0.6,0,1)] absolute inset-0 z-8 flex h-[120px] w-full items-center justify-center text-neutral-800/10 transition-transform duration-500 group-hover/animated-card:scale-150 dark:text-white/15'>
     <svg
       width='100%'
       height='100%'
@@ -89,10 +89,10 @@ const BarChartLayer = ({ hovered, color, secondaryColor }: LayerProps) => (
 
 const InfoRevealLayer = ({ color }: { color: string }) => (
   <div className='relative h-full w-full' style={{ '--color': color } as React.CSSProperties}>
-    <div className='ease-[cubic-bezier(0.6,0.6,0,1)] absolute inset-0 z-[7] flex w-full translate-y-full items-start justify-center bg-transparent p-3 transition-transform duration-500 group-hover/animated-card:translate-y-0'>
-      <div className='ease-[cubic-bezier(0.6,0.6,0,1)] rounded-md border border-zinc-200 bg-white/25 p-1 opacity-0 backdrop-blur-sm transition-opacity duration-500 group-hover/animated-card:opacity-100 dark:border-zinc-800 dark:bg-black/25'>
+    <div className='ease-[cubic-bezier(0.6,0.6,0,1)] absolute inset-0 z-7 flex w-full translate-y-full items-start justify-center bg-transparent p-3 transition-transform duration-500 group-hover/animated-card:translate-y-0'>
+      <div className='ease-[cubic-bezier(0.6,0.6,0,1)] rounded-md border border-zinc-200 bg-white/25 p-1 opacity-0 backdrop-blur-xs transition-opacity duration-500 group-hover/animated-card:opacity-100 dark:border-zinc-800 dark:bg-black/25'>
         <div className='flex items-center gap-2'>
-          <div className='h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--color)]' />
+          <div className='h-1.5 w-1.5 shrink-0 rounded-full bg-(--color)' />
           <span className='text-[10px] text-black dark:text-white'>Agent Activity</span>
         </div>
         <span className='text-[9px] text-neutral-500 dark:text-neutral-400'>
@@ -105,15 +105,15 @@ const InfoRevealLayer = ({ color }: { color: string }) => (
 
 const StatPillsLayer = ({ color, secondaryColor }: LayerProps) => (
   <div
-    className='absolute top-2 left-3 z-[8] flex items-center gap-1'
+    className='absolute top-2 left-3 z-8 flex items-center gap-1'
     style={{ '--color': color, '--secondary-color': secondaryColor } as React.CSSProperties}
   >
-    <div className='flex shrink-0 items-center rounded-full border border-zinc-200 bg-white/25 px-1.5 py-0.5 backdrop-blur-sm transition-opacity duration-300 ease-in-out group-hover/animated-card:opacity-0 dark:border-zinc-800 dark:bg-black/25'>
-      <div className='h-1.5 w-1.5 rounded-full bg-[var(--color)]' />
+    <div className='flex shrink-0 items-center rounded-full border border-zinc-200 bg-white/25 px-1.5 py-0.5 backdrop-blur-xs transition-opacity duration-300 ease-in-out group-hover/animated-card:opacity-0 dark:border-zinc-800 dark:bg-black/25'>
+      <div className='h-1.5 w-1.5 rounded-full bg-(--color)' />
       <span className='ml-1 text-[9px] text-black dark:text-white'>+15.2%</span>
     </div>
-    <div className='flex shrink-0 items-center rounded-full border border-zinc-200 bg-white/25 px-1.5 py-0.5 backdrop-blur-sm transition-opacity duration-300 ease-in-out group-hover/animated-card:opacity-0 dark:border-zinc-800 dark:bg-black/25'>
-      <div className='h-1.5 w-1.5 rounded-full bg-[var(--secondary-color)]' />
+    <div className='flex shrink-0 items-center rounded-full border border-zinc-200 bg-white/25 px-1.5 py-0.5 backdrop-blur-xs transition-opacity duration-300 ease-in-out group-hover/animated-card:opacity-0 dark:border-zinc-800 dark:bg-black/25'>
+      <div className='h-1.5 w-1.5 rounded-full bg-(--secondary-color)' />
       <span className='ml-1 text-[9px] text-black dark:text-white'>+18.7%</span>
     </div>
   </div>

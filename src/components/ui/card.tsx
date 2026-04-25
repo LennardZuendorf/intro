@@ -46,7 +46,7 @@ const cardVariants = cva(
         outline: 'bg-transparent ',
         accent: 'bg-accent text-accent-foreground ',
         // Completely remove border and shadow, background is transparent, no outline at all
-        invisible: '!bg-transparent !border-none !shadow-none'
+        invisible: 'bg-transparent! border-none! shadow-none!'
       },
       shadow: {
         none: 'shadow-none',
@@ -62,9 +62,9 @@ const cardVariants = cva(
       },
       rotation: {
         none: '',
-        slight: '-rotate-1',
+        slight: 'rotate-negative',
         slightNegative: 'rotate-1',
-        medium: '-rotate-2',
+        medium: 'rotate-negative-medium',
         mediumNegative: 'rotate-2'
       },
       interactive: {
@@ -136,7 +136,7 @@ const CardDescription = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn('text-sm text-primary-foreground font-base !mt-3', className)}
+    className={cn('text-sm text-primary-foreground font-base mt-3!', className)}
     {...props}
   />
 ));

@@ -126,7 +126,7 @@ const GridLayer = ({ color }: GridLayerProps) => {
           '--grid-color': color
         } as React.CSSProperties
       }
-      className='pointer-events-none absolute inset-0 z-[4] h-full w-full bg-transparent bg-[linear-gradient(to_right,var(--grid-color)_1px,transparent_1px),linear-gradient(to_bottom,var(--grid-color)_1px,transparent_1px)] bg-[size:20px_20px] bg-center opacity-70 [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_60%,transparent_100%)]'
+      className='pointer-events-none absolute inset-0 z-4 h-full w-full bg-transparent bg-[linear-gradient(to_right,var(--grid-color)_1px,transparent_1px),linear-gradient(to_bottom,var(--grid-color)_1px,transparent_1px)] bg-size-[20px_20px] bg-center opacity-70 mask-[radial-gradient(ellipse_50%_50%_at_50%_50%,#000_60%,transparent_100%)]'
     />
   );
 };
@@ -137,7 +137,7 @@ interface EllipseGradientProps {
 
 const EllipseGradient = ({ color }: EllipseGradientProps) => {
   return (
-    <div className='absolute inset-0 z-[5] flex h-full w-full items-center justify-center'>
+    <div className='absolute inset-0 z-5 flex h-full w-full items-center justify-center'>
       <svg
         width='356'
         height='196'
@@ -174,7 +174,7 @@ interface LayerProps {
 
 const Layer1 = ({ color, secondaryColor }: LayerProps) => {
   return (
-    <div className='ease-[cubic-bezier(0.6, 0.6, 0, 1)] absolute top-0 left-0 z-[6] transform transition-transform duration-500 group-hover/animated-card:translate-x-[-50%]'>
+    <div className='ease-[cubic-bezier(0.6, 0.6, 0, 1)] absolute top-0 left-0 z-6 transform transition-transform duration-500 group-hover/animated-card:translate-x-[-50%]'>
       <svg
         className='w-[200%]'
         viewBox='0 0 712 180'
@@ -286,7 +286,7 @@ const Layer1 = ({ color, secondaryColor }: LayerProps) => {
 
 const Layer2 = ({ color }: LayerProps) => {
   return (
-    <div className='absolute top-0 left-[-1px] h-full w-1/2'>
+    <div className='absolute top-0 -left-px h-full w-1/2'>
       <svg
         className='h-full w-full'
         viewBox='0 0 356 180'
@@ -312,7 +312,7 @@ const Layer2 = ({ color }: LayerProps) => {
           </clipPath>
         </defs>
       </svg>
-      <div className='ease-[cubic-bezier(0.6, 0.6, 0, 1)] absolute inset-0 z-[3] transform bg-gradient-to-r from-transparent from-0% to-white to-15% transition-transform duration-500 group-hover/animated-card:translate-x-full dark:to-black'></div>
+      <div className='ease-[cubic-bezier(0.6, 0.6, 0, 1)] absolute inset-0 z-3 transform bg-linear-to-r from-transparent from-0% to-white to-15% transition-transform duration-500 group-hover/animated-card:translate-x-full dark:to-black'></div>
     </div>
   );
 };
@@ -329,7 +329,7 @@ const defaultContributors = [
 const Layer3 = ({ color, secondaryColor, contributors = defaultContributors }: Layer3Props) => {
   return (
     <div
-      className='absolute top-4 right-4 z-[8] flex items-center gap-1'
+      className='absolute top-4 right-4 z-8 flex items-center gap-1'
       style={
         {
           '--color': color,
@@ -343,7 +343,7 @@ const Layer3 = ({ color, secondaryColor, contributors = defaultContributors }: L
       {contributors.map((contributor) => (
         <div
           key={contributor.name}
-          className='flex shrink-0 items-center rounded-full border border-zinc-200 bg-white/25 px-1.5 py-0.5 backdrop-blur-sm transition-opacity duration-300 ease-in-out group-hover/animated-card:opacity-0 dark:border-zinc-800 dark:bg-black/25'
+          className='flex shrink-0 items-center rounded-full border border-zinc-200 bg-white/25 px-1.5 py-0.5 backdrop-blur-xs transition-opacity duration-300 ease-in-out group-hover/animated-card:opacity-0 dark:border-zinc-800 dark:bg-black/25'
         >
           <div
             className='h-1.5 w-1.5 rounded-full'
@@ -359,8 +359,8 @@ const Layer3 = ({ color, secondaryColor, contributors = defaultContributors }: L
 const Layer4 = () => {
   return (
     <div className='group relative h-full w-1/2'>
-      <div className='ease-[cubic-bezier(0.6, 0.6, 0, 1)] absolute inset-0 z-[7] flex w-full -translate-y-full items-start justify-start bg-transparent p-4 transition-transform duration-500 group-hover/animated-card:translate-y-0'>
-        <div className='ease-[cubic-bezier(0.6, 0.6, 0, 1)] rounded-md border border-zinc-200 bg-white/25 p-1.5 opacity-0 backdrop-blur-sm transition-opacity duration-500 group-hover/animated-card:opacity-100 dark:border-zinc-800 dark:bg-black/25'>
+      <div className='ease-[cubic-bezier(0.6, 0.6, 0, 1)] absolute inset-0 z-7 flex w-full -translate-y-full items-start justify-start bg-transparent p-4 transition-transform duration-500 group-hover/animated-card:translate-y-0'>
+        <div className='ease-[cubic-bezier(0.6, 0.6, 0, 1)] rounded-md border border-zinc-200 bg-white/25 p-1.5 opacity-0 backdrop-blur-xs transition-opacity duration-500 group-hover/animated-card:opacity-100 dark:border-zinc-800 dark:bg-black/25'>
           <p className='mb-1 text-xs font-semibold text-black dark:text-white'>
             Random Data Visualization
           </p>

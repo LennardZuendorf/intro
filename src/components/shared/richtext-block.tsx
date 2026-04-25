@@ -155,7 +155,7 @@ export const RichTextBlock = ({
             </HeadingNoLink>
           ),
           p: ({ children }) => (
-            <M as='div' className='first:mt-0 mt-4 leading-[inherit] text-[inherit]'>
+            <M as='div' className='first:mt-0 mt-4 leading-[inherit] text-inherit'>
               {children}
             </M>
           ),

@@ -78,7 +78,7 @@ const EditorDocument = ({
   color: string;
   secondaryColor: string;
 }) => (
-  <div className='absolute inset-0 z-[8]'>
+  <div className='absolute inset-0 z-8'>
     <svg
       className='pointer-events-none absolute inset-0 h-full w-full'
       viewBox='0 0 356 120'
@@ -270,7 +270,7 @@ const WorkflowPipeline = ({
 
   return (
     <svg
-      className='pointer-events-none absolute inset-0 z-[7] h-full w-full'
+      className='pointer-events-none absolute inset-0 z-7 h-full w-full'
       viewBox='0 0 356 120'
       preserveAspectRatio='xMidYMid slice'
       aria-hidden='true'
@@ -353,15 +353,15 @@ const WorkflowPipeline = ({
 
 const AuthorLabels = ({ color, secondaryColor }: { color: string; secondaryColor: string }) => (
   <div
-    className='absolute top-2 left-3 z-[9] flex items-center gap-1'
+    className='absolute top-2 left-3 z-9 flex items-center gap-1'
     style={{ '--color': color, '--secondary-color': secondaryColor } as React.CSSProperties}
   >
-    <div className='flex shrink-0 items-center rounded-sm border-2 border-border bg-primary px-1.5 py-0.5 transition-opacity duration-300 ease-in-out group-hover/animated-card:opacity-0'>
-      <div className='h-1.5 w-1.5 rounded-sm bg-[var(--color)]' />
+    <div className='flex shrink-0 items-center rounded-xs border-2 border-border bg-primary px-1.5 py-0.5 transition-opacity duration-300 ease-in-out group-hover/animated-card:opacity-0'>
+      <div className='h-1.5 w-1.5 rounded-xs bg-(--color)' />
       <span className='ml-1 text-[9px] font-black text-primary-foreground/60'>AI</span>
     </div>
-    <div className='flex shrink-0 items-center rounded-sm border-2 border-border bg-primary px-1.5 py-0.5 transition-opacity duration-300 ease-in-out group-hover/animated-card:opacity-0'>
-      <div className='h-1.5 w-1.5 rounded-sm bg-[var(--secondary-color)]' />
+    <div className='flex shrink-0 items-center rounded-xs border-2 border-border bg-primary px-1.5 py-0.5 transition-opacity duration-300 ease-in-out group-hover/animated-card:opacity-0'>
+      <div className='h-1.5 w-1.5 rounded-xs bg-(--secondary-color)' />
       <span className='ml-1 text-[9px] font-black text-primary-foreground/60'>Human</span>
     </div>
   </div>

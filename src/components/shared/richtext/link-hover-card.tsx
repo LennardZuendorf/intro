@@ -38,7 +38,7 @@ export const LinkHoverCard = ({ url, _title, description, text }: LinkHoverCardP
             target={isExternal ? '_blank' : undefined}
             rel={isExternal ? 'noopener noreferrer' : undefined}
             style={{ display: 'inline' }}
-            className='!underline decoration-1 underline-offset-[3px] decoration-foreground/40 hover:decoration-foreground/70 transition-colors cursor-pointer'
+            className='underline! decoration-1 underline-offset-[3px] decoration-foreground/40 hover:decoration-foreground/70 transition-colors cursor-pointer'
           >
             {displayText}
           </Link>

@@ -110,11 +110,11 @@ function IndexVisual({ mainColor, secondaryColor, gradientId }: IndexVisualProps
       {/* Background grid */}
       <div
         style={{ '--grid-color': '#80808015' } as React.CSSProperties}
-        className='pointer-events-none absolute inset-0 z-[1] h-full w-full bg-transparent bg-[linear-gradient(to_right,var(--grid-color)_1px,transparent_1px),linear-gradient(to_bottom,var(--grid-color)_1px,transparent_1px)] bg-[size:16px_16px] bg-center opacity-70'
+        className='pointer-events-none absolute inset-0 z-1 h-full w-full bg-transparent bg-[linear-gradient(to_right,var(--grid-color)_1px,transparent_1px),linear-gradient(to_bottom,var(--grid-color)_1px,transparent_1px)] bg-size-[16px_16px] bg-center opacity-70'
       />
 
       {/* Radial gradient overlay */}
-      <div className='absolute inset-0 z-[2] flex items-center justify-center'>
+      <div className='absolute inset-0 z-2 flex items-center justify-center'>
         <svg
           width='100%'
           height='100%'
@@ -136,7 +136,7 @@ function IndexVisual({ mainColor, secondaryColor, gradientId }: IndexVisualProps
       </div>
 
       {/* Animated document/index bars */}
-      <div className='absolute inset-0 z-[3] flex items-end justify-center gap-[3px] px-6 pb-2'>
+      <div className='absolute inset-0 z-3 flex items-end justify-center gap-[3px] px-6 pb-2'>
         {[65, 45, 80, 35, 55, 90, 40, 70, 50, 85, 60, 75].map((h, i) => (
           <div
             key={`bar-h${h}-${i % 2 === 0 ? 'a' : 'b'}`}
@@ -151,7 +151,7 @@ function IndexVisual({ mainColor, secondaryColor, gradientId }: IndexVisualProps
       </div>
 
       {/* Floating search lens indicator */}
-      <div className='ease-[cubic-bezier(0.6,0.6,0,1)] absolute top-3 right-3 z-[4] opacity-70 transition-transform duration-500 group-hover/animated-card:translate-x-[-8px] group-hover/animated-card:translate-y-[8px]'>
+      <div className='ease-[cubic-bezier(0.6,0.6,0,1)] absolute top-3 right-3 z-4 opacity-70 transition-transform duration-500 group-hover/animated-card:translate-x-[-8px] group-hover/animated-card:translate-y-[8px]'>
         <svg
           width='28'
           height='28'

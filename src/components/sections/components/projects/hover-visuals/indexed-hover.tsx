@@ -42,7 +42,7 @@ const SceneLayout = ({
   color: string;
   secondaryColor: string;
 }) => (
-  <div className='absolute inset-0 z-[8] flex items-center justify-center'>
+  <div className='absolute inset-0 z-8 flex items-center justify-center'>
     <FlowLines hovered={hovered} color={color} />
     {docBadges.map((badge) => (
       <DocBadge
@@ -142,7 +142,7 @@ const IndexCard = ({
       {indexBars.map((bar) => (
         <div
           key={bar.delay}
-          className='ease-[cubic-bezier(0.6,0.6,0,1)] h-[5px] rounded-sm transition-all duration-500'
+          className='ease-[cubic-bezier(0.6,0.6,0,1)] h-[5px] rounded-xs transition-all duration-500'
           style={{
             width: hovered ? bar.hoverWidth : bar.width,
             backgroundColor: bar.primary ? color : secondaryColor,
@@ -191,7 +191,7 @@ const DocBadge = ({
 
   return (
     <div
-      className='ease-[cubic-bezier(0.6,0.6,0,1)] absolute z-[5] rounded border-2 border-border bg-primary px-1.5 py-0.5 transition-all duration-700'
+      className='ease-[cubic-bezier(0.6,0.6,0,1)] absolute z-5 rounded-sm border-2 border-border bg-primary px-1.5 py-0.5 transition-all duration-700'
       style={{
         transform: hovered
           ? `translate(${badge.hoverX}px, ${badge.hoverY}px)`
@@ -214,7 +214,7 @@ const DocBadge = ({
 
 const FlowLines = ({ hovered, color }: { hovered: boolean; color: string }) => (
   <svg
-    className='pointer-events-none absolute inset-0 z-[6] h-full w-full transition-opacity duration-500'
+    className='pointer-events-none absolute inset-0 z-6 h-full w-full transition-opacity duration-500'
     viewBox='0 0 356 120'
     preserveAspectRatio='xMidYMid slice'
     aria-hidden='true'

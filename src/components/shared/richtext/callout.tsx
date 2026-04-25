@@ -84,7 +84,7 @@ const CalloutIcon = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement> & { type?: CalloutType }
 >(({ className, type, ...props }, ref) => (
-  <div ref={ref} className={cn('flex-shrink-0', className)} {...props} />
+  <div ref={ref} className={cn('shrink-0', className)} {...props} />
 ));
 CalloutIcon.displayName = 'CalloutIcon';
 
@@ -109,7 +109,7 @@ const CalloutDescription = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn('text-sm text-primary-foreground font-base !mt-1', className)}
+    className={cn('text-sm text-primary-foreground font-base mt-1!', className)}
     {...props}
   />
 ));
@@ -331,7 +331,7 @@ export const CalloutComponent = ({ type = 'info', title, content }: CalloutCompo
     >
       {title ? (
         <CalloutHeader className='flex flex-row items-center gap-2'>
-          <CalloutIcon type={calloutType} className='flex-shrink-0'>
+          <CalloutIcon type={calloutType} className='shrink-0'>
             {getCalloutIcon(calloutType)}
             <span className='sr-only'>{calloutType}: </span>
           </CalloutIcon>
@@ -340,7 +340,7 @@ export const CalloutComponent = ({ type = 'info', title, content }: CalloutCompo
       ) : null}
       <CalloutContent className={cn('flex gap-2', !title && 'pt-3')}>
         {!title && (
-          <CalloutIcon type={calloutType} className='mt-0.5 flex-shrink-0'>
+          <CalloutIcon type={calloutType} className='mt-0.5 shrink-0'>
             {getCalloutIcon(calloutType)}
             <span className='sr-only'>{calloutType}: </span>
           </CalloutIcon>

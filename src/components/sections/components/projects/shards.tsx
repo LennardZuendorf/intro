@@ -115,11 +115,11 @@ function ShardsVisual({ mainColor, secondaryColor, tertiaryColor, gradientId }: 
       {/* Background grid */}
       <div
         style={{ '--grid-color': '#80808015' } as React.CSSProperties}
-        className='pointer-events-none absolute inset-0 z-[1] h-full w-full bg-transparent bg-[linear-gradient(to_right,var(--grid-color)_1px,transparent_1px),linear-gradient(to_bottom,var(--grid-color)_1px,transparent_1px)] bg-[size:20px_20px] bg-center opacity-50'
+        className='pointer-events-none absolute inset-0 z-1 h-full w-full bg-transparent bg-[linear-gradient(to_right,var(--grid-color)_1px,transparent_1px),linear-gradient(to_bottom,var(--grid-color)_1px,transparent_1px)] bg-size-[20px_20px] bg-center opacity-50'
       />
 
       {/* Radial glow */}
-      <div className='absolute inset-0 z-[2] flex items-center justify-center'>
+      <div className='absolute inset-0 z-2 flex items-center justify-center'>
         <svg
           width='100%'
           height='100%'
@@ -142,7 +142,7 @@ function ShardsVisual({ mainColor, secondaryColor, tertiaryColor, gradientId }: 
 
       {/* Crystal shards — geometric polygons */}
       <svg
-        className='absolute inset-0 z-[3] h-full w-full'
+        className='absolute inset-0 z-3 h-full w-full'
         viewBox='0 0 356 140'
         fill='none'
         xmlns='http://www.w3.org/2000/svg'
@@ -178,27 +178,27 @@ function ShardsVisual({ mainColor, secondaryColor, tertiaryColor, gradientId }: 
           stroke={tertiaryColor}
           strokeWidth='1'
           strokeOpacity='0.5'
-          className='origin-center transition-transform duration-500 group-hover/animated-card:-rotate-[5deg] group-hover/animated-card:scale-105'
+          className='origin-center transition-transform duration-500 group-hover/animated-card:rotate-[-5deg] group-hover/animated-card:scale-105'
         />
         {/* Small accent shards */}
         <polygon
           points='130,60 150,45 155,85 135,90'
           fill={mainColor}
           fillOpacity='0.25'
-          className='origin-center transition-transform duration-700 group-hover/animated-card:translate-x-[-4px] group-hover/animated-card:translate-y-[-4px]'
+          className='origin-center transition-transform duration-700 group-hover/animated-card:translate-x-reverseBoxShadowY group-hover/animated-card:translate-y-reverseBoxShadowY'
         />
         <polygon
           points='210,55 230,40 235,80 215,90'
           fill={secondaryColor}
           fillOpacity='0.25'
-          className='origin-center transition-transform duration-700 group-hover/animated-card:translate-x-[4px] group-hover/animated-card:translate-y-[-4px]'
+          className='origin-center transition-transform duration-700 group-hover/animated-card:translate-x-boxShadowY group-hover/animated-card:translate-y-reverseBoxShadowY'
         />
         {/* Far left small shard */}
         <polygon
           points='30,70 50,55 55,100 35,105'
           fill={tertiaryColor}
           fillOpacity='0.2'
-          className='origin-center transition-transform duration-600 group-hover/animated-card:-rotate-[8deg]'
+          className='origin-center transition-transform duration-600 group-hover/animated-card:rotate-[-8deg]'
         />
         {/* Far right small shard */}
         <polygon

@@ -102,7 +102,7 @@ const Page: NextPage = async () => {
             maskType='radial'
             className='flex w-full min-h-screen flex-col relative justify-center items-center'
           >
-            <div className='w-full flex justify-center fixed bottom-0 md:bottom-auto md:top-0 left-0 z-[9999] pointer-events-none'>
+            <div className='w-full flex justify-center fixed bottom-0 md:bottom-auto md:top-0 left-0 z-9999 pointer-events-none'>
               <div className='pointer-events-auto w-full max-w-[1536px] px-2 md:px-8 pb-3 md:pb-0 md:pt-3'>
                 <Nav socials={data.globals.socials.items} />
               </div>

@@ -37,7 +37,7 @@ export const Nav = ({ className, socials, backHref }: NavProps) => {
     >
       <NavigationMenu className='bg-primary w-full md:w-auto'>
         <NavigationMenuList className='flex justify-end w-full'>
-          <div className='isolate relative z-[9999]'>
+          <div className='isolate relative z-9999'>
             <NavigationMenuItem key='settings' className='relative bg-primary'>
               <div className='flex space-x-1 items-center'>
                 {backHref && (
@@ -75,7 +75,7 @@ export const Nav = ({ className, socials, backHref }: NavProps) => {
                 <ThemeSelect
                   buttonVariant='default'
                   noButtonShadow={true}
-                  popoverClassName='z-[9999]'
+                  popoverClassName='z-9999'
                 />
               </div>
             </NavigationMenuItem>

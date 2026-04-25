@@ -30,7 +30,7 @@ function Section({
       className={cn(
         "mx-auto relative",
         fullWidth ? "w-full" : "max-w-3xl",
-        fullHeight && "min-h-[100svh]",
+        fullHeight && "min-h-svh",
         "flex items-center justify-center",
         className,
       )}

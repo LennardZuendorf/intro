@@ -32,8 +32,8 @@ export function HeroCard({ heroText, secondaryText, className }: HeroCardProps) 
       </CardHeader>
       <CardContent className='space-y-3'>
         {heroText?.json?.content ? (
-          <div className='font-mono leading-relaxed inline [&_article>*]:!inline'>
-            <RichText blocks={heroText.json.blocks} className='!inline'>
+          <div className='font-mono leading-relaxed inline [&_article>*]:inline!'>
+            <RichText blocks={heroText.json.blocks} className='inline!'>
               {heroText.json.content}
             </RichText>
             {secondaryText?.json?.content && (

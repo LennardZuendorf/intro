@@ -56,9 +56,9 @@ const wrapClasses: Record<NonNullable<BaseTypographyProps["wrap"]>, string> = {
 // Note: Leading trim uses margin adjustments as CSS leading-trim has limited support
 const trimClasses: Record<NonNullable<BaseTypographyProps["trim"]>, string> = {
   normal: "",
-  start: "-mt-[0.42em]",
-  end: "-mb-[0.36em]",
-  both: "-mt-[0.42em] -mb-[0.36em]",
+  start: "mt-[-0.42em]",
+  end: "mb-[-0.36em]",
+  both: "mt-[-0.42em] mb-[-0.36em]",
 };
 
 const alignClasses: Record<NonNullable<BaseTypographyProps["align"]>, string> = {
@@ -677,7 +677,7 @@ const Muted: React.FC<TypographyProps> = ({
 // Code: Base -> sm/md (bigger) -> lg/xl (regular) -> 2xl (bigger)
 // Variants: solid, soft, outline, ghost
 interface CodeProps extends BaseTypographyProps {
-  variant?: "solid" | "soft" | "outline" | "ghost";
+  variant?: "solid" | "soft" | "outline-solid" | "ghost";
 }
 
 const Code: React.FC<CodeProps> = ({
@@ -700,7 +700,7 @@ const Code: React.FC<CodeProps> = ({
   return (
     <Comp
       className={cn(
-        "relative rounded-sm px-[0.3rem] py-[0.2rem] font-mono",
+        "relative rounded-xs px-[0.3rem] py-[0.2rem] font-mono",
         // Responsive sizing: base smaller, sm/md bigger, lg/xl regular, 2xl bigger
         "text-[0.625rem] sm:text-xs md:text-xs lg:text-xs xl:text-xs 2xl:text-sm",
         getWeightClass(weight),

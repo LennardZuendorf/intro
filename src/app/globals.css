@@ -1,13 +1,16 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@plugin '@tailwindcss/typography';
+
+@custom-variant dark (&:where(.dark, .dark *));
 
 :root {
   /* Main Color System - Theme Dependent */
   /* Main Background Colors */
-  --primary: oklch(97.61% 0 0); /* Light gray background (#f6f6f6) */
+  --primary: oklch(0.9761 0 0); /* Light gray background (#f6f6f6) */
   --primary-foreground: oklch(0 0 0); /* Main text color - black */
-  --secondary: oklch(95 0 0); /* Strong white */
+  --secondary: oklch(0.95 0 0); /* Strong white */
   --secondary-foreground: oklch(0 0 0);
   --blank: oklch(0 0 0); /* Pure black (#000000) */
 
@@ -24,36 +27,124 @@
   --base-font-weight: 500;
   --heading-font-weight: 900;
   --mono-font-family:
-    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New",
-    monospace;
+    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono',
+    'Courier New', monospace;
 
   /* Shadows */
   --shadow-sm: var(--shadow-sm-x) var(--shadow-sm-y) 0px 0px var(--blank);
   --shadow-md: var(--shadow-md-x) var(--shadow-md-y) 0px 0px var(--blank);
   --shadow-lg: var(--shadow-lg-x) var(--shadow-lg-y) 0px 0px var(--blank);
 
-    /* Grid and accent system. Editing based on Color Styles */
-    --grid: oklch(0.9 0 0); /* Slightly brighter light gray for grid lines */
-    --accent: oklch(0.3 0 0); /* Medium black */
-    --accent-foreground: oklch(1 0 0); /* Light gray text for accents (#e6e6e6) */
-    --accent-light: oklch(0.5 0 0); /* Light black */
-    --accent-dark: oklch(0.1 0 0); /* Dark black */
+  /* Grid and accent system. Editing based on Color Styles */
+  --grid: oklch(0.9 0 0); /* Slightly brighter light gray for grid lines */
+  --accent: oklch(0.3 0 0); /* Medium black */
+  --accent-foreground: oklch(1 0 0); /* Light gray text for accents (#e6e6e6) */
+  --accent-light: oklch(0.5 0 0); /* Light black */
+  --accent-dark: oklch(0.1 0 0); /* Dark black */
 }
 
 .dark {
   /* Main Color System - Theme Dependent */
   /* Main Background Colors */
-  --primary: oklch(15.27% 0 0); /* Slightly lighter dark gray background */
+  --primary: oklch(0.1527 0 0); /* Slightly lighter dark gray background */
   --primary-foreground: oklch(0.9 0 0); /* Light gray text (#e6e6e6) */
-  --secondary: oklch(30% 0 0); /* Slightly lighter very dark gray */
+  --secondary: oklch(0.3 0 0); /* Slightly lighter very dark gray */
   --secondary-foreground: oklch(0.9 0 0);
   --blank: oklch(0 0 0); /* Pure black (#000000) */
 
-  --grid: oklch(32% 0 0);
-  --accent: oklch(80 0 0);
+  --grid: oklch(0.32 0 0);
+  --accent: oklch(0.8 0 0);
   --accent-foreground: oklch(0 0 0);
-  --accent-light: oklch(90% 0 0);
-  --accent-dark: oklch(70% 0 0);
+  --accent-light: oklch(0.9 0 0);
+  --accent-dark: oklch(0.7 0 0);
+}
+
+@theme inline {
+  --font-mono: var(--mono-font-family);
+
+  --color-overlay: var(--primary);
+  --color-border: var(--blank);
+
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+
+  --color-accent-light: var(--accent-light);
+  --color-accent: var(--accent);
+  --color-accent-dark: var(--accent-dark);
+  --color-accent-foreground: var(--accent-foreground);
+
+  --color-destructive: var(--secondary);
+  --color-destructive-foreground: var(--secondary-foreground);
+
+  --color-muted: var(--secondary);
+  --color-muted-foreground: var(--secondary-foreground);
+
+  --color-popover: var(--secondary);
+  --color-popover-foreground: var(--secondary-foreground);
+
+  --color-card: var(--secondary);
+  --color-card-foreground: var(--secondary-foreground);
+
+  --radius-base: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+
+  --shadow-sm: var(--shadow-sm);
+  --shadow-md: var(--shadow-md);
+  --shadow-lg: var(--shadow-lg);
+
+  --animate-float: float 3s ease-in-out infinite;
+  --animate-wiggle: wiggle 0.5s ease-in-out infinite;
+  --animate-shimmer: shimmer 2s linear infinite;
+  --animate-pulse: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --animate-bounce: bounce 1s infinite;
+
+  --translate-boxShadowX: 6px;
+  --translate-boxShadowY: 4px;
+  --translate-reverseBoxShadowX: -6px;
+  --translate-reverseBoxShadowY: -4px;
+
+  --font-weight-base: 500;
+  --font-weight-heading: 900;
+
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0) rotate(var(--tw-rotate, 0));
+    }
+    50% {
+      transform: translateY(-10px) rotate(var(--tw-rotate, 0));
+    }
+  }
+  @keyframes wiggle {
+    0%,
+    100% {
+      transform: rotate(-2deg);
+    }
+    50% {
+      transform: rotate(2deg);
+    }
+  }
+  @keyframes shimmer {
+    0% {
+      background-position: -200% 0;
+    }
+    100% {
+      background-position: 200% 0;
+    }
+  }
+  @keyframes bounce {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-20px);
+    }
+  }
 }
 
 /* Interactive Components Layer */
@@ -101,7 +192,7 @@
   }
 
   .animate-shimmer {
-    @apply bg-gradient-to-r from-transparent via-white/20 to-transparent bg-[length:200%_100%];
+    @apply bg-linear-to-r from-transparent via-white/20 to-transparent bg-size-[200%_100%];
     animation: shimmer 2s linear infinite;
   }
 

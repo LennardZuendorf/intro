@@ -83,7 +83,7 @@ export const ThemeSelect: React.FC<ThemeSwitcherProps> = ({
         align='center'
         sideOffset={8}
         className={cn(
-          'flex shrink !border-0 p-0 font-base justify-items-center align-middle text-center z-[9999] shadow-lg bg-primary',
+          'flex shrink border-0! p-0 font-base justify-items-center align-middle text-center z-9999 shadow-lg bg-primary',
           'bottom-full md:bottom-auto', // Position above navbar on mobile, default on desktop
           popoverClassName
         )}

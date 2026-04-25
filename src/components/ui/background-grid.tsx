@@ -36,7 +36,7 @@ export const BackgroundGrid = ({
     <div className={cn('relative overflow-hidden', className)}>
       {/* Grid background with mask */}
       <div
-        className='absolute inset-0 w-full h-full z-[1] pointer-events-none'
+        className='absolute inset-0 w-full h-full z-1 pointer-events-none'
         style={{
           backgroundImage: `
             linear-gradient(to right, ${gridColor} 1px, transparent 1px),
@@ -48,7 +48,7 @@ export const BackgroundGrid = ({
       />
 
       {/* Content with higher z-index */}
-      <div className='relative z-[2]'>{children}</div>
+      <div className='relative z-2'>{children}</div>
     </div>
   );
 };

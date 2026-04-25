@@ -20,7 +20,7 @@ export const Footer = async ({ className = '' }: FooterProps) => {
       padding='pt-6 pb-6 px-6 md:pt-4 md:pb-4'
       centerContent={false}
     >
-      <div className='w-full flex flex-row items-center justify-between z-[10]'>
+      <div className='w-full flex flex-row items-center justify-between z-10'>
         <SocialButtons buttonVariant='default' />
         <div className='flex items-end gap-x-4'>
           <ThemeSelect buttonVariant='default' />

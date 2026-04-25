@@ -69,7 +69,7 @@ export function ExpandableCard({
         {active && (
           <div
             className={cn(
-              "fixed inset-0 z-[100] grid place-items-center before:pointer-events-none sm:mt-16"
+              "fixed inset-0 z-100 grid place-items-center before:pointer-events-none sm:mt-16"
             )}
           >
             <motion.div
@@ -81,7 +81,7 @@ export function ExpandableCard({
               )}
             >
               <motion.div layoutId={`image-${title}-${id}`}>
-                <div className="relative before:absolute before:inset-x-0 before:bottom-[-1px] before:z-50 before:h-[70px] before:bg-gradient-to-t before:from-zinc-50 dark:before:from-zinc-950">
+                <div className="relative before:absolute before:inset-x-0 before:-bottom-px before:z-50 before:h-[70px] before:bg-linear-to-t before:from-zinc-50 dark:before:from-zinc-950">
                   <Image
                     src={src}
                     alt={title}
@@ -91,7 +91,7 @@ export function ExpandableCard({
                   />
                 </div>
               </motion.div>
-              <div className="relative h-full before:fixed before:inset-x-0 before:bottom-0 before:z-50 before:h-[70px] before:bg-gradient-to-t before:from-zinc-50 dark:before:from-zinc-950">
+              <div className="relative h-full before:fixed before:inset-x-0 before:bottom-0 before:z-50 before:h-[70px] before:bg-linear-to-t before:from-zinc-50 dark:before:from-zinc-950">
                 <div className="flex h-auto items-start justify-between p-8">
                   <div>
                     <motion.p

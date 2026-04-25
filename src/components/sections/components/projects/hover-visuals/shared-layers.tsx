@@ -14,7 +14,7 @@ export function deriveSecondaryColor(hex: string): string {
 }
 
 export const EllipseGradient = ({ color, gradientId }: { color: string; gradientId: string }) => (
-  <div className='absolute inset-0 z-[5] flex h-full w-full items-center justify-center'>
+  <div className='absolute inset-0 z-5 flex h-full w-full items-center justify-center'>
     <svg
       width='100%'
       height='100%'
@@ -47,12 +47,12 @@ export const EllipseGradient = ({ color, gradientId }: { color: string; gradient
 export const GridLayer = () => (
   <div
     style={{ '--grid-color': '#80808015' } as React.CSSProperties}
-    className='pointer-events-none absolute inset-0 z-[4] h-full w-full bg-transparent bg-[linear-gradient(to_right,var(--grid-color)_1px,transparent_1px),linear-gradient(to_bottom,var(--grid-color)_1px,transparent_1px)] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_60%,transparent_100%)] bg-[size:20px_20px] bg-center opacity-70'
+    className='pointer-events-none absolute inset-0 z-4 h-full w-full bg-transparent bg-[linear-gradient(to_right,var(--grid-color)_1px,transparent_1px),linear-gradient(to_bottom,var(--grid-color)_1px,transparent_1px)] mask-[radial-gradient(ellipse_50%_50%_at_50%_50%,#000_60%,transparent_100%)] bg-size-[20px_20px] bg-center opacity-70'
   />
 );
 
 export const GradientRevealLayer = ({ color, linearId }: { color: string; linearId: string }) => (
-  <div className='ease-[cubic-bezier(0.6,0.6,0,1)] absolute inset-0 z-[6] flex translate-y-full items-center justify-center opacity-0 transition-all duration-500 group-hover/animated-card:translate-y-0 group-hover/animated-card:opacity-100'>
+  <div className='ease-[cubic-bezier(0.6,0.6,0,1)] absolute inset-0 z-6 flex translate-y-full items-center justify-center opacity-0 transition-all duration-500 group-hover/animated-card:translate-y-0 group-hover/animated-card:opacity-100'>
     <svg
       width='100%'
       height='100%'
