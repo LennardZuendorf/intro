@@ -4,8 +4,8 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { Footer } from '@/components/footer';
 import { Providers } from '@/components/providers';
+import { Toaster } from '@/components/retroui/Sonner';
 import { ScrollArrow } from '@/components/scroll-arrow';
-import { Toaster } from '@/components/ui/sonner';
 import { siteMeta } from '@/lib/site-meta';
 
 import { cn } from '@/lib/utils/ui';

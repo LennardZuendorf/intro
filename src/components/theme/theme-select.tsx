@@ -1,13 +1,12 @@
 'use client';
 
-import { CommandList } from 'cmdk';
 import { Monitor, Moon, Sun } from 'lucide-react';
 import { useTheme } from 'next-themes';
 import * as React from 'react';
 import { useEffect, useState } from 'react';
 import { Button } from '@/components/retroui/Button';
-import { Command, CommandGroup, CommandItem } from '@/components/ui/command';
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { Command } from '@/components/retroui/Command';
+import { Popover } from '@/components/retroui/Popover';
 import { cn } from '@/lib/utils/ui';
 
 const themes = [
@@ -63,7 +62,7 @@ export const ThemeSelect: React.FC<ThemeSwitcherProps> = ({
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
-      <PopoverTrigger asChild>
+      <Popover.Trigger asChild>
         <Button
           variant={buttonVariant}
           aria-haspopup='menu'
@@ -78,8 +77,8 @@ export const ThemeSelect: React.FC<ThemeSwitcherProps> = ({
             <Monitor className='h-4 w-4' />
           )}
         </Button>
-      </PopoverTrigger>
-      <PopoverContent
+      </Popover.Trigger>
+      <Popover.Content
         align='center'
         sideOffset={8}
         className={cn(
@@ -89,10 +88,10 @@ export const ThemeSelect: React.FC<ThemeSwitcherProps> = ({
         )}
       >
         <Command>
-          <CommandList>
-            <CommandGroup className='align-middle text-center'>
+          <Command.List>
+            <Command.Group className='align-middle text-center'>
               {themes.map((themeOption) => (
-                <CommandItem
+                <Command.Item
                   key={themeOption.value}
                   value={themeOption.value}
                   onSelect={(currentValue) => {
@@ -106,12 +105,12 @@ export const ThemeSelect: React.FC<ThemeSwitcherProps> = ({
                     {themeOption.icon}
                     {themeOption.label}
                   </div>
-                </CommandItem>
+                </Command.Item>
               ))}
-            </CommandGroup>
-          </CommandList>
+            </Command.Group>
+          </Command.List>
         </Command>
-      </PopoverContent>
+      </Popover.Content>
     </Popover>
   );
 };
