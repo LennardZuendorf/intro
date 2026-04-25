@@ -1,61 +1,48 @@
-import { basehub } from 'basehub';
-import { Icon } from 'basehub/react-icon';
 import Link from 'next/link';
 import { Button } from '@/components/retroui/Button';
 import { cn } from '@/lib/utils/ui';
 
+export type SocialItem = {
+  _id: string;
+  _title: string;
+  url: string | null;
+  icon: string | null;
+};
+
 interface SocialButtonsProps {
+  socials: SocialItem[];
   className?: string;
   buttonVariant?: 'default' | 'secondary' | 'outline' | 'link' | 'ghost';
   iconClassName?: string;
 }
 
-export async function SocialButtons({
+export function SocialButtons({
+  socials,
   className,
   iconClassName = 'w-5 h-5',
-  buttonVariant = 'default',
-  ...props
+  buttonVariant = 'default'
 }: SocialButtonsProps) {
-  const socials = await basehub()
-    .query({
-      globals: {
-        socials: {
-          items: {
-            _id: true,
-            _title: true,
-            url: true,
-            icon: true
-          }
-        }
-      }
-    })
-    .then((data) => data.globals.socials.items);
-
-  if (!socials) return null;
+  if (!socials || socials.length === 0) return null;
 
   return (
-    <div className={cn('flex gap-2', className)} {...props}>
+    <div className={cn('flex gap-2', className)}>
       {socials
         .filter((social) => social.url && social.icon)
-        .map((social) => {
-          return (
-            <Button key={social._id} variant={buttonVariant} size='icon' asChild>
-              <Link
-                href={social.url!}
-                aria-label={social._title}
-                target='_blank'
-                rel='noopener noreferrer'
-              >
-                <Icon
-                  content={social.icon || ''}
-                  components={{
-                    svg: (props) => <svg {...props} className={iconClassName} />
-                  }}
-                />
-              </Link>
-            </Button>
-          );
-        })}
+        .map((social) => (
+          <Button key={social._id} variant={buttonVariant} size='icon' asChild>
+            <Link
+              href={social.url!}
+              aria-label={social._title}
+              target='_blank'
+              rel='noopener noreferrer'
+            >
+              <span
+                className={cn('inline-flex items-center justify-center', iconClassName)}
+                dangerouslySetInnerHTML={{ __html: social.icon! }}
+              />
+            </Link>
+          </Button>
+        ))}
     </div>
   );
 }

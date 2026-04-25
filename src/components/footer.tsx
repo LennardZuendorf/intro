@@ -4,13 +4,14 @@ import { SocialButtons } from '@/components/shared/social-buttons';
 import { ThemeSelect } from '@/components/theme/theme-select';
 import { Section } from '@/components/ui/section';
 import { S } from '@/components/ui/typography';
+import { socials } from '@/lib/socials';
 import { cn } from '@/lib/utils/ui';
 
 interface FooterProps {
   className?: string;
 }
 
-export const Footer = async ({ className = '' }: FooterProps) => {
+export const Footer = ({ className = '' }: FooterProps) => {
   return (
     <Section
       as='footer'
@@ -21,7 +22,7 @@ export const Footer = async ({ className = '' }: FooterProps) => {
       centerContent={false}
     >
       <div className='w-full flex flex-row items-center justify-between z-10'>
-        <SocialButtons buttonVariant='default' />
+        <SocialButtons socials={[...socials]} buttonVariant='default' />
         <div className='flex items-end gap-x-4'>
           <ThemeSelect buttonVariant='default' />
         </div>

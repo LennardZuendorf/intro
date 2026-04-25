@@ -1,6 +1,5 @@
 'use client';
 
-import { Icon } from 'basehub/react-icon';
 import { ArrowLeftIcon } from 'lucide-react';
 import Link from 'next/link';
 import { Button } from '@/components/retroui/Button';
@@ -63,11 +62,9 @@ export const Nav = ({ className, socials, backHref }: NavProps) => {
                         target='_blank'
                         rel='noopener noreferrer'
                       >
-                        <Icon
-                          content={social.icon!}
-                          components={{
-                            svg: (props) => <svg {...props} className='w-4 h-4' />
-                          }}
+                        <span
+                          className='inline-flex items-center justify-center w-4 h-4 [&>svg]:w-4 [&>svg]:h-4'
+                          dangerouslySetInnerHTML={{ __html: social.icon! }}
                         />
                       </Link>
                     </Button>

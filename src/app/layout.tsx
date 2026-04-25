@@ -1,12 +1,12 @@
 import type React from 'react';
 import './globals.css';
-import { basehub } from 'basehub';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { Footer } from '@/components/footer';
 import { Providers } from '@/components/providers';
 import { ScrollArrow } from '@/components/scroll-arrow';
 import { Toaster } from '@/components/ui/sonner';
+import { siteMeta } from '@/lib/site-meta';
 
 import { cn } from '@/lib/utils/ui';
 
@@ -16,45 +16,24 @@ const inter = Inter({
 });
 
 export async function generateMetadata(): Promise<Metadata> {
-  const data = await basehub().query({
-    globals: {
-      mainMeta: {
-        title: true,
-        desc: true,
-        img: {
-          url: true
-        }
-      },
-      showAbout: true,
-      showProjects: true
-    }
-  });
+  const url = process.env.VERCEL_URL
+    ? `https://${process.env.VERCEL_URL}`
+    : 'http://localhost:3000';
 
   return {
-    title: data.globals.mainMeta.title || 'Lennard Zündorf',
-    description:
-      data.globals.mainMeta.desc || 'Full-stack product leader crafting digital experiences.',
+    title: siteMeta.title,
+    description: siteMeta.description,
     openGraph: {
-      title: data.globals.mainMeta.title || 'Lennard Zündorf',
-      description:
-        data.globals.mainMeta.desc || 'Full-stack product leader crafting digital experiences.',
-      url: process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'http://localhost:3000',
-      images: [
-        { url: data.globals.mainMeta.img?.url || '/img/opengraph.png', width: 1200, height: 630 }
-      ]
+      title: siteMeta.title,
+      description: siteMeta.description,
+      url,
+      images: [{ url: siteMeta.ogImage, width: 1200, height: 630 }]
     },
     twitter: {
       card: 'summary_large_image',
-      title: data.globals.mainMeta.title || 'Lennard Zündorf',
-      description:
-        data.globals.mainMeta.desc || 'Full-stack product leader crafting digital experiences.',
-      images: [
-        {
-          url: data.globals.mainMeta.img?.url || '/img/opengraph.png',
-          width: 1200,
-          height: 630
-        }
-      ]
+      title: siteMeta.title,
+      description: siteMeta.description,
+      images: [{ url: siteMeta.ogImage, width: 1200, height: 630 }]
     },
     robots: {
       index: true,
