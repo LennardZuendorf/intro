@@ -1,7 +1,7 @@
 import Link from 'next/link';
+import { Button } from '@/components/retroui/Button';
 import { SocialButtons } from '@/components/shared/social-buttons';
 import { ThemeSelect } from '@/components/theme/theme-select';
-import { Button } from '@/components/ui/button';
 import { Section } from '@/components/ui/section';
 import { S } from '@/components/ui/typography';
 import { cn } from '@/lib/utils/ui';

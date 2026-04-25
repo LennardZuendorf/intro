@@ -1,12 +1,12 @@
 import { basehub } from 'basehub';
 import { Icon } from 'basehub/react-icon';
 import Link from 'next/link';
-import { Button } from '@/components/ui/button';
+import { Button } from '@/components/retroui/Button';
 import { cn } from '@/lib/utils/ui';
 
 interface SocialButtonsProps {
   className?: string;
-  buttonVariant?: 'default' | 'neutral' | 'noShadow' | 'accent' | 'link' | 'action';
+  buttonVariant?: 'default' | 'secondary' | 'outline' | 'link' | 'ghost';
   iconClassName?: string;
 }
 

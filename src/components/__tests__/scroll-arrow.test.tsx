@@ -1,7 +1,7 @@
 import { render } from '@testing-library/react';
 import { AnimatePresence, motion } from 'framer-motion';
 import * as React from 'react';
-import { Button } from '@/components/ui/button';
+import { Button } from '@/components/retroui/Button';
 
 // Characterization test for `motion.create(Button)` ref-forwarding.
 //

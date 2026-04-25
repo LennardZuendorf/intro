@@ -4,7 +4,7 @@ import { ChevronDown } from 'lucide-react';
 import * as React from 'react';
 
 import { cn } from '@/lib/utils/ui';
-import { buttonVariants } from './button';
+import { buttonVariants } from '@/components/retroui/Button';
 
 const NavigationMenu = React.forwardRef<
   React.ElementRef<typeof NavigationMenuPrimitive.Root>,
@@ -42,7 +42,7 @@ NavigationMenuList.displayName = NavigationMenuPrimitive.List.displayName;
 const NavigationMenuItem = NavigationMenuPrimitive.Item;
 
 const navigationMenuTriggerStyle = () => {
-  return cn(buttonVariants({ variant: 'neutral' }), 'group w-max font-heading');
+  return cn(buttonVariants({ variant: 'secondary' }), 'group w-max font-heading');
 };
 
 const NavigationMenuTrigger = React.forwardRef<

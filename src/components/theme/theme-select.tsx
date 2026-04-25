@@ -5,7 +5,7 @@ import { Monitor, Moon, Sun } from 'lucide-react';
 import { useTheme } from 'next-themes';
 import * as React from 'react';
 import { useEffect, useState } from 'react';
-import { Button } from '@/components/ui/button';
+import { Button } from '@/components/retroui/Button';
 import { Command, CommandGroup, CommandItem } from '@/components/ui/command';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { cn } from '@/lib/utils/ui';
@@ -30,7 +30,7 @@ const themes = [
 
 interface ThemeSwitcherProps {
   className?: string; // Optional className for additional styling
-  buttonVariant?: 'default' | 'link' | 'accent' | 'action' | 'neutral' | 'noShadow'; // Button variant
+  buttonVariant?: 'default' | 'secondary' | 'outline' | 'link' | 'ghost'; // Button variant
   noButtonShadow?: boolean; // Whether to remove the button shadow
   popoverClassName?: string; // Separate class for the popover
 }

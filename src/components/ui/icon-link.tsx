@@ -2,16 +2,52 @@
 
 import Link from 'next/link';
 import React from 'react';
-import { Button, type ButtonProps } from '@/components/ui/button';
+import { Button, type IButtonProps } from '@/components/retroui/Button';
 import { cn } from '@/lib/utils/ui';
 
-interface IconLinkProps extends Omit<ButtonProps, 'asChild'> {
+// Legacy variant strings still used by callers that haven't migrated to the
+// RetroUI Button vocabulary. We translate them inside IconLink so consumers
+// can keep their existing variant prop while the visual is preserved via
+// className composition.
+type LegacyVariant = 'accent' | 'action' | 'neutral' | 'noShadow';
+type RetroVariant = NonNullable<IButtonProps['variant']>;
+type IconLinkVariant = RetroVariant | LegacyVariant;
+
+const ACCENT_CLASSES =
+  'bg-accent text-accent-foreground border-2 border-border shadow-sm hover:translate-x-boxShadowX hover:translate-y-boxShadowY hover:shadow-none hover:bg-accent-dark shadow-shadow';
+
+const ACTION_CLASSES =
+  'rounded-md w-full text-base border-2 border-border shadow-sm bg-accent text-accent-foreground group hover:shadow-lg hover:-translate-y-0.5 hover:bg-accent hover:text-accent-foreground shadow-shadow shadow-md';
+
+function resolveVariant(variant: IconLinkVariant | undefined | null): {
+  variant: RetroVariant;
+  extraClass?: string;
+} {
+  switch (variant) {
+    case 'accent':
+      return { variant: 'default', extraClass: ACCENT_CLASSES };
+    case 'action':
+      return { variant: 'default', extraClass: ACTION_CLASSES };
+    case 'neutral':
+      return { variant: 'secondary' };
+    case 'noShadow':
+      return { variant: 'outline', extraClass: 'shadow-none' };
+    case undefined:
+    case null:
+      return { variant: 'default' };
+    default:
+      return { variant };
+  }
+}
+
+interface IconLinkProps extends Omit<IButtonProps, 'asChild' | 'variant'> {
   href: string;
   icon?: React.ReactNode;
   iconPosition?: 'left' | 'right';
   external?: boolean;
   className?: string;
   linkClassName?: string;
+  variant?: IconLinkVariant;
 }
 
 export const IconLink = React.forwardRef<HTMLAnchorElement, IconLinkProps>(
@@ -41,6 +77,8 @@ export const IconLink = React.forwardRef<HTMLAnchorElement, IconLinkProps>(
     const isIconOnly = !children && icon;
     const iconOnlySize = isIconOnly ? 'icon' : size;
 
+    const { variant: retroVariant, extraClass } = resolveVariant(variant);
+
     // Styled icon that respects position
     const styledIcon = icon ? (
       <span
@@ -56,7 +94,12 @@ export const IconLink = React.forwardRef<HTMLAnchorElement, IconLinkProps>(
 
     return (
       <Link href={href} className={cn('group', linkClassName)} ref={ref} {...externalProps}>
-        <Button className={className} variant={variant} size={iconOnlySize} {...props}>
+        <Button
+          className={cn(extraClass, className)}
+          variant={retroVariant}
+          size={iconOnlySize}
+          {...props}
+        >
           {iconPosition === 'left' && styledIcon}
           {children}
           {iconPosition === 'right' && styledIcon}
