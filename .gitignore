@@ -16,6 +16,9 @@
 /.next/
 /out/
 
+# fumadocs-mdx codegen output
+/.source/
+
 # production
 /build
 
