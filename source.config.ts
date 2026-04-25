@@ -6,6 +6,14 @@ import {
 } from 'fumadocs-mdx/config';
 import { z } from 'zod';
 
+// Override fumadocs's required `title`/`description` to optional. This project
+// uses BaseHub-style `_title` for legacy parity. Extending preserves
+// fumadocs-generated runtime properties (e.g., `body`) on `page.data`.
+const baseSchema = frontmatterSchema.extend({
+  title: z.string().optional(),
+  description: z.string().optional()
+});
+
 /**
  * Fumadocs collections — mirrors BaseHub block field shapes per the migration
  * matrix (docs/migration-retroui-fumadocs.md §2 + plan §U4). Field names are
@@ -31,7 +39,7 @@ const metaShape = z
 export const home = defineCollections({
   type: 'doc',
   dir: 'content/home',
-  schema: frontmatterSchema.extend({
+  schema: baseSchema.extend({
     mainMeta: metaShape,
     showAbout: z.boolean().default(true),
     showProjects: z.boolean().default(true)
@@ -41,7 +49,7 @@ export const home = defineCollections({
 export const legal = defineCollections({
   type: 'doc',
   dir: 'content/legal',
-  schema: frontmatterSchema.extend({
+  schema: baseSchema.extend({
     language: z.enum(['en', 'de']),
     _title: z.string(),
     updatedAt: z.coerce.date(),
@@ -52,7 +60,7 @@ export const legal = defineCollections({
 export const projects = defineDocs({
   dir: 'content/projects',
   docs: {
-    schema: frontmatterSchema.extend({
+    schema: baseSchema.extend({
       _title: z.string(),
       _slug: z.string().optional(),
       shortDescription: z.string(),
@@ -88,7 +96,7 @@ export const projects = defineDocs({
 export const experience = defineDocs({
   dir: 'content/experience',
   docs: {
-    schema: frontmatterSchema.extend({
+    schema: baseSchema.extend({
       _title: z.string(),
       _slug: z.string().optional(),
       companyTitle: z.string().nullish(),

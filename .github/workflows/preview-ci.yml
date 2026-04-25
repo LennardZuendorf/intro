@@ -20,8 +20,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
     environment: ${{ github.event_name == 'pull_request' && 'Preview' || 'Production' }}
-    env:
-      BASEHUB_TOKEN: ${{ secrets.BASEHUB_TOKEN }}
 
     strategy:
       matrix:
@@ -31,13 +29,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
-      - name: Require BASEHUB_TOKEN secret
-        run: |
-          if [ -z "$BASEHUB_TOKEN" ]; then
-            echo "::error::BASEHUB_TOKEN is empty. If it is an Environment secret, set jobs.build.environment in this workflow to the same name as Settings → Environments → (the env that lists this secret). Or add BASEHUB_TOKEN under Repository secrets. Fork PRs do not receive secrets."
-            exit 1
-          fi
 
       - name: Install pnpm
         uses: pnpm/action-setup@v4
@@ -53,9 +44,6 @@ jobs:
 
       - name: Install Dependencies
         run: pnpm install --frozen-lockfile
-
-      - name: Run BaseHub CLI
-        run: pnpm run basehub
 
       - name: Run Biome Check
         run: pnpm run check

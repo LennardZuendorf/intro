@@ -5,10 +5,8 @@
   "license": "MIT",
   "type": "module",
   "scripts": {
-    "build": "basehub && cross-env NODE_OPTIONS=--no-deprecation next build",
-    "dev": "basehub --draft & cross-env NODE_OPTIONS=--no-deprecation next dev",
-    "basehub": "basehub",
-    "basehub:dev": "basehub --draft",
+    "build": "cross-env NODE_OPTIONS=--no-deprecation next build",
+    "dev": "cross-env NODE_OPTIONS=--no-deprecation next dev",
     "lint": "biome lint . --no-errors-on-unmatched",
     "format": "biome format --write . --no-errors-on-unmatched",
     "check": "biome check --write . --no-errors-on-unmatched",
@@ -31,11 +29,10 @@
     "@radix-ui/react-slot": "^1.1.0",
     "@radix-ui/react-tooltip": "^1.1.6",
     "@stagewise/toolbar-next": "^0.1.2",
-    "@t3-oss/env-nextjs": "^0.11.1",
+    "@t3-oss/env-nextjs": "^0.13.11",
     "@tailwindcss/typography": "^0.5.15",
     "@vercel/analytics": "^1.4.1",
     "@vercel/speed-insights": "^1.1.0",
-    "basehub": "^9.5.3",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cmdk": "^1.0.4",
@@ -44,7 +41,6 @@
     "framer-motion": "^11.18.1",
     "fumadocs-core": "^16.8.3",
     "fumadocs-mdx": "^14.3.1",
-    "graphql": "^16.9.0",
     "husky": "^9.1.7",
     "install": "^0.13.0",
     "lint-staged": "^15.2.10",
@@ -62,7 +58,7 @@
     "tailwind-merge": "^2.5.5",
     "title-case": "^4.3.2",
     "tw-animate-css": "^1.2.0",
-    "zod": "^3.25.0"
+    "zod": "^4.3.6"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.0.0",

@@ -40,9 +40,6 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    ".basehub/basehub-types.d.ts",
-    ".basehub/basehub.config.ts",
-    "basehub-types.d.ts",
     "postcss.config.cjs",
     ".next/dev/types/**/*.ts"
   ],

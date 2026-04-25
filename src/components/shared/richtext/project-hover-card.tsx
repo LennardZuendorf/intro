@@ -1,6 +1,5 @@
 'use client';
 
-import type { ProjectComponent } from 'basehub-types';
 import { ExternalLink, Github } from 'lucide-react';
 import { type ComponentType, useMemo } from 'react';
 import {
@@ -22,7 +21,18 @@ const visualMap: Record<string, ComponentType<VisualProps>> = {
   stride: StrideHoverVisual
 };
 
-export const ProjectHoverCard = (props: ProjectComponent) => {
+export interface ProjectHoverCardProps {
+  _id?: string;
+  _title: string;
+  _slug?: string;
+  shortDescription: string;
+  color: { hex: string };
+  technology: { _id?: string; _title: string }[];
+  links: { items: { _id?: string; _title: string; url: string }[] };
+  extendedPreview: boolean;
+}
+
+export const ProjectHoverCard = (props: ProjectHoverCardProps) => {
   const { _title, _slug, shortDescription, technology, links, color } = props;
 
   const showcaseUrl = links?.items?.[0]?.url || '#';

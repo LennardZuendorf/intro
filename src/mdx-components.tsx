@@ -72,19 +72,7 @@ const Heading = ({
 
   return (
     <HeadingComponent id={id} className={headingClassName}>
-      <NextLink
-        href={`#${id}`}
-        color='default'
-        className='text-inherit hover:underline'
-        onClick={(e: React.MouseEvent<HTMLAnchorElement>) => {
-          e.preventDefault();
-          const element = document.getElementById(id);
-          if (element) {
-            element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            window.history.pushState(null, '', `#${id}`);
-          }
-        }}
-      >
+      <NextLink href={`#${id}`} color='default' className='text-inherit hover:underline'>
         {children}
       </NextLink>
     </HeadingComponent>

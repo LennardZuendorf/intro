@@ -1,6 +1,5 @@
 'use client';
 
-import type { ExperienceComponent } from 'basehub-types';
 import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card';
 import { NeoBadge } from '@/components/ui/neoBadge';
 import { H4, Link, S, XS } from '@/components/ui/typography';
@@ -15,7 +14,19 @@ function formatDateRange(startDate: string, endDate: string | null): string {
   return `${formatDate(start)} — ${formatDate(new Date(endDate))}`;
 }
 
-export const ExperienceHoverCard = (props: ExperienceComponent) => {
+export interface ExperienceHoverCardProps {
+  _id?: string;
+  _title: string;
+  _slug?: string;
+  companyTitle: string | null;
+  companyLink: string;
+  shortDescription: string;
+  startDate: string;
+  endDate?: string | null;
+  skills: { _id?: string; _title: string }[];
+}
+
+export const ExperienceHoverCard = (props: ExperienceHoverCardProps) => {
   const { _title, shortDescription, companyTitle, companyLink, startDate, endDate, skills } = props;
 
   const isExternal = isExternalUrl(companyLink);
@@ -49,7 +60,7 @@ export const ExperienceHoverCard = (props: ExperienceComponent) => {
           <div className='space-y-3'>
             <H4>{_title}</H4>
             <XS className='text-primary-foreground/70'>
-              {companyTitle} · {formatDateRange(startDate, endDate)}
+              {companyTitle} · {formatDateRange(startDate, endDate ?? null)}
             </XS>
             <S>{shortDescription}</S>
             {skills && skills.length > 0 && (

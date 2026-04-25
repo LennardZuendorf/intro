@@ -23,10 +23,17 @@ export async function generateMetadata(): Promise<Metadata> {
   const page = legalSource.getPage(['en']);
   // The frontmatter `meta` block is optional/nullish per the zod schema; the
   // generated runtime types narrow loosely, so re-shape via a typed cast.
-  const meta = page?.data.meta as
-    | { title?: string | null; desc?: string | null; img?: { url?: string | null } | null }
-    | null
-    | undefined;
+  const meta = (
+    page?.data as
+      | {
+          meta?: {
+            title?: string | null;
+            desc?: string | null;
+            img?: { url?: string | null } | null;
+          } | null;
+        }
+      | undefined
+  )?.meta;
 
   if (!meta) {
     return fallbackMetadata;
