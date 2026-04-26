@@ -14,7 +14,7 @@ type RetroVariant = NonNullable<IButtonProps['variant']>;
 type IconLinkVariant = RetroVariant | LegacyVariant;
 
 const ACCENT_CLASSES =
-  'bg-accent text-accent-foreground border-2 border-border shadow-sm hover:translate-x-boxShadowX hover:translate-y-boxShadowY hover:shadow-none hover:bg-accent-dark shadow-shadow';
+  'rounded-md bg-accent text-accent-foreground border-2 border-border shadow-sm hover:translate-x-boxShadowX hover:translate-y-boxShadowY hover:shadow-none hover:bg-accent-dark shadow-shadow';
 
 const ACTION_CLASSES =
   'rounded-md w-full text-base border-2 border-border shadow-sm bg-accent text-accent-foreground group hover:shadow-lg hover:-translate-y-0.5 hover:bg-accent hover:text-accent-foreground shadow-shadow shadow-md';
