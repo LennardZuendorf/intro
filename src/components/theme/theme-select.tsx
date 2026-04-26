@@ -5,8 +5,7 @@ import { useTheme } from 'next-themes';
 import * as React from 'react';
 import { useEffect, useState } from 'react';
 import { Button } from '@/components/retroui/Button';
-import { Command } from '@/components/retroui/Command';
-import { Popover } from '@/components/retroui/Popover';
+import { Menu } from '@/components/retroui/Menu';
 import { cn } from '@/lib/utils/ui';
 
 const themes = [
@@ -28,10 +27,10 @@ const themes = [
 ];
 
 interface ThemeSwitcherProps {
-  className?: string; // Optional className for additional styling
-  buttonVariant?: 'default' | 'secondary' | 'outline' | 'link' | 'ghost'; // Button variant
-  noButtonShadow?: boolean; // Whether to remove the button shadow
-  popoverClassName?: string; // Separate class for the popover
+  className?: string;
+  buttonVariant?: 'default' | 'secondary' | 'outline' | 'link' | 'ghost';
+  noButtonShadow?: boolean;
+  popoverClassName?: string;
 }
 
 export const ThemeSelect: React.FC<ThemeSwitcherProps> = ({
@@ -41,76 +40,50 @@ export const ThemeSelect: React.FC<ThemeSwitcherProps> = ({
   popoverClassName
 }) => {
   const [open, setOpen] = React.useState(false);
-  const [value, setValue] = React.useState('');
-
   const [mounted, setMounted] = useState(false);
   const { theme, setTheme } = useTheme();
 
   useEffect(() => {
     setMounted(true);
-    setValue(theme === undefined ? 'system' : theme);
-  }, [theme]);
+  }, []);
 
   if (!mounted) {
     return null;
   }
 
-  // Apply theme without any toast notifications
-  const handleThemeChange = (selectedTheme: string) => {
-    setTheme(selectedTheme);
-  };
+  const activeTheme = theme ?? 'system';
+  const activeIcon = themes.find((t) => t.value === activeTheme)?.icon ?? (
+    <Monitor className='h-4 w-4' />
+  );
 
   return (
-    <Popover open={open} onOpenChange={setOpen}>
-      <Popover.Trigger asChild>
+    <Menu open={open} onOpenChange={setOpen}>
+      <Menu.Trigger asChild>
         <Button
           variant={buttonVariant}
-          aria-haspopup='menu'
-          aria-expanded={open}
           aria-label='Select theme'
           size='icon'
           className={cn(noButtonShadow && 'shadow-none', className)}
         >
-          {value ? (
-            themes.find((theme) => theme.value === value)?.icon
-          ) : (
-            <Monitor className='h-4 w-4' />
-          )}
+          {activeIcon}
         </Button>
-      </Popover.Trigger>
-      <Popover.Content
+      </Menu.Trigger>
+      <Menu.Content
         align='center'
         sideOffset={8}
-        className={cn(
-          'flex shrink border-0! p-0 font-base justify-items-center align-middle text-center z-9999 shadow-lg bg-primary',
-          'bottom-full md:bottom-auto', // Position above navbar on mobile, default on desktop
-          popoverClassName
-        )}
+        className={cn('z-9999 bg-primary', popoverClassName)}
       >
-        <Command>
-          <Command.List>
-            <Command.Group className='align-middle text-center'>
-              {themes.map((themeOption) => (
-                <Command.Item
-                  key={themeOption.value}
-                  value={themeOption.value}
-                  onSelect={(currentValue) => {
-                    setValue(currentValue === value ? 'system' : currentValue);
-                    setOpen(false);
-                    handleThemeChange(currentValue);
-                  }}
-                  className={value === themeOption.value ? 'opacity-60' : ''}
-                >
-                  <div className='flex flex-row gap-2 items-center justify-start w-full'>
-                    {themeOption.icon}
-                    {themeOption.label}
-                  </div>
-                </Command.Item>
-              ))}
-            </Command.Group>
-          </Command.List>
-        </Command>
-      </Popover.Content>
-    </Popover>
+        {themes.map((themeOption) => (
+          <Menu.Item
+            key={themeOption.value}
+            onSelect={() => setTheme(themeOption.value)}
+            className={cn('gap-2', activeTheme === themeOption.value && 'opacity-60')}
+          >
+            {themeOption.icon}
+            {themeOption.label}
+          </Menu.Item>
+        ))}
+      </Menu.Content>
+    </Menu>
   );
 };

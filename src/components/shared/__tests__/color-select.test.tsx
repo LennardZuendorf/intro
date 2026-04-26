@@ -2,7 +2,6 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import { ThemeProvider as NextThemeProvider } from 'next-themes';
 import { ThemeSelect } from '../../theme/theme-select';
 
-// Wrapper using the current next-themes-based ThemeSelect
 function TestWrapper({ children }: { children: React.ReactNode }) {
   return (
     <NextThemeProvider attribute='class' defaultTheme='system'>
@@ -11,22 +10,37 @@ function TestWrapper({ children }: { children: React.ReactNode }) {
   );
 }
 
+beforeAll(() => {
+  // Radix DropdownMenu uses pointer-capture APIs that JSDOM does not implement.
+  // Stub them so the menu can open in tests.
+  if (!Element.prototype.hasPointerCapture) {
+    Element.prototype.hasPointerCapture = () => false;
+  }
+  if (!Element.prototype.releasePointerCapture) {
+    Element.prototype.releasePointerCapture = () => {};
+  }
+  if (!Element.prototype.scrollIntoView) {
+    Element.prototype.scrollIntoView = () => {};
+  }
+});
+
 describe('ThemeSelect', () => {
   beforeEach(() => {
     document.documentElement.className = '';
     document.body.className = '';
 
-    // next-themes relies on matchMedia; provide a basic mock for JSDOM
-    window.matchMedia = window.matchMedia || ((query: string) => ({
-      matches: false,
-      media: query,
-      onchange: null,
-      addListener: () => {},
-      removeListener: () => {},
-      addEventListener: () => {},
-      removeEventListener: () => {},
-      dispatchEvent: () => false
-    }));
+    window.matchMedia =
+      window.matchMedia ||
+      ((query: string) => ({
+        matches: false,
+        media: query,
+        onchange: null,
+        addListener: () => {},
+        removeListener: () => {},
+        addEventListener: () => {},
+        removeEventListener: () => {},
+        dispatchEvent: () => false
+      }));
   });
 
   it('renders theme select button', () => {
@@ -39,7 +53,7 @@ describe('ThemeSelect', () => {
     expect(screen.getByRole('button', { name: /select theme/i })).toBeInTheDocument();
   });
 
-  it('opens popover when button is clicked', async () => {
+  it('opens menu and shows theme options when trigger receives keyboard activation', async () => {
     render(
       <TestWrapper>
         <ThemeSelect />
@@ -47,9 +61,9 @@ describe('ThemeSelect', () => {
     );
 
     const button = screen.getByRole('button', { name: /select theme/i });
-    fireEvent.click(button);
+    button.focus();
+    fireEvent.keyDown(button, { key: 'Enter', code: 'Enter' });
 
-    // Wait for popover to open and show theme options
     await screen.findByText('System');
     expect(screen.getByText('Dark')).toBeInTheDocument();
     expect(screen.getByText('Light')).toBeInTheDocument();
