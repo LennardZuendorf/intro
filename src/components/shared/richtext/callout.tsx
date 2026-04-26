@@ -111,11 +111,11 @@ CalloutFooter.displayName = 'CalloutFooter';
 
 export {
   Callout,
-  calloutVariants,
-  CalloutHeader,
-  CalloutFooter,
-  CalloutTitle,
-  CalloutDescription,
   CalloutContent,
-  CalloutIcon
+  CalloutDescription,
+  CalloutFooter,
+  CalloutHeader,
+  CalloutIcon,
+  CalloutTitle,
+  calloutVariants
 };
