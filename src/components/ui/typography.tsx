@@ -484,8 +484,8 @@ const L: React.FC<TypographyProps> = ({
   );
 };
 
-// M: Base -> sm/md (bigger) -> lg/xl (regular) -> 2xl (bigger)
-// Default styling for Link component
+// M: Base -> sm+ (body copy size, monotonic non-decreasing).
+// Default styling for Link component and MDX paragraphs.
 const M: React.FC<TypographyProps> = ({
   className = "",
   children,
@@ -506,8 +506,8 @@ const M: React.FC<TypographyProps> = ({
     <Comp
       className={cn(
         "leading-6 not-first:mt-1",
-        // Responsive sizing: base smaller, sm/md bigger, lg/xl regular, 2xl bigger
-        "text-xs sm:text-sm md:text-sm lg:text-xs xl:text-xs 2xl:text-sm",
+        // Responsive sizing: monotonic non-decreasing across breakpoints.
+        "text-sm sm:text-sm md:text-base lg:text-base xl:text-base 2xl:text-lg",
         getWeightClass(weight),
         getColorClass(color, highContrast),
         getWrapClass(wrap),
@@ -523,7 +523,7 @@ const M: React.FC<TypographyProps> = ({
   );
 };
 
-// S: Base -> sm/md (bigger) -> lg/xl (regular) -> 2xl (bigger)
+// S: Smaller-than-body label/badge size, monotonic non-decreasing.
 const S: React.FC<TypographyProps> = ({
   className = "",
   children,
@@ -544,8 +544,8 @@ const S: React.FC<TypographyProps> = ({
     <Comp
       className={cn(
         "leading-none",
-        // Responsive sizing: base smaller, sm/md bigger, lg/xl regular, 2xl bigger
-        "text-[0.625rem] sm:text-xs md:text-xs lg:text-xs xl:text-xs 2xl:text-sm",
+        // Responsive sizing: monotonic non-decreasing across breakpoints.
+        "text-xs sm:text-xs md:text-sm lg:text-sm xl:text-sm 2xl:text-base",
         getWeightClass(weight),
         getColorClass(color, highContrast),
         getWrapClass(wrap),
