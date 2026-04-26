@@ -1,17 +1,15 @@
 /**
  * MDX block components.
  *
- * These wrappers adapt MDX-prop shapes (e.g. `<Project slug="stride"/>`) to the
- * existing hover-card/animated-card components. Each `<Project>` / `<Experience>`
- * is an async RSC that resolves its own data via the Fumadocs source loader —
- * a single source of truth per slug, replacing BaseHub's parallel `blocks[]`
- * channel.
+ * Wrappers adapting MDX-prop shapes (e.g. `<Project slug="stride"/>`) to the
+ * hover-card components. Each `<Project>` / `<Experience>` is an async RSC
+ * that resolves its own data via the Fumadocs source loader — a single source
+ * of truth per slug, replacing BaseHub's parallel `blocks[]` channel.
  *
- * The 3D animated project cards (`StrideAnimatedCard`, `IndexedAnimatedCard`,
- * `ShardsAnimatedCard`) are preserved 1:1 — `<Project>` dispatches by `_slug`
- * exactly like the legacy `project-card.tsx`.
- *
- * No route consumes these yet (U5 unit). U6/U7 will wire them in.
+ * Inline references render as hover cards (`ProjectHoverCard`,
+ * `ExperienceHoverCard`). The 3D animated cards
+ * (`StrideAnimatedCard`/`IndexedAnimatedCard`/`ShardsAnimatedCard`) are
+ * reserved for the dedicated project route (deferred), not inline use.
  */
 
 import {
@@ -22,9 +20,6 @@ import {
   TriangleAlertIcon
 } from 'lucide-react';
 import type { ReactNode } from 'react';
-import { IndexedAnimatedCard } from '@/components/sections/components/projects/indexed';
-import { ShardsAnimatedCard } from '@/components/sections/components/projects/shards';
-import { StrideAnimatedCard } from '@/components/sections/components/projects/stride';
 import {
   Callout as CalloutBox,
   CalloutContent,
@@ -65,24 +60,14 @@ interface ProjectProps {
 
 /**
  * MDX adapter for inline project references. Resolves project frontmatter from
- * `content/projects/<slug>.mdx` and dispatches to the per-slug 3D animated
- * card components when one exists, falling back to the generic
- * `ProjectHoverCard` otherwise.
- *
- * Slug → animated-card mapping mirrors the legacy `project-card.tsx`
- * dispatcher exactly (do not drift):
- *   - `stride`        → StrideAnimatedCard
- *   - `indexed`       → IndexedAnimatedCard
- *   - `shards-agent`  → ShardsAnimatedCard
- *   - default         → ProjectHoverCard
+ * `content/projects/<slug>.mdx` and renders a `ProjectHoverCard`. The animated
+ * card components (`StrideAnimatedCard` etc.) are reserved for the dedicated
+ * project route (deferred work) — inline references stay hover-revealed.
  */
 export async function Project({ slug }: ProjectProps) {
   const page = projectSource.getPage([slug]);
   if (!page) return null;
 
-  // Animated cards key on `_id` (used to namespace aria-labelledby ids and
-  // React keys). Fumadocs frontmatter doesn't carry an explicit `_id`, so
-  // synthesise one from the slug — stable and unique per project.
   const data = page.data;
   const projectData = {
     _id: data._slug ?? page.slugs.join('/') ?? slug,
@@ -95,23 +80,9 @@ export async function Project({ slug }: ProjectProps) {
     extendedPreview: data.extendedPreview
   };
 
-  // The animated cards and `ProjectHoverCard` keep their BaseHub `ProjectData`
-  // / `ProjectComponent` type until U12 strips BaseHub. The field shape is
-  // structurally identical, but TS sees nominally different types — cast
-  // through `unknown` once at the boundary.
   // biome-ignore lint/suspicious/noExplicitAny: structurally compatible cross-package shape.
   const card = projectData as any;
-
-  switch (projectData._slug) {
-    case 'stride':
-      return <StrideAnimatedCard project={card} />;
-    case 'indexed':
-      return <IndexedAnimatedCard project={card} />;
-    case 'shards-agent':
-      return <ShardsAnimatedCard project={card} />;
-    default:
-      return <ProjectHoverCard {...card} />;
-  }
+  return <ProjectHoverCard {...card} />;
 }
 
 // ---------- Experience ----------
