@@ -1,10 +1,4 @@
-/**
- * Local project shape — mirrors the zod schema from `source.config.ts` for the
- * `projects` collection. Replaces the previous BaseHub `ProjectComponent`
- * dependency. Field shape is preserved 1:1 so the animated cards
- * (`stride.tsx`, `indexed.tsx`, `shards.tsx`) and the `ProjectHoverCard`
- * consumer continue to read the same field names without changes.
- */
+/** Project shape — mirrors the zod schema from `source.config.ts` for the `projects` collection. */
 export interface ProjectShape {
   _id?: string;
   _title: string;

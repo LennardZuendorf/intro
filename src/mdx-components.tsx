@@ -1,19 +1,9 @@
 /**
- * MDX components map.
- *
- * Returns the element-override + custom-component map consumed by Fumadocs'
- * `<MDXContent components={...}>`. Element overrides (h1–h6, p, ul, ol, li,
- * hr, a, code, b, strong, em, img, blockquote) port verbatim from the
- * BaseHub-coupled `richtext-block.tsx` so MDX rendering carries identical
- * typography classes.
- *
- * Custom MDX components (`<Project>`, `<Experience>`, `<HoverLink>`,
- * `<Callout>`, `<Highlight>`) live in
- * `src/components/shared/richtext/mdx-blocks.tsx` and adapt MDX-prop shapes
- * to the existing hover-card / animated-card components.
- *
- * No route consumes this map yet (U5 unit). U6/U7 wire it into `/legal` and
- * `/`.
+ * MDX components map consumed by Fumadocs `<MDXContent components={...}>`.
+ * Element overrides (h1–h6, p, ul, ol, li, hr, a, code, b, strong, em, img, blockquote)
+ * map HTML elements to typography components. Custom components (`<Project>`,
+ * `<Experience>`, `<HoverLink>`, `<Callout>`, `<Highlight>`) live in
+ * `src/components/shared/richtext/mdx-blocks.tsx`.
  */
 
 import Image from 'next/image';

@@ -2,6 +2,7 @@
 
 import { useEffect } from 'react';
 import { toast } from 'sonner';
+import { S, Strong } from '@/components/ui/typography';
 
 export function Banner() {
   useEffect(() => {
@@ -20,11 +21,11 @@ export function Banner() {
         // Show toast notification on first visit
         toast('Privacy-Friendly Tracking', {
           description: (
-            <p className='text-xs'>
-              I use <strong>privacy-friendly, cookieless tracking powered by Vercel</strong> to
+            <S as='p'>
+              I use <Strong>privacy-friendly, cookieless tracking powered by Vercel</Strong> to
               enhance my website. This method doesn&apos;t require consent and avoids cross-session
               tracking.
-            </p>
+            </S>
           ),
           action: {
             label: 'Learn More',

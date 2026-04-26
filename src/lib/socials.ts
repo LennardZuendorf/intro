@@ -1,15 +1,7 @@
 /**
- * Site socials.
- *
- * Trust boundary: the `icon` field holds raw SVG markup as an author-provided
- * literal. Consumers in `navbar.tsx`, `footer.tsx`, and `social-buttons.tsx`
- * inject these strings via `dangerouslySetInnerHTML`. SVG content here MUST
- * NOT come from user input or any remote source — only commit hand-authored
- * markup reviewed in code review.
- *
- * Replaces the BaseHub `Globals.socials.items` runtime query. Placeholder
- * values below; populate with real social links before the U7 cutover.
- * Consumers swap in U7.
+ * Trust boundary: `icon` holds raw SVG markup injected via `dangerouslySetInnerHTML`
+ * in `navbar.tsx` and `social-buttons.tsx`. Must be author-committed, never from
+ * user input or external sources.
  */
 
 export type Social = {

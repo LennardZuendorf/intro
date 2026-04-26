@@ -14,15 +14,6 @@ const baseSchema = frontmatterSchema.extend({
   description: z.string().optional()
 });
 
-/**
- * Fumadocs collections — mirrors BaseHub block field shapes per the migration
- * matrix (docs/migration-retroui-fumadocs.md §2 + plan §U4). Field names are
- * kept identical to the legacy GraphQL surface (`_title`, `_slug`, `_id`,
- * `mainMeta`, `links.items`, etc.) so MDX wrappers can adopt these objects in
- * place of BaseHub query results without prop renaming. Optional `meta`/`img`
- * shapes use `nullish()` to match the BaseHub-shape parity (BaseHub returned
- * `null` rather than `undefined`).
- */
 
 const metaShape = z
   .object({
@@ -39,11 +30,7 @@ const metaShape = z
 export const home = defineCollections({
   type: 'doc',
   dir: 'content/home',
-  schema: baseSchema.extend({
-    mainMeta: metaShape,
-    showAbout: z.boolean().default(true),
-    showProjects: z.boolean().default(true)
-  })
+  schema: baseSchema
 });
 
 export const legal = defineCollections({

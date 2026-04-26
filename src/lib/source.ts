@@ -5,16 +5,9 @@ import { experience, home, legal, projects } from '@/.source';
 /**
  * Fumadocs source loaders.
  *
- * `home` and `legal` are `defineCollections({ type: 'doc' })` collections,
- * which the codegen exposes as plain `DocCollectionEntry[]` arrays. They have
- * no `.toFumadocsSource()` method, so we wrap them with the free function
- * exported from `fumadocs-mdx/runtime/server`.
- *
- * `projects` and `experience` are `defineDocs(...)` collections, which expose
- * the helper as a method on the entry directly.
- *
- * No route consumes these yet — they're wired up here so callers in U6/U7
- * can `import { …Source } from '@/lib/source'` without restructuring.
+ * `home` and `legal` use `defineCollections` (plain array, no `.toFumadocsSource()`),
+ * so they're wrapped with the free function from `fumadocs-mdx/runtime/server`.
+ * `projects` and `experience` use `defineDocs` which exposes the helper directly.
  */
 export const homeSource = loader({
   baseUrl: '/',

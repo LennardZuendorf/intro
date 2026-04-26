@@ -15,22 +15,6 @@ export function hexToRgb(hex: string) {
   return { r, g, b };
 }
 
-export function hexToRgba(hex: string, alpha: number) {
-  const { r, g, b } = hexToRgb(hex);
-  return `rgba(${r}, ${g}, ${b}, ${alpha})`;
-}
-
 export function isExternalUrl(url?: string | null): boolean {
   return !!url && (url.startsWith('http') || url.startsWith('//'));
-}
-
-export interface ColorPalette {
-  name: string;
-  colorCode: {
-    light: string;
-    base: string;
-    dark: string;
-    foreground?: string;
-  };
-  className: string;
 }

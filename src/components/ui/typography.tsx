@@ -757,7 +757,8 @@ const TypographyLink: React.FC<LinkProps> = ({
       <Comp
         className={cn(
           "leading-6 not-first:mt-1",
-          "text-xs sm:text-sm md:text-sm lg:text-xs xl:text-xs 2xl:text-sm underline",
+          // Responsive sizing: monotonic non-decreasing, mirrors M.
+          "text-sm sm:text-sm md:text-base lg:text-base xl:text-base 2xl:text-lg underline",
           getWeightClass(weight),
           getColorClass(color, highContrast),
           getWrapClass(wrap),
@@ -781,8 +782,8 @@ const TypographyLink: React.FC<LinkProps> = ({
       className={cn(
         // M component base styling
         "leading-6 not-first:mt-1",
-        // Responsive sizing: base smaller, sm/md bigger, lg/xl regular, 2xl bigger
-        "text-xs sm:text-sm md:text-sm lg:text-xs xl:text-xs 2xl:text-sm",
+        // Responsive sizing: monotonic non-decreasing, mirrors M.
+        "text-sm sm:text-sm md:text-base lg:text-base xl:text-base 2xl:text-lg",
         getWeightClass(weight),
         getColorClass(color, highContrast),
         getWrapClass(wrap),

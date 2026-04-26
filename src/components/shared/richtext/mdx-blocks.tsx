@@ -1,15 +1,6 @@
 /**
- * MDX block components.
- *
- * Wrappers adapting MDX-prop shapes (e.g. `<Project slug="stride"/>`) to the
- * hover-card components. Each `<Project>` / `<Experience>` is an async RSC
- * that resolves its own data via the Fumadocs source loader — a single source
- * of truth per slug, replacing BaseHub's parallel `blocks[]` channel.
- *
- * Inline references render as hover cards (`ProjectHoverCard`,
- * `ExperienceHoverCard`). The 3D animated cards
- * (`StrideAnimatedCard`/`IndexedAnimatedCard`/`ShardsAnimatedCard`) are
- * reserved for the dedicated project route (deferred), not inline use.
+ * MDX block components — async RSC wrappers that resolve content from the
+ * Fumadocs source loaders and render hover cards inline in MDX bodies.
  */
 
 import {
@@ -28,9 +19,15 @@ import {
   CalloutTitle,
   type CalloutType
 } from '@/components/shared/richtext/callout';
-import { ExperienceHoverCard } from '@/components/shared/richtext/experience-hover-card';
+import {
+  ExperienceHoverCard,
+  type ExperienceHoverCardProps
+} from '@/components/shared/richtext/experience-hover-card';
 import { LinkHoverCard } from '@/components/shared/richtext/link-hover-card';
-import { ProjectHoverCard } from '@/components/shared/richtext/project-hover-card';
+import {
+  ProjectHoverCard,
+  type ProjectHoverCardProps
+} from '@/components/shared/richtext/project-hover-card';
 import { experienceSource, projectSource } from '@/lib/source';
 import { cn } from '@/lib/utils/ui';
 
@@ -58,18 +55,12 @@ interface ProjectProps {
   slug: string;
 }
 
-/**
- * MDX adapter for inline project references. Resolves project frontmatter from
- * `content/projects/<slug>.mdx` and renders a `ProjectHoverCard`. The animated
- * card components (`StrideAnimatedCard` etc.) are reserved for the dedicated
- * project route (deferred work) — inline references stay hover-revealed.
- */
 export async function Project({ slug }: ProjectProps) {
   const page = projectSource.getPage([slug]);
   if (!page) return null;
 
   const data = page.data;
-  const projectData = {
+  const card: ProjectHoverCardProps = {
     _id: data._slug ?? page.slugs.join('/') ?? slug,
     _title: data._title,
     _slug: data._slug ?? slug,
@@ -79,9 +70,6 @@ export async function Project({ slug }: ProjectProps) {
     links: data.links,
     extendedPreview: data.extendedPreview
   };
-
-  // biome-ignore lint/suspicious/noExplicitAny: structurally compatible cross-package shape.
-  const card = projectData as any;
   return <ProjectHoverCard {...card} />;
 }
 
@@ -91,35 +79,24 @@ interface ExperienceProps {
   slug: string;
 }
 
-/**
- * MDX adapter for inline experience references. Resolves experience
- * frontmatter from `content/experience/<slug>.mdx` and renders an
- * `ExperienceHoverCard`.
- */
 export async function Experience({ slug }: ExperienceProps) {
   const page = experienceSource.getPage([slug]);
   if (!page) return null;
 
   const data = page.data;
-  // `startDate`/`endDate` arrive as `Date` (zod `coerce.date()`); the legacy
-  // hover card formats them via `new Date(...)`, which accepts both `Date` and
-  // ISO string. Serialise here for prop-type compatibility.
-  const expData = {
+  // `startDate`/`endDate` arrive as `Date` from zod `coerce.date()`; serialise
+  // to ISO string for the hover card which calls `new Date(string)`.
+  const props: ExperienceHoverCardProps = {
     _id: data._slug ?? page.slugs.join('/') ?? slug,
     _title: data._title,
     _slug: data._slug ?? slug,
-    companyTitle: data.companyTitle,
+    companyTitle: data.companyTitle ?? null,
     companyLink: data.companyLink,
     shortDescription: data.shortDescription,
     startDate: data.startDate instanceof Date ? data.startDate.toISOString() : data.startDate,
     endDate: data.endDate instanceof Date ? data.endDate.toISOString() : (data.endDate ?? null),
     skills: data.skills
   };
-
-  // Hover card retains its BaseHub `ExperienceComponent` type until U12;
-  // shape is structurally compatible.
-  // biome-ignore lint/suspicious/noExplicitAny: structurally compatible cross-package shape.
-  const props = expData as any;
   return <ExperienceHoverCard {...props} />;
 }
 

@@ -6,7 +6,6 @@ import {
   IndexedHoverVisual,
   ObsidianTaskHoverVisual,
   ShardsAgentsHoverVisual,
-  StrideHoverVisual,
   type VisualProps
 } from '@/components/sections/components/projects/hover-visuals';
 import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card';
@@ -17,8 +16,7 @@ import { isExternalUrl } from '@/lib/utils/ui';
 const visualMap: Record<string, ComponentType<VisualProps>> = {
   indexed: IndexedHoverVisual,
   'shards-agent': ShardsAgentsHoverVisual,
-  'obsidian-task-ui': ObsidianTaskHoverVisual,
-  stride: StrideHoverVisual
+  'obsidian-task-ui': ObsidianTaskHoverVisual
 };
 
 export interface ProjectHoverCardProps {

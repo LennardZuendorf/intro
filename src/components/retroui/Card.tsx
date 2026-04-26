@@ -1,5 +1,6 @@
 import type { HTMLAttributes } from 'react';
 import { Text } from '@/components/retroui/Text';
+import { M } from '@/components/ui/typography';
 import { cn } from '@/lib/utils/index';
 
 interface ICardProps extends HTMLAttributes<HTMLDivElement> {
@@ -26,8 +27,10 @@ const CardTitle = ({ className, ...props }: ICardProps) => {
   return <Text as='h3' className={cn('mb-2', className)} {...props} />;
 };
 
-const CardDescription = ({ className, ...props }: ICardProps) => (
-  <p className={cn('text-muted-foreground', className)} {...props} />
+const CardDescription = ({ className, children, color: _color, ...props }: ICardProps) => (
+  <M color='muted' className={className} {...props}>
+    {children}
+  </M>
 );
 
 const CardContent = ({ className, ...props }: ICardProps) => {
