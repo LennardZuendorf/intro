@@ -34,7 +34,7 @@ import { cn } from '@/lib/utils/ui';
 // ---------- HoverLink ----------
 
 interface HoverLinkProps {
-  url: string;
+  url?: string | null;
   title?: string | null;
   description?: string | null;
   text?: string | null;

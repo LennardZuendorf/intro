@@ -8,7 +8,7 @@
 
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import * as React from 'react';
-import { cn } from '@/lib/utils/index';
+import { cn } from '@/lib/utils/ui';
 
 const Menu = DropdownMenu.Root;
 const Trigger = DropdownMenu.Trigger;

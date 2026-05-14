@@ -130,18 +130,18 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
       </HeadingNoLink>
     ),
     p: ({ children }: { children: ReactNode }) => (
-      <M as='div' className='first:mt-0 mt-4 leading-[inherit] text-inherit'>
+      <M as='div' className='first:mt-0 mt-5 leading-[inherit] text-inherit'>
         {children}
       </M>
     ),
     blockquote: ({ children }: { children: ReactNode }) => (
-      <Quote className='my-4'>{children}</Quote>
+      <Quote className='my-5'>{children}</Quote>
     ),
     ul: ({ children }: { children: ReactNode }) => (
-      <ul className='my-2 ml-5 list-disc space-y-1'>{children}</ul>
+      <ul className='my-3 ml-5 list-disc space-y-2'>{children}</ul>
     ),
     ol: ({ children }: { children: ReactNode }) => (
-      <ol className='my-2 ml-5 list-decimal space-y-1'>{children}</ol>
+      <ol className='my-3 ml-5 list-decimal space-y-2'>{children}</ol>
     ),
     li: ({ children }: { children: ReactNode }) => (
       <li className='[&>div]:m-0'>
@@ -150,7 +150,7 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
         </M>
       </li>
     ),
-    hr: () => <hr className='my-6 border-t-2 border-border' />,
+    hr: () => <hr className='my-7 border-t-2 border-border' />,
     a: ({
       children,
       href,

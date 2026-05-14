@@ -2,6 +2,7 @@ import type { NextPage } from 'next';
 import { notFound } from 'next/navigation';
 import { Banner } from '@/components/banner';
 import { Nav } from '@/components/navbar';
+import { Card } from '@/components/retroui/Card';
 import { BackgroundGrid } from '@/components/ui/background-grid';
 import { Section, SectionHeader } from '@/components/ui/section';
 import { socials } from '@/lib/socials';
@@ -9,13 +10,16 @@ import { homeSource } from '@/lib/source';
 import { getMDXComponents } from '@/mdx-components';
 
 const Page: NextPage = async () => {
-  const page = homeSource.getPage([]);
+  const introPage = homeSource.getPage([]);
+  const projectsPage = homeSource.getPage(['projects']);
 
-  if (!page) {
+  if (!introPage || !projectsPage) {
     notFound();
   }
 
-  const MDXContent = page.data.body;
+  const IntroBody = introPage.data.body;
+  const ProjectsBody = projectsPage.data.body;
+  const components = getMDXComponents();
 
   return (
     <BackgroundGrid
@@ -30,7 +34,21 @@ const Page: NextPage = async () => {
 
       <Section id='hero'>
         <SectionHeader badge='Hey there!' badgeRotation='slight' badgeVariant='default'>
-          <MDXContent components={getMDXComponents()} />
+          <div className='flex w-full max-w-full flex-col gap-10 md:gap-14'>
+            <Card className='block w-full max-w-full text-left'>
+              <Card.Content>
+                <IntroBody components={components} />
+              </Card.Content>
+            </Card>
+            <Card className='block w-full max-w-full text-left'>
+              <Card.Header>
+                <Card.Title>Side projects</Card.Title>
+              </Card.Header>
+              <Card.Content>
+                <ProjectsBody components={components} />
+              </Card.Content>
+            </Card>
+          </div>
         </SectionHeader>
       </Section>
 

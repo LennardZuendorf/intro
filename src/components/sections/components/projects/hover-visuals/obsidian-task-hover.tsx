@@ -6,7 +6,8 @@ import {
   deriveSecondaryColor,
   EllipseGradient,
   GradientRevealLayer,
-  GridLayer
+  GridLayer,
+  HOVER_VISUAL_SVG_VIEWBOX
 } from './shared-layers';
 import type { VisualProps } from './types';
 
@@ -48,7 +49,7 @@ const markdownLines = [
 const MarkdownTextLayer = ({ hovered, color }: { hovered: boolean; color: string }) => (
   <svg
     className='pointer-events-none absolute inset-0 z-7 h-full w-full'
-    viewBox='0 0 356 120'
+    viewBox={HOVER_VISUAL_SVG_VIEWBOX}
     preserveAspectRatio='xMidYMid slice'
     aria-hidden='true'
     focusable='false'
@@ -184,7 +185,7 @@ const CheckboxBlocks = ({
 }) => (
   <svg
     className='pointer-events-none absolute inset-0 z-8 h-full w-full'
-    viewBox='0 0 356 120'
+    viewBox={HOVER_VISUAL_SVG_VIEWBOX}
     preserveAspectRatio='xMidYMid slice'
     aria-hidden='true'
     focusable='false'

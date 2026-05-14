@@ -28,16 +28,16 @@ const Toaster = ({ ...props }: ToasterProps) => {
       toastOptions={{
         classNames: {
           toast:
-            'group toast group-[.toaster]:bg-pr group-[.toaster]:text-foreground group-[.toaster]:border-2 group-[.toaster]:border-black group-[.toaster]:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] group-[.toaster]:rounded-md group-[.toaster]:rotate-1 group-[.toaster]:font-bold',
+            'group toast group-[.toaster]:bg-pr group-[.toaster]:text-foreground group-[.toaster]:border-2 group-[.toaster]:border-border group-[.toaster]:shadow-md group-[.toaster]:shadow-shadow group-[.toaster]:rounded-md group-[.toaster]:rotate-1 group-[.toaster]:font-bold',
           title: 'group-[.toast]:font-bold group-[.toast]:text-base',
           description:
             'group-[.toast]:text-foreground/80 group-[.toast]:font-mono group-[.toast]:text-sm',
           actionButton:
-            'group-[.toast]:bg-accent group-[.toast]:text-accent-foreground group-[.toast]:border-2 group-[.toast]:border-black group-[.toast]:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] group-[.toast]:rounded-md group-[.toast]:px-3 group-[.toast]:py-1 group-[.toast]:text-sm group-[.toast]:font-bold hover:group-[.toast]:translate-y-[-2px] hover:group-[.toast]:shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] group-[.toast]:transition-all',
+            'group-[.toast]:bg-accent group-[.toast]:text-accent-foreground group-[.toast]:border-2 group-[.toast]:border-border group-[.toast]:shadow-md group-[.toast]:shadow-shadow group-[.toast]:rounded-md group-[.toast]:px-3 group-[.toast]:py-1 group-[.toast]:text-sm group-[.toast]:font-bold hover:group-[.toast]:translate-y-[-2px] hover:group-[.toast]:shadow-lg hover:group-[.toast]:shadow-shadow group-[.toast]:transition-all',
           cancelButton:
-            'group-[.toast]:bg-muted group-[.toast]:text-muted-foreground group-[.toast]:border-2 group-[.toast]:border-black group-[.toast]:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] group-[.toast]:rounded-md group-[.toast]:px-3 group-[.toast]:py-1 group-[.toast]:text-sm group-[.toast]:font-bold hover:group-[.toast]:translate-y-[-2px] hover:group-[.toast]:shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] group-[.toast]:transition-all',
+            'group-[.toast]:bg-muted group-[.toast]:text-muted-foreground group-[.toast]:border-2 group-[.toast]:border-border group-[.toast]:shadow-md group-[.toast]:shadow-shadow group-[.toast]:rounded-md group-[.toast]:px-3 group-[.toast]:py-1 group-[.toast]:text-sm group-[.toast]:font-bold hover:group-[.toast]:translate-y-[-2px] hover:group-[.toast]:shadow-lg hover:group-[.toast]:shadow-shadow group-[.toast]:transition-all',
           closeButton:
-            'group-[.toast]:bg-foreground/5 group-[.toast]:border group-[.toast]:border-black group-[.toast]:rounded-md group-[.toast]:hover:bg-foreground/10'
+            'group-[.toast]:bg-foreground/5 group-[.toast]:border group-[.toast]:border-border group-[.toast]:rounded-md group-[.toast]:hover:bg-foreground/10'
         },
         duration: 4000,
         closeButton: true

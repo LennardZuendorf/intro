@@ -1,7 +1,7 @@
 import type { HTMLAttributes } from 'react';
 import { Text } from '@/components/retroui/Text';
 import { M } from '@/components/ui/typography';
-import { cn } from '@/lib/utils/index';
+import { cn } from '@/lib/utils/ui';
 
 interface ICardProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
@@ -11,7 +11,7 @@ const Card = ({ className, ...props }: ICardProps) => {
   return (
     <div
       className={cn(
-        'inline-block border-2 rounded shadow-md transition-all hover:shadow-none bg-card',
+        'inline-block w-full rounded-base border-2 border-border bg-(--blank) text-popover-foreground p-1 shadow-md shadow-shadow font-base outline-hidden',
         className
       )}
       {...props}
@@ -20,11 +20,11 @@ const Card = ({ className, ...props }: ICardProps) => {
 };
 
 const CardHeader = ({ className, ...props }: ICardProps) => {
-  return <div className={cn('flex flex-col justify-start p-4', className)} {...props} />;
+  return <div className={cn('flex flex-col justify-start px-4 pt-4', className)} {...props} />;
 };
 
 const CardTitle = ({ className, ...props }: ICardProps) => {
-  return <Text as='h3' className={cn('mb-2', className)} {...props} />;
+  return <Text as='h3' className={cn('mb-0', className)} {...props} />;
 };
 
 const CardDescription = ({ className, children, color: _color, ...props }: ICardProps) => (
@@ -34,7 +34,12 @@ const CardDescription = ({ className, children, color: _color, ...props }: ICard
 );
 
 const CardContent = ({ className, ...props }: ICardProps) => {
-  return <div className={cn('p-4', className)} {...props} />;
+  return (
+    <div
+      className={cn('flex flex-col gap-8 px-4 pb-4 pt-3 md:gap-10 [&>*]:mt-0', className)}
+      {...props}
+    />
+  );
 };
 
 const CardComponent = Object.assign(Card, {

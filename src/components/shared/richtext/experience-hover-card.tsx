@@ -1,5 +1,6 @@
 'use client';
 
+import { Button } from '@/components/retroui/Button';
 import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card';
 import { NeoBadge } from '@/components/ui/neoBadge';
 import { H4, Link, S, XS } from '@/components/ui/typography';
@@ -47,13 +48,14 @@ export const ExperienceHoverCard = (props: ExperienceHoverCardProps) => {
               {displayText}
             </Link>
           ) : (
-            <button
+            <Button
               type='button'
+              variant='link'
               style={{ display: 'inline' }}
-              className='appearance-none bg-transparent border-none p-0 m-0 font-inherit cursor-pointer underline! decoration-1 underline-offset-[3px] decoration-foreground/40 hover:decoration-foreground/70 transition-colors'
+              className='h-auto min-h-0 !border-0 !p-0 !shadow-none hover:!translate-y-0 active:!translate-y-0 active:!translate-x-0 font-inherit underline! decoration-1 underline-offset-[3px] decoration-foreground/40 hover:decoration-foreground/70 hover:!shadow-none'
             >
               {displayText}
-            </button>
+            </Button>
           )}
         </HoverCardTrigger>
         <HoverCardContent className='w-96 p-4'>

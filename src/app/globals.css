@@ -171,7 +171,12 @@
   }
 
   .hover-glow {
-    @apply transition-shadow duration-300 hover:shadow-[0_0_15px_rgba(0,0,0,0.3)];
+    @apply transition-shadow duration-300;
+    box-shadow: 0 0 15px color-mix(in oklab, var(--blank) 30%, transparent);
+  }
+
+  .hover-glow:hover {
+    box-shadow: 0 0 18px color-mix(in oklab, var(--blank) 40%, transparent);
   }
 
   .hover-zoom-content {
@@ -182,22 +187,22 @@
     @apply transition-transform duration-500 hover:scale-110;
   }
 
-  /* Animations */
+  /* Animations — use @theme --animate-* tokens (single timing source) */
   .animate-float {
-    animation: float 3s ease-in-out infinite;
+    animation: var(--animate-float);
   }
 
   .animate-wiggle {
-    animation: wiggle 0.5s ease-in-out;
+    animation: var(--animate-wiggle);
   }
 
   .animate-shimmer {
     @apply bg-linear-to-r from-transparent via-white/20 to-transparent bg-size-[200%_100%];
-    animation: shimmer 2s linear infinite;
+    animation: var(--animate-shimmer);
   }
 
   .animate-pulse {
-    animation: pulse 3s ease-in-out infinite;
+    animation: var(--animate-pulse);
   }
 
   /* Rotation variants for consistent styling */

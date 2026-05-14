@@ -3,7 +3,7 @@
 import { Command as CommandPrimitive } from 'cmdk';
 import { Search } from 'lucide-react';
 import type React from 'react';
-import { cn } from '@/lib/utils/index';
+import { cn } from '@/lib/utils/ui';
 
 function Command({ className, ...props }: React.ComponentProps<typeof CommandPrimitive>) {
   return (

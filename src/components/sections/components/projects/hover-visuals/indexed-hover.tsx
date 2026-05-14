@@ -6,7 +6,8 @@ import {
   deriveSecondaryColor,
   EllipseGradient,
   GradientRevealLayer,
-  GridLayer
+  GridLayer,
+  HOVER_VISUAL_SVG_VIEWBOX
 } from './shared-layers';
 import type { VisualProps } from './types';
 
@@ -215,7 +216,7 @@ const DocBadge = ({
 const FlowLines = ({ hovered, color }: { hovered: boolean; color: string }) => (
   <svg
     className='pointer-events-none absolute inset-0 z-6 h-full w-full transition-opacity duration-500'
-    viewBox='0 0 356 120'
+    viewBox={HOVER_VISUAL_SVG_VIEWBOX}
     preserveAspectRatio='xMidYMid slice'
     aria-hidden='true'
     focusable='false'

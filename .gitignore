@@ -51,5 +51,7 @@ next-env.d.ts
 .memory/
 .agents/
 .claude/
-docs/
+
+# Cursor / local agent skill lock (regenerated per machine)
+skills-lock.json
 

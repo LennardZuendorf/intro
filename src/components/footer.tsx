@@ -17,7 +17,7 @@ export const Footer = ({ className = '' }: FooterProps) => {
       as='footer'
       fullHeight={false}
       fullWidth={true}
-      className={cn('border-t-4 border-black', className)}
+      className={cn('border-t-4 border-border', className)}
       padding='pt-6 pb-6 px-6 md:pt-4 md:pb-4'
       centerContent={false}
     >
