@@ -1,6 +1,5 @@
-import type { HTMLAttributes } from 'react';
-import { Text } from '@/components/retroui/Text';
-import { M } from '@/components/ui/typography';
+import type { HTMLAttributes, ReactNode } from 'react';
+import { H1, M } from '@/components/ui/typography';
 import { cn } from '@/lib/utils/ui';
 
 interface ICardProps extends HTMLAttributes<HTMLDivElement> {
@@ -11,7 +10,7 @@ const Card = ({ className, ...props }: ICardProps) => {
   return (
     <div
       className={cn(
-        'inline-block w-full rounded-base border-2 border-border bg-(--blank) text-popover-foreground p-1 shadow-md shadow-shadow font-base outline-hidden',
+        'inline-block w-full rounded-base border-2 border-border bg-card text-card-foreground p-1 shadow-md shadow-shadow font-base outline-hidden',
         className
       )}
       {...props}
@@ -23,8 +22,12 @@ const CardHeader = ({ className, ...props }: ICardProps) => {
   return <div className={cn('flex flex-col justify-start px-4 pt-4', className)} {...props} />;
 };
 
-const CardTitle = ({ className, ...props }: ICardProps) => {
-  return <Text as='h3' className={cn('mb-0', className)} {...props} />;
+const CardTitle = ({ className, children }: ICardProps & { children: ReactNode }) => {
+  return (
+    <H1 as='h3' format={false} className={cn('mb-0 mt-0', className)}>
+      {children}
+    </H1>
+  );
 };
 
 const CardDescription = ({ className, children, color: _color, ...props }: ICardProps) => (

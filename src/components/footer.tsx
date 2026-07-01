@@ -1,9 +1,8 @@
-import Link from 'next/link';
-import { Button } from '@/components/retroui/Button';
 import { SocialButtons } from '@/components/shared/social-buttons';
 import { ThemeSelect } from '@/components/theme/theme-select';
+import { Button } from '@/components/ui/retroui/Button';
 import { Section } from '@/components/ui/section';
-import { S } from '@/components/ui/typography';
+import { Link, S } from '@/components/ui/typography';
 import { socials } from '@/lib/socials';
 import { cn } from '@/lib/utils/ui';
 

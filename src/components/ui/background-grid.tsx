@@ -22,13 +22,14 @@ export const BackgroundGrid = ({
   const getMaskImage = () => {
     switch (maskType) {
       case 'radial':
-        return 'radial-gradient(circle at center, black 40%, transparent 100%)';
+        /* Transparent at center (reading column); grid strongest toward edges */
+        return 'radial-gradient(ellipse 78% 68% at 50% 48%, transparent 0%, transparent 36%, black 100%)';
       case 'linear':
         return 'linear-gradient(to bottom, black 0%, transparent 100%)';
       case 'none':
         return 'none';
       default:
-        return 'radial-gradient(circle at center, black 40%, transparent 100%)';
+        return 'radial-gradient(ellipse 78% 68% at 50% 48%, transparent 0%, transparent 36%, black 100%)';
     }
   };
 

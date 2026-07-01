@@ -1,7 +1,7 @@
-import { render } from '@testing-library/react';
-import { AnimatePresence, motion } from 'framer-motion';
-import * as React from 'react';
-import { Button } from '@/components/retroui/Button';
+import { render } from "@testing-library/react";
+import { AnimatePresence, motion } from "framer-motion";
+import * as React from "react";
+import { Button } from "@/components/ui/retroui/Button";
 
 // Characterization test for `motion.create(Button)` ref-forwarding.
 //
@@ -12,24 +12,24 @@ import { Button } from '@/components/retroui/Button';
 // underlying ref stops landing on the `<button>` element. This file locks the
 // current behaviour so that regression fails loudly.
 
-describe('motion.create(Button) ref forwarding', () => {
-  it('forwards a ref through the motion HOC to the underlying <button>', () => {
+describe("motion.create(Button) ref forwarding", () => {
+  it("forwards a ref through the motion HOC to the underlying <button>", () => {
     const MotionButton = motion.create(Button);
     const ref = React.createRef<HTMLButtonElement>();
 
     render(
-      <MotionButton ref={ref} aria-label='test'>
+      <MotionButton ref={ref} aria-label="test">
         click
-      </MotionButton>
+      </MotionButton>,
     );
 
     expect(ref.current).not.toBeNull();
     expect(ref.current).toBeInstanceOf(HTMLElement);
     expect(ref.current).toBeInstanceOf(HTMLButtonElement);
-    expect(ref.current?.tagName).toBe('BUTTON');
+    expect(ref.current?.tagName).toBe("BUTTON");
   });
 
-  it('clears the ref without throwing when AnimatePresence unmounts the motion child', () => {
+  it("clears the ref without throwing when AnimatePresence unmounts the motion child", () => {
     const MotionButton = motion.create(Button);
     const ref = React.createRef<HTMLButtonElement>();
 
@@ -39,7 +39,7 @@ describe('motion.create(Button) ref forwarding', () => {
           {show && (
             <MotionButton
               ref={ref}
-              aria-label='test'
+              aria-label="test"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}

@@ -1,0 +1,73 @@
+[
+  {
+    "label": "Lint",
+    "command": "pnpm",
+    "args": ["run", "lint"],
+    "reveal": "no_focus",
+    "hide": "never",
+    "save": "all",
+    "allow_concurrent_runs": false
+  },
+  {
+    "label": "Format",
+    "command": "pnpm",
+    "args": ["run", "format"],
+    "reveal": "no_focus",
+    "hide": "never",
+    "save": "all",
+    "allow_concurrent_runs": false
+  },
+  {
+    "label": "Lint Staged",
+    "command": "pnpm",
+    "args": ["run", "lint"],
+    "reveal": "no_focus",
+    "hide": "never",
+    "save": "all",
+    "allow_concurrent_runs": false
+  },
+  {
+    "label": "Validate Types",
+    "command": "pnpm",
+    "args": ["tsc", "--noEmit"],
+    "reveal": "no_focus",
+    "hide": "never",
+    "save": "all",
+    "allow_concurrent_runs": false
+  },
+  {
+    "label": "Full Code Quality Check",
+    "command": "pnpm run lint && pnpm run format && pnpm tsc --noEmit",
+    "reveal": "no_focus",
+    "hide": "never",
+    "save": "all",
+    "allow_concurrent_runs": false
+  },
+  {
+    "label": "Build Project",
+    "command": "pnpm",
+    "args": ["run", "build"],
+    "reveal": "no_focus",
+    "hide": "never",
+    "save": "all",
+    "allow_concurrent_runs": false
+  },
+  {
+    "label": "Dev Server",
+    "command": "pnpm",
+    "args": ["run", "dev"],
+    "reveal": "no_focus",
+    "hide": "never",
+    "save": "all",
+    "allow_concurrent_runs": false
+  },
+  {
+    "label": "Production Server",
+    "command": "pnpm",
+    "args": ["run", "start"],
+    "reveal": "no_focus",
+    "hide": "never",
+    "save": "all",
+    "allow_concurrent_runs": false
+  }
+]

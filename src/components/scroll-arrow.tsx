@@ -3,7 +3,7 @@
 import { AnimatePresence, motion, useScroll } from 'framer-motion';
 import type React from 'react';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { Button } from '@/components/retroui/Button';
+import { Button } from '@/components/ui/retroui/Button';
 import { cn } from '@/lib/utils/ui';
 
 const MotionButton = motion.create(Button);

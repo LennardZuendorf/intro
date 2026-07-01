@@ -13,19 +13,19 @@ export interface CalloutProps
 }
 
 const calloutVariants = cva(
-  'rounded-md border-4 border-border text-primary-foreground shadow-black shadow-md transition-all',
+  'rounded-md border-4 border-border text-card-foreground shadow-md shadow-shadow transition-all',
   {
     variants: {
       variant: {
-        default: 'bg-primary',
-        reversed: 'bg-primary',
-        outline: 'bg-transparent',
+        default: 'bg-card',
+        reversed: 'bg-card',
+        outline: 'bg-transparent text-foreground',
         accent: 'bg-accent text-accent-foreground',
-        info: 'bg-primary border-border',
-        check: 'bg-primary border-border',
-        warning: 'bg-primary border-border',
-        danger: 'bg-primary border-border',
-        note: 'bg-primary border-border'
+        info: 'bg-card border-border',
+        check: 'bg-card border-border',
+        warning: 'bg-card border-border',
+        danger: 'bg-card border-border',
+        note: 'bg-card border-border'
       },
       borderStyle: {
         default: 'border-4 border-border',
@@ -85,7 +85,7 @@ const CalloutDescription = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn('text-sm text-primary-foreground font-base mt-1!', className)}
+    className={cn('text-sm text-muted-foreground font-base mt-1!', className)}
     {...props}
   />
 ));

@@ -29,6 +29,8 @@ export interface BaseTypographyProps extends Omit<
 interface TypographyProps extends BaseTypographyProps {
   className?: string;
   children: React.ReactNode;
+  /** When false, skip title-case transformation (e.g. Card.Title). Default true for H1. */
+  format?: boolean;
 }
 
 interface VariantTypographyProps extends BaseTypographyProps {
@@ -96,31 +98,29 @@ function getAlignClass(align?: BaseTypographyProps["align"]): string {
   return align ? (alignClasses[align] ?? "") : "";
 }
 
-// Responsive sizing: sm/md bigger, lg/xl regular, 2xl bigger, no scaling beyond
-// H1: Base -> sm/md (bigger) -> lg/xl (regular) -> 2xl (bigger)
+// Matches Card.Title / retroui Text `as="h3"` display title styling
 const H1: React.FC<TypographyProps> = ({
   className = "",
   children,
   as: Component,
   asChild = false,
-  weight = "black",
+  weight = "medium",
   color,
   highContrast,
   truncate,
   wrap,
   trim,
   align,
+  format = true,
   ...props
 }) => {
-  const content = formatContent(children);
+  const content = format ? formatContent(children) : children;
   const Comp = asChild ? Slot : Component || "h1";
 
   return (
     <Comp
       className={cn(
-        "scroll-m-20 tracking-tight mt-8 first:mt-0",
-        // Responsive sizing: base smaller, sm/md bigger, lg/xl regular, 2xl bigger
-        "text-base sm:text-lg md:text-lg lg:text-lg xl:text-xl 2xl:text-2xl",
+        "scroll-m-20 tracking-tight mt-8 first:mt-0 font-head text-2xl",
         getWeightClass(weight),
         getColorClass(color, highContrast),
         getWrapClass(wrap),

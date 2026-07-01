@@ -57,7 +57,7 @@ function SectionHeader({
   children,
   badge,
   className,
-  badgeVariant = "light",
+  badgeVariant = "default",
   badgeRotation = "none",
 }: {
   children: ReactNode;

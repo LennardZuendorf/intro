@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Button } from '@/components/retroui/Button';
+import { Button } from '@/components/ui/retroui/Button';
 import { cn } from '@/lib/utils/ui';
 
 export type SocialItem = {

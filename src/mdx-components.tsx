@@ -54,14 +54,13 @@ const Heading = ({
   anchors?: boolean;
 }) => {
   const HeadingComponent = { h1: H1, h2: H2, h3: H3 }[as];
-  const headingClassName = as === 'h1' ? 'font-mono text-balance' : undefined;
 
   if (!id || !anchors) {
-    return <HeadingComponent className={headingClassName}>{children}</HeadingComponent>;
+    return <HeadingComponent>{children}</HeadingComponent>;
   }
 
   return (
-    <HeadingComponent id={id} className={headingClassName}>
+    <HeadingComponent id={id}>
       <NextLink href={`#${id}`} color='default' className='text-inherit hover:underline'>
         {children}
       </NextLink>

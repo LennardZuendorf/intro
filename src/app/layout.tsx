@@ -1,17 +1,25 @@
 import type React from 'react';
 import './globals.css';
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Archivo_Black, Space_Grotesk } from 'next/font/google';
 import { Footer } from '@/components/footer';
 import { Providers } from '@/components/providers';
-import { Toaster } from '@/components/retroui/Sonner';
 import { ScrollArrow } from '@/components/scroll-arrow';
+import { Toaster } from '@/components/ui/retroui/Sonner';
 import { siteMeta } from '@/lib/site-meta';
 
 import { cn } from '@/lib/utils/ui';
 
-const inter = Inter({
+const head = Archivo_Black({
   subsets: ['latin'],
+  weight: '400',
+  variable: '--font-head',
+  display: 'swap'
+});
+
+const sans = Space_Grotesk({
+  subsets: ['latin'],
+  variable: '--font-sans',
   display: 'swap'
 });
 
@@ -44,14 +52,16 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang='en' suppressHydrationWarning className={inter.className}>
+    <html lang='en' suppressHydrationWarning className={cn(sans.variable, head.variable)}>
       <head>
         {/* Preconnect for performance */}
         <link rel='preconnect' href='https://fonts.googleapis.com' />
         <link rel='preconnect' href='https://fonts.gstatic.com' crossOrigin='anonymous' />
       </head>
-      <body className={cn('min-h-screen bg-primary font-sans antialiased relative')}>
-        <div className='absolute inset-0 -z-10 h-full w-full bg-primary' />
+      <body
+        className={cn('min-h-screen bg-background text-foreground font-sans antialiased relative')}
+      >
+        <div className='absolute inset-0 -z-10 h-full w-full bg-background' />
         <Providers attribute='class' defaultTheme='system' enableSystem disableTransitionOnChange>
           <div className='w-full'>
             {children}

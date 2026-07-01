@@ -122,7 +122,7 @@ const IndexCard = ({
   secondaryColor: string;
 }) => (
   <div
-    className='ease-[cubic-bezier(0.6,0.6,0,1)] relative z-10 flex flex-col overflow-hidden rounded-md border-2 border-border bg-primary transition-all duration-500'
+    className='ease-[cubic-bezier(0.6,0.6,0,1)] relative z-10 flex flex-col overflow-hidden rounded-md border-2 border-border bg-card transition-all duration-500'
     style={{
       width: 164,
       height: 84,
@@ -132,10 +132,8 @@ const IndexCard = ({
   >
     {/* Title bar — bold label, no macOS dots */}
     <div className='flex items-center border-b-2 border-border px-3 py-1'>
-      <span className='font-mono text-[8px] font-black text-primary-foreground/50'>indexed</span>
-      <span className='ml-auto font-mono text-[7px] font-bold text-primary-foreground/25'>
-        FAISS
-      </span>
+      <span className='font-mono text-[8px] font-black text-card-foreground/50'>indexed</span>
+      <span className='ml-auto font-mono text-[7px] font-bold text-card-foreground/25'>FAISS</span>
     </div>
 
     {/* Abstract index chunk bars */}
@@ -192,7 +190,7 @@ const DocBadge = ({
 
   return (
     <div
-      className='ease-[cubic-bezier(0.6,0.6,0,1)] absolute z-5 rounded-sm border-2 border-border bg-primary px-1.5 py-0.5 transition-all duration-700'
+      className='ease-[cubic-bezier(0.6,0.6,0,1)] absolute z-5 rounded-sm border-2 border-border bg-card px-1.5 py-0.5 transition-all duration-700'
       style={{
         transform: hovered
           ? `translate(${badge.hoverX}px, ${badge.hoverY}px)`
@@ -202,7 +200,7 @@ const DocBadge = ({
       }}
     >
       <span
-        className='ease-[cubic-bezier(0.6,0.6,0,1)] font-mono text-[7px] font-black text-primary-foreground/50 transition-colors duration-500'
+        className='ease-[cubic-bezier(0.6,0.6,0,1)] font-mono text-[7px] font-black text-card-foreground/50 transition-colors duration-500'
         style={{ color: hovered ? badgeColor : undefined }}
       >
         {badge.label}

@@ -40,7 +40,7 @@ export default async function LegalLangPage({ params }: { params: Promise<{ lang
         fullHeight={false}
         className='pt-20 md:pt-24'
       >
-        <SectionHeader badge='Legal'>
+        <SectionHeader>
           <MDXContent components={getMDXComponents()} />
         </SectionHeader>
       </Section>

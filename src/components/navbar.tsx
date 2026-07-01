@@ -2,13 +2,13 @@
 
 import { ArrowLeftIcon } from 'lucide-react';
 import Link from 'next/link';
-import { Button } from '@/components/retroui/Button';
 import { ThemeSelect } from '@/components/theme/theme-select';
 import {
   NavigationMenu,
   NavigationMenuItem,
   NavigationMenuList
 } from '@/components/ui/navigation-menu';
+import { Button } from '@/components/ui/retroui/Button';
 import { cn } from '@/lib/utils/ui';
 
 type SocialItem = {
@@ -34,13 +34,13 @@ export const Nav = ({ className, socials, backHref }: NavProps) => {
         className
       )}
     >
-      <NavigationMenu className='bg-primary w-full md:w-auto'>
+      <NavigationMenu className='bg-background w-full md:w-auto'>
         <NavigationMenuList className='flex justify-end w-full'>
           <div className='isolate relative z-9999'>
-            <NavigationMenuItem key='settings' className='relative bg-primary'>
+            <NavigationMenuItem key='settings' className='relative bg-background'>
               <div className='flex space-x-1 items-center'>
                 {backHref && (
-                  <Button variant='default' size='icon' className='shadow-none' asChild>
+                  <Button variant='flatSecondary' size='icon' asChild>
                     <Link href={backHref} aria-label='Go back'>
                       <ArrowLeftIcon className='w-4 h-4' />
                     </Link>
@@ -49,13 +49,7 @@ export const Nav = ({ className, socials, backHref }: NavProps) => {
                 {socials
                   .filter((social) => social.url && social.icon)
                   .map((social) => (
-                    <Button
-                      key={social._id}
-                      variant='default'
-                      size='icon'
-                      className='shadow-none'
-                      asChild
-                    >
+                    <Button key={social._id} variant='flatSecondary' size='icon' asChild>
                       <Link
                         href={social.url!}
                         aria-label={social._title}
@@ -69,11 +63,7 @@ export const Nav = ({ className, socials, backHref }: NavProps) => {
                       </Link>
                     </Button>
                   ))}
-                <ThemeSelect
-                  buttonVariant='default'
-                  noButtonShadow={true}
-                  popoverClassName='z-9999'
-                />
+                <ThemeSelect buttonVariant='flatSecondary' popoverClassName='z-9999' />
               </div>
             </NavigationMenuItem>
           </div>

@@ -1,8 +1,8 @@
 'use client';
 
-import { Button } from '@/components/retroui/Button';
 import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card';
 import { NeoBadge } from '@/components/ui/neoBadge';
+import { Button } from '@/components/ui/retroui/Button';
 import { H4, Link, S, XS } from '@/components/ui/typography';
 import { isExternalUrl } from '@/lib/utils/ui';
 

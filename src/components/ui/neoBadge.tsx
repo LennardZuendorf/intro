@@ -5,21 +5,23 @@ import { cn } from "@/lib/utils/ui";
 import { M, S, L } from "./typography";
 
 const neoBadgeVariants = cva(
-  "inline-block font-mono font-black rounded-md border-2 border-border transition-[transform,background-color] duration-300",
+  "inline-flex items-center font-head font-semibold rounded-base border-2 border-border outline-hidden transition-all duration-200",
   {
     variants: {
       variant: {
-        default: "bg-accent text-accent-foreground hover:bg-accent-dark",
-        dark: "bg-accent-dark text-accent-foreground hover:bg-accent",
-        light: "bg-accent-light text-accent-foreground hover:bg-accent",
+        default:
+          "bg-primary text-primary-foreground hover:bg-primary-hover",
+        dark: "bg-primary-hover text-primary-foreground hover:bg-primary",
+        light:
+          "bg-primary-light text-primary-foreground hover:bg-primary",
         outline:
-          "bg-primary text-primary-foreground border-2 border-border hover:bg-accent hover:text-accent-foreground",
+          "bg-primary text-primary-foreground hover:bg-primary-hover",
       },
       rotation: {
         none: "",
-        slight: "rotate-negative",
+        slight: "-rotate-1",
         negative: "rotate-1",
-        medium: "rotate-negative-medium",
+        medium: "-rotate-2",
         negativeMedium: "rotate-2",
       },
       interactive: {
@@ -27,18 +29,18 @@ const neoBadgeVariants = cva(
         lift: "hover:-translate-y-0.5",
         grow: "hover:scale-[1.03]",
         bounce: "hover:animate-bounce",
-        wiggle: "hover:rotate-negative",
+        wiggle: "hover:-rotate-1",
       },
       shadow: {
         none: "",
-        sm: "shadow-sm",
-        md: "shadow-md",
-        lg: "shadow-lg",
+        sm: "shadow-sm shadow-shadow",
+        md: "shadow-md shadow-shadow",
+        lg: "shadow-lg shadow-shadow",
       },
       size: {
-        sm: "px-[0.35rem] py-[0.15rem] md:px-[0.45rem] md:py-[0.2rem] xl:px-2 xl:py-1",
-        md: "px-2 py-[0.2rem] md:px-[0.65rem] md:py-[0.3rem] xl:px-[0.8rem] xl:py-[0.4rem]",
-        lg: "px-[0.65rem] py-[0.3rem] md:px-[0.85rem] md:py-[0.4rem] xl:px-4 xl:py-2",
+        sm: "px-2 py-1",
+        md: "px-2.5 py-1.5",
+        lg: "px-3 py-2",
       },
     },
     defaultVariants: {
@@ -84,7 +86,7 @@ function NeoBadge({
       )}
       {...props}
     >
-      <Typography as="span" className="m-0 p-0 leading-none font-bold">
+      <Typography as="span" className="m-0 p-0 leading-none font-inherit">
         {props.children}
       </Typography>
     </Comp>

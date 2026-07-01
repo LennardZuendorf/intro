@@ -1,11 +1,12 @@
 'use client';
 
+import type { VariantProps } from 'class-variance-authority';
 import { Monitor, Moon, Sun } from 'lucide-react';
 import { useTheme } from 'next-themes';
 import * as React from 'react';
 import { useEffect, useState } from 'react';
-import { Button } from '@/components/retroui/Button';
-import { Menu } from '@/components/retroui/Menu';
+import { Button, type buttonVariants } from '@/components/ui/retroui/Button';
+import { Menu } from '@/components/ui/retroui/Menu';
 import { cn } from '@/lib/utils/ui';
 
 const themes = [
@@ -28,7 +29,7 @@ const themes = [
 
 interface ThemeSwitcherProps {
   className?: string;
-  buttonVariant?: 'default' | 'secondary' | 'outline' | 'link' | 'ghost';
+  buttonVariant?: VariantProps<typeof buttonVariants>['variant'];
   noButtonShadow?: boolean;
   popoverClassName?: string;
 }
@@ -71,7 +72,7 @@ export const ThemeSelect: React.FC<ThemeSwitcherProps> = ({
       <Menu.Content
         align='center'
         sideOffset={8}
-        className={cn('z-9999 bg-primary', popoverClassName)}
+        className={cn('z-9999 bg-background', popoverClassName)}
       >
         {themes.map((themeOption) => (
           <Menu.Item
