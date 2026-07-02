@@ -7,6 +7,7 @@
 @theme inline {
     --font-head: var(--font-head);
     --font-sans: var(--font-sans);
+    --font-mono: var(--font-mono);
     --font-heading: var(--font-head);
     --font-base: var(--font-sans);
     --radius: var(--radius);
@@ -84,59 +85,65 @@
     }
 }
 
-/* Brand yellow — defined once; accent aliases for shadcn/RetroUI class names */
+/* Accent axis — mode-independent. The picker sets only --primary on <html>;
+   every derived accent var cascades from it via color-mix. Default: lime. */
 :root,
 .dark {
-    --primary: #ffdb33;
-    --primary-light: #ffeb80;
-    --primary-hover: #ffcc00;
-    --primary-foreground: #000;
+    --primary: #c6ff2e;
+    --primary-foreground: #0b0b0b;
+
+    --primary-hover: color-mix(in srgb, var(--primary) 88%, black);
+    --primary-light: color-mix(in srgb, var(--primary) 70%, white);
 
     --accent: var(--primary);
     --accent-light: var(--primary-light);
-    --accent-dark: var(--primary-hover);
+    --accent-dark: color-mix(in srgb, var(--primary) 82%, black);
     --accent-foreground: var(--primary-foreground);
 }
 
 :root {
     --radius: 0.5rem;
-    --background: #fff;
-    --foreground: #000;
-    --card: #fff;
-    --card-foreground: #000;
+    --background: #faf9f4;
+    --foreground: #0b0b0b;
+    --card: #ffffff;
+    --card-foreground: #0b0b0b;
     --secondary: #000;
     --secondary-hover: #333;
     --secondary-foreground: #fff;
     --muted: #aeaeae;
-    --muted-foreground: #5a5a5a;
+    --muted-foreground: #6b675e;
     --destructive: #e63946;
     --destructive-foreground: #fff;
-    --border: #000;
+    --border: #0b0b0b;
     --input: #fff;
-    --ring: #000;
-    --popover: #fff;
-    --popover-foreground: #000;
+    --ring: #0b0b0b;
+    --popover: #ffffff;
+    --popover-foreground: #0b0b0b;
     --grid: #00000012;
+    --dotbase: #d9d4c2;
+    --dot: rgba(11, 11, 11, 0.07);
 }
 
 .dark {
-    --background: #1a1a1a;
-    --foreground: #f5f5f5;
-    --card: #242424;
-    --card-foreground: #f5f5f5;
+    --background: #0b0b0b;
+    --foreground: #f4f4ec;
+    --card: #161616;
+    --card-foreground: #f4f4ec;
     --secondary: #000;
     --secondary-hover: #4a4a4a;
-    --secondary-foreground: #f5f5f5;
+    --secondary-foreground: #f4f4ec;
     --muted: #3f3f46;
-    --muted-foreground: #a0a0a0;
+    --muted-foreground: #8c8c84;
     --destructive: #e63946;
     --destructive-foreground: #fff;
-    --border: #000;
+    --border: #f4f4ec;
     --input: #2a2a2a;
-    --ring: #f5f5f5;
-    --popover: #242424;
-    --popover-foreground: #f5f5f5;
+    --ring: #f4f4ec;
+    --popover: #161616;
+    --popover-foreground: #f4f4ec;
     --grid: #ffffff18;
+    --dotbase: #242424;
+    --dot: rgba(244, 244, 236, 0.05);
 }
 
 @layer base {

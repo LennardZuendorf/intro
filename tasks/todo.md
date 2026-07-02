@@ -21,8 +21,9 @@ Source of truth for features: `.spec/features/<name>/`.
 - page.tsx serial: L3 → N3. Effects mounts via section components, runs last.
 
 ## Current position
-- **CURRENT WAVE: (not launched)** — awaiting launch go.
-- Baseline commit: PENDING.
+- **CURRENT WAVE: 1 (foundation) — RUNNING** · workflow `wf_9eb2575c-109`.
+- On completion: main loop runs gate (`pnpm check`→`build`→`test` + persistence assert) → code-reviewer → commit (best-effort) → launch Wave 2.
+- Baseline commit: DONE `385aca0`.
 
 ## Wave 1 — foundation  [gate: build + accent/mode persistence]
 - [ ] F1 tokens + Space Mono — `globals.css`, `layout.tsx`   *(Opus: color-mix math)*
