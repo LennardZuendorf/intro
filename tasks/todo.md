@@ -24,8 +24,11 @@ Source of truth for features: `.spec/features/<name>/`.
 - page.tsx serial: L3 → N3. Effects mounts via section components, runs last.
 
 ## Current position
-- **CURRENT WAVE: 2 (landing) — RUNNING** · workflow `wf_9daa8103-5cb` (task `wbi54bmw9`).
-  On completion: gate (biome + next build + jest + route enum /,/legal) → commit best-effort → launch Wave 3 (nav).
+- **CURRENT WAVE: 3 (nav) — finishing.** N2 (Opus palette) crashed on API 529; N3 built the palette itself (Sonnet) — functional, but N2's jest test was missing.
+  Gate already green: next build (routes /,/legal) + jest 7/7 + biome (fixed 1 format nit in sections.ts).
+  Recovery agent `a6c750e5b6a711911` (Opus) writing the palette test + auditing/fixing palette bugs. On its completion: re-run jest+biome → commit nav → launch Wave 4 (effects).
+- Wave 2 landing: DONE, gate green (next build routes=/,/legal only + jest 7/7 + biome; fixed 2 JSX `//` eyebrow lint errors inline), committed `e5cec4d`.
+- Landing follow-ups (non-blocking polish for final pass): hero clamp() typography override; possible duplicate scroll hint (hero vs global ScrollArrow in layout); placeholder social handles + Hypoport copy.
 - Wave 1 foundation: DONE, gate green (build+TS+jest 7/7+biome), committed `72937ba`.
 - Known deferred nit (from F1): dark `--secondary` still `#000` (invisible on near-black) — fix in a later wave/polish, outside foundation bar.
 
@@ -35,12 +38,12 @@ Source of truth for features: `.spec/features/<name>/`.
 - [x] F3 no-flash persistence — `theme/accent-script.tsx`, `layout.tsx` head   *(Sonnet)*
 - [x] GATE green · [x] committed `72937ba` (manual reload persistence: verified structurally — build+script-in-head; headless reload deferred)
 
-## Wave 2 — landing  [gate: build + test + route enum /,/legal]
-- [ ] L1 content layer — `source.config.ts`, `content/*.mdx` backfill, `content/notes/*`, new `hypoport.mdx`, `lib/{work,socials,source}.ts`   *(Sonnet ‖ fan-out)*
-- [ ] L2 sections — `sections/{hero,about,work,notes,contact}.tsx`, `sections/scroll-progress.tsx`, `footer.tsx`   *(Sonnet ‖ fan-out)*
-- [ ] L3 page composition — `app/page.tsx`   *(Opus: keystone)*
-- [ ] L4 route assertion — verify-only   *(Sonnet)*
-- [ ] GATE green · [ ] committed
+## Wave 2 — landing  [gate: build + test + route enum /,/legal]  ✅ DONE
+- [x] L1 content layer — notes collection, schema fields, `getWorkItems`, socials, backfill, Hypoport, 4 notes
+- [x] L2 sections — hero/about/work/notes/contact + scroll-progress + v4 footer
+- [x] L3 page composition — `app/page.tsx` (server, hero→about→work→notes→contact→footer, ids)
+- [x] L4 route assertion — routes = /,/legal only ✓
+- [x] GATE green · [x] committed `e5cec4d`
 
 ## Wave 3 — nav  [gate: build + test palette open/filter/jump]
 - [ ] N1 registry — `components/nav/sections.ts`   *(Sonnet)*
@@ -58,7 +61,7 @@ Source of truth for features: `.spec/features/<name>/`.
 |---|---|---|
 | baseline | yes | `385aca0` |
 | 1 foundation | yes | `72937ba` |
-| 2 landing | — | |
+| 2 landing | yes | `e5cec4d` |
 | 3 nav | — | |
 | 4 effects | — | |
 

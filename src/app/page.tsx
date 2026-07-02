@@ -1,5 +1,6 @@
 import type { NextPage } from 'next';
 import { notFound } from 'next/navigation';
+import { Dock } from '@/components/nav/dock';
 import { AboutSection } from '@/components/sections/about';
 import { ContactSection } from '@/components/sections/contact';
 import { Hero } from '@/components/sections/hero';
@@ -19,7 +20,10 @@ import { getWorkItems } from '@/lib/work';
  *
  * `ScrollProgress` is core page chrome: it draws the top progress bar and injects
  * the `data-reveal` scroll-reveal CSS + observer the sections rely on.
- * Navigation chrome (dock/command palette) is a later wave and is not mounted here.
+ * `Dock` is the navigation chrome: a fixed top-center pill with JUMP, mode toggle,
+ * and accent swatches. It also hosts the command palette and its keyboard listener.
+ * The old `<Nav>` is intentionally not mounted here; it is still available for
+ * `src/app/legal/[lang]/page.tsx`.
  */
 const Page: NextPage = async () => {
   const introPage = homeSource.getPage([]);
@@ -35,6 +39,7 @@ const Page: NextPage = async () => {
 
   return (
     <main>
+      <Dock />
       <ScrollProgress />
       <Hero />
       <AboutSection body={bio} facts={facts} />
