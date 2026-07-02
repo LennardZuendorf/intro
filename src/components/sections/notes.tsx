@@ -24,8 +24,10 @@ export interface NoteItem {
 export interface NotesSectionProps {
   notes: NoteItem[];
   /**
-   * Forward a `data-floaty` attribute on each card so the neon-effects layer
-   * can attach idle-bob animations later. Does NOT build any motion itself.
+   * When set, add the `floaty` class (+ a staggered `animation-delay`) to each
+   * card so the neon-effects layer's idle-bob keyframe runs. The animation is
+   * gated in CSS (fine pointer + no reduced-motion), so this stays inert on
+   * touch / reduced-motion devices — pure enhancement, no layout shift.
    */
   floaty?: boolean;
 }
@@ -39,8 +41,8 @@ const CARD_ROTATIONS = ['-rotate-1', 'rotate-1'] as const;
  * Renders note cards in a 3-column grid (1-col on mobile, 3-col at lg).
  * Each card is slightly rotated and lifts on hover. MDX body is rendered via
  * `getMDXComponents()` when present; falls back to the `text` frontmatter
- * field. The optional `floaty` flag adds a `data-floaty` hook for the
- * neon-effects enhancement layer without building any motion here.
+ * field. The optional `floaty` flag adds the neon-effects idle-bob (`floaty`
+ * class + staggered delay), which is CSS-gated to desktop pointers.
  */
 export function NotesSection({ notes, floaty = false }: NotesSectionProps) {
   const components = getMDXComponents();
@@ -69,10 +71,14 @@ export function NotesSection({ notes, floaty = false }: NotesSectionProps) {
                 rotation,
                 'transition-all duration-200 cursor-default',
                 // Hover lift: translate toward shadow + deepen shadow (design §Elevation)
-                'hover:-translate-x-px hover:-translate-y-px hover:shadow-2xl'
+                'hover:-translate-x-px hover:-translate-y-px hover:shadow-2xl',
+                // Idle-bob enhancement (CSS-gated to desktop pointers in globals.css)
+                floaty && 'floaty'
               )}
-              // Hook for neon-effects floaty idle-bob enhancement
-              {...(floaty ? { 'data-floaty': 'true' } : {})}
+              // Stagger each card's bob so they don't move in lockstep. Negative
+              // delay starts each mid-cycle (no initial pause); inert unless the
+              // gated `.floaty` animation is active.
+              style={floaty ? { animationDelay: `${-i * 1.5}s` } : undefined}
             >
               <Card.Header>
                 {/* Accent tag — mono, uppercase, small (design §Note card) */}

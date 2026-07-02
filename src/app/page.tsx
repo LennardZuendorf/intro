@@ -1,5 +1,6 @@
 import type { NextPage } from 'next';
 import { notFound } from 'next/navigation';
+import { Cursor } from '@/components/effects/cursor';
 import { Dock } from '@/components/nav/dock';
 import { AboutSection } from '@/components/sections/about';
 import { ContactSection } from '@/components/sections/contact';
@@ -39,12 +40,14 @@ const Page: NextPage = async () => {
 
   return (
     <main>
+      {/* Enhancement-only cursor ring; renders nothing on touch / reduced-motion. */}
+      <Cursor />
       <Dock />
       <ScrollProgress />
       <Hero />
       <AboutSection body={bio} facts={facts} />
       <WorkSection items={workItems} />
-      <NotesSection notes={notes} />
+      <NotesSection notes={notes} floaty />
       <ContactSection socials={socials} />
     </main>
   );

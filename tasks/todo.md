@@ -24,9 +24,9 @@ Source of truth for features: `.spec/features/<name>/`.
 - page.tsx serial: L3 → N3. Effects mounts via section components, runs last.
 
 ## Current position
-- **CURRENT WAVE: 3 (nav) — finishing.** N2 (Opus palette) crashed on API 529; N3 built the palette itself (Sonnet) — functional, but N2's jest test was missing.
-  Gate already green: next build (routes /,/legal) + jest 7/7 + biome (fixed 1 format nit in sections.ts).
-  Recovery agent `a6c750e5b6a711911` (Opus) writing the palette test + auditing/fixing palette bugs. On its completion: re-run jest+biome → commit nav → launch Wave 4 (effects).
+- **CURRENT WAVE: 4 (effects) — RUNNING** · workflow `wf_6fc5daed-c49` (task `wvlgusjgi`). LAST wave.
+  On completion: gate (biome + next build + jest incl E1 hook test) → commit best-effort → FINAL pass (full gate + address landing polish follow-ups + review section + done).
+- Wave 3 nav: DONE, gate green (next build routes /,/legal + jest 14/14 incl 7 palette + biome), committed `2e8f36e`. N2 529-crash recovered by Opus audit+test agent (palette clean, no bug).
 - Wave 2 landing: DONE, gate green (next build routes=/,/legal only + jest 7/7 + biome; fixed 2 JSX `//` eyebrow lint errors inline), committed `e5cec4d`.
 - Landing follow-ups (non-blocking polish for final pass): hero clamp() typography override; possible duplicate scroll hint (hero vs global ScrollArrow in layout); placeholder social handles + Hypoport copy.
 - Wave 1 foundation: DONE, gate green (build+TS+jest 7/7+biome), committed `72937ba`.
@@ -45,11 +45,11 @@ Source of truth for features: `.spec/features/<name>/`.
 - [x] L4 route assertion — routes = /,/legal only ✓
 - [x] GATE green · [x] committed `e5cec4d`
 
-## Wave 3 — nav  [gate: build + test palette open/filter/jump]
-- [ ] N1 registry — `components/nav/sections.ts`   *(Sonnet)*
-- [ ] N2 palette — `components/nav/command-palette.tsx`   *(Opus: keyboard/focus)*
-- [ ] N3 dock — `components/nav/dock.tsx` + `app/page.tsx` (mount Dock, remove Nav)   *(Sonnet)*
-- [ ] GATE green · [ ] committed
+## Wave 3 — nav  [gate: build + test palette open/filter/jump]  ✅ DONE
+- [x] N1 registry — `components/nav/sections.ts`
+- [x] N2 palette — `components/nav/command-palette.tsx` + test *(529-crash → built by N3, Opus-audited clean + tested)*
+- [x] N3 dock — `components/nav/dock.tsx` + `app/page.tsx` mount (no old Nav present to remove)
+- [x] GATE green (jest 14/14) · [x] committed `2e8f36e`
 
 ## Wave 4 — effects  [gate: build + no-mount-under-reduced-motion]
 - [ ] E1 gate hook — `effects/use-enabled.ts`   *(Opus)*
@@ -62,7 +62,7 @@ Source of truth for features: `.spec/features/<name>/`.
 | baseline | yes | `385aca0` |
 | 1 foundation | yes | `72937ba` |
 | 2 landing | yes | `e5cec4d` |
-| 3 nav | — | |
+| 3 nav | yes | `2e8f36e` |
 | 4 effects | — | |
 
 ## Blocked / debug-round log

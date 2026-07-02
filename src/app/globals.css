@@ -175,3 +175,25 @@
         translate: 0 -4px;
     }
 }
+
+/* Floaty — gentle idle bob for note cards (neon-effects enhancement layer).
+   Uses the `translate` property (not `transform`) so it composes with each
+   card's rotation/hover transform instead of clobbering it. Gated in CSS to
+   mirror the effects hook exactly: fine pointer AND no reduced-motion request,
+   so on touch / reduced-motion it applies nothing (no animation, no shift).
+   Per-card stagger comes from an inline `animation-delay` set in notes.tsx. */
+@keyframes floaty {
+    0%,
+    100% {
+        translate: 0 0;
+    }
+    50% {
+        translate: 0 -6px;
+    }
+}
+
+@media (pointer: fine) and (prefers-reduced-motion: no-preference) {
+    .floaty {
+        animation: floaty 6s ease-in-out infinite;
+    }
+}

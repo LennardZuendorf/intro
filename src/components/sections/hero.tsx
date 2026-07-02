@@ -1,4 +1,6 @@
 import type { ReactNode } from 'react';
+import { DotField } from '@/components/effects/dot-field';
+import { Parallax } from '@/components/effects/parallax';
 import { NeoBadge } from '@/components/ui/neoBadge';
 import { H1, S } from '@/components/ui/typography';
 import { siteMeta } from '@/lib/site-meta';
@@ -35,12 +37,15 @@ export function Hero({
         className
       )}
     >
-      {/* Optional neon-effects backdrop — below all content, pointer-events-none */}
-      {backdrop != null && (
-        <div className='absolute inset-0 -z-10 pointer-events-none' aria-hidden='true'>
-          {backdrop}
-        </div>
-      )}
+      {/*
+       * Neon-effects backdrop — below all content, pointer-events-none.
+       * Defaults to the accent-aware dot-field, which self-gates to nothing on
+       * touch / reduced-motion (no canvas, no layout shift). Callers may override
+       * with their own backdrop node.
+       */}
+      <div className='absolute inset-0 -z-10 pointer-events-none' aria-hidden='true'>
+        {backdrop ?? <DotField />}
+      </div>
 
       {/* Corner labels — Space Mono, muted, wide tracking */}
       <S
@@ -65,18 +70,20 @@ export function Hero({
          * mix-blend-difference ensures legibility over the future dot-field canvas
          * in both light and dark modes.
          */}
-        <H1
-          as='h1'
-          format={false}
-          className={cn(
-            'mt-0 font-head font-normal uppercase',
-            'leading-[0.84] tracking-[-0.02em]',
-            'mix-blend-difference',
-            'text-[clamp(2.75rem,11vw,9rem)]'
-          )}
-        >
-          LENNARD ZÜNDORF
-        </H1>
+        <Parallax>
+          <H1
+            as='h1'
+            format={false}
+            className={cn(
+              'mt-0 font-head font-normal uppercase',
+              'leading-[0.84] tracking-[-0.02em]',
+              'mix-blend-difference',
+              'text-[clamp(2.75rem,11vw,9rem)]'
+            )}
+          >
+            LENNARD ZÜNDORF
+          </H1>
+        </Parallax>
 
         {/*
          * Role badge — accent fill, −2° rotation (rotation="medium"), hard shadow.
