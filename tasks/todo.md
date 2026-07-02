@@ -24,8 +24,11 @@ Source of truth for features: `.spec/features/<name>/`.
 - page.tsx serial: L3 → N3. Effects mounts via section components, runs last.
 
 ## Current position
-- **CURRENT WAVE: 4 (effects) — RUNNING** · workflow `wf_6fc5daed-c49` (task `wvlgusjgi`). LAST wave.
-  On completion: gate (biome + next build + jest incl E1 hook test) → commit best-effort → FINAL pass (full gate + address landing polish follow-ups + review section + done).
+- **ALL 4 WAVES GREEN + COMMITTED.** Final pass: Opus review done (verdict: fix-then-ship, no correctness bugs). Applying a11y/robustness fixes.
+- Fixes applied by main loop (this turn): #2 hero LCP (dropped data-reveal from hero + `.js`-scoped reveal hide via AccentScript, no-JS-safe), #3 removed legacy global `<ScrollArrow/>` from layout (kept hero hint), #4 swatch radio-roles → aria-pressed toggles, #6 accent set deduped into `src/components/theme/accents.ts` (imported by provider/script/swatches).
+- Delegated: #1 palette focus-trap → Radix Dialog (Opus agent `afa54004394270882`, guarded by the jest palette test).
+- Deferred follow-up: #5 hero `clamp()` → promote to sanctioned `H1 size="display"` variant in typography.tsx (design judgment; leave for user).
+- On palette agent completion: combined gate (biome + next build + jest) → commit fixes best-effort → write Review section → STOP.
 - Wave 3 nav: DONE, gate green (next build routes /,/legal + jest 14/14 incl 7 palette + biome), committed `2e8f36e`. N2 529-crash recovered by Opus audit+test agent (palette clean, no bug).
 - Wave 2 landing: DONE, gate green (next build routes=/,/legal only + jest 7/7 + biome; fixed 2 JSX `//` eyebrow lint errors inline), committed `e5cec4d`.
 - Landing follow-ups (non-blocking polish for final pass): hero clamp() typography override; possible duplicate scroll hint (hero vs global ScrollArrow in layout); placeholder social handles + Hypoport copy.
@@ -51,10 +54,11 @@ Source of truth for features: `.spec/features/<name>/`.
 - [x] N3 dock — `components/nav/dock.tsx` + `app/page.tsx` mount (no old Nav present to remove)
 - [x] GATE green (jest 14/14) · [x] committed `2e8f36e`
 
-## Wave 4 — effects  [gate: build + no-mount-under-reduced-motion]
-- [ ] E1 gate hook — `effects/use-enabled.ts`   *(Opus)*
-- [ ] E2 dot-field — `effects/dot-field.tsx`   *(Opus)*  ‖  [ ] E3 cursor/parallax/floaty — `effects/{cursor,parallax}.tsx`, `globals.css` keyframe   *(Opus)*
-- [ ] GATE green · [ ] committed
+## Wave 4 — effects  [gate: build + no-mount-under-reduced-motion]  ✅ DONE
+- [x] E1 gate hook — `effects/use-enabled.ts` + test (5/5)
+- [x] E2 dot-field + parallax — `effects/{dot-field,parallax}.tsx`, wired into hero.tsx
+- [x] E3 cursor + floaty — `effects/cursor.tsx` (mounted in page.tsx), notes floaty, globals keyframe
+- [x] GATE green (jest 19/19) · [x] committed `770909d`  (headless: no-mount asserted via E1 test + code; live reduced-motion visual deferred)
 
 ## Commit log (best-effort)
 | Wave | Committed? | SHA / note |
@@ -63,7 +67,7 @@ Source of truth for features: `.spec/features/<name>/`.
 | 1 foundation | yes | `72937ba` |
 | 2 landing | yes | `e5cec4d` |
 | 3 nav | yes | `2e8f36e` |
-| 4 effects | — | |
+| 4 effects | yes | `770909d` |
 
 ## Blocked / debug-round log
 _(record any gate that needed debugging + round count; note if backstop tripped)_

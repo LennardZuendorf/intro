@@ -3,14 +3,17 @@
 import { motion, useScroll, useSpring } from 'framer-motion';
 import { useEffect } from 'react';
 
-// CSS injected once for data-reveal fade+rise — keeps global styles co-located with the observer
+// CSS injected once for data-reveal fade+rise — keeps global styles co-located with the observer.
+// Scoped under `.js` (set pre-paint by AccentScript) so the hide rule only applies when JS is on:
+// no-JS visitors see all content instead of a permanently-invisible page, and there is no
+// flash-of-hidden since the class is present before first paint.
 const revealStyles = `
-  [data-reveal] {
+  .js [data-reveal] {
     opacity: 0;
     transform: translateY(16px);
     transition: opacity 0.5s ease, transform 0.5s ease;
   }
-  [data-reveal].reveal-visible {
+  .js [data-reveal].reveal-visible {
     opacity: 1;
     transform: translateY(0);
   }

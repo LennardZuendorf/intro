@@ -2,26 +2,20 @@
 
 import type * as React from 'react';
 import { createContext, useCallback, useContext, useEffect, useState } from 'react';
+import {
+  ACCENT_OPTIONS,
+  type Accent,
+  DEFAULT_ACCENT,
+  isValidAccent,
+  ACCENT_STORAGE_KEY as STORAGE_KEY
+} from './accents';
 
-export type Accent = '#C6FF2E' | '#FF2E9A' | '#21E6E0' | '#FF6A1A';
+export type { Accent } from './accents';
 
 interface AccentContext {
   accent: Accent;
   setAccent: (a: Accent) => void;
   options: readonly Accent[];
-}
-
-const ACCENT_OPTIONS = [
-  '#C6FF2E',
-  '#FF2E9A',
-  '#21E6E0',
-  '#FF6A1A'
-] as const satisfies readonly Accent[];
-const STORAGE_KEY = 'lz_accent';
-const DEFAULT_ACCENT: Accent = '#C6FF2E';
-
-function isValidAccent(value: unknown): value is Accent {
-  return (ACCENT_OPTIONS as readonly string[]).includes(value as string);
 }
 
 const AccentCtx = createContext<AccentContext>({

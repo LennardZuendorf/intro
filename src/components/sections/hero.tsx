@@ -31,7 +31,6 @@ export function Hero({
   return (
     <section
       id='hero'
-      data-reveal
       className={cn(
         'relative min-h-svh flex flex-col items-center justify-center overflow-hidden',
         className

@@ -2,14 +2,8 @@
 
 import { useEffect, useState } from 'react';
 import { cn } from '@/lib/utils/ui';
-import { type Accent, useAccent } from './accent-provider';
-
-const SWATCH_LABELS: Record<Accent, string> = {
-  '#C6FF2E': 'Lime',
-  '#FF2E9A': 'Pink',
-  '#21E6E0': 'Cyan',
-  '#FF6A1A': 'Orange'
-};
+import { useAccent } from './accent-provider';
+import { ACCENT_LABELS } from './accents';
 
 interface AccentSwatchesProps {
   className?: string;
@@ -26,7 +20,7 @@ export function AccentSwatches({ className }: AccentSwatchesProps) {
   return (
     <div
       className={cn('flex items-center gap-1.5', className)}
-      role='radiogroup'
+      role='group'
       aria-label='Accent color'
     >
       {options.map((swatch) => {
@@ -35,9 +29,8 @@ export function AccentSwatches({ className }: AccentSwatchesProps) {
           <button
             key={swatch}
             type='button'
-            role='radio'
-            aria-checked={mounted ? isActive : undefined}
-            aria-label={`${SWATCH_LABELS[swatch]} accent`}
+            aria-pressed={isActive}
+            aria-label={`${ACCENT_LABELS[swatch]} accent`}
             onClick={() => setAccent(swatch)}
             className={cn(
               'relative h-4 w-4 rounded-full border-2 border-border transition-all duration-150',

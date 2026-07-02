@@ -1,19 +1,21 @@
 /**
- * Inline pre-paint script that restores the stored accent BEFORE first paint.
+ * Inline pre-paint boot script. Runs synchronously before first paint and does
+ * two things:
  *
- * Reads `lz_accent` from localStorage and sets `--primary` on <html>.
- * This eliminates the flash of the default lime accent when the visitor
- * has chosen a different accent.
+ * 1. Marks `<html class="js">` so JS-gated CSS (the `[data-reveal]` scroll-reveal
+ *    hide rule) applies from frame 0 — and, crucially, does NOT apply when JS is
+ *    disabled, so no-JS visitors see all content instead of a blank page.
+ * 2. Restores the stored accent (`lz_accent`) by setting `--primary` on <html>,
+ *    eliminating the flash of the default lime accent.
  *
  * Intentionally does NOT touch `.dark` — mode no-flash is handled by
  * next-themes' own script. Interfering with that class would race it.
  */
 
-const VALID_ACCENTS = ['#C6FF2E', '#FF2E9A', '#21E6E0', '#FF6A1A'];
-const STORAGE_KEY = 'lz_accent';
+import { ACCENT_OPTIONS, ACCENT_STORAGE_KEY as STORAGE_KEY } from './accents';
 
 // Serialise once at build time so the browser payload is a simple string.
-const inlineScript = `(function(){try{var s=localStorage.getItem(${JSON.stringify(STORAGE_KEY)});if(s&&${JSON.stringify(VALID_ACCENTS)}.indexOf(s)!==-1){document.documentElement.style.setProperty('--primary',s);}}catch(e){}})();`;
+const inlineScript = `(function(){document.documentElement.classList.add('js');try{var s=localStorage.getItem(${JSON.stringify(STORAGE_KEY)});if(s&&${JSON.stringify([...ACCENT_OPTIONS])}.indexOf(s)!==-1){document.documentElement.style.setProperty('--primary',s);}}catch(e){}})();`;
 
 /**
  * Renders a blocking <script> tag (no async/defer) so the browser executes it

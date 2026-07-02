@@ -4,7 +4,6 @@ import type { Metadata } from 'next';
 import { Archivo_Black, Space_Grotesk, Space_Mono } from 'next/font/google';
 import { Footer } from '@/components/footer';
 import { Providers } from '@/components/providers';
-import { ScrollArrow } from '@/components/scroll-arrow';
 import { AccentProvider } from '@/components/theme/accent-provider';
 import { AccentScript } from '@/components/theme/accent-script';
 import { Toaster } from '@/components/ui/retroui/Sonner';
@@ -86,7 +85,6 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             <Footer />
           </AccentProvider>
         </Providers>
-        <ScrollArrow />
       </body>
     </html>
   );
