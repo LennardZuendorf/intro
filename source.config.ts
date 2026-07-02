@@ -30,7 +30,19 @@ const metaShape = z
 export const home = defineCollections({
   type: 'doc',
   dir: 'content/home',
-  schema: baseSchema
+  schema: baseSchema.extend({
+    facts: z.array(z.string()).optional()
+  })
+});
+
+export const notes = defineCollections({
+  type: 'doc',
+  dir: 'content/notes',
+  schema: baseSchema.extend({
+    _title: z.string(),
+    tag: z.string(),
+    text: z.string().optional()
+  })
 });
 
 export const legal = defineCollections({
@@ -75,7 +87,9 @@ export const projects = defineDocs({
             .default([])
         })
         .default({ items: [] }),
-      extendedPreview: z.boolean().default(false)
+      extendedPreview: z.boolean().default(false),
+      year: z.union([z.string(), z.number()]).optional(),
+      kind: z.string().optional()
     })
   }
 });
@@ -91,6 +105,7 @@ export const experience = defineDocs({
       shortDescription: z.string(),
       startDate: z.coerce.date(),
       endDate: z.coerce.date().nullish(),
+      kind: z.string().optional(),
       skills: z
         .array(
           z.object({

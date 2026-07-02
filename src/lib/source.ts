@@ -1,6 +1,6 @@
 import { loader } from 'fumadocs-core/source';
 import { toFumadocsSource } from 'fumadocs-mdx/runtime/server';
-import { experience, home, legal, projects } from '@/.source';
+import { experience, home, legal, notes, projects } from '@/.source';
 
 /**
  * Fumadocs source loaders.
@@ -27,4 +27,9 @@ export const projectSource = loader({
 export const experienceSource = loader({
   baseUrl: '/experience',
   source: experience.toFumadocsSource()
+});
+
+export const notesSource = loader({
+  baseUrl: '/notes',
+  source: toFumadocsSource(notes, [])
 });

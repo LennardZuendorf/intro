@@ -1,9 +1,6 @@
-import { SocialButtons } from '@/components/shared/social-buttons';
 import { ThemeSelect } from '@/components/theme/theme-select';
-import { Button } from '@/components/ui/retroui/Button';
 import { Section } from '@/components/ui/section';
 import { Link, S } from '@/components/ui/typography';
-import { socials } from '@/lib/socials';
 import { cn } from '@/lib/utils/ui';
 
 interface FooterProps {
@@ -11,29 +8,31 @@ interface FooterProps {
 }
 
 export const Footer = ({ className = '' }: FooterProps) => {
+  const year = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(new Date());
   return (
     <Section
       as='footer'
       fullHeight={false}
       fullWidth={true}
-      className={cn('border-t-4 border-border', className)}
-      padding='pt-6 pb-6 px-6 md:pt-4 md:pb-4'
+      className={cn('border-t border-border', className)}
+      padding='py-4 px-6'
       centerContent={false}
     >
-      <div className='w-full flex flex-row items-center justify-between z-10'>
-        <SocialButtons socials={[...socials]} buttonVariant='default' />
-        <div className='flex items-end gap-x-4'>
-          <ThemeSelect buttonVariant='default' />
+      <div className='w-full flex flex-row items-center justify-between'>
+        <div className='flex items-center gap-x-4 font-mono text-muted-foreground'>
+          <S className='font-mono tracking-widest uppercase text-xs'>
+            {`© ${year} LENNARD ZÜNDORF`}
+          </S>
+          <S className='font-mono text-xs hidden sm:block'>— designed &amp; built in stockholm</S>
         </div>
-      </div>
-      <div className='w-full flex justify-center mt-4 md:mt-2'>
-        <div className='flex items-center gap-x-2 font-mono'>
-          <S>Built by Lennard Zündorf</S>
-          <S>{`© ${new Intl.DateTimeFormat('en', { year: 'numeric' }).format(new Date())}`}</S>
-          <S>|</S>
-          <Button variant='link' className='justify-center items-center' size='icon' asChild>
-            <Link href='/legal'>legal</Link>
-          </Button>
+        <div className='flex items-center gap-x-4 font-mono text-muted-foreground text-xs'>
+          <Link
+            href='/legal'
+            className='font-mono tracking-wide uppercase text-xs hover:text-foreground transition-colors'
+          >
+            legal
+          </Link>
+          <ThemeSelect buttonVariant='ghost' />
         </div>
       </div>
     </Section>

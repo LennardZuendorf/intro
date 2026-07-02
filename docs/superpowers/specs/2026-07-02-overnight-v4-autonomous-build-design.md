@@ -31,7 +31,11 @@ directly; this doc says how the build is orchestrated, verified, and made safe.
   Archivo Black + Space Grotesk, **no Space Mono**; no accent axis; no
   `content/notes/`; no `src/components/nav/`.
 - `cmdk` `framer-motion` `next-themes` `sonner` all present — no installs needed.
-- Gates: `pnpm check` (biome --write), `pnpm build` (next build), `pnpm test` (jest).
+- Gates: biome check, next build, jest. **`pnpm` is aliased to `sudo -Hu lennarddib
+  pnpm` → needs a password → unusable unattended.** Run binaries directly:
+  `./node_modules/.bin/biome check --write .`,
+  `NODE_OPTIONS=--no-deprecation ./node_modules/.bin/next build`,
+  `./node_modules/.bin/jest`. (Commits still work — husky/lint-staged doesn't hit the alias.)
 - Existing tests under `src/**/__tests__/`. Jest configured (`jest.config.ts`).
 - **v4 reference HTML `Lennard v4.dc.html` does NOT exist** in repo or git history.
   Effects math comes from `neon-effects/tech.md` + `design.md` prose. Risk noted.
