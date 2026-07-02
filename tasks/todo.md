@@ -24,11 +24,7 @@ Source of truth for features: `.spec/features/<name>/`.
 - page.tsx serial: L3 → N3. Effects mounts via section components, runs last.
 
 ## Current position
-- **ALL 4 WAVES GREEN + COMMITTED.** Final pass: Opus review done (verdict: fix-then-ship, no correctness bugs). Applying a11y/robustness fixes.
-- Fixes applied by main loop (this turn): #2 hero LCP (dropped data-reveal from hero + `.js`-scoped reveal hide via AccentScript, no-JS-safe), #3 removed legacy global `<ScrollArrow/>` from layout (kept hero hint), #4 swatch radio-roles → aria-pressed toggles, #6 accent set deduped into `src/components/theme/accents.ts` (imported by provider/script/swatches).
-- Delegated: #1 palette focus-trap → Radix Dialog (Opus agent `afa54004394270882`, guarded by the jest palette test).
-- Deferred follow-up: #5 hero `clamp()` → promote to sanctioned `H1 size="display"` variant in typography.tsx (design judgment; leave for user).
-- On palette agent completion: combined gate (biome + next build + jest) → commit fixes best-effort → write Review section → STOP.
+- **✅ DONE. Build complete, loop stopped.** All 4 waves + review polish shipped, every gate green. No PR (per decision). On `neon-building`.
 - Wave 3 nav: DONE, gate green (next build routes /,/legal + jest 14/14 incl 7 palette + biome), committed `2e8f36e`. N2 529-crash recovered by Opus audit+test agent (palette clean, no bug).
 - Wave 2 landing: DONE, gate green (next build routes=/,/legal only + jest 7/7 + biome; fixed 2 JSX `//` eyebrow lint errors inline), committed `e5cec4d`.
 - Landing follow-ups (non-blocking polish for final pass): hero clamp() typography override; possible duplicate scroll hint (hero vs global ScrollArrow in layout); placeholder social handles + Hypoport copy.
@@ -68,11 +64,32 @@ Source of truth for features: `.spec/features/<name>/`.
 | 2 landing | yes | `e5cec4d` |
 | 3 nav | yes | `2e8f36e` |
 | 4 effects | yes | `770909d` |
+| review polish | yes | `edd14ac` |
 
 ## Blocked / debug-round log
 _(record any gate that needed debugging + round count; note if backstop tripped)_
 
-## Review (fill on completion)
-- shipped:
-- skipped/blocked:
-- follow-ups (content to rewrite, effects fidelity, etc.):
+## Review (final)
+
+**Shipped — full v4 redesign, 6 commits on `neon-building` (baseline `385aca0` → `edd14ac`):**
+- **Foundation** `72937ba` — v4 palette (lime `#c6ff2e` + color-mix derived accent vars, `--dot/--dotbase`, `--font-mono`), Space Mono alongside Grotesk/Archivo, accent axis (provider + 4 swatches + pre-paint no-flash script) separate from next-themes mode.
+- **Landing** `e5cec4d` — notes collection + schema (year/kind/facts), `getWorkItems()` merge/sort, socials backfill, Hypoport role + 4 seed notes; hero/about/work/notes/contact + scroll-progress + v4 footer; `page.tsx` server composition with stable ids.
+- **Nav** `2e8f36e` — section registry, cmdk command palette (`/`,`⌘K`, filter, jump, keyboard), floating dock hosting JUMP + mode + accent.
+- **Effects** `770909d` — useEffectsEnabled gate, hero dot-field (accent-aware) + parallax, ring cursor, floaty notes — all no-mount under reduced-motion/touch.
+- **Review polish** `edd14ac` — palette Radix Dialog focus-trap; hero LCP fix + no-JS-safe reveal; removed dup ScrollArrow; swatch aria-pressed; accent dedup (`theme/accents.ts`).
+
+**Gates:** every wave green — `next build` (routes exactly `/` + `/legal`, TS clean) + `jest` (final 19/19, incl. 5 effects-hook + 7 palette) + biome. Final Opus review verdict: fix-then-ship; **no correctness/data bugs** (merge/sort, effect gating, accent cascade all verified). One transient API 529 self-recovered mid-run.
+
+**Skipped/blocked:** none. neon-effects synthesized from spec prose (v4 reference HTML absent) — behavior per spec, not pixel-matched to the lost original.
+
+**Follow-ups for you (all non-blocking):**
+1. **Placeholder copy** — Hypoport role body, 4 seed notes, project years/kinds, and social handles (X `x.com/lennardzuendorf`, Bluesky `lennardzuendorf.bsky.social`) are plausible placeholders. Replace with real content.
+2. **#5 hero `clamp()`** — currently overrides typography inline (H1 base is fixed `text-2xl`, no display scale). Clean fix: add a sanctioned `H1 size="display"` variant to `typography.tsx` and use it.
+3. **Effects feel** — dot-field density/radius, cursor ease, parallax strength are spec-synthesis; tune live in a browser to taste.
+4. **Live checks not runnable headless** — reduced-motion no-mount, accent-reload no-flash, palette focus-return: asserted via code + tests; eyeball once in a browser.
+5. **Legal `<ScrollArrow/>`** — removed globally; if `/legal` wants it, mount locally there.
+6. **Dev-only console warning** — cmdk's Dialog lacks a visually-hidden title (Radix advisory, stripped in prod); silence later with a direct `@radix-ui/react-dialog` dep if desired.
+7. **`pnpm` alias** — this env aliases `pnpm` → `sudo -Hu lennarddib pnpm`; the run used `./node_modules/.bin/*` directly. Your normal terminal is unaffected.
+8. **Deferred nit** — dark `--secondary` still `#000` (near-invisible on near-black); retint if any component uses it.
+
+**No PR opened** (per your choice) — review the diff and merge `neon-building` when ready.
