@@ -1,15 +1,8 @@
-/**
- * Section registry — single source of truth for the neon-nav command palette
- * and dock jump control. IDs must match the `id` attributes on section elements
- * rendered by src/app/page.tsx (hero → about → work → notes → contact).
- *
- * Hero is reached via scroll-to-top (not listed here); the palette lists the
- * four navigable sections below.
- */
-
 export interface NavSection {
-  /** DOM element id to scroll into view. */
-  id: string;
+  /** DOM element id to scroll into view (home page sections). */
+  id?: string;
+  /** Route to navigate to (e.g. legal). */
+  href?: string;
   /** Short display label shown in the palette and dock. */
   label: string;
   /** One-line description shown as palette item subtitle. */
@@ -42,5 +35,11 @@ export const NAV_SECTIONS: NavSection[] = [
     label: 'Contact',
     blurb: 'Get in touch or find me elsewhere on the web.',
     n: '4'
+  },
+  {
+    href: '/legal',
+    label: 'Legal',
+    blurb: 'Privacy policy and legal notice.',
+    n: '5'
   }
 ];

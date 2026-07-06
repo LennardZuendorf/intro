@@ -1,10 +1,12 @@
 'use client';
 
 import { Command as CommandPrimitive } from 'cmdk';
+import { usePathname, useRouter } from 'next/navigation';
 import { useEffect } from 'react';
+import { Kbd } from '@/components/ui/kbd';
 import { Command } from '@/components/ui/retroui/Command';
 import { cn } from '@/lib/utils/ui';
-import { NAV_SECTIONS } from './sections';
+import { NAV_SECTIONS, type NavSection } from './sections';
 
 /** Smooth-scroll the viewport to the section with the given DOM id. */
 function jumpTo(id: string): void {
@@ -16,6 +18,26 @@ function jumpTo(id: string): void {
 function isEditableTarget(e: KeyboardEvent): boolean {
   const t = e.target as HTMLElement;
   return t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.isContentEditable;
+}
+
+function navigateToSection(
+  section: NavSection,
+  pathname: string,
+  router: ReturnType<typeof useRouter>
+): void {
+  if (section.href) {
+    router.push(section.href);
+    return;
+  }
+
+  if (!section.id) return;
+
+  if (pathname === '/') {
+    jumpTo(section.id);
+    return;
+  }
+
+  router.push(`/#${section.id}`);
 }
 
 interface CommandPaletteProps {
@@ -35,7 +57,7 @@ interface CommandPaletteProps {
  * is locked, and `role="dialog"` / `aria-modal` are set automatically.
  *
  * Registers ONE global keydown listener that handles the OPEN shortcuts:
- *   `/`     → open (ignored while typing in an input/textarea/CE)
+ *   shift+/ → open (ignored while typing in an input/textarea/CE)
  *   ⌘K/⌃K  → open (always)
  *
  * Escape-to-close is handled by Radix, so no manual Escape handling is needed.
@@ -43,10 +65,13 @@ interface CommandPaletteProps {
  * `onOpenChange` prop.
  */
 export function CommandPalette({ open, onOpenChange }: CommandPaletteProps) {
+  const pathname = usePathname();
+  const router = useRouter();
+
   // Global keyboard shortcut registration — exactly ONE listener
   useEffect(() => {
     function handleKeyDown(e: KeyboardEvent) {
-      if (e.key === '/') {
+      if (e.key === '/' && e.shiftKey) {
         if (isEditableTarget(e)) return;
         e.preventDefault();
         onOpenChange(true);
@@ -83,16 +108,16 @@ export function CommandPalette({ open, onOpenChange }: CommandPaletteProps) {
 
       <Command.List>
         <Command.Empty className='py-8 text-center font-mono text-muted-foreground text-sm'>
-          no match — try &lsquo;work&rsquo; or &lsquo;contact&rsquo;
+          no match — try &lsquo;work&rsquo; or &lsquo;legal&rsquo;
         </Command.Empty>
 
         <Command.Group>
           {NAV_SECTIONS.map((section) => (
             <Command.Item
-              key={section.id}
-              value={section.label}
+              key={section.id ?? section.href}
+              value={`${section.label} ${section.blurb}`}
               onSelect={() => {
-                jumpTo(section.id);
+                navigateToSection(section, pathname, router);
                 onOpenChange(false);
               }}
               className='group flex items-center gap-3 px-3 py-2.5'
@@ -122,13 +147,13 @@ export function CommandPalette({ open, onOpenChange }: CommandPaletteProps) {
       {/* Footer keyboard hint row */}
       <div className='flex items-center gap-4 border-border border-t px-3 py-2 font-mono text-muted-foreground text-xs'>
         <span>
-          <kbd className='text-accent'>↑↓</kbd> navigate
+          <Kbd className='text-accent'>↑↓</Kbd> navigate
         </span>
         <span>
-          <kbd className='text-accent'>↵</kbd> jump
+          <Kbd className='text-accent'>↵</Kbd> jump
         </span>
         <span>
-          <kbd className='text-accent'>esc</kbd> close
+          <Kbd className='text-accent'>esc</Kbd> close
         </span>
       </div>
     </CommandPrimitive.Dialog>
