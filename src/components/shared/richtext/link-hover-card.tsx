@@ -2,7 +2,6 @@
 
 import { ExternalLink } from 'lucide-react';
 import { HoverCard, HoverCardContent } from '@/components/ui/hover-card';
-import { NeoBadge } from '@/components/ui/neoBadge';
 import { H4, Link, S, XS } from '@/components/ui/typography';
 import { isExternalUrl } from '@/lib/utils/ui';
 import { HoverCardInlineTrigger } from './hover-card-inline-trigger';

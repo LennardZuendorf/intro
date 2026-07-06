@@ -11,8 +11,7 @@ function TestWrapper({ children }: { children: React.ReactNode }) {
 }
 
 beforeAll(() => {
-  // Radix DropdownMenu uses pointer-capture APIs that JSDOM does not implement.
-  // Stub them so the menu can open in tests.
+  // Base UI Menu uses pointer-capture APIs that JSDOM does not implement.
   if (!Element.prototype.hasPointerCapture) {
     Element.prototype.hasPointerCapture = () => false;
   }
@@ -53,16 +52,14 @@ describe('ThemeSelect', () => {
     expect(screen.getByRole('button', { name: /select theme/i })).toBeInTheDocument();
   });
 
-  it('opens menu and shows theme options when trigger receives keyboard activation', async () => {
+  it('opens menu and shows theme options when trigger is clicked', async () => {
     render(
       <TestWrapper>
         <ThemeSelect />
       </TestWrapper>
     );
 
-    const button = screen.getByRole('button', { name: /select theme/i });
-    button.focus();
-    fireEvent.keyDown(button, { key: 'Enter', code: 'Enter' });
+    fireEvent.click(screen.getByRole('button', { name: /select theme/i }));
 
     await screen.findByText('System');
     expect(screen.getByText('Dark')).toBeInTheDocument();
