@@ -5,9 +5,11 @@
 /.pnp
 .pnp.js
 .yarn/install-state.gz
-
+.pnpm-store/
 /.idea/*
 !/.idea/runConfigurations
+.serena/
+.zed/
 
 # testing
 /coverage
@@ -54,4 +56,3 @@ next-env.d.ts
 
 # Cursor / local agent skill lock (regenerated per machine)
 skills-lock.json
-
