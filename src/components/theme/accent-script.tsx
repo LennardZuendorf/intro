@@ -5,17 +5,17 @@
  * 1. Marks `<html class="js">` so JS-gated CSS (the `[data-reveal]` scroll-reveal
  *    hide rule) applies from frame 0 — and, crucially, does NOT apply when JS is
  *    disabled, so no-JS visitors see all content instead of a blank page.
- * 2. Restores the stored accent (`lz_accent`) by setting `--primary` on <html>,
- *    eliminating the flash of the default lime accent.
+ * 2. Restores the stored accent (`lz_accent`) by setting `--primary` and
+ *    `--primary-foreground` on <html>, eliminating the flash of the default accent.
  *
  * Intentionally does NOT touch `.dark` — mode no-flash is handled by
  * next-themes' own script. Interfering with that class would race it.
  */
 
-import { ACCENT_OPTIONS, ACCENT_STORAGE_KEY as STORAGE_KEY } from './accents';
+import { ACCENT_FOREGROUNDS, ACCENT_OPTIONS, ACCENT_STORAGE_KEY as STORAGE_KEY } from './accents';
 
 // Serialise once at build time so the browser payload is a simple string.
-const inlineScript = `(function(){document.documentElement.classList.add('js');try{var s=localStorage.getItem(${JSON.stringify(STORAGE_KEY)});if(s&&${JSON.stringify([...ACCENT_OPTIONS])}.indexOf(s)!==-1){document.documentElement.style.setProperty('--primary',s);}}catch(e){}})();`;
+const inlineScript = `(function(){document.documentElement.classList.add('js');try{var s=localStorage.getItem(${JSON.stringify(STORAGE_KEY)});var opts=${JSON.stringify([...ACCENT_OPTIONS])};var fg=${JSON.stringify(ACCENT_FOREGROUNDS)};if(s&&opts.indexOf(s)!==-1){document.documentElement.style.setProperty('--primary',s);document.documentElement.style.setProperty('--primary-foreground',fg[s]||'#f4f4ec');}}catch(e){}})();`;
 
 /**
  * Renders a blocking <script> tag (no async/defer) so the browser executes it

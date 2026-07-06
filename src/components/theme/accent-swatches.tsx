@@ -19,7 +19,10 @@ export function AccentSwatches({ className }: AccentSwatchesProps) {
 
   return (
     <div
-      className={cn('flex items-center gap-1.5', className)}
+      className={cn(
+        'flex items-center gap-1.5 rounded-base border border-border/50 bg-secondary/50 px-1.5 py-1',
+        className
+      )}
       role='group'
       aria-label='Accent color'
     >
@@ -33,9 +36,9 @@ export function AccentSwatches({ className }: AccentSwatchesProps) {
             aria-label={`${ACCENT_LABELS[swatch]} accent`}
             onClick={() => setAccent(swatch)}
             className={cn(
-              'relative h-4 w-4 rounded-full border-2 border-border transition-all duration-150',
-              'hover:scale-110 active:scale-95',
-              isActive && 'ring-2 ring-border ring-offset-2 ring-offset-background'
+              'relative size-5 rounded-base border border-border/50 transition-all duration-150',
+              'hover:scale-105 active:scale-95',
+              isActive && 'ring-1 ring-foreground/30 ring-offset-1 ring-offset-background'
             )}
             style={{ backgroundColor: swatch }}
           />

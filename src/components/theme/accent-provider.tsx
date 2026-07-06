@@ -5,6 +5,7 @@ import { createContext, useCallback, useContext, useEffect, useState } from 'rea
 import {
   ACCENT_OPTIONS,
   type Accent,
+  applyAccentToDocument,
   DEFAULT_ACCENT,
   isValidAccent,
   ACCENT_STORAGE_KEY as STORAGE_KEY
@@ -33,7 +34,7 @@ export function AccentProvider({ children }: { children: React.ReactNode }) {
       const stored = localStorage.getItem(STORAGE_KEY);
       if (isValidAccent(stored)) {
         setAccentState(stored);
-        document.documentElement.style.setProperty('--primary', stored);
+        applyAccentToDocument(stored);
       }
     } catch {
       // localStorage unavailable — use default
@@ -42,7 +43,7 @@ export function AccentProvider({ children }: { children: React.ReactNode }) {
 
   const setAccent = useCallback((a: Accent) => {
     setAccentState(a);
-    document.documentElement.style.setProperty('--primary', a);
+    applyAccentToDocument(a);
     try {
       localStorage.setItem(STORAGE_KEY, a);
     } catch {
