@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { Section } from '@/components/ui/section';
-import { M, Muted, S } from '@/components/ui/typography';
+import { SectionEyebrow } from '@/components/ui/section-eyebrow';
+import { M, S } from '@/components/ui/typography';
 import type { Social } from '@/lib/socials';
 import { cn } from '@/lib/utils/ui';
 
@@ -36,7 +37,7 @@ export function ContactSection({ socials }: ContactSectionProps) {
       padding='px-6 py-12 md:py-20 2xl:py-24'
     >
       <div data-reveal>
-        <Muted className='uppercase tracking-widest'>{'// elsewhere'}</Muted>
+        <SectionEyebrow>{'// elsewhere'}</SectionEyebrow>
       </div>
 
       <div className='w-full flex flex-col border-t-2 border-border' data-reveal>

@@ -1,7 +1,7 @@
 import type { NextPage } from 'next';
 import { notFound } from 'next/navigation';
-import { Cursor } from '@/components/effects/cursor';
 import { Dock } from '@/components/nav/dock';
+import { ScrollArrow } from '@/components/scroll-arrow';
 import { AboutSection } from '@/components/sections/about';
 import { ContactSection } from '@/components/sections/contact';
 import { Hero } from '@/components/sections/hero';
@@ -15,16 +15,6 @@ import { getWorkItems } from '@/lib/work';
 /**
  * One-page composition (`/`). Server component: it reads every section's data
  * from Fumadocs sources / helpers, then renders the sections in scroll order.
- *
- * Order: hero → about → work → notes → contact (footer is rendered globally by
- * `layout.tsx`, so it is intentionally not composed here — see the layout).
- *
- * `ScrollProgress` is core page chrome: it draws the top progress bar and injects
- * the `data-reveal` scroll-reveal CSS + observer the sections rely on.
- * `Dock` is the navigation chrome: a fixed top-center pill with JUMP, mode toggle,
- * and accent swatches. It also hosts the command palette and its keyboard listener.
- * The old `<Nav>` is intentionally not mounted here; it is still available for
- * `src/app/legal/[lang]/page.tsx`.
  */
 const Page: NextPage = async () => {
   const introPage = homeSource.getPage([]);
@@ -40,9 +30,8 @@ const Page: NextPage = async () => {
 
   return (
     <main>
-      {/* Enhancement-only cursor ring; renders nothing on touch / reduced-motion. */}
-      <Cursor />
-      <Dock />
+      <Dock socials={[...socials]} />
+      <ScrollArrow />
       <ScrollProgress />
       <Hero />
       <AboutSection body={bio} facts={facts} />

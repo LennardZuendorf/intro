@@ -20,7 +20,7 @@ interface HeroProps {
 
 /**
  * Hero section: oversized "LENNARD ZÜNDORF" display name, accent role badge,
- * corner labels, and a scroll hint.  Server component — no interactivity owned here;
+ * corner labels. Server component — no interactivity owned here;
  * neon-effects parallax is deferred to the backdrop slot.
  */
 export function Hero({
@@ -66,8 +66,7 @@ export function Hero({
       <div className='flex flex-col items-center gap-8 px-6 text-center'>
         {/*
          * Display name — Archivo Black, fluid via clamp(), line-height 0.84.
-         * mix-blend-difference ensures legibility over the future dot-field canvas
-         * in both light and dark modes.
+         * Pure black in light mode, pure white in dark — no blend modes.
          */}
         <Parallax>
           <H1
@@ -76,7 +75,7 @@ export function Hero({
             className={cn(
               'mt-0 font-head font-normal uppercase',
               'leading-[0.84] tracking-[-0.02em]',
-              'mix-blend-difference',
+              'text-black dark:text-white',
               'text-[clamp(2.75rem,11vw,9rem)]'
             )}
           >
@@ -91,13 +90,6 @@ export function Hero({
         <NeoBadge rotation='medium' shadow='md' size='md'>
           {tagline}
         </NeoBadge>
-      </div>
-
-      {/* Scroll hint */}
-      <div className='absolute bottom-8 flex flex-col items-center gap-1'>
-        <S as='span' color='muted' className='font-mono uppercase tracking-[0.1em]'>
-          ↓ scroll
-        </S>
       </div>
     </section>
   );

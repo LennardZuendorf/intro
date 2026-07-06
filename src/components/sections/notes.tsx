@@ -1,7 +1,8 @@
 import type { ComponentType } from 'react';
 import { Card } from '@/components/ui/retroui/Card';
 import { Section } from '@/components/ui/section';
-import { M, Muted, S } from '@/components/ui/typography';
+import { SectionEyebrow } from '@/components/ui/section-eyebrow';
+import { M, S } from '@/components/ui/typography';
 import { cn } from '@/lib/utils/ui';
 import type { MDXComponents } from '@/mdx-components';
 import { getMDXComponents } from '@/mdx-components';
@@ -56,7 +57,7 @@ export function NotesSection({ notes, floaty = false }: NotesSectionProps) {
       padding='px-6 py-12 md:py-16'
     >
       {/* Eyebrow: // scratchpad — Space Mono, muted, uppercase, wide tracking */}
-      <Muted className='uppercase tracking-[0.12em]'>{'// scratchpad'}</Muted>
+      <SectionEyebrow className='tracking-[0.12em]'>{'// scratchpad'}</SectionEyebrow>
 
       {/* 3-col grid: 1-col on mobile, 3-col at lg (design §Notes mobile open-question) */}
       <div className='grid grid-cols-1 lg:grid-cols-3 gap-5 w-full'>

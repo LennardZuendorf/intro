@@ -1,7 +1,7 @@
 import type { ComponentType } from 'react';
 import { NeoBadge } from '@/components/ui/neoBadge';
 import { Section } from '@/components/ui/section';
-import { Muted } from '@/components/ui/typography';
+import { SectionEyebrow } from '@/components/ui/section-eyebrow';
 import type { MDXComponents } from '@/mdx-components';
 import { getMDXComponents } from '@/mdx-components';
 
@@ -31,9 +31,7 @@ export function AboutSection({ body: Body, facts }: AboutSectionProps) {
   return (
     <Section id='about' as='section' fullHeight={false} centerContent={false} data-reveal>
       {/* Eyebrow: "// about" — Space Mono, muted, lowercase after slashes (design.md) */}
-      <Muted as='span' className='font-mono tracking-widest'>
-        {'// about'}
-      </Muted>
+      <SectionEyebrow className='tracking-widest normal-case'>{'// about'}</SectionEyebrow>
 
       {/* Accent vertical bar + rich bio MDX */}
       <div className='flex gap-4 md:gap-6'>

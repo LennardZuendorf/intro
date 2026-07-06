@@ -12,13 +12,15 @@ export type SocialItem = {
 interface SocialButtonsProps {
   socials: SocialItem[];
   className?: string;
-  buttonVariant?: 'default' | 'secondary' | 'outline' | 'link' | 'ghost';
+  buttonVariant?: 'default' | 'secondary' | 'outline' | 'link' | 'ghost' | 'flatSecondary';
+  buttonClassName?: string;
   iconClassName?: string;
 }
 
 export function SocialButtons({
   socials,
   className,
+  buttonClassName,
   iconClassName = 'w-5 h-5',
   buttonVariant = 'default'
 }: SocialButtonsProps) {
@@ -29,7 +31,13 @@ export function SocialButtons({
       {socials
         .filter((social) => social.url && social.icon)
         .map((social) => (
-          <Button key={social._id} variant={buttonVariant} size='icon' asChild>
+          <Button
+            key={social._id}
+            variant={buttonVariant}
+            size='icon'
+            className={buttonClassName}
+            asChild
+          >
             <Link
               href={social.url!}
               aria-label={social._title}
@@ -37,7 +45,10 @@ export function SocialButtons({
               rel='noopener noreferrer'
             >
               <span
-                className={cn('inline-flex items-center justify-center', iconClassName)}
+                className={cn(
+                  'inline-flex size-4 items-center justify-center [&_svg]:size-4',
+                  iconClassName
+                )}
                 dangerouslySetInnerHTML={{ __html: social.icon! }}
               />
             </Link>
