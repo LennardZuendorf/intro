@@ -13,13 +13,13 @@
     --radius: var(--radius);
     --radius-base: var(--radius);
 
-    --shadow-xs: 1px 1px 0 0 var(--border);
-    --shadow-sm: 2px 2px 0 0 var(--border);
-    --shadow: 3px 3px 0 0 var(--border);
-    --shadow-md: 4px 4px 0 0 var(--border);
-    --shadow-lg: 6px 6px 0 0 var(--border);
-    --shadow-xl: 10px 10px 0 1px var(--border);
-    --shadow-2xl: 16px 16px 0 1px var(--border);
+    --shadow-xs: 1px 1px 0 0 var(--shadow-color);
+    --shadow-sm: 2px 2px 0 0 var(--shadow-color);
+    --shadow: 3px 3px 0 0 var(--shadow-color);
+    --shadow-md: 4px 4px 0 0 var(--shadow-color);
+    --shadow-lg: 6px 6px 0 0 var(--shadow-color);
+    --shadow-xl: 10px 10px 0 1px var(--shadow-color);
+    --shadow-2xl: 16px 16px 0 1px var(--shadow-color);
 
     --color-background: var(--background);
     --color-foreground: var(--foreground);
@@ -45,7 +45,7 @@
     --color-ring: var(--ring);
     --color-popover: var(--popover);
     --color-popover-foreground: var(--popover-foreground);
-    --color-shadow: var(--border);
+    --color-shadow: var(--shadow-color);
 
     --translate-boxShadowX: 4px;
     --translate-boxShadowY: 4px;
@@ -85,12 +85,13 @@
     }
 }
 
-/* Accent axis — mode-independent. The picker sets only --primary on <html>;
-   every derived accent var cascades from it via color-mix. Default: lime. */
+/* Accent axis — mode-independent. The picker sets --primary and
+   --primary-foreground on <html>; derived accent vars cascade via color-mix.
+   Default: teal. */
 :root,
 .dark {
-    --primary: #c6ff2e;
-    --primary-foreground: #0b0b0b;
+    --primary: #4e9e96;
+    --primary-foreground: #f4f4ec;
 
     --primary-hover: color-mix(in srgb, var(--primary) 88%, black);
     --primary-light: color-mix(in srgb, var(--primary) 70%, white);
@@ -103,6 +104,7 @@
 
 :root {
     --radius: 0.5rem;
+    --shadow-color: #0b0b0b;
     --background: #faf9f4;
     --foreground: #0b0b0b;
     --card: #ffffff;
@@ -125,20 +127,21 @@
 }
 
 .dark {
-    --background: #0b0b0b;
-    --foreground: #f4f4ec;
-    --card: #161616;
+    --shadow-color: #0b0b0b;
+    --background: #1a1a1a;
+    --foreground: #e8e8e0;
+    --card: #111111;
     --card-foreground: #f4f4ec;
-    --secondary: #000;
-    --secondary-hover: #4a4a4a;
+    --secondary: #141414;
+    --secondary-hover: #1e1e1e;
     --secondary-foreground: #f4f4ec;
     --muted: #3f3f46;
-    --muted-foreground: #8c8c84;
+    --muted-foreground: #6e6e68;
     --destructive: #e63946;
     --destructive-foreground: #fff;
-    --border: #f4f4ec;
+    --border: #2a2a2a;
     --input: #2a2a2a;
-    --ring: #f4f4ec;
+    --ring: #2a2a2a;
     --popover: #161616;
     --popover-foreground: #f4f4ec;
     --grid: #ffffff18;
