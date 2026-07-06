@@ -11,14 +11,7 @@ import {
   TriangleAlertIcon
 } from 'lucide-react';
 import type { ReactNode } from 'react';
-import {
-  Callout as CalloutBox,
-  CalloutContent,
-  CalloutHeader,
-  CalloutIcon,
-  CalloutTitle,
-  type CalloutType
-} from '@/components/shared/richtext/callout';
+import type { CalloutType } from '@/components/shared/richtext/callout';
 import {
   ExperienceHoverCard,
   type ExperienceHoverCardProps
@@ -28,6 +21,7 @@ import {
   ProjectHoverCard,
   type ProjectHoverCardProps
 } from '@/components/shared/richtext/project-hover-card';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { experienceSource, projectSource } from '@/lib/source';
 import { cn } from '@/lib/utils/ui';
 
@@ -40,11 +34,6 @@ interface HoverLinkProps {
   text?: string | null;
 }
 
-/**
- * MDX adapter for inline rich-text links with a hover card preview.
- * Translates the MDX prop shape (`title`) to the legacy hover card prop
- * shape (`_title`).
- */
 export function HoverLink({ url, title, description, text }: HoverLinkProps) {
   return <LinkHoverCard url={url} _title={title} description={description} text={text} />;
 }
@@ -84,8 +73,6 @@ export async function Experience({ slug }: ExperienceProps) {
   if (!page) return null;
 
   const data = page.data;
-  // `startDate`/`endDate` arrive as `Date` from zod `coerce.date()`; serialise
-  // to ISO string for the hover card which calls `new Date(string)`.
   const props: ExperienceHoverCardProps = {
     _id: data._slug ?? page.slugs.join('/') ?? slug,
     _title: data._title,
@@ -125,37 +112,40 @@ const calloutIconFor = (type: CalloutType) => {
   }
 };
 
-/**
- * MDX-facing Callout. Composes the visual primitives exported from
- * `callout.tsx` and renders MDX `children` directly (no nested `<RichText>`).
- */
+const calloutStatusFor = (type: CalloutType) => {
+  switch (type) {
+    case 'check':
+      return 'success' as const;
+    case 'warning':
+      return 'warning' as const;
+    case 'danger':
+      return 'error' as const;
+    case 'info':
+      return 'info' as const;
+    default:
+      return undefined;
+  }
+};
+
 export function Callout({ type = 'info', title, children }: CalloutProps) {
   const calloutType: CalloutType = type;
+
   return (
-    <CalloutBox
-      type={calloutType}
-      className={cn('my-4', 'text-left')}
+    <Alert
+      status={calloutStatusFor(calloutType)}
+      className={cn('my-4 text-left')}
       data-type='callout'
       data-callout-type={calloutType}
     >
       {title ? (
-        <CalloutHeader className='flex flex-row items-center gap-2'>
-          <CalloutIcon type={calloutType} className='shrink-0'>
-            {calloutIconFor(calloutType)}
-            <span className='sr-only'>{calloutType}: </span>
-          </CalloutIcon>
-          <CalloutTitle>{title}</CalloutTitle>
-        </CalloutHeader>
-      ) : null}
-      <CalloutContent className={cn('flex gap-2', !title && 'pt-3')}>
-        {!title && (
-          <CalloutIcon type={calloutType} className='mt-0.5 shrink-0'>
-            {calloutIconFor(calloutType)}
-            <span className='sr-only'>{calloutType}: </span>
-          </CalloutIcon>
-        )}
-        <div className='flex-1'>{children}</div>
-      </CalloutContent>
-    </CalloutBox>
+        <>
+          {calloutIconFor(calloutType)}
+          <AlertTitle>{title}</AlertTitle>
+        </>
+      ) : (
+        calloutIconFor(calloutType)
+      )}
+      <AlertDescription className={cn(!title && 'col-start-2')}>{children}</AlertDescription>
+    </Alert>
   );
 }

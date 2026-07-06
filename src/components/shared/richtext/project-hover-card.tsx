@@ -25,10 +25,11 @@ import {
   ShardsAgentsHoverVisual,
   type VisualProps
 } from '@/components/sections/components/projects/hover-visuals';
-import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card';
+import { HoverCard, HoverCardContent } from '@/components/ui/hover-card';
 import { NeoBadge } from '@/components/ui/neoBadge';
 import { H4, Link, S, XS } from '@/components/ui/typography';
 import { isExternalUrl } from '@/lib/utils/ui';
+import { HoverCardInlineTrigger } from './hover-card-inline-trigger';
 
 const visualMap: Record<string, ComponentType<VisualProps>> = {
   indexed: IndexedHoverVisual,
@@ -60,17 +61,17 @@ export const ProjectHoverCard = (props: ProjectHoverCardProps) => {
   return (
     <span style={{ display: 'inline' }}>
       <HoverCard>
-        <HoverCardTrigger asChild>
-          <Link
-            href={showcaseUrl}
-            target={isExternal ? '_blank' : undefined}
-            rel={isExternal ? 'noopener noreferrer' : undefined}
-            style={{ display: 'inline' }}
-            className='underline! decoration-1 underline-offset-[3px] decoration-foreground/40 hover:decoration-foreground/70 transition-colors cursor-pointer'
-          >
-            {_title}
-          </Link>
-        </HoverCardTrigger>
+        <HoverCardInlineTrigger
+          render={
+            <Link
+              href={showcaseUrl}
+              target={isExternal ? '_blank' : undefined}
+              rel={isExternal ? 'noopener noreferrer' : undefined}
+            >
+              {_title}
+            </Link>
+          }
+        />
         <HoverCardContent className={Visual ? 'w-96 overflow-hidden p-0' : 'w-80 p-4'}>
           {Visual && (
             <div className='group/animated-card h-[120px] w-full overflow-hidden bg-primary'>

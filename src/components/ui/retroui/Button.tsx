@@ -1,10 +1,16 @@
+import { Button as ButtonPrimitive } from '@base-ui/react/button';
 import { Slot } from '@radix-ui/react-slot';
 import { cva, type VariantProps } from 'class-variance-authority';
 import React, { type ButtonHTMLAttributes } from 'react';
 import { cn } from '@/lib/utils/ui';
 
 export const buttonVariants = cva(
-  'font-head transition-all rounded outline-hidden cursor-pointer duration-200 font-medium flex items-center',
+  cn(
+    'group/button font-head font-medium inline-flex cursor-pointer items-center justify-center gap-2 rounded whitespace-nowrap select-none transition-all duration-200 outline-hidden',
+    'disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-60',
+    'focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary',
+    "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4"
+  ),
   {
     variants: {
       variant: {
@@ -15,16 +21,23 @@ export const buttonVariants = cva(
           'shadow-md shadow-shadow hover:shadow-lg hover:shadow-shadow active:shadow-none bg-secondary text-secondary-foreground border-2 border-border transition hover:translate-y-1 active:translate-y-2 active:translate-x-1 hover:bg-secondary-hover',
         flatSecondary:
           'shadow-none bg-secondary text-secondary-foreground border-2 border-border hover:bg-secondary-hover active:bg-secondary-hover',
+        destructive:
+          'shadow-md shadow-shadow hover:shadow-lg hover:shadow-shadow active:shadow-none bg-destructive text-destructive-foreground border-2 border-border transition hover:translate-y-1 active:translate-y-2 active:translate-x-1 hover:bg-destructive/90',
         outline:
-          'shadow-md shadow-shadow hover:shadow-lg hover:shadow-shadow active:shadow-none bg-transparent border-2 transition hover:translate-y-1 active:translate-y-2 active:translate-x-1',
-        link: 'bg-transparent hover:underline',
-        ghost: 'bg-transparent hover:bg-accent'
+          'shadow-md shadow-shadow hover:shadow-lg hover:shadow-shadow active:shadow-none bg-transparent border-2 border-border transition hover:translate-y-1 active:translate-y-2 active:translate-x-1',
+        link: 'bg-transparent hover:underline shadow-none',
+        ghost: 'bg-transparent hover:bg-accent shadow-none'
       },
       size: {
         sm: 'px-3 py-1 text-sm',
         md: 'px-4 py-1.5 text-base',
-        lg: 'px-6 lg:px-8 py-2 lg:py-3 text-md lg:text-lg',
-        icon: 'p-2 shadow-md shadow-shadow hover:shadow-lg hover:shadow-shadow active:shadow-none'
+        default: 'px-4 py-1.5 text-base',
+        lg: 'px-6 lg:px-8 py-2 lg:py-3 text-base lg:text-lg',
+        icon: 'size-9 shrink-0 items-center justify-center p-0 shadow-md shadow-shadow hover:shadow-lg hover:shadow-shadow active:shadow-none',
+        xs: 'px-2 py-0.5 text-xs',
+        'icon-xs': 'size-7 p-1',
+        'icon-sm': 'size-8 p-1.5',
+        'icon-lg': 'size-10 p-3'
       }
     },
     compoundVariants: [
@@ -71,15 +84,20 @@ export const Button = React.forwardRef<HTMLButtonElement, IButtonProps>(
     }: IButtonProps,
     forwardedRef
   ) => {
-    const Comp = asChild ? Slot : 'button';
+    const classes = cn(buttonVariants({ variant, size }), className);
+
+    if (asChild) {
+      return (
+        <Slot ref={forwardedRef} className={classes} {...props}>
+          {children}
+        </Slot>
+      );
+    }
+
     return (
-      <Comp
-        ref={forwardedRef}
-        className={cn(buttonVariants({ variant, size }), className)}
-        {...props}
-      >
+      <ButtonPrimitive ref={forwardedRef} className={classes} {...props}>
         {children}
-      </Comp>
+      </ButtonPrimitive>
     );
   }
 );

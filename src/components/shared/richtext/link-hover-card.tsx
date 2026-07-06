@@ -1,10 +1,11 @@
 'use client';
 
 import { ExternalLink } from 'lucide-react';
-import { useMemo } from 'react';
-import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card';
+import { HoverCard, HoverCardContent } from '@/components/ui/hover-card';
+import { NeoBadge } from '@/components/ui/neoBadge';
 import { H4, Link, S, XS } from '@/components/ui/typography';
 import { isExternalUrl } from '@/lib/utils/ui';
+import { HoverCardInlineTrigger } from './hover-card-inline-trigger';
 
 export interface LinkHoverCardProps {
   url?: string | null;
@@ -20,29 +21,29 @@ export const LinkHoverCard = ({ url, _title, description, text }: LinkHoverCardP
   const displayText = text || _title || url || 'this link';
   const href = url || '#';
 
-  const domain = useMemo(() => {
+  const domain = (() => {
     if (!url) return '';
     try {
       return new URL(url.startsWith('http') ? url : `https://${url}`).hostname;
     } catch {
       return url;
     }
-  }, [url]);
+  })();
 
   return (
     <span style={{ display: 'inline' }}>
       <HoverCard>
-        <HoverCardTrigger asChild>
-          <Link
-            href={href}
-            target={isExternal ? '_blank' : undefined}
-            rel={isExternal ? 'noopener noreferrer' : undefined}
-            style={{ display: 'inline' }}
-            className='underline! decoration-1 underline-offset-[3px] decoration-foreground/40 hover:decoration-foreground/70 transition-colors cursor-pointer'
-          >
-            {displayText}
-          </Link>
-        </HoverCardTrigger>
+        <HoverCardInlineTrigger
+          render={
+            <Link
+              href={href}
+              target={isExternal ? '_blank' : undefined}
+              rel={isExternal ? 'noopener noreferrer' : undefined}
+            >
+              {displayText}
+            </Link>
+          }
+        />
         <HoverCardContent className='w-80 p-4'>
           <div className='space-y-3'>
             {_title && <H4>{_title}</H4>}

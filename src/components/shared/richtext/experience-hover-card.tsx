@@ -1,10 +1,11 @@
 'use client';
 
-import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card';
+import { HoverCard, HoverCardContent } from '@/components/ui/hover-card';
 import { NeoBadge } from '@/components/ui/neoBadge';
 import { Button } from '@/components/ui/retroui/Button';
 import { H4, Link, S, XS } from '@/components/ui/typography';
 import { isExternalUrl } from '@/lib/utils/ui';
+import { HoverCardInlineTrigger } from './hover-card-inline-trigger';
 
 function formatDateRange(startDate: string, endDate: string | null): string {
   const start = new Date(startDate);
@@ -36,28 +37,31 @@ export const ExperienceHoverCard = (props: ExperienceHoverCardProps) => {
   return (
     <span style={{ display: 'inline' }}>
       <HoverCard>
-        <HoverCardTrigger asChild>
-          {companyLink ? (
-            <Link
-              href={companyLink}
-              target={isExternal ? '_blank' : undefined}
-              rel={isExternal ? 'noopener noreferrer' : undefined}
-              style={{ display: 'inline' }}
-              className='underline! decoration-1 underline-offset-[3px] decoration-foreground/40 hover:decoration-foreground/70 transition-colors cursor-pointer'
-            >
-              {displayText}
-            </Link>
-          ) : (
-            <Button
-              type='button'
-              variant='link'
-              style={{ display: 'inline' }}
-              className='h-auto min-h-0 !border-0 !p-0 !shadow-none hover:!translate-y-0 active:!translate-y-0 active:!translate-x-0 font-inherit underline! decoration-1 underline-offset-[3px] decoration-foreground/40 hover:decoration-foreground/70 hover:!shadow-none'
-            >
-              {displayText}
-            </Button>
-          )}
-        </HoverCardTrigger>
+        {companyLink ? (
+          <HoverCardInlineTrigger
+            render={
+              <Link
+                href={companyLink}
+                target={isExternal ? '_blank' : undefined}
+                rel={isExternal ? 'noopener noreferrer' : undefined}
+              >
+                {displayText}
+              </Link>
+            }
+          />
+        ) : (
+          <HoverCardInlineTrigger
+            render={
+              <Button
+                type='button'
+                variant='link'
+                className='h-auto min-h-0 !border-0 !p-0 !shadow-none hover:!translate-y-0 active:!translate-y-0 active:!translate-x-0 font-inherit hover:!shadow-none'
+              >
+                {displayText}
+              </Button>
+            }
+          />
+        )}
         <HoverCardContent className='w-96 p-4'>
           <div className='space-y-3'>
             <H4>{_title}</H4>

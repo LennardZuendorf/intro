@@ -656,7 +656,7 @@ const Muted: React.FC<TypographyProps> = ({
   return (
     <Comp
       className={cn(
-        "text-mono",
+        "font-mono",
         // Responsive sizing: base smaller, sm/md bigger, lg/xl regular, 2xl bigger
         "text-sm sm:text-sm md:text-sm lg:text-sm xl:text-sm 2xl:text-base",
         getWeightClass(weight),
