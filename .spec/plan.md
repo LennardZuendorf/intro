@@ -7,7 +7,8 @@ children:
   - features/neon-landing/plan.md
   - features/neon-nav/plan.md
   - features/neon-effects/plan.md
-updated: 2026-06-29
+  - features/component-unification/plan.md
+updated: 2026-07-05
 ---
 
 # intro-zuendorf.me — Implementation Plan
@@ -28,6 +29,7 @@ single hard gate — landing and nav both depend on it.
 | [neon-landing](features/neon-landing/product.md) | root + feature | [plan.md](features/neon-landing/plan.md) | planned |
 | [neon-nav](features/neon-nav/product.md) | root + feature | [plan.md](features/neon-nav/plan.md) | planned |
 | [neon-effects](features/neon-effects/product.md) | root + feature | [plan.md](features/neon-effects/plan.md) | deferred |
+| [component-unification](features/component-unification/product.md) | root + feature | [plan.md](features/component-unification/plan.md) | NOT STARTED |
 
 ---
 
@@ -38,6 +40,7 @@ neon-foundation ── owns ──> globals.css tokens (+ derived accent vars, -
 neon-landing    ── owns ──> page.tsx, section components, notes collection, content/schema backfill, CORE chrome (scroll-progress + scroll-reveal)
 neon-nav        ── owns ──> floating dock, command palette, section registry, removing the <Nav> mount
 neon-effects    ── owns ──> dot-field, custom cursor, parallax, floaty (ENHANCEMENT motion, client islands)
+component-unification ── owns ──> @retroui/* primitive adoption, Base UI migration, shared UI wrappers, Radix cleanup
 ```
 
 | Layer | Owns | Does not own |
@@ -46,6 +49,7 @@ neon-effects    ── owns ──> dot-field, custom cursor, parallax, floaty (
 | **neon-landing** | `page.tsx`, `components/sections/*`, scroll-progress + reveal (core chrome), `content/notes/*` + `notes` schema, content/schema backfill | Tokens, theming internals, dock/palette, the shared project/experience loaders |
 | **neon-nav** | `components/nav/*` (dock + palette), section id registry, keyboard handling, `<Nav>`-mount removal | Token system, section content, `navbar.tsx` (kept for legal) |
 | **neon-effects** | `components/effects/*`, reduced-motion/pointer gating (enhancement only) | Content, tokens, nav, core chrome (scroll-progress/reveal) |
+| **component-unification** | `ui/*` retroUI/Base UI primitives, shared wrappers (`SectionEyebrow`, `IconMenuSelect`, etc.), `package.json` Radix trim | Page content, MDX sources, effects, typography/section systems |
 
 **Cross-feature seams (resolved):** (a) foundation builds the mode/accent controls
 but they mount in nav's dock — foundation verifies them programmatically, not via
@@ -67,6 +71,7 @@ only when its upstream is `DONE`. Units (`feature/n`) live in feature plans.
 | 2 | neon-landing | One-page `/` from MDX (hero/about/merged-work/notes/contact/footer) + core chrome; content/schema backfill; route surface asserted `/`+`/legal` | `pnpm build` + `pnpm test`; manual section render | NOT STARTED | neon-foundation DONE |
 | 3 | neon-nav | Floating dock + `/`/`⌘K` palette jumping to every section | `pnpm test` palette/jump; keyboard manual check | NOT STARTED | neon-foundation DONE |
 | — | neon-effects | Dot-field, cursor, parallax, floaty; reduced-motion gated | manual + reduced-motion check | DEFERRED | neon-landing DONE |
+| 4 | component-unification | Single Base UI headless layer; retroUI primitives; shared wrappers; Radix trimmed to Slot+cmdk | `pnpm check/build/test` + manual smoke matrix | NOT STARTED | neon-nav DONE |
 
 Cross-feature order is **only** here. Feature plans declare same-feature unit deps only.
 
@@ -78,13 +83,14 @@ Cross-feature order is **only** here. Feature plans declare same-feature unit de
 |---|---|---|
 | Whole redesign unbuilt — spec ahead of code | all | Specs written; implementation pending on `neon-building`. |
 | v4 effect code exists only in the design HTML | neon-effects | Port reference logic from `Lennard v4.dc.html` when the feature is picked up. |
+| Radix + Base UI hybrid primitives | component-unification | Tracked in [features/component-unification/plan.md](features/component-unification/plan.md); phases A–D. |
 
 ---
 
 ## Current Focus
 
-Specs just authored for all four features. Next human gate: confirm the
-`neon-foundation` unit breakdown in
-[features/neon-foundation/plan.md](features/neon-foundation/plan.md), then begin
-implementation at sequence step 1. `neon-effects` stays deferred; its v4 reference
-code is kept, not deleted.
+v4 redesign features (neon-foundation → neon-landing → neon-nav) take precedence.
+When nav ships, begin **component-unification** at
+[features/component-unification/plan.md](features/component-unification/plan.md)
+unit `component-unification/1` (Button + kbd + separator + token fixes).
+`neon-effects` stays deferred.

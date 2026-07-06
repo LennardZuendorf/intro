@@ -6,7 +6,8 @@ children:
   - features/neon-landing/tech.md
   - features/neon-nav/tech.md
   - features/neon-effects/tech.md
-updated: 2026-06-29
+  - features/component-unification/tech.md
+updated: 2026-07-05
 ---
 
 # intro-zuendorf.me — Technical Architecture
@@ -30,7 +31,14 @@ than introducing a new component system. Feature implementation detail lives und
 3. **Reuse the design system.** Tailwind `@theme` tokens, the `--shadow-*` scale,
    and RetroUI `Button`/`Card`/`Command` are the building blocks. New CSS is the
    exception, justified in a feature `tech.md`.
-4. **Two orthogonal theme axes.** `next-themes` owns light/dark via the `class`
+4. **One headless primitive layer.** Interactive UI primitives come from the
+   `@retroui/*` registry (`components.json` → `https://retroui.dev/r/{name}.json`),
+   backed by `@base-ui/react`. Install via `pnpm exec shadcn add @retroui/<name>`,
+   then reskin with site tokens (`rounded-base`, `border-2`, `shadow-shadow`).
+   **Allowed Radix exceptions:** `@radix-ui/react-slot` for `asChild` composition;
+   cmdk (command palette) uses Radix Dialog transitively. Do not add new Radix
+   primitives — see [features/component-unification/tech.md](features/component-unification/tech.md).
+5. **Two orthogonal theme axes.** `next-themes` owns light/dark via the `class`
    attribute; accent is a separate CSS-variable axis with its own persistence —
    they must not be coupled.
 
@@ -58,7 +66,8 @@ intro/
 │   │   ├── nav/                  # NEW — floating dock + command palette
 │   │   ├── theme/                # extended — mode + accent controls
 │   │   ├── effects/              # NEW (deferred) — dot-field/cursor/parallax
-│   │   └── ui/retroui/           # inherited — Button/Card/Command/…
+│   │   └── ui/                   # RetroUI registry + reskinned primitives
+│   │       └── retroui/          # Button/Card/Command/Sonner (site variants)
 │   └── lib/
 │       └── source.ts             # extended — add notesSource
 └── .spec/                        # Design docs
@@ -112,6 +121,7 @@ Map build order to features. Unit-level detail lives in feature `plan.md`.
 | **[features/neon-landing/](features/neon-landing/tech.md)** | `notes` collection + sources, one-page `page.tsx`, section components, merged work list, route deletion. |
 | **[features/neon-nav/](features/neon-nav/tech.md)** | Dock + `cmdk` palette island, section registry, keyboard handling. |
 | **[features/neon-effects/](features/neon-effects/tech.md)** | Canvas dot-field, custom cursor, parallax, floaty — client islands, reduced-motion gated. **Deferred.** |
+| **[features/component-unification/](features/component-unification/tech.md)** | Migrate primitives to `@retroui/*` (Base UI); extract shared wrappers; remove Radix forks. |
 
 Feature-level files, APIs, and algorithms live in `features/<name>/tech.md`.
 

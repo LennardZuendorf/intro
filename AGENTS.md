@@ -2,6 +2,33 @@
 
 Personal portfolio site — Next.js 15, React 19, TypeScript, Fumadocs MDX content, Neobrutalism design.
 
+## Spec system (read before non-trivial work)
+
+Design and implementation truth lives in **`.spec/`** — not ad-hoc plans alone.
+
+| Layer | Path | Use when |
+|---|---|---|
+| **Root** | [`.spec/product.md`](.spec/product.md) | What we're building — requirements, principles |
+| | [`.spec/tech.md`](.spec/tech.md) | Stack, architecture, contracts |
+| | [`.spec/design.md`](.spec/design.md) | Colors, RetroUI tokens, typography, motion |
+| | [`.spec/plan.md`](.spec/plan.md) | Feature sequence and current focus |
+| | [`.spec/lessons.md`](.spec/lessons.md) | Past mistakes — read at session start |
+| **Feature** | `.spec/features/<name>/` | Branch-scoped detail (`product`, `tech`, `design`, `plan`) |
+
+**Workflow:**
+
+1. **Read** relevant `.spec/` entrypoints before coding (root + active feature folder).
+2. **Plan** multi-step work in the feature's `plan.md` (stable unit IDs like `component-unification/1`).
+3. **Track** progress in `tasks/todo.md` for session-level checklists; spec owns *what/why*, todo owns *this session*.
+4. **Bump** `updated:` in any spec file you edit.
+5. **Validate** after spec changes: `bash .agents/skills/spec/scripts/validate.sh` (if skill installed) or reconcile links manually.
+
+**Active feature (component layer):** [`.spec/features/component-unification/`](.spec/features/component-unification/product.md) — RetroUI + Base UI migration.
+
+Invoke the spec skill (`/spec`) for strategy, feature scoping, or audits.
+
+---
+
 ## Core principles
 
 - **Simplicity first.** Make every change as small and direct as it can be while meeting the goal; touch only the code and files the task requires.
@@ -18,14 +45,15 @@ Personal portfolio site — Next.js 15, React 19, TypeScript, Fumadocs MDX conte
 
 ### Task tracking
 
-For multi-step or multi-session work, use a lightweight task file so progress stays inspectable:
+For multi-step or multi-session work, use **both** spec and tasks:
 
-1. **Plan first** — write a checkable plan to `tasks/todo.md` (create the file and `tasks/` directory if missing).
-2. **Validate the plan** — reconcile it with repo rules (this file, skills, existing patterns); ask the user only when requirements are genuinely ambiguous.
-3. **Track progress** — check items off as you complete them.
-4. **Explain changes** — short high-level summary at meaningful milestones.
-5. **Document results** — add a brief review section to `tasks/todo.md` when the thread completes (what shipped, what was skipped, follow-ups).
-6. **Capture lessons** — after **any** user correction that reveals a repeatable mistake, append the pattern to `tasks/lessons.md` (create if missing) and, when appropriate, suggest a durable rule (e.g. Cursor rule or skill) so the same slip is less likely next time.
+1. **Spec first** — requirements and units live in `.spec/features/<name>/plan.md`; root [`.spec/plan.md`](.spec/plan.md) for feature sequence.
+2. **Session checklist** — write a checkable plan to `tasks/todo.md` (create `tasks/` if missing) mirroring the active spec units.
+3. **Validate the plan** — reconcile with `.spec/`, this file, and skills; ask only when requirements are ambiguous.
+4. **Track progress** — check items off in `tasks/todo.md`; bump spec `updated:` when decisions change.
+5. **Explain changes** — short high-level summary at meaningful milestones.
+6. **Document results** — review section in `tasks/todo.md` when the thread completes.
+7. **Capture lessons** — append repeatable mistakes to `.spec/lessons.md` (and `tasks/lessons.md` if used); suggest durable rules when appropriate.
 
 ## Skills and orchestration
 
@@ -63,6 +91,7 @@ For multi-step or multi-session work, use a lightweight task file so progress st
 - **NEVER use raw HTML text elements** (`<p>`, `<h1>`, etc.) — use typography components from `@/components/ui/typography`
 - **NEVER override responsive typography** — use components as-is
 - **NEVER create custom shadows/borders/grids** — use component variants and `Section` columns
+- **NEVER fork Radix primitives** when `@retroui/*` registry provides the same component — install via `pnpm exec shadcn add @retroui/<name>` per [`.spec/design.md`](.spec/design.md)
 
 ## Next.js & React
 

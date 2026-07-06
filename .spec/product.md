@@ -6,7 +6,8 @@ children:
   - features/neon-landing/product.md
   - features/neon-nav/product.md
   - features/neon-effects/product.md
-updated: 2026-06-29
+  - features/component-unification/product.md
+updated: 2026-07-05
 ---
 
 # intro-zuendorf.me — Product
@@ -49,6 +50,9 @@ At a project level the site must:
 6. **Honor the design language.** Tokens, type hierarchy, and motion tiers in
    [design.md](design.md) are binding. Reuse RetroUI primitives and the existing
    offset-shadow scale; no ad-hoc visuals.
+7. **One primitive layer.** Interactive UI comes from the `@retroui/*` registry
+   (Base UI underneath). No parallel Radix forks of the same component — see
+   [features/component-unification/](features/component-unification/product.md).
 
 ---
 
@@ -83,6 +87,7 @@ theme/palette for fun. Secondary: Lennard himself, editing content via MDX.
 | **[features/neon-landing/](features/neon-landing/product.md)** | The one-page content: hero, about, merged work list, notes, contact, footer; route cleanup; notes content collection. |
 | **[features/neon-nav/](features/neon-nav/product.md)** | Floating dock + command palette navigation. |
 | **[features/neon-effects/](features/neon-effects/product.md)** | Enhancement motion (dot-field, custom cursor, parallax, floaty). **Deferred.** |
+| **[features/component-unification/](features/component-unification/product.md)** | RetroUI registry adoption + Base UI migration; shared wrappers; Radix cleanup. |
 
 Feature-level UX and requirements live in `features/<name>/product.md` — not here.
 
