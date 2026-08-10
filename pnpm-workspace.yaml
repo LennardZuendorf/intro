@@ -1,0 +1,21 @@
+overrides:
+  "@types/react": 19.2.14
+  "@types/react-dom": 19.2.3
+  vite: 6.4.2
+  mdast-util-to-hast: 13.2.1
+  minimatch: 3.1.5
+  brace-expansion: 1.1.14
+  "@istanbuljs/load-nyc-config>js-yaml": 3.14.2
+  diff: 5.2.2
+  "micromatch>picomatch": 2.3.2
+  "jest-util>picomatch": 4.0.4
+  "cosmiconfig>yaml": 1.10.3
+  "vite>yaml": 2.8.3
+  "lint-staged>yaml": 2.8.3
+  "anymatch>picomatch": 2.3.2
+  "next>postcss": 8.5.12
+
+onlyBuiltDependencies:
+  - "@vercel/speed-insights"
+  - esbuild
+  - unrs-resolver

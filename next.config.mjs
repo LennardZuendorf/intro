@@ -1,6 +1,26 @@
+import { createMDX } from 'fumadocs-mdx/next';
+
+const withMDX = createMDX();
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  turbopack: {},
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'http',
+        hostname: 'localhost',
+        port: '3000',
+        pathname: '/api/media/**',
+        search: ''
+      },
+      {
+        protocol: 'https',
+        hostname: 'img.shields.io',
+        pathname: '/badge/**'
+      }
+    ],
+    dangerouslyAllowSVG: true,
+  },
   async redirects() {
     return [
       {
@@ -27,4 +47,4 @@ const nextConfig = {
   }
 };
 
-export default nextConfig;
+export default withMDX(nextConfig);

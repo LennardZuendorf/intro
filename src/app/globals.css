@@ -1,0 +1,202 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@plugin '@tailwindcss/typography';
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme inline {
+    --font-head: var(--font-head);
+    --font-sans: var(--font-sans);
+    --font-mono: var(--font-mono);
+    --font-heading: var(--font-head);
+    --font-base: var(--font-sans);
+    --radius: var(--radius);
+    --radius-base: var(--radius);
+
+    --shadow-xs: 1px 1px 0 0 var(--shadow-color);
+    --shadow-sm: 2px 2px 0 0 var(--shadow-color);
+    --shadow: 3px 3px 0 0 var(--shadow-color);
+    --shadow-md: 4px 4px 0 0 var(--shadow-color);
+    --shadow-lg: 6px 6px 0 0 var(--shadow-color);
+    --shadow-xl: 10px 10px 0 1px var(--shadow-color);
+    --shadow-2xl: 16px 16px 0 1px var(--shadow-color);
+
+    --color-background: var(--background);
+    --color-foreground: var(--foreground);
+    --color-primary: var(--primary);
+    --color-primary-foreground: var(--primary-foreground);
+    --color-primary-light: var(--primary-light);
+    --color-primary-hover: var(--primary-hover);
+    --color-secondary: var(--secondary);
+    --color-secondary-foreground: var(--secondary-foreground);
+    --color-secondary-hover: var(--secondary-hover);
+    --color-card: var(--card);
+    --color-card-foreground: var(--card-foreground);
+    --color-muted: var(--muted);
+    --color-muted-foreground: var(--muted-foreground);
+    --color-accent: var(--accent);
+    --color-accent-foreground: var(--accent-foreground);
+    --color-accent-light: var(--accent-light);
+    --color-accent-dark: var(--accent-dark);
+    --color-destructive: var(--destructive);
+    --color-destructive-foreground: var(--destructive-foreground);
+    --color-border: var(--border);
+    --color-input: var(--input);
+    --color-ring: var(--ring);
+    --color-popover: var(--popover);
+    --color-popover-foreground: var(--popover-foreground);
+    --color-shadow: var(--shadow-color);
+
+    --translate-boxShadowX: 4px;
+    --translate-boxShadowY: 4px;
+
+    --animate-float: float 3s ease-in-out infinite;
+    --animate-wiggle: wiggle 0.5s ease-in-out infinite;
+    --animate-shimmer: shimmer 2s linear infinite;
+    --animate-pulse: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+
+    @keyframes float {
+        0%,
+        100% {
+            transform: translateY(0) rotate(var(--tw-rotate, 0));
+        }
+        50% {
+            transform: translateY(-10px) rotate(var(--tw-rotate, 0));
+        }
+    }
+
+    @keyframes wiggle {
+        0%,
+        100% {
+            transform: rotate(-2deg);
+        }
+        50% {
+            transform: rotate(2deg);
+        }
+    }
+
+    @keyframes shimmer {
+        0% {
+            background-position: -200% 0;
+        }
+        100% {
+            background-position: 200% 0;
+        }
+    }
+}
+
+/* Accent axis — mode-independent. The picker sets --primary and
+   --primary-foreground on <html>; derived accent vars cascade via color-mix.
+   Default: teal. */
+:root,
+.dark {
+    --primary: #4e9e96;
+    --primary-foreground: #f4f4ec;
+
+    --primary-hover: color-mix(in srgb, var(--primary) 88%, black);
+    --primary-light: color-mix(in srgb, var(--primary) 70%, white);
+
+    --accent: var(--primary);
+    --accent-light: var(--primary-light);
+    --accent-dark: color-mix(in srgb, var(--primary) 82%, black);
+    --accent-foreground: var(--primary-foreground);
+}
+
+:root {
+    --radius: 0.5rem;
+    --shadow-color: #0b0b0b;
+    --background: #faf9f4;
+    --foreground: #0b0b0b;
+    --card: #ffffff;
+    --card-foreground: #0b0b0b;
+    --secondary: #000;
+    --secondary-hover: #333;
+    --secondary-foreground: #fff;
+    --muted: #aeaeae;
+    --muted-foreground: #6b675e;
+    --destructive: #e63946;
+    --destructive-foreground: #fff;
+    --border: #0b0b0b;
+    --input: #fff;
+    --ring: #0b0b0b;
+    --popover: #ffffff;
+    --popover-foreground: #0b0b0b;
+    --grid: #00000012;
+    --dotbase: #d9d4c2;
+    --dot: rgba(11, 11, 11, 0.07);
+}
+
+.dark {
+    --shadow-color: #0b0b0b;
+    --background: #1a1a1a;
+    --foreground: #e8e8e0;
+    --card: #111111;
+    --card-foreground: #f4f4ec;
+    --secondary: #141414;
+    --secondary-hover: #1e1e1e;
+    --secondary-foreground: #f4f4ec;
+    --muted: #3f3f46;
+    --muted-foreground: #6e6e68;
+    --destructive: #e63946;
+    --destructive-foreground: #fff;
+    --border: #2a2a2a;
+    --input: #2a2a2a;
+    --ring: #2a2a2a;
+    --popover: #161616;
+    --popover-foreground: #f4f4ec;
+    --grid: #ffffff18;
+    --dotbase: #242424;
+    --dot: rgba(244, 244, 236, 0.05);
+}
+
+@layer base {
+    * {
+        @apply border-border outline-ring/50;
+    }
+
+    body {
+        @apply bg-background text-foreground font-sans antialiased;
+    }
+}
+
+@keyframes pulse {
+    0%,
+    100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.7;
+    }
+}
+
+@keyframes indexed-float {
+    0%,
+    100% {
+        translate: 0 0;
+    }
+    50% {
+        translate: 0 -4px;
+    }
+}
+
+/* Floaty — gentle idle bob for note cards (neon-effects enhancement layer).
+   Uses the `translate` property (not `transform`) so it composes with each
+   card's rotation/hover transform instead of clobbering it. Gated in CSS to
+   mirror the effects hook exactly: fine pointer AND no reduced-motion request,
+   so on touch / reduced-motion it applies nothing (no animation, no shift).
+   Per-card stagger comes from an inline `animation-delay` set in notes.tsx. */
+@keyframes floaty {
+    0%,
+    100% {
+        translate: 0 0;
+    }
+    50% {
+        translate: 0 -6px;
+    }
+}
+
+@media (pointer: fine) and (prefers-reduced-motion: no-preference) {
+    .floaty {
+        animation: floaty 6s ease-in-out infinite;
+    }
+}

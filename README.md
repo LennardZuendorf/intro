@@ -1,22 +1,28 @@
 # intro v2
 
-#### Intro V2 is the next generation of my personal website, merging my personal website and portfolio page.
+#### Intro V2 Neo is the next generation of my personal website.
 
-#### Build using Next.js 13 and shadcn/ui components (powered by tailwindcss and radix primitives). Uses a completely custom layout using Contentlayer for mdx based content.
+#### Build using Next.js 16 and shadcn/ui components (powered by tailwindcss and radix primitives). Uses a completely custom layout that merges minimalism with functionality
+
+
+## Details
+
+- Fully relies on customized shacn/ui and [NeoBrutalism Components](https://www.neobrutalism.dev/)
+- 
 
 ## 🏗️ Tech Stack:
 
-**Languages:** Typescript, Javascript, CSS, MDX
+**Languages:** Typescript (tsx)
 
-**Frameworks:** Next.js, TailwindCSS, Contentlayer
+**Frameworks:** Next.js, TailwindCSS, PostCSS
 
-**Hosting:** Vercel
+**Hosting/Additionals:** Vercel, Basehub CMS
 
 ## 🗳️ Status (Main):
 
 [![Check NextJs build](https://github.com/LennardZuendorf/intro/actions/workflows/node.js.yml/badge.svg)](https://github.com/LennardZuendorf/intro/actions/workflows/node.js.yml)
 
-## 👨‍💻 Author and Credits:
+##  Author and Credits:
 
 **Author:** [@LennardZuendorf](https://github.com/LennardZuendorf)
 

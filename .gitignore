@@ -5,6 +5,11 @@
 /.pnp
 .pnp.js
 .yarn/install-state.gz
+.pnpm-store/
+/.idea/*
+!/.idea/runConfigurations
+.serena/
+.zed/
 
 # testing
 /coverage
@@ -12,6 +17,9 @@
 # next.js
 /.next/
 /out/
+
+# fumadocs-mdx codegen output
+/.source/
 
 # production
 /build
@@ -34,8 +42,17 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
-/.contentlayer/
 
-# cursor
-.history/
-.cursor/
+.env
+*/.env
+*.env
+
+/media
+
+.history
+.memory/
+.agents/
+.claude/
+
+# Cursor / local agent skill lock (regenerated per machine)
+skills-lock.json
