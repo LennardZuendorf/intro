@@ -69,7 +69,7 @@ export default function Home() {
               >
                 DIB Travel
               </Link>
-               in Stockholm.
+               {' '} in Stockholm, Sweden.
             </Muted>
 
             <div className='flex justify-center gap-3 sm:gap-4 pt-2 sm:pt-4'>
