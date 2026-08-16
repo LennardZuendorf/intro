@@ -19,7 +19,7 @@ export default function Home() {
     description: siteMetadata.description,
     worksFor: {
       '@type': 'Organization',
-      name: 'CHECK24 Flug'
+      name: 'DIB Travel'
     },
     sameAs: ['https://www.linkedin.com/in/lennard-zuendorf/', 'https://github.com/lennardzuendorf'],
     knowsAbout: [
@@ -50,7 +50,7 @@ export default function Home() {
                 Lennard Zündorf
               </H1>
               <Lead type='foreground' className='font-semibold text-lg sm:text-xl md:text-2xl'>
-                Fullstack Product Builder
+                Fullstack Product Manager
               </Lead>
             </div>
 
@@ -60,16 +60,16 @@ export default function Home() {
             </p>
 
             <Muted className='text-sm sm:text-base md:text-lg'>
-              Currently building and leading at{' '}
+              Currently building product at{' '}
               <Link
-                href='https://flug.check24.de'
+                href='https://dibtravel.com'
                 target='_blank'
                 rel='noopener noreferrer'
                 className='underline hover:text-foreground transition-colors'
               >
-                Check24 Flug
+                DIB Travel
               </Link>
-              .
+              in Stockholm.
             </Muted>
 
             <div className='flex justify-center gap-3 sm:gap-4 pt-2 sm:pt-4'>
