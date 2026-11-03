@@ -68,8 +68,8 @@ export default function Home() {
                 className='underline hover:text-foreground transition-colors'
               >
                 DIB Travel
-              </Link>
-               {' '} in Stockholm, Sweden.
+              </Link>{' '}
+              in Stockholm, Sweden.
             </Muted>
 
             <div className='flex justify-center gap-3 sm:gap-4 pt-2 sm:pt-4'>
