@@ -2,43 +2,44 @@
 
 ## 1. Current repo state (as found, 2026-10-05)
 
-| Area | Found | Verdict |
-|------|-------|---------|
-| Framework | `next@16.0.10`, App Router, `turbopack: {}`, `react@19.0.0` | **Keep**. Bump to the latest 16.x patch and React 19.2.x |
-| Package manager | `pnpm@10.24.0` (`packageManager`), `pnpm-lock.yaml` | Keep. **Fix** `vercel.json` (`installCommand: npm install` contradicts pnpm). Delete the file and let Vercel detect pnpm |
-| Styling | Tailwind **v4** (`@tailwindcss/postcss`, CSS-first `@theme` in `app/globals.css`, no `tailwind.config`), `tailwindcss-animate`, `@tailwindcss/typography` | Keep TW v4. Replace `tailwindcss-animate` with `tw-animate-css`. Remove `@tailwindcss/typography` |
-| shadcn | `components.json`: style `default` (deprecated), baseColor `stone`, HSL variables wrapped as `hsl(var(--x))`. 17 UI files, most unused | Re-init for TW v4 conventions (`new-york` style, `@theme inline`, raw colour values). Keep only `button`, `command`, `dialog`, `tabs` |
-| Content | **No Contentlayer anymore** (not in deps or lockfile). The README and `.gitignore`/eslint ignores still mention it. The only content is TS objects in `data/` | Introduce an MDX pipeline (§4). Purge the Contentlayer leftovers |
-| Theme | `next-themes@0.4`, `defaultTheme="system"`, 3-way dropdown toggle | Keep the library. Change to light default + a single-click toggle |
-| Fonts | Lato (google), League Spartan + Roboto Mono (local TTF in `public/fonts`) | Replace with Geist + JetBrains Mono via `next/font/google` |
-| Analytics | `@vercel/analytics` (imported from `/react`), `@vercel/speed-insights/next` | Keep. Switch the import to `@vercel/analytics/next` |
-| SEO | `metadata` in layout, `opengraph-image.tsx` + `twitter-image.tsx` (edge, outdated "CHECK24" copy), static `public/img/opengraph-image.png` referenced in metadata, `sitemap.ts` (lists a non-existent `/about`), `robots.ts`, `manifest.ts`, JSON-LD Person on home | Keep the file conventions and rewrite the content (§8) |
-| Pages | `/` ("coming soon" card), `/legal` (DE/EN imprint + privacy, 527 lines, uses Tabs/Card/typography), `not-found` | Rewrite home. Restyle legal and 404 |
-| Icons | `react-icons` (Rx, Io5), `lucide-react@0.468` | Drop `react-icons`. Use local brand SVGs + lucide |
-| Tooling | ESLint 9 flat (`next/core-web-vitals`, `next/typescript`, prettier), Prettier, Husky 9 (`prepare: husky install`, which is deprecated), lint-staged, GH Action (lint, format:check, build on Node 20/22/24) | Keep. Set `prepare` to `husky`. Add the content check to CI (§4.5) |
-| Misc | `.env` committed with `NEXT_PUBLIC_SANITY_*` leftovers. `jsconfig.json` duplicates tsconfig paths. `tsconfig` target `es5`. `.idea/`, `.fleet/` committed | Delete `.env` + `jsconfig.json`. Set target `ES2022`. Add `.idea/`, `.fleet/` to `.gitignore` and untrack them (**assumption**: they are not needed) |
+| Area            | Found                                                                                                                                                                                                                                                               | Verdict                                                                                                                                              |
+| --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Framework       | `next@16.0.10`, App Router, `turbopack: {}`, `react@19.0.0`                                                                                                                                                                                                         | **Keep**. Bump to the latest 16.x patch and React 19.2.x                                                                                             |
+| Package manager | `pnpm@10.24.0` (`packageManager`), `pnpm-lock.yaml`                                                                                                                                                                                                                 | Keep. **Fix** `vercel.json` (`installCommand: npm install` contradicts pnpm). Delete the file and let Vercel detect pnpm                             |
+| Styling         | Tailwind **v4** (`@tailwindcss/postcss`, CSS-first `@theme` in `app/globals.css`, no `tailwind.config`), `tailwindcss-animate`, `@tailwindcss/typography`                                                                                                           | Keep TW v4. Replace `tailwindcss-animate` with `tw-animate-css`. Remove `@tailwindcss/typography`                                                    |
+| shadcn          | `components.json`: style `default` (deprecated), baseColor `stone`, HSL variables wrapped as `hsl(var(--x))`. 17 UI files, most unused                                                                                                                              | Re-init for TW v4 conventions (`new-york` style, `@theme inline`, raw colour values). Keep only `button`, `command`, `dialog`, `tabs`                |
+| Content         | **No Contentlayer anymore** (not in deps or lockfile). The README and `.gitignore`/eslint ignores still mention it. The only content is TS objects in `data/`                                                                                                       | Introduce an MDX pipeline (§4). Purge the Contentlayer leftovers                                                                                     |
+| Theme           | `next-themes@0.4`, `defaultTheme="system"`, 3-way dropdown toggle                                                                                                                                                                                                   | Keep the library. Change to light default + a single-click toggle                                                                                    |
+| Fonts           | Lato (google), League Spartan + Roboto Mono (local TTF in `public/fonts`)                                                                                                                                                                                           | Replace with Geist + JetBrains Mono via `next/font/google`                                                                                           |
+| Analytics       | `@vercel/analytics` (imported from `/react`), `@vercel/speed-insights/next`                                                                                                                                                                                         | Keep. Switch the import to `@vercel/analytics/next`                                                                                                  |
+| SEO             | `metadata` in layout, `opengraph-image.tsx` + `twitter-image.tsx` (edge, outdated "CHECK24" copy), static `public/img/opengraph-image.png` referenced in metadata, `sitemap.ts` (lists a non-existent `/about`), `robots.ts`, `manifest.ts`, JSON-LD Person on home | Keep the file conventions and rewrite the content (§8)                                                                                               |
+| Pages           | `/` ("coming soon" card), `/legal` (DE/EN imprint + privacy, 527 lines, uses Tabs/Card/typography), `not-found`                                                                                                                                                     | Rewrite home. Restyle legal and 404                                                                                                                  |
+| Icons           | `react-icons` (Rx, Io5), `lucide-react@0.468`                                                                                                                                                                                                                       | Drop `react-icons`. Use local brand SVGs + lucide                                                                                                    |
+| Tooling         | ESLint 9 flat (`next/core-web-vitals`, `next/typescript`, prettier), Prettier, Husky 9 (`prepare: husky install`, which is deprecated), lint-staged, GH Action (lint, format:check, build on Node 20/22/24)                                                         | Keep. Set `prepare` to `husky`. Add the content check to CI (§4.5)                                                                                   |
+| Misc            | `.env` committed with `NEXT_PUBLIC_SANITY_*` leftovers. `jsconfig.json` duplicates tsconfig paths. `tsconfig` target `es5`. `.idea/`, `.fleet/` committed                                                                                                           | Delete `.env` + `jsconfig.json`. Set target `ES2022`. Add `.idea/`, `.fleet/` to `.gitignore` and untrack them (**assumption**: they are not needed) |
 
 ## 2. Dependencies
 
-| Action | Packages |
-|--------|----------|
-| **Remove** | `@radix-ui/react-accordion`, `-dropdown-menu`, `-label`, `-menubar`, `-navigation-menu`, `-popover`, `-select`, `-separator`, `-slider`, `-tooltip`, `embla-carousel`, `embla-carousel-autoplay`, `embla-carousel-react`, `date-fns`, `react-icons`, `title-case`, `tailwindcss-animate`, `@tailwindcss/typography` |
-| **Add** | `cmdk`, `@radix-ui/react-dialog` (or the `radix-ui` umbrella, whichever the shadcn CLI emits), `@next/mdx`, `@mdx-js/loader`, `@mdx-js/react`, `@types/mdx`, `zod`, `tw-animate-css` |
-| **Upgrade** | `next` + `eslint-config-next` to the latest 16.x. `react`/`react-dom` to the latest 19.2.x. `tailwind-merge` ^3 (TW v4 class support). `lucide-react` latest |
-| **Keep** | `next-themes`, `clsx`, `class-variance-authority`, `@radix-ui/react-slot`, `@radix-ui/react-tabs`, `@vercel/analytics`, `@vercel/speed-insights`, tailwind/postcss, eslint/prettier/husky/lint-staged, typescript |
+| Action      | Packages                                                                                                                                                                                                                                                                                                            |
+| ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Remove**  | `@radix-ui/react-accordion`, `-dropdown-menu`, `-label`, `-menubar`, `-navigation-menu`, `-popover`, `-select`, `-separator`, `-slider`, `-tooltip`, `embla-carousel`, `embla-carousel-autoplay`, `embla-carousel-react`, `date-fns`, `react-icons`, `title-case`, `tailwindcss-animate`, `@tailwindcss/typography` |
+| **Add**     | `cmdk`, `@radix-ui/react-dialog` (or the `radix-ui` umbrella, whichever the shadcn CLI emits), `@next/mdx`, `@mdx-js/loader`, `@mdx-js/react`, `@types/mdx`, `zod`, `tw-animate-css`                                                                                                                                |
+| **Upgrade** | `next` + `eslint-config-next` to the latest 16.x. `react`/`react-dom` to the latest 19.2.x. `tailwind-merge` ^3 (TW v4 class support). `lucide-react` latest                                                                                                                                                        |
+| **Keep**    | `next-themes`, `clsx`, `class-variance-authority`, `@radix-ui/react-slot`, `@radix-ui/react-tabs`, `@vercel/analytics`, `@vercel/speed-insights`, tailwind/postcss, eslint/prettier/husky/lint-staged, typescript                                                                                                   |
 
 ## 3. Routing
 
-| Route | File | Rendering |
-|-------|------|-----------|
-| `/` | `app/page.tsx` | Static (RSC) |
-| `/projects/[slug]` | `app/projects/[slug]/page.tsx` | SSG: `generateStaticParams` from the registry, `dynamicParams = false` (unknown slug → 404) |
-| `/legal` | `app/legal/page.tsx` | Static |
-| 404 | `app/not-found.tsx` | Static |
-| OG | `app/opengraph-image.tsx`, `app/projects/[slug]/opengraph-image.tsx` | Build-time `ImageResponse` (Node runtime) |
-| SEO files | `app/sitemap.ts`, `app/robots.ts`, `app/manifest.ts` | Static |
+| Route              | File                                                                 | Rendering                                                                                   |
+| ------------------ | -------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| `/`                | `app/page.tsx`                                                       | Static (RSC)                                                                                |
+| `/projects/[slug]` | `app/projects/[slug]/page.tsx`                                       | SSG: `generateStaticParams` from the registry, `dynamicParams = false` (unknown slug → 404) |
+| `/legal`           | `app/legal/page.tsx`                                                 | Static                                                                                      |
+| 404                | `app/not-found.tsx`                                                  | Static                                                                                      |
+| OG                 | `app/opengraph-image.tsx`, `app/projects/[slug]/opengraph-image.tsx` | Build-time `ImageResponse` (Node runtime)                                                   |
+| SEO files          | `app/sitemap.ts`, `app/robots.ts`, `app/manifest.ts`                 | Static                                                                                      |
 
 Redirects in `next.config.mjs`:
+
 - Keep `/linkedin`, `/linkd`, `/github`.
 - Add `/about → /#about` (permanent) and `/projects → /#building` (temporary).
 - For `/cv`, see open question Q3. Default proposal: temporary redirect to LinkedIn.
@@ -47,15 +48,16 @@ Redirects in `next.config.mjs`:
 
 ### 4.1 Options evaluated
 
-| Option | Status | Fit for 3 projects + 1 home page | Verdict |
-|--------|--------|----------------------------------|---------|
-| Contentlayer | Unmaintained, and already removed from this repo | – | ✗ |
-| content-collections | Maintained successor to Contentlayer. Zod schemas, typed collections, MDX package | Good DX, but it adds a codegen step + Next plugin. Turbopack compatibility needs verifying per release | Fallback if the content grows (more than ~10 entries, or listings/feeds) |
-| Velite | Maintained, schema + codegen | Same trade-off as content-collections, and a smaller ecosystem | ✗ |
-| `next-mdx-remote` (RSC) | Runtime MDX compile from strings | Needs fs reads + a compile step at build, and has no advantage for local files | ✗ |
-| **`@next/mdx` + typed registry** | First-party and Turbopack-native. No codegen | MDX compiles as modules. `meta` is a JS export validated by zod at build. Pages use static imports | **✓ Recommended** |
+| Option                           | Status                                                                            | Fit for 3 projects + 1 home page                                                                       | Verdict                                                                  |
+| -------------------------------- | --------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------ |
+| Contentlayer                     | Unmaintained, and already removed from this repo                                  | –                                                                                                      | ✗                                                                        |
+| content-collections              | Maintained successor to Contentlayer. Zod schemas, typed collections, MDX package | Good DX, but it adds a codegen step + Next plugin. Turbopack compatibility needs verifying per release | Fallback if the content grows (more than ~10 entries, or listings/feeds) |
+| Velite                           | Maintained, schema + codegen                                                      | Same trade-off as content-collections, and a smaller ecosystem                                         | ✗                                                                        |
+| `next-mdx-remote` (RSC)          | Runtime MDX compile from strings                                                  | Needs fs reads + a compile step at build, and has no advantage for local files                         | ✗                                                                        |
+| **`@next/mdx` + typed registry** | First-party and Turbopack-native. No codegen                                      | MDX compiles as modules. `meta` is a JS export validated by zod at build. Pages use static imports     | **✓ Recommended**                                                        |
 
 ### 4.2 Decision: `@next/mdx` + registry + zod
+
 - `next.config.mjs`: `withMDX = createMDX({ extension: /\.mdx$/ })`. No remark/rehype plugins are needed initially. If one is needed later, pass it by **string name** (Turbopack requires serialisable options).
 - `mdx-components.tsx` at the repo root, as required by `@next/mdx` in the App Router. It maps `p`, `a`, `em`, `code` and similar elements to styled elements, plus the custom blocks (§5.3).
 - MDX lives in `content/projects/<slug>.mdx` and is imported as a module, **not** routed as a page. `pageExtensions` stays the default.
@@ -63,17 +65,25 @@ Redirects in `next.config.mjs`:
 
 ```mdx
 export const meta = {
-  slug: 'indexed', order: 1, name: 'indexed', status: 'active', started: '[YYYY]',
+  slug: 'indexed',
+  order: 1,
+  name: 'indexed',
+  status: 'active',
+  started: '[YYYY]',
   oneLiner: 'Local-first search over your code, docs and tickets. Speaks MCP.',
   tagline: 'One local knowledge base per project. Code, docs, issues, wikis — one MCP, zero cloud.',
   site: { label: 'indexed.sh', href: 'https://indexed.sh' },
   source: { label: 'GitHub', href: 'https://github.com/LennardZuendorf/indexed' },
   cardImage: '/projects/indexed/card.png',
   hero: { src: '/projects/indexed/hero.png', alt: '…', caption: '…' },
-  stack: ['Python','LlamaIndex','FAISS','ONNX Runtime','tree-sitter','Docling','MCP'],
-  where: ['Migrating to LlamaIndex v2','Reshaping the docs into Guide + Reference','Next: graph-aware retrieval across sources'],
-  published: true,
-}
+  stack: ['Python', 'LlamaIndex', 'FAISS', 'ONNX Runtime', 'tree-sitter', 'Docling', 'MCP'],
+  where: [
+    'Migrating to LlamaIndex v2',
+    'Reshaping the docs into Guide + Reference',
+    'Next: graph-aware retrieval across sources'
+  ],
+  published: true
+};
 
 <Why>…</Why>
 <How>
@@ -95,35 +105,50 @@ export const meta = {
 
 ```ts
 const Link = z.object({ label: z.string(), href: z.string().url() });
-const Img  = z.object({ src: z.string().startsWith('/'), alt: z.string(), caption: z.string().optional() });
+const Img = z.object({
+  src: z.string().startsWith('/'),
+  alt: z.string(),
+  caption: z.string().optional()
+});
 export const ProjectMeta = z.object({
-  slug: z.string().regex(/^[a-z0-9-]+$/), order: z.number().int(),
-  name: z.string(), status: z.enum(['active', 'paused', 'archived']),
-  started: z.string(), oneLiner: z.string().max(90), tagline: z.string(),
-  site: Link.optional(), source: Link.optional(),
-  cardImage: z.string().optional(), hero: Img.partial({ src: true }),
-  stack: z.array(z.string()).min(1), where: z.array(z.string()).min(1),
-  published: z.boolean().default(true),
+  slug: z.string().regex(/^[a-z0-9-]+$/),
+  order: z.number().int(),
+  name: z.string(),
+  status: z.enum(['active', 'paused', 'archived']),
+  started: z.string(),
+  oneLiner: z.string().max(90),
+  tagline: z.string(),
+  site: Link.optional(),
+  source: Link.optional(),
+  cardImage: z.string().optional(),
+  hero: Img.partial({ src: true }),
+  stack: z.array(z.string()).min(1),
+  where: z.array(z.string()).min(1),
+  published: z.boolean().default(true)
 });
 ```
 
 ### 4.4 Registry (`content/projects/index.ts`)
+
 - Static imports: `import * as indexed from './indexed.mdx'` (and the same for brain and vibe). Explicit imports are bundler-safe and avoid template-literal dynamic imports.
 - `lib/content/projects.ts` exposes `getProjects()` (parsed, sorted by `order`), `getProject(slug)` and `getNeighbors(slug)` (next wraps around).
 - Zod parse failure → **build fails**.
 - `published: false` → the project is excluded from `generateStaticParams`, the sitemap and palette subpage links. Its home card falls back to linking `source.href` with the CTA "source ↗". This lets launch happen before brain/vibe copy is ready, if Lennard chooses that (Q4).
 
 ### 4.5 Placeholders
+
 - In MDX: `<Placeholder>…</Placeholder>`. In TS content: strings starting with `[`.
 - Dev renders placeholders muted, in brackets, as in the mockups.
 - `scripts/check-content.ts` (run via `pnpm check:content`, wired into CI and `pre-push`) fails if any placeholder is found in a published project or in `content/site.ts`, unless `ALLOW_PLACEHOLDERS=1` (used for Vercel preview builds).
 - A missing image is **not** a placeholder error. The `gfx` dot pattern is an acceptable final fallback, rendered without its bracket label in production.
 
 ### 4.6 Home content
+
 - `content/site.ts` holds typed objects: `site` (url, title, description, links, email), `status`, `hero`, `about`, `beliefs`, `now`, `sideQuests`, `work`, `contact`.
 - It replaces `data/site.ts` and `data/about.ts`. The old `data/about.ts` work history stays in git history only (product.md C10).
 
 ### 4.7 Assets
+
 - `public/projects/<slug>/{card,hero,fig-2,fig-3}.{png,webp}`, referenced by path.
 - Rendered with `next/image` `fill` inside fixed-aspect frames, with `sizes` set (card `(min-width:640px) 213px, 100vw`, hero `(min-width:1080px) 1040px, 100vw`, figure `(min-width:1080px) 508px, 100vw`). The hero gets `priority`.
 
@@ -158,10 +183,12 @@ scripts/
 ```
 
 ### 5.1 Server vs client
+
 - Everything is an RSC except: theme provider and toggle, command menu (+ provider, global key listener), nav search button, kbd hint, copy button and live region.
 - The pixel name is rendered on the server with no JS.
 
 ### 5.2 Shared primitives (CSS utilities in `globals.css`, `@utility`)
+
 - `nb`: 2px fg border, card background, `shadow-nb`.
 - `nb-link`: `nb` plus the hover/focus lift (§design 4).
 - `tag`, `tag-sm`, `chip`, `gfx`.
@@ -185,6 +212,7 @@ scripts/
 - Text blocks constrain themselves to 680px. `Figure` and `FigurePair` span 1040px.
 
 ## 6. Theming
+
 - `next-themes`: `attribute="class"`, `defaultTheme="light"`, `enableSystem={false}`, `disableTransitionOnChange`. **Assumption:** this follows "light default + toggle". See Q1 on honouring the system preference.
 - Tailwind v4: `@custom-variant dark (&:where(.dark, .dark *));`. `:root` and `.dark` hold the raw hex tokens (design §1). `@theme inline { --color-background: var(--background); … --radius: 0; --shadow-nb: var(--shadow-offset) var(--shadow-offset) 0 var(--foreground); }`.
 - The toggle flips with `setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')`. Any theme-dependent label renders after mount to avoid hydration mismatch.
@@ -192,6 +220,7 @@ scripts/
 - Links: external links open in the **same tab** everywhere, including the palette (**assumption**, for calm and consistency; the mockup palette used `window.open`).
 
 ## 7. ⌘K implementation
+
 - `CommandMenuProvider` (client, in the root layout) holds `open` state and exposes `useCommandMenu()` → `{ open, setOpen, toggle }`.
 - Global listener: `keydown` on `document`, where `(e.key === 'k' || e.key === 'K') && (e.metaKey || e.ctrlKey)` → `preventDefault()`, then `toggle()`. Esc and focus return are handled by Radix Dialog.
 - UI: shadcn `CommandDialog` (Radix Dialog + cmdk), restyled per design §2.3.
@@ -208,6 +237,7 @@ scripts/
 - Kbd label: `isApple()` (`navigator.userAgentData?.platform ?? navigator.platform` matching `/mac|iphone|ipad/i`) after mount. SSR shows `⌘K`.
 
 ## 8. Pixel-name renderer
+
 - `layout.ts` (pure, unit-testable) has `layoutWord(word, glyphs)`, which returns `{ cols, rows, on: Cell[] with rampStep, shadowEdges: Segment[] }`.
   - Glyphs are placed with a 1-column gap and bottom-aligned to the tallest glyph `H`.
   - Ramp step = `round(r/(H-1)*6)`.
@@ -226,6 +256,7 @@ scripts/
 - OG reuse: `renderPixelSvgString(word)` → `data:image/svg+xml` `<img>` inside `ImageResponse` (Satori doesn't support CSS grid). It uses resolved hex colours (light theme) instead of `color-mix`.
 
 ## 9. SEO, metadata, OG
+
 - `metadataBase` `https://zuendorf.me`, title template `%s · zuendorf.me`, and default title "Lennard Zündorf".
 - Description: derive from the hero lede (**assumption**).
 - Remove the stale keywords (Berlin, CHECK24, "Software Engineer").
@@ -240,28 +271,31 @@ scripts/
 
 ## 10. Performance budget
 
-| Metric | Budget (mobile, Lighthouse, prod) |
-|--------|-----------------------------------|
-| Lighthouse Performance / A11y / Best Practices / SEO | ≥ 95 / 100 / 100 / 100 |
-| LCP | ≤ 1.8 s (the home LCP is the lede text or the pixel SVG, with no image) |
-| CLS | ≤ 0.02 (fonts via `next/font` with fallback metrics, fixed aspect frames) |
-| INP | ≤ 100 ms |
-| First-load JS, `/` | ≤ 110 KB gz. cmdk/dialog are lazy and not counted until first open |
-| Fonts | 2 families, latin subset, at most 5 weight files total, `display: swap` |
-| Pixel name SVG (both lines) | ≤ 10 KB inline |
-| Images | AVIF/WebP via `next/image`, with no image above the fold on home |
+| Metric                                               | Budget (mobile, Lighthouse, prod)                                         |
+| ---------------------------------------------------- | ------------------------------------------------------------------------- |
+| Lighthouse Performance / A11y / Best Practices / SEO | ≥ 95 / 100 / 100 / 100                                                    |
+| LCP                                                  | ≤ 1.8 s (the home LCP is the lede text or the pixel SVG, with no image)   |
+| CLS                                                  | ≤ 0.02 (fonts via `next/font` with fallback metrics, fixed aspect frames) |
+| INP                                                  | ≤ 100 ms                                                                  |
+| First-load JS, `/`                                   | ≤ 110 KB gz. cmdk/dialog are lazy and not counted until first open        |
+| Fonts                                                | 2 families, latin subset, at most 5 weight files total, `display: swap`   |
+| Pixel name SVG (both lines)                          | ≤ 10 KB inline                                                            |
+| Images                                               | AVIF/WebP via `next/image`, with no image above the fold on home          |
 
 ## 11. Analytics
+
 - Keep `<Analytics/>` (import from `@vercel/analytics/next`) and `<SpeedInsights/>`.
 - No custom events in v1. Optional later: `track('cmdk_open')` and `track('copy_email')`.
 - No cookies, so no banner needed. The privacy text must mention Vercel Web Analytics / Speed Insights (product.md C11).
 
 ## 12. Quality gates
+
 - CI (existing workflow): `pnpm lint`, `pnpm format:check`, `pnpm check:content`, `pnpm build`.
 - Optional: `vitest` unit tests for `pixel-name/layout.ts`. These assert line widths 59/57, H 5/7, and the shadow rule on a known cell.
 - Manual per milestone: axe DevTools + Lighthouse on the preview URL, in both themes, at 360 / 768 / 1280.
 
 ## 13. Assumptions (explicit; open questions Q1–Q6 live in plan.md)
+
 1. Light theme is forced by default, and the system preference is ignored (Q1).
 2. Breakpoint is 640 instead of 620.
 3. External links open in the same tab.
